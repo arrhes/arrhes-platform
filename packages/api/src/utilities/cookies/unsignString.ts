@@ -1,5 +1,5 @@
-import { signString } from "#src/utilities/cookies/signString.js"
-import { Exception } from "#src/utilities/exception.js"
+import { signString } from "#/utilities/cookies/signString.js"
+import { Exception } from "#/utilities/exception.js"
 import { timingSafeEqual } from "crypto"
 
 

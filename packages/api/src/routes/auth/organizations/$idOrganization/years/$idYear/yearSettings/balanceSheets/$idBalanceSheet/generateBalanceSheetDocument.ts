@@ -1,10 +1,10 @@
-import { authFactory } from "#src/factories/authFactory.js"
-import { response } from "#src/utilities/response.js"
-import { insertOne } from "#src/utilities/sql/insertOne.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { models } from "@arrhes/schemas/models"
-import { generateBalanceSheetDocumentRouteDefinition } from "@arrhes/schemas/routes"
-import { generateId } from "@arrhes/schemas/utilities"
+import { authFactory } from "#/factories/authFactory.js"
+import { response } from "#/utilities/response.js"
+import { insertOne } from "#/utilities/sql/insertOne.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { models } from "@arrhes/metadata/models"
+import { generateBalanceSheetDocumentRouteDefinition } from "@arrhes/metadata/routes"
+import { generateId } from "@arrhes/metadata/utilities"
 
 
 export const generateBalanceSheetDocumentRoute = authFactory.createApp()

@@ -1,10 +1,10 @@
-import { authFactory } from "#src/factories/authFactory.js"
-import { response } from "#src/utilities/response.js"
-import { selectOne } from "#src/utilities/sql/selectOne.js"
-import { generateGetSignedUrl } from "#src/utilities/storage/generateGetSignedUrl.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { models } from "@arrhes/schemas/models"
-import { generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/schemas/routes"
+import { authFactory } from "#/factories/authFactory.js"
+import { response } from "#/utilities/response.js"
+import { selectOne } from "#/utilities/sql/selectOne.js"
+import { generateGetSignedUrl } from "#/utilities/storage/generateGetSignedUrl.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { models } from "@arrhes/metadata/models"
+import { generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

@@ -1,9 +1,9 @@
-import { authFactory } from "#src/factories/authFactory.js"
-import { response } from "#src/utilities/response.js"
-import { updateOne } from "#src/utilities/sql/updateOne.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { models } from "@arrhes/schemas/models"
-import { updateOneBalanceSheetRouteDefinition } from "@arrhes/schemas/routes"
+import { authFactory } from "#/factories/authFactory.js"
+import { response } from "#/utilities/response.js"
+import { updateOne } from "#/utilities/sql/updateOne.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { models } from "@arrhes/metadata/models"
+import { updateOneBalanceSheetRouteDefinition } from "@arrhes/metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

@@ -1,5 +1,5 @@
-import { sqlClient } from "#src/clients/sqlClient.js"
-import { Exception } from "#src/utilities/exception.js"
+import { sqlClient } from "#/clients/sqlClient.js"
+import { Exception } from "#/utilities/exception.js"
 import { TableConfig } from "drizzle-orm"
 import { PgInsertValue, PgTable } from "drizzle-orm/pg-core"
 

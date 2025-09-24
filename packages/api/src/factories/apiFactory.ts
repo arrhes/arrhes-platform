@@ -1,5 +1,5 @@
-import { getClients } from "#src/utilities/getClients.js"
-import { getEnv } from "#src/utilities/getEnv.js"
+import { getClients } from "#/utilities/getClients.js"
+import { getEnv } from "#/utilities/getEnv.js"
 import { Env } from "hono"
 import { createFactory } from "hono/factory"
 

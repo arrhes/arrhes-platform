@@ -1,9 +1,9 @@
-import { publicFactory } from "#src/factories/publicFactory.js"
-import { response } from "#src/utilities/response.js"
-import { selectOne } from "#src/utilities/sql/selectOne.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { models } from "@arrhes/schemas/models"
-import { sendMagicLinkRouteDefinition } from "@arrhes/schemas/routes"
+import { publicFactory } from "#/factories/publicFactory.js"
+import { response } from "#/utilities/response.js"
+import { selectOne } from "#/utilities/sql/selectOne.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { models } from "@arrhes/metadata/models"
+import { sendMagicLinkRouteDefinition } from "@arrhes/metadata/routes"
 import { eq } from "drizzle-orm"
 
 

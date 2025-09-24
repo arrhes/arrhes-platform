@@ -1,4 +1,4 @@
-import { ApiEnv } from "#src/factories/apiFactory.js"
+import { ApiEnv } from "#/factories/apiFactory.js"
 import { createFactory } from "hono/factory"
 
 

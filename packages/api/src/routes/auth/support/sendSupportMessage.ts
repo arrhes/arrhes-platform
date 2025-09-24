@@ -1,9 +1,9 @@
-import { authFactory } from "#src/factories/authFactory.js"
-import { sendEmail } from "#src/utilities/email/sendEmail.js"
-import { supportTemplate } from "#src/utilities/email/templates/support.js"
-import { response } from "#src/utilities/response.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { sendSupportMessageRouteDefinition } from "@arrhes/schemas/routes"
+import { authFactory } from "#/factories/authFactory.js"
+import { sendEmail } from "#/utilities/email/sendEmail.js"
+import { supportTemplate } from "#/utilities/email/templates/support.js"
+import { response } from "#/utilities/response.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { sendSupportMessageRouteDefinition } from "@arrhes/metadata/routes"
 
 
 export const sendSupportMessageRoute = authFactory.createApp()

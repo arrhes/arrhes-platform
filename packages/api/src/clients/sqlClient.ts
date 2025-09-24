@@ -1,6 +1,6 @@
-import { Exception } from "#src/utilities/exception.js"
-import { getEnv } from "#src/utilities/getEnv.js"
-import { modelSchemas } from "@arrhes/schemas/models"
+import { Exception } from "#/utilities/exception.js"
+import { getEnv } from "#/utilities/getEnv.js"
+import { modelSchemas } from "@arrhes/metadata/models"
 import { drizzle } from "drizzle-orm/postgres-js"
 import postgres from "postgres"
 

@@ -1,5 +1,5 @@
-import { Balance } from "#src/utilities/email/templates/balanceSheet/getBalance.js"
-import { schemas } from "@arrhes/schemas/schemas"
+import { Balance } from "#/utilities/email/templates/balanceSheet/getBalance.js"
+import { schemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

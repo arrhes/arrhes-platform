@@ -1,6 +1,6 @@
-import { IncomeStatementItem } from "#src/utilities/email/templates/incomeStatement/groupIncomeStatements.js"
-import { IncomeStatementTable } from "#src/utilities/email/templates/incomeStatement/incomeStatements.js"
-import { schemas } from "@arrhes/schemas/schemas"
+import { IncomeStatementItem } from "#/utilities/email/templates/incomeStatement/groupIncomeStatements.js"
+import { IncomeStatementTable } from "#/utilities/email/templates/incomeStatement/incomeStatements.js"
+import { schemas } from "@arrhes/metadata/schemas"
 import { Style, css } from "hono/css"
 import * as v from "valibot"
 

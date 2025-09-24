@@ -1,7 +1,7 @@
-import { emailClient } from "#src/clients/emailClient.js"
-import { sqlClient } from "#src/clients/sqlClient.js"
-import { storageClient } from "#src/clients/storageClient.js"
-import { getEnv } from "#src/utilities/getEnv.js"
+import { emailClient } from "#/clients/emailClient.js"
+import { sqlClient } from "#/clients/sqlClient.js"
+import { storageClient } from "#/clients/storageClient.js"
+import { getEnv } from "#/utilities/getEnv.js"
 
 
 export async function getClients(env: ReturnType<typeof getEnv>) {

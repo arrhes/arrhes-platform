@@ -1,4 +1,4 @@
-import { publicFactory } from "#src/factories/publicFactory.js"
+import { publicFactory } from "#/factories/publicFactory.js"
 
 
 export const publicMiddleware = publicFactory.createMiddleware(async (c, next) => {

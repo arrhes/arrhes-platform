@@ -1,7 +1,7 @@
-import { BalanceSheetAssetBody } from "#src/utilities/email/templates/balanceSheet/balanceSheetAssetBody.js"
-import { BalanceSheetAsset } from "#src/utilities/email/templates/balanceSheet/groupBalanceSheetsAssets.js"
-import { PriceFormat } from "#src/utilities/email/templates/components/price/priceFormat.js"
-import { Table } from "#src/utilities/email/templates/components/table/table.js"
+import { BalanceSheetAssetBody } from "#/utilities/email/templates/balanceSheet/balanceSheetAssetBody.js"
+import { BalanceSheetAsset } from "#/utilities/email/templates/balanceSheet/groupBalanceSheetsAssets.js"
+import { PriceFormat } from "#/utilities/email/templates/components/price/priceFormat.js"
+import { Table } from "#/utilities/email/templates/components/table/table.js"
 import { Style, css } from "hono/css"
 
 

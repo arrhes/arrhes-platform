@@ -1,7 +1,7 @@
-import { BalanceSheetLiability } from "#src/utilities/email/templates/balanceSheet/groupBalanceSheetsLiabilities.js"
-import { PriceFormat } from "#src/utilities/email/templates/components/price/priceFormat.js"
-import { Table } from "#src/utilities/email/templates/components/table/table.js"
-import { numberToRomanString } from "#src/utilities/numberToRomanString.js"
+import { BalanceSheetLiability } from "#/utilities/email/templates/balanceSheet/groupBalanceSheetsLiabilities.js"
+import { PriceFormat } from "#/utilities/email/templates/components/price/priceFormat.js"
+import { Table } from "#/utilities/email/templates/components/table/table.js"
+import { numberToRomanString } from "#/utilities/numberToRomanString.js"
 import { css, cx } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 

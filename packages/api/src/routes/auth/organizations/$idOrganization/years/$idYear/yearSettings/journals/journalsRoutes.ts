@@ -1,7 +1,7 @@
-import { $idJournalRoutes } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/$idJournalRoute.js"
-import { createOneJournalRoute } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/createOneJournal.js"
-import { generateJournalsRoute } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/generateJournals.js"
-import { readAllJournalsRoute } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/readAllJournals.js"
+import { $idJournalRoutes } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/$idJournalRoute.js"
+import { createOneJournalRoute } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/createOneJournal.js"
+import { generateJournalsRoute } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/generateJournals.js"
+import { readAllJournalsRoute } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/readAllJournals.js"
 
 
 export const journalsRoutes = [

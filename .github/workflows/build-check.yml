@@ -1,21 +1,21 @@
-name: Publish package to GitHub Packages
+name: Build check
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
-  publish:
-    name: Publish package
+  build:
     runs-on: ubuntu-22.04
+
     permissions:
-      contents: write
-      packages: write
+      contents: read
+      packages: read
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: production
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -25,18 +25,13 @@ jobs:
 
       - name: Install Node.js
         uses: actions/setup-node@v4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
-          scope: arrhes
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build
         run: pnpm run build
-
-      - name: Publish package
-        run: pnpm publish --access public --publish-branch production --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

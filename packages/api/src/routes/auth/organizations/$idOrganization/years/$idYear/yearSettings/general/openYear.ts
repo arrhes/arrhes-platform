@@ -1,7 +1,7 @@
-import { authFactory } from "#src/factories/authFactory.js"
-import { response } from "#src/utilities/response.js"
-import { bodyValidator } from "#src/validators/bodyValidator.js"
-import { openYearRouteDefinition } from "@arrhes/schemas/routes"
+import { authFactory } from "#/factories/authFactory.js"
+import { response } from "#/utilities/response.js"
+import { bodyValidator } from "#/validators/bodyValidator.js"
+import { openYearRouteDefinition } from "@arrhes/metadata/routes"
 
 
 export const openYearRoute = authFactory.createApp()
