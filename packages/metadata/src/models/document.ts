@@ -1,0 +1,32 @@
+import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
+import { idColumn } from "#src/components/models/idColumn.js"
+import { documentType } from "#src/components/values/documentType.js"
+import { relations } from "drizzle-orm"
+import { AnyPgColumn, pgEnum, pgTable, text } from "drizzle-orm/pg-core"
+import { organizationModel } from "./organization.js"
+import { yearModel } from "./year.js"
+
+
+// Model
+export const documentTypeEnum = pgEnum("enum_document_type", documentType)
+
+export const documentModel = pgTable(
+    "table_document",
+    {
+        id: idColumn("id").primaryKey(),
+        idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        label: text("label").notNull(),
+        type: documentTypeEnum("type").notNull(),
+        storageKey: text("storage_key").notNull(),
+        createdAt: dateTimeColumn("created_at").notNull(),
+        lastUpdatedAt: dateTimeColumn("last_updated_at"),
+        createdBy: idColumn("created_by").references((): AnyPgColumn => documentModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        lastUpdatedBy: idColumn("last_updated_by").references((): AnyPgColumn => documentModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+    }
+)
+
+
+// Relations
+export const documentRelations = relations(documentModel, ({ }) => ({}))
+

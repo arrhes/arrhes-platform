@@ -1,0 +1,23 @@
+name: Deploy to server
+
+on:
+  workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: ubuntu-22.04
+
+        steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Deploy the new image
+            uses: appleboy/ssh-action@v1.1.0
+            with:
+                host: ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USERNAME }}
+                password: ${{ secrets.SSH_PASSWORD }}
+                script: |
+                        docker container remove api --force
+                        docker compose -f ~/arrhes/api/compose.yaml pull
+                        docker compose -f ~/arrhes/api/compose.yaml up -d

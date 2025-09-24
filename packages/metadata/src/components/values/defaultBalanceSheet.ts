@@ -1,0 +1,15 @@
+import { balanceSheetFlow } from "./balanceSheetFlow.js"
+import { balanceSheetSide } from "./balanceSheetSide.js"
+
+
+export type DefaultBalanceSheet = {
+    side: (typeof balanceSheetSide)[number]
+    number: number
+    label: string
+    numberParent: number | undefined
+    accounts: Array<{
+        number: number
+        flow: (typeof balanceSheetFlow)[number]
+        isAllowance: boolean
+    }>
+}

@@ -1,0 +1,13 @@
+import { $idRecordRoutes } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRoutes.js"
+import { createOneRecordRoute } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/records/createOneRecord.js"
+import { readAllRecordsRoute } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/records/readAllRecords.js"
+import { recordRowsRoutes } from "#src/routes/auth/organizations/$idOrganization/years/$idYear/records/recordRows/recordRowsRoutes.js"
+
+
+export const recordsRoutes = [
+    createOneRecordRoute,
+    readAllRecordsRoute,
+
+    ...$idRecordRoutes,
+    ...recordRowsRoutes,
+]

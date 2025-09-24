@@ -1,0 +1,34 @@
+import { dateTimeSchema } from "#src/components/_index.js"
+import { idSchema } from "#src/components/schemas/idSchema.js"
+import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
+import { journalModel } from "#src/models/journal.js"
+import * as v from "valibot"
+
+
+export const journalSchema = v.object({
+    id: v.nonNullable(idSchema),
+    idOrganization: v.nonNullable(idSchema),
+    idYear: v.nonNullable(idSchema),
+    code: v.nonNullable(varcharSchema({ maxLength: 32 })),
+    label: v.nullable(varcharSchema({ maxLength: 256 })),
+    createdAt: v.nonNullable(dateTimeSchema),
+    lastUpdatedAt: v.nullable(dateTimeSchema),
+    createdBy: v.nullable(idSchema),
+    lastUpdatedBy: v.nullable(idSchema),
+}) satisfies v.GenericSchema<typeof journalModel.$inferSelect>
+
+
+export const journalSchemaReturn = v.pick(
+    journalSchema,
+    [
+        "id",
+        "idOrganization",
+        "idYear",
+        "code",
+        "label",
+        "createdAt",
+        "lastUpdatedAt",
+        "createdBy",
+        "lastUpdatedBy",
+    ]
+)

@@ -1,0 +1,46 @@
+{
+    "name": "@arrhes/metadata",
+    "type": "module",
+    "private": false,
+    "scripts": {
+        "dev": "tsc --build --watch",
+        "build": "tsc --build"
+    },
+    "devDependencies": {
+        "@types/node": "24.5.2",
+        "typescript": "5.9.2"
+    },
+    "dependencies": {
+        "drizzle-orm": "0.44.5",
+        "nanoid": "5.1.6",
+        "valibot": "1.1.0"
+    },
+    "files": [
+        "./build/**/*"
+    ],
+    "imports": {
+        "#src/*": "./build/*"
+    },
+    "exports": {
+        "./models": {
+            "default": "./build/models/_index.js",
+            "types": "./build/models/_index.d.ts"
+        },
+        "./components": {
+            "default": "./build/components/_index.js",
+            "types": "./build/components/_index.d.ts"
+        },
+        "./schemas": {
+            "default": "./build/schemas/_index.js",
+            "types": "./build/schemas/_index.d.ts"
+        },
+        "./routes": {
+            "default": "./build/routes/_index.js",
+            "types": "./build/routes/_index.d.ts"
+        },
+        "./utilities": {
+            "default": "./build/utilities/_index.js",
+            "types": "./build/utilities/_index.d.ts"
+        }
+    }
+}

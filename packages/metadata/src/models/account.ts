@@ -1,0 +1,64 @@
+import { accountType, balanceSheetFlow } from "#src/components/_index.js"
+import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
+import { idColumn } from "#src/components/models/idColumn.js"
+import { balanceSheetColumn } from "#src/components/values/balanceSheetColumn.js"
+import { relations } from "drizzle-orm"
+import { AnyPgColumn, boolean, pgEnum, pgTable, unique, varchar } from "drizzle-orm/pg-core"
+import { balanceSheetModel } from "./balanceSheet.js"
+import { incomeStatementModel } from "./incomeStatement.js"
+import { organizationModel } from "./organization.js"
+import { recordRowModel } from "./recordRow.js"
+import { userModel } from "./user.js"
+import { yearModel } from "./year.js"
+
+
+// Model
+export const accountBalanceSheetFlowEnum = pgEnum("enum_account_balance_sheet_flow", balanceSheetFlow)
+export const accountBalanceSheetColumnEnum = pgEnum("enum_account_balance_sheet_column", balanceSheetColumn)
+export const accountTypeEnum = pgEnum("enum_account_type", accountType)
+
+export const accountModel = pgTable(
+    "table_account",
+    {
+        id: idColumn("id").primaryKey(),
+        idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idAccountParent: idColumn("id_account_parent").references((): AnyPgColumn => accountModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
+
+        idBalanceSheet: idColumn("id_balance_sheet").references(() => balanceSheetModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
+        balanceSheetFlow: accountBalanceSheetFlowEnum("balance_sheet_flow"),
+        balanceSheetColumn: accountBalanceSheetColumnEnum("balance_sheet_column"),
+
+        idIncomeStatement: idColumn("id_income_statement").references(() => incomeStatementModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
+
+        isMandatory: boolean("is_mandatory").notNull(),
+        isClass: boolean("is_class").notNull(),
+        isSelectable: boolean("is_selectable").notNull(),
+        isDefault: boolean("is_default").notNull(),
+        number: varchar("number", { length: 32 }).notNull(),
+        label: varchar("label", { length: 256 }).notNull(),
+        type: accountTypeEnum("type").notNull(),
+
+        createdAt: dateTimeColumn("created_at").notNull(),
+        lastUpdatedAt: dateTimeColumn("last_updated_at"),
+        createdBy: idColumn("created_by").references((): AnyPgColumn => userModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        lastUpdatedBy: idColumn("last_updated_by").references((): AnyPgColumn => userModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+    },
+    (t) => ([
+        unique().on(t.idOrganization, t.idYear, t.number)
+    ])
+)
+
+
+// Relations
+export const accountRelations = relations(accountModel, ({ one, many }) => ({
+    balanceSheet: one(balanceSheetModel, {
+        fields: [accountModel.idBalanceSheet],
+        references: [balanceSheetModel.id],
+    }),
+    incomeStatement: one(incomeStatementModel, {
+        fields: [accountModel.idIncomeStatement],
+        references: [incomeStatementModel.id],
+    }),
+    rows: many(recordRowModel)
+}))

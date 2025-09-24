@@ -1,0 +1,20 @@
+import { routePath } from "#src/components/_index.js"
+import { computationSchema, computationSchemaReturn } from "#src/schemas/computation.js"
+import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import * as v from "valibot"
+
+
+export const updateOneComputationRouteDefinition = routeDefinition({
+    protocol: "http",
+    path: `${routePath.auth}/update-one-computation`,
+    schemas: {
+        body: v.object({
+            idComputation: computationSchema.entries.id,
+            idOrganization: computationSchema.entries.idOrganization,
+            idYear: computationSchema.entries.idYear,
+            number: v.optional(computationSchema.entries.number),
+            label: v.optional(computationSchema.entries.label),
+        }),
+        return: computationSchemaReturn
+    },
+})

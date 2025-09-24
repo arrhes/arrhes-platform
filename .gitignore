@@ -1,0 +1,13 @@
+node_modules
+build
+
+.cache
+.env
+.npmrc
+.continue
+.dev
+.old
+.vscode
+
+pnpm-lock.yaml
+*.tsbuildinfo

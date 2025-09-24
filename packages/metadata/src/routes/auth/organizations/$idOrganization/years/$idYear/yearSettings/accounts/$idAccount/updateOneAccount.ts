@@ -1,0 +1,31 @@
+import { routePath } from "#src/components/_index.js"
+import { accountSchema, accountSchemaReturn } from "#src/schemas/account.js"
+import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import * as v from "valibot"
+
+
+export const updateOneAccountRouteDefinition = routeDefinition({
+    protocol: "http",
+    path: `${routePath.auth}/update-one-account`,
+    schemas: {
+        body: v.object({
+            idAccount: accountSchema.entries.id,
+            idOrganization: accountSchema.entries.idOrganization,
+            idYear: accountSchema.entries.idYear,
+            idAccountParent: v.optional(accountSchema.entries.idAccountParent),
+
+            idBalanceSheet: v.optional(accountSchema.entries.idBalanceSheet),
+            balanceSheetFlow: v.optional(accountSchema.entries.balanceSheetFlow),
+            balanceSheetColumn: v.optional(accountSchema.entries.balanceSheetColumn),
+
+            idIncomeStatement: v.optional(accountSchema.entries.idIncomeStatement),
+
+            isClass: v.optional(accountSchema.entries.isClass),
+            isSelectable: v.optional(accountSchema.entries.isSelectable),
+            number: v.optional(accountSchema.entries.number),
+            label: v.optional(accountSchema.entries.label),
+            type: v.optional(accountSchema.entries.type),
+        }),
+        return: accountSchemaReturn
+    },
+})

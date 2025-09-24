@@ -1,0 +1,42 @@
+import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
+import { idColumn } from "#src/components/models/idColumn.js"
+import { organizationUserStatus } from "#src/components/values/organizationUserStatus.js"
+import { relations } from "drizzle-orm"
+import { AnyPgColumn, boolean, pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
+import { organizationModel } from "./organization.js"
+import { userModel } from "./user.js"
+
+
+// Model
+export const organizationUserStatusEnum = pgEnum("enum_organization_user_status", organizationUserStatus)
+
+export const organizationUserModel = pgTable(
+    "table_organization_user",
+    {
+        id: idColumn("id").primaryKey(),
+        idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idUser: idColumn("id_user").references(() => userModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        isAdmin: boolean("is_admin").notNull(),
+        status: organizationUserStatusEnum("status").notNull(),
+        createdAt: dateTimeColumn("created_at").notNull(),
+        lastUpdatedAt: dateTimeColumn("last_updated_at"),
+        createdBy: idColumn("created_by").references((): AnyPgColumn => userModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        lastUpdatedBy: idColumn("last_updated_by").references((): AnyPgColumn => userModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+    },
+    (t) => ([
+        unique().on(t.idOrganization, t.idUser)
+    ])
+)
+
+
+// Relations
+export const organizationUserRelations = relations(organizationUserModel, ({ one }) => ({
+    organization: one(organizationModel, {
+        fields: [organizationUserModel.idOrganization],
+        references: [organizationModel.id],
+    }),
+    user: one(userModel, {
+        fields: [organizationUserModel.idUser],
+        references: [userModel.id],
+    })
+}))

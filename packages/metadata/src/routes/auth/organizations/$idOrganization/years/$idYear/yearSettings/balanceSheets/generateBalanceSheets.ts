@@ -1,0 +1,17 @@
+import { routePath } from "#src/components/_index.js"
+import { balanceSheetSchema, balanceSheetSchemaReturn } from "#src/schemas/balanceSheet.js"
+import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import * as v from "valibot"
+
+
+export const generateBalanceSheetsRouteDefinition = routeDefinition({
+    protocol: "http",
+    path: `${routePath.auth}/generate-balance-sheets`,
+    schemas: {
+        body: v.object({
+            idOrganization: balanceSheetSchema.entries.idOrganization,
+            idYear: balanceSheetSchema.entries.idYear,
+        }),
+        return: v.array(balanceSheetSchemaReturn)
+    },
+})
