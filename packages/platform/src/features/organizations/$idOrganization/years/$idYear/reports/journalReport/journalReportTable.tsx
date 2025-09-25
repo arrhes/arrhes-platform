@@ -4,6 +4,7 @@ import { FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Table } from "#/components/layouts/table/table.js"
+import { cn } from "#/utilities/cn.js"
 import { readOneAccountRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Fragment } from "react/jsx-runtime"
@@ -14,8 +15,8 @@ export function JournalReportTable(props: {
     records: Array<v.InferOutput<typeof returnedSchemas.record>>
     recordRows: Array<v.InferOutput<typeof returnedSchemas.recordRow>>
 }) {
-    let totalDebit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
-    let totalCredit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
+    const totalDebit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
+    const totalCredit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
 
     const sortedRecords = props.records
         // .filter((record) => record.isComputed)
@@ -87,13 +88,20 @@ export function JournalReportTable(props: {
                             </Table.Body.Root>
                         )
                         : sortedRecords.map((record) => {
+
                             const sortedRecordRows = props.recordRows
                                 .filter((recordRow) => recordRow.idRecord === record.id)
                                 .sort((a, b) => (a.lastUpdatedAt ?? "").localeCompare(b.lastUpdatedAt ?? ""))
 
+                            const recordTotalDebit = sortedRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
+                            const recordTotalCredit = sortedRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
+
                             return (
                                 <Table.Body.Root key={record.id} className="border-y border-neutral/10 last:border-b-0">
-                                    <Table.Body.Row className="border-neutral/10 bg-background">
+                                    <Table.Body.Row className={cn(
+                                        "border-neutral/10 bg-background",
+                                        // (recordTotalDebit === recordTotalCredit) ? "" : "border border-error"
+                                    )}>
                                         <Table.Body.Cell>
                                             <FormatDate date={record.date} />
                                         </Table.Body.Cell>
@@ -102,14 +110,29 @@ export function JournalReportTable(props: {
                                                 {record.label}
                                             </FormatText>
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell colSpan={2} />
+                                        {/* <Table.Body.Cell colSpan={2} /> */}
+                                        <Table.Body.Cell className="w-[1%]" align="right">
+                                            <FormatPrice
+                                                price={recordTotalDebit}
+                                                className={cn(
+                                                    "font-bold",
+                                                    (recordTotalDebit === recordTotalCredit) ? "" : "text-error"
+                                                )}
+                                            />
+                                        </Table.Body.Cell>
+                                        <Table.Body.Cell className="w-[1%]" align="right">
+                                            <FormatPrice
+                                                price={recordTotalCredit}
+                                                className={cn(
+                                                    "font-bold",
+                                                    (recordTotalDebit === recordTotalCredit) ? "text-neutral" : "text-error"
+                                                )}
+                                            />
+                                        </Table.Body.Cell>
                                     </Table.Body.Row>
                                     <Fragment>
                                         {
                                             sortedRecordRows.map((recordRow) => {
-                                                totalDebit += Number(recordRow.debit)
-                                                totalCredit += Number(recordRow.credit)
-
                                                 return (
                                                     <Table.Body.Row key={recordRow.id}>
                                                         <Table.Body.Cell />

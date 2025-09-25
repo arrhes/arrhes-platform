@@ -49,6 +49,9 @@
         "valibot": "1.1.0"
     },
     "imports": {
+        "#/*": "./src/*"
+    },
+    "exports": {
         "#/*": "./build/*"
     },
     "browserslist": {
