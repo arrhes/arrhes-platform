@@ -16,8 +16,16 @@ export function BalanceReportTable(props: {
 
     let accountsTotalDebit = 0
     let accountsTotalCredit = 0
-    let accountsTotalBalanceDebit = 0
-    let accountsTotalBalanceCredit = 0
+
+    props.recordRows.forEach((recordRow) => {
+        accountsTotalDebit += Number(recordRow.debit)
+        accountsTotalCredit += Number(recordRow.credit)
+    })
+
+    const algebricBalance = accountsTotalDebit - accountsTotalCredit
+
+    const accountsTotalBalanceDebit = (algebricBalance > 0) ? algebricBalance : 0
+    const accountsTotalBalanceCredit = (algebricBalance < 0) ? -algebricBalance : 0
 
     return (
         <Table.Root>
@@ -94,9 +102,12 @@ export function BalanceReportTable(props: {
 
                             return (
                                 <Table.Body.Row key={account.id} className="border-neutral/5">
-                                    <Table.Body.Cell>
-                                        <FormatText wrap={true}>
+                                    <Table.Body.Cell className="flex justify-start items-start gap-2">
+                                        <FormatText className="overflow-visible">
                                             {account.number}
+                                        </FormatText>
+                                        <FormatText wrap={true} className="text-neutral/50">
+                                            {account.label}
                                         </FormatText>
                                     </Table.Body.Cell>
                                     <Table.Body.Cell className="w-[1%]" align="right">

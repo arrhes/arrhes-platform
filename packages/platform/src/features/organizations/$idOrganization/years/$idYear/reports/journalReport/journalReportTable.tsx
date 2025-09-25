@@ -103,7 +103,10 @@ export function JournalReportTable(props: {
                                         // (recordTotalDebit === recordTotalCredit) ? "" : "border border-error"
                                     )}>
                                         <Table.Body.Cell>
-                                            <FormatDate date={record.date} />
+                                            <FormatDate
+                                                className="italic"
+                                                date={record.date}
+                                            />
                                         </Table.Body.Cell>
                                         <Table.Body.Cell colSpan={2}>
                                             <FormatText wrap={true}>
@@ -141,7 +144,7 @@ export function JournalReportTable(props: {
                                                                 {recordRow.label}
                                                             </FormatText>
                                                         </Table.Body.Cell>
-                                                        <Table.Body.Cell>
+                                                        <Table.Body.Cell className="flex justify-start items-start gap-2">
                                                             <DataWrapper
                                                                 routeDefinition={readOneAccountRouteDefinition}
                                                                 body={{
@@ -151,9 +154,14 @@ export function JournalReportTable(props: {
                                                                 }}
                                                             >
                                                                 {(account) => (
-                                                                    <span>
-                                                                        {`${account.number}`}
-                                                                    </span>
+                                                                    <Fragment>
+                                                                        <FormatText className="overflow-visible">
+                                                                            {account.number}
+                                                                        </FormatText>
+                                                                        <FormatText wrap={true} className="text-neutral/50">
+                                                                            {account.label}
+                                                                        </FormatText>
+                                                                    </Fragment>
                                                                 )}
                                                             </DataWrapper>
                                                         </Table.Body.Cell>
