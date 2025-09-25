@@ -103,7 +103,7 @@ export function RecordsPage() {
                                         filterFn: 'includesString'
                                     },
                                     {
-                                        accessorKey: 'createdOn',
+                                        accessorKey: 'createdAt',
                                         header: "Ajouté le",
                                         cell: ({ row }) => (
                                             <FormatDateTime
