@@ -1,6 +1,6 @@
+import { models } from '@arrhes/metadata/models'
+import { generateId } from '@arrhes/metadata/utilities'
 import { DefaultBalanceSheet, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations, defaultJournals } from '@arrhes/schemas/components'
-import { models } from '@arrhes/schemas/models'
-import { generateId } from '@arrhes/schemas/utilities'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
 import { drizzle } from "drizzle-orm/postgres-js"

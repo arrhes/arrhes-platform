@@ -1,8 +1,8 @@
-import { returnedSchemas } from "@arrhes/schemas/schemas"
+import { GroupedBalanceSheet } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/groupBalanceSheets.js"
+import { cn } from "#/utilities/cn.js"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Link } from "@tanstack/react-router"
-import { GroupedBalanceSheet } from "features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/groupBalanceSheets"
 import { ComponentProps, Fragment } from "react"
-import { cn } from "utilities/cn"
 import * as v from "valibot"
 
 

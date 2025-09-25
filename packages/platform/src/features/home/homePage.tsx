@@ -1,6 +1,6 @@
-import { Page } from "components/layouts/page/page"
-import { DocumentationBanner } from "features/home/documentationBanner"
-import { OrganizationsBanner } from "features/home/organizationsBanner"
+import { Page } from "#/components/layouts/page/page.js"
+import { DocumentationBanner } from "#/features/home/documentationBanner.js"
+import { OrganizationsBanner } from "#/features/home/organizationsBanner.js"
 
 
 export function HomePage() {

@@ -1,7 +1,7 @@
+import { cn } from "#/utilities/cn.js"
 import { IconStarFilled } from '@tabler/icons-react'
 import { InputHTMLAttributes, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
-import { cn } from 'utilities/cn'
 
 
 type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {

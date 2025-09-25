@@ -1,6 +1,6 @@
 
+import { cn } from "#/utilities/cn.js"
 import { HTMLAttributes } from "react"
-import { cn } from "utilities/cn"
 
 
 export function DialogFooter(props:

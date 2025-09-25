@@ -1,7 +1,7 @@
-import { PageContent } from "./pageContent"
-import { PageHeader } from "./pageHeader"
-import { PageRoot } from "./pageRoot"
-import { PageSeparator } from "./pageSeparator"
+import { PageContent } from "./pageContent.js"
+import { PageHeader } from "./pageHeader.js"
+import { PageRoot } from "./pageRoot.js"
+import { PageSeparator } from "./pageSeparator.js"
 
 
 export const Page = {

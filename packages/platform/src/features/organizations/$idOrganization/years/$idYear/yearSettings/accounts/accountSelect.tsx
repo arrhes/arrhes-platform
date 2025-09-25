@@ -1,7 +1,7 @@
-import { readAllAccountsRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { InputCombobox } from "components/inputs/inputCombobox"
-import { useHTTPData } from "utilities/useHTTPData"
+import { InputCombobox } from "#/components/inputs/inputCombobox.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { readAllAccountsRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

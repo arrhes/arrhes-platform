@@ -1,10 +1,10 @@
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
+import { Section } from "#/components/layouts/section/section.js"
+import { CreateOneOrganizationUser } from "#/features/organizations/$idOrganization/organizationSettings/organizationUsers/createOneOrganizationUser.js"
+import { OrganizationUsersTable } from "#/features/organizations/$idOrganization/organizationSettings/organizationUsers/organizationUsersTable.js"
+import { organizationUsersRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationSettings/organizationUsers/organizationUsersRoute.js"
 import { IconUserPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent"
-import { Section } from "components/layouts/section/section"
-import { CreateOneOrganizationUser } from "features/organizations/$idOrganization/organizationSettings/organizationUsers/createOneOrganizationUser"
-import { OrganizationUsersTable } from "features/organizations/$idOrganization/organizationSettings/organizationUsers/organizationUsersTable"
-import { organizationUsersRoute } from "routes/root/auth/organizations/$idOrganization/organizationSettings/organizationUsers/organizationUsersRoute"
 
 
 export function OrganizationUsersPage() {

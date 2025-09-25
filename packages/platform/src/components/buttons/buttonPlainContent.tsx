@@ -1,6 +1,6 @@
+import { cn } from "#/utilities/cn.js"
 import { Icon, IconLoader2, IconProps } from "@tabler/icons-react"
 import { ComponentProps, ReactElement, cloneElement } from "react"
-import { cn } from "utilities/cn"
 
 
 export type PlainColors = "neutral" | "error" | "warning" | "success" | "information"

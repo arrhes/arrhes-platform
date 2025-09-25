@@ -1,5 +1,5 @@
+import { yearLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearLayoutRoute.js"
 import { createRoute, Outlet } from "@tanstack/react-router"
-import { yearLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearLayoutRoute"
 
 
 export const attachmentsLayoutRoute = createRoute({

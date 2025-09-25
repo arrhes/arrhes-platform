@@ -1,4 +1,4 @@
-import { Button } from 'components/buttons/button'
+import { Button } from "#/components/buttons/button.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
 

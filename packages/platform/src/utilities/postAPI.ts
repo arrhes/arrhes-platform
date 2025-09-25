@@ -1,8 +1,8 @@
-import { routeDefinition } from "@arrhes/schemas/utilities"
-import { toast } from "contexts/toasts/useToast"
+import { toast } from "#/contexts/toasts/useToast.js"
+import { routeDefinition } from "@arrhes/metadata/utilities"
 import * as v from "valibot"
-import { ClientError } from "./clientError"
-import { validate } from "./validate"
+import { ClientError } from "./clientError.js"
+import { validate } from "./validate.js"
 
 
 export async function postAPI<

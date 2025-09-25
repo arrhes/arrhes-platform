@@ -1,8 +1,8 @@
-import { DrawerBody } from "./drawerBody"
-import { DrawerContent } from "./drawerContent"
-import { DrawerHeader } from "./drawerHeader"
-import { DrawerRoot } from "./drawerRoot"
-import { DrawerTrigger } from "./drawerTrigger"
+import { DrawerBody } from "./drawerBody.js"
+import { DrawerContent } from "./drawerContent.js"
+import { DrawerHeader } from "./drawerHeader.js"
+import { DrawerRoot } from "./drawerRoot.js"
+import { DrawerTrigger } from "./drawerTrigger.js"
 
 
 export const Drawer = {

@@ -1,7 +1,7 @@
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { FormatNull } from "components/formats/formatNull"
-import { Table } from "components/layouts/table/table"
-import { BalanceSheetAssetBody } from "features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetBody"
+import { FormatNull } from "#/components/formats/formatNull.js"
+import { Table } from "#/components/layouts/table/table.js"
+import { BalanceSheetAssetBody } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetBody.js"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

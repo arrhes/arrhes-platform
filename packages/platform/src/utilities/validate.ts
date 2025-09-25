@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { ClientError } from "./clientError"
+import { ClientError } from "./clientError.js"
 
 
 type Validate<T extends v.GenericSchema<unknown, unknown>> = {

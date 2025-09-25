@@ -1,7 +1,7 @@
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { AuthLayout } from "#/features/authLayout.js"
+import { rootLayoutRoute } from "#/routes/rootLayoutRoute.js"
 import { createRoute, redirect } from "@tanstack/react-router"
-import { CircularLoader } from "components/layouts/circularLoader"
-import { AuthLayout } from "features/authLayout"
-import { rootLayoutRoute } from "routes/rootLayoutRoute"
 
 
 export const authLayoutRoute = createRoute({

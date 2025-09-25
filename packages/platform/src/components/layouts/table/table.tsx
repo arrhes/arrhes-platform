@@ -1,10 +1,10 @@
-import { TableBodyCell } from "./tableBody/tableBodyCell"
-import { TableBodyRoot } from "./tableBody/tableBodyRoot"
-import { TableBodyRow } from "./tableBody/tableBodyRow"
-import { TableHeaderCell } from "./tableHeader/tableHeaderCell"
-import { TableHeaderRoot } from "./tableHeader/tableHeaderRoot"
-import { TableHeaderRow } from "./tableHeader/tableHeaderRow"
-import { TableRoot } from "./tableRoot"
+import { TableBodyCell } from "./tableBody/tableBodyCell.js"
+import { TableBodyRoot } from "./tableBody/tableBodyRoot.js"
+import { TableBodyRow } from "./tableBody/tableBodyRow.js"
+import { TableHeaderCell } from "./tableHeader/tableHeaderCell.js"
+import { TableHeaderRoot } from "./tableHeader/tableHeaderRoot.js"
+import { TableHeaderRow } from "./tableHeader/tableHeaderRow.js"
+import { TableRoot } from "./tableRoot.js"
 
 
 export const Table = {

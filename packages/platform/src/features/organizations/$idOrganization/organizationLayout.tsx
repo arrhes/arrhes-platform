@@ -1,7 +1,7 @@
+import { PageLayout } from "#/components/layouts/pageLayout.js"
+import { organizationLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationLayoutRoute.js"
 import { IconCalendarEvent, IconSettings } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { PageLayout } from "components/layouts/pageLayout"
-import { organizationLayoutRoute } from "routes/root/auth/organizations/$idOrganization/organizationLayoutRoute"
 
 
 export function OrganizationLayout() {

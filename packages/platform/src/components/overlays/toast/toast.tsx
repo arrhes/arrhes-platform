@@ -1,10 +1,10 @@
-import { ToastAction } from "./toastAction"
-import { ToastClose } from "./toastClose"
-import { ToastContent } from "./toastContent"
-import { ToastDescription } from "./toastDescription"
-import { ToastProvider } from "./toastProvider"
-import { ToastTitle } from "./toastTitle"
-import { ToastViewport } from "./toastViewport"
+import { ToastAction } from "./toastAction.js"
+import { ToastClose } from "./toastClose.js"
+import { ToastContent } from "./toastContent.js"
+import { ToastDescription } from "./toastDescription.js"
+import { ToastProvider } from "./toastProvider.js"
+import { ToastTitle } from "./toastTitle.js"
+import { ToastViewport } from "./toastViewport.js"
 
 
 export const Toast = {

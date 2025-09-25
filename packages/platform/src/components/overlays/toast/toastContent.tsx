@@ -1,8 +1,8 @@
+import { cn } from "#/utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
 import { cva, VariantProps } from "class-variance-authority"
 import { ComponentProps } from "react"
-import { cn } from "utilities/cn"
 
 
 const toastIcons = {

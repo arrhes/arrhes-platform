@@ -1,6 +1,6 @@
-import { readUserSessionRouteDefinition } from "@arrhes/schemas/routes"
-import { getIsAuthenticated } from "utilities/cookies/getIsAuthenticated"
-import { postAPI } from "utilities/postAPI"
+import { getIsAuthenticated } from "#/utilities/cookies/getIsAuthenticated.js"
+import { postAPI } from "#/utilities/postAPI.js"
+import { readUserSessionRouteDefinition } from "@arrhes/metadata/routes"
 
 
 export async function getUserSession() {

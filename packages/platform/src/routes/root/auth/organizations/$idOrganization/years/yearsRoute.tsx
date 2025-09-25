@@ -1,6 +1,6 @@
+import { YearsPage } from "#/features/organizations/$idOrganization/years/yearsPage.js"
+import { yearsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/yearsLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { YearsPage } from "features/organizations/$idOrganization/years/yearsPage"
-import { yearsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/yearsLayoutRoute"
 
 
 export const yearsRoute = createRoute({

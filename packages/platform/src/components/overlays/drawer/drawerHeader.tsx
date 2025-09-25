@@ -1,7 +1,7 @@
 
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
-import { ButtonGhost } from "components/buttons/buttonGhost"
 
 
 export function DrawerHeader(props: {

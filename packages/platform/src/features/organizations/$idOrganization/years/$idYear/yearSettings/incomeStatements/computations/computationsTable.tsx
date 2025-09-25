@@ -1,9 +1,9 @@
-import { readAllComputationsRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
+import { FormatNull } from "#/components/formats/formatNull.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { cn } from "#/utilities/cn.js"
+import { readAllComputationsRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Link } from "@tanstack/react-router"
-import { FormatNull } from "components/formats/formatNull"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { cn } from "utilities/cn"
 import * as v from "valibot"
 
 

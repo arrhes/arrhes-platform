@@ -1,9 +1,9 @@
-import { routeDefinition } from "@arrhes/schemas/utilities"
-import { FormatError } from "components/formats/formatError"
-import { CircularLoader } from "components/layouts/circularLoader"
+import { FormatError } from "#/components/formats/formatError.js"
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { cn } from "#/utilities/cn.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { routeDefinition } from "@arrhes/metadata/utilities"
 import { ComponentProps, ReactElement, Suspense } from "react"
-import { cn } from "utilities/cn"
-import { useHTTPData } from "utilities/useHTTPData"
 import * as v from "valibot"
 
 

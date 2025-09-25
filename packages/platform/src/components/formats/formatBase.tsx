@@ -1,5 +1,5 @@
+import { cn } from "#/utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
-import { cn } from "utilities/cn.js"
 
 
 type FormatBase = {

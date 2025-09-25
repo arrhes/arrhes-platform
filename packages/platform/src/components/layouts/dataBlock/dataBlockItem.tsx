@@ -1,5 +1,5 @@
+import { Tooltip } from "#/components/overlays/tooltip/tooltip.js"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
-import { Tooltip } from "components/overlays/tooltip/tooltip"
 import { Fragment, ReactElement } from "react"
 
 

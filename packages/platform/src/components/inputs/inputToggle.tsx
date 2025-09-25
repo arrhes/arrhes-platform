@@ -1,9 +1,9 @@
 
+import { Button } from "#/components/buttons/button.js"
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { cn } from "#/utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
-import { Button } from "components/buttons/button"
-import { ButtonGhostContent } from "components/buttons/buttonGhostContent"
 import { ComponentProps, JSX } from "react"
-import { cn } from "utilities/cn"
 
 
 export function InputToggle<TValue extends (string | boolean)>(props:

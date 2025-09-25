@@ -1,9 +1,9 @@
 
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { cn } from "#/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
-import { ButtonGhost } from "components/buttons/buttonGhost"
 import { HTMLAttributes } from "react"
-import { cn } from "utilities/cn"
 
 
 export function DialogHeader(props:

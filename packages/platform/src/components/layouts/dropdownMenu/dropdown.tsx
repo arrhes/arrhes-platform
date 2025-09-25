@@ -1,9 +1,9 @@
-import { DropdownContent } from "./dropdownContent"
-import { DropdownItem } from "./dropdownItem"
-import { DropdownLabel } from "./dropdownLabel"
-import { DropdownRoot } from "./dropdownRoot"
-import { DropdownSeparator } from "./dropdownSeparator"
-import { DropdownTrigger } from "./dropdownTrigger"
+import { DropdownContent } from "./dropdownContent.js"
+import { DropdownItem } from "./dropdownItem.js"
+import { DropdownLabel } from "./dropdownLabel.js"
+import { DropdownRoot } from "./dropdownRoot.js"
+import { DropdownSeparator } from "./dropdownSeparator.js"
+import { DropdownTrigger } from "./dropdownTrigger.js"
 
 
 export const Dropdown = {

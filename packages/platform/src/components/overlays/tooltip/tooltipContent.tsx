@@ -1,7 +1,7 @@
 
+import { cn } from "#/utilities/cn.js"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 import { ComponentProps } from "react"
-import { cn } from "utilities/cn"
 
 
 export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Content>) {

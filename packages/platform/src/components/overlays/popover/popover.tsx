@@ -1,7 +1,7 @@
-import { PopoverClose } from "./popoverClose"
-import { PopoverContent } from "./popoverContent"
-import { PopoverRoot } from "./popoverRoot"
-import { PopoverTrigger } from "./popoverTrigger"
+import { PopoverClose } from "./popoverClose.js"
+import { PopoverContent } from "./popoverContent.js"
+import { PopoverRoot } from "./popoverRoot.js"
+import { PopoverTrigger } from "./popoverTrigger.js"
 
 
 export const Popover = {

@@ -1,8 +1,8 @@
+import { cn } from "#/utilities/cn.js"
 import { Dialog, DialogContent, DialogProps } from "@radix-ui/react-dialog"
 import { IconSearch } from "@tabler/icons-react"
 import { Command as CommandPrimitive } from "cmdk"
 import * as React from "react"
-import { cn } from "utilities/cn"
 
 
 export const Command = React.forwardRef<

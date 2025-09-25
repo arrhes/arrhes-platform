@@ -1,6 +1,6 @@
+import { AccountPage } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountPage.js"
+import { accountLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { AccountPage } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountPage"
-import { accountLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountLayoutRoute"
 
 
 export const accountRoute = createRoute({

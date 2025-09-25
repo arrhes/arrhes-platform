@@ -1,5 +1,5 @@
-import { Toast } from "components/overlays/toast/toast"
-import { ToastContent } from "components/overlays/toast/toastContent"
+import { Toast } from "#/components/overlays/toast/toast.js"
+import { ToastContent } from "#/components/overlays/toast/toastContent.js"
 import { ComponentProps, ReactNode, useEffect, useState } from "react"
 
 

@@ -1,5 +1,5 @@
-import { Button } from "components/buttons/button.js"
-import { toast } from "contexts/toasts/useToast.js"
+import { Button } from "#/components/buttons/button.js"
+import { toast } from "#/contexts/toasts/useToast.js"
 import { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"

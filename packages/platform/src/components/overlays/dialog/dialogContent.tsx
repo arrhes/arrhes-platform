@@ -1,9 +1,9 @@
 
+import { cn } from "#/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentPropsWithRef } from "react"
-import { cn } from "utilities/cn"
-import { DialogOverlay } from "./dialogOverlay"
-import { DialogPortal } from "./dialogPortal"
+import { DialogOverlay } from "./dialogOverlay.js"
+import { DialogPortal } from "./dialogPortal.js"
 
 
 export function DialogContent(props:

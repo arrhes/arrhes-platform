@@ -1,4 +1,4 @@
-import { modelSchemas } from "@arrhes/schemas/models"
+import { modelSchemas } from "@arrhes/metadata/models"
 
 
 module.exports = modelSchemas

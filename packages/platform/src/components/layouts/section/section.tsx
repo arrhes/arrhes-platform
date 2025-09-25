@@ -1,5 +1,5 @@
-import { SectionItem } from "./sectionItem"
-import { SectionRoot } from "./sectionRoot"
+import { SectionItem } from "./sectionItem.js"
+import { SectionRoot } from "./sectionRoot.js"
 
 
 export const Section = {

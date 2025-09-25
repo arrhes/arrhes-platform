@@ -1,5 +1,5 @@
+import { useDeviceDetect } from "#/utilities/useDeviceDetect.js"
 import { Outlet } from "@tanstack/react-router"
-import { useDeviceDetect } from "utilities/useDeviceDetect"
 
 
 export function RootLayout() {

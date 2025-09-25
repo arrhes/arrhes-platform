@@ -1,6 +1,6 @@
+import { BalanceReportPage } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceReport/balanceReportPage.js"
+import { reportsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { BalanceReportPage } from "features/organizations/$idOrganization/years/$idYear/reports/balanceReport/balanceReportPage"
-import { reportsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute"
 
 
 export const balanceReportRoute = createRoute({

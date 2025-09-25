@@ -1,5 +1,5 @@
-import { ButtonGhost } from "components/buttons/buttonGhost"
-import { ButtonPlain } from "components/buttons/buttonPlain"
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
 
 
 export type FormSubmit<T> = {

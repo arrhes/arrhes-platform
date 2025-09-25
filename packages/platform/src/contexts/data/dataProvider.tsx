@@ -1,5 +1,5 @@
+import { dataClient } from "#/contexts/data/queryClient.js"
 import { QueryClientProvider } from '@tanstack/react-query'
-import { dataClient } from 'contexts/data/queryClient'
 import { ReactNode } from "react"
 
 

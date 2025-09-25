@@ -1,5 +1,5 @@
-import { FormatBase } from "components/formats/formatBase"
-import { FormatNull } from "components/formats/formatNull"
+import { FormatBase } from "#/components/formats/formatBase.js"
+import { FormatNull } from "#/components/formats/formatNull.js"
 import { ComponentProps } from "react"
 
 

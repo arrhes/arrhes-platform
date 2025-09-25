@@ -1,6 +1,6 @@
 
-import { Toast } from "components/overlays/toast/toast"
-import { useToast } from "./useToast"
+import { Toast } from "#/components/overlays/toast/toast.js"
+import { useToast } from "./useToast.js"
 
 
 export function ToasterProvider() {

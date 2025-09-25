@@ -1,9 +1,9 @@
-import { readAllAccountsRouteDefinition } from "@arrhes/schemas/routes";
-import { returnedSchemas } from "@arrhes/schemas/schemas";
-import { FormatNull } from "components/formats/formatNull";
-import { DataWrapper } from "components/layouts/dataWrapper";
-import { AccountItem } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountItem";
-import { groupAccounts } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/groupAccounts";
+import { FormatNull } from "#/components/formats/formatNull.js";
+import { DataWrapper } from "#/components/layouts/dataWrapper.js";
+import { AccountItem } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountItem.js";
+import { groupAccounts } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/groupAccounts.js";
+import { readAllAccountsRouteDefinition } from "@arrhes/metadata/routes";
+import { returnedSchemas } from "@arrhes/metadata/schemas";
 import * as v from "valibot";
 
 

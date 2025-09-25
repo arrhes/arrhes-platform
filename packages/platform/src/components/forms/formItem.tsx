@@ -1,6 +1,6 @@
+import { cn } from "#/utilities/cn.js"
 import { HTMLAttributes, useId } from "react"
-import { cn } from "utilities/cn"
-import { FormItemContext } from "./formItemContext"
+import { FormItemContext } from "./formItemContext.js"
 
 
 type FormItem = HTMLAttributes<HTMLDivElement>

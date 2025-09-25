@@ -1,10 +1,10 @@
-import { readAllAccountsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/schemas/routes"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { Section } from "#/components/layouts/section/section.js"
+import { LedgerReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/ledgerReport/ledgerReportTable.js"
+import { ledgerReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/ledgerReportRoute.js"
+import { readAllAccountsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
 import { useParams } from "@tanstack/react-router"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { Section } from "components/layouts/section/section"
-import { LedgerReportTable } from "features/organizations/$idOrganization/years/$idYear/reports/ledgerReport/ledgerReportTable"
-import { ledgerReportRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/reports/ledgerReportRoute"
 
 
 export function LedgerReportPage() {

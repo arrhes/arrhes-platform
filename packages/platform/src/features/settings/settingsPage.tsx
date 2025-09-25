@@ -1,4 +1,4 @@
-import { Page } from "components/layouts/page/page"
+import { Page } from "#/components/layouts/page/page.js"
 
 
 export function SettingsPage() {

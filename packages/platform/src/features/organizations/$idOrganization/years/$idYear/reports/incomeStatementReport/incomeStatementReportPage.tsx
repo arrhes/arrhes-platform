@@ -1,10 +1,10 @@
-import { readAllAccountsRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllComputationsRouteDefinition, readAllIncomeStatementsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/schemas/routes"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { Section } from "#/components/layouts/section/section.js"
+import { IncomeStatementsReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementsReportTable.js"
+import { incomeStatementReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/incomeStatementReportRoute.js"
+import { readAllAccountsRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllComputationsRouteDefinition, readAllIncomeStatementsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
 import { useParams } from "@tanstack/react-router"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { Section } from "components/layouts/section/section"
-import { IncomeStatementsReportTable } from "features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementsReportTable"
-import { incomeStatementReportRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/reports/incomeStatementReportRoute"
 
 
 export function IncomeStatementReportPage() {

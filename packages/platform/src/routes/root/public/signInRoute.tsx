@@ -1,7 +1,7 @@
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { SignInPage } from "#/features/signIn/signInPage.js"
+import { publicLayoutRoute } from "#/routes/root/publicLayoutRoute.js"
 import { createRoute, redirect } from "@tanstack/react-router"
-import { CircularLoader } from "components/layouts/circularLoader"
-import { SignInPage } from "features/signIn/signInPage"
-import { publicLayoutRoute } from "routes/root/publicLayoutRoute"
 
 
 export const signInRoute = createRoute({

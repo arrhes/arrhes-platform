@@ -1,5 +1,5 @@
+import { cn } from "#/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
-import { cn } from "utilities/cn"
 
 
 export function CardContent(props: {

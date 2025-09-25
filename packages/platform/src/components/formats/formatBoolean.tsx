@@ -1,6 +1,6 @@
-import { Chip } from "components/layouts/chip"
+import { Chip } from "#/components/layouts/chip.js"
 import { ComponentProps } from "react"
-import { FormatBase } from "./formatBase"
+import { FormatBase } from "./formatBase.js"
 
 
 export function formatBoolean(boolean?: boolean | null) {

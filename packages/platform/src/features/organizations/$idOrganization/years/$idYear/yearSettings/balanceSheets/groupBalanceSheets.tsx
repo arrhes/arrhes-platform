@@ -1,4 +1,4 @@
-import { returnedSchemas } from "@arrhes/schemas/schemas"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

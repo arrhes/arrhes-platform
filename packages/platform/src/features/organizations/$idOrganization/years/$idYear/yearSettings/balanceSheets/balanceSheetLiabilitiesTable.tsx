@@ -1,9 +1,9 @@
-import { readAllBalanceSheetsRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { FormatNull } from "components/formats/formatNull"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { BalanceSheetItem } from "features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetItem"
-import { groupBalanceSheets } from "features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/groupBalanceSheets"
+import { FormatNull } from "#/components/formats/formatNull.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { BalanceSheetItem } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetItem.js"
+import { groupBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/groupBalanceSheets.js"
+import { readAllBalanceSheetsRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

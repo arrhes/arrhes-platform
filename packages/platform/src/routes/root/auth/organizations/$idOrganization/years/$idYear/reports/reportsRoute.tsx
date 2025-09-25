@@ -1,5 +1,5 @@
+import { reportsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute.js"
 import { createRoute, redirect } from "@tanstack/react-router"
-import { reportsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute"
 
 
 export const reportsRoute = createRoute({

@@ -1,7 +1,7 @@
+import { cn } from "#/utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from 'react-imask'
-import { cn } from "utilities/cn"
 
 
 export function InputPrice(props:
@@ -47,7 +47,7 @@ export function InputPrice(props:
                 unmask={"typed"}
                 // onClick={(event) => { event.currentTarget.select() }}
                 // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
-                onAccept={(value) => props.onChange(output(value))}
+                onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
                 className={cn(
                     "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",

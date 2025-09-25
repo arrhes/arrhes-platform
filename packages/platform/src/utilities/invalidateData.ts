@@ -1,5 +1,5 @@
-import { routeDefinition } from "@arrhes/schemas/utilities"
-import { dataClient } from "contexts/data/queryClient"
+import { dataClient } from "#/contexts/data/queryClient.js"
+import { routeDefinition } from "@arrhes/metadata/utilities"
 import * as v from "valibot"
 
 

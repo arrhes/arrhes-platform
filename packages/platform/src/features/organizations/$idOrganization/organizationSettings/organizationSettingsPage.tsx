@@ -1,12 +1,12 @@
-import { readOneOrganizationRouteDefinition } from "@arrhes/schemas/routes"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { DeleteOneOrganization } from "#/features/organizations/$idOrganization/organizationSettings/deleteOneOrganization.js"
+import { UpdateOneOrganization } from "#/features/organizations/$idOrganization/organizationSettings/updateOneOrganization.js"
+import { organizationSettingsRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationSettings/organizationSettingsRoute.js"
+import { readOneOrganizationRouteDefinition } from "@arrhes/metadata/routes"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { DeleteOneOrganization } from "features/organizations/$idOrganization/organizationSettings/deleteOneOrganization"
-import { UpdateOneOrganization } from "features/organizations/$idOrganization/organizationSettings/updateOneOrganization"
-import { organizationSettingsRoute } from "routes/root/auth/organizations/$idOrganization/organizationSettings/organizationSettingsRoute"
 
 
 export function OrganizationSettingsPage() {

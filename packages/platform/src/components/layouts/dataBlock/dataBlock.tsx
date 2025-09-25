@@ -1,7 +1,7 @@
-import { DataBlockContent } from "./dataBlockContent"
-import { DataBlockHeader } from "./dataBlockHeader"
-import { DataBlockItem } from "./dataBlockItem"
-import { DataBlockRoot } from "./dataBlockRoot"
+import { DataBlockContent } from "./dataBlockContent.js"
+import { DataBlockHeader } from "./dataBlockHeader.js"
+import { DataBlockItem } from "./dataBlockItem.js"
+import { DataBlockRoot } from "./dataBlockRoot.js"
 
 
 export const DataBlock = {

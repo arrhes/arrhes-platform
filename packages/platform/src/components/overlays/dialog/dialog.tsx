@@ -1,12 +1,12 @@
-import { DialogContent } from "./dialogContent"
-import { DialogDescription } from "./dialogDescription"
-import { DialogFooter } from "./dialogFooter"
-import { DialogHeader } from "./dialogHeader"
-import { DialogOverlay } from "./dialogOverlay"
-import { DialogPortal } from "./dialogPortal"
-import { DialogRoot } from "./dialogRoot"
-import { DialogTitle } from "./dialogTitle"
-import { DialogTrigger } from "./dialogTrigger"
+import { DialogContent } from "./dialogContent.js"
+import { DialogDescription } from "./dialogDescription.js"
+import { DialogFooter } from "./dialogFooter.js"
+import { DialogHeader } from "./dialogHeader.js"
+import { DialogOverlay } from "./dialogOverlay.js"
+import { DialogPortal } from "./dialogPortal.js"
+import { DialogRoot } from "./dialogRoot.js"
+import { DialogTitle } from "./dialogTitle.js"
+import { DialogTrigger } from "./dialogTrigger.js"
 
 
 export const Dialog = {

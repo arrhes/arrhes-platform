@@ -1,7 +1,7 @@
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
 import { Slot } from "@radix-ui/react-slot"
 import { ComponentProps, Suspense } from "react"
-import { useFormField } from "./useFormField"
-import { CircularLoader } from "components/layouts/circularLoader"
+import { useFormField } from "./useFormField.js"
 
 
 type FormControl = ComponentProps<typeof Slot>

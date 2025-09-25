@@ -1,8 +1,8 @@
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ValidParams, ValidRoutes } from "#/routes/platformRouter.js"
+import { cn } from "#/utilities/cn.js"
 import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
-import { ButtonGhostContent } from "components/buttons/buttonGhostContent"
 import { JSX } from "react"
-import { ValidParams, ValidRoutes } from "routes/platformRouter"
-import { cn } from "utilities/cn"
 
 
 export function SubPageLayout(props: {

@@ -1,5 +1,5 @@
+import { balanceSheetsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetsLayoutRoute.js"
 import { createRoute, Outlet } from "@tanstack/react-router"
-import { balanceSheetsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetsLayoutRoute"
 
 
 export const balanceSheetLayoutRoute = createRoute({

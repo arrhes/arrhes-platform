@@ -1,6 +1,6 @@
-import { cn } from "utilities/cn"
-import { Button } from "./button"
-import { ButtonPlainContent } from "./buttonPlainContent"
+import { cn } from "#/utilities/cn.js"
+import { Button } from "./button.js"
+import { ButtonPlainContent } from "./buttonPlainContent.js"
 
 
 export function ButtonPlain(props:

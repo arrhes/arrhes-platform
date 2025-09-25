@@ -1,8 +1,8 @@
+import { Page } from "#/components/layouts/page/page.js";
+import { SubPageLayout } from "#/components/layouts/subPageLayout.js";
+import { yearSettingsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsLayoutRoute.js";
 import { IconFileDiff, IconFileReport, IconNews, IconSettings, IconSitemap } from "@tabler/icons-react";
 import { useParams } from "@tanstack/react-router";
-import { Page } from "components/layouts/page/page";
-import { SubPageLayout } from "components/layouts/subPageLayout";
-import { yearSettingsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsLayoutRoute";
 
 
 export function YearSettingsLayout() {

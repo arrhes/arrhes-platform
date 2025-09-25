@@ -1,9 +1,9 @@
-import { readOneAttachmentRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { FormatError } from "components/formats/formatError"
-import { CircularLoader } from "components/layouts/circularLoader"
+import { FormatError } from "#/components/formats/formatError.js"
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { readOneAttachmentRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { ReactElement } from "react"
-import { useHTTPData } from "utilities/useHTTPData"
 import * as v from "valibot"
 
 

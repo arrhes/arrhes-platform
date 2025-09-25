@@ -1,6 +1,6 @@
-import { cn } from "utilities/cn"
-import { Button } from "./button"
-import { ButtonOutlineContent } from "./buttonOutlineContent"
+import { cn } from "#/utilities/cn.js"
+import { Button } from "./button.js"
+import { ButtonOutlineContent } from "./buttonOutlineContent.js"
 
 
 type ButtonOutline = ButtonOutlineContent & Button

@@ -1,5 +1,5 @@
 import { ComponentProps } from "react"
-import { FormatBase } from "./formatBase"
+import { FormatBase } from "./formatBase.js"
 
 
 

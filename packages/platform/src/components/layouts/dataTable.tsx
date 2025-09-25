@@ -1,3 +1,9 @@
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { FormatNull } from "#/components/formats/formatNull.js"
+import { InputDebounced } from "#/components/inputs/inputDebounced.js"
+import { InputText } from "#/components/inputs/inputText.js"
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { cn } from "#/utilities/cn.js"
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
@@ -10,13 +16,7 @@ import {
     getSortedRowModel,
     useReactTable
 } from '@tanstack/react-table'
-import { ButtonGhost } from "components/buttons/buttonGhost"
-import { FormatNull } from "components/formats/formatNull"
-import { InputDebounced } from "components/inputs/inputDebounced"
-import { InputText } from "components/inputs/inputText"
-import { CircularLoader } from "components/layouts/circularLoader"
 import { ReactElement, useMemo, useState } from "react"
-import { cn } from "utilities/cn"
 
 
 export function DataTable<TData extends Record<string, unknown>>(props: {

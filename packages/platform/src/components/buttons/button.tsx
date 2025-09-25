@@ -1,9 +1,9 @@
-import { ButtonGhostContent } from "components/buttons/buttonGhostContent"
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent"
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent"
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
+import { cn } from "#/utilities/cn.js"
+import { sleep } from "#/utilities/sleep.js"
 import { cloneElement, ComponentProps, ComponentPropsWithRef, MouseEvent, ReactElement, useState } from "react"
-import { cn } from "utilities/cn"
-import { sleep } from "utilities/sleep"
 
 
 export type Button = Omit<ComponentPropsWithRef<"button">, "children"> & {

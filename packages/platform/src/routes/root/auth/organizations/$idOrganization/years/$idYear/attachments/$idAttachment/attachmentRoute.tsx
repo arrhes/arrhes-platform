@@ -1,6 +1,6 @@
+import { AttachmentPage } from "#/features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentPage.js"
+import { attachmentLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { AttachmentPage } from "features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentPage"
-import { attachmentLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute"
 
 
 export const attachmentRoute = createRoute({

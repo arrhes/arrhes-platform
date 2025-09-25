@@ -1,15 +1,15 @@
-import { readAllJournalsRouteDefinition } from "@arrhes/schemas/routes";
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js";
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js";
+import { FormatNull } from "#/components/formats/formatNull.js";
+import { Box } from "#/components/layouts/box.js";
+import { DataWrapper } from "#/components/layouts/dataWrapper.js";
+import { Section } from "#/components/layouts/section/section.js";
+import { CreateOneJournal } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/createOneJournal.js";
+import { GenerateJournals } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/generateJournals.js";
+import { journalsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoute.js";
+import { readAllJournalsRouteDefinition } from "@arrhes/metadata/routes";
 import { IconPlus } from "@tabler/icons-react";
 import { Link, useParams } from "@tanstack/react-router";
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent";
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent";
-import { FormatNull } from "components/formats/formatNull";
-import { Box } from "components/layouts/box";
-import { DataWrapper } from "components/layouts/dataWrapper";
-import { Section } from "components/layouts/section/section";
-import { CreateOneJournal } from "features/organizations/$idOrganization/years/$idYear/yearSettings/journals/createOneJournal";
-import { GenerateJournals } from "features/organizations/$idOrganization/years/$idYear/yearSettings/journals/generateJournals";
-import { journalsRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoute";
 
 
 export function JournalsPage() {

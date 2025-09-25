@@ -1,6 +1,6 @@
+import { SettingsPage } from "#/features/settings/settingsPage.js"
+import { settingsLayoutRoute } from "#/routes/root/auth/settings/settingsLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { SettingsPage } from "features/settings/settingsPage"
-import { settingsLayoutRoute } from "routes/root/auth/settings/settingsLayoutRoute"
 
 
 export const settingsRoute = createRoute({

@@ -1,14 +1,14 @@
-import { signOutRouteDefinition } from "@arrhes/schemas/routes"
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
+import { Dropdown } from "#/components/layouts/dropdownMenu/dropdown.js"
+import { toast } from "#/contexts/toasts/useToast.js"
+import { Breadcrumbs } from "#/features/breadcrumbs.js"
+import { platformRouter } from "#/routes/platformRouter.js"
+import { postAPI } from "#/utilities/postAPI.js"
+import { signOutRouteDefinition } from "@arrhes/metadata/routes"
 import { IconAbacus, IconBuilding, IconLifebuoy, IconLogout, IconSettings, IconUser } from "@tabler/icons-react"
 import { Link, Outlet } from "@tanstack/react-router"
-import { ButtonGhost } from "components/buttons/buttonGhost"
-import { ButtonGhostContent } from "components/buttons/buttonGhostContent"
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent"
-import { Dropdown } from "components/layouts/dropdownMenu/dropdown"
-import { toast } from "contexts/toasts/useToast"
-import { Breadcrumbs } from "features/breadcrumbs"
-import { platformRouter } from "routes/platformRouter"
-import { postAPI } from "utilities/postAPI"
 
 
 export function AuthLayout() {

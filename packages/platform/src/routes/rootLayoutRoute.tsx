@@ -1,7 +1,7 @@
-import { readUserSessionRouteDefinition } from "@arrhes/schemas/routes"
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { RootLayout } from "#/features/rootLayout.js"
+import { readUserSessionRouteDefinition } from "@arrhes/metadata/routes"
 import { createRootRouteWithContext, useRouterState } from "@tanstack/react-router"
-import { CircularLoader } from "components/layouts/circularLoader"
-import { RootLayout } from "features/rootLayout"
 import { Fragment } from "react/jsx-runtime"
 import * as v from "valibot"
 

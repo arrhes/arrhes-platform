@@ -1,7 +1,7 @@
+import { cn } from "#/utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from "react-imask"
-import { cn } from "utilities/cn"
 
 
 export function InputDate(props:
@@ -75,7 +75,7 @@ export function InputDate(props:
                 eager="append"
                 unmask="typed"
                 placeholder={"JJ / MM / YYYY"}
-                onComplete={(value) => props.onChange(output(value))}
+                onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
                 className={cn(
                     "rounded-[inherit] w-full text-sm placeholder:text-neutral/25 p-2",

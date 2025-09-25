@@ -1,5 +1,5 @@
 import { createRoute, redirect } from "@tanstack/react-router"
-import { rootLayoutRoute } from "./rootLayoutRoute"
+import { rootLayoutRoute } from "./rootLayoutRoute.js"
 
 
 export const catchRoute = createRoute({

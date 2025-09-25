@@ -1,6 +1,6 @@
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
+import { Box } from "#/components/layouts/box.js"
 import { IconExternalLink } from "@tabler/icons-react"
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent"
-import { Box } from "components/layouts/box"
 
 
 export function DocumentationBanner() {

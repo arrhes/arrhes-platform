@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "pnpm --filter='api' --filter='platform' run dev",
     "build": "pnpm run build --filter ./packages/*"
   },
   "workspaces": [

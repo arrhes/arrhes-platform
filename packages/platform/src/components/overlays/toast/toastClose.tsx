@@ -1,8 +1,8 @@
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { cn } from "#/utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { IconX } from "@tabler/icons-react"
-import { ButtonGhost } from "components/buttons/buttonGhost"
 import { ComponentProps } from "react"
-import { cn } from "utilities/cn"
 
 
 type ToastClose = ComponentProps<typeof ToastPrimitives.Close>

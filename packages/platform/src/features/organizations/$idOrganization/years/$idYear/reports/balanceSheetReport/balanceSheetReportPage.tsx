@@ -1,11 +1,11 @@
-import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/schemas/routes"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { Section } from "#/components/layouts/section/section.js"
+import { BalanceSheetAssetsTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetsTable.js"
+import { BalanceSheetLiabilitiesTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiabilitiesTable.js"
+import { balanceSheetReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/balanceSheetReportRoute.js"
+import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
 import { useParams } from "@tanstack/react-router"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { Section } from "components/layouts/section/section"
-import { BalanceSheetAssetsTable } from "features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetsTable"
-import { BalanceSheetLiabilitiesTable } from "features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiabilitiesTable"
-import { balanceSheetReportRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/reports/balanceSheetReportRoute"
 
 
 export function BalanceSheetReportPage() {

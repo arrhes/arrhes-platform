@@ -1,8 +1,8 @@
+import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
+import { cn } from "#/utilities/cn.js"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import { ButtonPlain } from "components/buttons/buttonPlain"
 import { ReactElement, useEffect, useRef } from "react"
 import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
-import { cn } from "utilities/cn"
 import * as v from "valibot"
 
 
@@ -25,7 +25,7 @@ export function FormRoot<
         criteriaMode: "all",
         shouldFocusError: true,
         defaultValues: props.defaultValues,
-        resolver: valibotResolver(props.schema),
+        resolver: valibotResolver<T, any, T>(props.schema),
     })
     const submitButtonRef = useRef<HTMLButtonElement>(null)
 

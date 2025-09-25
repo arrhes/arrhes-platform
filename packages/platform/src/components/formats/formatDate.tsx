@@ -1,6 +1,6 @@
 import { ComponentProps } from "react"
-import { FormatBase } from "./formatBase"
-import { FormatNull } from "./formatNull"
+import { FormatBase } from "./formatBase.js"
+import { FormatNull } from "./formatNull.js"
 
 
 export function formatDate(rawDate?: string | Date | undefined | null) {

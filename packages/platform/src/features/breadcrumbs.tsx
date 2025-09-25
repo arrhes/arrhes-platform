@@ -1,6 +1,6 @@
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
 import { IconSlash } from "@tabler/icons-react"
 import { Link, useRouterState } from "@tanstack/react-router"
-import { ButtonGhostContent } from "components/buttons/buttonGhostContent"
 import { Fragment } from "react/jsx-runtime"
 
 

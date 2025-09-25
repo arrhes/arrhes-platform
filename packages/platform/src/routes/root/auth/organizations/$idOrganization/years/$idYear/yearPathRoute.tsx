@@ -1,5 +1,5 @@
+import { yearsPathRoute } from "#/routes/root/auth/organizations/$idOrganization/years/yearsPathRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { yearsPathRoute } from "routes/root/auth/organizations/$idOrganization/years/yearsPathRoute"
 
 
 export const yearPathRoute = createRoute({

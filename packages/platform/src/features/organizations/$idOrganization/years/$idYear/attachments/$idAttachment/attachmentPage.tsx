@@ -1,21 +1,21 @@
+import { ButtonOutline } from "#/components/buttons/buttonOutline.js"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
+import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
+import { FormatDate } from "#/components/formats/formatDate.js"
+import { FormatDateTime } from "#/components/formats/formatDateTime.js"
+import { FormatFileSize } from "#/components/formats/formatFileSize.js"
+import { FormatText } from "#/components/formats/formatText.js"
+import { DataBlock } from "#/components/layouts/dataBlock/dataBlock.js"
+import { Page } from "#/components/layouts/page/page.js"
+import { Section } from "#/components/layouts/section/section.js"
+import { TitleComponent } from "#/components/layouts/title.js"
+import { AttachmentData } from "#/features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentData.js"
+import { AttachmentFile } from "#/features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentFile.js"
+import { DeleteOneAttachment } from "#/features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/deleteOneAttachment.js"
+import { UpdateOneAttachment } from "#/features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/updateOneAttachment.js"
+import { attachmentLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
-import { ButtonOutline } from "components/buttons/buttonOutline"
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent"
-import { ButtonPlain } from "components/buttons/buttonPlain"
-import { FormatDate } from "components/formats/formatDate"
-import { FormatDateTime } from "components/formats/formatDateTime"
-import { FormatFileSize } from "components/formats/formatFileSize"
-import { FormatText } from "components/formats/formatText"
-import { DataBlock } from "components/layouts/dataBlock/dataBlock"
-import { Page } from "components/layouts/page/page"
-import { Section } from "components/layouts/section/section"
-import { TitleComponent } from "components/layouts/title"
-import { AttachmentData } from "features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentData"
-import { AttachmentFile } from "features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentFile"
-import { DeleteOneAttachment } from "features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/deleteOneAttachment"
-import { UpdateOneAttachment } from "features/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/updateOneAttachment"
-import { attachmentLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute"
 
 
 export function AttachmentPage() {
@@ -77,21 +77,21 @@ export function AttachmentPage() {
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Référence">
                                                 <FormatText>
-{attachment.reference}
-</FormatText>
+                                                    {attachment.reference}
+                                                </FormatText>
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Libellé">
                                                 <FormatText>
-{attachment.label}
-</FormatText>
+                                                    {attachment.label}
+                                                </FormatText>
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Date">
                                                 <FormatDate date={attachment.date} />
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Type">
                                                 <FormatText>
-{attachment.type?.split("/").at(1)}
-</FormatText>
+                                                    {attachment.type?.split("/").at(1)}
+                                                </FormatText>
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Size">
                                                 <FormatFileSize size={attachment.size} />
@@ -128,8 +128,8 @@ export function AttachmentPage() {
                                             </DataBlock.Item> */}
                                             <DataBlock.Item label="Id">
                                                 <FormatText>
-{attachment.id}
-</FormatText>
+                                                    {attachment.id}
+                                                </FormatText>
                                             </DataBlock.Item>
                                         </DataBlock.Content>
                                     </DataBlock.Root>

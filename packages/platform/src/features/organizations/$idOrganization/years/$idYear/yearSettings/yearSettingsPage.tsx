@@ -1,12 +1,12 @@
-import { readOneYearRouteDefinition } from "@arrhes/schemas/routes"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { DeleteOneYear } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/deleteOneYear.js"
+import { UpdateOneYear } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/updateOneYear.js"
+import { yearSettingsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute.js"
+import { readOneYearRouteDefinition } from "@arrhes/metadata/routes"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { DeleteOneYear } from "features/organizations/$idOrganization/years/$idYear/yearSettings/deleteOneYear"
-import { UpdateOneYear } from "features/organizations/$idOrganization/years/$idYear/yearSettings/updateOneYear"
-import { yearSettingsRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute"
 
 
 export function YearSettingsPage() {

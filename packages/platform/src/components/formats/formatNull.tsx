@@ -1,5 +1,5 @@
+import { cn } from "#/utilities/cn.js"
 import { ComponentProps } from "react"
-import { cn } from "utilities/cn"
 
 
 type FormatNull = {

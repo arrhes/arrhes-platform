@@ -1,8 +1,8 @@
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js";
+import { Box } from "#/components/layouts/box.js";
+import { Page } from "#/components/layouts/page/page.js";
+import { ContactSupportForm } from "#/features/support/contactSupportForm.js";
 import { IconBrandGithub, IconBrandLinkedin, IconMail } from "@tabler/icons-react";
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent";
-import { Box } from "components/layouts/box";
-import { Page } from "components/layouts/page/page";
-import { ContactSupportForm } from "features/support/contactSupportForm";
 
 
 export function SupportPage() {

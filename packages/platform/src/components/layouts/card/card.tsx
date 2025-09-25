@@ -1,6 +1,6 @@
-import { CardContent } from "./cardContent"
-import { CardHeader } from "./cardHeader"
-import { CardRoot } from "./cardRoot"
+import { CardContent } from "./cardContent.js"
+import { CardHeader } from "./cardHeader.js"
+import { CardRoot } from "./cardRoot.js"
 
 
 export const Card = {

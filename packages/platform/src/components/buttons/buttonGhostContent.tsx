@@ -1,7 +1,7 @@
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { cn } from "#/utilities/cn.js"
 import { Icon, IconProps } from "@tabler/icons-react"
-import { CircularLoader } from "components/layouts/circularLoader"
 import { ComponentProps, ReactElement, cloneElement } from "react"
-import { cn } from "utilities/cn"
 
 
 export type GhostColors = "neutral" | "error" | "warning" | "success" | "information"

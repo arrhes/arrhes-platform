@@ -1,6 +1,6 @@
+import { RecordsPage } from "#/features/organizations/$idOrganization/years/$idYear/records/recordsPage.js"
+import { recordsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/records/recordsLayoutRoute.js"
 import { createRoute } from "@tanstack/react-router"
-import { RecordsPage } from "features/organizations/$idOrganization/years/$idYear/records/recordsPage"
-import { recordsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/records/recordsLayoutRoute"
 
 
 export const recordsRoute = createRoute({

@@ -1,8 +1,8 @@
-import { TooltipContent } from "./tooltipContent"
-import { TooltipPortal } from "./tooltipPortal"
-import { TooltipProvider } from "./tooltipProvider"
-import { TooltipRoot } from "./tooltipRoot"
-import { TooltipTrigger } from "./tooltipTrigger"
+import { TooltipContent } from "./tooltipContent.js"
+import { TooltipPortal } from "./tooltipPortal.js"
+import { TooltipProvider } from "./tooltipProvider.js"
+import { TooltipRoot } from "./tooltipRoot.js"
+import { TooltipTrigger } from "./tooltipTrigger.js"
 
 
 export const Tooltip = {

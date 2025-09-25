@@ -1,8 +1,8 @@
-import { routeDefinition } from "@arrhes/schemas/utilities"
+import { routeDefinition } from "@arrhes/metadata/utilities"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
-import { ClientError } from "./clientError"
-import { postAPI } from "./postAPI"
+import { ClientError } from "./clientError.js"
+import { postAPI } from "./postAPI.js"
 
 
 

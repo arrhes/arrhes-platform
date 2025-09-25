@@ -2,7 +2,7 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { IconInfoSquare } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
-import { useFormField } from "./useFormField"
+import { useFormField } from "./useFormField.js"
 
 
 type FormLabel = {

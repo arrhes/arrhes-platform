@@ -1,8 +1,8 @@
 
 
+import { cn } from "#/utilities/cn.js"
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
-import { cn } from "utilities/cn"
 
 
 export function DropdownTrigger(props:

@@ -1,7 +1,7 @@
-import { Chip, ChipColors } from "components/layouts/chip"
+import { Chip, ChipColors } from "#/components/layouts/chip.js"
 import { ComponentProps } from "react"
-import { FormatBase } from "./formatBase"
-import { FormatNull } from "./formatNull"
+import { FormatBase } from "./formatBase.js"
+import { FormatNull } from "./formatNull.js"
 
 
 export function formatSelect(key: string | null | undefined, options: { key: string, label: string }[]) {

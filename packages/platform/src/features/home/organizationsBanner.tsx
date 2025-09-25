@@ -1,7 +1,7 @@
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
+import { Box } from "#/components/layouts/box.js"
 import { IconBuilding } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent"
-import { Box } from "components/layouts/box"
 
 
 export function OrganizationsBanner() {

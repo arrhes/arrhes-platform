@@ -1,8 +1,8 @@
-import { returnedSchemas } from "@arrhes/schemas/schemas"
+import { GroupedIncomeStatement } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/groupIncomeStatements.js"
+import { cn } from "#/utilities/cn.js"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Link } from "@tanstack/react-router"
-import { GroupedIncomeStatement } from "features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/groupIncomeStatements"
 import { ComponentProps, Fragment } from "react"
-import { cn } from "utilities/cn"
 import * as v from "valibot"
 
 

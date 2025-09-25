@@ -1,12 +1,12 @@
-import { getAllMyOrganizationsRouteDefinition } from "@arrhes/schemas/routes"
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
+import { FormatNull } from "#/components/formats/formatNull.js"
+import { Box } from "#/components/layouts/box.js"
+import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { Page } from "#/components/layouts/page/page.js"
+import { AddNewOrganization } from "#/features/organizations/addNewOrganization.js"
+import { getAllMyOrganizationsRouteDefinition } from "@arrhes/metadata/routes"
 import { IconBuildingPlus } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent"
-import { FormatNull } from "components/formats/formatNull"
-import { Box } from "components/layouts/box"
-import { DataWrapper } from "components/layouts/dataWrapper"
-import { Page } from "components/layouts/page/page"
-import { AddNewOrganization } from "features/organizations/addNewOrganization"
 
 
 export function OrganizationsPage() {

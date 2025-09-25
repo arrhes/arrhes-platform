@@ -1,9 +1,9 @@
-import { readAllAttachmentsRouteDefinition } from "@arrhes/schemas/routes";
+import { DataWrapper } from "#/components/layouts/dataWrapper.js";
+import { Page } from "#/components/layouts/page/page.js";
+import { AttachmentsTable } from "#/features/organizations/$idOrganization/years/$idYear/attachments/attachmentsTable.js";
+import { attachmentsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/attachmentsLayoutRoute.js";
+import { readAllAttachmentsRouteDefinition } from "@arrhes/metadata/routes";
 import { useParams } from "@tanstack/react-router";
-import { DataWrapper } from "components/layouts/dataWrapper";
-import { Page } from "components/layouts/page/page";
-import { AttachmentsTable } from "features/organizations/$idOrganization/years/$idYear/attachments/attachmentsTable";
-import { attachmentsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/attachments/attachmentsLayoutRoute";
 
 
 export function AttachmentsPage() {

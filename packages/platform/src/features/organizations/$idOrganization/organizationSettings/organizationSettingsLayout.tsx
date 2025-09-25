@@ -1,8 +1,8 @@
+import { Page } from "#/components/layouts/page/page.js"
+import { SubPageLayout } from "#/components/layouts/subPageLayout.js"
+import { organizationSettingsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute.js"
 import { IconSettings, IconUsers } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { Page } from "components/layouts/page/page"
-import { SubPageLayout } from "components/layouts/subPageLayout"
-import { organizationSettingsLayoutRoute } from "routes/root/auth/organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute"
 
 
 export function OrganizationSettingsLayout() {

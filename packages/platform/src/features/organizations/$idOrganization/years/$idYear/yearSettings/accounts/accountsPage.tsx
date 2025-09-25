@@ -1,13 +1,13 @@
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js";
+import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js";
+import { Box } from "#/components/layouts/box.js";
+import { Section } from "#/components/layouts/section/section.js";
+import { AccountsTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountsTable.js";
+import { CreateOneAccount } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/createOneAccount.js";
+import { GenerateAccounts } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/generateAccounts.js";
+import { accountsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountsRoute.js";
 import { IconPlus } from "@tabler/icons-react";
 import { useParams } from "@tanstack/react-router";
-import { ButtonOutlineContent } from "components/buttons/buttonOutlineContent";
-import { ButtonPlainContent } from "components/buttons/buttonPlainContent";
-import { Box } from "components/layouts/box";
-import { Section } from "components/layouts/section/section";
-import { AccountsTable } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountsTable";
-import { CreateOneAccount } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/createOneAccount";
-import { GenerateAccounts } from "features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/generateAccounts";
-import { accountsRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountsRoute";
 
 
 export function AccountsPage() {

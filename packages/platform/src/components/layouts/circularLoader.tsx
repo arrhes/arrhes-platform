@@ -1,6 +1,6 @@
+import { cn } from "#/utilities/cn.js"
 import { IconLoader2 } from "@tabler/icons-react"
 import { ComponentProps } from "react"
-import { cn } from "utilities/cn"
 
 
 type CircularLoader = {

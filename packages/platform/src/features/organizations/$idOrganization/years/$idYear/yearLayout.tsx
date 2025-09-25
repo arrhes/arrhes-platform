@@ -1,7 +1,7 @@
+import { PageLayout } from "#/components/layouts/pageLayout.js"
+import { yearLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearLayoutRoute.js"
 import { IconFolders, IconPencil, IconReport, IconSettings } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { PageLayout } from "components/layouts/pageLayout"
-import { yearLayoutRoute } from "routes/root/auth/organizations/$idOrganization/years/$idYear/yearLayoutRoute"
 
 
 export function YearLayout() {

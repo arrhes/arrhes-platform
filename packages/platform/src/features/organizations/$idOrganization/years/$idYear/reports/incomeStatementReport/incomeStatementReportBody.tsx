@@ -1,10 +1,10 @@
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { FormatPrice } from "components/formats/formatPrice"
-import { FormatText } from "components/formats/formatText"
-import { Table } from "components/layouts/table/table"
+import { FormatPrice } from "#/components/formats/formatPrice.js"
+import { FormatText } from "#/components/formats/formatText.js"
+import { Table } from "#/components/layouts/table/table.js"
+import { cn } from "#/utilities/cn.js"
+import { toRoman } from "#/utilities/toRoman.js"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Fragment } from "react/jsx-runtime"
-import { cn } from "utilities/cn"
-import { toRoman } from "utilities/toRoman"
 import * as v from "valibot"
 
 

@@ -1,6 +1,6 @@
-import { routeDefinition } from "@arrhes/schemas/utilities"
-import { InputCombobox } from "components/inputs/inputCombobox"
-import { useHTTPData } from "utilities/useHTTPData"
+import { InputCombobox } from "#/components/inputs/inputCombobox.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { routeDefinition } from "@arrhes/metadata/utilities"
 import * as v from "valibot"
 
 

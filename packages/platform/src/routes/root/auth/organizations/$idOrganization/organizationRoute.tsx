@@ -1,5 +1,5 @@
+import { organizationLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationLayoutRoute.js"
 import { createRoute, redirect } from "@tanstack/react-router"
-import { organizationLayoutRoute } from "routes/root/auth/organizations/$idOrganization/organizationLayoutRoute"
 
 
 export const organizationRoute = createRoute({

@@ -1,7 +1,7 @@
+import { platformTree } from "#/routes/platformTree.js"
+import { getIsAuthenticated } from "#/utilities/cookies/getIsAuthenticated.js"
+import { getUserSession } from "#/utilities/cookies/getUserSession.js"
 import { createRouter, LinkProps } from '@tanstack/react-router'
-import { getIsAuthenticated } from 'utilities/cookies/getIsAuthenticated'
-import { getUserSession } from 'utilities/cookies/getUserSession'
-import { platformTree } from './platformTree'
 
 
 export type ValidRoutes = LinkProps["to"]

@@ -1,5 +1,5 @@
-import { cookiePrefix } from "utilities/variables"
-import { getCookie } from "./getCookie"
+import { cookiePrefix } from "#/utilities/variables.js"
+import { getCookie } from "./getCookie.js"
 
 
 export function getIsAuthenticated() {

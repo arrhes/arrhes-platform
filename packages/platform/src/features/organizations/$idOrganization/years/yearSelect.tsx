@@ -1,7 +1,7 @@
-import { readAllYearsRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { InputSelect } from "components/inputs/inputSelect"
-import { useHTTPData } from "utilities/useHTTPData"
+import { InputSelect } from "#/components/inputs/inputSelect.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { readAllYearsRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 

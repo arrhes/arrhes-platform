@@ -1,8 +1,8 @@
-import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/schemas/routes"
-import { returnedSchemas } from "@arrhes/schemas/schemas"
-import { FormatError } from "components/formats/formatError"
-import { CircularLoader } from "components/layouts/circularLoader"
-import { useHTTPData } from "utilities/useHTTPData"
+import { FormatError } from "#/components/formats/formatError.js"
+import { CircularLoader } from "#/components/layouts/circularLoader.js"
+import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
+import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
 
