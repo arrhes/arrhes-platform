@@ -1,6 +1,7 @@
 import { Box } from "#/components/layouts/box.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Section } from "#/components/layouts/section/section.js"
+import { TitleComponent } from "#/components/layouts/title.js"
 import { BalanceSheetAssetsTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetsTable.js"
 import { BalanceSheetLiabilitiesTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiabilitiesTable.js"
 import { balanceSheetReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/balanceSheetReportRoute.js"
@@ -42,32 +43,28 @@ export function BalanceSheetReportPage() {
                                         >
                                             {(balanceSheets) => {
                                                 return (
-                                                    <Box>
-                                                        <Section.Root>
-                                                            <Section.Item>
-                                                                {/* <div className="w-full min-w-full max-w-full h-full max-h-full grid grid-cols-2 grid-rows-[max-content_auto] overflow-auto rounded-md border border-neutral/10"> */}
-                                                                {/* <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-between items-center gap-3">
-                        <span className="text-lg uppercase text-neutral/50">Actif</span>
-                        <FormatPrice price={totalSheetAsset} />
-                    </div>
-                    <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-between items-center gap-3">
-                        <span className="text-lg uppercase text-neutral/50">Passif</span>
-                        <FormatPrice price={totalSheetLiability} />
-                    </div> */}
-                                                                <BalanceSheetAssetsTable
-                                                                    balanceSheets={balanceSheets}
-                                                                    recordRows={recordRows}
-                                                                    accounts={accounts}
-                                                                />
-                                                                <BalanceSheetLiabilitiesTable
-                                                                    balanceSheets={balanceSheets}
-                                                                    recordRows={recordRows}
-                                                                    accounts={accounts}
-                                                                />
-                                                                {/* </div> */}
-                                                            </Section.Item>
-                                                        </Section.Root>
-                                                    </Box>
+                                                    <div className="w-full flex flex-row justify-start items-start gap-4 flex-wrap">
+                                                        <Box className="gap-4 max-h-[640px]">
+                                                            <TitleComponent className="p-4">
+                                                                Actif
+                                                            </TitleComponent>
+                                                            <BalanceSheetAssetsTable
+                                                                balanceSheets={balanceSheets}
+                                                                recordRows={recordRows}
+                                                                accounts={accounts}
+                                                            />
+                                                        </Box>
+                                                        <Box className="gap-4 max-h-[640px]">
+                                                            <TitleComponent className="p-4">
+                                                                Passif
+                                                            </TitleComponent>
+                                                            <BalanceSheetLiabilitiesTable
+                                                                balanceSheets={balanceSheets}
+                                                                recordRows={recordRows}
+                                                                accounts={accounts}
+                                                            />
+                                                        </Box>
+                                                    </div>
                                                 )
                                             }}
                                         </DataWrapper>

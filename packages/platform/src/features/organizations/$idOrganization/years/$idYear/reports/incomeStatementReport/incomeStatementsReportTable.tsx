@@ -32,6 +32,8 @@ export function IncomeStatementsReportTable(props: {
                 <IncomeStatementReportBody
                     incomeStatements={props.incomeStatements}
                     incomeStatementParent={null}
+                    recordRows={props.recordRows}
+                    accounts={props.accounts}
                     displayNumber={true}
                     increment={0}
                 />
@@ -50,6 +52,9 @@ export function IncomeStatementsReportTable(props: {
                         )
                         : props.computations.map((computation, index) => {
                             const computationStatements = props.computationIncomeStatements
+                                .filter((computationIncomeStatement) => {
+                                    return computationIncomeStatement.idComputation === computation.id
+                                })
                                 .map((computationIncomeStatement) => ({
                                     ...computationIncomeStatement,
                                     incomeStatement: props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)

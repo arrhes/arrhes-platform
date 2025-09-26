@@ -11,7 +11,7 @@ export function BalanceSheetAssetsTable(props: {
     accounts: Array<v.InferOutput<typeof returnedSchemas.account>>
 }) {
     return (
-        <Table.Root className="border-r border-neutral/10">
+        <Table.Root className="">
             <Table.Header.Root>
                 <Table.Header.Row>
                     <Table.Header.Cell />

@@ -11,11 +11,16 @@ import * as v from "valibot"
 export function IncomeStatementReportBody(props: {
     incomeStatements: Array<v.InferOutput<typeof returnedSchemas.incomeStatement>>
     incomeStatementParent: v.InferOutput<typeof returnedSchemas.incomeStatement> | null
+    recordRows: Array<v.InferOutput<typeof returnedSchemas.recordRow>>
+    accounts: Array<v.InferOutput<typeof returnedSchemas.account>>
     increment: number
     displayNumber: boolean
 }) {
     const filteredIncomeStatements = props.incomeStatements
-        .filter((incomeStatement) => incomeStatement.idIncomeStatementParent === props.incomeStatementParent?.id)
+        .filter((incomeStatement) => {
+            const hasParent = incomeStatement.idIncomeStatementParent === (props.incomeStatementParent?.id ?? null)
+            return hasParent
+        })
 
     return (
         <Fragment>
@@ -24,6 +29,18 @@ export function IncomeStatementReportBody(props: {
                     const label = (props.displayNumber === false)
                         ? incomeStatement.label
                         : `${toRoman(Number(incomeStatement.number))} ${incomeStatement.label}`
+
+                    const accounts = props.accounts.filter((account) => {
+                        console.log(account.idIncomeStatement)
+                        return account.idIncomeStatement === incomeStatement.id
+                    })
+                    console.log(accounts)
+
+                    const recordRows = props.recordRows.filter((recordRow) => {
+                        return accounts.find((account) => account.id === recordRow.idAccount) !== undefined
+                    })
+
+                    const total = recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit) - Number(recordRow.credit), 0)
 
                     return (
                         <Fragment key={incomeStatement.id}>
@@ -46,18 +63,20 @@ export function IncomeStatementReportBody(props: {
                                 {
                                     (filteredIncomeStatements.length === 0)
                                         ? (
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={incomeStatement.netAmountAdded} />
-                                            </Table.Body.Cell>
+                                            <Table.Body.Cell />
                                         )
                                         : (
-                                            <Table.Body.Cell />
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={total} />
+                                            </Table.Body.Cell>
                                         )
                                 }
                             </Table.Body.Row>
                             <IncomeStatementReportBody
                                 incomeStatements={props.incomeStatements}
                                 incomeStatementParent={incomeStatement}
+                                recordRows={props.recordRows}
+                                accounts={props.accounts}
                                 increment={props.increment + 1}
                                 displayNumber={false}
                             />

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --filter='api' --filter='platform' run dev",
-    "build": "pnpm run build --filter ./packages/*"
+    "build": "pnpm --filter='metadata' --filter='api' --filter='platform' run build"
   },
   "workspaces": [
     "./packages/*"

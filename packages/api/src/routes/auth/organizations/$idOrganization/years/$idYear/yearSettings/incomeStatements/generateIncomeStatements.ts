@@ -78,7 +78,6 @@ export const generateIncomeStatementsRoute = authFactory.createApp()
                         })
                     })
 
-
                 const generatedIncomeStatements = await insertMany({
                     database: tx,
                     table: models.incomeStatement,

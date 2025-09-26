@@ -15,7 +15,11 @@ export function BalanceSheetAssetBody(props: {
     displayNumber: boolean
 }) {
     const filteredBalanceSheets = props.balanceSheets
-        .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === props.balanceSheetParent?.id)
+        .filter((balanceSheet) => {
+            const isAssetSide = balanceSheet.side === "asset"
+            const hasParent = balanceSheet.idBalanceSheetParent === (props.balanceSheetParent?.id ?? null)
+            return isAssetSide && hasParent
+        })
 
     return (
         <Fragment>
@@ -46,6 +50,9 @@ export function BalanceSheetAssetBody(props: {
                                 {
                                     (filteredBalanceSheets.length === 0)
                                         ? (
+                                            <Table.Body.Cell colSpan={3} />
+                                        )
+                                        : (
                                             <Fragment>
                                                 <Table.Body.Cell className="w-[1%]" align="right">
                                                     <FormatPrice price={balanceSheet.grossAmountAdded} />
@@ -57,9 +64,6 @@ export function BalanceSheetAssetBody(props: {
                                                     <FormatPrice price={balanceSheet.netAmountAdded} />
                                                 </Table.Body.Cell>
                                             </Fragment>
-                                        )
-                                        : (
-                                            <Table.Body.Cell colSpan={3} />
                                         )
                                 }
                             </Table.Body.Row>
