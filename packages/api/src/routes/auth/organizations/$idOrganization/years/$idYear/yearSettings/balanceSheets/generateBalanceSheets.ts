@@ -60,7 +60,9 @@ export const generateBalanceSheetsRoute = authFactory.createApp()
                 defaultBalanceSheets
                     .forEach((defaultBalanceSheet) => {
                         const balanceSheetParent = newBalanceSheets.find((newBalanceSheet) => {
-                            return newBalanceSheet.number === defaultBalanceSheet.numberParent?.toString()
+                            const isParent = newBalanceSheet.number === defaultBalanceSheet.numberParent?.toString()
+                            const isSameSide = newBalanceSheet.side === defaultBalanceSheet.side
+                            return isParent && isSameSide
                         })
                         newBalanceSheets.push({
                             id: generateId(),

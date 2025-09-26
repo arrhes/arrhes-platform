@@ -45,9 +45,14 @@ export function RecordRowsTable(props: {
                             }}
                         >
                             {(account) => (
-                                <span>
-                                    {`${account.number}`}
-                                </span>
+                                <div className="flex justify-start items-start gap-2">
+                                    <FormatText className="overflow-visible">
+                                        {account.number}
+                                    </FormatText>
+                                    <FormatText wrap={true} className="text-neutral/50">
+                                        {account.label}
+                                    </FormatText>
+                                </div>
                             )}
                         </DataWrapper>
                     ),
