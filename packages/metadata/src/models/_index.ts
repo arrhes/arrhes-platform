@@ -9,6 +9,7 @@ import * as journalModel from "./journal.js"
 import * as organizationModel from "./organization.js"
 import * as organizationUserModel from "./organizationUser.js"
 import * as recordModel from "./record.js"
+import * as recordLabelModel from "./recordLabel.js"
 import * as recordRowModel from "./recordRow.js"
 import * as userModel from "./user.js"
 import * as userSessionModel from "./userSession.js"
@@ -27,6 +28,7 @@ export const models = {
     organization: organizationModel.organizationModel,
     organizationUser: organizationUserModel.organizationUserModel,
     record: recordModel.recordModel,
+    recordLabel: recordLabelModel.recordLabelModel,
     recordRow: recordRowModel.recordRowModel,
     user: userModel.userModel,
     userSession: userSessionModel.userSessionModel,
@@ -45,6 +47,7 @@ export const modelSchemas = {
     ...organizationModel,
     ...organizationUserModel,
     ...recordModel,
+    ...recordLabelModel,
     ...recordRowModel,
     ...userModel,
     ...userSessionModel,

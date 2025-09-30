@@ -1,3 +1,4 @@
+import { getIncomeStatementLevel } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementLevel.js"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import * as v from "valibot"
 
@@ -8,23 +9,14 @@ export function sortIncomeStatements(parameters: {
 }) {
     if (parameters.incomeStatements.length === 0) return []
 
-    const map = new Map(parameters.incomeStatements.map(i => [i.id, i]))
-
-    function getLevel(incomeStatement: (typeof parameters.incomeStatements)[number]) {
-        let level = 0
-        let current = incomeStatement
-        while (current.idIncomeStatementParent && map.has(current.idIncomeStatementParent)) {
-            current = map.get(current.idIncomeStatementParent)!
-            level += 1
-        }
-        return level
-    }
-
     return parameters.incomeStatements
         .map((incomeStatement) => {
             return ({
                 incomeStatement: incomeStatement,
-                level: getLevel(incomeStatement)
+                level: getIncomeStatementLevel({
+                    incomeStatement: incomeStatement,
+                    incomeStatements: parameters.incomeStatements
+                })
             })
         })
 }

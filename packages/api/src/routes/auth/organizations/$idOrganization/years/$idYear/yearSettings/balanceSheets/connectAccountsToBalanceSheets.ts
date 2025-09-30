@@ -4,16 +4,16 @@ import { selectMany } from "#/utilities/sql/selectMany.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { defaultAssociationIncomeStatements, defaultCompanyIncomeStatements } from "@arrhes/metadata/components"
+import { balanceSheetColumn, balanceSheetFlow, defaultAssociationBalanceSheets, defaultCompanyBalanceSheets } from "@arrhes/metadata/components"
 import { models } from "@arrhes/metadata/models"
-import { connectAccountsToIncomeStatementsRouteDefinition } from "@arrhes/metadata/routes"
+import { connectAccountsToBalanceSheetsRouteDefinition } from "@arrhes/metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 
-export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
+export const connectAccountsToBalanceSheetsRoute = authFactory.createApp()
     .post(
-        connectAccountsToIncomeStatementsRouteDefinition.path,
-        bodyValidator(connectAccountsToIncomeStatementsRouteDefinition.schemas.body),
+        connectAccountsToBalanceSheetsRouteDefinition.path,
+        bodyValidator(connectAccountsToBalanceSheetsRouteDefinition.schemas.body),
         async (c) => {
             const body = c.req.valid("json")
 
@@ -28,9 +28,9 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
                 )
             })
 
-            const readAllIncomeStatements = await selectMany({
+            const readAllBalanceSheets = await selectMany({
                 database: c.var.clients.sql,
-                table: models.incomeStatement,
+                table: models.balanceSheet,
                 where: (table) => (
                     and(
                         eq(table.idOrganization, body.idOrganization),
@@ -39,7 +39,6 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
                 )
             })
 
-
             const organization = await selectOne({
                 database: c.var.clients.sql,
                 table: models.organization,
@@ -47,25 +46,35 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
                     eq(table.id, body.idOrganization)
                 )
             })
-            const defaultIncomeStatements = (
+            const defaultBalanceSheets = (
                 (organization.scope === "association")
-                    ? defaultAssociationIncomeStatements
-                    : defaultCompanyIncomeStatements
+                    ? defaultAssociationBalanceSheets
+                    : defaultCompanyBalanceSheets
             )
 
-            const connectAccountsToIncomeStatements = await c.var.clients.sql.transaction(async (tx) => {
+            const connectAccountsToBalanceSheets = await c.var.clients.sql.transaction(async (tx) => {
                 for (const account of readAllAccounts) {
-                    const defaultIncomeStatement = defaultIncomeStatements.find((defaultIncomeStatement) => {
-                        const foundAccount = defaultIncomeStatement.accounts.find((defaultAccount) => defaultAccount.toString() === account.number)
-                        return foundAccount !== undefined
+                    let newBalanceSheetColumn: (typeof balanceSheetColumn)[number] | undefined = undefined
+                    let newBalanceSheetFlow: (typeof balanceSheetFlow)[number] | undefined = undefined
+
+                    const defaultBalanceSheet = defaultBalanceSheets.find((defaultBalanceSheet) => {
+                        const foundAccount = defaultBalanceSheet.accounts.find((defaultAccount) => defaultAccount.number.toString() === account.number)
+                        if (foundAccount !== undefined) {
+                            newBalanceSheetColumn = foundAccount.isAllowance
+                                ? "amortization"
+                                : "gross"
+                            newBalanceSheetFlow = foundAccount.flow
+                            return true
+                        }
+                        return false
                     })
 
-                    if (defaultIncomeStatement === undefined) {
+                    if (defaultBalanceSheet === undefined) {
                         continue
                     }
 
-                    const incomeStatement = readAllIncomeStatements.find((incomeStatement) => incomeStatement.number === defaultIncomeStatement.number.toString())
-                    if (incomeStatement === undefined) {
+                    const balanceSheet = readAllBalanceSheets.find((balanceSheet) => balanceSheet.number === defaultBalanceSheet.number.toString())
+                    if (balanceSheet === undefined) {
                         continue
                     }
 
@@ -73,7 +82,9 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
                         database: tx,
                         table: models.account,
                         data: {
-                            idIncomeStatement: incomeStatement.id,
+                            idBalanceSheet: balanceSheet.id,
+                            balanceSheetColumn: newBalanceSheetColumn,
+                            balanceSheetFlow: newBalanceSheetFlow,
                             lastUpdatedAt: new Date().toISOString(),
                             lastUpdatedBy: c.var.user.id,
                         },
@@ -92,7 +103,7 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
             return response({
                 context: c,
                 statusCode: 200,
-                schema: connectAccountsToIncomeStatementsRouteDefinition.schemas.return,
+                schema: connectAccountsToBalanceSheetsRouteDefinition.schemas.return,
                 data: {},
             })
         }

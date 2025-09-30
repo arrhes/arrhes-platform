@@ -12,9 +12,10 @@ export const createOneIncomeStatementRouteDefinition = routeDefinition({
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
             idIncomeStatementParent: incomeStatementSchema.entries.idIncomeStatementParent,
+            index: incomeStatementSchema.entries.index,
+            isComputed: incomeStatementSchema.entries.isComputed,
             number: incomeStatementSchema.entries.number,
-            label: incomeStatementSchema.entries.label,
-            netAmountAdded: incomeStatementSchema.entries.netAmountAdded
+            label: incomeStatementSchema.entries.label
         }),
         return: incomeStatementSchemaReturn
     },

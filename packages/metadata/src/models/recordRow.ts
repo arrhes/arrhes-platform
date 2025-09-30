@@ -17,7 +17,7 @@ export const recordRowModel = pgTable(
         idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idRecord: idColumn("id_record").references(() => recordModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
-        idAccount: idColumn("id_account").references(() => accountModel.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idAccount: idColumn("id_account").references(() => accountModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         computedCode: text("computed_code"),
         isComputed: boolean("is_computed").notNull(),
         label: varchar("label", { length: 256 }),

@@ -5,10 +5,11 @@ import { Section } from "#/components/layouts/section/section.js"
 import { TitleComponent } from "#/components/layouts/title.js"
 import { BalanceSheetAssetsTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetAssetsTable.js"
 import { BalanceSheetLiabilitiesTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetLiabilitiesTable.js"
+import { ConnectAccountsToBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/connectAccountsToBalanceSheets.js"
 import { CreateOneBalanceSheet } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/createOneBalanceSheet.js"
 import { GenerateBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/generateBalanceSheets.js"
 import { balanceSheetsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetsRoute.js"
-import { IconPlus } from "@tabler/icons-react"
+import { IconLine, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 
 
@@ -18,7 +19,7 @@ export function BalanceSheetsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className="w-full flex justify-end items-center gap-2">
+                <div className="min-w-full flex justify-end items-center gap-2 flex-wrap">
                     <CreateOneBalanceSheet
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
@@ -34,9 +35,18 @@ export function BalanceSheetsPage() {
                     >
                         <ButtonOutlineContent
                             icon={<IconPlus />}
-                            text="Générer le bilan par défaut"
+                            text="Générer les lignes de bilan par défaut"
                         />
                     </GenerateBalanceSheets>
+                    <ConnectAccountsToBalanceSheets
+                        idOrganization={params.idOrganization}
+                        idYear={params.idYear}
+                    >
+                        <ButtonOutlineContent
+                            icon={<IconLine />}
+                            text="Connecter les comptes aux lignes de bilan par défaut"
+                        />
+                    </ConnectAccountsToBalanceSheets>
                 </div>
                 <div className="w-full flex flex-row justify-start items-start gap-2 flex-wrap">
                     <Box className="p-4 gap-4 max-h-[640px]">

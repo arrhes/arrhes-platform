@@ -1,4 +1,4 @@
-import { booleanSchema, dateTimeSchema, numericSchema } from "#src/components/_index.js"
+import { booleanSchema, dateTimeSchema, integerSchema } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
 import { incomeStatementModel } from "#src/models/incomeStatement.js"
@@ -10,10 +10,11 @@ export const incomeStatementSchema = v.object({
     idOrganization: v.nonNullable(idSchema),
     idYear: v.nonNullable(idSchema),
     idIncomeStatementParent: v.nullable(idSchema),
+    index: v.nonNullable(integerSchema),
     isDefault: v.nonNullable(booleanSchema),
+    isComputed: v.nonNullable(booleanSchema),
     number: v.nonNullable(varcharSchema({ maxLength: 32 })),
     label: v.nonNullable(varcharSchema({ maxLength: 256 })),
-    netAmountAdded: v.nonNullable(numericSchema),
     createdAt: v.nonNullable(dateTimeSchema),
     lastUpdatedAt: v.nullable(dateTimeSchema),
     createdBy: v.nullable(idSchema),
@@ -28,10 +29,11 @@ export const incomeStatementSchemaReturn = v.pick(
         "idOrganization",
         "idYear",
         "idIncomeStatementParent",
+        "index",
         "isDefault",
+        "isComputed",
         "number",
         "label",
-        "netAmountAdded",
         "createdAt",
         "lastUpdatedAt",
         "createdBy",

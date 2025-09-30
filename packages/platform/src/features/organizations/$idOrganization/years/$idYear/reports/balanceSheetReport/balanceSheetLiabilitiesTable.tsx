@@ -38,6 +38,8 @@ export function BalanceSheetLiabilitiesTable(props: {
                             <BalanceSheetLiabilityBody
                                 balanceSheets={props.balanceSheets}
                                 balanceSheetParent={null}
+                                recordRows={props.recordRows}
+                                accounts={props.accounts}
                                 increment={0}
                                 displayNumber={true}
                             />

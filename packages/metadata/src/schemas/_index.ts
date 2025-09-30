@@ -8,6 +8,7 @@ import { journalSchema, journalSchemaReturn } from "./journal.js"
 import { organizationSchema, organizationSchemaReturn } from "./organization.js"
 import { organizationUserSchema, organizationUserSchemaReturn } from "./organizationUser.js"
 import { recordSchema, recordSchemaReturn } from "./record.js"
+import { recordLabelSchema, recordLabelSchemaReturn } from "./recordLabel.js"
 import { recordRowSchema, recordRowSchemaReturn } from "./recordRow.js"
 import { userSchema, userSchemaReturn } from "./user.js"
 import { userSessionSchema, userSessionSchemaReturn } from "./userSession.js"
@@ -25,6 +26,7 @@ export const schemas = {
     organization: organizationSchema,
     organizationUser: organizationUserSchema,
     record: recordSchema,
+    recordLabel: recordLabelSchema,
     recordRow: recordRowSchema,
     user: userSchema,
     userSession: userSessionSchema,
@@ -43,6 +45,7 @@ export const returnedSchemas = {
     organization: organizationSchemaReturn,
     organizationUser: organizationUserSchemaReturn,
     record: recordSchemaReturn,
+    recordLabel: recordLabelSchemaReturn,
     recordRow: recordRowSchemaReturn,
     user: userSchemaReturn,
     userSession: userSessionSchemaReturn,

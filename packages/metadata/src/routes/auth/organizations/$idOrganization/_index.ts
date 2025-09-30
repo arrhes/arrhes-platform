@@ -77,6 +77,12 @@ export { createOneJournalRouteDefinition } from "./years/$idYear/yearSettings/jo
 export { generateJournalsRouteDefinition } from "./years/$idYear/yearSettings/journals/generateJournals.js"
 export { readAllJournalsRouteDefinition } from "./years/$idYear/yearSettings/journals/readAllJournals.js"
 
+export { deleteOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/deleteOneRecordLabel.js"
+export { readOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/readOneRecordLabel.js"
+export { updateOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/updateOneRecordLabel.js"
+export { createOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/createOneRecordLabel.js"
+export { readAllRecordLabelsRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/readAllRecordLabels.js"
+
 export { computeOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/computeOneRecord.js"
 export { deleteOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/deleteOneRecord.js"
 export { duplicateOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/duplicateOneRecord.js"

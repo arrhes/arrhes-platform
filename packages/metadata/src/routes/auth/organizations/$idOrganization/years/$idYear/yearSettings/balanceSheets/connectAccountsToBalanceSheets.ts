@@ -1,5 +1,4 @@
 import { routePath } from "#src/components/_index.js"
-import { accountSchemaReturn } from "#src/schemas/account.js"
 import { incomeStatementSchema } from "#src/schemas/incomeStatement.js"
 import { routeDefinition } from "#src/utilities/routeDefinition.js"
 import * as v from "valibot"
@@ -13,6 +12,6 @@ export const connectAccountsToBalanceSheetsRouteDefinition = routeDefinition({
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
-        return: v.array(accountSchemaReturn)
+        return: v.object({})
     },
 })

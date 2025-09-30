@@ -30,17 +30,16 @@ export function IncomeStatementReportBody(props: {
                         ? incomeStatement.label
                         : `${toRoman(Number(incomeStatement.number))} ${incomeStatement.label}`
 
-                    const accounts = props.accounts.filter((account) => {
-                        console.log(account.idIncomeStatement)
-                        return account.idIncomeStatement === incomeStatement.id
-                    })
-                    console.log(accounts)
-
-                    const recordRows = props.recordRows.filter((recordRow) => {
-                        return accounts.find((account) => account.id === recordRow.idAccount) !== undefined
-                    })
-
-                    const total = recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit) - Number(recordRow.credit), 0)
+                    let amount = 0
+                    props.accounts
+                        .filter((account) => account.idIncomeStatement === incomeStatement.id)
+                        .forEach((account) => {
+                            props.recordRows
+                                .filter((recordRow) => account.id === recordRow.idAccount)
+                                .forEach((recordRow) => {
+                                    amount += Math.abs(Number(recordRow.debit) - Number(recordRow.credit))
+                                })
+                        })
 
                     return (
                         <Fragment key={incomeStatement.id}>
@@ -67,7 +66,7 @@ export function IncomeStatementReportBody(props: {
                                         )
                                         : (
                                             <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={total} />
+                                                <FormatPrice price={amount} />
                                             </Table.Body.Cell>
                                         )
                                 }

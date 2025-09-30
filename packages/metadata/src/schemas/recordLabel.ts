@@ -1,33 +1,33 @@
-import { dateTimeSchema, integerSchema } from "#src/components/_index.js"
+import { dateTimeSchema } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
-import { computationModel } from "#src/models/computation.js"
+import { recordLabelModel } from "#src/models/recordLabel.js"
 import * as v from "valibot"
 
 
-export const computationSchema = v.object({
+export const recordLabelSchema = v.object({
     id: v.nonNullable(idSchema),
     idOrganization: v.nonNullable(idSchema),
     idYear: v.nonNullable(idSchema),
-    index: v.nonNullable(integerSchema),
-    number: v.nonNullable(varcharSchema({ maxLength: 32 })),
+
     label: v.nonNullable(varcharSchema({ maxLength: 256 })),
+
     createdAt: v.nonNullable(dateTimeSchema),
     lastUpdatedAt: v.nullable(dateTimeSchema),
     createdBy: v.nullable(idSchema),
     lastUpdatedBy: v.nullable(idSchema),
-}) satisfies v.GenericSchema<typeof computationModel.$inferSelect>
+}) satisfies v.GenericSchema<typeof recordLabelModel.$inferSelect>
 
 
-export const computationSchemaReturn = v.pick(
-    computationSchema,
+export const recordLabelSchemaReturn = v.pick(
+    recordLabelSchema,
     [
         "id",
         "idOrganization",
         "idYear",
-        "index",
-        "number",
+
         "label",
+
         "createdAt",
         "lastUpdatedAt",
         "createdBy",
