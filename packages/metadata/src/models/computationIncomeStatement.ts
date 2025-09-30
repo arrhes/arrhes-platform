@@ -21,7 +21,7 @@ export const computationIncomeStatementModel = pgTable(
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idComputation: idColumn("id_computation").references(() => computationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idIncomeStatement: idColumn("id_income_statement").references(() => incomeStatementModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
-        index: integer("index"),
+        index: integer("index").notNull(),
         operation: computationIncomeStatementOperationEnum("operation").notNull(),
         createdAt: dateTimeColumn("created_at").notNull(),
         lastUpdatedAt: dateTimeColumn("last_updated_at"),
