@@ -49,6 +49,10 @@ import { journalLayoutRoute } from "#/routes/root/auth/organizations/$idOrganiza
 import { journalRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/journalRoute.js"
 import { journalsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsLayoutRoute.js"
 import { journalsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoute.js"
+import { recordLabelLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/recordLabelLayoutRoute.js"
+import { recordLabelRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/recordLabelRoute.js"
+import { recordLabelsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsLayoutRoute.js"
+import { recordLabelsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsRoute.js"
 import { yearSettingsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsLayoutRoute.js"
 import { yearSettingsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute.js"
 import { yearsLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/yearsLayoutRoute.js"
@@ -123,6 +127,12 @@ export const platformTree = rootLayoutRoute.addChildren([
                                     journalsRoute,
                                     journalLayoutRoute.addChildren([
                                         journalRoute
+                                    ])
+                                ]),
+                                recordLabelsLayoutRoute.addChildren([
+                                    recordLabelsRoute,
+                                    recordLabelLayoutRoute.addChildren([
+                                        recordLabelRoute
                                     ])
                                 ]),
                                 balanceSheetsLayoutRoute.addChildren([

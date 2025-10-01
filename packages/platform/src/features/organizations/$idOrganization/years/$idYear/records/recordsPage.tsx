@@ -9,7 +9,7 @@ import { Page } from "#/components/layouts/page/page.js"
 import { CreateOneRecord } from "#/features/organizations/$idOrganization/years/$idYear/records/createOneRecord.js"
 import { platformRouter } from "#/routes/platformRouter.js"
 import { recordsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/records/recordsRoute.js"
-import { readAllRecordsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllRecordsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition } from "@arrhes/metadata/routes"
 import { IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 
@@ -71,9 +71,32 @@ export function RecordsPage() {
                                                     }}
                                                 >
                                                     {(journal) => (
-                                                        <span>
+                                                        <FormatText>
                                                             {journal.code}
-                                                        </span>
+                                                        </FormatText>
+                                                    )}
+                                                </DataWrapper>
+                                            ),
+                                        filterFn: 'includesString'
+                                    },
+                                    {
+                                        accessorKey: 'idRecordLabel',
+                                        header: 'Catégorie',
+                                        cell: ({ row }) => (row.original.idRecordLabel === null)
+                                            ? (<FormatNull />)
+                                            : (
+                                                <DataWrapper
+                                                    routeDefinition={readOneRecordLabelRouteDefinition}
+                                                    body={{
+                                                        idOrganization: params.idOrganization,
+                                                        idYear: params.idYear,
+                                                        idRecordLabel: row.original.idRecordLabel
+                                                    }}
+                                                >
+                                                    {(recordLabel) => (
+                                                        <FormatText>
+                                                            {recordLabel.label}
+                                                        </FormatText>
                                                     )}
                                                 </DataWrapper>
                                             ),
@@ -94,9 +117,9 @@ export function RecordsPage() {
                                                     }}
                                                 >
                                                     {(attachment) => (
-                                                        <span>
+                                                        <FormatText>
                                                             {attachment.reference}
-                                                        </span>
+                                                        </FormatText>
                                                     )}
                                                 </DataWrapper>
                                             ),

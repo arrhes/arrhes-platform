@@ -52,6 +52,7 @@ export const duplicateOneRecordRoute = authFactory.createApp()
                         idOrganization: originalRecord.idOrganization,
                         idYear: originalRecord.idYear,
                         idJournal: originalRecord.idJournal,
+                        idRecordLabel: originalRecord.idRecordLabel,
                         idAttachment: originalRecord.idAttachment,
                         label: `${originalRecord.label} (copy)`,
                         date: originalRecord.date,

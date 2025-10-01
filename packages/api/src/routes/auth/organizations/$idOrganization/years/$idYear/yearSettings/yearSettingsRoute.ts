@@ -4,6 +4,7 @@ import { computationsRoutes } from "#/routes/auth/organizations/$idOrganization/
 import { generalRoutes } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/general/generalRoutes.js"
 import { incomeStatementsRoutes } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/incomeStatementsRoutes.js"
 import { journalsRoutes } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoutes.js"
+import { recordLabelsRoutes } from "#/routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsRoutes.js"
 
 
 export const yearSettingsRoute = [
@@ -13,4 +14,5 @@ export const yearSettingsRoute = [
     ...balanceSheetsRoutes,
     ...incomeStatementsRoutes,
     ...computationsRoutes,
+    ...recordLabelsRoutes,
 ]
