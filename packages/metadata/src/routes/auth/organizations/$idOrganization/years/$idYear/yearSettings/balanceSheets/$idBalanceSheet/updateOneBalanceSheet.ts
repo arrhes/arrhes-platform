@@ -13,7 +13,6 @@ export const updateOneBalanceSheetRouteDefinition = routeDefinition({
             idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
             idBalanceSheetParent: v.optional(balanceSheetSchema.entries.idBalanceSheetParent),
-            index: v.optional(balanceSheetSchema.entries.index),
             isComputed: v.optional(balanceSheetSchema.entries.isComputed),
             side: v.optional(balanceSheetSchema.entries.side),
             number: v.optional(balanceSheetSchema.entries.number),

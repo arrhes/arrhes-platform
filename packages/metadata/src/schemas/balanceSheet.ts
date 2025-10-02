@@ -1,4 +1,4 @@
-import { balanceSheetSide, booleanSchema, dateTimeSchema, integerSchema } from "#src/components/_index.js"
+import { balanceSheetSide, booleanSchema, dateTimeSchema } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
 import { balanceSheetModel } from "#src/models/balanceSheet.js"
@@ -10,7 +10,6 @@ export const balanceSheetSchema = v.object({
     idOrganization: v.nonNullable(idSchema),
     idYear: v.nonNullable(idSchema),
     idBalanceSheetParent: v.nullable(idSchema),
-    index: v.nonNullable(integerSchema),
     isDefault: v.nonNullable(booleanSchema),
     isComputed: v.nonNullable(booleanSchema),
     side: v.picklist(balanceSheetSide),
@@ -30,7 +29,6 @@ export const balanceSheetSchemaReturn = v.pick(
         "idOrganization",
         "idYear",
         "idBalanceSheetParent",
-        "index",
         "isDefault",
         "isComputed",
         "side",

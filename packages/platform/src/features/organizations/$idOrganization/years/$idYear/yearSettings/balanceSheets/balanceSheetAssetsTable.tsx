@@ -38,7 +38,7 @@ export function BalanceSheetAssetsTable(props: {
                     .sort((a, b) => a.balanceSheet.number.toString().localeCompare(b.balanceSheet.number.toString()))
 
                 return (
-                    <div className="h-fit w-fit flex flex-col justify-start items-start p-4 gap-4">
+                    <div className="h-fit w-fit flex flex-col justify-start items-start gap-4">
                         <InputDebounced
                             value={globalFilter ?? ""}
                             onChange={(value) => setGlobalFilter(value ?? "")}

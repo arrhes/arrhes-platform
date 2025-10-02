@@ -2,7 +2,7 @@ import { balanceSheetSide } from "#src/components/_index.js"
 import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
 import { idColumn } from "#src/components/models/idColumn.js"
 import { relations } from "drizzle-orm"
-import { AnyPgColumn, boolean, integer, pgEnum, pgTable, unique, varchar } from "drizzle-orm/pg-core"
+import { AnyPgColumn, boolean, pgEnum, pgTable, unique, varchar } from "drizzle-orm/pg-core"
 import { accountModel } from "./account.js"
 import { organizationModel } from "./organization.js"
 import { userModel } from "./user.js"
@@ -19,7 +19,6 @@ export const balanceSheetModel = pgTable(
         idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idBalanceSheetParent: idColumn("id_balance_sheet_parent").references((): AnyPgColumn => balanceSheetModel.id, { onDelete: "set null", onUpdate: "cascade" }),
-        index: integer("index").notNull(),
         isDefault: boolean("is_default").notNull(),
         isComputed: boolean("is_computing").notNull(),
         side: balanceSheetSideEnum("side").notNull(),

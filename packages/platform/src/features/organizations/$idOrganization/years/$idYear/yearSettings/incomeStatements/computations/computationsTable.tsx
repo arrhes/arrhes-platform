@@ -22,7 +22,9 @@ export function ComputationsTable(props: {
             {(computations) => {
                 if (computations.length === 0) {
                     return (
-                        <FormatNull />
+                        <FormatNull
+                            text="Aucune ligne de calcul"
+                        />
                     )
                 }
                 return (

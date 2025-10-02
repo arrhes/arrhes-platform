@@ -12,7 +12,6 @@ export const createOneBalanceSheetRouteDefinition = routeDefinition({
             idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
             idBalanceSheetParent: balanceSheetSchema.entries.idBalanceSheetParent,
-            index: balanceSheetSchema.entries.index,
             isComputed: balanceSheetSchema.entries.isComputed,
             side: balanceSheetSchema.entries.side,
             number: balanceSheetSchema.entries.number,
