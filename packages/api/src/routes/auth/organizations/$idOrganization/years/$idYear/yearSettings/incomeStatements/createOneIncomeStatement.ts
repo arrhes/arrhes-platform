@@ -22,7 +22,6 @@ export const createOneIncomeStatementRoute = authFactory.createApp()
                     idOrganization: body.idOrganization,
                     idYear: body.idYear,
                     idIncomeStatementParent: body.idIncomeStatementParent,
-                    index: null,
                     isDefault: false,
                     isComputed: body.isComputed,
                     number: body.number,

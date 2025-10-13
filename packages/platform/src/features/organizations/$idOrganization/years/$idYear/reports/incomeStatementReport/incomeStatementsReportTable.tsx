@@ -2,9 +2,8 @@ import { FormatNull } from "#/components/formats/formatNull.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { Table } from "#/components/layouts/table/table.js"
-import { IncomeStatementReportRow } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementReportRow.js"
+import { IncomeStatementReportItem } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementReportItem.js"
 import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
-import { getIncomeStatementLevel } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementLevel.js"
 import { cn } from "#/utilities/cn.js"
 import { toRoman } from "#/utilities/toRoman.js"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
@@ -33,44 +32,24 @@ export function IncomeStatementsReportTable(props: {
             <Table.Body.Root>
                 {
                     props.incomeStatements
-                        .sort((a, b) => a.number.toString().localeCompare(b.number.toString()))
+                        .filter((incomeStatement) => incomeStatement.idIncomeStatementParent === null)
+                        .sort((a, b) => Number(a.number) - Number(b.number))
                         .map((incomeStatement) => {
-                            const level = getIncomeStatementLevel({
-                                incomeStatement: incomeStatement,
-                                incomeStatements: props.incomeStatements
-                            })
-
-                            const number = (incomeStatement.number.length === 1)
-                                ? toRoman(Number(incomeStatement.number))
-                                : null
-
-                            const label = incomeStatement.label
-
-                            let amount = 0
                             const incomeStatementChildren = getIncomeStatementChildren({
                                 incomeStatement: incomeStatement,
                                 incomeStatements: props.incomeStatements
                             })
-                            console.log(incomeStatementChildren)
-                            props.accounts
-                                .filter((account) => {
-                                    return incomeStatementChildren.some((incomeStatementChild) => account.idIncomeStatement === incomeStatementChild.id)
-                                })
-                                .forEach((account) => {
-                                    props.recordRows
-                                        .filter((recordRow) => account.id === recordRow.idAccount)
-                                        .forEach((recordRow) => {
-                                            amount += Math.abs(Number(recordRow.debit) - Number(recordRow.credit))
-                                        })
-                                })
 
                             return (
-                                <IncomeStatementReportRow
+                                <IncomeStatementReportItem
                                     key={incomeStatement.id}
-                                    level={level}
-                                    number={number}
-                                    label={label}
-                                    amount={amount}
+                                    idOrganization={incomeStatement.idOrganization}
+                                    idYear={incomeStatement.idYear}
+                                    accounts={props.accounts}
+                                    recordRows={props.recordRows}
+                                    incomeStatement={incomeStatement}
+                                    incomeStatementChildren={incomeStatementChildren}
+                                    level={0}
                                 />
                             )
                         })
@@ -96,20 +75,33 @@ export function IncomeStatementsReportTable(props: {
                                 .forEach((computationIncomeStatement) => {
                                     let incomeStatementAmount = 0
                                     props.accounts
-                                        .filter((account) => account.idIncomeStatement === computationIncomeStatement.idIncomeStatement)
+                                        .filter((account) => {
+                                            const foundIncomeStatement = props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)
+                                            if (foundIncomeStatement === undefined) {
+                                                return false
+                                            }
+                                            const incomeStatementChildren = getIncomeStatementChildren({
+                                                incomeStatement: foundIncomeStatement,
+                                                incomeStatements: props.incomeStatements
+                                            })
+
+                                            const hasAccount = account.idIncomeStatement === computationIncomeStatement.idIncomeStatement
+                                            const hasChildrenAccount = incomeStatementChildren.some((incomeStatement) => incomeStatement.id === account.idIncomeStatement)
+                                            return hasAccount || hasChildrenAccount
+                                        })
                                         .forEach((account) => {
                                             props.recordRows
-                                                .filter((recordRow) => account.id === recordRow.idAccount)
+                                                .filter((recordRow) => recordRow.idAccount === account.id)
                                                 .forEach((recordRow) => {
-                                                    incomeStatementAmount += Math.abs(Number(recordRow.debit) - Number(recordRow.credit))
+                                                    incomeStatementAmount += Number(recordRow.debit) - Number(recordRow.credit)
                                                 })
                                         })
 
                                     if (computationIncomeStatement.operation === "plus") {
-                                        computationAmount += incomeStatementAmount
+                                        computationAmount += Math.abs(incomeStatementAmount)
                                     }
                                     if (computationIncomeStatement.operation === "minus") {
-                                        computationAmount += -incomeStatementAmount
+                                        computationAmount += -Math.abs(incomeStatementAmount)
                                     }
                                 })
 

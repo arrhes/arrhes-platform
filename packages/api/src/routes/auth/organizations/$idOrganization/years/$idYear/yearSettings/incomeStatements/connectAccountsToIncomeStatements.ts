@@ -54,37 +54,42 @@ export const connectAccountsToIncomeStatementsRoute = authFactory.createApp()
             )
 
             const connectAccountsToIncomeStatements = await c.var.clients.sql.transaction(async (tx) => {
-                for (const account of readAllAccounts) {
-                    const defaultIncomeStatement = defaultIncomeStatements.find((defaultIncomeStatement) => {
-                        const foundAccount = defaultIncomeStatement.accounts.find((defaultAccount) => defaultAccount.toString() === account.number)
-                        return foundAccount !== undefined
-                    })
+                for (const defaultIncomeStatement of defaultIncomeStatements) {
+                    for (const defaultAccount of defaultIncomeStatement.accounts) {
 
-                    if (defaultIncomeStatement === undefined) {
-                        continue
-                    }
+                        const foundAccount = readAllAccounts.find((account) => {
+                            return account.number === defaultAccount.toString()
+                        })
 
-                    const incomeStatement = readAllIncomeStatements.find((incomeStatement) => incomeStatement.number === defaultIncomeStatement.number.toString())
-                    if (incomeStatement === undefined) {
-                        continue
-                    }
+                        if (foundAccount === undefined) {
+                            console.log("foundAccount is undefined", defaultIncomeStatement.number, defaultAccount)
+                            continue
+                        }
 
-                    const updateOneAccount = await updateOne({
-                        database: tx,
-                        table: models.account,
-                        data: {
-                            idIncomeStatement: incomeStatement.id,
-                            lastUpdatedAt: new Date().toISOString(),
-                            lastUpdatedBy: c.var.user.id,
-                        },
-                        where: (table) => (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear),
-                                eq(table.id, account.id),
+                        const incomeStatement = readAllIncomeStatements.find((incomeStatement) => incomeStatement.number === defaultIncomeStatement.number.toString())
+                        if (incomeStatement === undefined) {
+                            console.log("incomeStatement is undefined", defaultIncomeStatement.number)
+                            continue
+                        }
+
+                        const updateOneAccount = await updateOne({
+                            database: tx,
+                            table: models.account,
+                            data: {
+                                idIncomeStatement: incomeStatement.id,
+                                lastUpdatedAt: new Date().toISOString(),
+                                lastUpdatedBy: c.var.user.id,
+                            },
+                            where: (table) => (
+                                and(
+                                    eq(table.idOrganization, body.idOrganization),
+                                    eq(table.idYear, body.idYear),
+                                    eq(table.id, foundAccount.id),
+                                )
                             )
-                        )
-                    })
+                        })
+
+                    }
                 }
             })
 

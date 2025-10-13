@@ -4,11 +4,12 @@ import { Table } from "#/components/layouts/table/table.js"
 import { cn } from "#/utilities/cn.js"
 
 
-export function IncomeStatementReportRow(props: {
+export function BalanceSheetAssetsReportRow(props: {
     level: number
     number: string | null
     label: string
-    amount: number
+    grossAmount: number
+    amortizationAmount: number
     isAmountDisplayed: boolean
 }) {
 
@@ -33,7 +34,25 @@ export function IncomeStatementReportRow(props: {
                 {
                     (props.isAmountDisplayed === true)
                         ? (
-                            <FormatPrice price={props.amount} />
+                            <FormatPrice price={props.grossAmount} />
+                        )
+                        : (null)
+                }
+            </Table.Body.Cell>
+            <Table.Body.Cell className="w-[1%]" align="right">
+                {
+                    (props.isAmountDisplayed === true)
+                        ? (
+                            <FormatPrice price={props.amortizationAmount} />
+                        )
+                        : (null)
+                }
+            </Table.Body.Cell>
+            <Table.Body.Cell className="w-[1%]" align="right">
+                {
+                    (props.isAmountDisplayed === true)
+                        ? (
+                            <FormatPrice price={props.grossAmount - props.amortizationAmount} />
                         )
                         : (null)
                 }

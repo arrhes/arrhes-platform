@@ -4,11 +4,11 @@ import { Table } from "#/components/layouts/table/table.js"
 import { cn } from "#/utilities/cn.js"
 
 
-export function IncomeStatementReportRow(props: {
+export function BalanceSheetLiabilitiesReportRow(props: {
     level: number
     number: string | null
     label: string
-    amount: number
+    netAmount: number
     isAmountDisplayed: boolean
 }) {
 
@@ -33,7 +33,7 @@ export function IncomeStatementReportRow(props: {
                 {
                     (props.isAmountDisplayed === true)
                         ? (
-                            <FormatPrice price={props.amount} />
+                            <FormatPrice price={props.netAmount} />
                         )
                         : (null)
                 }

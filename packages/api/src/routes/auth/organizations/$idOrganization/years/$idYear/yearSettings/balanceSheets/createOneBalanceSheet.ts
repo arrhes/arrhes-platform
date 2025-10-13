@@ -22,7 +22,6 @@ export const createOneBalanceSheetRoute = authFactory.createApp()
                     idOrganization: body.idOrganization,
                     idYear: body.idYear,
                     idBalanceSheetParent: body.idBalanceSheetParent,
-                    index: null,
                     isDefault: false,
                     isComputed: body.isComputed,
                     side: body.side,

@@ -31,5 +31,5 @@ export function response<
         parameters.statusCode ?? 500,
         {},
     )
-    return jsonResponse
+    return jsonResponse as Response
 }

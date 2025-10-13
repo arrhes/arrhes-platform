@@ -69,10 +69,11 @@ export const generateBalanceSheetsRoute = authFactory.createApp()
                             idOrganization: body.idOrganization,
                             idYear: body.idYear,
                             idBalanceSheetParent: balanceSheetParent?.id ?? null,
-                            index: null,
                             number: defaultBalanceSheet.number.toString(),
                             isDefault: true,
-                            isComputed: true,
+                            isComputed: (balanceSheetParent === undefined)
+                                ? true
+                                : false,
                             label: defaultBalanceSheet.label,
                             side: defaultBalanceSheet.side,
                             createdAt: new Date().toISOString(),

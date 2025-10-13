@@ -39,6 +39,7 @@ export function DataWrapper<
             <FormatError
                 {...props.errorProps}
                 text={props.errorProps?.text ?? "Erreur lors de la récupération des données."}
+                className="p-2"
             />
         )
     }

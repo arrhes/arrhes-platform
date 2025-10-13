@@ -51,11 +51,12 @@ export const generateComputationsRoute = authFactory.createApp()
                 })
 
                 const newComputationIncomeStatements: Array<(typeof models.computationIncomeStatement.$inferInsert)> = []
-                let newComputations = defaultComputations.map((defaultComputation) => {
+                let newComputations = defaultComputations.map((defaultComputation, defaultComputationIndex) => {
                     const newComputation = {
                         id: generateId(),
                         idOrganization: body.idOrganization,
                         idYear: body.idYear,
+                        index: defaultComputationIndex,
                         number: defaultComputation.number.toString(),
                         label: defaultComputation.label,
                         createdAt: new Date().toISOString(),
@@ -64,7 +65,7 @@ export const generateComputationsRoute = authFactory.createApp()
                         lastUpdatedBy: null,
                     }
 
-                    defaultComputation.incomeStatements.forEach((_incomeStatement) => {
+                    defaultComputation.incomeStatements.forEach((_incomeStatement, index) => {
                         const incomeStatement = incomeStatements.find((x) => x.number === _incomeStatement.number.toString())
 
                         if (incomeStatement === undefined) {
@@ -77,6 +78,7 @@ export const generateComputationsRoute = authFactory.createApp()
                             idYear: body.idYear,
                             idComputation: newComputation.id,
                             idIncomeStatement: incomeStatement.id,
+                            index: index,
                             operation: _incomeStatement.operation,
                             createdAt: new Date().toISOString(),
                         })

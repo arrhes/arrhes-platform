@@ -2132,6 +2132,11 @@ export const defaultAssociationBalanceSheets: DefaultBalanceSheet[] = [
                 number: 5198,
                 flow: "credit",
                 isAllowance: false
+            },
+            {
+                number: 53,
+                flow: "credit",
+                isAllowance: false
             }
         ]
     },

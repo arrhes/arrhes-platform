@@ -3,16 +3,17 @@ import { InputDebounced } from "#/components/inputs/inputDebounced.js"
 import { InputText } from "#/components/inputs/inputText.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { BalanceSheetItem } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetItem.js"
-import { sortBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/sortBalanceSheets.js"
+import { getBalanceSheetChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/getBalanceSheetChildren.js"
 import { readAllBalanceSheetsRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { useState } from "react"
 import * as v from "valibot"
 
 
-export function BalanceSheetAssetsTable(props: {
+export function BalanceSheetTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
+    filter: (balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>) => boolean
 }) {
     const [globalFilter, setGlobalFilter] = useState("")
 
@@ -25,17 +26,11 @@ export function BalanceSheetAssetsTable(props: {
             }}
         >
             {(balanceSheets) => {
-                const balanceSheetAssets = balanceSheets.filter((balanceSheet) => balanceSheet.side === "asset")
+                const sidedBalanceSheets = balanceSheets.filter(props.filter)
 
-                const groupedBalanceSheets = sortBalanceSheets({
-                    balanceSheets: balanceSheetAssets,
-                })
-                    .filter((sortedBalanceSheet) => {
-                        const processedAccount = `${sortedBalanceSheet.balanceSheet.number} ${sortedBalanceSheet.balanceSheet.label}`.toLowerCase()
-                        const processedFilter = globalFilter.toLowerCase()
-                        return processedAccount.includes(processedFilter)
-                    })
-                    .sort((a, b) => a.balanceSheet.number.toString().localeCompare(b.balanceSheet.number.toString()))
+                const filteredBalanceSheets = sidedBalanceSheets
+                    .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
+                    .sort((a, b) => Number(a.number) - Number(b.number))
 
                 return (
                     <div className="h-fit w-fit flex flex-col justify-start items-start gap-4">
@@ -50,7 +45,7 @@ export function BalanceSheetAssetsTable(props: {
                         </InputDebounced>
                         <div className="h-fit w-fit flex flex-col justify-start items-start">
                             {
-                                (groupedBalanceSheets.length !== 0)
+                                (filteredBalanceSheets.length !== 0)
                                     ? (null)
                                     : (
                                         <FormatNull
@@ -59,15 +54,23 @@ export function BalanceSheetAssetsTable(props: {
                                         />
                                     )
                             }
-                            {groupedBalanceSheets.map((groupedBalanceSheet) => (
-                                <BalanceSheetItem
-                                    key={groupedBalanceSheet.balanceSheet.id}
-                                    idOrganization={props.idOrganization}
-                                    idYear={props.idYear}
-                                    balanceSheet={groupedBalanceSheet.balanceSheet}
-                                    level={groupedBalanceSheet.level}
-                                />
-                            ))}
+                            {filteredBalanceSheets.map((balanceSheet) => {
+                                const balanceSheetChildren = getBalanceSheetChildren({
+                                    balanceSheet: balanceSheet,
+                                    balanceSheets: sidedBalanceSheets,
+                                })
+
+                                return (
+                                    <BalanceSheetItem
+                                        key={balanceSheet.id}
+                                        idOrganization={props.idOrganization}
+                                        idYear={props.idYear}
+                                        balanceSheet={balanceSheet}
+                                        balanceSheetChildren={balanceSheetChildren}
+                                        level={0}
+                                    />
+                                )
+                            })}
                         </div>
                     </div>
                 )

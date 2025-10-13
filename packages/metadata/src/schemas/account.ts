@@ -1,4 +1,4 @@
-import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "#src/components/_index.js"
+import { accountType, booleanSchema, dateTimeSchema } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
 import { balanceSheetColumn } from "#src/components/values/balanceSheetColumn.js"
@@ -12,9 +12,10 @@ export const accountSchema = v.object({
     idYear: v.nonNullable(idSchema),
     idAccountParent: v.nullable(idSchema),
 
-    idBalanceSheet: v.nullable(idSchema),
-    balanceSheetFlow: v.nullable(v.picklist(balanceSheetFlow)),
-    balanceSheetColumn: v.nullable(v.picklist(balanceSheetColumn)),
+    idBalanceSheetAsset: v.nullable(idSchema),
+    idBalanceSheetLiability: v.nullable(idSchema),
+    balanceSheetAssetColumn: v.nullable(v.picklist(balanceSheetColumn)),
+    balanceSheetLiabilityColumn: v.nullable(v.picklist(balanceSheetColumn)),
 
     idIncomeStatement: v.nullable(idSchema),
 
@@ -41,9 +42,10 @@ export const accountSchemaReturn = v.pick(
         "idYear",
         "idAccountParent",
 
-        "idBalanceSheet",
-        "balanceSheetFlow",
-        "balanceSheetColumn",
+        "idBalanceSheetAsset",
+        "idBalanceSheetLiability",
+        "balanceSheetAssetColumn",
+        "balanceSheetLiabilityColumn",
 
         "idIncomeStatement",
 

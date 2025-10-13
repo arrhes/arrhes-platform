@@ -77,7 +77,7 @@ export function IncomeStatementsPage() {
                         />
                     </GenerateComputations>
                 </div>
-                <Box className="max-h-[640px] p-4">
+                <Box className="max-h-[640px]">
                     <ComputationsTable
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}

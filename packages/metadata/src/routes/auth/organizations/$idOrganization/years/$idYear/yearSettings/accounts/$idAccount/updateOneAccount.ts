@@ -14,9 +14,10 @@ export const updateOneAccountRouteDefinition = routeDefinition({
             idYear: accountSchema.entries.idYear,
             idAccountParent: v.optional(accountSchema.entries.idAccountParent),
 
-            idBalanceSheet: v.optional(accountSchema.entries.idBalanceSheet),
-            balanceSheetFlow: v.optional(accountSchema.entries.balanceSheetFlow),
-            balanceSheetColumn: v.optional(accountSchema.entries.balanceSheetColumn),
+            idBalanceSheetAsset: v.optional(accountSchema.entries.idBalanceSheetAsset),
+            idBalanceSheetLiability: v.optional(accountSchema.entries.idBalanceSheetLiability),
+            balanceSheetAssetColumn: v.optional(accountSchema.entries.balanceSheetAssetColumn),
+            balanceSheetLiabilityColumn: v.optional(accountSchema.entries.balanceSheetLiabilityColumn),
 
             idIncomeStatement: v.optional(accountSchema.entries.idIncomeStatement),
 

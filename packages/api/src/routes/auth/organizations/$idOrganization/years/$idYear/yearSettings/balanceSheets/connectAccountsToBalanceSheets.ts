@@ -4,7 +4,7 @@ import { selectMany } from "#/utilities/sql/selectMany.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { balanceSheetColumn, balanceSheetFlow, defaultAssociationBalanceSheets, defaultCompanyBalanceSheets } from "@arrhes/metadata/components"
+import { defaultAssociationBalanceSheets, defaultCompanyBalanceSheets } from "@arrhes/metadata/components"
 import { models } from "@arrhes/metadata/models"
 import { connectAccountsToBalanceSheetsRouteDefinition } from "@arrhes/metadata/routes"
 import { and, eq } from "drizzle-orm"
@@ -53,19 +53,61 @@ export const connectAccountsToBalanceSheetsRoute = authFactory.createApp()
             )
 
             const connectAccountsToBalanceSheets = await c.var.clients.sql.transaction(async (tx) => {
+                for (const defaultBalanceSheet of defaultBalanceSheets) {
+                    for (const defaultAccount of defaultBalanceSheet.accounts) {
+
+                        const foundAccount = readAllAccounts.find((account) => {
+                            return account.number === defaultAccount.number.toString()
+                        })
+
+                        if (foundAccount === undefined) {
+                            console.log("foundAccount is undefined", defaultBalanceSheet.number, defaultAccount)
+                            continue
+                        }
+
+                        const balanceSheet = readAllBalanceSheets.find((balanceSheet) => balanceSheet.number === defaultBalanceSheet.number.toString())
+                        if (balanceSheet === undefined) {
+                            console.log("balanceSheet is undefined", defaultBalanceSheet.number)
+                            continue
+                        }
+
+                        const updateOneAccount = await updateOne({
+                            database: tx,
+                            table: models.account,
+                            data: {
+                                idBalanceSheetAsset: (defaultAccount.flow === "debit")
+                                    ? balanceSheet.id
+                                    : undefined,
+                                balanceSheetAssetColumn: (defaultAccount.flow === "debit")
+                                    ? (defaultAccount.isAllowance)
+                                        ? "amortization"
+                                        : "gross"
+                                    : undefined,
+                                idBalanceSheetLiability: (defaultAccount.flow === "credit")
+                                    ? balanceSheet.id
+                                    : undefined,
+                                balanceSheetLiabilityColumn: (defaultAccount.flow === "credit")
+                                    ? "net"
+                                    : undefined,
+                                lastUpdatedAt: new Date().toISOString(),
+                                lastUpdatedBy: c.var.user.id,
+                            },
+                            where: (table) => (
+                                and(
+                                    eq(table.idOrganization, body.idOrganization),
+                                    eq(table.idYear, body.idYear),
+                                    eq(table.id, foundAccount.id),
+                                )
+                            )
+                        })
+                    }
+                }
                 for (const account of readAllAccounts) {
-                    let newBalanceSheetColumn: (typeof balanceSheetColumn)[number] | undefined = undefined
-                    let newBalanceSheetFlow: (typeof balanceSheetFlow)[number] | undefined = undefined
+
 
                     const defaultBalanceSheet = defaultBalanceSheets.find((defaultBalanceSheet) => {
                         const foundAccount = defaultBalanceSheet.accounts.find((defaultAccount) => defaultAccount.number.toString() === account.number)
-                        if (foundAccount !== undefined) {
-                            newBalanceSheetColumn = foundAccount.isAllowance
-                                ? "amortization"
-                                : "gross"
-                            newBalanceSheetFlow = foundAccount.flow
-                            return true
-                        }
+
                         return false
                     })
 
@@ -78,24 +120,7 @@ export const connectAccountsToBalanceSheetsRoute = authFactory.createApp()
                         continue
                     }
 
-                    const updateOneAccount = await updateOne({
-                        database: tx,
-                        table: models.account,
-                        data: {
-                            idBalanceSheet: balanceSheet.id,
-                            balanceSheetColumn: newBalanceSheetColumn,
-                            balanceSheetFlow: newBalanceSheetFlow,
-                            lastUpdatedAt: new Date().toISOString(),
-                            lastUpdatedBy: c.var.user.id,
-                        },
-                        where: (table) => (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear),
-                                eq(table.id, account.id),
-                            )
-                        )
-                    })
+
                 }
             })
 

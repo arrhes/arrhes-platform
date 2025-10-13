@@ -20,7 +20,7 @@ export const balanceSheetModel = pgTable(
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idBalanceSheetParent: idColumn("id_balance_sheet_parent").references((): AnyPgColumn => balanceSheetModel.id, { onDelete: "set null", onUpdate: "cascade" }),
         isDefault: boolean("is_default").notNull(),
-        isComputed: boolean("is_computing").notNull(),
+        isComputed: boolean("is_total").notNull(),
         side: balanceSheetSideEnum("side").notNull(),
         number: varchar("number", { length: 32 }).notNull(),
         label: varchar("label", { length: 256 }).notNull(),

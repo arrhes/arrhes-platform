@@ -67,10 +67,11 @@ export const generateIncomeStatementsRoute = authFactory.createApp()
                             idOrganization: body.idOrganization,
                             idYear: body.idYear,
                             idIncomeStatementParent: incomeStatementParent?.id ?? null,
-                            index: null,
                             number: defaultIncomeStatement.number.toString(),
                             isDefault: true,
-                            isComputed: true,
+                            isComputed: (incomeStatementParent === undefined)
+                                ? true
+                                : false,
                             label: defaultIncomeStatement.label,
                             createdAt: new Date().toISOString(),
                             lastUpdatedAt: null,

@@ -2,8 +2,8 @@ import { Box } from "#/components/layouts/box.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Section } from "#/components/layouts/section/section.js"
 import { TitleComponent } from "#/components/layouts/title.js"
-import { BalanceSheetAssetsTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAssetsTable.js"
-import { BalanceSheetLiabilitiesTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiabilitiesTable.js"
+import { BalanceSheetAssetsReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetAsset/balanceSheetAssetsReportTable.js"
+import { BalanceSheetLiabilitiesReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiability/balanceSheetLiabilitiesReportTable.js"
 import { balanceSheetReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/balanceSheetReportRoute.js"
 import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
 import { useParams } from "@tanstack/react-router"
@@ -48,8 +48,8 @@ export function BalanceSheetReportPage() {
                                                             <TitleComponent className="p-4">
                                                                 Actif
                                                             </TitleComponent>
-                                                            <BalanceSheetAssetsTable
-                                                                balanceSheets={balanceSheets}
+                                                            <BalanceSheetAssetsReportTable
+                                                                balanceSheets={balanceSheets.filter((balanceSheet) => balanceSheet.side === "asset")}
                                                                 recordRows={recordRows}
                                                                 accounts={accounts}
                                                             />
@@ -58,8 +58,8 @@ export function BalanceSheetReportPage() {
                                                             <TitleComponent className="p-4">
                                                                 Passif
                                                             </TitleComponent>
-                                                            <BalanceSheetLiabilitiesTable
-                                                                balanceSheets={balanceSheets}
+                                                            <BalanceSheetLiabilitiesReportTable
+                                                                balanceSheets={balanceSheets.filter((balanceSheet) => balanceSheet.side === "liability")}
                                                                 recordRows={recordRows}
                                                                 accounts={accounts}
                                                             />

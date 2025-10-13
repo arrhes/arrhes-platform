@@ -18,7 +18,7 @@ export const incomeStatementModel = pgTable(
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idIncomeStatementParent: idColumn("id_income_statement_parent").references((): AnyPgColumn => incomeStatementModel.id, { onDelete: "set null", onUpdate: "cascade" }),
         isDefault: boolean("is_default").notNull(),
-        isComputed: boolean("is_computing").notNull(),
+        isComputed: boolean("is_total").notNull(),
         number: varchar("number", { length: 32 }).notNull(),
         label: varchar("label", { length: 256 }).notNull(),
         createdAt: dateTimeColumn("created_at").notNull(),

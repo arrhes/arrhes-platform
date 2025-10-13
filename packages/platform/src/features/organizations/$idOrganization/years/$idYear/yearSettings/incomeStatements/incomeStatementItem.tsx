@@ -1,6 +1,6 @@
-import { cn } from "#/utilities/cn.js"
+import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
+import { IncomeStatementRow } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/incomeStatementRow.js"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
-import { Link } from "@tanstack/react-router"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 
@@ -9,61 +9,39 @@ export function IncomeStatementItem(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
     incomeStatement: v.InferOutput<typeof returnedSchemas.incomeStatement>
+    incomeStatementChildren: Array<v.InferOutput<typeof returnedSchemas.incomeStatement>>
     level: number
     className?: ComponentProps<'div'>['className']
 }) {
-
-    const prefix = `${(new Array(props.level).fill("").map((_, index) => {
-        return "&nbsp;&nbsp;"
-    }))
-        .join("")
-        }`
-
     return (
         <Fragment>
-            <Link
-                to="/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/$idIncomeStatement"
-                params={{
-                    idOrganization: props.idOrganization,
-                    idYear: props.idYear,
-                    idIncomeStatement: props.incomeStatement.id,
-                }}
-                className="w-full"
-            >
-                <div
-                    className="min-w-fit w-full flex justify-start items-center gap-2 hover:bg-neutral/5 border-b border-neutral/5 last:border-b-0"
-                // style={{
-                //     paddingLeft: `${(1 + props.level) * 12}px`
-                // }}
-                >
-                    {
-                        (prefix === null)
-                            ? (null)
-                            : (
-                                <pre
-                                    className={cn(
-                                        "text-neutral/25 text-[22px] leading-none h-full align-middle text-left",
-                                    )}
-                                    dangerouslySetInnerHTML={{
-                                        __html: prefix
-                                    }}
-                                />
-                            )
-                    }
-                    <div className="p-1 flex justify-start items-center gap-2">
-                        <span className={cn(
-                            "text-neutral text-xs leading-none",
-                        )}>
-                            {props.incomeStatement.number}
-                        </span>
-                        <span className={cn(
-                            "text-neutral text-xs text-left leading-none whitespace-nowrap",
-                        )}>
-                            {props.incomeStatement.label}
-                        </span>
-                    </div>
-                </div>
-            </Link>
+            <IncomeStatementRow
+                idOrganization={props.idOrganization}
+                idYear={props.idYear}
+                incomeStatement={props.incomeStatement}
+                level={props.level}
+            />
+            {
+                props.incomeStatementChildren
+                    .filter((incomeStatement) => incomeStatement.idIncomeStatementParent === props.incomeStatement.id)
+                    .map((incomeStatement) => {
+                        const children = getIncomeStatementChildren({
+                            incomeStatement: incomeStatement,
+                            incomeStatements: props.incomeStatementChildren,
+                        })
+
+                        return (
+                            <IncomeStatementItem
+                                key={incomeStatement.id}
+                                idOrganization={props.idOrganization}
+                                idYear={props.idYear}
+                                incomeStatement={incomeStatement}
+                                incomeStatementChildren={children}
+                                level={props.level + 1}
+                            />
+                        )
+                    })
+            }
         </Fragment>
     )
 }

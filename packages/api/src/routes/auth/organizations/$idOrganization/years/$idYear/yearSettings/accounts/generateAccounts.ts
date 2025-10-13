@@ -29,9 +29,11 @@ function generateAccounts(parameters: {
             idYear: parameters.idYear,
             idAccountParent: parameters.idAccountParent,
 
-            idBalanceSheet: null,
-            balanceSheetColumn: null,
-            balanceSheetFlow: null,
+            idBalanceSheetAsset: null,
+            balanceSheetAssetColumn: null,
+            idBalanceSheetLiability: null,
+            balanceSheetLiabilityColumn: null,
+
             idIncomeStatement: null,
 
             number: account.number.toString(),

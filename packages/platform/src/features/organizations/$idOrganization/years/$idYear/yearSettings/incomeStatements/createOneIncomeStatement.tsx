@@ -44,7 +44,6 @@ export function CreateOneIncomeStatement(props: {
                             idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             idIncomeStatementParent: null,
-                            netAmountAdded: "0.00",
                         }}
                         submitButtonProps={{
                             icon: <IconPlus />,

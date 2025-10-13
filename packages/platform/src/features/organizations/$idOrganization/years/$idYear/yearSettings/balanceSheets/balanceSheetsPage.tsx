@@ -3,8 +3,7 @@ import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
 import { Box } from "#/components/layouts/box.js"
 import { Section } from "#/components/layouts/section/section.js"
 import { TitleComponent } from "#/components/layouts/title.js"
-import { BalanceSheetAssetsTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetAssetsTable.js"
-import { BalanceSheetLiabilitiesTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetLiabilitiesTable.js"
+import { BalanceSheetTable } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetTable.js"
 import { ConnectAccountsToBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/connectAccountsToBalanceSheets.js"
 import { CreateOneBalanceSheet } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/createOneBalanceSheet.js"
 import { GenerateBalanceSheets } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/generateBalanceSheets.js"
@@ -53,18 +52,20 @@ export function BalanceSheetsPage() {
                         <TitleComponent>
                             Actif
                         </TitleComponent>
-                        <BalanceSheetAssetsTable
+                        <BalanceSheetTable
                             idOrganization={params.idOrganization}
                             idYear={params.idYear}
+                            filter={(balanceSheet) => balanceSheet.side === "asset"}
                         />
                     </Box>
                     <Box className="p-4 gap-4 max-h-[640px]">
                         <TitleComponent>
                             Passif
                         </TitleComponent>
-                        <BalanceSheetLiabilitiesTable
+                        <BalanceSheetTable
                             idOrganization={params.idOrganization}
                             idYear={params.idYear}
+                            filter={(balanceSheet) => balanceSheet.side === "liability"}
                         />
                     </Box>
                 </div>

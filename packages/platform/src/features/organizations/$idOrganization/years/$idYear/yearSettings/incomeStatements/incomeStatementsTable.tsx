@@ -2,8 +2,8 @@ import { FormatNull } from "#/components/formats/formatNull.js"
 import { InputDebounced } from "#/components/inputs/inputDebounced.js"
 import { InputText } from "#/components/inputs/inputText.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
 import { IncomeStatementItem } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/incomeStatementItem.js"
-import { sortIncomeStatements } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/sortIncomeStatements.js"
 import { readAllIncomeStatementsRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { useState } from "react"
@@ -26,16 +26,9 @@ export function IncomeStatementsTable(props: {
         >
             {(incomeStatements) => {
 
-                const groupedIncomeStatements = sortIncomeStatements({
-                    incomeStatements: incomeStatements,
-                })
-                    .filter((sortedIncomeStatement) => {
-                        const processedAccount = `${sortedIncomeStatement.incomeStatement.number} ${sortedIncomeStatement.incomeStatement.label}`.toLowerCase()
-                        const processedFilter = globalFilter.toLowerCase()
-                        return processedAccount.includes(processedFilter)
-                    })
-                    .sort((a, b) => a.incomeStatement.number.toString().localeCompare(b.incomeStatement.number.toString()))
-
+                const filteredIncomeStatements = incomeStatements
+                    .filter((incomeStatement) => incomeStatement.idIncomeStatementParent === null)
+                    .sort((a, b) => Number(a.number) - Number(b.number))
 
                 return (
                     <div className="h-fit w-fit flex flex-col justify-start items-start p-4 gap-4">
@@ -50,7 +43,7 @@ export function IncomeStatementsTable(props: {
                         </InputDebounced>
                         <div className="h-fit w-fit flex flex-col justify-start items-start">
                             {
-                                (groupedIncomeStatements.length !== 0)
+                                (filteredIncomeStatements.length !== 0)
                                     ? (null)
                                     : (
                                         <FormatNull
@@ -59,15 +52,23 @@ export function IncomeStatementsTable(props: {
                                         />
                                     )
                             }
-                            {groupedIncomeStatements.map((groupedIncomeStatement) => (
-                                <IncomeStatementItem
-                                    key={groupedIncomeStatement.incomeStatement.id}
-                                    idOrganization={props.idOrganization}
-                                    idYear={props.idYear}
-                                    incomeStatement={groupedIncomeStatement.incomeStatement}
-                                    level={groupedIncomeStatement.level}
-                                />
-                            ))}
+                            {filteredIncomeStatements.map((incomeStatement) => {
+                                const incomeStatementChildren = getIncomeStatementChildren({
+                                    incomeStatement: incomeStatement,
+                                    incomeStatements: incomeStatements,
+                                })
+
+                                return (
+                                    <IncomeStatementItem
+                                        key={incomeStatement.id}
+                                        idOrganization={props.idOrganization}
+                                        idYear={props.idYear}
+                                        incomeStatement={incomeStatement}
+                                        incomeStatementChildren={incomeStatementChildren}
+                                        level={0}
+                                    />
+                                )
+                            })}
                         </div>
                     </div>
                 )

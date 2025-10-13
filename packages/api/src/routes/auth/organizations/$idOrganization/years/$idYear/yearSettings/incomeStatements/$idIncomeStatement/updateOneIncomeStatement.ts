@@ -19,7 +19,6 @@ export const updateOneIncomeStatementRoute = authFactory.createApp()
                 table: models.incomeStatement,
                 data: {
                     idIncomeStatementParent: body.idIncomeStatementParent,
-                    index: body.index,
                     isComputed: body.isComputed,
                     number: body.number,
                     label: body.label,
