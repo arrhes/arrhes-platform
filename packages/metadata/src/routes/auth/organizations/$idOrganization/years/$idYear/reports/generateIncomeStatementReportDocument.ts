@@ -5,9 +5,9 @@ import { routeDefinition } from "#src/utilities/routeDefinition.js"
 import * as v from "valibot"
 
 
-export const generateIncomeStatementDocumentRouteDefinition = routeDefinition({
+export const generateIncomeStatementReportDocumentRouteDefinition = routeDefinition({
     protocol: "http",
-    path: `${routePath.auth}/generate-income-statement-document`,
+    path: `${routePath.auth}/generate-income-statement-report-document`,
     schemas: {
         body: v.object({
             idOrganization: incomeStatementSchema.entries.idOrganization,

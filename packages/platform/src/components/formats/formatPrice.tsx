@@ -27,20 +27,19 @@ export function FormatPrice(props: {
             <FormatNull />
         )
     }
+    const price = Number(props.price)
     return (
         <span className={cn(
             "w-fit max-w-full text-sm",
-            formatPrice({
-                price: props.price
-            }) === "0.00" ? "text-neutral/25" : "",
+            price === 0 ? "text-neutral/25" : "",
             props.className
         )}>
-            {Number(props.price) < 0
+            {price < 0
                 ? `(${formatPrice({
-                    price: Math.abs(Number(props.price))
+                    price: Math.abs(price)
                 })})`
                 : formatPrice({
-                    price: props.price
+                    price: Math.abs(price)
                 })}
         </span>
     )

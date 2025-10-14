@@ -6,7 +6,6 @@ import { generatePutSignedUrl } from "#/utilities/storage/generatePutSignedUrl.j
 import { bodyValidator } from "#/validators/bodyValidator.js"
 import { models } from "@arrhes/metadata/models"
 import { generateAttachmentPutSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
-import { generateId } from "@arrhes/metadata/utilities"
 import { and, eq } from "drizzle-orm"
 
 
@@ -24,8 +23,7 @@ export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
                     externalMessage: "Fichier trop volumineux"
                 })
             }
-            const storageKey = `organizations/${body.idOrganization}/${body.idYear}/${generateId()}`
-
+            const storageKey = `organizations/${body.idOrganization}/${body.idYear}/attachments/${body.idAttachment}`
 
             const updateOneAttachment = await updateOne({
                 database: c.var.clients.sql,

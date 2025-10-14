@@ -54,13 +54,6 @@ export function BalanceSheetLiabilitiesReportTable(props: {
                         )
                         : (
                             <Fragment>
-                                <BalanceSheetLiabilitiesReportRow
-                                    level={0}
-                                    number={" "}
-                                    label={"Total"}
-                                    netAmount={netAmount}
-                                    isAmountDisplayed={true}
-                                />
                                 {
                                     props.balanceSheets
                                         .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
@@ -85,6 +78,13 @@ export function BalanceSheetLiabilitiesReportTable(props: {
                                             )
                                         })
                                 }
+                                <BalanceSheetLiabilitiesReportRow
+                                    level={0}
+                                    number={" "}
+                                    label={"Total"}
+                                    netAmount={netAmount}
+                                    isAmountDisplayed={true}
+                                />
                             </Fragment>
                         )
                 }

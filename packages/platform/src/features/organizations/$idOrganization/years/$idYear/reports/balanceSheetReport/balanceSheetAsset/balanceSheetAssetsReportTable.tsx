@@ -64,14 +64,6 @@ export function BalanceSheetAssetsReportTable(props: {
                         )
                         : (
                             <Fragment>
-                                <BalanceSheetAssetsReportRow
-                                    level={0}
-                                    number={" "}
-                                    label={"Total"}
-                                    grossAmount={grossAmount}
-                                    amortizationAmount={amortizationAmount}
-                                    isAmountDisplayed={true}
-                                />
                                 {
                                     props.balanceSheets
                                         .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
@@ -96,6 +88,14 @@ export function BalanceSheetAssetsReportTable(props: {
                                             )
                                         })
                                 }
+                                <BalanceSheetAssetsReportRow
+                                    level={0}
+                                    number={" "}
+                                    label={"Total"}
+                                    grossAmount={Math.abs(grossAmount)}
+                                    amortizationAmount={-Math.abs(amortizationAmount)}
+                                    isAmountDisplayed={true}
+                                />
                             </Fragment>
                         )
                 }

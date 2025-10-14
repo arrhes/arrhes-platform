@@ -5,9 +5,9 @@ import { routeDefinition } from "#src/utilities/routeDefinition.js"
 import * as v from "valibot"
 
 
-export const generateBalanceSheetDocumentRouteDefinition = routeDefinition({
+export const generateBalanceSheetReportDocumentRouteDefinition = routeDefinition({
     protocol: "http",
-    path: `${routePath.auth}/generate-balance-sheet-document`,
+    path: `${routePath.auth}/generate-balance-sheet-report-document`,
     schemas: {
         body: v.object({
             idOrganization: balanceSheetSchema.entries.idOrganization,

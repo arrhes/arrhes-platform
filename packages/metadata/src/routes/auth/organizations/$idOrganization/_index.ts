@@ -36,7 +36,6 @@ export { createOneAttachmentRouteDefinition } from "./years/$idYear/attachments/
 export { readAllAttachmentsRouteDefinition } from "./years/$idYear/attachments/readAllAttachments.js"
 
 export { deleteOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/deleteOneBalanceSheet.js"
-export { generateBalanceSheetDocumentRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/generateBalanceSheetDocument.js"
 export { readOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/readOneBalanceSheet.js"
 export { updateOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/updateOneBalanceSheet.js"
 export { connectAccountsToBalanceSheetsRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/connectAccountsToBalanceSheets.js"
@@ -60,9 +59,10 @@ export { readAllComputationIncomeStatementsRouteDefinition } from "./years/$idYe
 export { generateDocumentGetSignedUrlRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/generateDocumentGetSignedUrl.js"
 export { readOneDocumentRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/readOneDocument.js"
 export { readAllDocumentsRouteDefinition } from "./years/$idYear/reports/documents/readAllDocuments.js"
+export { generateBalanceSheetReportDocumentRouteDefinition } from "./years/$idYear/reports/generateBalanceSheetReportDocument.js"
+export { generateIncomeStatementReportDocumentRouteDefinition } from "./years/$idYear/reports/generateIncomeStatementReportDocument.js"
 
 export { deleteOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/deleteOneIncomeStatement.js"
-export { generateIncomeStatementDocumentRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/generateIncomeStatementDocument.js"
 export { readOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/readOneIncomeStatement.js"
 export { updateOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/updateOneIncomeStatement.js"
 export { connectAccountsToIncomeStatementsRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/connectAccountsToIncomeStatements.js"

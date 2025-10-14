@@ -111,18 +111,20 @@ export function IncomeStatementsReportTable(props: {
                             // })
 
 
-                            const statementsLabel = props.computationIncomeStatements
+                            const computationIncomeStatementsLabel = props.computationIncomeStatements
                                 .filter((computationIncomeStatement) => computationIncomeStatement.idComputation === computation.id)
                                 .map((computationIncomeStatement, computationIncomeStatementIndex) => {
                                     const incomeStatement = props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)
-                                    if (incomeStatement === undefined) return ""
+                                    if (incomeStatement === undefined) {
+                                        return ""
+                                    }
                                     const romanNumber = toRoman(Number(incomeStatement.number))
                                     if (computationIncomeStatement.operation === "plus") {
                                         if (computationIncomeStatementIndex === 0) return `${romanNumber}`
                                         return `+${romanNumber}`
                                     }
                                     if (computationIncomeStatement.operation === "minus") return `-${romanNumber}`
-                                    return 0
+                                    return ""
                                 }).join("")
 
                             return (
@@ -142,7 +144,7 @@ export function IncomeStatementsReportTable(props: {
                                         <FormatText
                                             className={"whitespace-normal text-right text-neutral/50"}
                                         >
-                                            {`(${statementsLabel})`}
+                                            {`(${computationIncomeStatementsLabel})`}
                                         </FormatText>
                                     </Table.Body.Cell>
                                     <Table.Body.Cell className="w-[1%]" align="right">

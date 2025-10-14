@@ -57,7 +57,7 @@ export function BalanceSheetAssetsReportItem(props: {
                 number={number}
                 label={label}
                 grossAmount={Math.abs(grossAmount)}
-                amortizationAmount={Math.abs(amortizationAmount)}
+                amortizationAmount={-Math.abs(amortizationAmount)}
                 isAmountDisplayed={isAmountDisplayed}
             />
             {
