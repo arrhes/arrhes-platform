@@ -113,7 +113,8 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             return (
                                 <tr
                                     key={row.id}
-                                    onClick={() => {
+                                    onClick={(event) => {
+                                        event.stopPropagation()
                                         if (!props.onRowClick) return
                                         props.onRowClick(row)
                                     }}

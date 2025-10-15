@@ -14,24 +14,28 @@ export const updateOneRecordRoute = authFactory.createApp()
         async (c) => {
             const body = c.req.valid("json")
 
-            const updateRecord = await updateOne({
-                database: c.var.clients.sql,
-                table: models.record,
-                data: {
-                    idJournal: body.idJournal,
-                    idAttachment: body.idAttachment,
-                    label: body.label,
-                    date: body.date,
-                    lastUpdatedAt: new Date().toISOString(),
-                    lastUpdatedBy: c.var.user.id,
-                },
-                where: (table) => (
-                    and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idYear, body.idYear),
-                        eq(table.id, body.idRecord),
+            const updateRecord = await c.var.clients.sql.transaction(async (tx) => {
+                const updateRecord = await updateOne({
+                    database: tx,
+                    table: models.record,
+                    data: {
+                        idJournal: body.idJournal,
+                        idAttachment: body.idAttachment,
+                        label: body.label,
+                        date: body.date,
+                        lastUpdatedAt: new Date().toISOString(),
+                        lastUpdatedBy: c.var.user.id,
+                    },
+                    where: (table) => (
+                        and(
+                            eq(table.idOrganization, body.idOrganization),
+                            eq(table.idYear, body.idYear),
+                            eq(table.id, body.idRecord),
+                        )
                     )
-                )
+                })
+
+                return updateRecord
             })
 
             return response({

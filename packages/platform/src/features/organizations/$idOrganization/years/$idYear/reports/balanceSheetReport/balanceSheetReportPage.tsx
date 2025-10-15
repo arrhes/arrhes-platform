@@ -65,8 +65,8 @@ export function BalanceSheetReportPage() {
                                                             </TitleComponent>
                                                             <BalanceSheetAssetsReportTable
                                                                 balanceSheets={balanceSheets.filter((balanceSheet) => balanceSheet.side === "asset")}
-                                                                recordRows={recordRows}
-                                                                accounts={accounts}
+                                                                recordRows={recordRows.filter((recordRow) => recordRow.isComputedForBalanceSheetReport === true)}
+                                                                accounts={accounts.filter((account) => account.type === "balance-sheet")}
                                                             />
                                                         </Box>
                                                         <Box className="gap-4">
@@ -75,8 +75,8 @@ export function BalanceSheetReportPage() {
                                                             </TitleComponent>
                                                             <BalanceSheetLiabilitiesReportTable
                                                                 balanceSheets={balanceSheets.filter((balanceSheet) => balanceSheet.side === "liability")}
-                                                                recordRows={recordRows}
-                                                                accounts={accounts}
+                                                                recordRows={recordRows.filter((recordRow) => recordRow.isComputedForBalanceSheetReport === true)}
+                                                                accounts={accounts.filter((account) => account.type === "balance-sheet")}
                                                             />
                                                         </Box>
                                                     </div>

@@ -5,6 +5,7 @@ import { FormatText } from "#/components/formats/formatText.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Table } from "#/components/layouts/table/table.js"
 import { cn } from "#/utilities/cn.js"
+import { compareAmounts } from "#/utilities/compareAmounts.js"
 import { readOneAccountRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Fragment } from "react/jsx-runtime"
@@ -15,11 +16,13 @@ export function JournalReportTable(props: {
     records: Array<v.InferOutput<typeof returnedSchemas.record>>
     recordRows: Array<v.InferOutput<typeof returnedSchemas.recordRow>>
 }) {
-    const totalDebit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
-    const totalCredit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
+
+    const recordRows = props.recordRows
+
+    const totalDebit = recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
+    const totalCredit = recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
 
     const sortedRecords = props.records
-        // .filter((record) => record.isComputed)
         .sort((a, b) => b.date.localeCompare(a.date))
 
     return (
@@ -89,7 +92,7 @@ export function JournalReportTable(props: {
                         )
                         : sortedRecords.map((record) => {
 
-                            const sortedRecordRows = props.recordRows
+                            const sortedRecordRows = recordRows
                                 .filter((recordRow) => recordRow.idRecord === record.id)
                                 .sort((a, b) => (a.lastUpdatedAt ?? "").localeCompare(b.lastUpdatedAt ?? ""))
 
@@ -119,7 +122,7 @@ export function JournalReportTable(props: {
                                                 price={recordTotalDebit}
                                                 className={cn(
                                                     "font-bold",
-                                                    (recordTotalDebit === recordTotalCredit) ? "" : "text-error"
+                                                    (compareAmounts({ a: recordTotalDebit, b: recordTotalCredit })) ? "" : "text-error"
                                                 )}
                                             />
                                         </Table.Body.Cell>
@@ -128,7 +131,7 @@ export function JournalReportTable(props: {
                                                 price={recordTotalCredit}
                                                 className={cn(
                                                     "font-bold",
-                                                    (recordTotalDebit === recordTotalCredit) ? "text-neutral" : "text-error"
+                                                    (compareAmounts({ a: recordTotalDebit, b: recordTotalCredit })) ? "text-neutral" : "text-error"
                                                 )}
                                             />
                                         </Table.Body.Cell>
@@ -138,7 +141,9 @@ export function JournalReportTable(props: {
                                             sortedRecordRows.map((recordRow) => {
                                                 return (
                                                     <Table.Body.Row key={recordRow.id}>
-                                                        <Table.Body.Cell />
+                                                        <Table.Body.Cell>
+
+                                                        </Table.Body.Cell>
                                                         <Table.Body.Cell>
                                                             <FormatText wrap={true}>
                                                                 {recordRow.label}

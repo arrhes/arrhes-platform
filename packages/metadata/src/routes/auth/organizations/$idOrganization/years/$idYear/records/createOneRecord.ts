@@ -15,7 +15,7 @@ export const createOneRecordRouteDefinition = routeDefinition({
             idRecordLabel: v.optional(recordSchema.entries.idRecordLabel),
             idAttachment: v.optional(recordSchema.entries.idAttachment),
             label: recordSchema.entries.label,
-            date: recordSchema.entries.date
+            date: recordSchema.entries.date,
         }),
         return: recordSchemaReturn
     },

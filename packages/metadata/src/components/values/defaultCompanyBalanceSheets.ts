@@ -11,7 +11,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 109,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -24,42 +24,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 201,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2011,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2012,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 20121,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 20122,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2013,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2801,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2901,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -86,17 +86,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 203,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2803,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2903,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -109,32 +109,32 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 205,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2805,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2905,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 229,
                 flow: "debit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 282,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 292,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -147,17 +147,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 207,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2807,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2907,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -170,42 +170,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 206,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 208,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2081,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2806,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2808,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2906,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2908,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 29081,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -218,17 +218,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 232,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 237,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2932,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -248,52 +248,52 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 211,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2111,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2112,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2113,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2114,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2115,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 212,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2911,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2812,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2912,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -306,47 +306,47 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 213,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2131,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2135,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2138,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 214,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2813,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2814,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2913,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2914,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -359,62 +359,62 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 215,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2151,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 21511,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 21514,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2153,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 21531,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 21534,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2154,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2155,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2157,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2815,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2915,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -427,62 +427,62 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 218,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2181,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2182,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2183,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2184,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2185,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2186,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2187,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2818,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 28187,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2918,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 29187,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -495,17 +495,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 231,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 238,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2931,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -525,47 +525,47 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 261,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2611,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2618,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 262,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 266,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2661,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2961,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2962,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2966,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -578,62 +578,62 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 267,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2671,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2674,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2675,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2676,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2677,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2678,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 268,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2681,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2688,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2967,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2968,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -646,12 +646,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 273,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2973,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -664,62 +664,62 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 271,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2711,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2718,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 272,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2721,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2722,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 27682,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 277,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2771,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2772,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2971,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2972,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -732,37 +732,37 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 274,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2741,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2742,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2743,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2748,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 27684,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2974,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -775,47 +775,47 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 275,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2751,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2755,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2761,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 27685,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 27688,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 2975,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 2976,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 278,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -842,77 +842,77 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 31,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 32,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 321,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 322,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3221,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3222,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3223,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3224,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3225,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 326,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3261,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3265,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3267,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 391,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 392,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -925,42 +925,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 33,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 331,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 335,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 34,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 341,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 345,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 393,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 394,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -973,42 +973,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 35,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 351,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 355,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 358,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3581,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3585,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 3586,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 395,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -1021,12 +1021,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 37,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 397,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -1039,7 +1039,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 4091,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1059,47 +1059,47 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 411,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4111,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4117,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 413,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 416,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 418,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4181,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4188,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 491,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -1112,272 +1112,272 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 4096,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4097,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 40971,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 40974,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4098,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 425,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 439,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 441,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 442,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4421,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4422,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4423,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 444,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4455,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44551,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44558,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4456,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44562,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44563,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44566,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44567,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44568,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4457,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44571,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44578,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44581,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44583,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44586,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 451,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 455,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 456,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4561,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 45611,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 45615,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4563,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4564,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4566,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4567,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 458,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4581,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4588,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 462,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 465,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 467,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 478,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4781,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 495,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4951,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4955,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4958,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 496,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4962,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4965,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 4967,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -1390,7 +1390,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 486,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1403,17 +1403,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 4562,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 45621,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 45625,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1433,17 +1433,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 502,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5021,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5022,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1456,92 +1456,92 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 503,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5031,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5035,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 504,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 505,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 506,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5061,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5065,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 507,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 508,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5081,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5082,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5088,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 590,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 5903,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 5904,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 5906,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             },
             {
                 number: 5908,
                 flow: "credit",
-                isAllowance: true
+                isAmortization: true
             }
         ]
     },
@@ -1554,27 +1554,27 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 52,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 521,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 522,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 523,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 524,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1587,67 +1587,67 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 511,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5111,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5112,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5113,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5114,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 512,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5121,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5124,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 517,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 518,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5181,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5188,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 53,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1660,7 +1660,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 481,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1673,7 +1673,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 169,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1686,42 +1686,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 474,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4741,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4742,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4746,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 476,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4761,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4762,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4768,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1741,47 +1741,47 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 101,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 102,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1011,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1012,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1013,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 10131,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 10132,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1018,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 108,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1794,32 +1794,32 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 104,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1041,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1042,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1043,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1044,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1045,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1832,7 +1832,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 105,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1845,7 +1845,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 107,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1865,7 +1865,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 1061,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1878,12 +1878,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 1062,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1063,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1896,7 +1896,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 1064,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1909,7 +1909,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 1068,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1922,17 +1922,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 11,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 110,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 119,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1945,22 +1945,22 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 12,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 120,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1209,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 129,
                 flow: "debit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1973,17 +1973,17 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 13,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 131,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 139,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -1996,22 +1996,22 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 14,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 143,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 145,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 148,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2031,37 +2031,37 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 151,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1511,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1512,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1514,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1515,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1516,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1518,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2074,42 +2074,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 152,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1521,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1522,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1523,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1524,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1525,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1526,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1527,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2129,12 +2129,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 161,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1618,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2147,12 +2147,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 163,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1638,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2165,57 +2165,57 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 164,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1648,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 511,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 512,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 517,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 518,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 519,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5191,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5193,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 5198,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 53,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2228,107 +2228,107 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 162,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 165,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1651,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1655,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1658,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 166,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1661,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1662,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1668,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1671,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 16718,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1674,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 16748,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1675,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 16758,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 168,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1681,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1685,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1687,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 1688,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 17,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2341,22 +2341,22 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 521,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 522,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 523,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 524,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2369,7 +2369,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 4191,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2382,32 +2382,32 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 401,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4011,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4017,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 403,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4081,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4088,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2420,227 +2420,227 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 421,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 422,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 424,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4246,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4248,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 426,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 427,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 428,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4282,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4284,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4286,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 431,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 437,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 438,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4382,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4386,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 441,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 442,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4421,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4422,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4423,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 444,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4452,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4455,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44551,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44558,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4456,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44562,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44563,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44566,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44567,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44568,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4457,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44571,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44578,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4458,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44584,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44587,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 446,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 447,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4481,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44811,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 44812,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4482,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 449,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2653,37 +2653,37 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 269,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 279,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 404,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4041,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4047,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 405,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4084,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2696,97 +2696,97 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 171,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 174,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 178,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 181,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 186,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 187,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 188,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4196,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4197,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4198,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 451,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 455,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4551,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4558,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 457,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4562,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 464,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 468,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 509,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2799,12 +2799,12 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 487,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4871,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     },
@@ -2817,42 +2817,42 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             {
                 number: 475,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4751,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4752,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4756,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 477,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4771,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4772,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             },
             {
                 number: 4778,
                 flow: "credit",
-                isAllowance: false
+                isAmortization: false
             }
         ]
     }

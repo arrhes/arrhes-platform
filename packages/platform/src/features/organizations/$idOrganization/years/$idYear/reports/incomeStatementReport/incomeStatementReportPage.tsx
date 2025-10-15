@@ -79,8 +79,8 @@ export function IncomeStatementReportPage() {
                                                                                     incomeStatements={incomeStatements}
                                                                                     computations={computations}
                                                                                     computationIncomeStatements={computationIncomeStatements}
-                                                                                    recordRows={recordRows}
-                                                                                    accounts={accounts}
+                                                                                    recordRows={recordRows.filter((recordRow) => recordRow.isComputedForIncomeStatementReport === true)}
+                                                                                    accounts={accounts.filter((account) => account.type === "income-statement")}
                                                                                 />
                                                                             </Box>
                                                                         </Section.Item>

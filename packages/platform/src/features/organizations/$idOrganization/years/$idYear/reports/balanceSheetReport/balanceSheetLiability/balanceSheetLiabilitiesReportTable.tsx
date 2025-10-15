@@ -14,19 +14,32 @@ export function BalanceSheetLiabilitiesReportTable(props: {
     accounts: Array<v.InferOutput<typeof returnedSchemas.account>>
 }) {
 
-    let netAmount = 0
-    props.accounts
-        .filter((account) => account.idBalanceSheetLiability !== null)
-        .forEach((account) => {
-            props.recordRows
-                .filter((recordRow) => recordRow.idAccount === account.id)
-                .forEach((recordRow) => {
-                    const debit = Number(recordRow.debit)
-                    const credit = Number(recordRow.credit)
+    let netTotalAmount = 0
+    props.accounts.forEach((account) => {
+        let accountTotalDebit = 0
+        let accountTotalCredit = 0
 
-                    netAmount += (debit - credit)
-                })
-        })
+        props.recordRows
+            .filter((recordRow) => recordRow.idAccount === account.id)
+            .forEach((recordRow) => {
+                accountTotalDebit += Number(recordRow.debit)
+                accountTotalCredit += Number(recordRow.credit)
+            })
+
+        const accountBalance = accountTotalDebit - accountTotalCredit
+
+        if (accountBalance < 0 && account.balanceSheetLiabilityFlow === "debit") {
+            return
+        }
+
+        if (accountBalance > 0 && account.balanceSheetLiabilityFlow === "credit") {
+            return
+        }
+
+        if (account.balanceSheetLiabilityColumn === "net") {
+            netTotalAmount += Math.abs(accountBalance)
+        }
+    })
 
     return (
         <Table.Root>
@@ -82,7 +95,7 @@ export function BalanceSheetLiabilitiesReportTable(props: {
                                     level={0}
                                     number={" "}
                                     label={"Total"}
-                                    netAmount={netAmount}
+                                    netAmount={netTotalAmount}
                                     isAmountDisplayed={true}
                                 />
                             </Fragment>

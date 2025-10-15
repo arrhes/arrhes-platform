@@ -16,16 +16,34 @@ export function BalanceReportTable(props: {
 
     let accountsTotalDebit = 0
     let accountsTotalCredit = 0
+    let accountsTotalBalanceDebit = 0
+    let accountsTotalBalanceCredit = 0
 
-    props.recordRows.forEach((recordRow) => {
-        accountsTotalDebit += Number(recordRow.debit)
-        accountsTotalCredit += Number(recordRow.credit)
+    props.accounts.forEach((account) => {
+        let accountTotalDebit = 0
+        let accountTotalCredit = 0
+
+        props.recordRows
+            .filter((recordRow) => recordRow.idAccount === account.id)
+            .forEach((recordRow) => {
+                accountTotalDebit += Number(recordRow.debit)
+                accountTotalCredit += Number(recordRow.credit)
+            })
+
+        accountsTotalDebit += accountTotalDebit
+        accountsTotalCredit += accountTotalCredit
+
+        const algebricBalance = accountTotalDebit - accountTotalCredit
+
+        if (algebricBalance > 0) {
+            accountsTotalBalanceDebit += Math.abs(algebricBalance)
+        }
+
+        if (algebricBalance < 0) {
+            accountsTotalBalanceCredit += Math.abs(algebricBalance)
+        }
+
     })
-
-    const algebricBalance = accountsTotalDebit - accountsTotalCredit
-
-    const accountsTotalBalanceDebit = (algebricBalance > 0) ? algebricBalance : 0
-    const accountsTotalBalanceCredit = (algebricBalance < 0) ? -algebricBalance : 0
 
     return (
         <Table.Root>

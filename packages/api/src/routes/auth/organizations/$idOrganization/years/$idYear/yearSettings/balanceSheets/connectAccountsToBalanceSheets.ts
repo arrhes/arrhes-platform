@@ -75,20 +75,28 @@ export const connectAccountsToBalanceSheetsRoute = authFactory.createApp()
                             database: tx,
                             table: models.account,
                             data: {
-                                idBalanceSheetAsset: (defaultAccount.flow === "debit")
+                                idBalanceSheetAsset: (defaultBalanceSheet.side === "asset")
                                     ? balanceSheet.id
                                     : undefined,
-                                balanceSheetAssetColumn: (defaultAccount.flow === "debit")
-                                    ? (defaultAccount.isAllowance)
+                                balanceSheetAssetColumn: (defaultBalanceSheet.side === "asset")
+                                    ? (defaultAccount.isAmortization)
                                         ? "amortization"
                                         : "gross"
                                     : undefined,
-                                idBalanceSheetLiability: (defaultAccount.flow === "credit")
+                                balanceSheetAssetFlow: (defaultBalanceSheet.side === "asset")
+                                    ? defaultAccount.flow
+                                    : undefined,
+
+                                idBalanceSheetLiability: (defaultBalanceSheet.side === "liability")
                                     ? balanceSheet.id
                                     : undefined,
-                                balanceSheetLiabilityColumn: (defaultAccount.flow === "credit")
+                                balanceSheetLiabilityColumn: (defaultBalanceSheet.side === "liability")
                                     ? "net"
                                     : undefined,
+                                balanceSheetLiabilityFlow: (defaultBalanceSheet.side === "liability")
+                                    ? defaultAccount.flow
+                                    : undefined,
+
                                 lastUpdatedAt: new Date().toISOString(),
                                 lastUpdatedBy: c.var.user.id,
                             },

@@ -3,7 +3,7 @@ import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
 import { FormatDate } from "#/components/formats/formatDate.js"
 import { FormatDateTime } from "#/components/formats/formatDateTime.js"
 import { FormatNull } from "#/components/formats/formatNull.js"
-import { FormatPrice } from "#/components/formats/formatPrice.js"
+import { formatPrice, FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { Banner } from "#/components/layouts/banner.js"
 import { DataBlock } from "#/components/layouts/dataBlock/dataBlock.js"
@@ -131,7 +131,7 @@ export function RecordPage() {
                                                         ? (null)
                                                         : (
                                                             <Banner variant="error">
-                                                                Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider.
+                                                                Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider. ({formatPrice({ price: totalDebit - totalCredit })})
                                                             </Banner>
                                                         )
                                                 }

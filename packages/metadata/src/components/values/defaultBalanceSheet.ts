@@ -10,6 +10,6 @@ export type DefaultBalanceSheet = {
     accounts: Array<{
         number: number
         flow: (typeof balanceSheetFlow)[number]
-        isAllowance: boolean
+        isAmortization: boolean
     }>
 }

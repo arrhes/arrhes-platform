@@ -35,7 +35,7 @@ export function JournalReportPage() {
                                         <Box>
                                             <JournalReportTable
                                                 records={records}
-                                                recordRows={recordRows}
+                                                recordRows={recordRows.filter((recordRow) => recordRow.isComputedForJournalReport === true)}
                                             />
                                         </Box>
                                     )

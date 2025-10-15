@@ -31,8 +31,11 @@ function generateAccounts(parameters: {
 
             idBalanceSheetAsset: null,
             balanceSheetAssetColumn: null,
+            balanceSheetAssetFlow: null,
+
             idBalanceSheetLiability: null,
             balanceSheetLiabilityColumn: null,
+            balanceSheetLiabilityFlow: null,
 
             idIncomeStatement: null,
 

@@ -25,8 +25,8 @@ export function BalanceSheetAssetsReportItem(props: {
 
     const isAmountDisplayed = (props.balanceSheet.isComputed === true || props.balanceSheetChildren.length === 0)
 
-    let grossAmount = 0
-    let amortizationAmount = 0
+    let grossTotalAmount = 0
+    let amortizationTotalAmount = 0
     props.accounts
         .filter((account) => {
             const hasAccount = (account.idBalanceSheetAsset === props.balanceSheet.id)
@@ -34,19 +34,32 @@ export function BalanceSheetAssetsReportItem(props: {
             return hasAccount || hasChildrenAccount
         })
         .forEach((account) => {
+            let accountTotalDebit = 0
+            let accountTotalCredit = 0
+
             props.recordRows
                 .filter((recordRow) => recordRow.idAccount === account.id)
                 .forEach((recordRow) => {
-                    const debit = Number(recordRow.debit)
-                    const credit = Number(recordRow.credit)
-
-                    if (account.balanceSheetAssetColumn === "gross") {
-                        grossAmount += (debit - credit)
-                    }
-                    if (account.balanceSheetAssetColumn === "amortization") {
-                        amortizationAmount += (debit - credit)
-                    }
+                    accountTotalDebit += Number(recordRow.debit)
+                    accountTotalCredit += Number(recordRow.credit)
                 })
+
+            const accountBalance = accountTotalDebit - accountTotalCredit
+
+            if (accountBalance < 0 && account.balanceSheetAssetFlow === "debit") {
+                return
+            }
+
+            if (accountBalance > 0 && account.balanceSheetAssetFlow === "credit") {
+                return
+            }
+
+            if (account.balanceSheetAssetColumn === "gross") {
+                grossTotalAmount += Math.abs(accountBalance)
+            }
+            if (account.balanceSheetAssetColumn === "amortization") {
+                amortizationTotalAmount += Math.abs(accountBalance)
+            }
         })
 
     return (
@@ -56,8 +69,8 @@ export function BalanceSheetAssetsReportItem(props: {
                 level={props.level}
                 number={number}
                 label={label}
-                grossAmount={Math.abs(grossAmount)}
-                amortizationAmount={-Math.abs(amortizationAmount)}
+                grossAmount={grossTotalAmount}
+                amortizationAmount={-amortizationTotalAmount}
                 isAmountDisplayed={isAmountDisplayed}
             />
             {

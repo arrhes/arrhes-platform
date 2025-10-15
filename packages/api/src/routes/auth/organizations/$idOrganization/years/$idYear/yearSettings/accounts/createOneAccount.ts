@@ -44,8 +44,11 @@ export const createOneAccountRoute = authFactory.createApp()
 
                     idBalanceSheetAsset: body.idBalanceSheetAsset ?? readOneAccount?.idBalanceSheetAsset,
                     balanceSheetAssetColumn: body.balanceSheetAssetColumn ?? readOneAccount?.balanceSheetAssetColumn,
+                    balanceSheetAssetFlow: body.balanceSheetAssetFlow ?? readOneAccount?.balanceSheetAssetFlow,
+
                     idBalanceSheetLiability: body.idBalanceSheetLiability ?? readOneAccount?.idBalanceSheetLiability,
                     balanceSheetLiabilityColumn: body.balanceSheetLiabilityColumn ?? readOneAccount?.balanceSheetLiabilityColumn,
+                    balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow ?? readOneAccount?.balanceSheetLiabilityFlow,
 
                     idIncomeStatement: body.idIncomeStatement,
 

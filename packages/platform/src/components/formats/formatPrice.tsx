@@ -7,13 +7,17 @@ export function formatPrice(parameters: {
     price?: number | null | string
 }) {
     if (parameters.price === undefined || parameters.price === null) return "/"
+    const price = Number(parameters.price)
+    const processedPrice = Math.abs(price) < 0.0090
+        ? 0
+        : price
     return (
         new Intl.NumberFormat("fr", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             //@ts-ignore
             roundingMode: "halfExpand"
-        }).format(Number(parameters.price)).replace(/,/g, '.')
+        }).format(processedPrice).replace(/,/g, '.')
     )
 }
 
@@ -28,18 +32,21 @@ export function FormatPrice(props: {
         )
     }
     const price = Number(props.price)
+    const processedPrice = Math.abs(price) < 0.0090
+        ? 0
+        : price
     return (
         <span className={cn(
             "w-fit max-w-full text-sm",
-            price === 0 ? "text-neutral/25" : "",
+            processedPrice === 0 ? "text-neutral/25" : "",
             props.className
         )}>
-            {price < 0
+            {processedPrice < 0
                 ? `(${formatPrice({
-                    price: Math.abs(price)
+                    price: Math.abs(processedPrice)
                 })})`
                 : formatPrice({
-                    price: Math.abs(price)
+                    price: Math.abs(processedPrice)
                 })}
         </span>
     )
