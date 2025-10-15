@@ -1931,7 +1931,7 @@ export const defaultCompanyBalanceSheets: DefaultBalanceSheet[] = [
             },
             {
                 number: 119,
-                flow: "credit",
+                flow: "debit",
                 isAmortization: false
             }
         ]

@@ -55,10 +55,20 @@ export function BalanceSheetAssetsReportItem(props: {
             }
 
             if (account.balanceSheetAssetColumn === "gross") {
-                grossTotalAmount += Math.abs(accountBalance)
+                if (account.balanceSheetAssetFlow === "debit") {
+                    grossTotalAmount += Math.abs(accountBalance)
+                }
+                if (account.balanceSheetAssetFlow === "credit") {
+                    grossTotalAmount += -Math.abs(accountBalance)
+                }
             }
             if (account.balanceSheetAssetColumn === "amortization") {
-                amortizationTotalAmount += Math.abs(accountBalance)
+                if (account.balanceSheetAssetFlow === "debit") {
+                    amortizationTotalAmount += Math.abs(accountBalance)
+                }
+                if (account.balanceSheetAssetFlow === "credit") {
+                    amortizationTotalAmount += -Math.abs(accountBalance)
+                }
             }
         })
 
@@ -70,7 +80,7 @@ export function BalanceSheetAssetsReportItem(props: {
                 number={number}
                 label={label}
                 grossAmount={grossTotalAmount}
-                amortizationAmount={-amortizationTotalAmount}
+                amortizationAmount={amortizationTotalAmount}
                 isAmountDisplayed={isAmountDisplayed}
             />
             {

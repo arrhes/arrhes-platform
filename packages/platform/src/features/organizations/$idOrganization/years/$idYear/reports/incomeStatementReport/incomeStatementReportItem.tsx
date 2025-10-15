@@ -25,7 +25,7 @@ export function IncomeStatementReportItem(props: {
 
     const isAmountDisplayed = (props.incomeStatement.isComputed === true || props.incomeStatementChildren.length === 0)
 
-    let amount = 0
+    let netAmount = 0
     props.accounts
         .filter((account) => {
             const hasAccount = props.incomeStatement.id === account.idIncomeStatement
@@ -33,11 +33,19 @@ export function IncomeStatementReportItem(props: {
             return hasAccount || hasChildrenAccount
         })
         .forEach((account) => {
+            let accountTotalDebit = 0
+            let accountTotalCredit = 0
+
             props.recordRows
                 .filter((recordRow) => recordRow.idAccount === account.id)
                 .forEach((recordRow) => {
-                    amount += Number(recordRow.debit) - Number(recordRow.credit)
+                    accountTotalDebit += Number(recordRow.debit)
+                    accountTotalCredit += Number(recordRow.credit)
                 })
+
+            const accountBalance = accountTotalDebit - accountTotalCredit
+
+            netAmount += Math.abs(accountBalance)
         })
 
     return (
@@ -47,7 +55,7 @@ export function IncomeStatementReportItem(props: {
                 level={props.level}
                 number={number}
                 label={label}
-                amount={Math.abs(amount)}
+                amount={netAmount}
                 isAmountDisplayed={isAmountDisplayed}
             />
             {

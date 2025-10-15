@@ -37,7 +37,12 @@ export function BalanceSheetLiabilitiesReportTable(props: {
         }
 
         if (account.balanceSheetLiabilityColumn === "net") {
-            netTotalAmount += Math.abs(accountBalance)
+            if (account.balanceSheetLiabilityFlow === "debit") {
+                netTotalAmount += -Math.abs(accountBalance)
+            }
+            if (account.balanceSheetLiabilityFlow === "credit") {
+                netTotalAmount += Math.abs(accountBalance)
+            }
         }
     })
 

@@ -43,18 +43,23 @@ export function BalanceSheetLiabilitiesReportItem(props: {
                     accountTotalCredit += Number(recordRow.credit)
                 })
 
-            const accountBalance = accountTotalDebit - accountTotalCredit
+            const accountBalance = accountTotalCredit - accountTotalDebit
 
-            if (accountBalance < 0 && account.balanceSheetLiabilityFlow === "debit") {
+            if (accountBalance > 0 && account.balanceSheetLiabilityFlow === "debit") {
                 return
             }
 
-            if (accountBalance > 0 && account.balanceSheetLiabilityFlow === "credit") {
+            if (accountBalance < 0 && account.balanceSheetLiabilityFlow === "credit") {
                 return
             }
 
             if (account.balanceSheetLiabilityColumn === "net") {
-                netTotalAmount += Math.abs(accountBalance)
+                if (account.balanceSheetLiabilityFlow === "debit") {
+                    netTotalAmount += accountBalance
+                }
+                if (account.balanceSheetLiabilityFlow === "credit") {
+                    netTotalAmount += accountBalance
+                }
             }
         })
 

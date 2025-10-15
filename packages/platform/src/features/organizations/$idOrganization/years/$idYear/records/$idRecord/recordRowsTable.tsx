@@ -1,5 +1,6 @@
 import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
 import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
 import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
 import { FormatDateTime } from "#/components/formats/formatDateTime.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
@@ -8,9 +9,10 @@ import { DataTable } from "#/components/layouts/dataTable.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { UpdateOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/updateOneRecordRow.js"
 import { CreateOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/createOneRecordRow.js"
+import { UpdateManyRecordRows } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/updateManyRecordRows.js"
 import { readOneAccountRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
-import { IconEye, IconPencil, IconPlus } from "@tabler/icons-react"
+import { IconEdit, IconEye, IconPencil, IconPlus } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import * as v from "valibot"
 
@@ -135,14 +137,24 @@ export function RecordRowsTable(props: {
                 // })
             }}
         >
-            <CreateOneRecordRow
-                record={props.record}
-            >
-                <ButtonPlainContent
-                    icon={<IconPlus />}
-                    text="Ajouter un mouvement"
-                />
-            </CreateOneRecordRow>
+            <div className="flex justify-end items-center gap-1">
+                <CreateOneRecordRow
+                    record={props.record}
+                >
+                    <ButtonPlainContent
+                        icon={<IconPlus />}
+                        text="Ajouter un mouvement"
+                    />
+                </CreateOneRecordRow>
+                <UpdateManyRecordRows
+                    record={props.record}
+                >
+                    <ButtonOutlineContent
+                        icon={<IconEdit />}
+                        text="Modifier plusieurs mouvements"
+                    />
+                </UpdateManyRecordRows>
+            </div>
         </DataTable>
     )
 }

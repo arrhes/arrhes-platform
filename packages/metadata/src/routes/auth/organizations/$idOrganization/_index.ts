@@ -96,6 +96,7 @@ export { readOneRecordRowRouteDefinition } from "./years/$idYear/records/$idReco
 export { updateOneRecordRowRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/$idRecordRow/updateOneRecordRow.js"
 export { createOneRecordRowRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/createOneRecordRow.js"
 export { readAllRecordRowsRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/readAllRecordRows.js"
+export { updateManyRecordRowsRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/updateManyRecordRows.js"
 
 export { closeYearRouteDefinition } from "./years/$idYear/yearSettings/general/closeYear.js"
 export { deleteOneYearRouteDefinition } from "./years/$idYear/yearSettings/general/deleteOneYear.js"

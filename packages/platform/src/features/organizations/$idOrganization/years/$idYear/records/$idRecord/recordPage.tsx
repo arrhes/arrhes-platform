@@ -80,6 +80,14 @@ export function RecordPage() {
                                                                 text="Modifier"
                                                             />
                                                         </UpdateOneRecord>
+                                                        <DuplicateOneRecord
+                                                            record={record}
+                                                        >
+                                                            <ButtonOutlineContent
+                                                                icon={<IconCopyCheck />}
+                                                                text="Dupliquer"
+                                                            />
+                                                        </DuplicateOneRecord>
                                                         <DeleteOneRecord
                                                             record={record}
                                                         >
@@ -89,14 +97,6 @@ export function RecordPage() {
                                                                 color="error"
                                                             />
                                                         </DeleteOneRecord>
-                                                        <DuplicateOneRecord
-                                                            record={record}
-                                                        >
-                                                            <ButtonOutlineContent
-                                                                icon={<IconCopyCheck />}
-                                                                text="Dupliquer"
-                                                            />
-                                                        </DuplicateOneRecord>
                                                         {/* <ComputeRecord record={record.data}>
                                 <ButtonOutline
                                     text={!record.data.isComputed ? "Simuler" : "Ne plus simuler"}
