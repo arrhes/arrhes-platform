@@ -65,20 +65,51 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
    git remote add upstream https://github.com/arrhes/arrhes.git
    ```
 
-4. **Installer les dépendances**
+4. **Choisir votre méthode de développement**
+
+   **Option A : Dev Container (Recommandé pour les nouveaux contributeurs) 🚀**
+   
+   C'est la méthode la plus simple pour démarrer rapidement :
+   
    ```bash
+   # Ouvrir dans VS Code/Cursor
+   code .  # ou cursor .
+   
+   # Cliquer sur "Reopen in Container" quand demandé
+   # Tout sera configuré automatiquement !
+   ```
+   
+   **Option B : Docker Compose**
+   
+   ```bash
+   # Installer les dépendances
    pnpm install
+   
+   # Lancer les services
+   docker-compose up -d
+   
+   # Configurer l'environnement
+   # Suivez les instructions dans DEVELOPMENT.md
+   ```
+   
+   **Option C : Installation native**
+   
+   ```bash
+   # Installer les dépendances
+   pnpm install
+   
+   # Configurer l'environnement
+   # Suivez les instructions complètes dans DEVELOPMENT.md
    ```
 
-5. **Configurer l'environnement**
-   Suivez les instructions dans [DEVELOPMENT.md](DEVELOPMENT.md)
-
-6. **Créer une branche pour votre contribution**
+5. **Créer une branche pour votre contribution**
    ```bash
    git checkout -b feature/ma-fonctionnalite
    # ou
    git checkout -b fix/mon-correctif
    ```
+
+Pour plus de détails, consultez [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ## Standards de code
 

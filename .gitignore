@@ -10,4 +10,6 @@ build
 .vscode
 
 pnpm-lock.yaml
+.pnpm-store
+
 *.tsbuildinfo

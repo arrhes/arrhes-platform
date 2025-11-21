@@ -39,13 +39,31 @@ Arrhes est une solution complète de comptabilité conçue spécifiquement pour 
 
 ## Démarrage rapide
 
-### Prérequis
+### Option 1 : Dev Container 🚀 (Le plus simple)
 
-- Node.js 24.5+ 
-- pnpm
-- PostgreSQL
+Prérequis : Docker, VS Code ou Cursor avec l'extension Dev Containers
 
-### Installation
+```bash
+# Cloner le repository
+git clone https://github.com/arrhes/arrhes.git
+cd arrhes
+
+# Ouvrir dans VS Code/Cursor
+code .
+
+# Cliquer sur "Reopen in Container" quand demandé
+# Ou : Cmd/Ctrl+Shift+P > "Dev Containers: Reopen in Container"
+
+# L'environnement se configure automatiquement !
+# Une fois prêt, lancer l'application :
+pnpm run dev
+```
+
+Tout est configuré automatiquement : Node.js, pnpm, PostgreSQL, MinIO, MailHog, et les données de démonstration !
+
+### Option 2 : Avec Docker Compose 🐳
+
+Prérequis : Node.js 24.5+, pnpm, Docker
 
 ```bash
 # Cloner le repository
@@ -55,10 +73,16 @@ cd arrhes
 # Installer les dépendances
 pnpm install
 
+# Lancer les services (PostgreSQL, MinIO, MailHog)
+docker-compose up -d
+
+# Créer le bucket MinIO
+# Accéder à http://localhost:9001 (minioadmin / minioadmin)
+# Créer un bucket nommé "arrhes-files"
+
 # Configurer les variables d'environnement
-cp packages/api/.env.example packages/api/.env
-cp packages/tools/.env.example packages/tools/.env
-# Éditer les fichiers .env avec vos valeurs
+# Créer packages/api/.env et packages/tools/.env
+# (voir la documentation complète)
 
 # Initialiser la base de données
 pnpm --filter tools run push
@@ -68,9 +92,38 @@ pnpm --filter tools run seed
 pnpm run dev
 ```
 
-L'API sera accessible sur le port configuré (par défaut `http://localhost:3000`) et la plateforme sur `http://localhost:5173`.
+### Option 3 : Installation native
+
+Prérequis : Node.js 24.5+, pnpm, PostgreSQL
+
+```bash
+# Cloner le repository
+git clone https://github.com/arrhes/arrhes.git
+cd arrhes
+
+# Installer les dépendances
+pnpm install
+
+# Créer la base de données PostgreSQL
+# (voir la documentation complète)
+
+# Configurer les variables d'environnement
+# Créer packages/api/.env et packages/tools/.env
+# (voir la documentation complète)
+
+# Initialiser la base de données
+pnpm --filter tools run push
+pnpm --filter tools run seed
+
+# Lancer l'application
+pnpm run dev
+```
+
+L'API sera accessible sur `http://localhost:3000` et la plateforme sur `http://localhost:5173`.
 
 **Identifiants de démonstration :** `demo@arrhes.com` / `demo`
+
+**Pour plus de détails, consultez le [Guide de développement](docs/DEVELOPMENT.md).**
 
 ## Documentation
 

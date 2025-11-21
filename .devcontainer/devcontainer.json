@@ -1,0 +1,118 @@
+{
+  "name": "Arrhes Development",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+
+  // Monter le workspace
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+
+  // Exposer les ports pour accéder aux services
+  "forwardPorts": [
+    3000,  // API
+    5173,  // Platform (Vite)
+    5432,  // PostgreSQL
+    9000,  // MinIO API
+    9001,  // MinIO Console
+    1025,  // MailHog SMTP
+    8025   // MailHog Web UI
+  ],
+
+  // Labels pour les ports
+  "portsAttributes": {
+    "3000": {
+      "label": "API",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Platform",
+      "onAutoForward": "openBrowser"
+    },
+    "9001": {
+      "label": "MinIO Console",
+      "onAutoForward": "ignore"
+    },
+    "8025": {
+      "label": "MailHog Web",
+      "onAutoForward": "ignore"
+    }
+  },
+
+  // Extensions VS Code/Cursor recommandées
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // TypeScript
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        
+        // Git
+        "eamodio.gitlens",
+        
+        // Développement
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "dsznajder.es7-react-js-snippets",
+        
+        // Base de données
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        
+        // Docker
+        "ms-azuretools.vscode-docker",
+        
+        // Utilitaires
+        "usernamehw.errorlens",
+        "christian-kohler.path-intellisense",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
+    }
+  },
+
+  // Commandes post-création du container
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  
+  // Commande post-démarrage (vide pour éviter les erreurs avec docker-compose)
+  "postStartCommand": "",
+
+  // Fonctionnalités à ajouter
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "configureZshAsDefaultShell": true,
+      "username": "node"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  },
+
+  // Utilisateur non-root
+  "remoteUser": "node",
+
+  // Variables d'environnement
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  }
+}
+

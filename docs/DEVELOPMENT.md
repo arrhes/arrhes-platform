@@ -4,6 +4,7 @@ Ce document vous guidera pour installer, configurer et développer Arrhes sur vo
 
 ## Table des matières
 
+- [Choix de l'environnement](#choix-de-lenvironnement)
 - [Prérequis](#prérequis)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -15,11 +16,79 @@ Ce document vous guidera pour installer, configurer et développer Arrhes sur vo
 - [Debugging](#debugging)
 - [Conseils](#conseils)
 
+## Choix de l'environnement
+
+Vous avez trois options pour développer Arrhes :
+
+### Option 1 : Dev Container 🚀 (Le plus simple)
+
+**Avantages :**
+- ✨ Configuration 100% automatique
+- Environnement de développement complet dans un container
+- Tous les services préconfigurés (PostgreSQL, MinIO, MailHog)
+- Base de données initialisée automatiquement avec données de démo
+- Extensions VS Code/Cursor installées automatiquement
+- Zéro configuration manuelle
+
+**Prérequis :**
+- Docker et Docker Compose
+- VS Code ou Cursor avec l'extension "Dev Containers"
+
+**Idéal pour :** Nouveaux contributeurs, onboarding ultra-rapide, environnement unifié
+
+### Option 2 : Développement avec Docker Compose 🐳
+
+**Avantages :**
+- Configuration simplifiée (pas d'installation de PostgreSQL, MinIO, etc.)
+- Environnement standardisé et reproductible
+- Isolation complète des services
+- Node.js et pnpm installés localement (meilleure performance)
+
+**Prérequis :**
+- Node.js 24.5+
+- pnpm
+- Docker et Docker Compose
+
+**Idéal pour :** Développement quotidien, bonne balance performance/simplicité
+
+### Option 3 : Développement natif
+
+**Avantages :**
+- Contrôle total sur chaque service
+- Peut être plus rapide sur certaines machines
+- Pas besoin de Docker
+
+**Prérequis :**
+- Node.js 24.5+
+- pnpm
+- PostgreSQL installé localement
+- Optionnellement Docker pour MinIO et MailHog
+
+**Idéal pour :** Développeurs expérimentés, personnalisation avancée
+
+---
+
+**💡 Conseil :** 
+- **Première contribution ?** → Choisissez l'**Option 1 (Dev Container)** pour démarrer en 2 minutes
+- **Développement quotidien ?** → Choisissez l'**Option 2 (Docker Compose)** pour la meilleure expérience
+
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir installé les outils suivants :
+### Option 1 : Dev Container
 
-### Node.js et pnpm
+- **Docker** et **Docker Compose** : https://www.docker.com/get-started
+  ```bash
+  docker --version
+  docker-compose --version
+  ```
+
+- **VS Code** ou **Cursor** avec l'extension Dev Containers :
+  - VS Code : https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+  - Cursor : Installer depuis le marketplace d'extensions
+
+C'est tout ! Node.js, pnpm, PostgreSQL, MinIO et MailHog seront configurés automatiquement dans le container.
+
+### Prérequis communs (Options 2 et 3)
 
 - **Node.js** : Version 24.5 ou supérieure
   ```bash
@@ -40,7 +109,17 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
   curl -fsSL https://get.pnpm.io/install.sh | sh -
   ```
 
-### PostgreSQL
+### Option 2 : Avec Docker Compose
+
+- **Docker** et **Docker Compose** : https://www.docker.com/get-started
+  ```bash
+  docker --version
+  docker-compose --version
+  ```
+
+C'est tout ! PostgreSQL, MinIO et MailHog seront lancés automatiquement dans des containers.
+
+### Option 3 : Développement natif
 
 - **PostgreSQL** : Version 14 ou supérieure recommandée
   ```bash
@@ -65,21 +144,83 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
   **Windows :**
   Télécharger depuis https://www.postgresql.org/download/windows/
 
-### Services optionnels (pour développement complet)
-
-- **Docker** (pour MinIO et MailHog) : https://www.docker.com/get-started
+- **Docker** (optionnel, pour MinIO et MailHog) : https://www.docker.com/get-started
 - Ou configurez des services S3 et SMTP alternatifs
 
 ## Installation
 
-### 1. Cloner le repository
+### Option 1 : Avec Dev Container 🚀
+
+**Étape 1 : Cloner le repository**
 
 ```bash
 git clone https://github.com/arrhes/arrhes.git
 cd arrhes
 ```
 
-### 2. Installer les dépendances
+**Étape 2 : Ouvrir dans VS Code/Cursor**
+
+```bash
+# Avec VS Code
+code .
+
+# Avec Cursor
+cursor .
+```
+
+**Étape 3 : Reopen in Container**
+
+Lorsque VS Code/Cursor détecte le fichier `.devcontainer/devcontainer.json`, une notification apparaît :
+
+> "Folder contains a Dev Container configuration file. Reopen folder to develop in a container?"
+
+Cliquez sur **"Reopen in Container"** ou utilisez la palette de commandes :
+- `Cmd/Ctrl + Shift + P`
+- Tapez "Dev Containers: Reopen in Container"
+- Appuyez sur Entrée
+
+**Ce qui se passe automatiquement :**
+1. 🐳 Construction du container de développement
+2. 📦 Installation de toutes les dépendances (pnpm install)
+3. 🚀 Démarrage de PostgreSQL, MinIO et MailHog
+4. ⏳ Attente que PostgreSQL soit prêt
+5. 🗄️ Création du schéma de base de données
+6. 🌱 Insertion des données de démonstration
+7. ⚙️ Création automatique des fichiers `.env`
+8. 🎨 Installation des extensions VS Code recommandées
+
+**Étape 4 : Lancer l'application**
+
+Une fois le container prêt (vous verrez "✨ Configuration terminée !" dans le terminal) :
+
+```bash
+pnpm run dev
+```
+
+C'est tout ! Vous êtes prêt à développer. 🎉
+
+**URLs d'accès :**
+- **Platform** : http://localhost:5173
+- **API** : http://localhost:3000
+- **MinIO Console** : http://localhost:9001 (minioadmin / minioadmin)
+- **MailHog** : http://localhost:8025
+
+**Identifiants de démonstration :**
+- Email : `demo@arrhes.com`
+- Mot de passe : `demo`
+
+---
+
+### Option 2 : Avec Docker Compose 🐳
+
+**Étape 1 : Cloner le repository**
+
+```bash
+git clone https://github.com/arrhes/arrhes.git
+cd arrhes
+```
+
+**Étape 2 : Installer les dépendances**
 
 ```bash
 pnpm install
@@ -87,7 +228,7 @@ pnpm install
 
 Cette commande installera toutes les dépendances de tous les packages du monorepo.
 
-### 3. Vérifier l'installation
+**Étape 3 : Vérifier l'installation**
 
 ```bash
 pnpm ls --depth=0
@@ -95,50 +236,85 @@ pnpm ls --depth=0
 
 Vous devriez voir tous les packages workspace listés.
 
-## Configuration
+---
 
-### 1. Créer la base de données PostgreSQL
+### Option 3 : Installation native
+
+**Étape 1 : Cloner le repository**
 
 ```bash
-# Se connecter à PostgreSQL
-sudo -u postgres psql
-
-# Dans le shell PostgreSQL :
-CREATE USER arrhes_user WITH PASSWORD 'arrhes_password';
-CREATE DATABASE arrhes OWNER arrhes_user;
-GRANT ALL PRIVILEGES ON DATABASE arrhes TO arrhes_user;
-\q
+git clone https://github.com/arrhes/arrhes.git
+cd arrhes
 ```
 
-### 2. Configurer les services externes (optionnel)
-
-#### MinIO (Stockage de fichiers)
+**Étape 2 : Installer les dépendances**
 
 ```bash
-# Lancer MinIO avec Docker
-docker run -d \
-  -p 9000:9000 \
-  -p 9001:9001 \
-  --name minio \
-  -e "MINIO_ROOT_USER=minioadmin" \
-  -e "MINIO_ROOT_PASSWORD=minioadmin" \
-  -v ~/minio/data:/data \
-  quay.io/minio/minio server /data --console-address ":9001"
+pnpm install
+```
 
-# Accéder à la console : http://localhost:9001
+**Étape 3 : Vérifier l'installation**
+
+```bash
+pnpm ls --depth=0
+```
+
+## Configuration
+
+### Option 1 : Avec Dev Container 🚀
+
+**Aucune configuration manuelle nécessaire !**
+
+Le script `post-create.sh` s'exécute automatiquement et crée les fichiers `.env` avec les bonnes valeurs pour l'environnement containerisé.
+
+Les fichiers suivants sont créés automatiquement :
+- `packages/api/.env` (avec connexion aux services Docker)
+- `packages/tools/.env` (avec connexion à PostgreSQL)
+
+**Note importante :** Dans le Dev Container, les URLs pointent vers les noms de services Docker :
+- PostgreSQL : `postgres:5432` (au lieu de `localhost:5432`)
+- MinIO : `minio:9000` (au lieu de `localhost:9000`)
+- MailHog : `mailhog:1025` (au lieu de `localhost:1025`)
+
+Si vous souhaitez modifier la configuration, éditez directement les fichiers `.env` créés.
+
+---
+
+### Option 2 : Configuration avec Docker Compose 🐳
+
+#### 1. Lancer les services avec Docker Compose
+
+```bash
+# Lancer tous les services (PostgreSQL, MinIO, MailHog)
+docker-compose up -d
+
+# Vérifier que tout fonctionne
+docker-compose ps
+```
+
+Les services seront disponibles sur :
+- **PostgreSQL** : `localhost:5432`
+- **MinIO API** : `localhost:9000`
+- **MinIO Console** : http://localhost:9001
+- **MailHog SMTP** : `localhost:1025`
+- **MailHog Web** : http://localhost:8025
+
+#### 2. Créer le bucket MinIO
+
+```bash
+# Accéder à la console MinIO : http://localhost:9001
+# Credentials : minioadmin / minioadmin
 # Créer un bucket nommé "arrhes-files"
 ```
 
-#### MailHog (Test d'emails)
-
+Ou via la ligne de commande :
 ```bash
-# Lancer MailHog avec Docker
-docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
-
-# Interface web : http://localhost:8025
+# Installer le client MinIO
+docker exec arrhes-minio mc alias set local http://localhost:9000 minioadmin minioadmin
+docker exec arrhes-minio mc mb local/arrhes-files
 ```
 
-### 3. Créer les fichiers de configuration
+#### 3. Créer les fichiers de configuration
 
 **`packages/api/.env` :**
 
@@ -160,16 +336,16 @@ API_BASE_URL=http://localhost:3000
 PLATFORM_BASE_URL=http://localhost:5173
 WEBSITE_BASE_URL=http://localhost:5174
 
-# Base de données
+# Base de données (Docker Compose)
 SQL_DATABASE_URL=postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
 
-# Stockage MinIO
+# Stockage MinIO (Docker Compose)
 STORAGE_ENDPOINT=http://localhost:9000
 STORAGE_NAME=arrhes-files
 STORAGE_ACCESS_KEY=minioadmin
 STORAGE_SECRET_KEY=minioadmin
 
-# Email MailHog
+# Email MailHog (Docker Compose)
 EMAIL_ENDPOINT=localhost:1025
 EMAIL_USER=test
 EMAIL_PASSWORD=test
@@ -187,11 +363,79 @@ EOF
 cd ../..
 ```
 
-Pour plus de détails sur la configuration, consultez [CONFIGURATION.md](CONFIGURATION.md).
+---
+
+### Option 2 : Configuration native
+
+#### 1. Créer la base de données PostgreSQL
+
+```bash
+# Se connecter à PostgreSQL
+sudo -u postgres psql
+
+# Dans le shell PostgreSQL :
+CREATE USER arrhes_user WITH PASSWORD 'arrhes_password';
+CREATE DATABASE arrhes OWNER arrhes_user;
+GRANT ALL PRIVILEGES ON DATABASE arrhes TO arrhes_user;
+\q
+```
+
+#### 2. Configurer les services externes (optionnel)
+
+**MinIO (Stockage de fichiers) :**
+
+```bash
+# Lancer MinIO avec Docker
+docker run -d \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  --name minio \
+  -e "MINIO_ROOT_USER=minioadmin" \
+  -e "MINIO_ROOT_PASSWORD=minioadmin" \
+  -v ~/minio/data:/data \
+  quay.io/minio/minio server /data --console-address ":9001"
+
+# Accéder à la console : http://localhost:9001
+# Créer un bucket nommé "arrhes-files"
+```
+
+**MailHog (Test d'emails) :**
+
+```bash
+# Lancer MailHog avec Docker
+docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+
+# Interface web : http://localhost:8025
+```
+
+#### 3. Créer les fichiers de configuration
+
+Utilisez les mêmes commandes que dans l'Option 1, étape 3 ci-dessus.
+
+---
+
+**Pour plus de détails sur la configuration, consultez [CONFIGURATION.md](CONFIGURATION.md).**
 
 ## Initialisation de la base de données
 
-### 1. Pousser le schéma vers la base de données
+### Option 1 : Avec Dev Container 🚀
+
+**Aucune action nécessaire !**
+
+La base de données est automatiquement initialisée lors de la création du container. Le script `post-create.sh` exécute :
+1. `pnpm --filter tools run push` (création du schéma)
+2. `pnpm --filter tools run seed` (insertion des données de démo)
+
+Si vous souhaitez réinitialiser la base :
+```bash
+pnpm --filter tools run reset
+```
+
+---
+
+### Options 2 et 3 : Configuration manuelle
+
+**Étape 1 : Pousser le schéma vers la base de données**
 
 ```bash
 pnpm --filter tools run push
@@ -199,7 +443,7 @@ pnpm --filter tools run push
 
 Cette commande crée toutes les tables nécessaires dans PostgreSQL à partir des schémas définis dans `@arrhes/metadata`.
 
-### 2. Seed avec des données de démonstration
+**Étape 2 : Seed avec des données de démonstration**
 
 ```bash
 pnpm --filter tools run seed
@@ -213,7 +457,7 @@ Cette commande insère :
 - Des écritures comptables d'exemple pour 2022 et 2023
 - Des documents et états financiers
 
-### 3. Réinitialiser la base (si nécessaire)
+**Étape 3 : Réinitialiser la base (si nécessaire)**
 
 Pour tout supprimer et recommencer :
 
@@ -225,7 +469,7 @@ Cette commande exécute : `clear` + `push` + `seed`
 
 ## Lancement en développement
 
-### Option 1 : Tout lancer ensemble (recommandé)
+### Commande principale (toutes options)
 
 ```bash
 pnpm run dev
@@ -237,7 +481,7 @@ Cette commande lance simultanément :
 
 Les deux processus tournent en parallèle avec hot-reload activé.
 
-### Option 2 : Lancer individuellement
+### Lancer individuellement (optionnel)
 
 Dans des terminaux séparés :
 
@@ -258,10 +502,10 @@ pnpm --filter metadata run dev
 
 ### Accès à l'application
 
-- **Frontend** : http://localhost:5173
+- **Frontend (Platform)** : http://localhost:5173
 - **API** : http://localhost:3000
-- **MinIO Console** : http://localhost:9001 (si configuré)
-- **MailHog** : http://localhost:8025 (si configuré)
+- **MinIO Console** : http://localhost:9001 (minioadmin / minioadmin)
+- **MailHog Web UI** : http://localhost:8025
 
 ### Identifiants de démonstration
 
@@ -269,6 +513,21 @@ pnpm --filter metadata run dev
 Email    : demo@arrhes.com
 Password : demo
 ```
+
+### Notes par option
+
+**Dev Container :**
+- Les services (PostgreSQL, MinIO, MailHog) sont déjà démarrés automatiquement
+- Les ports sont automatiquement forwardés vers votre machine locale
+- Vous pouvez cliquer sur les ports dans VS Code/Cursor pour ouvrir les URLs
+
+**Docker Compose :**
+- Assurez-vous que les services sont lancés : `docker-compose ps`
+- Si les services ne sont pas démarrés : `docker-compose up -d`
+
+**Natif :**
+- Assurez-vous que PostgreSQL est démarré
+- Si vous utilisez MinIO/MailHog avec Docker, vérifiez qu'ils tournent : `docker ps`
 
 ## Structure du projet
 
@@ -420,16 +679,48 @@ pnpm --filter tools run drop
 
 ### Développement typique
 
+#### Avec Docker Compose 🐳
+
+1. **Lancer les services**
+   ```bash
+   # Lancer tous les services (PostgreSQL, MinIO, MailHog)
+   docker-compose up -d
+   ```
+
+2. **Lancer l'application**
+   ```bash
+   pnpm run dev
+   ```
+
+3. **Développer avec hot-reload**
+   - Modifications dans `packages/api/src/` → Rechargement automatique de l'API
+   - Modifications dans `packages/platform/src/` → HMR (Hot Module Replacement)
+   - Modifications dans `packages/metadata/src/` → Nécessite rebuild (ou mode watch)
+
+4. **Arrêter les services (à la fin de la session)**
+   ```bash
+   # Arrêter sans supprimer les données
+   docker-compose stop
+   
+   # Ou arrêter et supprimer les containers (garde les volumes)
+   docker-compose down
+   
+   # Ou tout supprimer (containers + volumes = perte de données)
+   docker-compose down -v
+   ```
+
+#### Avec installation native
+
 1. **Lancer les services externes**
    ```bash
    # PostgreSQL (si pas démarré)
    sudo systemctl start postgresql
    
-   # MinIO (si arrêté)
+   # MinIO (si utilisé avec Docker)
    docker start minio
    
-   # MailHog (si arrêté)
-   docker start [container-id]
+   # MailHog (si utilisé avec Docker)
+   docker start mailhog
    ```
 
 2. **Lancer l'application**
@@ -599,8 +890,9 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 ### Problèmes courants
 
 **"Cannot connect to database" :**
-- Vérifiez que PostgreSQL est démarré
-- Testez la connexion : `psql <DATABASE_URL>`
+- **Avec Docker :** Vérifiez que les containers sont lancés : `docker-compose ps`
+- **Natif :** Vérifiez que PostgreSQL est démarré : `sudo systemctl status postgresql`
+- Testez la connexion : `psql postgres://arrhes_user:arrhes_password@localhost:5432/arrhes`
 - Vérifiez les credentials dans `.env`
 
 **"Module not found @arrhes/metadata" :**
@@ -616,9 +908,28 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 - Vérifiez que l'API et la platform sont sur le même domaine
 
 **"S3/Storage error" :**
-- Vérifiez que MinIO est démarré : `docker ps`
-- Vérifiez que le bucket existe
-- Testez l'endpoint : `curl http://localhost:9000`
+- Vérifiez que MinIO est démarré : `docker ps | grep minio`
+- Vérifiez que le bucket existe (console : http://localhost:9001)
+- Testez l'endpoint : `curl http://localhost:9000/minio/health/live`
+
+**Problèmes Docker :**
+- **Port déjà utilisé :** Un autre service utilise le même port
+  ```bash
+  # Voir ce qui utilise le port 5432 (PostgreSQL)
+  sudo lsof -i :5432
+  # Ou arrêter l'autre service
+  ```
+- **Container ne démarre pas :** Voir les logs
+  ```bash
+  docker-compose logs postgres
+  docker-compose logs minio
+  docker-compose logs mailhog
+  ```
+- **Réinitialiser complètement :**
+  ```bash
+  docker-compose down -v
+  docker-compose up -d
+  ```
 
 ### Bonnes pratiques
 
