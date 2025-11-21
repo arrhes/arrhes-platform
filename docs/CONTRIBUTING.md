@@ -62,7 +62,7 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
 
 3. **Ajouter le repository principal comme remote**
    ```bash
-   git remote add upstream https://github.com/arrhes/arrhes.git
+   git remote add upstream https://github.com/arrhes/arrhes-platform.git
    ```
 
 4. **Choisir votre méthode de développement**
@@ -538,8 +538,8 @@ Plusieurs utilisateurs ont demandé cette fonctionnalité pour faire des analyse
 - [Documentation d'architecture](ARCHITECTURE.md)
 - [Guide de développement](DEVELOPMENT.md)
 - [Configuration](CONFIGURATION.md)
-- [Issues GitHub](https://github.com/arrhes/arrhes/issues)
-- [Discussions GitHub](https://github.com/arrhes/arrhes/discussions)
+- [Issues GitHub](https://github.com/arrhes/arrhes-platform/issues)
+- [Discussions GitHub](https://github.com/arrhes/arrhes-platform/discussions)
 
 ## Questions ?
 

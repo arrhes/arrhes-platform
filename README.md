@@ -45,8 +45,8 @@ Prérequis : Docker, VS Code ou Cursor avec l'extension Dev Containers
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Ouvrir dans VS Code/Cursor
 code .
@@ -67,8 +67,8 @@ Prérequis : Node.js 24.5+, pnpm, Docker
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Installer les dépendances
 pnpm install
@@ -98,8 +98,8 @@ Prérequis : Node.js 24.5+, pnpm, PostgreSQL
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Installer les dépendances
 pnpm install
@@ -150,8 +150,8 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Support
 
-- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes/issues)
-- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes/issues)
+- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-platform/issues)
+- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-platform/issues)
 - 📧 Contact : demo@arrhes.com
 
 ---

@@ -178,8 +178,8 @@ Pour de meilleures performances, clonez le projet dans le filesystem WSL2 :
 ```bash
 # Dans WSL2
 cd ~
-git clone https://github.com/arrhes/arrhes.git
-code arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+code arrhes-platform
 ```
 
 **macOS :**

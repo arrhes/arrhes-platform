@@ -154,8 +154,8 @@ C'est tout ! PostgreSQL, MinIO et MailHog seront lancés automatiquement dans de
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Ouvrir dans VS Code/Cursor**
@@ -216,8 +216,8 @@ C'est tout ! Vous êtes prêt à développer. 🎉
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Installer les dépendances**
@@ -243,8 +243,8 @@ Vous devriez voir tous les packages workspace listés.
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes.git
-cd arrhes
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Installer les dépendances**
