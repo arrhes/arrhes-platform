@@ -11,32 +11,24 @@
 
   // Exposer les ports pour accéder aux services
   "forwardPorts": [
-    3000,  // API
-    5173,  // Platform (Vite)
-    5432,  // PostgreSQL
-    9000,  // MinIO API
-    9001,  // MinIO Console
-    1025,  // MailHog SMTP
-    8025   // MailHog Web UI
+    3100,  // API
+    3101,  // Platform
+    3102,  // Website (with docs)
   ],
 
   // Labels pour les ports
   "portsAttributes": {
-    "3000": {
+    "3100": {
       "label": "API",
       "onAutoForward": "notify"
     },
-    "5173": {
+    "3101": {
       "label": "Platform",
       "onAutoForward": "openBrowser"
     },
-    "9001": {
-      "label": "MinIO Console",
-      "onAutoForward": "ignore"
-    },
-    "8025": {
-      "label": "MailHog Web",
-      "onAutoForward": "ignore"
+   "3102": {
+      "label": "Platform",
+      "onAutoForward": "openBrowser"
     }
   },
 
