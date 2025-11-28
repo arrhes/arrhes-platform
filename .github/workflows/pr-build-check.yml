@@ -3,11 +3,6 @@ name: PR build check
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    
-on:
-  push:
-    branches:
-      - main
 
 jobs:
   build:
