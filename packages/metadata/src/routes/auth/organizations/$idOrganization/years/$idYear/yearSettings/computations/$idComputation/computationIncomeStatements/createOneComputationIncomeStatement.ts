@@ -13,6 +13,7 @@ export const createOneComputationIncomeStatementRouteDefinition = routeDefinitio
             idYear: computationIncomeStatementSchema.entries.idYear,
             idComputation: computationIncomeStatementSchema.entries.idComputation,
             idIncomeStatement: computationIncomeStatementSchema.entries.idIncomeStatement,
+            index: computationIncomeStatementSchema.entries.index,
             operation: computationIncomeStatementSchema.entries.operation
         }),
         return: computationIncomeStatementSchemaReturn

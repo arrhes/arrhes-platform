@@ -19,7 +19,7 @@ import {
 import { ReactElement, useMemo, useState } from "react"
 
 
-export function DataTable<TData extends Record<string, unknown>>(props: {
+export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     children?: ReactElement | null
     data: Array<TData>
     isLoading?: boolean
@@ -85,7 +85,7 @@ export function DataTable<TData extends Record<string, unknown>>(props: {
                                                 icon={{
                                                     asc: <IconSortAscending size={16} />,
                                                     desc: <IconSortDescending size={16} />,
-                                                }[header.column.getIsSorted() as string] ?? undefined}
+                                                }[String(header.column.getIsSorted())] ?? undefined}
                                                 text={header.column.columnDef.header?.toString()}
                                             />
                                         </div>
@@ -113,7 +113,8 @@ export function DataTable<TData extends Record<string, unknown>>(props: {
                             return (
                                 <tr
                                     key={row.id}
-                                    onClick={() => {
+                                    onClick={(event) => {
+                                        event.stopPropagation()
                                         if (!props.onRowClick) return
                                         props.onRowClick(row)
                                     }}

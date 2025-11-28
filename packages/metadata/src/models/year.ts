@@ -12,6 +12,7 @@ export const yearModel = pgTable(
         id: idColumn("id").primaryKey(),
         idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idYearPrevious: idColumn("id_year_previous").references((): AnyPgColumn => yearModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        // isGenerated: boolean("is_generated").notNull(),
         isClosed: boolean("is_closed").notNull(),
         closedAt: dateTimeColumn("closed_at"),
         label: varchar("label", { length: 256 }).notNull(),

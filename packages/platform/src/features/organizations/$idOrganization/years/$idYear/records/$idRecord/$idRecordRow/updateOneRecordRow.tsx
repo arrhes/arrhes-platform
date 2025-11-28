@@ -177,29 +177,129 @@ export function UpdateOneRecordRow(props: {
                                         )}
                                     />
                                 </div>
-                                <FormField
-                                    control={form.control}
-                                    name="isComputed"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Mouvement ajouté aux calculs ?"
-                                                isRequired={true}
-                                            />
-                                            <FormControl>
-                                                <InputToggle
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    options={[
-                                                        { value: true, label: "Oui" },
-                                                        { value: false, label: "Non" }
-                                                    ]}
-                                                />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
+                                <div className="w-full flex-col justify-start items-start gap-2">
+                                    <FormLabel
+                                        label="Mouvement ajouté aux calculs ?"
+                                        isRequired={false}
+                                    />
+                                    <div className="w-full flex justify-start items-start flex-wrap gap-2">
+                                        <FormField
+                                            control={form.control}
+                                            name="isComputedForJournalReport"
+                                            render={({ field }) => (
+                                                <FormItem className="w-fit">
+                                                    <FormLabel
+                                                        label="Journal"
+                                                        isRequired={true}
+                                                    />
+                                                    <FormControl>
+                                                        <InputToggle
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            options={[
+                                                                { value: true, label: "Oui" },
+                                                                { value: false, label: "Non" }
+                                                            ]}
+                                                        />
+                                                    </FormControl>
+                                                    <FormError />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="isComputedForLedgerReport"
+                                            render={({ field }) => (
+                                                <FormItem className="w-fit">
+                                                    <FormLabel
+                                                        label="Grand-livre"
+                                                        isRequired={true}
+                                                    />
+                                                    <FormControl>
+                                                        <InputToggle
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            options={[
+                                                                { value: true, label: "Oui" },
+                                                                { value: false, label: "Non" }
+                                                            ]}
+                                                        />
+                                                    </FormControl>
+                                                    <FormError />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="isComputedForBalanceReport"
+                                            render={({ field }) => (
+                                                <FormItem className="w-fit">
+                                                    <FormLabel
+                                                        label="Balance"
+                                                        isRequired={true}
+                                                    />
+                                                    <FormControl>
+                                                        <InputToggle
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            options={[
+                                                                { value: true, label: "Oui" },
+                                                                { value: false, label: "Non" }
+                                                            ]}
+                                                        />
+                                                    </FormControl>
+                                                    <FormError />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="isComputedForBalanceSheetReport"
+                                            render={({ field }) => (
+                                                <FormItem className="w-fit">
+                                                    <FormLabel
+                                                        label="Bilan"
+                                                        isRequired={true}
+                                                    />
+                                                    <FormControl>
+                                                        <InputToggle
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            options={[
+                                                                { value: true, label: "Oui" },
+                                                                { value: false, label: "Non" }
+                                                            ]}
+                                                        />
+                                                    </FormControl>
+                                                    <FormError />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="isComputedForIncomeStatementReport"
+                                            render={({ field }) => (
+                                                <FormItem className="w-fit">
+                                                    <FormLabel
+                                                        label="Compte de résultat"
+                                                        isRequired={true}
+                                                    />
+                                                    <FormControl>
+                                                        <InputToggle
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            options={[
+                                                                { value: true, label: "Oui" },
+                                                                { value: false, label: "Non" }
+                                                            ]}
+                                                        />
+                                                    </FormControl>
+                                                    <FormError />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                </div>
                             </Fragment>
                         )}
                     </FormRoot>

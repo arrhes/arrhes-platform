@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter='api' --filter='platform' run dev",
-    "build": "pnpm run build --filter ./packages/*"
+    "dev": "pnpm --recursive --if-present --parallel --filter='./packages/**' run dev",
+    "build": "pnpm --recursive --if-present --filter='./packages/**' run build"
   },
   "workspaces": [
     "./packages/*"

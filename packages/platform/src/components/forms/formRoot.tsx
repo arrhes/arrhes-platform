@@ -32,7 +32,6 @@ export function FormRoot<
     useEffect(() => {
         const listener = async (event: KeyboardEvent) => {
             if (event.code === "Enter" || event.code === "NumpadEnter") {
-                console.log("Enter key was pressed. Run your function.")
                 event.preventDefault()
                 submitButtonRef.current?.click()
             }

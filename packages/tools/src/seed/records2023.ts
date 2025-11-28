@@ -1,4 +1,4 @@
-import { DefaultRecord } from "./records2022"
+import { DefaultRecord } from "./records2022.js"
 
 
 export const defaultRecords2023: Array<DefaultRecord> = [

@@ -19,11 +19,9 @@ export const updateOneBalanceSheetRoute = authFactory.createApp()
                 table: models.balanceSheet,
                 data: {
                     idBalanceSheetParent: body.idBalanceSheetParent,
+                    isComputed: body.isComputed,
                     number: body.number,
                     label: body.label,
-                    grossAmountAdded: body.grossAmountAdded,
-                    amortizationAmountAdded: body.amortizationAmountAdded,
-                    netAmountAdded: body.netAmountAdded,
                     lastUpdatedAt: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id,
                 },

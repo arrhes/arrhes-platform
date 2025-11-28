@@ -36,9 +36,9 @@ export { createOneAttachmentRouteDefinition } from "./years/$idYear/attachments/
 export { readAllAttachmentsRouteDefinition } from "./years/$idYear/attachments/readAllAttachments.js"
 
 export { deleteOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/deleteOneBalanceSheet.js"
-export { generateBalanceSheetDocumentRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/generateBalanceSheetDocument.js"
 export { readOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/readOneBalanceSheet.js"
 export { updateOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/updateOneBalanceSheet.js"
+export { connectAccountsToBalanceSheetsRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/connectAccountsToBalanceSheets.js"
 export { createOneBalanceSheetRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/createOneBalanceSheet.js"
 export { generateBalanceSheetsRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/generateBalanceSheets.js"
 export { readAllBalanceSheetsRouteDefinition } from "./years/$idYear/yearSettings/balanceSheets/readAllBalanceSheets.js"
@@ -59,11 +59,13 @@ export { readAllComputationIncomeStatementsRouteDefinition } from "./years/$idYe
 export { generateDocumentGetSignedUrlRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/generateDocumentGetSignedUrl.js"
 export { readOneDocumentRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/readOneDocument.js"
 export { readAllDocumentsRouteDefinition } from "./years/$idYear/reports/documents/readAllDocuments.js"
+export { generateBalanceSheetReportDocumentRouteDefinition } from "./years/$idYear/reports/generateBalanceSheetReportDocument.js"
+export { generateIncomeStatementReportDocumentRouteDefinition } from "./years/$idYear/reports/generateIncomeStatementReportDocument.js"
 
 export { deleteOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/deleteOneIncomeStatement.js"
-export { generateIncomeStatementDocumentRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/generateIncomeStatementDocument.js"
 export { readOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/readOneIncomeStatement.js"
 export { updateOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/updateOneIncomeStatement.js"
+export { connectAccountsToIncomeStatementsRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/connectAccountsToIncomeStatements.js"
 export { createOneIncomeStatementRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/createOneIncomeStatement.js"
 export { generateIncomeStatementsRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/generateIncomeStatements.js"
 export { readAllIncomeStatementsRouteDefinition } from "./years/$idYear/yearSettings/incomeStatements/readAllIncomeStatements.js"
@@ -74,6 +76,12 @@ export { updateOneJournalRouteDefinition } from "./years/$idYear/yearSettings/jo
 export { createOneJournalRouteDefinition } from "./years/$idYear/yearSettings/journals/createOneJournal.js"
 export { generateJournalsRouteDefinition } from "./years/$idYear/yearSettings/journals/generateJournals.js"
 export { readAllJournalsRouteDefinition } from "./years/$idYear/yearSettings/journals/readAllJournals.js"
+
+export { deleteOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/deleteOneRecordLabel.js"
+export { readOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/readOneRecordLabel.js"
+export { updateOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/$idRecordLabel/updateOneRecordLabel.js"
+export { createOneRecordLabelRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/createOneRecordLabel.js"
+export { readAllRecordLabelsRouteDefinition } from "./years/$idYear/yearSettings/recordLabels/readAllRecordLabels.js"
 
 export { computeOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/computeOneRecord.js"
 export { deleteOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/deleteOneRecord.js"
@@ -88,6 +96,7 @@ export { readOneRecordRowRouteDefinition } from "./years/$idYear/records/$idReco
 export { updateOneRecordRowRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/$idRecordRow/updateOneRecordRow.js"
 export { createOneRecordRowRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/createOneRecordRow.js"
 export { readAllRecordRowsRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/readAllRecordRows.js"
+export { updateManyRecordRowsRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/updateManyRecordRows.js"
 
 export { closeYearRouteDefinition } from "./years/$idYear/yearSettings/general/closeYear.js"
 export { deleteOneYearRouteDefinition } from "./years/$idYear/yearSettings/general/deleteOneYear.js"

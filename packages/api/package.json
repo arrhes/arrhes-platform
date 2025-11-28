@@ -8,23 +8,20 @@
         "start": "node --env-file=.env ./build/server.js"
     },
     "devDependencies": {
-        "@types/node": "24.5.2",
-        "@types/nodemailer": "7.0.1",
-        "tsx": "4.20.5",
-        "typescript": "5.9.2"
+        "@types/node": "24.10.1",
+        "@types/nodemailer": "7.0.4",
+        "tsx": "4.20.6",
+        "typescript": "5.9.3"
     },
     "dependencies": {
         "@arrhes/metadata": "workspace:*",
-        "@aws-sdk/client-s3": "3.895.0",
-        "@aws-sdk/s3-request-presigner": "3.895.0",
-        "drizzle-orm": "0.44.5",
-        "hono": "4.9.8",
-        "nodemailer": "7.0.6",
-        "puppeteer": "24.22.2",
+        "@aws-sdk/client-s3": "3.940.0",
+        "@aws-sdk/s3-request-presigner": "3.940.0",
+        "drizzle-orm": "0.44.7",
+        "hono": "4.10.7",
+        "nodemailer": "7.0.11",
         "postgres": "3.4.7",
-        "valibot": "1.1.0"
-    },
-    "imports": {
-        "#/*": "./build/*"
+        "puppeteer": "24.31.0",
+        "valibot": "1.2.0"
     }
 }

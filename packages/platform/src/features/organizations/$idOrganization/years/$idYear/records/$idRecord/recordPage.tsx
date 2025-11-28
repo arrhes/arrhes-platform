@@ -3,7 +3,7 @@ import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
 import { FormatDate } from "#/components/formats/formatDate.js"
 import { FormatDateTime } from "#/components/formats/formatDateTime.js"
 import { FormatNull } from "#/components/formats/formatNull.js"
-import { FormatPrice } from "#/components/formats/formatPrice.js"
+import { formatPrice, FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { Banner } from "#/components/layouts/banner.js"
 import { DataBlock } from "#/components/layouts/dataBlock/dataBlock.js"
@@ -17,7 +17,7 @@ import { RecordRowsTable } from "#/features/organizations/$idOrganization/years/
 import { UpdateOneRecord } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/updateOneRecord.js"
 import { recordRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/recordRoute.js"
 import { compareAmounts } from "#/utilities/compareAmounts.js"
-import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition, readOneRecordRouteDefinition } from "@arrhes/metadata/routes"
 import { IconChevronLeft, IconCopyCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 
@@ -80,6 +80,14 @@ export function RecordPage() {
                                                                 text="Modifier"
                                                             />
                                                         </UpdateOneRecord>
+                                                        <DuplicateOneRecord
+                                                            record={record}
+                                                        >
+                                                            <ButtonOutlineContent
+                                                                icon={<IconCopyCheck />}
+                                                                text="Dupliquer"
+                                                            />
+                                                        </DuplicateOneRecord>
                                                         <DeleteOneRecord
                                                             record={record}
                                                         >
@@ -89,14 +97,6 @@ export function RecordPage() {
                                                                 color="error"
                                                             />
                                                         </DeleteOneRecord>
-                                                        <DuplicateOneRecord
-                                                            record={record}
-                                                        >
-                                                            <ButtonOutlineContent
-                                                                icon={<IconCopyCheck />}
-                                                                text="Dupliquer"
-                                                            />
-                                                        </DuplicateOneRecord>
                                                         {/* <ComputeRecord record={record.data}>
                                 <ButtonOutline
                                     text={!record.data.isComputed ? "Simuler" : "Ne plus simuler"}
@@ -131,7 +131,7 @@ export function RecordPage() {
                                                         ? (null)
                                                         : (
                                                             <Banner variant="error">
-                                                                Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider.
+                                                                Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider. ({formatPrice({ price: totalDebit - totalCredit })})
                                                             </Banner>
                                                         )
                                                 }
@@ -167,6 +167,27 @@ export function RecordPage() {
                                                                         {(journal) => (
                                                                             <span>
                                                                                 {`(${journal.code}) ${journal.label}`}
+                                                                            </span>
+                                                                        )}
+                                                                    </DataWrapper>
+                                                                )
+                                                            }
+                                                        </DataBlock.Item>
+                                                        <DataBlock.Item label="Catégorie">
+                                                            {(record.idRecordLabel === null)
+                                                                ? (<FormatNull />)
+                                                                : (
+                                                                    <DataWrapper
+                                                                        routeDefinition={readOneRecordLabelRouteDefinition}
+                                                                        body={{
+                                                                            idOrganization: params.idOrganization,
+                                                                            idYear: params.idYear,
+                                                                            idRecordLabel: record.idRecordLabel
+                                                                        }}
+                                                                    >
+                                                                        {(recordLabel) => (
+                                                                            <span>
+                                                                                {`${recordLabel.label}`}
                                                                             </span>
                                                                         )}
                                                                     </DataWrapper>

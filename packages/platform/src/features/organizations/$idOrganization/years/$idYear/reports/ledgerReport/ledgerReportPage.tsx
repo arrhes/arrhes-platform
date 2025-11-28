@@ -34,7 +34,7 @@ export function LedgerReportPage() {
                                     return (
                                         <Box>
                                             <LedgerReportTable
-                                                recordRows={recordRows}
+                                                recordRows={recordRows.filter((recordRow) => recordRow.isComputedForLedgerReport === true)}
                                                 accounts={accounts}
                                             />
                                         </Box>

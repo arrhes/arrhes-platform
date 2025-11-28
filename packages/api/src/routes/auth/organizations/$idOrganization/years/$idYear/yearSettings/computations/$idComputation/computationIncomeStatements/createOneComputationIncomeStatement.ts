@@ -24,6 +24,7 @@ export const createOneComputationIncomeStatementRoute = authFactory.createApp()
                     idComputation: body.idComputation,
                     idIncomeStatement: body.idIncomeStatement,
                     operation: body.operation,
+                    index: body.index,
                     createdAt: new Date().toISOString(),
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,

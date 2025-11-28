@@ -19,7 +19,7 @@ export type ButtonOutlineContent = {
 
 const variants = {
     "neutral": {
-        container: "border-neutral/25 hover:bg-neutral/5 group-focus:bg-neutral/5 bg-background",
+        container: "border-neutral/25 hover:bg-neutral/5 group-focus:bg-neutral/5",
         loader: "stroke-neutral",
         icon: "stroke-neutral",
         rightIcon: "stroke-neutral/50",

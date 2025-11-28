@@ -2,7 +2,8 @@ import { FormatNull } from "#/components/formats/formatNull.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { Table } from "#/components/layouts/table/table.js"
-import { IncomeStatementReportBody } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementReportBody.js"
+import { IncomeStatementReportItem } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementReportItem.js"
+import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
 import { cn } from "#/utilities/cn.js"
 import { toRoman } from "#/utilities/toRoman.js"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
@@ -29,12 +30,30 @@ export function IncomeStatementsReportTable(props: {
                 </Table.Header.Row>
             </Table.Header.Root>
             <Table.Body.Root>
-                <IncomeStatementReportBody
-                    incomeStatements={props.incomeStatements}
-                    incomeStatementParent={null}
-                    displayNumber={true}
-                    increment={0}
-                />
+                {
+                    props.incomeStatements
+                        .filter((incomeStatement) => incomeStatement.idIncomeStatementParent === null)
+                        .sort((a, b) => Number(a.number) - Number(b.number))
+                        .map((incomeStatement) => {
+                            const incomeStatementChildren = getIncomeStatementChildren({
+                                incomeStatement: incomeStatement,
+                                incomeStatements: props.incomeStatements
+                            })
+
+                            return (
+                                <IncomeStatementReportItem
+                                    key={incomeStatement.id}
+                                    idOrganization={incomeStatement.idOrganization}
+                                    idYear={incomeStatement.idYear}
+                                    accounts={props.accounts}
+                                    recordRows={props.recordRows}
+                                    incomeStatement={incomeStatement}
+                                    incomeStatementChildren={incomeStatementChildren}
+                                    level={0}
+                                />
+                            )
+                        })
+                }
             </Table.Body.Root>
             <Table.Body.Root>
                 {
@@ -49,32 +68,64 @@ export function IncomeStatementsReportTable(props: {
                             </Table.Body.Root>
                         )
                         : props.computations.map((computation, index) => {
+
+                            let computationAmount = 0
                             const computationStatements = props.computationIncomeStatements
-                                .map((computationIncomeStatement) => ({
-                                    ...computationIncomeStatement,
-                                    incomeStatement: props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)
-                                }))
+                                .filter((computationIncomeStatement) => computationIncomeStatement.idComputation === computation.id)
+                                .forEach((computationIncomeStatement) => {
+                                    let incomeStatementAmount = 0
+                                    props.accounts
+                                        .filter((account) => {
+                                            const foundIncomeStatement = props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)
+                                            if (foundIncomeStatement === undefined) {
+                                                return false
+                                            }
+                                            const incomeStatementChildren = getIncomeStatementChildren({
+                                                incomeStatement: foundIncomeStatement,
+                                                incomeStatements: props.incomeStatements
+                                            })
+
+                                            const hasAccount = account.idIncomeStatement === computationIncomeStatement.idIncomeStatement
+                                            const hasChildrenAccount = incomeStatementChildren.some((incomeStatement) => incomeStatement.id === account.idIncomeStatement)
+                                            return hasAccount || hasChildrenAccount
+                                        })
+                                        .forEach((account) => {
+                                            props.recordRows
+                                                .filter((recordRow) => recordRow.idAccount === account.id)
+                                                .forEach((recordRow) => {
+                                                    incomeStatementAmount += Number(recordRow.debit) - Number(recordRow.credit)
+                                                })
+                                        })
+
+                                    if (computationIncomeStatement.operation === "plus") {
+                                        computationAmount += Math.abs(incomeStatementAmount)
+                                    }
+                                    if (computationIncomeStatement.operation === "minus") {
+                                        computationAmount += -Math.abs(incomeStatementAmount)
+                                    }
+                                })
+
                             // .sort((a, b) => {
                             //     if (!a.incomeStatement || !b.incomeStatement) return 0
                             //     return (a.incomeStatement.number - b.incomeStatement.number)
                             // })
 
-                            const sum = computationStatements.reduce((sum, computationStatement) => {
-                                if (!computationStatement.incomeStatement) return sum
-                                if (computationStatement.operation === "plus") sum += Number(computationStatement.incomeStatement.netAmountAdded)
-                                if (computationStatement.operation === "minus") sum += -Number(computationStatement.incomeStatement.netAmountAdded)
-                                return sum
-                            }, 0)
-                            const statementsLabel = computationStatements.map((computationStatement, computationStatementIndex) => {
-                                if (!computationStatement.incomeStatement) return ""
-                                const romanNumber = toRoman(Number(computationStatement.incomeStatement.number))
-                                if (computationStatement.operation === "plus") {
-                                    if (computationStatementIndex === 0) return `${romanNumber}`
-                                    return `+${romanNumber}`
-                                }
-                                if (computationStatement.operation === "minus") return `-${romanNumber}`
-                                return 0
-                            }).join("")
+
+                            const computationIncomeStatementsLabel = props.computationIncomeStatements
+                                .filter((computationIncomeStatement) => computationIncomeStatement.idComputation === computation.id)
+                                .map((computationIncomeStatement, computationIncomeStatementIndex) => {
+                                    const incomeStatement = props.incomeStatements.find((incomeStatement) => incomeStatement.id === computationIncomeStatement.idIncomeStatement)
+                                    if (incomeStatement === undefined) {
+                                        return ""
+                                    }
+                                    const romanNumber = toRoman(Number(incomeStatement.number))
+                                    if (computationIncomeStatement.operation === "plus") {
+                                        if (computationIncomeStatementIndex === 0) return `${romanNumber}`
+                                        return `+${romanNumber}`
+                                    }
+                                    if (computationIncomeStatement.operation === "minus") return `-${romanNumber}`
+                                    return ""
+                                }).join("")
 
                             return (
                                 <Table.Body.Row
@@ -93,11 +144,11 @@ export function IncomeStatementsReportTable(props: {
                                         <FormatText
                                             className={"whitespace-normal text-right text-neutral/50"}
                                         >
-                                            {`(${statementsLabel})`}
+                                            {`(${computationIncomeStatementsLabel})`}
                                         </FormatText>
                                     </Table.Body.Cell>
                                     <Table.Body.Cell className="w-[1%]" align="right">
-                                        <FormatPrice price={sum} />
+                                        <FormatPrice price={computationAmount} />
                                     </Table.Body.Cell>
                                 </Table.Body.Row>
                             )

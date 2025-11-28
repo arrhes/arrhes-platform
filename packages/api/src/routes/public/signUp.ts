@@ -19,7 +19,6 @@ export const signUpRoute = publicFactory.createApp()
         signUpRouteDefinition.path,
         bodyValidator(signUpRouteDefinition.schemas.body),
         async (c) => {
-            console.log(1)
             const body = c.req.valid("json")
 
             if (body.password !== body.passwordCheck) {

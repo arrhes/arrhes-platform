@@ -10,6 +10,7 @@ export function BalanceSheetsSelect(props: {
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
     value?: string | null
     onChange: (value?: string | null) => void
+    side: "asset" | "liability" | null
 }) {
     const balanceSheetsResponse = useHTTPData({
         routeDefinition: readAllBalanceSheetsRouteDefinition,
@@ -29,10 +30,12 @@ export function BalanceSheetsSelect(props: {
             options={
                 (balanceSheetsResponse.data === undefined)
                     ? []
-                    : balanceSheetsResponse.data.map((balanceSheet) => ({
-                        key: balanceSheet.id,
-                        label: `${balanceSheet.number} ${balanceSheet.label}`
-                    }))
+                    : balanceSheetsResponse.data
+                        .filter((balanceSheet) => props.side === undefined || balanceSheet.side === props.side)
+                        .map((balanceSheet) => ({
+                            key: balanceSheet.id,
+                            label: `${balanceSheet.number} ${balanceSheet.label}`
+                        }))
             }
         />
     )

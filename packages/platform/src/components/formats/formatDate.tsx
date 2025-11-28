@@ -1,5 +1,5 @@
+import { FormatText } from "#/components/formats/formatText.js"
 import { ComponentProps } from "react"
-import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
 
 
@@ -29,10 +29,10 @@ export function FormatDate(props: {
     if (!props.date) return <FormatNull />
     if (String(new Date(props.date)) === "Invalid Date") return <FormatNull />
     return (
-        <FormatBase className={props.className}>
-            <span className="inline-flex flex-row justify-start items-center">
-                {formatDate(props.date)}
-            </span>
-        </FormatBase>
+        <FormatText
+            className={props.className}
+        >
+            {formatDate(props.date)}
+        </FormatText>
     )
 }

@@ -13,9 +13,13 @@ export const createOneAccountRouteDefinition = routeDefinition({
             idYear: accountSchema.entries.idYear,
             idAccountParent: accountSchema.entries.idAccountParent,
 
-            idBalanceSheet: v.optional(accountSchema.entries.idBalanceSheet),
-            balanceSheetFlow: v.optional(accountSchema.entries.balanceSheetFlow),
-            balanceSheetColumn: v.optional(accountSchema.entries.balanceSheetColumn),
+            idBalanceSheetAsset: v.optional(accountSchema.entries.idBalanceSheetAsset),
+            balanceSheetAssetColumn: v.optional(accountSchema.entries.balanceSheetAssetColumn),
+            balanceSheetAssetFlow: v.optional(accountSchema.entries.balanceSheetAssetFlow),
+
+            idBalanceSheetLiability: v.optional(accountSchema.entries.idBalanceSheetLiability),
+            balanceSheetLiabilityColumn: v.optional(accountSchema.entries.balanceSheetLiabilityColumn),
+            balanceSheetLiabilityFlow: v.optional(accountSchema.entries.balanceSheetLiabilityFlow),
 
             idIncomeStatement: v.optional(accountSchema.entries.idIncomeStatement),
 

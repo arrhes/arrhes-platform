@@ -9,6 +9,7 @@ import { InputToggle } from "#/components/inputs/inputToggle.js"
 import { Drawer } from "#/components/overlays/drawer/drawer.js"
 import { toast } from "#/contexts/toasts/useToast.js"
 import { AccountSelect } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/accountSelect.js"
+import { BalanceSheetsSelect } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetSelect.js"
 import { invalidateData } from "#/utilities/invalidateData.js"
 import { postAPI } from "#/utilities/postAPI.js"
 import { createOneAccountRouteDefinition, readAllAccountsRouteDefinition } from "@arrhes/metadata/routes"
@@ -207,6 +208,73 @@ export function CreateOneAccount(props: {
                                                         { label: "Compte de gestion", value: "income-statement" },
                                                         { label: "Compte spécial", value: "special" }
                                                     ]}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="idBalanceSheetAsset"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Ligne de bilan associée (actif)"
+                                                tooltip="La ligne de bilan associée (actif) au compte créé."
+                                            />
+                                            <FormControl>
+                                                <BalanceSheetsSelect
+                                                    idOrganization={props.idOrganization}
+                                                    idYear={props.idYear}
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    side="asset"
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="balanceSheetAssetColumn"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Colonne de ligne de bilan associée (actif)"
+                                                tooltip="Colonne de la ligne de bilan associée (actif) au compte créé."
+                                            />
+                                            <FormControl>
+                                                <InputToggle
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    options={[
+                                                        { label: "Brut", value: "gross" },
+                                                        { label: "Amort. & Dépré.", value: "amortization" },
+                                                    ]}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="idBalanceSheetLiability"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Ligne de bilan associée (passif)"
+                                                tooltip="La ligne de bilan associée (passif) au compte créé."
+                                            />
+                                            <FormControl>
+                                                <BalanceSheetsSelect
+                                                    idOrganization={props.idOrganization}
+                                                    idYear={props.idYear}
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    side="liability"
                                                 />
                                             </FormControl>
                                             <FormError />

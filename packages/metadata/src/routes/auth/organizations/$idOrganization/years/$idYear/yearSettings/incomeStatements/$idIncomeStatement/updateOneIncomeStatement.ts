@@ -13,9 +13,9 @@ export const updateOneIncomeStatementRouteDefinition = routeDefinition({
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
             idIncomeStatementParent: v.optional(incomeStatementSchema.entries.idIncomeStatementParent),
+            isComputed: v.optional(incomeStatementSchema.entries.isComputed),
             number: v.optional(incomeStatementSchema.entries.number),
             label: v.optional(incomeStatementSchema.entries.label),
-            netAmountAdded: v.optional(incomeStatementSchema.entries.netAmountAdded),
         }),
         return: incomeStatementSchemaReturn
     },

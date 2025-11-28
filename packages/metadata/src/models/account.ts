@@ -23,13 +23,17 @@ export const accountModel = pgTable(
         id: idColumn("id").primaryKey(),
         idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
-        idAccountParent: idColumn("id_account_parent").references((): AnyPgColumn => accountModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
+        idAccountParent: idColumn("id_account_parent").references((): AnyPgColumn => accountModel.id, { onDelete: "set null", onUpdate: "cascade" }),
 
-        idBalanceSheet: idColumn("id_balance_sheet").references(() => balanceSheetModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
-        balanceSheetFlow: accountBalanceSheetFlowEnum("balance_sheet_flow"),
-        balanceSheetColumn: accountBalanceSheetColumnEnum("balance_sheet_column"),
+        idBalanceSheetAsset: idColumn("id_balance_sheet_asset").references(() => balanceSheetModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        balanceSheetAssetColumn: accountBalanceSheetColumnEnum("balance_sheet_asset_column"),
+        balanceSheetAssetFlow: accountBalanceSheetFlowEnum("balance_sheet_asset_flow"),
 
-        idIncomeStatement: idColumn("id_income_statement").references(() => incomeStatementModel.id, { onDelete: "cascade", onUpdate: "cascade" }),
+        idBalanceSheetLiability: idColumn("id_balance_sheet_liability").references(() => balanceSheetModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        balanceSheetLiabilityColumn: accountBalanceSheetColumnEnum("balance_sheet_liability_column"),
+        balanceSheetLiabilityFlow: accountBalanceSheetFlowEnum("balance_sheet_liability_flow"),
+
+        idIncomeStatement: idColumn("id_income_statement").references(() => incomeStatementModel.id, { onDelete: "set null", onUpdate: "cascade" }),
 
         isMandatory: boolean("is_mandatory").notNull(),
         isClass: boolean("is_class").notNull(),
@@ -52,8 +56,12 @@ export const accountModel = pgTable(
 
 // Relations
 export const accountRelations = relations(accountModel, ({ one, many }) => ({
-    balanceSheet: one(balanceSheetModel, {
-        fields: [accountModel.idBalanceSheet],
+    balanceSheetAsset: one(balanceSheetModel, {
+        fields: [accountModel.idBalanceSheetAsset],
+        references: [balanceSheetModel.id],
+    }),
+    balanceSheetLiability: one(balanceSheetModel, {
+        fields: [accountModel.idBalanceSheetLiability],
         references: [balanceSheetModel.id],
     }),
     incomeStatement: one(incomeStatementModel, {

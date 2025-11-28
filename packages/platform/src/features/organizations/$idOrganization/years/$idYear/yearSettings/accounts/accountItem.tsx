@@ -1,4 +1,3 @@
-import { GroupedAccount } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/accounts/groupAccounts.js"
 import { cn } from "#/utilities/cn.js"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { Link } from "@tanstack/react-router"
@@ -9,29 +8,34 @@ import * as v from "valibot"
 export function AccountItem(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
-    groupedAccount: GroupedAccount
+    account: v.InferOutput<typeof returnedSchemas.account>
+    level: number
     displayIndexes: Array<boolean>
     currentIndex: number
     length: number
-    level: number
     className?: ComponentProps<'div'>['className']
 }) {
-    const tab = "&nbsp;&nbsp;&thinsp;&thinsp;"
+    const tab = "&nbsp;&nbsp;"
 
-    const lastArrow = (props.currentIndex === props.length - 1)
-        ? "└──"
-        : "├──"
+    // const lastArrow = (props.currentIndex === props.length - 1)
+    //     ? "└──"
+    //     : "├──"
 
-    const prefix = (props.level > 0)
-        ? `${(new Array(props.level - 1).fill("").map((_, index) => {
-            if (props.displayIndexes[index + 1] === true) {
-                return `│${tab}`
-            }
-            return `&nbsp;${tab}`
-        }))
-            .join("")
-        }${lastArrow}`
-        : null
+    // const prefix = (props.level > 0)
+    //     ? `${(new Array(props.level - 1).fill("").map((_, index) => {
+    //         if (props.displayIndexes[index + 1] === true) {
+    //             return `│${tab}`
+    //         }
+    //         return `&nbsp;${tab}`
+    //     }))
+    //         .join("")
+    //     }${lastArrow}`
+    //     : null
+    const prefix = `${(new Array(props.level).fill("").map((_, index) => {
+        return `${tab}`
+    }))
+        .join("")
+        }`
     // ? (props.index !== props.length - 1)
     //                                     ? `&thinsp;&thinsp;${(new Array(props.level - 1).fill(`${(props.index !== props.length - 1)
     //                                         ? "│"
@@ -47,7 +51,7 @@ export function AccountItem(props: {
                 params={{
                     idOrganization: props.idOrganization,
                     idYear: props.idYear,
-                    idAccount: props.groupedAccount.account.id,
+                    idAccount: props.account.id,
                 }}
                 className="w-full"
             >
@@ -64,7 +68,7 @@ export function AccountItem(props: {
                                 <pre
                                     className={cn(
                                         "text-neutral/25 text-[22px] leading-none h-full align-middle text-left",
-                                        props.groupedAccount.account.isMandatory ? "" : ""
+                                        props.account.isMandatory ? "" : ""
                                     )}
                                     dangerouslySetInnerHTML={{
                                         __html: prefix
@@ -75,35 +79,19 @@ export function AccountItem(props: {
                     <div className="p-1 flex justify-start items-center gap-2">
                         <span className={cn(
                             "text-neutral text-xs leading-none",
-                            props.groupedAccount.account.isMandatory ? "font-bold" : ""
+                            props.account.isMandatory ? "font-bold" : ""
                         )}>
-                            {props.groupedAccount.account.number}
+                            {props.account.number}
                         </span>
                         <span className={cn(
                             "text-neutral text-xs text-left leading-none whitespace-nowrap",
-                            props.groupedAccount.account.isMandatory ? "font-bold" : ""
+                            props.account.isMandatory ? "font-bold" : ""
                         )}>
-                            {props.groupedAccount.account.label}
+                            {props.account.label}
                         </span>
                     </div>
                 </div>
             </Link>
-            {
-                props.groupedAccount.subAccounts
-                    .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
-                    .map((groupedSubAccount, index) => (
-                        <AccountItem
-                            key={groupedSubAccount.account.id}
-                            idOrganization={props.idOrganization}
-                            idYear={props.idYear}
-                            groupedAccount={groupedSubAccount}
-                            displayIndexes={[...props.displayIndexes, (props.currentIndex < props.length - 1)]}
-                            currentIndex={index}
-                            length={props.groupedAccount.subAccounts.length}
-                            level={props.level + 1}
-                        />
-                    ))
-            }
         </Fragment>
     )
 }

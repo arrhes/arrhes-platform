@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "verbatimModuleSyntax": false,
         "rootDir": "./src",
         "outDir": "./build",
         "paths": {

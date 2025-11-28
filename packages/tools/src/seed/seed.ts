@@ -1,6 +1,6 @@
+import { DefaultBalanceSheet, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations, defaultJournals } from '@arrhes/metadata/components'
 import { models } from '@arrhes/metadata/models'
 import { generateId } from '@arrhes/metadata/utilities'
-import { DefaultBalanceSheet, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations, defaultJournals } from '@arrhes/schemas/components'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
 import { drizzle } from "drizzle-orm/postgres-js"
@@ -123,6 +123,7 @@ async function seed() {
                 idOrganization: newOrganization.id,
                 idYear: newYear.id,
                 isDefault: true,
+                isComputed: true,
                 side: _balanceSheet.side,
                 number: _balanceSheet.number.toString(),
                 label: _balanceSheet.label,
@@ -158,6 +159,7 @@ async function seed() {
                     idOrganization: newOrganization.id,
                     idYear: newYear.id,
                     isDefault: true,
+                    isComputed: true,
                     number: _incomeStatement.number.toString(),
                     label: _incomeStatement.label,
                     netAmountAdded: "0",
@@ -182,11 +184,12 @@ async function seed() {
             const newComputations: Array<
                 & typeof models.computation.$inferInsert
                 & { incomeStatements: DefaultComputation["incomeStatements"][number][] }
-            > = defaultComputations.map((_computation) => {
+            > = defaultComputations.map((_computation, index) => {
                 return ({
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: newYear.id,
+                    index: index,
                     number: _computation.number.toString(),
                     label: _computation.label,
                     createdAt: new Date().toISOString(),
@@ -200,7 +203,7 @@ async function seed() {
             console.log("Add computationStatements")
             const newComputationIncomeStatements: Array<(typeof models.computationIncomeStatement.$inferInsert)> = []
             newComputations.forEach((_computation) => {
-                _computation.incomeStatements.forEach((_incomeStatement) => {
+                _computation.incomeStatements.forEach((_incomeStatement, index) => {
                     const incomeStatement = newIncomeStatements.find((x) => x.number === _incomeStatement.number.toString())
 
                     if (!incomeStatement) return console.log(`Statement not found ${_computation.number} ${_incomeStatement.number}`)
@@ -210,6 +213,7 @@ async function seed() {
                         idYear: newYear.id,
                         idComputation: _computation.id,
                         idIncomeStatement: incomeStatement.id,
+                        index: index,
                         operation: _incomeStatement.operation,
                         createdAt: new Date().toISOString(),
                     })

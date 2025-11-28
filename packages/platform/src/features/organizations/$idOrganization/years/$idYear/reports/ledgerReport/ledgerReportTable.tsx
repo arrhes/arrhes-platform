@@ -12,8 +12,8 @@ export function LedgerReportTable(props: {
     accounts: Array<v.InferOutput<typeof returnedSchemas.account>>
 }) {
 
-    let accountsTotalDebit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
-    let accountsTotalCredit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
+    const accountsTotalDebit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
+    const accountsTotalCredit = props.recordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
 
     const sortedAccounts = props.accounts.sort((a, b) => a.number.localeCompare(b.number))
 
@@ -84,20 +84,21 @@ export function LedgerReportTable(props: {
                             const accountTotalDebit = filteredRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
                             const accountTotalCredit = filteredRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
 
-                            accountsTotalDebit += accountTotalDebit
-                            accountsTotalCredit += accountTotalCredit
-
                             return (
                                 <Table.Body.Root
                                     key={account.id}
                                     className="border-y border-neutral/10 last:border-b-0"
                                 >
                                     <Table.Body.Row className="border-neutral/10 bg-background">
-                                        <Table.Body.Cell colSpan={2}>
-                                            <FormatText wrap={true}>
+                                        <Table.Body.Cell className="flex justify-start items-start gap-2">
+                                            <FormatText className="overflow-visible">
                                                 {account.number}
                                             </FormatText>
+                                            <FormatText wrap={true} className="text-neutral/50">
+                                                {account.label}
+                                            </FormatText>
                                         </Table.Body.Cell>
+                                        <Table.Body.Cell />
                                         <Table.Body.Cell className="w-[1%]" align="right">
                                             <FormatPrice price={accountTotalDebit} className="font-bold" />
                                         </Table.Body.Cell>

@@ -11,7 +11,7 @@ import { Drawer } from "#/components/overlays/drawer/drawer.js"
 import { toast } from "#/contexts/toasts/useToast.js"
 import { invalidateData } from "#/utilities/invalidateData.js"
 import { postAPI } from "#/utilities/postAPI.js"
-import { readAllAttachmentsRouteDefinition, readAllJournalsRouteDefinition, readAllRecordsRouteDefinition, readOneRecordRouteDefinition, updateOneRecordRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllAttachmentsRouteDefinition, readAllJournalsRouteDefinition, readAllRecordLabelsRouteDefinition, readAllRecordsRouteDefinition, readOneRecordRouteDefinition, updateOneRecordRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
 import { IconPencil } from "@tabler/icons-react"
 import { JSX, useState } from "react"
@@ -147,6 +147,35 @@ export function UpdateOneRecord(props: {
                                                     getOption={(journal) => ({
                                                         key: journal.id,
                                                         label: `(${journal.code}) ${journal.label}`
+                                                    })}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="idRecordLabel"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Catégorie"
+                                                isRequired={false}
+                                            />
+                                            <FormControl>
+                                                <InputDataCombobox
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    routeDefinition={readAllRecordLabelsRouteDefinition}
+                                                    body={{
+                                                        idOrganization: props.record.idOrganization,
+                                                        idYear: props.record.idYear,
+                                                    }}
+                                                    placeholder="Sélectionner une catégorie"
+                                                    getOption={(recordLabel) => ({
+                                                        key: recordLabel.id,
+                                                        label: `${recordLabel.label}`
                                                     })}
                                                 />
                                             </FormControl>
