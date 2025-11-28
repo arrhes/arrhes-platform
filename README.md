@@ -119,7 +119,7 @@ pnpm --filter tools run seed
 pnpm run dev
 ```
 
-L'API sera accessible sur `http://localhost:3000` et la plateforme sur `http://localhost:5173`.
+L'API sera accessible sur `http://localhost:3101`, la plateforme sur `http://localhost:3101` et le website sur `http://localhost:3102.
 
 **Identifiants de démonstration :** `demo@arrhes.com` / `demo`
 
@@ -140,7 +140,7 @@ Le projet est organisé en monorepo avec les packages suivants :
 - **@arrhes/platform** - Interface web (React, TanStack Router)
 - **@arrhes/metadata** - Schémas et modèles partagés (Valibot, Drizzle ORM)
 - **@arrhes/tools** - Outils de migration et seed de base de données
-- **@arrhes/website** - Site vitrine
+- **@arrhes/website** - Site vitrine + Documentation
 
 Pour plus de détails, consultez la [documentation d'architecture](docs/ARCHITECTURE.md).
 
@@ -152,8 +152,9 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 - 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-platform/issues)
 - 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-platform/issues)
-- 📧 Contact : demo@arrhes.com
+- 📧 Contact : contact@arrhes.com
 
 ---
 
 Développé avec ❤️ pour la communauté française
+
