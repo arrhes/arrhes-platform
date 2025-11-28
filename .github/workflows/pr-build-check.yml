@@ -1,5 +1,9 @@
-name: Build check
+name: PR build check
 
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
 on:
   push:
     branches:
@@ -20,7 +24,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.18.1
           run_install: false
 
       - name: Install Node.js
@@ -28,7 +32,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          node-version: 20
+          node-version: 22.1.0
 
       - name: Install dependencies
         run: pnpm install
