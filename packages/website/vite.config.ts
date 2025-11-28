@@ -7,7 +7,7 @@ export default defineConfig({
   assetsInclude: ["**/*.md", "**/*.woff2"],
   server: {
     host: true,
-    port: 3101,
+    port: 3102,
     watch: {
       usePolling: true
     },
