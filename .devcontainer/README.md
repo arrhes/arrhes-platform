@@ -1,6 +1,6 @@
 # Dev Container Configuration
 
-Ce répertoire contient la configuration pour développer Arrhes dans un Dev Container (VS Code/Cursor).
+Ce répertoire contient la configuration pour développer Arrhes dans un Dev Container.
 
 ## Qu'est-ce qu'un Dev Container ?
 
@@ -70,12 +70,8 @@ Tous les services sont automatiquement démarrés et configurés :
 | Service | URL/Port | Credentials |
 |---------|----------|-------------|
 | PostgreSQL | `postgres:5432` | `arrhes_user` / `arrhes_password` |
-| MinIO API | `minio:9000` | `minioadmin` / `minioadmin` |
-| MinIO Console | http://localhost:9001 | `minioadmin` / `minioadmin` |
-| MailHog SMTP | `mailhog:1025` | - |
-| MailHog Web | http://localhost:8025 | - |
 
-**Note :** Dans le Dev Container, les services sont accessibles via leur nom Docker (`postgres`, `minio`, `mailhog`) plutôt que `localhost`.
+**Note :** Dans le Dev Container, les services sont accessibles via leur nom Docker (`postgres`) plutôt que `localhost`.
 
 ## Extensions installées
 
