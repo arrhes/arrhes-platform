@@ -136,6 +136,7 @@ export function CreateOneBalanceSheet(props: {
                                                     idYear={props.idYear}
                                                     value={field.value}
                                                     onChange={field.onChange}
+                                                    side={null}
                                                 />
                                             </FormControl>
                                             <FormError />

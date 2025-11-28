@@ -2,21 +2,31 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react({ include: "**/*.tsx", }),
-  ],
-  assetsInclude: ['**/*.md'],
-  root: './src',
-  base: "/",
-  envDir: "../",
+  plugins: [react()],
+  assetsInclude: ["**/*.md", "**/*.woff2"],
   server: {
     host: true,
-    port: 3102,
+    port: 3101,
     watch: {
       usePolling: true
     },
     hmr: true,
+  },
+  build: {
+    outDir: './build',
+    rollupOptions: {
+      output: {
+        entryFileNames: "[hash].js",
+        chunkFileNames: "[hash].js",
+        assetFileNames: "[hash].[ext]",
+        manualChunks(id: string) {
+          if (id.includes('react-dom')) {
+            return 'react-dom'
+          }
+        },
+
+      }
+    }
   },
 })

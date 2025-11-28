@@ -3,13 +3,12 @@ import { ComponentProps, ReactNode } from "react"
 import { FormatNull } from "./formatNull.js"
 
 
-type FormatText = {
+export function FormatText(props: {
     wrap?: boolean
     className?: ComponentProps<'span'>['className']
     children?: ReactNode
 }
-
-export function FormatText(props: FormatText) {
+) {
     if (!props.children) return <FormatNull />
     return (
         <span className={cn(

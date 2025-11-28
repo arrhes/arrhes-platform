@@ -142,6 +142,7 @@ export function UpdateOneBalanceSheet(props: {
                                                     idYear={props.balanceSheet.idYear}
                                                     value={field.value}
                                                     onChange={field.onChange}
+                                                    side={null}
                                                 />
                                             </FormControl>
                                             <FormError />

@@ -12,12 +12,10 @@ export const createOneBalanceSheetRouteDefinition = routeDefinition({
             idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
             idBalanceSheetParent: balanceSheetSchema.entries.idBalanceSheetParent,
+            isComputed: balanceSheetSchema.entries.isComputed,
             side: balanceSheetSchema.entries.side,
             number: balanceSheetSchema.entries.number,
             label: balanceSheetSchema.entries.label,
-            grossAmountAdded: balanceSheetSchema.entries.grossAmountAdded,
-            amortizationAmountAdded: balanceSheetSchema.entries.amortizationAmountAdded,
-            netAmountAdded: balanceSheetSchema.entries.netAmountAdded,
         }),
         return: balanceSheetSchemaReturn
     },

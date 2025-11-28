@@ -34,7 +34,7 @@ export function BalanceReportPage() {
                                     return (
                                         <Box>
                                             <BalanceReportTable
-                                                recordRows={recordRows}
+                                                recordRows={recordRows.filter((recordRow) => recordRow.isComputedForBalanceReport === true)}
                                                 accounts={accounts}
                                             />
                                         </Box>

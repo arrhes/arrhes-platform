@@ -1,7 +1,7 @@
 import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
 import { idColumn } from "#src/components/models/idColumn.js"
 import { relations } from "drizzle-orm"
-import { AnyPgColumn, pgTable, unique, varchar } from "drizzle-orm/pg-core"
+import { AnyPgColumn, integer, pgTable, unique, varchar } from "drizzle-orm/pg-core"
 import { computationIncomeStatementModel } from "./computationIncomeStatement.js"
 import { organizationModel } from "./organization.js"
 import { userModel } from "./user.js"
@@ -15,6 +15,7 @@ export const computationModel = pgTable(
         id: idColumn("id").primaryKey(),
         idOrganization: idColumn("id_organization").references(() => organizationModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        index: integer("index").notNull(),
         number: varchar("number", { length: 32 }).notNull(),
         label: varchar("label", { length: 256 }).notNull(),
         createdAt: dateTimeColumn("created_at").notNull(),

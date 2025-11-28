@@ -14,6 +14,7 @@ export const updateOneComputationIncomeStatementRouteDefinition = routeDefinitio
             idYear: computationIncomeStatementSchema.entries.idYear,
             idComputation: v.optional(computationIncomeStatementSchema.entries.idComputation),
             idIncomeStatement: v.optional(computationIncomeStatementSchema.entries.idIncomeStatement),
+            index: v.optional(computationIncomeStatementSchema.entries.index),
             operation: v.optional(computationIncomeStatementSchema.entries.operation),
         }),
         return: computationIncomeStatementSchemaReturn

@@ -1,4 +1,4 @@
-import { dateTimeSchema, operation } from "#src/components/_index.js"
+import { dateTimeSchema, integerSchema, operation } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { computationIncomeStatementModel } from "#src/models/computationIncomeStatement.js"
 import * as v from "valibot"
@@ -10,6 +10,7 @@ export const computationIncomeStatementSchema = v.object({
     idYear: v.nonNullable(idSchema),
     idComputation: v.nonNullable(idSchema),
     idIncomeStatement: v.nonNullable(idSchema),
+    index: v.nonNullable(integerSchema),
     operation: v.nonNullable(v.picklist(operation)),
     createdAt: v.nonNullable(dateTimeSchema),
     lastUpdatedAt: v.nullable(dateTimeSchema),
@@ -26,6 +27,7 @@ export const computationIncomeStatementSchemaReturn = v.pick(
         "idYear",
         "idComputation",
         "idIncomeStatement",
+        "index",
         "operation",
         "createdAt",
         "lastUpdatedAt",

@@ -21,6 +21,7 @@ export const createOneComputationRoute = authFactory.createApp()
                     id: generateId(),
                     idOrganization: body.idOrganization,
                     idYear: body.idYear,
+                    index: body.index,
                     number: body.number,
                     label: body.label,
                     createdAt: new Date().toISOString(),

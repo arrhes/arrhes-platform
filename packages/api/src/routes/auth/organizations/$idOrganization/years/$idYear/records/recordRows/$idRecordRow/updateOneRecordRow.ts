@@ -20,7 +20,11 @@ export const updateOneRecordRowRoute = authFactory.createApp()
                 data: {
                     idRecord: body.idRecord,
                     idAccount: body.idAccount,
-                    isComputed: body.isComputed,
+                    isComputedForJournalReport: body.isComputedForJournalReport,
+                    isComputedForLedgerReport: body.isComputedForLedgerReport,
+                    isComputedForBalanceReport: body.isComputedForBalanceReport,
+                    isComputedForBalanceSheetReport: body.isComputedForBalanceSheetReport,
+                    isComputedForIncomeStatementReport: body.isComputedForIncomeStatementReport,
                     label: body.label,
                     debit: body.debit,
                     credit: body.credit,

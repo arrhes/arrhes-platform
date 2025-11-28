@@ -1,3 +1,4 @@
+import { cn } from "#/utilities/cn.js"
 import { ComponentProps } from "react"
 
 
@@ -6,7 +7,10 @@ export function TitleComponent(props: {
     className?: ComponentProps<'div'>['className']
 }) {
     return (
-        <span className="uppercase text-neutral/25 text-base">
+        <span className={cn(
+            "uppercase text-neutral/25 text-base",
+            props.className
+        )}>
             {props.children}
         </span>
     )

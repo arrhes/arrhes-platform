@@ -1,4 +1,5 @@
 export * from "./accountType.js"
+export * from "./balanceSheetColumn.js"
 export * from "./balanceSheetFlow.js"
 export * from "./balanceSheetSide.js"
 export * from "./colorVariant.js"

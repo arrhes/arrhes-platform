@@ -12,9 +12,13 @@ export const accountSchema = v.object({
     idYear: v.nonNullable(idSchema),
     idAccountParent: v.nullable(idSchema),
 
-    idBalanceSheet: v.nullable(idSchema),
-    balanceSheetFlow: v.nullable(v.picklist(balanceSheetFlow)),
-    balanceSheetColumn: v.nullable(v.picklist(balanceSheetColumn)),
+    idBalanceSheetAsset: v.nullable(idSchema),
+    balanceSheetAssetColumn: v.nullable(v.picklist(balanceSheetColumn)),
+    balanceSheetAssetFlow: v.nullable(v.picklist(balanceSheetFlow)),
+
+    idBalanceSheetLiability: v.nullable(idSchema),
+    balanceSheetLiabilityColumn: v.nullable(v.picklist(balanceSheetColumn)),
+    balanceSheetLiabilityFlow: v.nullable(v.picklist(balanceSheetFlow)),
 
     idIncomeStatement: v.nullable(idSchema),
 
@@ -41,9 +45,13 @@ export const accountSchemaReturn = v.pick(
         "idYear",
         "idAccountParent",
 
-        "idBalanceSheet",
-        "balanceSheetFlow",
-        "balanceSheetColumn",
+        "idBalanceSheetAsset",
+        "balanceSheetAssetColumn",
+        "balanceSheetAssetFlow",
+
+        "idBalanceSheetLiability",
+        "balanceSheetLiabilityColumn",
+        "balanceSheetLiabilityFlow",
 
         "idIncomeStatement",
 

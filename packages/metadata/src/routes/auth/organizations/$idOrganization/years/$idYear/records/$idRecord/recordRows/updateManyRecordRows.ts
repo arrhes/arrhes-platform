@@ -1,0 +1,25 @@
+import { routePath } from "#src/components/_index.js"
+import { recordRowSchema } from "#src/schemas/recordRow.js"
+import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import * as v from "valibot"
+
+
+export const updateManyRecordRowsRouteDefinition = routeDefinition({
+    protocol: "http",
+    path: `${routePath.auth}/update-many-record-rows`,
+    schemas: {
+        body: v.object({
+            idRecord: recordRowSchema.entries.idRecord,
+            idOrganization: recordRowSchema.entries.idOrganization,
+            idYear: recordRowSchema.entries.idYear,
+
+            isComputedForJournalReport: v.optional(recordRowSchema.entries.isComputedForJournalReport),
+            isComputedForLedgerReport: v.optional(recordRowSchema.entries.isComputedForLedgerReport),
+            isComputedForBalanceReport: v.optional(recordRowSchema.entries.isComputedForBalanceReport),
+            isComputedForBalanceSheetReport: v.optional(recordRowSchema.entries.isComputedForBalanceSheetReport),
+            isComputedForIncomeStatementReport: v.optional(recordRowSchema.entries.isComputedForIncomeStatementReport),
+            label: v.optional(recordRowSchema.entries.label),
+        }),
+        return: v.array(recordRowSchema)
+    },
+})

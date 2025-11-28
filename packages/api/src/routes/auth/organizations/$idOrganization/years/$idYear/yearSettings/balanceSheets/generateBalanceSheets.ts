@@ -60,7 +60,9 @@ export const generateBalanceSheetsRoute = authFactory.createApp()
                 defaultBalanceSheets
                     .forEach((defaultBalanceSheet) => {
                         const balanceSheetParent = newBalanceSheets.find((newBalanceSheet) => {
-                            return newBalanceSheet.number === defaultBalanceSheet.numberParent?.toString()
+                            const isParent = newBalanceSheet.number === defaultBalanceSheet.numberParent?.toString()
+                            const isSameSide = newBalanceSheet.side === defaultBalanceSheet.side
+                            return isParent && isSameSide
                         })
                         newBalanceSheets.push({
                             id: generateId(),
@@ -69,11 +71,11 @@ export const generateBalanceSheetsRoute = authFactory.createApp()
                             idBalanceSheetParent: balanceSheetParent?.id ?? null,
                             number: defaultBalanceSheet.number.toString(),
                             isDefault: true,
+                            isComputed: (balanceSheetParent === undefined)
+                                ? true
+                                : false,
                             label: defaultBalanceSheet.label,
                             side: defaultBalanceSheet.side,
-                            grossAmountAdded: "0.00",
-                            amortizationAmountAdded: "0.00",
-                            netAmountAdded: "0.00",
                             createdAt: new Date().toISOString(),
                             lastUpdatedAt: null,
                             createdBy: null,

@@ -7,15 +7,18 @@ export function PriceFormat(props: {
     price?: number | null | string
     class?: DOMAttributes["class"]
 }) {
+    const price = Number(props.price)
     return (
         <span
             class={cx(
                 css`width: fit-content; max-width: 100%; white-space: nowrap;`,
-                formatPrice(props.price) === "0.00" ? css`color: #888888;` : undefined,
+                price === 0 ? css`color: #888888;` : undefined,
                 props.class
             )}
         >
-            {Number(props.price) < 0 ? `(${formatPrice(Math.abs(Number(props.price)))})` : formatPrice(props.price)}
+            {price < 0
+                ? `(${formatPrice(Math.abs(price))})`
+                : formatPrice(Math.abs(price))}
         </span>
     )
 }

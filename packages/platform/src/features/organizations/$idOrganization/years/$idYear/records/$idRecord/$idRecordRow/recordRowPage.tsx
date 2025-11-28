@@ -1,6 +1,7 @@
 import { ButtonOutline } from "#/components/buttons/buttonOutline.js"
 import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
 import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
+import { FormatBoolean } from "#/components/formats/formatBoolean.js"
 import { FormatDateTime } from "#/components/formats/formatDateTime.js"
 import { FormatNull } from "#/components/formats/formatNull.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
@@ -110,6 +111,21 @@ export function RecordRowPage() {
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Crédit">
                                                 <FormatPrice price={recordRow.credit} />
+                                            </DataBlock.Item>
+                                            <DataBlock.Item label="Calculé pour le journal ?">
+                                                <FormatBoolean boolean={recordRow.isComputedForJournalReport} />
+                                            </DataBlock.Item>
+                                            <DataBlock.Item label="Calculé pour le grand-livre ?">
+                                                <FormatBoolean boolean={recordRow.isComputedForLedgerReport} />
+                                            </DataBlock.Item>
+                                            <DataBlock.Item label="Calculé pour la balance ?">
+                                                <FormatBoolean boolean={recordRow.isComputedForBalanceReport} />
+                                            </DataBlock.Item>
+                                            <DataBlock.Item label="Calculé pour le bilan ?">
+                                                <FormatBoolean boolean={recordRow.isComputedForBalanceSheetReport} />
+                                            </DataBlock.Item>
+                                            <DataBlock.Item label="Calculé pour le compte de résultat ?">
+                                                <FormatBoolean boolean={recordRow.isComputedForIncomeStatementReport} />
                                             </DataBlock.Item>
                                         </DataBlock.Content>
                                     </DataBlock.Root>

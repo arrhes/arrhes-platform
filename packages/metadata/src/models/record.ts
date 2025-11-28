@@ -1,5 +1,6 @@
 import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
 import { idColumn } from "#src/components/models/idColumn.js"
+import { recordLabelModel } from "#src/models/recordLabel.js"
 import { relations } from "drizzle-orm"
 import { AnyPgColumn, pgTable, varchar } from "drizzle-orm/pg-core"
 import { attachmentModel } from "./attachment.js"
@@ -19,6 +20,7 @@ export const recordModel = pgTable(
         idYear: idColumn("id_year").references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idJournal: idColumn("id_journal").references(() => journalModel.id, { onDelete: "set null", onUpdate: "cascade" }),
         idAttachment: idColumn("id_attachment").references(() => attachmentModel.id, { onDelete: "set null", onUpdate: "cascade" }),
+        idRecordLabel: idColumn("id_record_label").references(() => recordLabelModel.id, { onDelete: "set null", onUpdate: "cascade" }),
         label: varchar("label", { length: 256 }).notNull(),
         date: dateTimeColumn("date").notNull(),
         createdAt: dateTimeColumn("created_at").notNull(),

@@ -24,7 +24,7 @@ export function FormLabel(props: FormLabel) {
             className="flex justify-start items-center gap-2"
         >
             <div className="flex flex-col justify-start items-start gap-1">
-                <div className="inline-flex justify-start items-center gap-2">
+                <div className="inline-flex justify-start items-center gap-1">
                     {(!props.label) ? null : (
                         <span className="text-xs text-neutral/50 before:content-['\200b']">
                             {props.label}
@@ -34,9 +34,9 @@ export function FormLabel(props: FormLabel) {
                         (props.isRequired !== true)
                             ? null
                             : (
-                                <span className="text-error text-sm">
+                                <sup className="text-error text-xs">
                                     *
-                                </span>
+                                </sup>
                             )
                     }
                 </div>

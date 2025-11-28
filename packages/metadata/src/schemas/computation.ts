@@ -1,4 +1,4 @@
-import { dateTimeSchema } from "#src/components/_index.js"
+import { dateTimeSchema, integerSchema } from "#src/components/_index.js"
 import { idSchema } from "#src/components/schemas/idSchema.js"
 import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
 import { computationModel } from "#src/models/computation.js"
@@ -9,6 +9,7 @@ export const computationSchema = v.object({
     id: v.nonNullable(idSchema),
     idOrganization: v.nonNullable(idSchema),
     idYear: v.nonNullable(idSchema),
+    index: v.nonNullable(integerSchema),
     number: v.nonNullable(varcharSchema({ maxLength: 32 })),
     label: v.nonNullable(varcharSchema({ maxLength: 256 })),
     createdAt: v.nonNullable(dateTimeSchema),
@@ -24,6 +25,7 @@ export const computationSchemaReturn = v.pick(
         "id",
         "idOrganization",
         "idYear",
+        "index",
         "number",
         "label",
         "createdAt",

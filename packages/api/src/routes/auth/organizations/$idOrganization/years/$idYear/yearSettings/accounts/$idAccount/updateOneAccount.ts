@@ -21,9 +21,13 @@ export const updateOneAccountRoute = authFactory.createApp()
                 data: {
                     idAccountParent: body.idAccountParent,
 
-                    idBalanceSheet: body.idBalanceSheet,
-                    balanceSheetFlow: body.balanceSheetFlow,
-                    balanceSheetColumn: body.balanceSheetColumn,
+                    idBalanceSheetAsset: body.idBalanceSheetAsset,
+                    balanceSheetAssetColumn: body.balanceSheetAssetColumn,
+                    balanceSheetAssetFlow: body.balanceSheetAssetFlow,
+
+                    idBalanceSheetLiability: body.idBalanceSheetLiability,
+                    balanceSheetLiabilityColumn: body.balanceSheetLiabilityColumn,
+                    balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow,
 
                     idIncomeStatement: body.idIncomeStatement,
 

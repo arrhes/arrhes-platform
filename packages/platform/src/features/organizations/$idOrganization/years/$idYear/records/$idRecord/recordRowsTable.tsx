@@ -1,14 +1,19 @@
+import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
+import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
 import { ButtonPlainContent } from "#/components/buttons/buttonPlainContent.js"
 import { FormatDateTime } from "#/components/formats/formatDateTime.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { DataTable } from "#/components/layouts/dataTable.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
+import { UpdateOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/updateOneRecordRow.js"
 import { CreateOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/createOneRecordRow.js"
-import { platformRouter } from "#/routes/platformRouter.js"
+import { UpdateManyRecordRows } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/updateManyRecordRows.js"
 import { readOneAccountRouteDefinition } from "@arrhes/metadata/routes"
 import { returnedSchemas } from "@arrhes/metadata/schemas"
-import { IconPlus } from "@tabler/icons-react"
+import { IconEdit, IconEye, IconPencil, IconPlus } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
 import * as v from "valibot"
 
 
@@ -22,6 +27,37 @@ export function RecordRowsTable(props: {
             data={props.recordRows}
             isLoading={false}
             columns={[
+                {
+                    accessorKey: "actions",
+                    header: " ",
+                    cell: ({ row }) => (
+                        <div className="flex justify-center items-center">
+                            <UpdateOneRecordRow
+                                recordRow={row.original}
+                            >
+                                <ButtonGhost
+                                    icon={<IconPencil />}
+                                    text={undefined}
+                                />
+                            </UpdateOneRecordRow>
+                            <Link
+                                to="/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow"
+                                params={{
+                                    idOrganization: props.record.idOrganization,
+                                    idYear: props.record.idYear,
+                                    idRecord: row.original.idRecord,
+                                    idRecordRow: row.original.id
+                                }}
+                            >
+                                <ButtonGhostContent
+                                    icon={<IconEye />}
+                                    text={undefined}
+                                />
+                            </Link>
+                        </div>
+                    ),
+                    filterFn: 'includesString'
+                },
                 {
                     accessorKey: 'label',
                     header: 'Libellé',
@@ -45,9 +81,14 @@ export function RecordRowsTable(props: {
                             }}
                         >
                             {(account) => (
-                                <span>
-                                    {`${account.number}`}
-                                </span>
+                                <div className="flex justify-start items-start gap-2">
+                                    <FormatText className="overflow-visible">
+                                        {account.number}
+                                    </FormatText>
+                                    <FormatText wrap={true} className="text-neutral/50">
+                                        {account.label}
+                                    </FormatText>
+                                </div>
                             )}
                         </DataWrapper>
                     ),
@@ -85,25 +126,35 @@ export function RecordRowsTable(props: {
                 }
             ]}
             onRowClick={(row) => {
-                platformRouter.navigate({
-                    to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow",
-                    params: {
-                        idOrganization: props.record.idOrganization,
-                        idYear: props.record.idYear,
-                        idRecord: row.original.idRecord,
-                        idRecordRow: row.original.id
-                    }
-                })
+                // platformRouter.navigate({
+                //     to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow",
+                //     params: {
+                //         idOrganization: props.record.idOrganization,
+                //         idYear: props.record.idYear,
+                //         idRecord: row.original.idRecord,
+                //         idRecordRow: row.original.id
+                //     }
+                // })
             }}
         >
-            <CreateOneRecordRow
-                record={props.record}
-            >
-                <ButtonPlainContent
-                    icon={<IconPlus />}
-                    text="Ajouter un mouvement"
-                />
-            </CreateOneRecordRow>
+            <div className="flex justify-end items-center gap-1">
+                <CreateOneRecordRow
+                    record={props.record}
+                >
+                    <ButtonPlainContent
+                        icon={<IconPlus />}
+                        text="Ajouter un mouvement"
+                    />
+                </CreateOneRecordRow>
+                <UpdateManyRecordRows
+                    record={props.record}
+                >
+                    <ButtonOutlineContent
+                        icon={<IconEdit />}
+                        text="Modifier plusieurs mouvements"
+                    />
+                </UpdateManyRecordRows>
+            </div>
         </DataTable>
     )
 }

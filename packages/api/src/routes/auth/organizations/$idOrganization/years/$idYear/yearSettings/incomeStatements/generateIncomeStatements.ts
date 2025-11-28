@@ -69,15 +69,16 @@ export const generateIncomeStatementsRoute = authFactory.createApp()
                             idIncomeStatementParent: incomeStatementParent?.id ?? null,
                             number: defaultIncomeStatement.number.toString(),
                             isDefault: true,
+                            isComputed: (incomeStatementParent === undefined)
+                                ? true
+                                : false,
                             label: defaultIncomeStatement.label,
-                            netAmountAdded: "0.00",
                             createdAt: new Date().toISOString(),
                             lastUpdatedAt: null,
                             createdBy: null,
                             lastUpdatedBy: null,
                         })
                     })
-
 
                 const generatedIncomeStatements = await insertMany({
                     database: tx,

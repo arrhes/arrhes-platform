@@ -12,13 +12,14 @@ export function TableBodyCell(props: {
     return (
         <td
             className={cn(
-                "w-fit p-2 align-middle",
+                "w-fit p-2 align-top",
                 props.className
             )}
             colSpan={props.colSpan}
             style={props.style}
             align={props.align ?? "left"}
-            children={props.children}
-        />
+        >
+            {props.children}
+        </td>
     )
 }
