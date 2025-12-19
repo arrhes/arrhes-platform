@@ -1,0 +1,81 @@
+services:
+  arrhes-platform:
+    container_name: arrhes-platform
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        NODE_VERSION: "25.2.1"
+        PNPM_VERSION: "10.26.1"
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    ports:
+      - "3000:3000"  # API dev port (pnpm run dev)
+      - "5173:5173"  # Platform dev port (Vite)
+      - "5174:5174"  # Website dev port (Vite)
+    depends_on:
+      - postgres
+      - rustfs
+      - mailhog
+
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:18.1
+    container_name: arrhes-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: default
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d arrhes"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Object storage (RustFS)
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: arrhes-rustfs
+    restart: unless-stopped
+    command: server /data --web-ui-address ":9001"
+    environment:
+      RUSTFS_CONSOLE_ENABLE: true
+      RUSTFS_ACCESS_KEY: rustfsadmin
+      RUSTFS_SECRET_KEY: rustfsadmin
+    ports:
+      - "9000:9000"  # API
+      - "9001:9001"  # Web UI
+    volumes:
+      - rustfs_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:9000 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Serveur SMTP de test (Mailpit)
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: arrhes-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:8025 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    name: arrhes_postgres_data
+  rustfs_data:
+    name: arrhes_rustfs_data
+
