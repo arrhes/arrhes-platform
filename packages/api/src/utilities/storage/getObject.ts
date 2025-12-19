@@ -14,7 +14,7 @@ export async function getObject(parameters: {
     try {
 
         const command = new GetObjectCommand({
-            Bucket: parameters.var.env.STORAGE_NAME,
+            Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
             Key: parameters.storageKey ?? undefined
         })
 

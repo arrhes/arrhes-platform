@@ -16,7 +16,7 @@ export default defineConfig(() => {
         envDir: "../",
         server: {
             host: true,
-            port: 3101,
+            port: 5173,
             watch: {
                 usePolling: true
             },

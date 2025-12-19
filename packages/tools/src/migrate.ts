@@ -4,7 +4,7 @@ import postgres from "postgres"
 import { env } from "./env.js"
 
 
-const sql = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
+const sql = postgres(env()?.SQL_DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(sql)
 
 await migrate(db, { migrationsFolder: "drizzle" })

@@ -14,7 +14,7 @@ export async function deleteObject(parameters: {
     try {
 
         const command = new DeleteObjectCommand({
-            Bucket: parameters.var.env.STORAGE_NAME,
+            Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
             Key: parameters.storageKey
         })
 

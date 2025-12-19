@@ -1,5 +1,5 @@
 import type { Config } from "drizzle-kit"
-import { env } from "./src/env"
+import { env } from "./env.js"
 
 
 export default {
@@ -8,7 +8,7 @@ export default {
     dialect: "postgresql",
     strict: true,
     dbCredentials: {
-        url: env()?.DATABASE_URL ?? "",
+        url: env()?.SQL_DATABASE_URL ?? "",
     },
     verbose: true,
 } satisfies Config

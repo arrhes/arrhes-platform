@@ -1,5 +1,5 @@
-ARG NODE_VERSION
-ARG PNPM_VERSION
+ARG NODE_VERSION="latest"
+ARG PNPM_VERSION="latest"
 
 FROM node:${NODE_VERSION}-bullseye-slim
 

@@ -21,7 +21,7 @@ export async function generatePutSignedUrl(parameters: {
             parameters.var.clients.storage,
             new PutObjectCommand({
                 ACL: "private",
-                Bucket: parameters.var.env.STORAGE_NAME,
+                Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
                 Key: parameters.storageKey,
                 ContentLength: parameters.contentLength,
                 ContentType: parameters.contentType,

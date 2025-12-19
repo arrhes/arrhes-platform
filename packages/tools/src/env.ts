@@ -6,7 +6,7 @@ export function env() {
         return v.parse(
             v.object({
                 NODE_ENV: v.picklist(["development", "production"]),
-                DATABASE_URL: v.string()
+                SQL_DATABASE_URL: v.string()
             }),
             process.env,
         )

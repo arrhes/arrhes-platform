@@ -1,11 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { drizzle } from "drizzle-orm/postgres-js"
-import postgres from "postgres"
-import { env } from './env.js'
-
-
-const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
-const db = drizzle(connection)
+import { dbClient } from './dbClient.js'
 
 
 async function clearDb() {
@@ -17,11 +11,11 @@ async function clearDb() {
     `
     // CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
-    const tables = await db.execute(query)
+    const tables = await dbClient.execute(query)
 
     for (let table of tables) {
         const query = sql.raw(`DROP TABLE ${table.table_name} CASCADE;`)
-        await db.execute(query)
+        await dbClient.execute(query)
     }
 
     return

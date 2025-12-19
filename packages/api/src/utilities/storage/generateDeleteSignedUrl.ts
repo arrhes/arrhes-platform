@@ -17,7 +17,7 @@ export async function generateDeleteSignedUrl(parameters: {
         const signedUrl = await getSignedUrl(
             parameters.var.clients.storage,
             new DeleteObjectCommand({
-                Bucket: parameters.var.env.STORAGE_NAME,
+                Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
                 Key: parameters.storageKey
             }),
             {

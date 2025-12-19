@@ -25,7 +25,7 @@ Vous avez trois options pour développer Arrhes :
 **Avantages :**
 - ✨ Configuration 100% automatique
 - Environnement de développement complet dans un container
-- Tous les services préconfigurés (PostgreSQL, MinIO, MailHog)
+- Tous les services préconfigurés (PostgreSQL, RustFS, MailHog)
 - Base de données initialisée automatiquement avec données de démo
 - Extensions VS Code/Cursor installées automatiquement
 - Zéro configuration manuelle
@@ -39,7 +39,7 @@ Vous avez trois options pour développer Arrhes :
 ### Option 2 : Développement avec Docker Compose 🐳
 
 **Avantages :**
-- Configuration simplifiée (pas d'installation de PostgreSQL, MinIO, etc.)
+- Configuration simplifiée (pas d'installation de PostgreSQL, RustFS, etc.)
 - Environnement standardisé et reproductible
 - Isolation complète des services
 - Node.js et pnpm installés localement (meilleure performance)
@@ -62,7 +62,7 @@ Vous avez trois options pour développer Arrhes :
 - Node.js 24.5+
 - pnpm
 - PostgreSQL installé localement
-- Optionnellement Docker pour MinIO et MailHog
+- Optionnellement Docker pour RustFS et MailHog
 
 **Idéal pour :** Développeurs expérimentés, personnalisation avancée
 
@@ -86,7 +86,7 @@ Vous avez trois options pour développer Arrhes :
   - VS Code : https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
   - Cursor : Installer depuis le marketplace d'extensions
 
-C'est tout ! Node.js, pnpm, PostgreSQL, MinIO et MailHog seront configurés automatiquement dans le container.
+C'est tout ! Node.js, pnpm, PostgreSQL, RustFS et MailHog seront configurés automatiquement dans le container.
 
 ### Prérequis communs (Options 2 et 3)
 
@@ -117,7 +117,7 @@ C'est tout ! Node.js, pnpm, PostgreSQL, MinIO et MailHog seront configurés auto
   docker-compose --version
   ```
 
-C'est tout ! PostgreSQL, MinIO et MailHog seront lancés automatiquement dans des containers.
+C'est tout ! PostgreSQL, RustFS et MailHog seront lancés automatiquement dans des containers.
 
 ### Option 3 : Développement natif
 
@@ -144,7 +144,7 @@ C'est tout ! PostgreSQL, MinIO et MailHog seront lancés automatiquement dans de
   **Windows :**
   Télécharger depuis https://www.postgresql.org/download/windows/
 
-- **Docker** (optionnel, pour MinIO et MailHog) : https://www.docker.com/get-started
+- **Docker** (optionnel, pour RustFS et MailHog) : https://www.docker.com/get-started
 - Ou configurez des services S3 et SMTP alternatifs
 
 ## Installation
@@ -170,7 +170,7 @@ cursor .
 
 **Étape 3 : Reopen in Container**
 
-Lorsque VS Code/Cursor détecte le fichier `.devcontainer/devcontainer.json`, une notification apparaît :
+Lorsque VS Code/Cursor détecte le fichier `.dev/devcontainer.json`, une notification apparaît :
 
 > "Folder contains a Dev Container configuration file. Reopen folder to develop in a container?"
 
@@ -182,7 +182,7 @@ Cliquez sur **"Reopen in Container"** ou utilisez la palette de commandes :
 **Ce qui se passe automatiquement :**
 1. 🐳 Construction du container de développement
 2. 📦 Installation de toutes les dépendances (pnpm install)
-3. 🚀 Démarrage de PostgreSQL, MinIO et MailHog
+3. 🚀 Démarrage de PostgreSQL, RustFS et MailHog
 4. ⏳ Attente que PostgreSQL soit prêt
 5. 🗄️ Création du schéma de base de données
 6. 🌱 Insertion des données de démonstration
@@ -202,7 +202,7 @@ C'est tout ! Vous êtes prêt à développer. 🎉
 **URLs d'accès :**
 - **Platform** : http://localhost:5173
 - **API** : http://localhost:3000
-- **MinIO Console** : http://localhost:9001 (minioadmin / minioadmin)
+- **RustFS Console** : http://localhost:9001 (arrhes_rustfs / arrhes_rustfs_secret)
 - **MailHog** : http://localhost:8025
 
 **Identifiants de démonstration :**
@@ -273,7 +273,7 @@ Les fichiers suivants sont créés automatiquement :
 
 **Note importante :** Dans le Dev Container, les URLs pointent vers les noms de services Docker :
 - PostgreSQL : `postgres:5432` (au lieu de `localhost:5432`)
-- MinIO : `minio:9000` (au lieu de `localhost:9000`)
+- RustFS : `rustfs:9000` (au lieu de `localhost:9000`)
 - MailHog : `mailhog:1025` (au lieu de `localhost:1025`)
 
 Si vous souhaitez modifier la configuration, éditez directement les fichiers `.env` créés.
@@ -285,7 +285,7 @@ Si vous souhaitez modifier la configuration, éditez directement les fichiers `.
 #### 1. Lancer les services avec Docker Compose
 
 ```bash
-# Lancer tous les services (PostgreSQL, MinIO, MailHog)
+# Lancer tous les services (PostgreSQL, RustFS, MailHog)
 docker-compose up -d
 
 # Vérifier que tout fonctionne
@@ -294,24 +294,23 @@ docker-compose ps
 
 Les services seront disponibles sur :
 - **PostgreSQL** : `localhost:5432`
-- **MinIO API** : `localhost:9000`
-- **MinIO Console** : http://localhost:9001
+- **RustFS API** : `localhost:9000`
+- **RustFS Console** : http://localhost:9001
 - **MailHog SMTP** : `localhost:1025`
 - **MailHog Web** : http://localhost:8025
 
-#### 2. Créer le bucket MinIO
+#### 2. Créer le bucket RustFS
 
 ```bash
-# Accéder à la console MinIO : http://localhost:9001
-# Credentials : minioadmin / minioadmin
+# Accéder à la console RustFS : http://localhost:9001
+# Credentials : arrhes_rustfs / arrhes_rustfs_secret
 # Créer un bucket nommé "arrhes-files"
 ```
 
 Ou via la ligne de commande :
 ```bash
-# Installer le client MinIO
-docker exec arrhes-minio mc alias set local http://localhost:9000 minioadmin minioadmin
-docker exec arrhes-minio mc mb local/arrhes-files
+# Installer le client RustFS
+# Create the bucket via the RustFS web UI at http://localhost:9001 or use an S3-compatible client to create `arrhes-files`.
 ```
 
 #### 3. Créer les fichiers de configuration
@@ -339,11 +338,11 @@ WEBSITE_BASE_URL=http://localhost:5174
 # Base de données (Docker Compose)
 SQL_DATABASE_URL=postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
 
-# Stockage MinIO (Docker Compose)
+# Stockage RustFS (Docker Compose)
 STORAGE_ENDPOINT=http://localhost:9000
-STORAGE_NAME=arrhes-files
-STORAGE_ACCESS_KEY=minioadmin
-STORAGE_SECRET_KEY=minioadmin
+STORAGE_BUCKET_NAME=arrhes-files
+STORAGE_ACCESS_KEY=arrhes_rustfs
+STORAGE_SECRET_KEY=arrhes_rustfs_secret
 
 # Email MailHog (Docker Compose)
 EMAIL_ENDPOINT=localhost:1025
@@ -382,20 +381,21 @@ GRANT ALL PRIVILEGES ON DATABASE arrhes TO arrhes_user;
 
 #### 2. Configurer les services externes (optionnel)
 
-**MinIO (Stockage de fichiers) :**
+**RustFS (Stockage de fichiers) :**
 
 ```bash
-# Lancer MinIO avec Docker
+# Lancer RustFS avec Docker
 docker run -d \
   -p 9000:9000 \
   -p 9001:9001 \
-  --name minio \
-  -e "MINIO_ROOT_USER=minioadmin" \
-  -e "MINIO_ROOT_PASSWORD=minioadmin" \
-  -v ~/minio/data:/data \
-  quay.io/minio/minio server /data --console-address ":9001"
+  --name rustfs \
 
-# Accéder à la console : http://localhost:9001
+  -e "RUSTFS_ROOT_USER=arrhes_rustfs" \
+  -e "RUSTFS_ROOT_PASSWORD=arrhes_rustfs_secret" \
+  -v ~/rustfs/data:/data \
+  rustfs/rustfs:latest server /data --web-ui-address ":9001"
+
+# Accéder à la web UI : http://localhost:9001
 # Créer un bucket nommé "arrhes-files"
 ```
 
@@ -504,7 +504,7 @@ pnpm --filter metadata run dev
 
 - **Frontend (Platform)** : http://localhost:5173
 - **API** : http://localhost:3000
-- **MinIO Console** : http://localhost:9001 (minioadmin / minioadmin)
+- **RustFS Console** : http://localhost:9001 (arrhes_rustfs / arrhes_rustfs_secret)
 - **MailHog Web UI** : http://localhost:8025
 
 ### Identifiants de démonstration
@@ -517,7 +517,7 @@ Password : demo
 ### Notes par option
 
 **Dev Container :**
-- Les services (PostgreSQL, MinIO, MailHog) sont déjà démarrés automatiquement
+- Les services (PostgreSQL, RustFS, MailHog) sont déjà démarrés automatiquement
 - Les ports sont automatiquement forwardés vers votre machine locale
 - Vous pouvez cliquer sur les ports dans VS Code/Cursor pour ouvrir les URLs
 
@@ -527,7 +527,7 @@ Password : demo
 
 **Natif :**
 - Assurez-vous que PostgreSQL est démarré
-- Si vous utilisez MinIO/MailHog avec Docker, vérifiez qu'ils tournent : `docker ps`
+- Si vous utilisez RustFS/MailHog avec Docker, vérifiez qu'ils tournent : `docker ps`
 
 ## Structure du projet
 
@@ -683,7 +683,7 @@ pnpm --filter tools run drop
 
 1. **Lancer les services**
    ```bash
-   # Lancer tous les services (PostgreSQL, MinIO, MailHog)
+   # Lancer tous les services (PostgreSQL, RustFS, MailHog)
    docker-compose up -d
    ```
 
@@ -716,8 +716,8 @@ pnpm --filter tools run drop
    # PostgreSQL (si pas démarré)
    sudo systemctl start postgresql
    
-   # MinIO (si utilisé avec Docker)
-   docker start minio
+   # RustFS (si utilisé avec Docker)
+   docker start rustfs
    
    # MailHog (si utilisé avec Docker)
    docker start mailhog
@@ -908,9 +908,9 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 - Vérifiez que l'API et la platform sont sur le même domaine
 
 **"S3/Storage error" :**
-- Vérifiez que MinIO est démarré : `docker ps | grep minio`
+- Vérifiez que RustFS est démarré : `docker ps | grep rustfs`
 - Vérifiez que le bucket existe (console : http://localhost:9001)
-- Testez l'endpoint : `curl http://localhost:9000/minio/health/live`
+- Testez l'endpoint : `curl http://localhost:9000/health || curl http://localhost:9000/health/live`
 
 **Problèmes Docker :**
 - **Port déjà utilisé :** Un autre service utilise le même port
@@ -922,7 +922,7 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 - **Container ne démarre pas :** Voir les logs
   ```bash
   docker-compose logs postgres
-  docker-compose logs minio
+  docker-compose logs rustfs
   docker-compose logs mailhog
   ```
 - **Réinitialiser complètement :**

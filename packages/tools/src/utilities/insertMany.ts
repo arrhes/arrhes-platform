@@ -1,5 +1,5 @@
-import { dbClient } from "#/dbClient.js"
 import { PgInsertValue, PgTable, TableConfig } from "drizzle-orm/pg-core"
+import { dbClient } from "../dbClient.js"
 
 
 // : Promise<Array<T["$inferInsert"]>>

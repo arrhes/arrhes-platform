@@ -44,7 +44,6 @@ coverage
 *.tgz
 .npmrc
 .continue
-.dev
 .old
 
 # Docker
@@ -52,3 +51,5 @@ Dockerfile
 docker-compose.yml
 .dockerignore
 
+
+!.dev

@@ -41,25 +41,38 @@ Arrhes est une solution complète de comptabilité conçue spécifiquement pour 
 
 ### Option 1 : Dev Container 🚀 (Le plus simple)
 
-Prérequis : Docker, VS Code ou Cursor avec l'extension Dev Containers
+Prérequis : Docker
+
+Quick CLI workflow (no editor integration required):
 
 ```bash
-# Cloner le repository
+# Clone & enter repo
 git clone https://github.com/arrhes/arrhes-platform.git
 cd arrhes-platform
 
-# Ouvrir dans VS Code/Cursor
-code .
+# Start the devcontainer services (bind-mounts your workspace)
+./devcontainer-start.sh
 
-# Cliquer sur "Reopen in Container" quand demandé
-# Ou : Cmd/Ctrl+Shift+P > "Dev Containers: Reopen in Container"
+# Bootstrap the workspace (run inside the devcontainer): installs deps, builds metadata, pushes schema and seeds DB
+./dev/scripts/initialize.sh
 
-# L'environnement se configure automatiquement !
-# Une fois prêt, lancer l'application :
-pnpm run dev
+# Open an interactive shell inside the devcontainer (one-line)
+docker compose -f .dev/compose.yml exec devcontainer bash
+
+# From that shell you can start the dev servers (they must bind to 0.0.0.0 to be reachable from the host):
+# API
+pnpm --filter api run dev
+# Platform (Vite) - ensure host binding
+pnpm --filter platform run dev -- --host
+# Website (Vite) - ensure host binding
+pnpm --filter website run dev -- --host
 ```
 
-Tout est configuré automatiquement : Node.js, pnpm, PostgreSQL, MinIO, MailHog, et les données de démonstration !
+If you prefer to attach VS Code to the running container instead of using an in-container shell, install the "Dev Containers" extension and use "Dev Containers: Attach to Running Container..." then select the `devcontainer` container. Edits are persisted on the host because the service mount `.:/workspace` is a bind mount.
+
+
+
+Tout est configuré automatiquement : Node.js, pnpm, PostgreSQL, RustFS, MailHog, et les données de démonstration !
 
 ### Option 2 : Avec Docker Compose 🐳
 
@@ -73,11 +86,11 @@ cd arrhes-platform
 # Installer les dépendances
 pnpm install
 
-# Lancer les services (PostgreSQL, MinIO, MailHog)
+# Lancer les services (PostgreSQL, RustFS, MailHog)
 docker-compose up -d
 
-# Créer le bucket MinIO
-# Accéder à http://localhost:9001 (minioadmin / minioadmin)
+# Créer le bucket RustFS
+# Accéder à http://localhost:9001 (arrhes_rustfs / arrhes_rustfs_secret)
 # Créer un bucket nommé "arrhes-files"
 
 # Configurer les variables d'environnement

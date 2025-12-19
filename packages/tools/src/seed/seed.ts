@@ -1,20 +1,14 @@
-import { DefaultBalanceSheet, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations, defaultJournals } from '@arrhes/metadata/components'
+import { defaultJournals } from '@arrhes/metadata/components'
 import { models } from '@arrhes/metadata/models'
 import { generateId } from '@arrhes/metadata/utilities'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
-import { drizzle } from "drizzle-orm/postgres-js"
-import postgres from "postgres"
-import { env } from '../env.js'
-
-
-const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
-const db = drizzle(connection)
+import { dbClient } from '../dbClient.js'
 
 
 async function seed() {
     try {
-        await db.transaction(async (tx) => {
+        await dbClient.transaction(async (tx) => {
 
 
             // User
@@ -41,7 +35,7 @@ async function seed() {
                 isArchived: false,
                 scope: "company",
                 siren: "123456789",
-                name: "Arrhes",
+                name: "Demo company",
                 email: "demo@arrhes.com",
                 createdAt: new Date().toISOString(),
             }
@@ -63,13 +57,14 @@ async function seed() {
 
             // Years
             console.log("Add years")
+            const currentDate = new Date()
             const newYear: (typeof models.year.$inferInsert) = {
                 id: generateId(),
                 idOrganization: newOrganization.id,
                 isClosed: false,
-                label: "Exercice 2024",
-                startingAt: new Date(2024, 0, 1, 0, 0).toISOString(),
-                endingAt: new Date(2024, 11, 31, 23, 59, 99).toISOString(),
+                label: `Exercice ${currentDate.getFullYear()}`,
+                startingAt: new Date(currentDate.getFullYear(), 0, 1, 0, 0).toISOString(),
+                endingAt: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 99).toISOString(),
                 createdAt: new Date().toISOString(),
             }
             await tx.insert(models.year).values(newYear)
@@ -88,138 +83,138 @@ async function seed() {
             await tx.insert(models.journal).values(newJournals)
 
 
-            // Accounts
-            // console.log("Add accounts")
-            // let newAccounts: (typeof models.account.$inferInsert)[] = defaultCompanyAccounts.map((_account) => ({
+            // // Accounts
+            // // console.log("Add accounts")
+            // // let newAccounts: (typeof models.account.$inferInsert)[] = defaultCompanyAccounts.map((_account) => ({
+            // //     id: generateId(),
+            // //     idOrganization: newOrganization.id,
+            // //     idYear: newYear.id,
+            // //     idParent: undefined,
+            // //     isDefault: true,
+            // //     number: _account.number.toString(),
+            // //     isMandatory: _account.isMandatory,
+            // //     isClass: _account.isClass,
+            // //     isSelectable: _account.isSelectable,
+            // //     label: _account.label,
+            // //     type: _account.type,
+            // //     scope: "company",
+            // //     createdAt: new Date().toISOString(),
+            // // }))
+            // // newAccounts = newAccounts.map((_account) => {
+            // //     const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+
+            // //     return ({
+            // //         ..._account,
+            // //         idParent: parent?.id
+            // //     })
+            // // })
+            // // await tx.insert(models.account).values(newAccounts)
+
+
+            // // Sheets
+            // console.log("Add sheets")
+            // let newBalanceSheets: (typeof models.balanceSheet.$inferInsert & { numberParent: number | undefined, accounts: DefaultBalanceSheet["accounts"][number][] })[] = defaultCompanyBalanceSheets.map((_balanceSheet) => ({
             //     id: generateId(),
             //     idOrganization: newOrganization.id,
             //     idYear: newYear.id,
-            //     idParent: undefined,
             //     isDefault: true,
-            //     number: _account.number.toString(),
-            //     isMandatory: _account.isMandatory,
-            //     isClass: _account.isClass,
-            //     isSelectable: _account.isSelectable,
-            //     label: _account.label,
-            //     type: _account.type,
-            //     scope: "company",
+            //     isComputed: true,
+            //     side: _balanceSheet.side,
+            //     number: _balanceSheet.number.toString(),
+            //     label: _balanceSheet.label,
+            //     grossAmountAdded: "0",
+            //     amortizationAmountAdded: "0",
+            //     netAmountAdded: "0",
             //     createdAt: new Date().toISOString(),
+            //     numberParent: _balanceSheet.numberParent,
+            //     accounts: _balanceSheet.accounts,
             // }))
-            // newAccounts = newAccounts.map((_account) => {
-            //     const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+            // // newSheets = newSheets.map((_sheet) => {
+            // //     const parent = newSheets.find((x) => (x.number === _sheet.numberParent) && (x.side === _sheet.side))
 
+            // //     return ({
+            // //         ..._sheet,
+            // //         idParent: parent?.id
+            // //     })
+            // // })
+            // await tx.insert(models.balanceSheet).values(newBalanceSheets)
+
+
+            // // Statements
+            // console.log("Add statements")
+            // let newIncomeStatements: Array<
+            //     & typeof models.incomeStatement.$inferInsert
+            //     & {
+            //         numberParent: number | undefined,
+            //         accounts: number[]
+            //     }
+            // > = defaultCompanyIncomeStatements
+            //     .map((_incomeStatement) => ({
+            //         id: generateId(),
+            //         idOrganization: newOrganization.id,
+            //         idYear: newYear.id,
+            //         isDefault: true,
+            //         isComputed: true,
+            //         number: _incomeStatement.number.toString(),
+            //         label: _incomeStatement.label,
+            //         netAmountAdded: "0",
+            //         createdAt: new Date().toISOString(),
+            //         numberParent: _incomeStatement.numberParent,
+            //         accounts: _incomeStatement.accounts
+            //     }))
+            // // newStatements = newStatements.map((_statement) => {
+            // //     const parent = newStatements.find((x) => x.number === _statement.numberParent)
+
+            // //     return ({
+            // //         ..._statement,
+            // //         idParent: parent?.id
+            // //     })
+            // // })
+            // await tx.insert(models.incomeStatement).values(newIncomeStatements)
+
+
+
+            // // Computations
+            // console.log("Add computations")
+            // const newComputations: Array<
+            //     & typeof models.computation.$inferInsert
+            //     & { incomeStatements: DefaultComputation["incomeStatements"][number][] }
+            // > = defaultComputations.map((_computation, index) => {
             //     return ({
-            //         ..._account,
-            //         idParent: parent?.id
+            //         id: generateId(),
+            //         idOrganization: newOrganization.id,
+            //         idYear: newYear.id,
+            //         index: index,
+            //         number: _computation.number.toString(),
+            //         label: _computation.label,
+            //         createdAt: new Date().toISOString(),
+            //         incomeStatements: _computation.incomeStatements
             //     })
             // })
-            // await tx.insert(models.account).values(newAccounts)
+            // await tx.insert(models.computation).values(newComputations)
 
 
-            // Sheets
-            console.log("Add sheets")
-            let newBalanceSheets: (typeof models.balanceSheet.$inferInsert & { numberParent: number | undefined, accounts: DefaultBalanceSheet["accounts"][number][] })[] = defaultCompanyBalanceSheets.map((_balanceSheet) => ({
-                id: generateId(),
-                idOrganization: newOrganization.id,
-                idYear: newYear.id,
-                isDefault: true,
-                isComputed: true,
-                side: _balanceSheet.side,
-                number: _balanceSheet.number.toString(),
-                label: _balanceSheet.label,
-                grossAmountAdded: "0",
-                amortizationAmountAdded: "0",
-                netAmountAdded: "0",
-                createdAt: new Date().toISOString(),
-                numberParent: _balanceSheet.numberParent,
-                accounts: _balanceSheet.accounts,
-            }))
-            // newSheets = newSheets.map((_sheet) => {
-            //     const parent = newSheets.find((x) => (x.number === _sheet.numberParent) && (x.side === _sheet.side))
+            // // ComputationStatements
+            // console.log("Add computationStatements")
+            // const newComputationIncomeStatements: Array<(typeof models.computationIncomeStatement.$inferInsert)> = []
+            // newComputations.forEach((_computation) => {
+            //     _computation.incomeStatements.forEach((_incomeStatement, index) => {
+            //         const incomeStatement = newIncomeStatements.find((x) => x.number === _incomeStatement.number.toString())
 
-            //     return ({
-            //         ..._sheet,
-            //         idParent: parent?.id
+            //         if (!incomeStatement) return console.log(`Statement not found ${_computation.number} ${_incomeStatement.number}`)
+            //         newComputationIncomeStatements.push({
+            //             id: generateId(),
+            //             idOrganization: newOrganization.id,
+            //             idYear: newYear.id,
+            //             idComputation: _computation.id,
+            //             idIncomeStatement: incomeStatement.id,
+            //             index: index,
+            //             operation: _incomeStatement.operation,
+            //             createdAt: new Date().toISOString(),
+            //         })
             //     })
             // })
-            await tx.insert(models.balanceSheet).values(newBalanceSheets)
-
-
-            // Statements
-            console.log("Add statements")
-            let newIncomeStatements: Array<
-                & typeof models.incomeStatement.$inferInsert
-                & {
-                    numberParent: number | undefined,
-                    accounts: number[]
-                }
-            > = defaultCompanyIncomeStatements
-                .map((_incomeStatement) => ({
-                    id: generateId(),
-                    idOrganization: newOrganization.id,
-                    idYear: newYear.id,
-                    isDefault: true,
-                    isComputed: true,
-                    number: _incomeStatement.number.toString(),
-                    label: _incomeStatement.label,
-                    netAmountAdded: "0",
-                    createdAt: new Date().toISOString(),
-                    numberParent: _incomeStatement.numberParent,
-                    accounts: _incomeStatement.accounts
-                }))
-            // newStatements = newStatements.map((_statement) => {
-            //     const parent = newStatements.find((x) => x.number === _statement.numberParent)
-
-            //     return ({
-            //         ..._statement,
-            //         idParent: parent?.id
-            //     })
-            // })
-            await tx.insert(models.incomeStatement).values(newIncomeStatements)
-
-
-
-            // Computations
-            console.log("Add computations")
-            const newComputations: Array<
-                & typeof models.computation.$inferInsert
-                & { incomeStatements: DefaultComputation["incomeStatements"][number][] }
-            > = defaultComputations.map((_computation, index) => {
-                return ({
-                    id: generateId(),
-                    idOrganization: newOrganization.id,
-                    idYear: newYear.id,
-                    index: index,
-                    number: _computation.number.toString(),
-                    label: _computation.label,
-                    createdAt: new Date().toISOString(),
-                    incomeStatements: _computation.incomeStatements
-                })
-            })
-            await tx.insert(models.computation).values(newComputations)
-
-
-            // ComputationStatements
-            console.log("Add computationStatements")
-            const newComputationIncomeStatements: Array<(typeof models.computationIncomeStatement.$inferInsert)> = []
-            newComputations.forEach((_computation) => {
-                _computation.incomeStatements.forEach((_incomeStatement, index) => {
-                    const incomeStatement = newIncomeStatements.find((x) => x.number === _incomeStatement.number.toString())
-
-                    if (!incomeStatement) return console.log(`Statement not found ${_computation.number} ${_incomeStatement.number}`)
-                    newComputationIncomeStatements.push({
-                        id: generateId(),
-                        idOrganization: newOrganization.id,
-                        idYear: newYear.id,
-                        idComputation: _computation.id,
-                        idIncomeStatement: incomeStatement.id,
-                        index: index,
-                        operation: _incomeStatement.operation,
-                        createdAt: new Date().toISOString(),
-                    })
-                })
-            })
-            await tx.insert(models.computationIncomeStatement).values(newComputationIncomeStatements)
+            // await tx.insert(models.computationIncomeStatement).values(newComputationIncomeStatements)
 
 
             // Check accounts

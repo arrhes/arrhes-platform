@@ -26,7 +26,7 @@ Ces fichiers ne sont **pas versionnés** (`.gitignore`) pour des raisons de séc
 
 **Option 1 : Avec Docker Compose (Recommandé) 🐳**
 
-Le fichier `docker-compose.yml` à la racine du projet lance automatiquement PostgreSQL, MinIO et MailHog avec des valeurs par défaut prêtes à l'emploi. Cette option simplifie grandement la configuration.
+Le fichier `docker-compose.yml` à la racine du projet lance automatiquement PostgreSQL, RustFS et MailHog avec des valeurs par défaut prêtes à l'emploi. Cette option simplifie la configuration.
 
 **Option 2 : Installation native**
 
@@ -72,10 +72,10 @@ Fichier : `packages/api/.env`
 
 | Variable | Type | Description | Exemple |
 |----------|------|-------------|---------|
-| `STORAGE_ENDPOINT` | `string` | Endpoint S3 (ou compatible) | `http://localhost:9000` (MinIO) |
-| `STORAGE_NAME` | `string` | Nom du bucket S3 | `arrhes-files` |
-| `STORAGE_ACCESS_KEY` | `string` | Clé d'accès S3 | `minioadmin` |
-| `STORAGE_SECRET_KEY` | `string` | Clé secrète S3 | `minioadmin` |
+| `STORAGE_ENDPOINT` | `string` | Endpoint S3 (ou compatible) | `http://localhost:9000` (RustFS) |
+| `STORAGE_BUCKET_NAME` | `string` | Nom du bucket S3 | `arrhes-files` |
+| `STORAGE_ACCESS_KEY` | `string` | Clé d'accès S3 | `arrhes_rustfs` |
+| `STORAGE_SECRET_KEY` | `string` | Clé secrète S3 | `arrhes_rustfs_secret` |
 
 ### Email SMTP
 
@@ -184,50 +184,43 @@ Le système de stockage utilise l'API AWS S3 mais fonctionne avec n'importe quel
 
 ### Option 1 : Avec Docker Compose (Recommandé) 🐳
 
-Le fichier `docker-compose.yml` lance automatiquement MinIO.
+Le fichier `docker-compose.yml` lance automatiquement RustFS.
 
-**Lancer MinIO :**
+**Lancer RustFS :**
 ```bash
-docker-compose up -d minio
+docker-compose up -d rustfs
 ```
 
 **Configuration par défaut :**
 - **Endpoint** : `http://localhost:9000`
-- **Console** : http://localhost:9001
-- **Access Key** : `minioadmin`
-- **Secret Key** : `minioadmin`
+- **Web UI** : http://localhost:9001
+- **Access Key** : `arrhes_rustfs`
+- **Secret Key** : `arrhes_rustfs_secret`
 - **Bucket** : `arrhes-files` (à créer)
 
 **Variables d'environnement :**
 ```env
 STORAGE_ENDPOINT=http://localhost:9000
-STORAGE_NAME=arrhes-files
-STORAGE_ACCESS_KEY=minioadmin
-STORAGE_SECRET_KEY=minioadmin
+STORAGE_BUCKET_NAME=arrhes-files
+STORAGE_ACCESS_KEY=arrhes_rustfs
+STORAGE_SECRET_KEY=arrhes_rustfs_secret
 ```
 
 **Création du bucket :**
 
 Via l'interface web :
 1. Accéder à http://localhost:9001
-2. Se connecter avec `minioadmin` / `minioadmin`
+2. Se connecter avec `arrhes_rustfs` / `arrhes_rustfs_secret`
 3. Cliquer sur "Buckets" > "Create Bucket"
 4. Nommer le bucket `arrhes-files`
-
-Ou via la ligne de commande :
-```bash
-docker exec arrhes-minio mc alias set local http://localhost:9000 minioadmin minioadmin
-docker exec arrhes-minio mc mb local/arrhes-files
-docker exec arrhes-minio mc anonymous set public local/arrhes-files
-```
 
 **Commandes utiles :**
 ```bash
 # Voir les logs
-docker-compose logs minio
+docker-compose logs rustfs
 
 # Redémarrer
-docker-compose restart minio
+docker-compose restart rustfs
 ```
 
 ### Option 2 : MinIO standalone (sans Docker Compose)
@@ -237,11 +230,12 @@ docker-compose restart minio
 docker run -d \
   -p 9000:9000 \
   -p 9001:9001 \
-  --name minio \
-  -e "MINIO_ROOT_USER=minioadmin" \
-  -e "MINIO_ROOT_PASSWORD=minioadmin" \
-  -v ~/minio/data:/data \
-  quay.io/minio/minio server /data --console-address ":9001"
+  --name rustfs \
+
+  -e "RUSTFS_ROOT_USER=arrhes_rustfs" \
+  -e "RUSTFS_ROOT_PASSWORD=arrhes_rustfs_secret" \
+  -v ~/rustfs/data:/data \
+  rustfs/rustfs:latest server /data --web-ui-address ":9001"
 ```
 
 Suivez ensuite les mêmes étapes de création de bucket que ci-dessus.
@@ -251,7 +245,7 @@ Suivez ensuite les mêmes étapes de création de bucket que ci-dessus.
 **Configuration :**
 ```env
 STORAGE_ENDPOINT=https://s3.eu-west-3.amazonaws.com
-STORAGE_NAME=your-bucket-name
+STORAGE_BUCKET_NAME=your-bucket-name
 STORAGE_ACCESS_KEY=YOUR_AWS_ACCESS_KEY
 STORAGE_SECRET_KEY=YOUR_AWS_SECRET_KEY
 ```
@@ -387,51 +381,10 @@ SQL_DATABASE_URL=postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
 
 # Stockage MinIO (Docker Compose)
 STORAGE_ENDPOINT=http://localhost:9000
-STORAGE_NAME=arrhes-files
-STORAGE_ACCESS_KEY=minioadmin
-STORAGE_SECRET_KEY=minioadmin
+STORAGE_BUCKET_NAME=arrhes-files
+STORAGE_ACCESS_KEY=arrhes_rustfs
+STORAGE_SECRET_KEY=arrhes_rustfs_secret
 
-# Email MailHog (Docker Compose)
-EMAIL_ENDPOINT=localhost:1025
-EMAIL_USER=test
-EMAIL_PASSWORD=test
-```
-
-**Étape 3 : `packages/tools/.env`**
-```env
-DATABASE_URL=postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
-```
-
-**Étape 4 : Créer le bucket MinIO**
-Accédez à http://localhost:9001 (minioadmin / minioadmin) et créez un bucket `arrhes-files`.
-
-### Configuration native (PostgreSQL local + MinIO Docker)
-
-**`packages/api/.env` :**
-```env
-# Environnement
-ENV=development
-VERBOSE=true
-PORT=3000
-
-# CORS et Cookies
-CORS_ORIGIN=http://localhost:5173
-COOKIES_DOMAIN=localhost
-COOKIES_KEY=my-super-secret-development-key-at-least-32-chars
-
-# URLs
-API_BASE_URL=http://localhost:3000
-PLATFORM_BASE_URL=http://localhost:5173
-WEBSITE_BASE_URL=http://localhost:5174
-
-# Base de données (PostgreSQL local)
-SQL_DATABASE_URL=postgres://arrhes_user:your-password@localhost:5432/arrhes
-
-# Stockage MinIO (Docker standalone)
-STORAGE_ENDPOINT=http://localhost:9000
-STORAGE_NAME=arrhes-files
-STORAGE_ACCESS_KEY=minioadmin
-STORAGE_SECRET_KEY=minioadmin
 
 # Email (MailHog Docker standalone)
 EMAIL_ENDPOINT=localhost:1025
@@ -468,7 +421,7 @@ SQL_DATABASE_URL=postgres://user:pass@db.provider.com:5432/arrhes
 
 # Stockage AWS S3
 STORAGE_ENDPOINT=https://s3.eu-west-3.amazonaws.com
-STORAGE_NAME=my-arrhes-bucket
+STORAGE_BUCKET_NAME=my-arrhes-bucket
 STORAGE_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
 STORAGE_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
