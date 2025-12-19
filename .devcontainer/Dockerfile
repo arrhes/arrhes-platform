@@ -1,20 +1,28 @@
-ARG NODE_VERSION=24
-FROM mcr.microsoft.com/devcontainers/typescript-node:${NODE_VERSION}
+ARG NODE_VERSION
+ARG PNPM_VERSION
 
-# Installer pnpm globalement
-RUN npm install -g pnpm
+FROM node:${NODE_VERSION}-bullseye-slim
 
-# Installer des outils utiles
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends \
-    postgresql-client \
-    curl \
-    vim \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+# Minimal runtime + tools
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Configurer le workspace
+# Update package lists (no default packages installed here)
+RUN apt-get update
+
+# Install pnpm using the PNPM_VERSION build arg
+RUN npm install -g "pnpm@${PNPM_VERSION}"
+
+# Reduce image size
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
+# Create workspace directory and set permissions
 WORKDIR /workspace
+RUN mkdir -p /workspace \
+  && chown -R node:node /workspace
 
-# Note: Les dépendances seront installées via postCreateCommand
-# car le workspace sera monté depuis le host
+# Use non-root node user by default
+USER node
 
+# Note: dependencies are installed during the bootstrap step (post-create)
+# The workspace is mounted from the host at runtime.
