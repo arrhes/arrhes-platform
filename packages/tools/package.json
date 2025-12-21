@@ -1,5 +1,5 @@
 {
-    "name": "@arrhes/tools",
+    "name": "@arrhes/application-tools",
     "type": "module",
     "private": true,
     "scripts": {
@@ -20,7 +20,7 @@
         "typescript": "5.9.3"
     },
     "dependencies": {
-        "@arrhes/metadata": "workspace:*",
+        "@arrhes/application-metadata": "workspace:*",
         "@ngneat/falso": "8.0.2",
         "drizzle-orm": "0.44.7",
         "nanoid": "5.1.6",

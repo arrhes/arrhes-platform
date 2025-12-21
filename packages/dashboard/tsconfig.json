@@ -12,18 +12,22 @@
         "moduleResolution": "NodeNext",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "declaration": true,
-        "declarationMap": true,
         "sourceMap": true,
-        "verbatimModuleSyntax": false,
-        "rootDir": ".",
+        "rootDir": "./src",
         "outDir": "./build",
+        "paths": {
+            "#/*": [
+                "./src/*"
+            ]
+        },
+        "declaration": false,
+        "declarationMap": false,
     },
     "exclude": [
         "./node_modules",
         "./build",
     ],
     "include": [
-        "./src",
+        "./src"
     ]
 }

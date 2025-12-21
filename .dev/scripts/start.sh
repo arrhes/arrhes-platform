@@ -2,7 +2,7 @@
 set -euo pipefail
 
 COMPOSE_FILE=".dev/compose.yml"
-SERVICE="arrhes-platform"
+SERVICE="arrhes-application"
 
 echo "Remove previous containers"
 docker ps -a --filter="name=arrhes-" -q | xargs -r docker rm -f

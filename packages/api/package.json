@@ -1,5 +1,5 @@
 {
-    "name": "@arrhes/api",
+    "name": "@arrhes/application-api",
     "type": "module",
     "private": false,
     "scripts": {
@@ -14,7 +14,7 @@
         "typescript": "5.9.3"
     },
     "dependencies": {
-        "@arrhes/metadata": "workspace:*",
+        "@arrhes/application-metadata": "workspace:*",
         "@aws-sdk/client-s3": "3.940.0",
         "@aws-sdk/s3-request-presigner": "3.940.0",
         "drizzle-orm": "0.44.7",

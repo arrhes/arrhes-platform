@@ -1,36 +1,16 @@
-services:
-  arrhes-platform:
-    container_name: arrhes-platform
-    build:
-      context: .
-      dockerfile: .dev/Dockerfile
-      args:
-        NODE_VERSION: "25.2.1"
-        PNPM_VERSION: "10.26.1"
-    image: arrhes-platform
-    volumes:
-      - .:/workspace:cached
-    command: sleep infinity
-    ports:
-      - "3000:3000"  # API dev port (pnpm run dev)
-      - "5173:5173"  # Platform dev port (Vite)
-      - "5174:5174"  # Website dev port (Vite)
-    depends_on:
-      - postgres
-      - rustfs
-      - mailpit
+# name: arrhes-application
 
-  # Base de données PostgreSQL
+services:
+  # Database (PostgreSQL)
   postgres:
     image: postgres:18.1
-    container_name: arrhes-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: default
     ports:
-      - "5432:5432"
+      - "5432:5432" # Postgresql
     volumes:
       - postgres_data:/var/lib/postgresql
     healthcheck:
@@ -42,9 +22,7 @@ services:
   # Object storage (RustFS)
   rustfs:
     image: rustfs/rustfs:latest
-    container_name: arrhes-rustfs
     restart: unless-stopped
-    command: server /data --console-address ":9001"
     environment:
       RUSTFS_CONSOLE_ENABLE: true
       RUSTFS_ACCESS_KEY: rustfsadmin
@@ -62,10 +40,9 @@ services:
       timeout: 5s
       retries: 5
 
-  # Serveur SMTP de test (Mailpit)
+  # Mail server (Mailpit)
   mailpit:
     image: axllent/mailpit:latest
-    container_name: arrhes-mailpit
     restart: unless-stopped
     ports:
       - "1025:1025"  # SMTP
@@ -76,11 +53,38 @@ services:
       timeout: 5s
       retries: 5
 
+  # API (Node.js)
+  api:
+    build:
+      context: .
+      dockerfile: .dev/packages/api/Dockerfile
+      args:
+        NODE_VERSION: "25.2.1"
+        PNPM_VERSION: "10.26.1"
+    volumes:
+      - .:/workspace:delegated
+      - root_node_modules:/workspace/node_modules         # hoisted workspace node_modules
+      - api_node_modules:/workspace/packages/api/node_modules  # per-package mask if needed
+      - api_env:/workspace/packages/api/.env              # masked .env file (will be created inside container)
+      - pnpm_store:/root/.pnpm-store                      # pnpm store kept in docker volume (optional)
+    working_dir: /workspace/packages/api
+    command: pnpm --filter="@arrhes/@arrhes/platform-api" dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - rustfs
+      - mailpit
+
+
 volumes:
+  api_node_modules:
+  api_env:
+  root_node_modules:
+  pnpm_store:
   postgres_data:
     name: arrhes_postgres_data
     external: true
   rustfs_data:
     name: arrhes_rustfs_data
     external: true
-

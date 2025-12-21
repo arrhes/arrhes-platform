@@ -24,13 +24,13 @@ Le projet utilise désormais un fichier Compose canonique situé dans `.dev/comp
    .dev/scripts/start.sh
    ```
 
-   - Cette commande exécute `docker compose -f .dev/compose.yml up -d` puis lance le bootstrap à l'intérieur du service `arrhes-platform`.
+   - Cette commande exécute `docker compose -f .dev/compose.yml up -d` puis lance le bootstrap à l'intérieur du service `arrhes-application`.
    - Le bootstrap crée les fichiers `.env` nécessaires si absents, construit `@arrhes/metadata`, pousse la migration de la BDD et insère les données de démonstration.
 
 2. Ouvrir un shell dans le conteneur (si nécessaire) :
 
    ```bash
-   docker compose -f .dev/compose.yml exec arrhes-platform bash
+   docker compose -f .dev/compose.yml exec arrhes-application bash
    ```
 
 
@@ -53,7 +53,7 @@ Si vous modifiez le `Dockerfile` ou le compose, rebuild l'image :
 
 ```bash
 # Reconstruire l'image devcontainer
-docker compose -f .dev/compose.yml build --no-cache arrhes-platform
+docker compose -f .dev/compose.yml build --no-cache arrhes-application
 
 # Redémarrer les services
 docker compose -f .dev/compose.yml up -d

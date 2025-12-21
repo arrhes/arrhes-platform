@@ -1,5 +1,5 @@
 {
-    "name": "@arrhes/platform",
+    "name": "@arrhes/application-dashboard",
     "type": "module",
     "private": false,
     "scripts": {
@@ -26,7 +26,7 @@
         "vite": "7.2.4"
     },
     "dependencies": {
-        "@arrhes/metadata": "workspace:*",
+        "@arrhes/application-metadata": "workspace:*",
         "@hookform/resolvers": "5.2.2",
         "@radix-ui/react-dialog": "1.1.15",
         "@radix-ui/react-dropdown-menu": "2.1.16",

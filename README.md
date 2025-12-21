@@ -47,8 +47,8 @@ Quick CLI workflow (no editor integration required):
 
 ```bash
 # Clone & enter repo
-git clone https://github.com/arrhes/arrhes-platform.git
-cd arrhes-platform
+git clone https://github.com/arrhes/arrhes-application.git
+cd arrhes-application
 
 # Start the devcontainer services (bind-mounts your workspace)
 ./devcontainer-start.sh
@@ -80,8 +80,8 @@ Prérequis : Node.js 24.5+, pnpm, Docker
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes-platform.git
-cd arrhes-platform
+git clone https://github.com/arrhes/arrhes-application.git
+cd arrhes-application
 
 # Installer les dépendances
 pnpm install
@@ -111,8 +111,8 @@ Prérequis : Node.js 24.5+, pnpm, PostgreSQL
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes-platform.git
-cd arrhes-platform
+git clone https://github.com/arrhes/arrhes-application.git
+cd arrhes-application
 
 # Installer les dépendances
 pnpm install
@@ -163,8 +163,8 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Support
 
-- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-platform/issues)
-- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-platform/issues)
+- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-application/issues)
+- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-application/issues)
 - 📧 Contact : contact@arrhes.com
 
 ---
