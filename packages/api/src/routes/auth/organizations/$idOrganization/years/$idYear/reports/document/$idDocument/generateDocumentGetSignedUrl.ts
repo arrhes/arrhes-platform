@@ -3,8 +3,8 @@ import { response } from "#/utilities/response.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { generateGetSignedUrl } from "#/utilities/storage/generateGetSignedUrl.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

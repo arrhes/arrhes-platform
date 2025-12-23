@@ -4,9 +4,9 @@ import { response } from "#/utilities/response.js"
 import { insertOne } from "#/utilities/sql/insertOne.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { createOneOrganizationUserRouteDefinition } from "@arrhes/metadata/routes"
-import { generateId } from "@arrhes/metadata/utilities"
+import { models } from "@arrhes/application-metadata/models"
+import { createOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { and, eq } from "drizzle-orm"
 
 

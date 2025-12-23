@@ -12,5 +12,3 @@ pnpm-lock.yaml
 .pnpm-store
 
 *.tsbuildinfo
-
-!.dev

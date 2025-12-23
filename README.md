@@ -151,7 +151,7 @@ Le projet est organisé en monorepo avec les packages suivants :
 
 - **@arrhes/api** - Backend REST API (Hono, PostgreSQL)
 - **@arrhes/platform** - Interface web (React, TanStack Router)
-- **@arrhes/metadata** - Schémas et modèles partagés (Valibot, Drizzle ORM)
+- **@arrhes/application-metadata** - Schémas et modèles partagés (Valibot, Drizzle ORM)
 - **@arrhes/tools** - Outils de migration et seed de base de données
 - **@arrhes/website** - Site vitrine + Documentation
 

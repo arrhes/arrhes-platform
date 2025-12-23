@@ -1,7 +1,7 @@
 import { toast } from "#/contexts/toasts/useToast.js"
 import { postAPI } from "#/utilities/postAPI.js"
-import { generateBalanceSheetReportDocumentRouteDefinition, generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { generateBalanceSheetReportDocumentRouteDefinition, generateDocumentGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonHTMLAttributes, cloneElement, ReactElement } from "react"
 import * as v from "valibot"
 

@@ -1,7 +1,26 @@
-# name: arrhes-application
+# ==============================================================================
+# Arrhes Platform - Development Environment
+# ==============================================================================
+# Docker Compose configuration for local development
+#
+# Architecture:
+# - Source code: bind-mounted from host (live editing on both host and container)
+# - Runtime files: isolated in Docker volumes (node_modules, build outputs)
+# - Infrastructure: PostgreSQL, RustFS (S3), Mailpit (SMTP)
+# - Services: API, Dashboard, Website
+#
+# Usage:
+#   docker compose -f .dev/compose.yml up -d     # Start all services
+#   docker compose -f .dev/compose.yml down      # Stop all services
+#   docker compose -f .dev/compose.yml logs -f   # View logs
+# ==============================================================================
 
 services:
-  # Database (PostgreSQL)
+  # ============================================================================
+  # Infrastructure Services
+  # ============================================================================
+  
+  # PostgreSQL - Relational database for application data
   postgres:
     image: postgres:18.1
     restart: unless-stopped
@@ -10,7 +29,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: default
     ports:
-      - "5432:5432" # Postgresql
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
     healthcheck:
@@ -19,7 +38,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # Object storage (RustFS)
+  # RustFS - S3-compatible object storage for attachments/files
   rustfs:
     image: rustfs/rustfs:latest
     restart: unless-stopped
@@ -30,7 +49,7 @@ services:
       RUSTFS_VOLUMES: /data
     ports:
       - "9000:9000"  # API
-      - "9001:9001"  # Web UI
+      - "9001:9001"  # Web Console
     volumes:
       - rustfs_data:/data
     init: true
@@ -40,7 +59,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # Mail server (Mailpit)
+  # Mailpit - Development SMTP server with web interface
   mailpit:
     image: axllent/mailpit:latest
     restart: unless-stopped
@@ -53,38 +72,111 @@ services:
       timeout: 5s
       retries: 5
 
-  # API (Node.js)
+  # ============================================================================
+  # Application Services
+  # ============================================================================
+
+  # API - Backend service (Hono framework on Node.js)
   api:
     build:
-      context: .
+      context: ..
       dockerfile: .dev/packages/api/Dockerfile
       args:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"
-    volumes:
-      - .:/workspace:delegated
-      - root_node_modules:/workspace/node_modules         # hoisted workspace node_modules
-      - api_node_modules:/workspace/packages/api/node_modules  # per-package mask if needed
-      - api_env:/workspace/packages/api/.env              # masked .env file (will be created inside container)
-      - pnpm_store:/root/.pnpm-store                      # pnpm store kept in docker volume (optional)
-    working_dir: /workspace/packages/api
-    command: pnpm --filter="@arrhes/@arrhes/platform-api" dev
     ports:
-      - "3000:3000"
+      - "3000:3000"  # API server
+    volumes:
+      # Source code - bind-mounted for live editing (synced between host and container)
+      - ../packages:/workspace/packages:cached
+      - ../package.json:/workspace/package.json:cached
+      - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
+      - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
+      - ../.dev:/workspace/.dev:cached
+      
+      # Environment files - use .dev versions
+      - ./packages/api/.env:/workspace/packages/api/.env:cached
+      - ./packages/tools/.env:/workspace/packages/tools/.env:cached
+      
+      # Runtime files - isolated in Docker volumes (NOT on host)
+      - api_node_modules:/workspace/node_modules
+      - metadata_build:/workspace/packages/metadata/build
+      - pnpm_store:/root/.local/share/pnpm/store
     depends_on:
-      - postgres
-      - rustfs
-      - mailpit
+      postgres:
+        condition: service_healthy
+      rustfs:
+        condition: service_healthy
+      mailpit:
+        condition: service_healthy
 
+  # Dashboard - Frontend admin interface (React + Vite)
+  dashboard:
+    build:
+      context: ..
+      dockerfile: .dev/packages/dashboard/Dockerfile
+      args:
+        NODE_VERSION: "25.2.1"
+        PNPM_VERSION: "10.26.1"
+    ports:
+      - "5173:5173"  # Vite dev server
+    volumes:
+      # Source code - bind-mounted for live editing (synced between host and container)
+      - ../packages:/workspace/packages:cached
+      - ../package.json:/workspace/package.json:cached
+      - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
+      - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
+      - ../.dev:/workspace/.dev:cached
+      
+      # Environment file
+      - ./packages/dashboard/.env:/workspace/packages/dashboard/.env:cached
+      
+      # Runtime files - isolated in Docker volumes (NOT on host)
+      - dashboard_node_modules:/workspace/node_modules
+      - metadata_build:/workspace/packages/metadata/build
+      - pnpm_store:/root/.local/share/pnpm/store
 
+  # Website - Public-facing website (React + Vite)
+  website:
+    build:
+      context: ..
+      dockerfile: .dev/packages/website/Dockerfile
+      args:
+        NODE_VERSION: "25.2.1"
+        PNPM_VERSION: "10.26.1"
+    ports:
+      - "5174:5173"  # Host:Container (Vite runs on 5173 inside, exposed as 5174 on host)
+    volumes:
+      # Source code - bind-mounted for live editing (synced between host and container)
+      - ../packages:/workspace/packages:cached
+      - ../package.json:/workspace/package.json:cached
+      - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
+      - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
+      - ../.dev:/workspace/.dev:cached
+      
+      # Environment file
+      - ./packages/website/.env:/workspace/packages/website/.env:cached
+      
+      # Runtime files - isolated in Docker volumes (NOT on host)
+      - website_node_modules:/workspace/node_modules
+      - metadata_build:/workspace/packages/metadata/build
+      - pnpm_store:/root/.local/share/pnpm/store
+
+# ==============================================================================
+# Named Volumes (Runtime data isolated from host)
+# ==============================================================================
 volumes:
+  # Application runtime dependencies - isolated per service
   api_node_modules:
-  api_env:
-  root_node_modules:
+  dashboard_node_modules:
+  website_node_modules:
+  
+  # Shared build output - metadata package used by multiple services
+  metadata_build:
+  
+  # PNPM global store cache - shared across all Node services for efficiency
   pnpm_store:
+  
+  # Persistent infrastructure data - survives container restarts
   postgres_data:
-    name: arrhes_postgres_data
-    external: true
   rustfs_data:
-    name: arrhes_rustfs_data
-    external: true

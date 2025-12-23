@@ -2,8 +2,8 @@ import { publicFactory } from "#/factories/publicFactory.js"
 import { response } from "#/utilities/response.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { sendMagicLinkRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { sendMagicLinkRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
 
 

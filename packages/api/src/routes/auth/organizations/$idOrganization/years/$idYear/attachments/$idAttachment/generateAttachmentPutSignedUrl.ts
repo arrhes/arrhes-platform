@@ -4,8 +4,8 @@ import { response } from "#/utilities/response.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { generatePutSignedUrl } from "#/utilities/storage/generatePutSignedUrl.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { generateAttachmentPutSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { generateAttachmentPutSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

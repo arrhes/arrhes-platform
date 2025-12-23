@@ -4,9 +4,9 @@ import { selectMany } from "#/utilities/sql/selectMany.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { defaultAssociationIncomeStatements, defaultCompanyIncomeStatements } from "@arrhes/metadata/components"
-import { models } from "@arrhes/metadata/models"
-import { connectAccountsToIncomeStatementsRouteDefinition } from "@arrhes/metadata/routes"
+import { defaultAssociationIncomeStatements, defaultCompanyIncomeStatements } from "@arrhes/application-metadata/components"
+import { models } from "@arrhes/application-metadata/models"
+import { connectAccountsToIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

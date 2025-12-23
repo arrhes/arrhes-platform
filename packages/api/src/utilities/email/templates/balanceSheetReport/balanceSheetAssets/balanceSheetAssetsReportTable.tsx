@@ -2,7 +2,7 @@ import { BalanceSheetAssetsReportItem } from "#/utilities/email/templates/balanc
 import { BalanceSheetAssetsReportRow } from "#/utilities/email/templates/balanceSheetReport/balanceSheetAssets/balanceSheetAssetsReportRow.js"
 import { getBalanceSheetChildren } from "#/utilities/email/templates/balanceSheetReport/getBalanceSheetChildren.js"
 import { Table } from "#/utilities/email/templates/components/table/table.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Style, css } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import * as v from "valibot"

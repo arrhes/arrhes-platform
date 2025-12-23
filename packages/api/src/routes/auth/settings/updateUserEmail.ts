@@ -4,8 +4,8 @@ import { generateVerificationToken } from "#/utilities/generateVerificationToken
 import { response } from "#/utilities/response.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { updateUserEmailRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { updateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
 import { pbkdf2Sync } from "crypto"
 import { eq } from "drizzle-orm"
 

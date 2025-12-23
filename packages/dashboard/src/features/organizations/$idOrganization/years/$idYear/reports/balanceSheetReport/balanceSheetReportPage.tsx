@@ -7,7 +7,7 @@ import { BalanceSheetAssetsReportTable } from "#/features/organizations/$idOrgan
 import { BalanceSheetLiabilitiesReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiability/balanceSheetLiabilitiesReportTable.js"
 import { DownloadBalanceSheetReport } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/downloadBalanceSheetReport.js"
 import { balanceSheetReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/balanceSheetReportRoute.js"
-import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconDownload } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 

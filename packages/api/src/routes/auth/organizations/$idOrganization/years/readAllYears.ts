@@ -2,8 +2,8 @@ import { authFactory } from "#/factories/authFactory.js"
 import { response } from "#/utilities/response.js"
 import { selectMany } from "#/utilities/sql/selectMany.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { readAllYearsRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

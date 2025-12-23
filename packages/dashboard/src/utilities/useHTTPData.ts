@@ -1,4 +1,4 @@
-import { routeDefinition } from "@arrhes/metadata/utilities"
+import { routeDefinition } from "@arrhes/application-metadata/utilities"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { ClientError } from "./clientError.js"

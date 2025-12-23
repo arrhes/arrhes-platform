@@ -10,7 +10,7 @@ import { TitleComponent } from "#/components/layouts/title.js"
 import { DeleteOneBalanceSheet } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/deleteOneBalanceSheet.js"
 import { UpdateOneBalanceSheet } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/updateOneBalanceSheet.js"
 import { balanceSheetRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/$idBalanceSheet/balanceSheetRoute.js"
-import { readOneBalanceSheetRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

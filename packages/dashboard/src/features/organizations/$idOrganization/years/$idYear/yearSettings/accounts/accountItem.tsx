@@ -1,5 +1,5 @@
 import { cn } from "#/utilities/cn.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Link } from "@tanstack/react-router"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"

@@ -14,7 +14,7 @@ import { TitleComponent } from "#/components/layouts/title.js"
 import { DeleteOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/deleteOneRecordRow.js"
 import { UpdateOneRecordRow } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/updateOneRecordRow.js"
 import { recordRowRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/recordRowRoute.js"
-import { readOneAccountRouteDefinition, readOneRecordRowRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneAccountRouteDefinition, readOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

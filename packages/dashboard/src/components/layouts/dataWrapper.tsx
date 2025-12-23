@@ -2,7 +2,7 @@ import { FormatError } from "#/components/formats/formatError.js"
 import { CircularLoader } from "#/components/layouts/circularLoader.js"
 import { cn } from "#/utilities/cn.js"
 import { useHTTPData } from "#/utilities/useHTTPData.js"
-import { routeDefinition } from "@arrhes/metadata/utilities"
+import { routeDefinition } from "@arrhes/application-metadata/utilities"
 import { ComponentProps, ReactElement, Suspense } from "react"
 import * as v from "valibot"
 

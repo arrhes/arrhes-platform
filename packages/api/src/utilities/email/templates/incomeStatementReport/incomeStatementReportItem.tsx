@@ -1,7 +1,7 @@
 import { getIncomeStatementChildren } from "#/utilities/email/templates/incomeStatementReport/getIncomeStatementChildren.js"
 import { IncomeStatementReportRow } from "#/utilities/email/templates/incomeStatementReport/incomeStatementReportRow.js"
 import { numberToRomanString } from "#/utilities/numberToRomanString.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import * as v from "valibot"
 

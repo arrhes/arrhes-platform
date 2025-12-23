@@ -2,7 +2,7 @@ import { FormatNull } from "#/components/formats/formatNull.js"
 import { FormatPrice } from "#/components/formats/formatPrice.js"
 import { FormatText } from "#/components/formats/formatText.js"
 import { Table } from "#/components/layouts/table/table.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import * as v from "valibot"
 
 

@@ -4,7 +4,7 @@ import { Box } from "#/components/layouts/box.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Page } from "#/components/layouts/page/page.js"
 import { AddNewOrganization } from "#/features/organizations/addNewOrganization.js"
-import { getAllMyOrganizationsRouteDefinition } from "@arrhes/metadata/routes"
+import { getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconBuildingPlus } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 

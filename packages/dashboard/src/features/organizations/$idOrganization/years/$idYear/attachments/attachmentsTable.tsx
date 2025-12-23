@@ -7,7 +7,7 @@ import { FormatText } from "#/components/formats/formatText.js"
 import { DataTable } from "#/components/layouts/dataTable.js"
 import { CreateOneAttachment } from "#/features/organizations/$idOrganization/years/$idYear/attachments/createOneAttachment.js"
 import { platformRouter } from "#/routes/platformRouter.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 

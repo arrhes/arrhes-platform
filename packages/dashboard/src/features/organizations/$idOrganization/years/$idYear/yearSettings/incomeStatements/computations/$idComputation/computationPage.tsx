@@ -11,7 +11,7 @@ import { ComputationIncomeStatementsTable } from "#/features/organizations/$idOr
 import { DeleteOneComputation } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/deleteOneComputation.js"
 import { UpdateOneComputation } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/updateOneComputation.js"
 import { computationLayoutRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/computationLayoutRoute.js"
-import { readOneComputationRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"

@@ -4,7 +4,7 @@ import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { DeleteOneYear } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/deleteOneYear.js"
 import { UpdateOneYear } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/updateOneYear.js"
 import { yearSettingsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute.js"
-import { readOneYearRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 

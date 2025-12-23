@@ -1,6 +1,6 @@
 import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
 import { IncomeStatementRow } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/incomeStatementRow.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 

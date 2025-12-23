@@ -1,8 +1,8 @@
 import { FormatError } from "#/components/formats/formatError.js"
 import { CircularLoader } from "#/components/layouts/circularLoader.js"
 import { useHTTPData } from "#/utilities/useHTTPData.js"
-import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/metadata/routes"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import * as v from "valibot"
 
 

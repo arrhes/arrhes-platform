@@ -9,7 +9,7 @@ import { TitleComponent } from "#/components/layouts/title.js"
 import { DeleteOneJournal } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/deleteOneJournal.js"
 import { UpdateOneJournal } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/updateOneJournal.js"
 import { journalRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/journalRoute.js"
-import { readOneJournalRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

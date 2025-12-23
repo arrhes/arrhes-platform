@@ -2,9 +2,9 @@ import { authFactory } from "#/factories/authFactory.js"
 import { response } from "#/utilities/response.js"
 import { insertOne } from "#/utilities/sql/insertOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { createOneRecordRouteDefinition } from "@arrhes/metadata/routes"
-import { generateId } from "@arrhes/metadata/utilities"
+import { models } from "@arrhes/application-metadata/models"
+import { createOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 
 
 export const createOneRecordRoute = authFactory.createApp()

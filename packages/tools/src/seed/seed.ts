@@ -1,6 +1,6 @@
-import { defaultJournals } from '@arrhes/metadata/components'
-import { models } from '@arrhes/metadata/models'
-import { generateId } from '@arrhes/metadata/utilities'
+import { defaultJournals } from '@arrhes/application-metadata/components'
+import { models } from '@arrhes/application-metadata/models'
+import { generateId } from '@arrhes/application-metadata/utilities'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
 import { dbClient } from '../dbClient.js'

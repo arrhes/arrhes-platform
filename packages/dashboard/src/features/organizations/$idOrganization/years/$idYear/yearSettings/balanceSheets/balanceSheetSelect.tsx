@@ -1,7 +1,7 @@
 import { InputCombobox } from "#/components/inputs/inputCombobox.js"
 import { useHTTPData } from "#/utilities/useHTTPData.js"
-import { readAllBalanceSheetsRouteDefinition } from "@arrhes/metadata/routes"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { readAllBalanceSheetsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import * as v from "valibot"
 
 

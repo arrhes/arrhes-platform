@@ -5,7 +5,7 @@ import { Section } from "#/components/layouts/section/section.js"
 import { DownloadIncomeStatementReport } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/downloadIncomeStatementReport.js"
 import { IncomeStatementsReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementsReportTable.js"
 import { incomeStatementReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/incomeStatementReportRoute.js"
-import { readAllAccountsRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllComputationsRouteDefinition, readAllIncomeStatementsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllAccountsRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllComputationsRouteDefinition, readAllIncomeStatementsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconDownload } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 

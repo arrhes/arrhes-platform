@@ -8,9 +8,9 @@ import { response } from "#/utilities/response.js"
 import { insertOne } from "#/utilities/sql/insertOne.js"
 import { cookiePrefix, userSessionCookieMaxAge } from "#/utilities/variables.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { signUpRouteDefinition } from "@arrhes/metadata/routes"
-import { generateId } from "@arrhes/metadata/utilities"
+import { models } from "@arrhes/application-metadata/models"
+import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { pbkdf2Sync } from "crypto"
 
 

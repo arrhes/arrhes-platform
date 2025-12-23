@@ -1,7 +1,7 @@
 import { BalanceSheetLiabilitiesReportRow } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiability/balanceSheetLiabilityiesReportRow.js"
 import { getBalanceSheetChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/getBalanceSheetChildren.js"
 import { toRoman } from "#/utilities/toRoman.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 

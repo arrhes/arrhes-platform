@@ -3,7 +3,7 @@ import { Table } from "#/components/layouts/table/table.js"
 import { BalanceSheetLiabilitiesReportItem } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiability/balanceSheetLiabilitiesReportItem.js"
 import { BalanceSheetLiabilitiesReportRow } from "#/features/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetLiability/balanceSheetLiabilityiesReportRow.js"
 import { getBalanceSheetChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/getBalanceSheetChildren.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Fragment } from "react/jsx-runtime"
 import * as v from "valibot"
 

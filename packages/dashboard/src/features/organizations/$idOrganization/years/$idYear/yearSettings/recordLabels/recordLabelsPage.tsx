@@ -5,7 +5,7 @@ import { DataWrapper } from "#/components/layouts/dataWrapper.js";
 import { Section } from "#/components/layouts/section/section.js";
 import { CreateOneRecordLabel } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/createOneRecordLabel.js";
 import { recordLabelsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsRoute.js";
-import { readAllRecordLabelsRouteDefinition } from "@arrhes/metadata/routes";
+import { readAllRecordLabelsRouteDefinition } from "@arrhes/application-metadata/routes";
 import { IconPlus } from "@tabler/icons-react";
 import { Link, useParams } from "@tanstack/react-router";
 

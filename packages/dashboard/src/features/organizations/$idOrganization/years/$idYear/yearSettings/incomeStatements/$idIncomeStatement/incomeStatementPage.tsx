@@ -10,7 +10,7 @@ import { TitleComponent } from "#/components/layouts/title.js"
 import { DeleteOneIncomeStatement } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/deleteOneIncomeStatement.js"
 import { UpdateOneIncomeStatement } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/updateOneIncomeStatement.js"
 import { incomeStatementRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/$idIncomeStatement/incomeStatementRoute.js"
-import { readOneIncomeStatementRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

@@ -3,7 +3,7 @@ import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Section } from "#/components/layouts/section/section.js"
 import { LedgerReportTable } from "#/features/organizations/$idOrganization/years/$idYear/reports/ledgerReport/ledgerReportTable.js"
 import { ledgerReportRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/reports/ledgerReportRoute.js"
-import { readAllAccountsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllAccountsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { useParams } from "@tanstack/react-router"
 
 

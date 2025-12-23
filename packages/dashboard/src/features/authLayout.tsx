@@ -6,7 +6,7 @@ import { toast } from "#/contexts/toasts/useToast.js"
 import { Breadcrumbs } from "#/features/breadcrumbs.js"
 import { platformRouter } from "#/routes/platformRouter.js"
 import { postAPI } from "#/utilities/postAPI.js"
-import { signOutRouteDefinition } from "@arrhes/metadata/routes"
+import { signOutRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconAbacus, IconBuilding, IconLifebuoy, IconLogout, IconSettings, IconUser } from "@tabler/icons-react"
 import { Link, Outlet } from "@tanstack/react-router"
 

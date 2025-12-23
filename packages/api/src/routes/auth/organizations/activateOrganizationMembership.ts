@@ -2,8 +2,8 @@ import { authFactory } from "#/factories/authFactory.js"
 import { response } from "#/utilities/response.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { activateOrganizationMembershipRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { activateOrganizationMembershipRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

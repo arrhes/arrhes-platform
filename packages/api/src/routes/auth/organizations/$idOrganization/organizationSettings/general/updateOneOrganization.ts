@@ -4,8 +4,8 @@ import { response } from "#/utilities/response.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { updateOneOrganizationRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { updateOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

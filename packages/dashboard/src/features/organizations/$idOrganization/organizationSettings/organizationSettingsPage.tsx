@@ -4,7 +4,7 @@ import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { DeleteOneOrganization } from "#/features/organizations/$idOrganization/organizationSettings/deleteOneOrganization.js"
 import { UpdateOneOrganization } from "#/features/organizations/$idOrganization/organizationSettings/updateOneOrganization.js"
 import { organizationSettingsRoute } from "#/routes/root/auth/organizations/$idOrganization/organizationSettings/organizationSettingsRoute.js"
-import { readOneOrganizationRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 

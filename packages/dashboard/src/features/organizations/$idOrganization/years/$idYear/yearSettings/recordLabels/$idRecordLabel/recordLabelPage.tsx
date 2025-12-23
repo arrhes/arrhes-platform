@@ -9,7 +9,7 @@ import { TitleComponent } from "#/components/layouts/title.js"
 import { DeleteOneRecordLabel } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/deleteOneRecordLabel.js"
 import { UpdateOneRecordLabel } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/updateOneRecordLabel.js"
 import { recordLabelRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/recordLabelRoute.js"
-import { readOneRecordLabelRouteDefinition } from "@arrhes/metadata/routes"
+import { readOneRecordLabelRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

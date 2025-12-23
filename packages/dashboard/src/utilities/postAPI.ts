@@ -1,5 +1,5 @@
 import { toast } from "#/contexts/toasts/useToast.js"
-import { routeDefinition } from "@arrhes/metadata/utilities"
+import { routeDefinition } from "@arrhes/application-metadata/utilities"
 import * as v from "valibot"
 import { ClientError } from "./clientError.js"
 import { validate } from "./validate.js"

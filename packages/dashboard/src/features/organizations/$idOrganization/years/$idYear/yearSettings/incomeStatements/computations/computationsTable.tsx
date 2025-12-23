@@ -1,8 +1,8 @@
 import { FormatNull } from "#/components/formats/formatNull.js"
 import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { cn } from "#/utilities/cn.js"
-import { readAllComputationsRouteDefinition } from "@arrhes/metadata/routes"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Link } from "@tanstack/react-router"
 import * as v from "valibot"
 

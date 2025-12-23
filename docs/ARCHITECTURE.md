@@ -45,7 +45,7 @@ Arrhes est construit sur une architecture monorepo moderne utilisant **pnpm work
 
 Le projet utilise **pnpm workspaces** pour gérer plusieurs packages dans un seul repository. Cette approche offre plusieurs avantages :
 
-- **Partage de code** : Les packages peuvent facilement partager du code via `@arrhes/metadata`
+- **Partage de code** : Les packages peuvent facilement partager du code via `@arrhes/application-metadata`
 - **Dépendances optimisées** : pnpm déduplique les dépendances communes
 - **Développement simplifié** : Build et développement coordonnés entre packages
 - **Versioning cohérent** : Toutes les parties du projet évoluent ensemble
@@ -188,7 +188,7 @@ platform/src/
 - Gestion des documents et pièces justificatives
 - Notifications et retours utilisateur
 
-### @arrhes/metadata
+### @arrhes/application-metadata
 
 **Rôle :** Package partagé contenant tous les schémas, modèles et types utilisés par l'API et la plateforme
 
@@ -231,10 +231,10 @@ metadata/src/
 **Exports :**
 ```typescript
 // Utilisable par l'API et la plateforme
-import { models } from '@arrhes/metadata/models'
-import { schemas } from '@arrhes/metadata/schemas'
-import { routes } from '@arrhes/metadata/routes'
-import { generateId } from '@arrhes/metadata/utilities'
+import { models } from '@arrhes/application-metadata/models'
+import { schemas } from '@arrhes/application-metadata/schemas'
+import { routes } from '@arrhes/application-metadata/routes'
+import { generateId } from '@arrhes/application-metadata/utilities'
 ```
 
 **Responsabilités :**
@@ -512,14 +512,14 @@ organization 1──n organizationUser n──1 user
 ### Migrations
 
 Les migrations sont gérées par **Drizzle Kit** :
-- Le schéma source est défini dans `@arrhes/metadata`
+- Le schéma source est défini dans `@arrhes/application-metadata`
 - Drizzle Kit génère automatiquement les migrations SQL
 - Application via `drizzle-kit migrate` ou `push` (dev)
 
 ## Diagramme de dépendances
 
 ```
-@arrhes/platform ──depends on──> @arrhes/metadata
+@arrhes/platform ──depends on──> @arrhes/application-metadata
                                         ▲
                                         │
 @arrhes/api      ──depends on───────────┘
@@ -530,7 +530,7 @@ Les migrations sont gérées par **Drizzle Kit** :
 @arrhes/website  (indépendant)
 ```
 
-Tous les packages dépendent de `@arrhes/metadata` pour partager les schémas, modèles et types. Cette architecture assure une cohérence totale entre le frontend et le backend.
+Tous les packages dépendent de `@arrhes/application-metadata` pour partager les schémas, modèles et types. Cette architecture assure une cohérence totale entre le frontend et le backend.
 
 ---
 

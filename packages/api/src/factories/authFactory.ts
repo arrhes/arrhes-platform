@@ -1,5 +1,5 @@
 import { ApiEnv } from "#/factories/apiFactory.js"
-import { models } from "@arrhes/metadata/models"
+import { models } from "@arrhes/application-metadata/models"
 import { createFactory } from "hono/factory"
 
 

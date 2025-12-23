@@ -1,7 +1,7 @@
 import { BalanceSheetLiabilitiesReportRow } from "#/utilities/email/templates/balanceSheetReport/balanceSheetLiabilities/balanceSheetLiabilitiesReportRow.js"
 import { getBalanceSheetChildren } from "#/utilities/email/templates/balanceSheetReport/getBalanceSheetChildren.js"
 import { numberToRomanString } from "#/utilities/numberToRomanString.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Style } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import * as v from "valibot"

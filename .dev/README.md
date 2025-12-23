@@ -1,99 +1,153 @@
-# Dev Container Configuration
+# Development Environment
 
-Ce répertoire contient la configuration pour développer Arrhes dans un environnement de developpement (docker container).
+Docker-based development environment for the Arrhes platform.
 
-## Aperçu
+## Architecture
 
-Le projet utilise désormais un fichier Compose canonique situé dans `.dev/compose.yml` et un script d'orchestration simple `.dev/scripts/start.sh` à la racine du dépôt pour démarrer et initialiser l'environnement de développement.
+```
+.dev/
+├── compose.yml              # Main Docker Compose configuration
+├── .dockerignore            # Build context exclusions
+├── .gitignore               # Git tracking rules
+└── packages/
+    ├── api/
+    │   ├── Dockerfile       # API service image
+    │   ├── entrypoint.sh    # API startup script
+    │   └── .env             # API environment variables
+    ├── dashboard/
+    │   ├── Dockerfile       # Dashboard service image
+    │   ├── entrypoint.sh    # Dashboard startup script
+    │   └── .env             # Dashboard environment variables
+    ├── tools/
+    │   └── .env             # Tools environment variables
+    └── website/
+        ├── Dockerfile       # Website service image
+        ├── entrypoint.sh    # Website startup script
+        └── .env             # Website environment variables
+```
 
-- Le script `.dev/scripts/start.sh` : démarre les services Docker (Postgres, RustFS, Mailpit, devcontainer) puis exécute le script de bootstrap à l'intérieur du conteneur de développement.
-- Le bootstrap (`.dev/scripts/initialize.sh`) installe les dépendances, construit `@arrhes/metadata`, crée les fichiers `.env`, initialise la base de données et injecte les données de démonstration.
+## Key Concepts
 
-## Fichiers importants
+### Source Code Binding
+- **Source files** (packages/) are bind-mounted from host to container
+- Changes made on **either host or container** are instantly synced
+- Enables live editing with IDE on host and HMR in container
 
-- `.dev/scripts/start.sh` — script d'aide pour démarrer les services et lancer le bootstrap (à la racine).
-- `.dev/compose.yml` — compose canonique utilisé par les scripts.
-- `.dev/Dockerfile` — image du devcontainer (Node + pnpm, utilisateur non-root).
-- `.dev/scripts/initialize.sh` — script exécuté dans le conteneur après démarrage pour préparer l'environnement.
+### Runtime Isolation
+- **node_modules** stored in Docker volumes (not on host)
+- **Build outputs** stored in Docker volumes
+- Keeps host clean and ensures consistent dependencies
 
-## Démarrage rapide (recommandé)
+### Services
 
-1. Depuis la racine du dépôt, lancer :
+**Infrastructure:**
+- PostgreSQL (port 5432) - Database
+- RustFS (ports 9000, 9001) - S3-compatible storage
+- Mailpit (ports 1025, 8025) - SMTP server with web UI
 
-   ```bash
-   .dev/scripts/start.sh
-   ```
+**Applications:**
+- API (port 3000) - Hono backend
+- Dashboard (port 5173) - React admin interface
+- Website (port 5174) - React public site
 
-   - Cette commande exécute `docker compose -f .dev/compose.yml up -d` puis lance le bootstrap à l'intérieur du service `arrhes-application`.
-   - Le bootstrap crée les fichiers `.env` nécessaires si absents, construit `@arrhes/metadata`, pousse la migration de la BDD et insère les données de démonstration.
+## Usage
 
-2. Ouvrir un shell dans le conteneur (si nécessaire) :
-
-   ```bash
-   docker compose -f .dev/compose.yml exec arrhes-application bash
-   ```
-
-
-## Ports & services
-
-- PostgreSQL : `localhost:5432` (container `postgres`)
-- RustFS API : `http://localhost:9000` (service `rustfs`)
-- RustFS Console (web) : `http://localhost:9001`
-- Mailpit SMTP : `1025` (SMTP)
-- Mailpit UI (web) : `http://localhost:8025`
-- API : `http://localhost:3000`
-- Platform : `http://localhost:5173`
-- Website : `http://localhost:5174`
-
-> Dans le conteneur, les services sont accessibles par leur nom Docker (`postgres`, `rustfs`, `mailpit`) ; depuis l'hôte, utilisez `localhost` et les ports exposés ci‑dessus.
-
-## Rebuild du container
-
-Si vous modifiez le `Dockerfile` ou le compose, rebuild l'image :
-
+### Start all services
 ```bash
-# Reconstruire l'image devcontainer
-docker compose -f .dev/compose.yml build --no-cache arrhes-application
+# Create required volumes first
+docker volume create arrhes_postgres_data
+docker volume create arrhes_rustfs_data
 
-# Redémarrer les services
+# Start services
 docker compose -f .dev/compose.yml up -d
 ```
 
+### View logs
+```bash
+# All services
+docker compose -f .dev/compose.yml logs -f
+
+# Specific service
+docker compose -f .dev/compose.yml logs -f api
+```
+
+### Stop services
+```bash
+docker compose -f .dev/compose.yml down
+```
+
+### Rebuild after changes
+```bash
+# Rebuild specific service
+docker compose -f .dev/compose.yml build api
+
+# Rebuild and restart
+docker compose -f .dev/compose.yml up -d --build api
+```
+
+### Access running containers
+```bash
+docker compose -f .dev/compose.yml exec api bash
+```
+
+## Environment Files
+
+Each service has its own `.env` file in `.dev/packages/{service}/.env`:
+
+- **api/.env** - API configuration (database, storage, email)
+- **dashboard/.env** - Dashboard configuration (API URL)
+- **website/.env** - Website configuration (API URL)
+- **tools/.env** - Database tools configuration
+
+These files are bind-mounted into containers at runtime.
+
+## How It Works
+
+1. **Build Phase:**
+   - Dockerfiles create minimal base images with Node.js + PNPM
+   - No source code or dependencies copied during build
+   - Images are lightweight and reusable
+
+2. **Runtime Phase:**
+   - Source code bind-mounted from `../packages` to `/workspace/packages`
+   - node_modules stored in named volumes (isolated per service)
+   - Entrypoint scripts install dependencies and start dev servers
+
+3. **Development:**
+   - Edit code on host with your IDE
+   - Changes instantly reflected in container
+   - Vite HMR updates browser automatically
+   - No manual restarts needed
 
 ## Troubleshooting
 
-- Voir les services en cours :
-
+### Port already in use
 ```bash
-docker compose -f .dev/compose.yml ps
+# Check what's using the port
+lsof -i :3000
+
+# Stop the conflicting service or change port in compose.yml
 ```
 
-- Logs d'un service (ex : `postgres`) :
-
+### Dependencies not updating
 ```bash
-docker compose -f .dev/compose.yml logs postgres
+# Remove volume and rebuild
+docker volume rm .dev_api_node_modules
+docker compose -f .dev/compose.yml up -d --build api
 ```
 
-- Forcer une remise à zéro (supprime les volumes) :
-
+### Database reset
 ```bash
+# Remove database volume (WARNING: deletes all data)
+docker compose -f .dev/compose.yml down
+docker volume rm arrhes_postgres_data
+docker volume create arrhes_postgres_data
+docker compose -f .dev/compose.yml up -d
+```
+
+### Clean slate
+```bash
+# Remove all containers, volumes (except external), and rebuild
 docker compose -f .dev/compose.yml down -v
+docker compose -f .dev/compose.yml up -d --build
 ```
-
-- Si les dépendances ne s'installent pas correctement (dans le conteneur) :
-
-```bash
-rm -rf node_modules
-pnpm install
-```
-
-## Performance
-
-- Le dépôt utilise un bind mount (`.:/workspace`) pour que les modifications effectuées depuis l'IDE hôte soient visibles immédiatement dans le conteneur (HMR, tests, etc.).
-- Si vous développez sur macOS/Windows et constatez des lenteurs, testez les options Docker (volumes `cached`) ou développez via WSL2 sous Windows.
-
-## Ressources
-
-- Docker Compose : https://docs.docker.com/compose/
-
-

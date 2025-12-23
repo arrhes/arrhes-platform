@@ -441,7 +441,7 @@ pnpm --filter tools run reset
 pnpm --filter tools run push
 ```
 
-Cette commande crée toutes les tables nécessaires dans PostgreSQL à partir des schémas définis dans `@arrhes/metadata`.
+Cette commande crée toutes les tables nécessaires dans PostgreSQL à partir des schémas définis dans `@arrhes/application-metadata`.
 
 **Étape 2 : Seed avec des données de démonstration**
 
@@ -777,7 +777,7 @@ pnpm --filter tools run drop
 2. **Créer l'implémentation** dans `packages/api/src/routes/auth/`
    ```typescript
    // packages/api/src/routes/auth/myFeature.ts
-   import { myFeatureRoute } from '@arrhes/metadata/routes'
+   import { myFeatureRoute } from '@arrhes/application-metadata/routes'
    import { authFactory } from '#/factories/authFactory.js'
    
    export const myFeature = authFactory.createApp().post(
@@ -895,7 +895,7 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 - Testez la connexion : `psql postgres://arrhes_user:arrhes_password@localhost:5432/arrhes`
 - Vérifiez les credentials dans `.env`
 
-**"Module not found @arrhes/metadata" :**
+**"Module not found @arrhes/application-metadata" :**
 - Rebuild metadata : `pnpm --filter metadata run build`
 - Ou lancez en mode watch : `pnpm --filter metadata run dev`
 

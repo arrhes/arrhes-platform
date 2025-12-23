@@ -17,7 +17,7 @@ import { RecordRowsTable } from "#/features/organizations/$idOrganization/years/
 import { UpdateOneRecord } from "#/features/organizations/$idOrganization/years/$idYear/records/$idRecord/updateOneRecord.js"
 import { recordRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/recordRoute.js"
 import { compareAmounts } from "#/utilities/compareAmounts.js"
-import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition, readOneRecordRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition, readOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconChevronLeft, IconCopyCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

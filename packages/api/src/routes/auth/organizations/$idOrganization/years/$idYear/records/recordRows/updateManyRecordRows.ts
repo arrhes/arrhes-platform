@@ -3,8 +3,8 @@ import { response } from "#/utilities/response.js"
 import { selectMany } from "#/utilities/sql/selectMany.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { updateManyRecordRowsRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { updateManyRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 
 

@@ -7,8 +7,8 @@ import { response } from "#/utilities/response.js"
 import { updateOne } from "#/utilities/sql/updateOne.js"
 import { cookiePrefix, userSessionCookieMaxAge } from "#/utilities/variables.js"
 import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { signOutRouteDefinition } from "@arrhes/metadata/routes"
+import { models } from "@arrhes/application-metadata/models"
+import { signOutRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
 
 

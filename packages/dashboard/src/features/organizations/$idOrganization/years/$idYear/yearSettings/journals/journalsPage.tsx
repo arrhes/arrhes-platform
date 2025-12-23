@@ -7,7 +7,7 @@ import { Section } from "#/components/layouts/section/section.js";
 import { CreateOneJournal } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/createOneJournal.js";
 import { GenerateJournals } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/journals/generateJournals.js";
 import { journalsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoute.js";
-import { readAllJournalsRouteDefinition } from "@arrhes/metadata/routes";
+import { readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes";
 import { IconPlus } from "@tabler/icons-react";
 import { Link, useParams } from "@tanstack/react-router";
 

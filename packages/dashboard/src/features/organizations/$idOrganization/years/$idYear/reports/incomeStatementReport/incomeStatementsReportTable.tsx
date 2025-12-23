@@ -6,7 +6,7 @@ import { IncomeStatementReportItem } from "#/features/organizations/$idOrganizat
 import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
 import { cn } from "#/utilities/cn.js"
 import { toRoman } from "#/utilities/toRoman.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import * as v from "valibot"
 
 

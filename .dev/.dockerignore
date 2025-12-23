@@ -1,19 +1,29 @@
-# Git
+# ==============================================================================
+# .dockerignore - Excludes files from Docker build context
+# ==============================================================================
+# This file prevents unnecessary files from being sent to Docker daemon
+# during image builds, speeding up the build process and reducing image size.
+#
+# Note: Source code is bind-mounted at runtime, not copied during build,
+# so this primarily affects base image creation.
+# ==============================================================================
+
+# Version control
 .git
 .gitignore
 
-# Dependencies
+# Dependencies (installed in container at runtime)
 node_modules
 **/node_modules
 
-# Build outputs
+# Build outputs (generated in container)
 build
 **/build
 dist
 **/dist
 *.tsbuildinfo
 
-# Environment files
+# Environment files (mounted separately per service)
 .env
 **/.env
 .env.*
@@ -24,10 +34,9 @@ logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 
-# IDE
+# IDE and editor files
 .vscode
 .idea
 *.swp
@@ -44,12 +53,6 @@ coverage
 *.tgz
 .npmrc
 .continue
-.old
 
-# Docker
-Dockerfile
-docker-compose.yml
-.dockerignore
-
-
+# Keep .dev folder (needed for entrypoint scripts)
 !.dev

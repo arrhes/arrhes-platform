@@ -5,7 +5,7 @@ import { DataWrapper } from "#/components/layouts/dataWrapper.js"
 import { Page } from "#/components/layouts/page/page.js"
 import { CreateOneYear } from "#/features/organizations/$idOrganization/years/createOneYear.js"
 import { yearsRoute } from "#/routes/root/auth/organizations/$idOrganization/years/yearsRoute.js"
-import { readAllYearsRouteDefinition } from "@arrhes/metadata/routes"
+import { readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconCalendarPlus } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
 

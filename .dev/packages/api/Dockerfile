@@ -1,41 +1,25 @@
-ARG NODE_VERSION="latest"
-ARG PNPM_VERSION="latest"
+# ==============================================================================
+# API Service Dockerfile
+# ==============================================================================
+# Creates a Node.js container with PNPM for running the API service
+# Source code is bind-mounted from host, dependencies installed at runtime
+# ==============================================================================
 
-FROM node:${NODE_VERSION}-bullseye-slim AS node
-# Minimal runtime + tools
-ENV DEBIAN_FRONTEND=noninteractive
+ARG NODE_VERSION="25.2.1"
+ARG PNPM_VERSION="10.26.1"
 
-# Update package lists (no default packages installed here)
-RUN apt-get update
+FROM node:${NODE_VERSION}-bullseye-slim
 
-# Install pnpm using the PNPM_VERSION build arg
-RUN npm install -g "pnpm@${PNPM_VERSION}"
+# Install PNPM package manager
+RUN npm install -g "pnpm@${PNPM_VERSION}" && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Reduce image size
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
-
-# Copy the files and install dependencies
+# Set working directory
 WORKDIR /workspace
-COPY .dev ./.dev
-COPY package.json pnpm-workspace.yaml ./
-COPY packages/metadata ./packages/metadata
-COPY packages/tools ./packages/tools
-COPY packages/api ./packages/api
 
-# Install all dependencies
-RUN ls -la ./
-RUN pnpm install
-# RUN ls -la node_modules/.pnpm
-
-
-# Build the api
-RUN pnpm --filter="@retrievall/platform-metadata" run build
-RUN pnpm --filter="@retrievall/platform-api" run build
-
+# Run as non-root user
 USER node
 
-# RUN chmod +x ./.dev/packages/api/entrypoint.sh
-RUN ./.dev/packages/api/entrypoint.sh
-
-CMD "pnpm", "--filter=@arrhes/@arrhes/platform-api", "dev"
+# Start via entrypoint script (bind-mounted at runtime)
+ENTRYPOINT ["/bin/bash", "/workspace/.dev/packages/api/entrypoint.sh"]

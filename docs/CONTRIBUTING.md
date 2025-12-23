@@ -179,8 +179,8 @@ import { Hono } from 'hono'
 import * as v from 'valibot'
 
 // 2. Imports de workspace packages
-import { models } from '@arrhes/metadata/models'
-import { schemas } from '@arrhes/metadata/schemas'
+import { models } from '@arrhes/application-metadata/models'
+import { schemas } from '@arrhes/application-metadata/schemas'
 
 // 3. Imports relatifs du package actuel
 import { authFactory } from '#/factories/authFactory.js'

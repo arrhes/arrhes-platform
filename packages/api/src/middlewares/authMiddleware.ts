@@ -4,7 +4,7 @@ import { unsignString } from "#/utilities/cookies/unsignString.js"
 import { Exception } from "#/utilities/exception.js"
 import { selectOne } from "#/utilities/sql/selectOne.js"
 import { cookiePrefix } from "#/utilities/variables.js"
-import { models } from "@arrhes/metadata/models"
+import { models } from "@arrhes/application-metadata/models"
 import { eq } from "drizzle-orm"
 import { createMiddleware } from "hono/factory"
 

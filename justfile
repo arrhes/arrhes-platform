@@ -3,8 +3,8 @@ COMPOSE_FILE := ".dev/compose.yml"
 PROJECT := "arrhes-application"
 
 up:
-    export HOST_UID=$(id -u) HOST_GID=$(id -g) && \
-    docker compose --project-directory="." --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
+    docker compose --project-directory=".dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
 
 down:
-    docker compose --project-directory="." --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down
+    docker ps -a --filter="name=arrhes-" -q | xargs -r docker rm -f
+    docker compose --project-directory=".dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down

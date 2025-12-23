@@ -9,7 +9,7 @@ import { InputToggle } from "#/components/inputs/inputToggle.js"
 import { toast } from "#/contexts/toasts/useToast.js"
 import { platformRouter } from "#/routes/platformRouter.js"
 import { postAPI } from "#/utilities/postAPI.js"
-import { sendSupportMessageRouteDefinition } from "@arrhes/metadata/routes"
+import { sendSupportMessageRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconSend } from "@tabler/icons-react"
 import { Fragment } from "react/jsx-runtime"
 

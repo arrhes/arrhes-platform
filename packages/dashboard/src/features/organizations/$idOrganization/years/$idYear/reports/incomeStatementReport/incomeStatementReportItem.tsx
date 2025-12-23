@@ -1,7 +1,7 @@
 import { IncomeStatementReportRow } from "#/features/organizations/$idOrganization/years/$idYear/reports/incomeStatementReport/incomeStatementReportRow.js"
 import { getIncomeStatementChildren } from "#/features/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/getIncomeStatementChildren.js"
 import { toRoman } from "#/utilities/toRoman.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 

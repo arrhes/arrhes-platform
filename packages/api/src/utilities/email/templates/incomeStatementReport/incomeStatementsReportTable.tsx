@@ -3,7 +3,7 @@ import { Table } from "#/utilities/email/templates/components/table/table.js"
 import { getIncomeStatementChildren } from "#/utilities/email/templates/incomeStatementReport/getIncomeStatementChildren.js"
 import { IncomeStatementReportItem } from "#/utilities/email/templates/incomeStatementReport/incomeStatementReportItem.js"
 import { numberToRomanString } from "#/utilities/numberToRomanString.js"
-import { returnedSchemas } from "@arrhes/metadata/schemas"
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "hono/css"
 import * as v from "valibot"
 
