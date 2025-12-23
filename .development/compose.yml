@@ -92,9 +92,9 @@ services:
       - ../package.json:/workspace/package.json:cached
       - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
       - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
-      - ../.dev:/workspace/.dev:cached
+      - ../.development:/workspace/.development:cached
       
-      # Environment files - use .dev versions
+      # Environment files - use .development versions
       - ./packages/api/.env:/workspace/packages/api/.env:cached
       - ./packages/tools/.env:/workspace/packages/tools/.env:cached
       
@@ -126,7 +126,7 @@ services:
       - ../package.json:/workspace/package.json:cached
       - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
       - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
-      - ../.dev:/workspace/.dev:cached
+      - ../.development:/workspace/.development:cached
       
       # Environment file
       - ./packages/dashboard/.env:/workspace/packages/dashboard/.env:cached
@@ -152,7 +152,7 @@ services:
       - ../package.json:/workspace/package.json:cached
       - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
       - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
-      - ../.dev:/workspace/.dev:cached
+      - ../.development:/workspace/.development:cached
       
       # Environment file
       - ./packages/website/.env:/workspace/packages/website/.env:cached

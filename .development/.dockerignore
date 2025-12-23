@@ -54,5 +54,5 @@ coverage
 .npmrc
 .continue
 
-# Keep .dev folder (needed for entrypoint scripts)
-!.dev
+# Keep .development folder (needed for entrypoint scripts)
+!.development
