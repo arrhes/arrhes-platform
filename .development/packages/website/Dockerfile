@@ -18,8 +18,6 @@ RUN npm install -g "pnpm@${PNPM_VERSION}" && \
 # Set working directory
 WORKDIR /workspace
 
-# Run as non-root user
-USER node
-
 # Start via entrypoint script (bind-mounted at runtime)
-ENTRYPOINT ["/bin/bash", "/workspace/.dev/packages/website/entrypoint.sh"]
+# NOTE: We don't switch to node user here - entrypoint will handle permissions
+ENTRYPOINT ["/bin/bash", "/workspace/.development/packages/website/entrypoint.sh"]

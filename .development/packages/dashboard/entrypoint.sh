@@ -9,12 +9,16 @@
 # ==============================================================================
 set -e
 
+# Fix permissions for bind-mounted workspace
+echo "🔧 Fixing workspace permissions..."
+chown -R node:node /workspace
+
 echo "📦 Installing workspace dependencies..."
-CI=true pnpm install
+su node -c "CI=true pnpm install"
 
 echo "🔨 Building @arrhes/application-metadata..."
-pnpm --filter="@arrhes/application-metadata" build
+su node -c "pnpm --filter='@arrhes/application-metadata' build"
 
 echo "🚀 Starting dashboard dev server..."
 cd /workspace/packages/dashboard
-exec pnpm --filter="@arrhes/application-dashboard" dev -- --host 0.0.0.0
+exec su node -c "pnpm --filter='@arrhes/application-dashboard' dev -- --host 0.0.0.0"

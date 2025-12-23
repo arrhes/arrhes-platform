@@ -5,7 +5,7 @@ Docker-based development environment for the Arrhes platform.
 ## Architecture
 
 ```
-.dev/
+.development/
 ├── compose.yml              # Main Docker Compose configuration
 ├── .dockerignore            # Build context exclusions
 ├── .gitignore               # Git tracking rules
@@ -59,40 +59,40 @@ docker volume create arrhes_postgres_data
 docker volume create arrhes_rustfs_data
 
 # Start services
-docker compose -f .dev/compose.yml up -d
+docker compose -f .development/compose.yml up -d
 ```
 
 ### View logs
 ```bash
 # All services
-docker compose -f .dev/compose.yml logs -f
+docker compose -f .development/compose.yml logs -f
 
 # Specific service
-docker compose -f .dev/compose.yml logs -f api
+docker compose -f .development/compose.yml logs -f api
 ```
 
 ### Stop services
 ```bash
-docker compose -f .dev/compose.yml down
+docker compose -f .development/compose.yml down
 ```
 
 ### Rebuild after changes
 ```bash
 # Rebuild specific service
-docker compose -f .dev/compose.yml build api
+docker compose -f .development/compose.yml build api
 
 # Rebuild and restart
-docker compose -f .dev/compose.yml up -d --build api
+docker compose -f .development/compose.yml up -d --build api
 ```
 
 ### Access running containers
 ```bash
-docker compose -f .dev/compose.yml exec api bash
+docker compose -f .development/compose.yml exec api bash
 ```
 
 ## Environment Files
 
-Each service has its own `.env` file in `.dev/packages/{service}/.env`:
+Each service has its own `.env` file in `.development/packages/{service}/.env`:
 
 - **api/.env** - API configuration (database, storage, email)
 - **dashboard/.env** - Dashboard configuration (API URL)
@@ -133,21 +133,21 @@ lsof -i :3000
 ```bash
 # Remove volume and rebuild
 docker volume rm .dev_api_node_modules
-docker compose -f .dev/compose.yml up -d --build api
+docker compose -f .development/compose.yml up -d --build api
 ```
 
 ### Database reset
 ```bash
 # Remove database volume (WARNING: deletes all data)
-docker compose -f .dev/compose.yml down
+docker compose -f .development/compose.yml down
 docker volume rm arrhes_postgres_data
 docker volume create arrhes_postgres_data
-docker compose -f .dev/compose.yml up -d
+docker compose -f .development/compose.yml up -d
 ```
 
 ### Clean slate
 ```bash
 # Remove all containers, volumes (except external), and rebuild
-docker compose -f .dev/compose.yml down -v
-docker compose -f .dev/compose.yml up -d --build
+docker compose -f .development/compose.yml down -v
+docker compose -f .development/compose.yml up -d --build
 ```

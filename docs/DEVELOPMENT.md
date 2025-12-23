@@ -170,7 +170,7 @@ cursor .
 
 **Étape 3 : Reopen in Container**
 
-Lorsque VS Code/Cursor détecte le fichier `.dev/devcontainer.json`, une notification apparaît :
+Lorsque VS Code/Cursor détecte le fichier `.development/devcontainer.json`, une notification apparaît :
 
 > "Folder contains a Dev Container configuration file. Reopen folder to develop in a container?"
 

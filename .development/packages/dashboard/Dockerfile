@@ -1,7 +1,7 @@
 # ==============================================================================
-# API Service Dockerfile
+# Dashboard Service Dockerfile
 # ==============================================================================
-# Creates a Node.js container with PNPM for running the API service
+# Creates a Node.js container with PNPM for running the dashboard service
 # Source code is bind-mounted from host, dependencies installed at runtime
 # ==============================================================================
 
@@ -18,8 +18,6 @@ RUN npm install -g "pnpm@${PNPM_VERSION}" && \
 # Set working directory
 WORKDIR /workspace
 
-# Run as non-root user
-USER node
-
 # Start via entrypoint script (bind-mounted at runtime)
-ENTRYPOINT ["/bin/bash", "/workspace/.dev/packages/api/entrypoint.sh"]
+# NOTE: We don't switch to node user here - entrypoint will handle permissions
+ENTRYPOINT ["/bin/bash", "/workspace/.development/packages/dashboard/entrypoint.sh"]

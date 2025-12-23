@@ -8,9 +8,13 @@
 # ==============================================================================
 set -e
 
+# Fix permissions for bind-mounted workspace
+echo "🔧 Fixing workspace permissions..."
+chown -R node:node /workspace
+
 echo "📦 Installing workspace dependencies..."
-CI=true pnpm install
+su node -c "CI=true pnpm install"
 
 echo "🚀 Starting website dev server..."
 cd /workspace/packages/website
-exec pnpm --filter="@arrhes/application-website" dev -- --host 0.0.0.0
+exec su node -c "pnpm --filter='@arrhes/application-website' dev -- --host 0.0.0.0"

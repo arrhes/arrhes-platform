@@ -57,7 +57,7 @@ cd arrhes-application
 ./dev/scripts/initialize.sh
 
 # Open an interactive shell inside the devcontainer (one-line)
-docker compose -f .dev/compose.yml exec devcontainer bash
+docker compose -f .development/compose.yml exec devcontainer bash
 
 # From that shell you can start the dev servers (they must bind to 0.0.0.0 to be reachable from the host):
 # API

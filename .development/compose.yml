@@ -10,9 +10,9 @@
 # - Services: API, Dashboard, Website
 #
 # Usage:
-#   docker compose -f .dev/compose.yml up -d     # Start all services
-#   docker compose -f .dev/compose.yml down      # Stop all services
-#   docker compose -f .dev/compose.yml logs -f   # View logs
+#   docker compose -f .development/compose.yml up -d     # Start all services
+#   docker compose -f .development/compose.yml down      # Stop all services
+#   docker compose -f .development/compose.yml logs -f   # View logs
 # ==============================================================================
 
 services:
@@ -54,7 +54,7 @@ services:
       - rustfs_data:/data
     init: true
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:9000 || exit 1"]
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:9000 2>&1 | grep -q '403 Forbidden' && exit 0 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -80,7 +80,7 @@ services:
   api:
     build:
       context: ..
-      dockerfile: .dev/packages/api/Dockerfile
+      dockerfile: .development/packages/api/Dockerfile
       args:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"
@@ -114,7 +114,7 @@ services:
   dashboard:
     build:
       context: ..
-      dockerfile: .dev/packages/dashboard/Dockerfile
+      dockerfile: .development/packages/dashboard/Dockerfile
       args:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"
@@ -140,7 +140,7 @@ services:
   website:
     build:
       context: ..
-      dockerfile: .dev/packages/website/Dockerfile
+      dockerfile: .development/packages/website/Dockerfile
       args:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"

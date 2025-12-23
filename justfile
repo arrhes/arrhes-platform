@@ -1,10 +1,13 @@
 set shell := ["bash", "-cu"]
-COMPOSE_FILE := ".dev/compose.yml"
+COMPOSE_FILE := ".development/compose.yml"
 PROJECT := "arrhes-application"
 
-up:
-    docker compose --project-directory=".dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
+dev cmd:
+    @just dev-{{cmd}}
 
-down:
+dev-up:
+    docker compose --project-directory=".development" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
+
+dev-down:
     docker ps -a --filter="name=arrhes-" -q | xargs -r docker rm -f
-    docker compose --project-directory=".dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down
+    docker compose --project-directory=".development" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down
