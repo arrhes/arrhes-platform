@@ -39,6 +39,11 @@ Arrhes est une solution complète de comptabilité conçue spécifiquement pour 
 
 ## Démarrage rapide
 
+> **Windows :** Certains chemins du repository sont longs et peuvent dépasser la limite par défaut de Windows. Avant de cloner, exécutez la commande suivante depuis une invite de commandes **administrateur** :
+> ```
+> git config --system core.longpaths true
+> ```
+
 ### Option 1 : Dev Container 🚀 (Le plus simple)
 
 Prérequis : Docker
@@ -47,8 +52,8 @@ Quick CLI workflow (no editor integration required):
 
 ```bash
 # Clone & enter repo
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Start the devcontainer services (bind-mounts your workspace)
 ./devcontainer-start.sh
@@ -80,8 +85,8 @@ Prérequis : Node.js 24.5+, pnpm, Docker
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Installer les dépendances
 pnpm install
@@ -111,8 +116,8 @@ Prérequis : Node.js 24.5+, pnpm, PostgreSQL
 
 ```bash
 # Cloner le repository
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 
 # Installer les dépendances
 pnpm install
@@ -163,8 +168,8 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Support
 
-- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-application/issues)
-- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-application/issues)
+- 🐛 [Signaler un bug](https://github.com/arrhes/arrhes-platform/issues)
+- 💡 [Proposer une fonctionnalité](https://github.com/arrhes/arrhes-platform/issues)
 - 📧 Contact : contact@arrhes.com
 
 ---
