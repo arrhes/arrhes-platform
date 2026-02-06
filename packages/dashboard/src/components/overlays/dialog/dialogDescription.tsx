@@ -1,5 +1,5 @@
 
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentPropsWithRef } from "react"
 
@@ -10,8 +10,11 @@ export function DialogDescription(props:
     return (
         <DialogPrimitive.Description
             {...props}
-            className={cn(
-                "text-sm text-neutral/50",
+            className={cx(
+                css({
+                    fontSize: "sm",
+                    color: "neutral/50"
+                }),
                 props.className
             )}
         />

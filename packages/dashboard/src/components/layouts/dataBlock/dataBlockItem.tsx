@@ -1,4 +1,5 @@
-import { Tooltip } from "#/components/overlays/tooltip/tooltip.js"
+import { Tooltip } from "../../../components/overlays/tooltip/tooltip.js"
+import { css } from "../../../utilities/cn.js"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
 import { Fragment, ReactElement } from "react"
 
@@ -10,22 +11,47 @@ export function DataBlockItem(props: {
 }) {
     return (
         <Fragment>
-            <div className="flex justify-start items-start gap-2">
-                <span className="uppercase text-sm text-neutral/50">{props.label}</span>
+            <div className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                gap: "2"
+            })}>
+                <span className={css({
+                    textTransform: "uppercase",
+                    fontSize: "sm",
+                    color: "neutral/50"
+                })}>{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <Tooltip.Root delayDuration={0}>
-                            <Tooltip.Trigger className="cursor-help" onClick={(e) => e.preventDefault()}>
-                                <IconInfoSquareRounded size={16} strokeWidth={1} className="stroke-neutral/50 hover:stroke-neutral hover:fill-neutral/5" />
+                            <Tooltip.Trigger className={css({ cursor: "help" })} onClick={(e) => e.preventDefault()}>
+                                <IconInfoSquareRounded size={16} strokeWidth={1} className={css({
+                                    stroke: "neutral/50",
+                                    _hover: {
+                                        stroke: "neutral",
+                                        fill: "neutral/5"
+                                    }
+                                })} />
                             </Tooltip.Trigger>
-                            <Tooltip.Content className="bg-neutral">
-                                <p className="break-words hyphens-auto text-white text-sm">{props.description}</p>
+                            <Tooltip.Content className={css({ bg: "neutral" })}>
+                                <p className={css({
+                                    wordBreak: "break-word",
+                                    hyphens: "auto",
+                                    color: "white",
+                                    fontSize: "sm"
+                                })}>{props.description}</p>
                             </Tooltip.Content>
                         </Tooltip.Root>
                     )
                 }
             </div>
-            <div className="flex justify-start items-start gap-2">
+            <div className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                gap: "2"
+            })}>
                 {
                     !(props.children instanceof String) ? props.children :
                         (

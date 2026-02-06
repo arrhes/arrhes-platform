@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,16 @@ export function DataBlockHeader(props: {
 }) {
     return (
         <div
-            className={cn(
-                "shrink-0 w-full h-fit flex justify-start items-start gap-2",
+            className={cx(
+                css({
+                    flexShrink: "0",
+                    w: "full",
+                    h: "fit",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "2"
+                }),
                 props.className
             )}
         >

@@ -1,29 +1,25 @@
-@import "tailwindcss";
-@reference "./theme.css";
-@import "tailwindcss/preflight.css" layer(base);
-
-
-@layer theme, base;
+@layer reset, base, tokens, recipes, utilities;
 
 @layer base {
-
   html {
     font-size: 16px;
     overflow: auto;
   }
 
-  body {
-    /* @apply overflow-auto; */
-  }
-
   *,
   *::before,
   *::after {
-    @apply box-border bg-clip-padding;
+    box-sizing: border-box;
+    background-clip: padding-box;
   }
 
   * {
-    @apply m-0 p-0 list-none scroll-smooth outline-none font-mono;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    scroll-behavior: smooth;
+    outline: none;
+    font-family: "Sometype Mono", monospace;
   }
 
   span,
@@ -40,15 +36,28 @@
   button,
   textarea,
   select {
-    @apply text-sm font-normal text-neutral;
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: var(--colors-neutral);
   }
 
   a {
-    @apply no-underline;
+    text-decoration: none;
   }
 
   #root {
-    @apply bg-background relative min-h-[100dvh] h-[100dvh] min-w-[100dvw] w-[100dvw] overflow-x-hidden overflow-y-auto flex flex-col justify-center items-center;
+    background-color: var(--colors-background);
+    position: relative;
+    min-height: 100dvh;
+    height: 100dvh;
+    min-width: 100dvw;
+    width: 100dvw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   img,
@@ -56,15 +65,21 @@
   video,
   canvas,
   svg {
-    @apply box-border block;
+    box-sizing: border-box;
+    display: block;
   }
 
   input,
   button {
-    @apply focus:outline-none;
+    outline: none;
+  }
+
+  input:focus,
+  button:focus {
+    outline: none;
   }
 
   svg {
-    @apply stroke-[1.5px];
+    stroke-width: 1.5px;
   }
 }

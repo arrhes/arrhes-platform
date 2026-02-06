@@ -1,5 +1,5 @@
-import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
-import { cn } from "#/utilities/cn.js"
+import { Button } from "@arrhes/ui"
+import { css, cx } from "../../../utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { IconX } from "@tabler/icons-react"
 import { ComponentProps } from "react"
@@ -11,15 +11,21 @@ export function ToastClose(props: ToastClose) {
     return (
         <ToastPrimitives.Close
             {...props}
-            className={cn(
-                "ml-auto opacity-0",
-                "transition-opacity focus:opacity-100 group-hover:opacity-100",
+            className={cx(
+                css({
+                    ml: "auto",
+                    opacity: "0",
+                    transition: "opacity",
+                    _focus: { opacity: "1" },
+                    _groupHover: { opacity: "1" }
+                }),
                 props.className
             )}
             toast-close=""
             asChild
         >
-            <ButtonGhost
+            <Button
+                variant="invisible"
                 icon={<IconX />}
             />
         </ToastPrimitives.Close>

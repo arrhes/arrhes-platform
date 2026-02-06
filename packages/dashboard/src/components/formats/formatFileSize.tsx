@@ -1,5 +1,6 @@
-import { FormatBase } from "#/components/formats/formatBase.js"
-import { FormatNull } from "#/components/formats/formatNull.js"
+import { FormatBase } from "../../components/formats/formatBase.js"
+import { FormatNull } from "../../components/formats/formatNull.js"
+import { css } from "../../utilities/cn.js"
 import { ComponentProps } from "react"
 
 
@@ -24,7 +25,15 @@ export function FormatFileSize(props: FormatFileSize) {
     if (props.size === undefined || props.size === null) return <FormatNull />
     return (
         <FormatBase className={props.className}>
-            <span className="w-fit max-w-full overflow-hidden whitespace-nowrap text-ellipsis text-base break-words">
+            <span className={css({
+                w: "fit",
+                maxW: "full",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                fontSize: "base",
+                wordBreak: "break-word"
+            })}>
                 {formatFileSize(props.size)}
             </span>
         </FormatBase>

@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -10,9 +10,20 @@ type CardRoot = {
 export function CardRoot(props: CardRoot) {
     return (
         <div
-            className={cn(
-                "w-full shrink-0 flex-1 flex flex-col justify-start items-stretch overflow-auto",
-                "border border-neutral/10 rounded-md",
+            className={cx(
+                css({
+                    w: "full",
+                    flexShrink: "0",
+                    flex: "1",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    overflow: "auto",
+                    border: "1px solid",
+                    borderColor: "neutral/10",
+                    rounded: "md"
+                }),
                 props.className
             )}
             children={props.children}

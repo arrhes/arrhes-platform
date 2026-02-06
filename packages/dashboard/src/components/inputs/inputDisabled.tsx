@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
 
@@ -14,9 +14,22 @@ export function InputDisabled(props: InputDisabled) {
     return (
         <input
             ref={ref}
-            className={cn(
-                "relative w-full flex flex-row justify-between items-center gap-2 p-2 border border-solid rounded-md bg-neutral text-sm",
-                (!props.error) ? "border-neutral/25" : "border-error"
+            className={cx(
+                css({
+                    position: "relative",
+                    w: "full",
+                    display: "flex",
+                    flexDir: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "2",
+                    p: "2",
+                    border: "1px solid",
+                    rounded: "md",
+                    bg: "neutral",
+                    fontSize: "sm"
+                }),
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" })
             )}
             disabled
         />

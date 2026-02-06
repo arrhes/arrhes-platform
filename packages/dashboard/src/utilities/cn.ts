@@ -1,7 +1,7 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { css, cx } from "../../styled-system/css"
 
+export { css, cx }
 
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs))
+export function cn(...inputs: (string | undefined | null | false)[]) {
+    return cx(...inputs.filter(Boolean) as string[])
 }

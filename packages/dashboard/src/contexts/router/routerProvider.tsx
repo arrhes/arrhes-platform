@@ -1,4 +1,4 @@
-import { platformRouter } from "#/routes/platformRouter.js"
+import { platformRouter } from "../../routes/platformRouter.js"
 import { RouterProvider as Router } from "@tanstack/react-router"
 
 

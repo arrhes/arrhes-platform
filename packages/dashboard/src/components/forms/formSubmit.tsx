@@ -1,5 +1,5 @@
-import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
-import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
+import { Button } from "@arrhes/ui"
+import { css } from "../../utilities/cn.js"
 
 
 export type FormSubmit<T> = {
@@ -23,26 +23,28 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
     }
 
     return (
-        <div className="w-full mt-auto flex flex-col justify-start items-stretch gap-2">
-            <div className="w-full flex flex-row justify-end items-center gap-2">
+        <div className={css({ w: "full", mt: "auto", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "2" })}>
+            <div className={css({ w: "full", display: "flex", flexDir: "row", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                 {
                     (props.previousCallback === undefined) ? null : (
-                        <ButtonGhost
+                        <Button
+                            variant="invisible"
                             text={props.previousLabel}
                             onClick={handlePrevious}
                         />
                     )
                 }
-                <ButtonPlain
+                <Button
+                    variant="primary"
                     text={props.nextLabel}
                     onClick={handleNext}
                     hasLoader
                 />
             </div>
             {(!props.stepCount && !props.stepName) ? null :
-                <div className="w-full flex flex-row justify-end items-center gap-1">
-                    {(!props.stepCount) ? null : <span className="text-sm text-neutral/50">{props.stepCount}</span>}
-                    {(!props.stepName) ? null : <span className="text-sm text-neutral/50">{props.stepName}</span>}
+                <div className={css({ w: "full", display: "flex", flexDir: "row", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>
+                    {(!props.stepCount) ? null : <span className={css({ fontSize: "sm", color: "neutral/50" })}>{props.stepCount}</span>}
+                    {(!props.stepName) ? null : <span className={css({ fontSize: "sm", color: "neutral/50" })}>{props.stepName}</span>}
                 </div>
             }
         </div>

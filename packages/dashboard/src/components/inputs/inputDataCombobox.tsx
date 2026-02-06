@@ -1,5 +1,5 @@
-import { InputCombobox } from "#/components/inputs/inputCombobox.js"
-import { useHTTPData } from "#/utilities/useHTTPData.js"
+import { InputCombobox } from "../../components/inputs/inputCombobox.js"
+import { useDataFromAPI } from "../../utilities/useHTTPData.js"
 import { routeDefinition } from "@arrhes/application-metadata/utilities"
 import * as v from "valibot"
 
@@ -14,7 +14,7 @@ export function InputDataCombobox<
     value?: string | null
     onChange: (value?: string | null) => void
 }) {
-    const response = useHTTPData({
+    const response = useDataFromAPI({
         routeDefinition: props.routeDefinition,
         body: props.body,
     })

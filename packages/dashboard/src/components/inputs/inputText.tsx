@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes } from 'react'
 import { FieldError } from 'react-hook-form'
 
@@ -22,19 +22,35 @@ export function InputText(props: InputText) {
 
     return (
         <div
-            className={cn(
-                "w-full h-[32px] flex justify-between items-center gap-2 border border-solid rounded-sm",
-                "focus-within:border-neutral/50 focus-within:shadow-inner",
-                (!props.error) ? "border-neutral/25" : "border-error",
+            className={cx(
+                css({
+                    w: "full",
+                    h: "32px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "2",
+                    border: "1px solid",
+                    rounded: "sm",
+                    _focusWithin: { borderColor: "neutral/50", shadow: "inset" }
+                }),
+                css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
                 props.className
             )}
         >
             <input
                 {...props}
                 type="text"
-                className={cn(
-                    "w-full h-full text-sm leading-none placeholder:text-neutral/25 bg-transparent p-2 rounded-md",
-                )}
+                className={css({
+                    w: "full",
+                    h: "full",
+                    fontSize: "sm",
+                    lineHeight: "none",
+                    _placeholder: { color: "neutral/25" },
+                    bg: "transparent",
+                    p: "2",
+                    rounded: "md"
+                })}
                 value={input(props.value)}
                 onChange={(e) => {
                     if (!props.onChange) return

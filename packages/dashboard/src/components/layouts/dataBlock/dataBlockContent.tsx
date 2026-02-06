@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,20 @@ export function DataBlockContent(props: {
 }) {
     return (
         <div
-            className={cn(
-                "shrink-0 w-full h-fit grid grid-cols-[max-content_auto] gap-x-4 gap-y-2 p-4 border border-neutral/20 rounded-md",
+            className={cx(
+                css({
+                    flexShrink: "0",
+                    w: "full",
+                    h: "fit",
+                    display: "grid",
+                    gridTemplateColumns: "max-content auto",
+                    columnGap: "4",
+                    rowGap: "2",
+                    p: "4",
+                    border: "1px solid",
+                    borderColor: "neutral/20",
+                    rounded: "md"
+                }),
                 props.className
             )}
             children={props.children}

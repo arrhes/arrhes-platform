@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,9 +8,22 @@ export function Box(props: {
 }) {
     return (
         <div
-            className={cn(
-                "min-w-0 w-full max-w-full h-fit shrink-0 flex flex-col justify-start items-start overflow-x-auto",
-                "border border-neutral/10 rounded-md",
+            className={cx(
+                css({
+                    minW: "0",
+                    w: "full",
+                    maxW: "full",
+                    h: "fit",
+                    flexShrink: "0",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    overflowX: "auto",
+                    border: "1px solid",
+                    borderColor: "neutral/10",
+                    rounded: "md"
+                }),
                 props.className
             )}
         >

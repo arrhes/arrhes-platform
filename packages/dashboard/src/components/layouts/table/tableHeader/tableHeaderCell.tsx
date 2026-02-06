@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -10,8 +10,12 @@ export function TableHeaderCell(props: {
 }) {
     return (
         <th
-            className={cn(
-                "w-fit p-2 align-middle",
+            className={cx(
+                css({
+                    w: "fit",
+                    p: "2",
+                    verticalAlign: "middle"
+                }),
                 props.className
             )}
             colSpan={props.colSpan}

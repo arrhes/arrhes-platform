@@ -1,5 +1,5 @@
-import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
-import { cn } from "#/utilities/cn.js"
+import { Button, type ButtonProps } from "@arrhes/ui"
+import { css, cx } from "../../utilities/cn.js"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { ReactElement, useEffect, useRef } from "react"
 import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
@@ -17,7 +17,7 @@ export function FormRoot<
     onSuccess: ((data: v.InferOutput<U>) => void) | (() => Promise<void>) | undefined
     resetOnSubmit?: boolean
     submitOnPressEnterKey?: boolean
-    submitButtonProps: Parameters<typeof ButtonPlain>[0]
+    submitButtonProps: Parameters<typeof Button>[0]
     children: (form: UseFormReturn<v.InferOutput<U>, any, v.InferOutput<U>>) => ReactElement
 }) {
     const form = useForm<T>({
@@ -45,17 +45,39 @@ export function FormRoot<
     return (
         <FormProvider {...form}>
             <form
-                className="w-full flex flex-col justify-start items-start"
+                className={css({
+                    w: "full",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start"
+                })}
             //  onSubmit={}
             >
-                <div className="w-full max-w-md flex flex-col justify-start items-stretch gap-4">
-                    <div className="w-full flex flex-col justify-start items-stretch gap-2">
+                <div className={css({
+                    w: "full",
+                    maxW: "md",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    gap: "4"
+                })}>
+                    <div className={css({
+                        w: "full",
+                        display: "flex",
+                        flexDir: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "stretch",
+                        gap: "2"
+                    })}>
                         {props.children(form)}
                     </div>
-                    <ButtonPlain
+                    <Button
                         {...props.submitButtonProps}
+                        variant="primary"
                         ref={submitButtonRef}
-                        className={cn(
+                        className={cx(
                             "",
                             props.submitButtonProps.className
                         )}

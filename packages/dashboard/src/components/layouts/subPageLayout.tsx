@@ -1,6 +1,6 @@
-import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
-import { ValidParams, ValidRoutes } from "#/routes/platformRouter.js"
-import { cn } from "#/utilities/cn.js"
+import { ButtonContent } from "@arrhes/ui"
+import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
+import { css, cx } from "../../utilities/cn.js"
 import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import { JSX } from "react"
 
@@ -19,12 +19,31 @@ export function SubPageLayout(props: {
     })
 
     return (
-        <div className="flex-1 shrink w-full max-w-full h-fit flex justify-start items-start gap-4">
+        <div className={css({
+            flex: "1",
+            flexShrink: "1",
+            w: "full",
+            maxW: "full",
+            h: "fit",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: "4"
+        })}>
             {
                 props.tabs === undefined
                     ? (null)
                     : (
-                        <div className="w-fit flex flex-col justify-start items-stretch gap-2 border-r border-neutral/10">
+                        <div className={css({
+                            w: "fit",
+                            display: "flex",
+                            flexDir: "column",
+                            justifyContent: "flex-start",
+                            alignItems: "stretch",
+                            gap: "2",
+                            borderRight: "1px solid",
+                            borderColor: "neutral/10"
+                        })}>
                             {
                                 props.tabs.map((tab) => {
                                     const matchRoute = routeMatches.find((match) => match.fullPath.includes(tab.to ?? ""))
@@ -36,25 +55,47 @@ export function SubPageLayout(props: {
                                         <div
                                             key={tab.to}
                                             aria-current={isActive}
-                                            className="w-full flex justify-start items-stretch gap-2 group"
+                                            className={css({
+                                                w: "full",
+                                                display: "flex",
+                                                justifyContent: "flex-start",
+                                                alignItems: "stretch",
+                                                gap: "2"
+                                            })}
                                         >
                                             <Link
                                                 to={tab.to}
                                                 params={tab.params}
-                                                className="w-full flex justify-start items-center gap-2"
+                                                className={css({
+                                                    w: "full",
+                                                    display: "flex",
+                                                    justifyContent: "flex-start",
+                                                    alignItems: "center",
+                                                    gap: "2"
+                                                })}
                                             >
-                                                <ButtonGhostContent
+                                                <ButtonContent
+                                                    variant="invisible"
                                                     icon={tab.icon}
                                                     text={tab.label}
                                                     color="neutral"
                                                     isActive={isActive}
-                                                    className="w-full transition-all duration-200 ease-in-out"
+                                                    className={css({
+                                                        w: "full",
+                                                        transition: "all",
+                                                        transitionDuration: "200ms",
+                                                        transitionTimingFunction: "ease-in-out"
+                                                    })}
                                                 />
                                             </Link>
                                             <div
-                                                className={cn(
-                                                    "shrink-0 w-[2px] rounded-full",
-                                                    isActive ? "bg-neutral" : "bg-transparent"
+                                                className={cx(
+                                                    css({
+                                                        flexShrink: "0",
+                                                        w: "2px",
+                                                        rounded: "full"
+                                                    }),
+                                                    isActive ? css({ bg: "neutral" }) : css({ bg: "transparent" })
                                                 )}
                                             />
                                         </div>
@@ -64,7 +105,17 @@ export function SubPageLayout(props: {
                         </div>
                     )
             }
-            <div className="shrink min-h-fit min-w-0 w-full max-w-full flex flex-col justify-start items-stretch">
+            <div className={css({
+                flexShrink: "1",
+                minH: "fit",
+                minW: "0",
+                w: "full",
+                maxW: "full",
+                display: "flex",
+                flexDir: "column",
+                justifyContent: "flex-start",
+                alignItems: "stretch"
+            })}>
                 <Outlet />
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { Dialog, DialogContent, DialogProps } from "@radix-ui/react-dialog"
 import { IconSearch } from "@tabler/icons-react"
 import { Command as CommandPrimitive } from "cmdk"
@@ -11,8 +11,16 @@ export const Command = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <CommandPrimitive
         ref={ref}
-        className={cn(
-            "flex h-full w-full flex-col overflow-auto rounded-[inherit] bg-white",
+        className={cx(
+            css({
+                display: "flex",
+                h: "full",
+                w: "full",
+                flexDir: "column",
+                overflow: "auto",
+                rounded: "inherit",
+                bg: "white"
+            }),
             className
         )}
         {...props}
@@ -24,8 +32,39 @@ interface CommandDialogProps extends DialogProps { }
 export const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
     return (
         <Dialog {...props}>
-            <DialogContent className="overflow-auto p-0 shadow-lg">
-                <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-500 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5 dark:[&_[cmdk-group-heading]]:text-slate-400">
+            <DialogContent className={css({
+                overflow: "auto",
+                p: "0",
+                shadow: "lg"
+            })}>
+                <Command className={css({
+                    "& [cmdk-group-heading]": {
+                        px: "2",
+                        fontWeight: "medium",
+                        color: "slate.500"
+                    },
+                    "& [cmdk-group]:not([hidden])~[cmdk-group]": {
+                        pt: "0"
+                    },
+                    "& [cmdk-group]": {
+                        px: "2"
+                    },
+                    "& [cmdk-input-wrapper] svg": {
+                        h: "5",
+                        w: "5"
+                    },
+                    "& [cmdk-input]": {
+                        h: "12"
+                    },
+                    "& [cmdk-item]": {
+                        px: "2",
+                        py: "3"
+                    },
+                    "& [cmdk-item] svg": {
+                        h: "5",
+                        w: "5"
+                    }
+                })}>
                     {children}
                 </Command>
             </DialogContent>
@@ -37,12 +76,37 @@ export const CommandInput = React.forwardRef<
     React.ElementRef<typeof CommandPrimitive.Input>,
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-    <div className="h-[40px] flex items-center gap-2 p-2 border-b border-neutral/10" cmdk-input-wrapper="">
-        <IconSearch className="h-4 w-4 shrink-0 opacity-50" />
+    <div className={css({
+        h: "40px",
+        display: "flex",
+        alignItems: "center",
+        gap: "2",
+        p: "2",
+        borderBottom: "1px solid",
+        borderColor: "neutral/10"
+    })} cmdk-input-wrapper="">
+        <IconSearch className={css({
+            h: "4",
+            w: "4",
+            flexShrink: "0",
+            opacity: "0.5"
+        })} />
         <CommandPrimitive.Input
             ref={ref}
-            className={cn(
-                "flex w-full rounded-md bg-transparent text-base outline-none placeholder:text-neutral/50 disabled:cursor-not-allowed disabled:opacity-50",
+            className={cx(
+                css({
+                    display: "flex",
+                    w: "full",
+                    rounded: "md",
+                    bg: "transparent",
+                    fontSize: "base",
+                    outline: "none",
+                    _placeholder: { color: "neutral/50" },
+                    _disabled: {
+                        cursor: "not-allowed",
+                        opacity: "0.5"
+                    }
+                }),
                 className
             )}
             {...props}
@@ -57,7 +121,14 @@ export const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <CommandPrimitive.List
         ref={ref}
-        className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+        className={cx(
+            css({
+                maxH: "300px",
+                overflowY: "auto",
+                overflowX: "hidden"
+            }),
+            className
+        )}
         {...props}
     />
 ))
@@ -73,7 +144,11 @@ export const CommandEmpty = React.forwardRef<
     return (
         <CommandPrimitive.Empty
             ref={ref}
-            className="py-6 text-center text-sm"
+            className={css({
+                py: "6",
+                textAlign: "center",
+                fontSize: "sm"
+            })}
             {...props}
         />
     )
@@ -86,8 +161,18 @@ export const CommandGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <CommandPrimitive.Group
         ref={ref}
-        className={cn(
-            "overflow-auto text-slate-950 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-500 dark:text-slate-50 dark:[&_[cmdk-group-heading]]:text-slate-400",
+        className={cx(
+            css({
+                overflow: "auto",
+                color: "slate.950",
+                "& [cmdk-group-heading]": {
+                    px: "2",
+                    py: "1.5",
+                    fontSize: "xs",
+                    fontWeight: "medium",
+                    color: "slate.500"
+                }
+            }),
             className
         )}
         {...props}
@@ -100,7 +185,14 @@ export const CommandSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <CommandPrimitive.Separator
         ref={ref}
-        className={cn("-mx-1 h-px bg-slate-200 dark:bg-slate-800", className)}
+        className={cx(
+            css({
+                mx: "-1",
+                h: "1px",
+                bg: "slate.200"
+            }),
+            className
+        )}
         {...props}
     />
 ))
@@ -111,8 +203,27 @@ export const CommandItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <CommandPrimitive.Item
         ref={ref}
-        className={cn(
-            "relative flex cursor-default select-none items-center rounded-md-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-slate-100 aria-selected:text-slate-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:aria-selected:bg-slate-800 dark:aria-selected:text-slate-50",
+        className={cx(
+            css({
+                position: "relative",
+                display: "flex",
+                cursor: "default",
+                userSelect: "none",
+                alignItems: "center",
+                rounded: "sm",
+                px: "2",
+                py: "1.5",
+                fontSize: "sm",
+                outline: "none",
+                _selected: {
+                    bg: "slate.100",
+                    color: "slate.900"
+                },
+                _disabled: {
+                    pointerEvents: "none",
+                    opacity: "0.5"
+                }
+            }),
             className
         )}
         {...props}
@@ -125,8 +236,13 @@ export const CommandShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => {
     return (
         <span
-            className={cn(
-                "ml-auto text-xs tracking-widest text-slate-500 ",
+            className={cx(
+                css({
+                    ml: "auto",
+                    fontSize: "xs",
+                    letterSpacing: "widest",
+                    color: "slate.500"
+                }),
                 className
             )}
             {...props}

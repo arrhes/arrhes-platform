@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,8 @@ export function TableBodyRoot(props: {
 }) {
     return (
         <tbody
-            className={cn(
-                "w-full",
+            className={cx(
+                css({ w: "full" }),
                 props.className
             )}
             children={props.children}

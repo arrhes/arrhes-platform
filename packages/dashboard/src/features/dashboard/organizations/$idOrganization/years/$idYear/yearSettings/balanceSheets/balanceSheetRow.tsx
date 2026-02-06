@@ -1,0 +1,89 @@
+import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { css } from "@arrhes/ui/utilities/cn.js"
+import { Link } from "@tanstack/react-router"
+import { ComponentProps } from "react"
+import * as v from "valibot"
+
+
+export function BalanceSheetRow(props: {
+    idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
+    idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
+    balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>
+    level: number
+    className?: ComponentProps<'div'>['className']
+}) {
+
+    const prefix = `${(new Array(props.level).fill("").map((_) => {
+        return "&nbsp;&nbsp;"
+    }))
+        .join("")
+        }`
+
+    return (
+        <Link
+            to="/organisations/$idOrganization/exercices/$idYear/paramètres/bilan/$idBalanceSheet"
+            params={{
+                idOrganization: props.idOrganization,
+                idYear: props.idYear,
+                idBalanceSheet: props.balanceSheet.id,
+            }}
+            className={css({ w: "full" })}
+        >
+            <div
+                className={css({
+                    minW: "fit-content",
+                    w: "full",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    gap: "2",
+                    _hover: { bg: "neutral/5" },
+                    borderBottom: "1px solid",
+                    borderColor: "neutral/5",
+                    _last: { borderBottom: "0" }
+                })}
+            // style={{
+            //     paddingLeft: `${(1 + props.level) * 12}px`
+            // }}
+            >
+                {
+                    (prefix === "")
+                        ? (null)
+                        : (
+                            <pre
+                                className={css({
+                                    color: "neutral/25",
+                                    fontSize: "[22px]",
+                                    lineHeight: "none",
+                                    h: "full",
+                                    verticalAlign: "middle",
+                                    textAlign: "left"
+                                })}
+                                dangerouslySetInnerHTML={{
+                                    __html: prefix
+                                }}
+                            />
+                        )
+                }
+                <div className={css({ p: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                    <span className={css({
+                        color: "neutral",
+                        fontSize: "xs",
+                        lineHeight: "none"
+                    })}>
+                        {props.balanceSheet.number}
+                    </span>
+                    <span className={css({
+                        color: "neutral",
+                        fontSize: "xs",
+                        textAlign: "left",
+                        lineHeight: "none",
+                        whiteSpace: "nowrap"
+                    })}>
+                        {props.balanceSheet.label}
+                    </span>
+                </div>
+            </div>
+        </Link>
+    )
+}

@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { IconStarFilled } from '@tabler/icons-react'
 import { InputHTMLAttributes, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
@@ -24,14 +24,14 @@ export const InputRating = forwardRef<HTMLInputElement, InputText>(
         }
 
         return (
-            <div className="flex">
-                <input className="hidden" ref={ref} />
+            <div className={css({ display: "flex" })}>
+                <input className={css({ display: "none" })} ref={ref} />
                 {Array(5)
                     .fill(0)
                     .map((_, i) => (
                         <div
                             key={i}
-                            className="group"
+                            className={css({ cursor: "pointer" })}
                             onClick={() => {
                                 if (!props.onChange) return
                                 props?.onChange(output((i === +input(props.value) - 1) ? 0 : i + 1))
@@ -40,9 +40,13 @@ export const InputRating = forwardRef<HTMLInputElement, InputText>(
                         >
                             <IconStarFilled
                                 size={16}
-                                className={cn(
-                                    "fill-none stroke-neutral/50 group-hover:fill-neutral/10",
-                                    i < +input(props.value) ? "fill-neutral" : ""
+                                className={cx(
+                                    css({
+                                        fill: "none",
+                                        stroke: "neutral/50",
+                                        _hover: { fill: "neutral/10" }
+                                    }),
+                                    css(i < +input(props.value) ? { fill: "neutral" } : {})
                                 )}
                             />
                         </div>

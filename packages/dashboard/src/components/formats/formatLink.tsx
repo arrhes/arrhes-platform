@@ -1,5 +1,6 @@
-import { Button } from "#/components/buttons/button.js"
-import { toast } from "#/contexts/toasts/useToast.js"
+import { Button } from "@arrhes/ui"
+import { toast } from "../../contexts/toasts/useToast.js"
+import { css } from "../../utilities/cn.js"
 import { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
@@ -22,9 +23,22 @@ export function FormatLink(props: FormatLinkProps) {
         <FormatBase className={props.className}>
             <Button
                 onClick={() => copyContent(props.text)}
-                className="w-full overflow-auto rounded-none"
+                className={css({
+                    w: "full",
+                    overflow: "auto",
+                    rounded: "none"
+                })}
             >
-                <span className="text-left underline hover:no-underline max-w-full break-normal whitespace-nowrap overflow-auto text-ellipsis">
+                <span className={css({
+                    textAlign: "left",
+                    textDecoration: "underline",
+                    _hover: { textDecoration: "none" },
+                    maxW: "full",
+                    overflowWrap: "normal",
+                    whiteSpace: "nowrap",
+                    overflow: "auto",
+                    textOverflow: "ellipsis"
+                })}>
                     {props.text}
                 </span>
             </Button>

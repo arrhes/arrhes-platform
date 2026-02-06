@@ -1,7 +1,7 @@
-import { routePath } from "#src/components/_index.js"
-import { booleanSchema } from "#src/components/schemas/booleanSchema.js"
-import { accountSchema, accountSchemaReturn } from "#src/schemas/account.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../../components/_index.js"
+import { booleanSchema } from "../../../../../../../../components/schemas/booleanSchema.js"
+import { accountSchema, accountSchemaReturn } from "../../../../../../../../schemas/account.js"
+import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

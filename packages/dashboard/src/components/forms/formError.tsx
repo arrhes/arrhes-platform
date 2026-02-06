@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { forwardRef } from "react"
 import { useFormField } from "./useFormField.js"
 
@@ -15,7 +15,14 @@ export const FormError = forwardRef<
         <p
             ref={ref}
             id={formMessageId}
-            className={cn("w-full text-xs text-error", props.className)}
+            className={cx(
+                css({
+                    w: "full",
+                    fontSize: "xs",
+                    color: "error"
+                }),
+                props.className
+            )}
             {...props}
         >
             {body}

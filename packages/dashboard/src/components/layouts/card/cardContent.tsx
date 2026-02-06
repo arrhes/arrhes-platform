@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,15 @@ export function CardContent(props: {
 }) {
     return (
         <div
-            className={cn(
-                "w-full h-fit flex flex-col justify-start items-start",
+            className={cx(
+                css({
+                    w: "full",
+                    h: "fit",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start"
+                }),
                 props.className
             )}
         >

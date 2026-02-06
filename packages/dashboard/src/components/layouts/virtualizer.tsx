@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentProps, ReactElement, useRef } from "react"
 
@@ -20,13 +20,29 @@ export function Virtualizer<TData extends unknown>(props: {
     return (
         <div
             ref={parentRef}
-            className={cn(
-                "w-full h-full flex flex-col justify-start items-start overflow-auto",
+            className={cx(
+                css({
+                    w: "full",
+                    h: "full",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    overflow: "auto"
+                }),
                 props.className
             )}
         >
             <div
-                className="relative w-full h-fit flex flex-col justify-start items-start"
+                className={css({
+                    position: "relative",
+                    w: "full",
+                    h: "fit",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start"
+                })}
                 style={{
                     height: `${rowVirtualizer.getTotalSize()}px`,
                 }}
@@ -34,7 +50,14 @@ export function Virtualizer<TData extends unknown>(props: {
                 {rowVirtualizer.getVirtualItems().map((virtualItem) => (
                     <div
                         key={virtualItem.key}
-                        className='absolute top-0 left-0 min-h-fit h-fit w-full'
+                        className={css({
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                            minH: "fit",
+                            h: "fit",
+                            w: "full"
+                        })}
                         style={{
                             height: `${virtualItem.size}px`,
                             transform: `translateY(${virtualItem.start}px)`,

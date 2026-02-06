@@ -1,5 +1,5 @@
-import { BalanceSheetAssetsReportTable } from "#/utilities/email/templates/balanceSheetReport/balanceSheetAssets/balanceSheetAssetsReportTable.js"
-import { BalanceSheetLiabilitiesReportTable } from "#/utilities/email/templates/balanceSheetReport/balanceSheetLiabilities/balanceSheetLiabilitiesReportTable.js"
+import { BalanceSheetAssetsReportTable } from "./balanceSheetAssets/balanceSheetAssetsReportTable.js"
+import { BalanceSheetLiabilitiesReportTable } from "./balanceSheetLiabilities/balanceSheetLiabilitiesReportTable.js"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Style, css } from "hono/css"
 import * as v from "valibot"

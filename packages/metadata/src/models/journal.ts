@@ -1,5 +1,5 @@
-import { dateTimeColumn } from "#src/components/models/dateTimeColumn.js"
-import { idColumn } from "#src/components/models/idColumn.js"
+import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
+import { idColumn } from "../components/models/idColumn.js"
 import { AnyPgColumn, pgTable, unique, varchar } from "drizzle-orm/pg-core"
 import { organizationModel } from "./organization.js"
 import { userModel } from "./user.js"

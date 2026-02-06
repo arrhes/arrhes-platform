@@ -1,15 +1,16 @@
-import { ButtonOutlineContent } from "#/components/buttons/buttonOutlineContent.js"
-import { FormControl } from "#/components/forms/formControl.js"
-import { FormError } from "#/components/forms/formError.js"
-import { FormField } from "#/components/forms/formField.js"
-import { FormItem } from "#/components/forms/formItem.js"
-import { FormLabel } from "#/components/forms/formLabel.js"
-import { FormRoot } from "#/components/forms/formRoot.js"
-import { InputPassword } from "#/components/inputs/inputPassword.js"
-import { InputText } from "#/components/inputs/inputText.js"
-import { toast } from "#/contexts/toasts/useToast.js"
-import { platformRouter } from "#/routes/platformRouter.js"
-import { postAPI } from "#/utilities/postAPI.js"
+import { ButtonContent } from "@arrhes/ui"
+import { FormControl } from "../../components/forms/formControl.js"
+import { FormError } from "../../components/forms/formError.js"
+import { FormField } from "../../components/forms/formField.js"
+import { FormItem } from "../../components/forms/formItem.js"
+import { FormLabel } from "../../components/forms/formLabel.js"
+import { FormRoot } from "../../components/forms/formRoot.js"
+import { InputPassword } from "../../components/inputs/inputPassword.js"
+import { InputText } from "../../components/inputs/inputText.js"
+import { toast } from "../../contexts/toasts/useToast.js"
+import { platformRouter } from "../../routes/platformRouter.js"
+import { css } from "../../utilities/cn.js"
+import { postAPI } from "../../utilities/postAPI.js"
 import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
 import { IconLogin2 } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
@@ -18,20 +19,53 @@ import { Fragment } from "react/jsx-runtime"
 
 export function SignInPage() {
     return (
-        <div className="w-full h-full flex justify-center items-center">
-            <div className="w-full max-w-sm flex flex-col justify-center items-center gap-4">
-                <div className="w-full flex flex-col justify-start items-start gap-4 bg-white border border-neutral/10 rounded-md p-8">
-                    <span className="text-xl">
+        <div className={css({
+            w: "full",
+            h: "full",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        })}>
+            <div className={css({
+                w: "full",
+                maxW: "sm",
+                display: "flex",
+                flexDir: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "4"
+            })}>
+                <div className={css({
+                    w: "full",
+                    display: "flex",
+                    flexDir: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "4",
+                    bg: "white",
+                    border: "1px solid",
+                    borderColor: "neutral/10",
+                    rounded: "md",
+                    p: "8"
+                })}>
+                    <span className={css({ fontSize: "xl" })}>
                         Connexion
                     </span>
-                    <div className="w-full flex flex-col justify-start items-start gap-4">
+                    <div className={css({
+                        w: "full",
+                        display: "flex",
+                        flexDir: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        gap: "4"
+                    })}>
                         <FormRoot
                             schema={signInRouteDefinition.schemas.body}
                             defaultValues={{}}
                             submitButtonProps={{
                                 icon: <IconLogin2 />,
                                 text: "Se connecter",
-                                className: "w-full justify-center"
+                                className: css({ w: "full", justifyContent: "center" })
                             }}
                             submitOnPressEnterKey={true}
                             onSubmit={async (data) => {
@@ -105,11 +139,12 @@ export function SignInPage() {
                         </FormRoot>
                         <Link
                             to="/inscription"
-                            className="w-full"
+                            className={css({ w: "full" })}
                         >
-                            <ButtonOutlineContent
+                            <ButtonContent
+                                variant="default"
                                 text="Pas de compte ?"
-                                className="w-full justify-center"
+                                className={css({ w: "full", justifyContent: "center" })}
                             />
                         </Link>
                     </div>

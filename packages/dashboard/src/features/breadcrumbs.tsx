@@ -1,4 +1,5 @@
-import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
+import { ButtonContent } from "@arrhes/ui"
+import { css } from "../utilities/cn.js"
 import { IconSlash } from "@tabler/icons-react"
 import { Link, useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
@@ -21,7 +22,7 @@ export function Breadcrumbs() {
         return (null)
     }
     return (
-        <div className="flex justify-start items-center gap-1">
+        <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "1" })}>
             {
                 (idOrganization === null)
                     ? (null)
@@ -32,7 +33,8 @@ export function Breadcrumbs() {
                                 idOrganization: idOrganization,
                             }}
                         >
-                            <ButtonGhostContent
+                            <ButtonContent
+                                variant="invisible"
                                 text={idOrganization}
                                 isActive={(idYear === null)}
                             />
@@ -46,7 +48,7 @@ export function Breadcrumbs() {
                         <Fragment>
                             <IconSlash
                                 size={16}
-                                className="stroke-neutral/25"
+                                className={css({ stroke: "neutral/25" })}
                             />
                             <Link
                                 to="/organisations/$idOrganization/exercices/$idYear/écritures"
@@ -55,7 +57,8 @@ export function Breadcrumbs() {
                                     idYear: idYear,
                                 }}
                             >
-                                <ButtonGhostContent
+                                <ButtonContent
+                                    variant="invisible"
                                     text={idYear}
                                     isActive={true}
                                 />

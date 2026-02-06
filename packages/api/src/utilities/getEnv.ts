@@ -1,4 +1,4 @@
-import { validate } from "#/utilities/validate.js"
+import { validate } from "../utilities/validate.js"
 import * as v from "valibot"
 
 

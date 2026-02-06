@@ -1,9 +1,9 @@
-import { CircularLoader } from "#/components/layouts/circularLoader.js"
-import { RootLayout } from "#/features/rootLayout.js"
 import { readUserSessionRouteDefinition } from "@arrhes/application-metadata/routes"
 import { createRootRouteWithContext, useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import * as v from "valibot"
+import { CircularLoader } from "../components/layouts/circularLoader.js"
+import { RootLayout } from "../features/rootLayout.js"
 
 
 export const rootLayoutRoute = createRootRouteWithContext<{
@@ -24,7 +24,7 @@ export const rootLayoutRoute = createRootRouteWithContext<{
             .reverse()
             .find((d) => d.context.title)
 
-        const title = matchWithTitle?.context.title || "arrhes"
+        const title = matchWithTitle?.context.title || "Arrhes"
 
         return (
             <Fragment>

@@ -1,8 +1,8 @@
-import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
-import { balanceSheetColumn } from "#src/components/values/balanceSheetColumn.js"
-import { accountModel } from "#src/models/account.js"
+import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { varcharSchema } from "../components/schemas/varcharSchema.js"
+import { balanceSheetColumn } from "../components/values/balanceSheetColumn.js"
+import { accountModel } from "../models/account.js"
 import * as v from "valibot"
 
 

@@ -1,11 +1,11 @@
 
-import { Button } from "#/components/buttons/button.js"
-import { FormatNull } from "#/components/formats/formatNull.js"
-import { CircularLoader } from "#/components/layouts/circularLoader.js"
-import { Virtualizer } from "#/components/layouts/virtualizer.js"
-import { Popover } from "#/components/overlays/popover/popover.js"
-import { cn } from "#/utilities/cn.js"
-import { debounce } from "#/utilities/debounce.js"
+import { Button } from "@arrhes/ui"
+import { FormatNull } from "../../components/formats/formatNull.js"
+import { CircularLoader } from "../../components/layouts/circularLoader.js"
+import { Virtualizer } from "../../components/layouts/virtualizer.js"
+import { Popover } from "../../components/overlays/popover/popover.js"
+import { css, cx } from "../../utilities/cn.js"
+import { debounce } from "../../utilities/debounce.js"
 import { IconCheck, IconChevronDown } from "@tabler/icons-react"
 import { ComponentProps, useEffect, useState } from "react"
 import { FieldError } from "react-hook-form"
@@ -54,25 +54,45 @@ export function InputCombobox<TValue extends string>(props: {
                         setOpen(!open)
                     }}
                     data-open={open}
-                    className={cn(
-                        "w-full group",
-                        props.isDisabled ? "cursor-not-allowed" : "",
+                    className={cx(
+                        css({ w: "full" }),
+                        props.isDisabled ? css({ cursor: "not-allowed" }) : "",
                         props.className
                     )}
                     autoFocus={props.autoFocus}
                     disabled={props.isDisabled}
                 >
-                    <div className={cn(
-                        "w-full h-[32px] flex justify-between items-center gap-2 rounded-sm p-2 border border-solid",
-                        "hover:shadow-inner",
-                        "focus-within:border-neutral/50 focus-within:shadow-inner",
-                        (props.error === undefined) ? "border-neutral/25" : "border-error",
+                    <div className={cx(
+                        css({
+                            w: "full",
+                            h: "[32px]",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            gap: "2",
+                            rounded: "sm",
+                            p: "2",
+                            border: "1px solid",
+                            _hover: { shadow: "inner" },
+                            _focusWithin: { borderColor: "neutral/50", shadow: "inner" }
+                        }),
+                        (props.error === undefined) ? css({ borderColor: "neutral/25" }) : css({ borderColor: "error" }),
                         props.className
                     )}>
                         <span
-                            className={cn(
-                                "w-full h-full text-sm font-medium leading-none whitespace-nowrap text-ellipsis rounded-sm text-left",
-                                (currentOption === undefined) ? "text-neutral/50" : "text-neutral"
+                            className={cx(
+                                css({
+                                    w: "full",
+                                    h: "full",
+                                    fontSize: "sm",
+                                    fontWeight: "medium",
+                                    lineHeight: "none",
+                                    whiteSpace: "nowrap",
+                                    textOverflow: "ellipsis",
+                                    rounded: "sm",
+                                    textAlign: "left"
+                                }),
+                                (currentOption === undefined) ? css({ color: "neutral/50" }) : css({ color: "neutral" })
                             )}
                         >
                             {currentOption === undefined
@@ -82,7 +102,7 @@ export function InputCombobox<TValue extends string>(props: {
                         </span>
                         <IconChevronDown
                             size={16}
-                            className="stroke-neutral min-w-[16px] w-[16px] min-h-[16px] h-[16px]"
+                            className={css({ stroke: "neutral", minW: "[16px]", w: "[16px]", minH: "[16px]", h: "[16px]" })}
                             strokeWidth={2}
                         />
                     </div>
@@ -93,17 +113,20 @@ export function InputCombobox<TValue extends string>(props: {
                     ? (null)
                     : (
                         <Popover.Content align="start">
-                            <div className="w-full h-[32px] flex justify-start items-center p-2 border-b border-b-neutral/10">
+                            <div className={css({ w: "full", h: "[32px]", display: "flex", justifyContent: "flex-start", alignItems: "center", p: "2", borderBottom: "1px solid", borderColor: "neutral/10" })}>
                                 <input
                                     type="text"
-                                    className={cn(
-                                        "w-full text-sm leading-none placeholder:text-neutral/25",
-                                    )}
+                                    className={css({
+                                        w: "full",
+                                        fontSize: "sm",
+                                        lineHeight: "none",
+                                        _placeholder: { color: "neutral/25" }
+                                    })}
                                     value={rawQuery}
                                     onChange={(e) => setRawQuery(e.currentTarget.value)}
                                 />
                             </div>
-                            <div className='h-fit max-h-[256px] w-full flex flex-col justify-start items-start'>
+                            <div className={css({ h: "fit-content", maxH: "[256px]", w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                                 {
                                     (props.isLoading === false)
                                         ? (null)
@@ -117,7 +140,7 @@ export function InputCombobox<TValue extends string>(props: {
                                         : (
                                             <FormatNull
                                                 text="Pas de résultat"
-                                                className="p-2"
+                                                className={css({ p: "2" })}
                                             />
                                         )
                                 }
@@ -138,23 +161,30 @@ export function InputCombobox<TValue extends string>(props: {
                                                     props.onChange(option.key)
                                                     setOpen(false)
                                                 }}
-                                                className={cn(
-                                                    "w-full h-fit flex justify-between items-center gap-2 p-2 cursor-pointer",
-                                                    (currentOption?.key === option.key) ? "bg-neutral/5" : "bg-none hover:bg-neutral/5"
+                                                className={cx(
+                                                    css({
+                                                        w: "full",
+                                                        h: "fit-content",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                        alignItems: "center",
+                                                        gap: "2",
+                                                        p: "2",
+                                                        cursor: "pointer"
+                                                    }),
+                                                    (currentOption?.key === option.key) ? css({ bg: "neutral/5" }) : css({ bg: "none", _hover: { bg: "neutral/5" } })
                                                 )}
                                             >
                                                 <span
-                                                    className={cn(
-                                                        currentOption?.key === option.key ? "text-neutral" : "text-neutral"
-                                                    )}
+                                                    className={css({ color: "neutral" })}
                                                 >
                                                     {option.label}
                                                 </span>
                                                 <IconCheck
                                                     size={16}
-                                                    className={cn(
-                                                        "stroke-neutral",
-                                                        currentOption?.key === option.key ? "opacity-100" : "opacity-0"
+                                                    className={cx(
+                                                        css({ stroke: "neutral" }),
+                                                        currentOption?.key === option.key ? css({ opacity: "100" }) : css({ opacity: "0" })
                                                     )}
                                                 />
                                             </div>

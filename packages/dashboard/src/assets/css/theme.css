@@ -1,37 +1,13 @@
-@import "tailwindcss";
-@import "./fonts.css";
+/* Theme variables are now defined in panda.config.ts */
+/* This file is kept for backwards compatibility */
 
-
-@theme {
-    --color-*: initial;
-    --color-white: #FFFFFF;
-    /* --color-background: #F9F9F9; */
-    --color-background: #F9F9F9;
-    --color-neutral: #1F292E;
-    --color-success: #34B234;
-    --color-error: #C91D1D;
-    --color-warning: #E8B130;
-    --color-information: #309be8;
-
-    --font-mono: "Sometype Mono", monospace;
-
-    --breakpoint-sm: 320px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-
-    --radius-xs: 0.125rem;
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 1rem;
-    --radius-xl: 2rem;
-
-    --inset-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
-    /* --shadow-xs: 0 0 0.125rem rgba(0, 0, 0, 0.1); */
-    --shadow-xs: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-
-    --max-width-sm: 320px;
-    --max-width-md: 768px;
-    --max-width-lg: 1024px;
-    --max-width-xl: 1280px;
+:root {
+  --colors-white: #FFFFFF;
+  --colors-background: #F9F9F9;
+  --colors-neutral: #1F292E;
+  --colors-success: #34B234;
+  --colors-error: #C91D1D;
+  --colors-warning: #E8B130;
+  --colors-information: #309be8;
+  --colors-primary: #2563eb;
 }

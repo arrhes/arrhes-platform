@@ -1,9 +1,9 @@
-import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
-import { FormatNull } from "#/components/formats/formatNull.js"
-import { InputDebounced } from "#/components/inputs/inputDebounced.js"
-import { InputText } from "#/components/inputs/inputText.js"
-import { CircularLoader } from "#/components/layouts/circularLoader.js"
-import { cn } from "#/utilities/cn.js"
+import { Button } from "@arrhes/ui"
+import { FormatNull } from "../../components/formats/formatNull.js"
+import { InputDebounced } from "../../components/inputs/inputDebounced.js"
+import { InputText } from "../../components/inputs/inputText.js"
+import { CircularLoader } from "../../components/layouts/circularLoader.js"
+import { css, cx } from "../../utilities/cn.js"
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
@@ -51,36 +51,93 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
         }
     })
 
-    if (props.isLoading) return <CircularLoader className="m-3" />
+    if (props.isLoading) return <CircularLoader className={css({ m: "3" })} />
     return (
-        <div className="shrink-0 w-full h-fit flex flex-col justify-start items-stretch gap-3">
-            <div className="shrink-0 w-full h-fit flex justify-between items-start gap-4">
+        <div className={css({
+            flexShrink: "0",
+            w: "full",
+            h: "fit",
+            display: "flex",
+            flexDir: "column",
+            justifyContent: "flex-start",
+            alignItems: "stretch",
+            gap: "3"
+        })}>
+            <div className={css({
+                flexShrink: "0",
+                w: "full",
+                h: "fit",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "4"
+            })}>
                 <InputDebounced
                     value={globalFilter ?? ""}
                     onChange={(value) => setGlobalFilter(value)}
                 >
                     <InputText
                         placeholder="Recherche"
-                        className="max-w-[320px]"
+                        className={css({ maxW: "320px" })}
                     />
                 </InputDebounced>
-                <div className="flex justify-start items-center gap-2">
+                <div className={css({
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    gap: "2"
+                })}>
                     {props.children ?? null}
                 </div>
             </div>
-            <div className="w-full max-w-full max-h-[600px] p-0 flex flex-col justify-start items-stretch overflow-auto rounded-md border border-neutral/10">
-                <table className="w-full max-w-full h-full max-h-full border-collapse">
-                    <thead className="w-full sticky top-0 bg-white">
-                        <tr className="w-full">
+            <div className={css({
+                w: "full",
+                maxW: "full",
+                maxH: "600px",
+                p: "0",
+                display: "flex",
+                flexDir: "column",
+                justifyContent: "flex-start",
+                alignItems: "stretch",
+                overflow: "auto",
+                rounded: "md",
+                border: "1px solid",
+                borderColor: "neutral/10"
+            })}>
+                <table className={css({
+                    w: "full",
+                    maxW: "full",
+                    h: "full",
+                    maxH: "full",
+                    borderCollapse: "collapse"
+                })}>
+                    <thead className={css({
+                        w: "full",
+                        position: "sticky",
+                        top: "0",
+                        bg: "white"
+                    })}>
+                        <tr className={css({ w: "full" })}>
                             {table.getFlatHeaders().map((header) => {
                                 return (
                                     <th
                                         key={header.id}
                                         colSpan={header.colSpan}
-                                        className="w-fit"
+                                        className={css({ w: "fit" })}
                                     >
-                                        <div className="flex justify-start items-center gap-2 p-2 border-b border-b-neutral/10 border-t-2 border-t-white">
-                                            <ButtonGhost
+                                        <div className={css({
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            alignItems: "center",
+                                            gap: "2",
+                                            p: "2",
+                                            borderBottom: "1px solid",
+                                            borderBottomColor: "neutral/10",
+                                            borderTop: "2px solid",
+                                            borderTopColor: "white"
+                                        })}>
+                                            <Button
+                                                variant="invisible"
                                                 onClick={header.column.getToggleSortingHandler()}
                                                 icon={{
                                                     asc: <IconSortAscending size={16} />,
@@ -94,7 +151,10 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             })}
                         </tr>
                     </thead>
-                    <tbody className="w-full h-fit">
+                    <tbody className={css({
+                        w: "full",
+                        h: "fit"
+                    })}>
                         {
                             table.getRowModel().rows.length > 0
                                 ? (null)
@@ -103,7 +163,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                         <td>
                                             <FormatNull
                                                 text="Pas de données"
-                                                className="p-2"
+                                                className={css({ p: "2" })}
                                             />
                                         </td>
                                     </tr>
@@ -118,15 +178,31 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                         if (!props.onRowClick) return
                                         props.onRowClick(row)
                                     }}
-                                    className={cn(
-                                        "w-full border-b border-neutral/5 last:border-b-0",
-                                        !props.onRowClick ? "" : "cursor-pointer hover:bg-neutral/5"
+                                    className={cx(
+                                        css({
+                                            w: "full",
+                                            borderBottom: "1px solid",
+                                            borderBottomColor: "neutral/5",
+                                            _last: { borderBottom: "0" }
+                                        }),
+                                        !props.onRowClick ? undefined : css({
+                                            cursor: "pointer",
+                                            _hover: { bg: "neutral/5" }
+                                        })
                                     )}
                                 >
                                     {row.getVisibleCells().map(cell => {
                                         return (
-                                            <td key={cell.id} className="w-fit last:w-[1%]">
-                                                <div className="flex justify-start items-center p-2" >
+                                            <td key={cell.id} className={css({
+                                                w: "fit",
+                                                _last: { w: "1%" }
+                                            })}>
+                                                <div className={css({
+                                                    display: "flex",
+                                                    justifyContent: "flex-start",
+                                                    alignItems: "center",
+                                                    p: "2"
+                                                })}>
                                                     {flexRender(
                                                         cell.column.columnDef.cell,
                                                         cell.getContext()

@@ -1,5 +1,6 @@
 
-import { Toast } from "#/components/overlays/toast/toast.js"
+import { Toast } from "../../components/overlays/toast/toast.js"
+import { css } from "../../utilities/cn.js"
 import { useToast } from "./useToast.js"
 
 
@@ -15,7 +16,7 @@ export function ToasterProvider() {
                             {...props}
                             key={id}
                         >
-                            <div className="flex flex-col justify-center items-start">
+                            <div className={css({ display: "flex", flexDir: "column", justifyContent: "center", alignItems: "flex-start" })}>
                                 {
                                     (title === undefined)
                                         ? null

@@ -1,6 +1,6 @@
-import { routePath } from "#src/components/_index.js"
-import { balanceSheetSchema, balanceSheetSchemaReturn } from "#src/schemas/balanceSheet.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../../components/_index.js"
+import { balanceSheetSchema, balanceSheetSchemaReturn } from "../../../../../../../../schemas/balanceSheet.js"
+import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

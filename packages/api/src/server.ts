@@ -1,6 +1,6 @@
-import { api } from "#/api.js"
-import { getClients } from "#/utilities/getClients.js"
-import { getEnv } from "#/utilities/getEnv.js"
+import { api } from "./api.js"
+import { getClients } from "./utilities/getClients.js"
+import { getEnv } from "./utilities/getEnv.js"
 import { createServer } from "http"
 
 

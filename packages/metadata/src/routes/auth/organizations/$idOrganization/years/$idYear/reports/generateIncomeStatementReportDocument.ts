@@ -1,7 +1,7 @@
-import { routePath } from "#src/components/_index.js"
-import { documentSchemaReturn } from "#src/schemas/document.js"
-import { incomeStatementSchema } from "#src/schemas/incomeStatement.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../components/_index.js"
+import { documentSchemaReturn } from "../../../../../../../schemas/document.js"
+import { incomeStatementSchema } from "../../../../../../../schemas/incomeStatement.js"
+import { routeDefinition } from "../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

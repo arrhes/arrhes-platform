@@ -1,4 +1,4 @@
-import { FormatText } from "#/components/formats/formatText.js"
+import { FormatText } from "../../components/formats/formatText.js"
 import { ComponentProps } from "react"
 import { FormatNull } from "./formatNull.js"
 

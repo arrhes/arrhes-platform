@@ -1,4 +1,5 @@
 
+import { css } from "../../utilities/cn.js"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { IconInfoSquare } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
@@ -21,12 +22,32 @@ export function FormLabel(props: FormLabel) {
             {...props.labelProps}
             htmlFor={formItemId}
             aria-required={props.isRequired}
-            className="flex justify-start items-center gap-2"
+            className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: "2"
+            })}
         >
-            <div className="flex flex-col justify-start items-start gap-1">
-                <div className="inline-flex justify-start items-center gap-1">
+            <div className={css({
+                display: "flex",
+                flexDir: "column",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                gap: "1"
+            })}>
+                <div className={css({
+                    display: "inline-flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    gap: "1"
+                })}>
                     {(!props.label) ? null : (
-                        <span className="text-xs text-neutral/50 before:content-['\200b']">
+                        <span className={css({
+                            fontSize: "xs",
+                            color: "neutral/50",
+                            _before: { content: "'\\200b'" }
+                        })}>
                             {props.label}
                         </span>
                     )}
@@ -34,14 +55,20 @@ export function FormLabel(props: FormLabel) {
                         (props.isRequired !== true)
                             ? null
                             : (
-                                <sup className="text-error text-xs">
+                                <sup className={css({
+                                    color: "error",
+                                    fontSize: "xs"
+                                })}>
                                     *
                                 </sup>
                             )
                     }
                 </div>
                 {(!props.description) ? null : (
-                    <span className="text-neutral/50 text-sm">
+                    <span className={css({
+                        color: "neutral/50",
+                        fontSize: "sm"
+                    })}>
                         {props.description}
                     </span>
                 )}
@@ -49,11 +76,19 @@ export function FormLabel(props: FormLabel) {
             {(!props.tooltip) ? null : (
                 <TooltipProvider>
                     <Tooltip delayDuration={0}>
-                        <TooltipTrigger className="cursor-help" onClick={(e) => e.preventDefault()} tabIndex={-1}>
-                            <IconInfoSquare size={20} className="text-neutral/50 hover:text-neutral hover:fill-neutral/5" />
+                        <TooltipTrigger className={css({ cursor: "help" })} onClick={(e) => e.preventDefault()} tabIndex={-1}>
+                            <IconInfoSquare size={20} className={css({
+                                color: "neutral/50",
+                                _hover: { color: "neutral", fill: "neutral/5" }
+                            })} />
                         </TooltipTrigger>
-                        <TooltipContent className="bg-neutral p-2">
-                            <p className="break-words hyphens-auto text-white text-sm">{props.tooltip}</p>
+                        <TooltipContent className={css({ bg: "neutral", p: "2" })}>
+                            <p className={css({
+                                overflowWrap: "break-word",
+                                hyphens: "auto",
+                                color: "white",
+                                fontSize: "sm"
+                            })}>{props.tooltip}</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>

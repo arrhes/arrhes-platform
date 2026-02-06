@@ -1,8 +1,10 @@
 # ==============================================================================
-# Website Service Dockerfile
+# Website Development Dockerfile
 # ==============================================================================
-# Creates a Node.js container with PNPM for running the website service
-# Source code is bind-mounted from host, dependencies installed at runtime
+# Self-contained development image for the website service.
+# - Dependencies installed at build time (node_modules inside image)
+# - Source code bind-mounted at runtime for live editing
+# - No entrypoint script needed - just run `docker compose up`
 # ==============================================================================
 
 ARG NODE_VERSION="25.2.1"
@@ -10,14 +12,33 @@ ARG PNPM_VERSION="10.26.1"
 
 FROM node:${NODE_VERSION}-bullseye-slim
 
-# Install PNPM package manager
+ARG PNPM_VERSION
+
+# Install PNPM
 RUN npm install -g "pnpm@${PNPM_VERSION}" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /workspace
 
-# Start via entrypoint script (bind-mounted at runtime)
-# NOTE: We don't switch to node user here - entrypoint will handle permissions
-ENTRYPOINT ["/bin/bash", "/workspace/.development/packages/website/entrypoint.sh"]
+# Copy package manifests for dependency installation
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+
+COPY packages/ui ./packages/ui
+COPY packages/website ./packages/website
+
+# Install all dependencies (hoisted to workspace root)
+RUN pnpm install
+
+# Generate PandaCSS styles (styled-system directory)
+RUN pnpm --filter="@arrhes/website" run prepare
+
+# Copy environment file for Vite
+COPY .development/packages/website/.env ./packages/website/.env
+
+# Set working directory to website package
+WORKDIR /workspace/packages/website
+
+# Run Vite dev server
+# Source files will be bind-mounted at runtime, overriding the copied files
+CMD ["pnpm", "dev", "--", "--host", "0.0.0.0"]

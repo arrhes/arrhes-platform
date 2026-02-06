@@ -1,6 +1,6 @@
-import { booleanSchema, dateTimeSchema, stringSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { userSessionModel } from "#src/models/userSession.js"
+import { booleanSchema, dateTimeSchema, stringSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { userSessionModel } from "../models/userSession.js"
 import * as v from "valibot"
 
 

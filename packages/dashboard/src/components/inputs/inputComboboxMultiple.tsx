@@ -1,10 +1,9 @@
-import { Button } from "#/components/buttons/button.js"
-import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
-import { FormatNull } from "#/components/formats/formatNull.js"
-import { CircularLoader } from "#/components/layouts/circularLoader.js"
-import { Command, CommandInput, CommandItem, CommandList } from "#/components/layouts/command.js"
-import { Popover } from "#/components/overlays/popover/popover.js"
-import { cn } from "#/utilities/cn.js"
+import { Button } from "@arrhes/ui"
+import { FormatNull } from "../../components/formats/formatNull.js"
+import { CircularLoader } from "../../components/layouts/circularLoader.js"
+import { Command, CommandInput, CommandItem, CommandList } from "../../components/layouts/command.js"
+import { Popover } from "../../components/overlays/popover/popover.js"
+import { css, cx } from "../../utilities/cn.js"
 import { IconCheck, IconSelector, IconX } from "@tabler/icons-react"
 import { CommandEmpty, CommandLoading } from "cmdk"
 import { Fragment, useState } from "react"
@@ -42,20 +41,21 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
         .filter((option) => !props.selectedOptions.some((x) => x.key === option.key))
 
     return (
-        <div className="flex flex-col justify-start items-stretch gap-1">
-            <div className="flex flex-col justify-start items-stretch p-2 w-full rounded-md border border-neutral/25 disabled:cursor-not-allowed disabled:opacity-50 max-h-64 overflow-auto min-h-[40px]">
+        <div className={css({ display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "1" })}>
+            <div className={css({ display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", p: "2", w: "full", rounded: "md", border: "1px solid", borderColor: "neutral/25", _disabled: { cursor: "not-allowed", opacity: "50" }, maxH: "[256px]", overflow: "auto", minH: "[40px]" })}>
                 {(props.selectedOptions.length === 0) ? (
-                    <div className="w-full h-full flex justify-start items-center">
+                    <div className={css({ w: "full", h: "full", display: "flex", justifyContent: "flex-start", alignItems: "center" })}>
                         <FormatNull text={props.emptyLabel ?? "Nothing selected"} />
                     </div>
                 ) : (
                     props.selectedOptions.map((option, index) => (
                         <Fragment key={option.key}>
-                            <div className="flex justify-between items-center gap-2 rounded-md" >
-                                <span className="p-2">
+                            <div className={css({ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "2", rounded: "md" })} >
+                                <span className={css({ p: "2" })}>
                                     {option.label}
                                 </span>
-                                <ButtonGhost
+                                <Button
+                                    variant="invisible"
                                     onClick={() => handleUnselect(index)}
                                     icon={<IconX />}
                                 />
@@ -69,21 +69,31 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                     <Button
                         role="combobox"
                         data-open={open}
-                        className="w-full group"
+                        className={css({ w: "full" })}
                         onClick={() => {
                             if (props.isDisabled) return
                             setOpen(!open)
                         }}
                         autoFocus={props.autoFocus}
                     >
-                        <div className={cn(
-                            "w-full grid grid-cols-[auto_min-content] items-center gap-x-2 p-2 border border-neutral/25 rounded-md",
-                            "group-focus:border-neutral/50 group-focus:shadow-outer group-focus:bg-neutral/5",
-                            "group-data-[state=open]:border-neutral/50 group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-outer",
+                        <div className={cx(
+                            css({
+                                w: "full",
+                                display: "grid",
+                                gridTemplateColumns: "auto min-content",
+                                alignItems: "center",
+                                gap: "2",
+                                p: "2",
+                                border: "1px solid",
+                                borderColor: "neutral/25",
+                                rounded: "md",
+                                _groupFocus: { borderColor: "neutral/50", shadow: "outer", bg: "neutral/5" },
+                                "&[data-open=true]": { borderColor: "neutral/50", bg: "neutral/5", shadow: "outer" }
+                            })
                         )}
                         >
-                            <span className="w-full h-fit text-left text-neutral/50 text-sm">{props.placeholder}</span>
-                            <IconSelector className="h-4 w-4 shrink-0 opacity-50" />
+                            <span className={css({ w: "full", h: "fit-content", textAlign: "left", color: "neutral/50", fontSize: "sm" })}>{props.placeholder}</span>
+                            <IconSelector className={css({ h: "4", w: "4", flexShrink: "0", opacity: "50" })} />
                         </div>
                     </Button>
                 </Popover.Trigger>
@@ -93,8 +103,8 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                             align="start"
                         >
                             <Command
-                                className={cn(
-                                    "w-full",
+                                className={cx(
+                                    css({ w: "full" }),
                                     props.className
                                 )}
                                 filter={(value, search) => {
@@ -113,10 +123,10 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                         )
                                         : (null)
                                 }
-                                <CommandList className='max-h-64 overflow-auto flex flex-col justify-start items-stretch'>
+                                <CommandList className={css({ maxH: "[256px]", overflow: "auto", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch" })}>
                                     <CommandEmpty>
-                                        <div className="relative h-[40px] p-3 flex justify-start items-center cursor-default select-none rounded-md-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                            <span className="text-neutral/10 text-left italic">
+                                        <div className={css({ position: "relative", h: "[40px]", p: "3", display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: "default", userSelect: "none", rounded: "sm", outline: "none", _disabled: { pointerEvents: "none", opacity: "50" } })}>
+                                            <span className={css({ color: "neutral/10", textAlign: "left", fontStyle: "italic" })}>
                                                 No result
                                             </span>
                                         </div>
@@ -137,23 +147,28 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                                         )
                                                         setOpen(false)
                                                     }}
-                                                    className={cn(
-                                                        "p-3 h-[40px] flex justify-between items-center overflow-auto gap-3",
-                                                        isSelected ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
+                                                    className={cx(
+                                                        css({
+                                                            p: "3",
+                                                            h: "[40px]",
+                                                            display: "flex",
+                                                            justifyContent: "space-between",
+                                                            alignItems: "center",
+                                                            overflow: "auto",
+                                                            gap: "3"
+                                                        }),
+                                                        isSelected ? css({ bg: "neutral/10" }) : css({ bg: "none", _hover: { bg: "neutral/5" } })
                                                     )}
                                                 >
                                                     <span
-                                                        className={cn(
-                                                            "text-sm",
-                                                            isSelected ? "text-neutral" : "text-neutral"
-                                                        )}
+                                                        className={css({ fontSize: "sm", color: "neutral" })}
                                                     >
                                                         {option.label}
                                                     </span>
                                                     <IconCheck
-                                                        className={cn(
-                                                            "h-4 w-4 stroke-neutral",
-                                                            isSelected ? "opacity-100" : "opacity-0"
+                                                        className={cx(
+                                                            css({ h: "4", w: "4", stroke: "neutral" }),
+                                                            isSelected ? css({ opacity: "100" }) : css({ opacity: "0" })
                                                         )}
                                                     />
                                                 </CommandItem>

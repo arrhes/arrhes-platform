@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import { colorVariant } from "@arrhes/application-metadata/components"
 import { IconAlertHexagon, IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
 import { ComponentProps, ReactElement } from "react"
@@ -16,41 +16,48 @@ export function Banner(props: {
     const banners = {
         "neutral": {
             icon: null,
-            bg: "bg-background",
-            text: "text-neutral"
+            bg: css({ bg: "background" }),
+            text: css({ color: "neutral" })
         },
         "information": {
-            icon: <IconInfoSquare size={20} className="text-information" />,
-            bg: "bg-information/5",
-            text: "text-information"
+            icon: <IconInfoSquare size={20} className={css({ color: "information" })} />,
+            bg: css({ bg: "information/5" }),
+            text: css({ color: "information" })
         },
         "error": {
-            icon: <IconAlertTriangle size={20} className="text-error" />,
-            bg: "bg-error/5",
-            text: "text-error"
+            icon: <IconAlertTriangle size={20} className={css({ color: "error" })} />,
+            bg: css({ bg: "error/5" }),
+            text: css({ color: "error" })
         },
         "warning": {
-            icon: <IconAlertHexagon size={20} className="text-warning" />,
-            bg: "bg-warning/5",
-            text: "text-warning"
+            icon: <IconAlertHexagon size={20} className={css({ color: "warning" })} />,
+            bg: css({ bg: "warning/5" }),
+            text: css({ color: "warning" })
         },
         "success": {
-            icon: <IconCircleCheck size={20} className="text-success" />,
-            bg: "bg-success/5",
-            text: "text-success"
+            icon: <IconCircleCheck size={20} className={css({ color: "success" })} />,
+            bg: css({ bg: "success/5" }),
+            text: css({ color: "success" })
         }
     }
 
     return (
         <div
-            className={cn(
-                "w-full p-4 flex justify-start items-start gap-2 rounded-md",
+            className={cx(
+                css({
+                    w: "full",
+                    p: "4",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "2",
+                    rounded: "md"
+                }),
                 banners[props?.variant ?? "neutral"].bg,
                 props.className
             )}
         >
-            <p className={cn(
-                "",
+            <p className={cx(
                 banners[props?.variant ?? "neutral"].text,
                 props.className
             )}

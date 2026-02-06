@@ -8,6 +8,13 @@ import { dbClient } from '../dbClient.js'
 
 async function seed() {
     try {
+        // Check if data already exists
+        const existingUsers = await dbClient.select().from(models.user).limit(1)
+        if (existingUsers.length > 0) {
+            console.log("Database already seeded, skipping...")
+            return
+        }
+
         await dbClient.transaction(async (tx) => {
 
 

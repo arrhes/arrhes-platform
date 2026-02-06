@@ -1,4 +1,5 @@
-import { Button } from "#/components/buttons/button.js"
+import { Button } from "@arrhes/ui"
+import { css } from "../../utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
 
@@ -17,7 +18,17 @@ export function InputFile(props:
 
     return (
         <div
-            className="w-full border border-neutral/20 border-dashed hover:bg-neutral/5 rounded-sm flex justify-center items-center"
+            className={css({
+                w: "full",
+                border: "1px solid",
+                borderColor: "neutral/20",
+                borderStyle: "dashed",
+                _hover: { bg: "neutral/5" },
+                rounded: "sm",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            })}
             onDrop={(event) => {
                 event.preventDefault()
                 if (!props.onChange) return
@@ -38,13 +49,21 @@ export function InputFile(props:
                     }
                 }}
                 accept={!props.type ? "*" : "image/*"}
-                className="hidden w-full h-full"
+                className={css({ display: "none", w: "full", h: "full" })}
             />
             <Button
                 onClick={(_event) => { inputRef.current?.click() }}
-                className="cursor-pointer w-full h-full p-2 md:p-3 flex justify-center items-center"
+                className={css({
+                    cursor: "pointer",
+                    w: "full",
+                    h: "full",
+                    p: { base: "2", md: "3" },
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                })}
             >
-                <span className="text-neutral/75">
+                <span className={css({ color: "neutral/75" })}>
                     {props.value?.name ?? props.placeholder ?? "Glissez-déposez ou cliquez pour ajouter un fichier"}
                 </span>
             </Button>

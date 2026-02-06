@@ -137,7 +137,7 @@ api/src/
 - **TanStack Table** : Tableaux de données performants
 - **TanStack Virtual** : Virtualisation pour grandes listes
 - **Radix UI** : Composants accessibles headless
-- **Tailwind CSS** : Framework CSS utility-first
+- **Panda CSS** : Framework CSS utility-first
 - **React Hook Form** : Gestion de formulaires
 - **Valibot** : Validation côté client
 - **Vite** : Build tool et dev server
@@ -333,7 +333,7 @@ tools/src/
 | Tables | TanStack Table 8.21 | Data tables |
 | Virtual | TanStack Virtual 3.13 | Virtualisation listes |
 | UI | Radix UI | Composants accessibles |
-| Styling | Tailwind CSS 4.1 | CSS utility-first |
+| Styling | Panda CSS | CSS utility-first |
 | Forms | React Hook Form 7.63 | Gestion de formulaires |
 | Validation | Valibot 1.1 | Validation client-side |
 | Icons | Tabler Icons 3.35 | Icônes |

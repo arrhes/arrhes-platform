@@ -1,5 +1,5 @@
-import { getIsAuthenticated } from "#/utilities/cookies/getIsAuthenticated.js"
-import { postAPI } from "#/utilities/postAPI.js"
+import { getIsAuthenticated } from "../../utilities/cookies/getIsAuthenticated.js"
+import { postAPI } from "../../utilities/postAPI.js"
 import { readUserSessionRouteDefinition } from "@arrhes/application-metadata/routes"
 
 

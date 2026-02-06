@@ -1,4 +1,4 @@
-import { IncomeStatementsReportTable } from "#/utilities/email/templates/incomeStatementReport/incomeStatementsReportTable.js"
+import { IncomeStatementsReportTable } from "./incomeStatementsReportTable.js"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Style, css } from "hono/css"
 import * as v from "valibot"

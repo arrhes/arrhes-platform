@@ -6,7 +6,7 @@ import { postAPI } from "./postAPI.js"
 
 
 
-export function useHTTPData<
+export function useDataFromAPI<
     TSchemaBody extends v.ObjectSchema<v.ObjectEntries, undefined>,
     TSchemaReturn extends v.ObjectSchema<v.ObjectEntries, undefined> | v.ArraySchema<v.ObjectSchema<v.ObjectEntries, undefined>, undefined>
 >(

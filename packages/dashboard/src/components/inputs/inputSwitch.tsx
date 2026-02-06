@@ -1,5 +1,5 @@
 
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { ComponentProps } from "react"
 
@@ -23,9 +23,22 @@ export function InputSwitch(props: InputSwitch) {
         <SwitchPrimitives.Root
             // {...props}
             ref={props.ref}
-            className={cn(
-                "inline-flex h-6 w-10 shrink-0 cursor-pointer items-center rounded-full border border-neutral/25 disabled:cursor-not-allowed disabled:opacity-50 bg-white data-[state=checked]:bg-success/5 data-[state=checked]:border-neutral",
-                "focus:shadow-inner ",
+            className={cx(
+                css({
+                    display: "inline-flex",
+                    h: "6",
+                    w: "10",
+                    flexShrink: "0",
+                    cursor: "pointer",
+                    alignItems: "center",
+                    rounded: "full",
+                    border: "1px solid",
+                    borderColor: "neutral/25",
+                    _disabled: { cursor: "not-allowed", opacity: "0.5" },
+                    bg: "white",
+                    _checked: { bg: "success/5", borderColor: "neutral" },
+                    _focus: { shadow: "inset" }
+                }),
                 props.className
             )}
             checked={input(props.value)}
@@ -33,9 +46,18 @@ export function InputSwitch(props: InputSwitch) {
             autoFocus={props.autoFocus}
         >
             <SwitchPrimitives.Thumb
-                className={cn(
-                    "pointer-events-none block h-4 w-4 rounded-full data-[state=checked]:bg-neutral data-[state=unchecked]:bg-neutral/10 shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-[18px] data-[state=unchecked]:translate-x-1"
-                )}
+                className={css({
+                    pointerEvents: "none",
+                    display: "block",
+                    h: "4",
+                    w: "4",
+                    rounded: "full",
+                    _checked: { bg: "neutral", transform: "translateX(18px)" },
+                    bg: "neutral/10",
+                    transform: "translateX(4px)",
+                    shadow: "lg",
+                    transition: "transform"
+                })}
             />
         </SwitchPrimitives.Root>
     )

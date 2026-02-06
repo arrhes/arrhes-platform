@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "../../../utilities/cn.js"
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
 
@@ -10,8 +10,13 @@ export function DropdownSeparator(props:
     return (
         <DropdownMenuSeparator
             {...props}
-            className={cn(
-                "w-full h-[1px] bg-neutral/10 my-2",
+            className={cx(
+                css({
+                    w: "full",
+                    h: "1px",
+                    bg: "neutral/10",
+                    my: "2"
+                }),
                 props.className
             )}
         />

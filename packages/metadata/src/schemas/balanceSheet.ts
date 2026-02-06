@@ -1,7 +1,7 @@
-import { balanceSheetSide, booleanSchema, dateTimeSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
-import { balanceSheetModel } from "#src/models/balanceSheet.js"
+import { balanceSheetSide, booleanSchema, dateTimeSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { varcharSchema } from "../components/schemas/varcharSchema.js"
+import { balanceSheetModel } from "../models/balanceSheet.js"
 import * as v from "valibot"
 
 

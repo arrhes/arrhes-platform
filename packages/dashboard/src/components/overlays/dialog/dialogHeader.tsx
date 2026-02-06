@@ -1,6 +1,6 @@
 
-import { ButtonGhost } from "#/components/buttons/buttonGhost.js"
-import { cn } from "#/utilities/cn.js"
+import { Button } from "@arrhes/ui"
+import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
@@ -12,16 +12,27 @@ export function DialogHeader(props:
     return (
         <div
             {...props}
-            className={cn(
-                "w-full flex justify-between items-center p-4",
+            className={cx(
+                css({
+                    w: "full",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    p: "4"
+                }),
                 props.className
             )}
         >
-            <div className="flex justify-start items-start">
+            <div className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start"
+            })}>
                 {props.children}
             </div>
             <DialogPrimitive.Close asChild>
-                <ButtonGhost
+                <Button
+                    variant="invisible"
                     icon={<IconX />}
                 />
             </DialogPrimitive.Close>
