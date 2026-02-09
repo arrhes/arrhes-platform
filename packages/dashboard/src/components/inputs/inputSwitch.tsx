@@ -1,7 +1,7 @@
 
-import { css, cx } from "../../utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { ComponentProps } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 type InputSwitch = Omit<ComponentProps<typeof SwitchPrimitives.Root>, "value" | "onChange"> & {
@@ -26,18 +26,18 @@ export function InputSwitch(props: InputSwitch) {
             className={cx(
                 css({
                     display: "inline-flex",
-                    h: "6",
-                    w: "10",
+                    height: "6",
+                    width: "10",
                     flexShrink: "0",
                     cursor: "pointer",
                     alignItems: "center",
-                    rounded: "full",
+                    rounded: "100%",
                     border: "1px solid",
                     borderColor: "neutral/25",
                     _disabled: { cursor: "not-allowed", opacity: "0.5" },
-                    bg: "white",
-                    _checked: { bg: "success/5", borderColor: "neutral" },
-                    _focus: { shadow: "inset" }
+                    backgroundColor: "white",
+                    _checked: { backgroundColor: "success/5", borderColor: "neutral" },
+                    _focus: { shadowidth: "inset" }
                 }),
                 props.className
             )}
@@ -49,13 +49,13 @@ export function InputSwitch(props: InputSwitch) {
                 className={css({
                     pointerEvents: "none",
                     display: "block",
-                    h: "4",
-                    w: "4",
-                    rounded: "full",
-                    _checked: { bg: "neutral", transform: "translateX(18px)" },
-                    bg: "neutral/10",
+                    height: "4",
+                    width: "4",
+                    rounded: "100%",
+                    _checked: { backgroundColor: "neutral", transform: "translateX(18px)" },
+                    backgroundColor: "neutral/10",
                     transform: "translateX(4px)",
-                    shadow: "lg",
+                    shadowidth: "lg",
                     transition: "transform"
                 })}
             />

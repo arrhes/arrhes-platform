@@ -1,6 +1,6 @@
-import { css, cx } from "../../utilities/cn.js"
 import { ComponentPropsWithRef, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function InputTextArea(props:
@@ -29,7 +29,7 @@ export function InputTextArea(props:
             ref={textAreaRef}
             className={cx(
                 css({
-                    w: "full",
+                    width: "100%",
                     minH: "128px",
                     display: "flex",
                     justifyContent: "center",
@@ -40,12 +40,12 @@ export function InputTextArea(props:
                     rounded: "sm",
                     fontSize: "sm",
                     _placeholder: { color: "neutral/50" },
-                    _focus: { borderColor: "neutral/50", shadow: "inset" },
+                    _focus: { borderColor: "neutral/50", shadowidth: "inset" },
                     outline: "none",
                     flexShrink: "0",
                     resize: "none",
-                    h: "fit",
-                    overflow: "auto"
+                    height: "fit",
+                    overflowidth: "auto"
                 }),
                 css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
                 props.className

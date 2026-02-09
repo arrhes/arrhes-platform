@@ -17,8 +17,8 @@ export function YearsPage() {
     return (
         <Page.Root>
             <Page.Content>
-                <div className={css({ w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
-                    <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "center" })}>
+                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
+                    <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" })}>
                         <span className={css({ fontSize: "2xl" })}>
                             Exercices fiscaux
                         </span>
@@ -27,7 +27,7 @@ export function YearsPage() {
                         >
                             <ButtonContent
                                 variant="default"
-                                icon={<IconCalendarPlus />}
+                                leftIcon={<IconCalendarPlus />}
                                 text="Ajouter un exercice"
                             />
                         </CreateOneYear>
@@ -43,12 +43,12 @@ export function YearsPage() {
                                 return (
                                     <FormatNull
                                         text="Aucun exercice"
-                                        className={css({ p: "4", w: "full" })}
+                                        className={css({ p: "4", width: "100%" })}
                                     />
                                 )
                             }
                             return (
-                                <div className={css({ w: "full", display: "flex", flexDir: "column", gap: "3" })}>
+                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", gap: "3" })}>
                                     {years.map((year) => (
                                         <YearCard
                                             key={year.id}

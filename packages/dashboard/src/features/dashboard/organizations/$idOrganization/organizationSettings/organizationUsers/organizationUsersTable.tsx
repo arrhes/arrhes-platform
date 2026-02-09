@@ -38,7 +38,7 @@ export function OrganizationUsersTable(props: {
                                 return (
                                     <div
                                         key={organizationUser.id}
-                                        className={css({ w: "full", p: "4", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "space-between", alignItems: "center" })}
+                                        className={css({ width: "100%", p: "4", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "space-between", alignItems: "center" })}
                                     >
                                         <span>
                                             {organizationUser.user.email}
@@ -49,7 +49,7 @@ export function OrganizationUsersTable(props: {
                                             >
                                                 <ButtonContent
                                                     variant="default"
-                                                    icon={<IconPencil />}
+                                                    leftIcon={<IconPencil />}
                                                     title="Modifier l'utilisateur"
                                                 />
                                             </UpdateOneOrganizationUser>
@@ -58,7 +58,7 @@ export function OrganizationUsersTable(props: {
                                             >
                                                 <ButtonContent
                                                     variant="default"
-                                                    icon={<IconTrash />}
+                                                    leftIcon={<IconTrash />}
                                                     title="Supprimer l'utilisateur"
                                                     color="error"
                                                 />

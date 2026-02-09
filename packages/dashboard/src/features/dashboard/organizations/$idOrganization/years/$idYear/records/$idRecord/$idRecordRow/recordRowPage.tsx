@@ -29,14 +29,14 @@ export function RecordRowPage() {
                     body={{
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,
-                        idRecordRow: params.idRecordRow,
+                        idRecordRowidth: params.idRecordRow,
                     }}
                 >
                     {(recordRow) => {
                         return (
                             <Section.Root>
                                 <Section.Item>
-                                    <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
+                                    <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
                                         <Link
                                             to="/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord"
                                             params={{
@@ -47,7 +47,7 @@ export function RecordRowPage() {
                                         >
                                             <ButtonContent
                                                 variant="default"
-                                                icon={<IconChevronLeft />}
+                                                leftIcon={<IconChevronLeft />}
                                                 text="Retour"
                                             />
                                         </Link>
@@ -74,7 +74,7 @@ export function RecordRowPage() {
                                         </div>
                                     </div>
                                 </Section.Item>
-                                <Section.Item className={css({ flexDir: "column" })}>
+                                <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
                                         <DataBlock.Header>
                                             <TitleComponent>

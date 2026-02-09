@@ -29,7 +29,7 @@ export function JournalPage() {
             {(journal) => {
                 return (
                     <Section.Root>
-                        <Section.Item className={css({ flexDir: "row" })}>
+                        <Section.Item className={css({ flexDirection: "row" })}>
                             <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                                 <Link
                                     to="/organisations/$idOrganization/exercices/$idYear/paramètres/journaux"
@@ -40,7 +40,7 @@ export function JournalPage() {
                                 >
                                     <ButtonContent
                                         variant="default"
-                                        icon={<IconChevronLeft />}
+                                        leftIcon={<IconChevronLeft />}
                                         text="Retour"
                                     />
                                 </Link>
@@ -51,7 +51,7 @@ export function JournalPage() {
                                 >
                                     <ButtonContent
                                         variant="primary"
-                                        icon={<IconPencil />}
+                                        leftIcon={<IconPencil />}
                                         text="Modifier"
                                     />
                                 </UpdateOneJournal>
@@ -60,14 +60,14 @@ export function JournalPage() {
                                 >
                                     <ButtonContent
                                         variant="default"
-                                        icon={<IconTrash />}
+                                        leftIcon={<IconTrash />}
                                         title="Supprimer"
                                         color="error"
                                     />
                                 </DeleteOneJournal>
                             </div>
                         </Section.Item>
-                        <Section.Item className={css({ flexDir: "column" })}>
+                        <Section.Item className={css({ flexDirection: "column" })}>
                             <DataBlock.Root>
                                 <DataBlock.Header>
                                     <TitleComponent>

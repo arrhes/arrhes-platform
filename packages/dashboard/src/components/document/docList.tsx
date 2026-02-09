@@ -1,20 +1,43 @@
+import { IconCheck } from "@tabler/icons-react"
 import { css } from "../../utilities/cn.js"
 
 
 export function DocList(props: {
     items: string[]
+    variant?: "bullet" | "check"
 }) {
+    const variant = props.variant ?? "bullet"
+
     return (
-        <ul className={css({ mb: "4", spaceY: "2" })}>
+        <ul className={css({ spaceY: "2" })}>
             {props.items.map((item, index) => (
                 <li key={index} className={css({
                     display: "flex",
                     alignItems: "flex-start",
-                    gap: "2",
-                    color: "neutral/80"
+                    gap: "3",
+                    color: "neutral/70",
+                    fontSize: "sm",
+                    lineHeight: "1.6"
                 })}>
-                    <span className={css({ color: "neutral/40", mt: "1" })}>-</span>
-                    {item}
+                    {variant === "check" ? (
+                        <IconCheck className={css({
+                            width: "4",
+                            height: "4",
+                            color: "success",
+                            marginTop: "0.5",
+                            flexShrink: 0
+                        })} />
+                    ) : (
+                        <span className={css({
+                            width: "1.5",
+                            height: "1.5",
+                            rounded: "100%",
+                            backgroundColor: "neutral/30",
+                            marginTop: "2",
+                            flexShrink: 0
+                        })} />
+                    )}
+                    <span>{item}</span>
                 </li>
             ))}
         </ul>

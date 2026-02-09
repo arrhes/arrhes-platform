@@ -4,7 +4,7 @@ import { docsLayoutRoute } from "../docsLayoutRoute.js"
 
 export const accountingLayoutRoute = createRoute({
     getParentRoute: () => docsLayoutRoute,
-    path: "/comptabilité",
+    path: "/comptabilite",
     component: () => (
         <Outlet />
     )

@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 type PageContent = {
@@ -12,11 +12,11 @@ export function PageContent(props: PageContent) {
         <div
             className={cx(
                 css({
-                    w: "full",
-                    maxW: "xl",
-                    h: "fit",
+                    width: "100%",
+                    maxWidth: "xl",
+                    height: "fit",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "4"

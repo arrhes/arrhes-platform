@@ -1,6 +1,6 @@
-import { css, cx } from "../../utilities/cn.js"
-import { IconChevronRight } from "@tabler/icons-react"
+import { IconArrowRight } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
+import { css } from "../../utilities/cn.js"
 
 
 export function DocNextPage(props: {
@@ -8,41 +8,58 @@ export function DocNextPage(props: {
     label: string
 }) {
     return (
-        <Link
-            to={props.to}
-            className={cx(
-                css({
-                    mt: "12",
-                    p: "4",
-                    rounded: "lg",
-                    border: "1px solid",
-                    borderColor: "neutral/10",
+        <div className={css({
+            marginTop: "12",
+            pt: "8",
+            borderTop: "1px solid",
+            borderColor: "neutral/10"
+        })}>
+            <Link
+                to={props.to}
+                className={css({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    _hover: { bg: "neutral/5" },
-                    transition: "colors"
-                }),
-                "group"
-            )}
-        >
-            <div>
-                <span className={css({
-                    fontSize: "xs",
-                    color: "neutral/50"
-                })}>Page suivante</span>
-                <p className={css({
-                    fontSize: "sm",
-                    fontWeight: "medium"
-                })}>{props.label}</p>
-            </div>
-            <IconChevronRight className={css({
-                w: "5",
-                h: "5",
-                color: "neutral/30",
-                _groupHover: { color: "neutral/50" },
-                transition: "colors"
-            })} />
-        </Link>
+                    p: "5",
+                    rounded: "xl",
+                    border: "1px solid",
+                    borderColor: "neutral/10",
+                    backgroundColor: "white",
+                    transition: "all 0.2s",
+                    _hover: {
+                        borderColor: "primary/30",
+                        shadowidth: "sm",
+                        transform: "translateX(4px)"
+                    }
+                })}
+            >
+                <div>
+                    <span className={css({
+                        display: "block",
+                        fontSize: "xs",
+                        fontWeight: "medium",
+                        color: "neutral/40",
+                        textTransform: "uppercase",
+                        letterSpacing: "wider",
+                        mb: "1"
+                    })}>
+                        Page suivante
+                    </span>
+                    <span className={css({
+                        display: "block",
+                        fontSize: "md",
+                        fontWeight: "semibold",
+                        color: "neutral"
+                    })}>
+                        {props.label}
+                    </span>
+                </div>
+                <IconArrowRight className={css({
+                    width: "5",
+                    height: "5",
+                    color: "primary"
+                })} />
+            </Link>
+        </div>
     )
 }

@@ -4,7 +4,7 @@ import { docsLayoutRoute } from "../docsLayoutRoute.js"
 
 export const guideLayoutRoute = createRoute({
     getParentRoute: () => docsLayoutRoute,
-    path: "/guide",
+    path: "/dashboard",
     component: () => (
         <Outlet />
     )

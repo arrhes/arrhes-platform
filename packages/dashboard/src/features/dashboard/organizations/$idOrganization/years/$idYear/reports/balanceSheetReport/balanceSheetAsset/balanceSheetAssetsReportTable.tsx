@@ -61,13 +61,13 @@ export function BalanceSheetAssetsReportTable(props: {
             <Table.Header.Root>
                 <Table.Header.Row>
                     <Table.Header.Cell />
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm" })}>Brut</span>
                     </Table.Header.Cell>
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>Amort. & Dépré.</span>
                     </Table.Header.Cell>
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm" })}>Net</span>
                     </Table.Header.Cell>
                 </Table.Header.Row>

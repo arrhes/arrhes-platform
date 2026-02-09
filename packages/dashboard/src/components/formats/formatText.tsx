@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
+import { css, cx } from "../../utilities/cn.js"
 import { FormatNull } from "./formatNull.js"
 
 
@@ -16,7 +16,7 @@ export function FormatText(props: {
                 fontSize: "sm",
                 wordBreak: "break-word",
                 overflowX: "hidden",
-                textOverflow: "ellipsis"
+                textOverflowidth: "ellipsis"
             }),
             !props.wrap ? css({ whiteSpace: "nowrap" }) : undefined,
             props.className

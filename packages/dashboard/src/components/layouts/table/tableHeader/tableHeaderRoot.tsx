@@ -1,5 +1,5 @@
-import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../../utilities/cn.js"
 
 
 export function TableHeaderRoot(props: {
@@ -10,7 +10,7 @@ export function TableHeaderRoot(props: {
         <thead
             className={cx(
                 css({
-                    w: "full",
+                    width: "100%",
                     borderBottom: "1px solid",
                     borderColor: "neutral/10"
                 }),

@@ -1,7 +1,7 @@
 
-import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentPropsWithRef } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 
@@ -17,14 +17,14 @@ export function DialogOverlay(props:
                     position: "fixed",
                     zIndex: "10",
                     inset: "0",
-                    w: "full",
-                    h: "full",
+                    width: "100%",
+                    height: "100%",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
                     p: "6",
-                    bg: "neutral/20",
+                    backgroundColor: "neutral/20",
                     "&[data-state=open]": {
                         animation: "fadeIn 0.2s ease-out"
                     },

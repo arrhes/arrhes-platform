@@ -1,8 +1,8 @@
 
-import { css } from "../../utilities/cn.js"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { IconInfoSquare } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
+import { css } from "../../utilities/cn.js"
 import { useFormField } from "./useFormField.js"
 
 
@@ -31,7 +31,7 @@ export function FormLabel(props: FormLabel) {
         >
             <div className={css({
                 display: "flex",
-                flexDir: "column",
+                flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
                 gap: "1"
@@ -82,7 +82,7 @@ export function FormLabel(props: FormLabel) {
                                 _hover: { color: "neutral", fill: "neutral/5" }
                             })} />
                         </TooltipTrigger>
-                        <TooltipContent className={css({ bg: "neutral", p: "2" })}>
+                        <TooltipContent className={css({ backgroundColor: "neutral", p: "2" })}>
                             <p className={css({
                                 overflowWrap: "break-word",
                                 hyphens: "auto",

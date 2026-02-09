@@ -1,7 +1,7 @@
 
-import { css, cx } from "../../../utilities/cn.js"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 import { ComponentProps } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Content>) {
@@ -12,10 +12,10 @@ export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Con
             className={cx(
                 css({
                     zIndex: "50",
-                    overflow: "auto",
-                    maxW: "xs",
+                    overflowidth: "auto",
+                    maxWidth: "xs",
                     rounded: "md",
-                    bg: "white",
+                    backgroundColor: "white",
                     px: "4",
                     py: "3",
                     fontSize: "xs",

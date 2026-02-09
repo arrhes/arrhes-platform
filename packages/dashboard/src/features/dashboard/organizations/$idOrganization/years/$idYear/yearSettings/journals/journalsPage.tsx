@@ -18,14 +18,14 @@ export function JournalsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ w: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                     <CreateOneJournal
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter un journal"
                         />
                     </CreateOneJournal>
@@ -35,7 +35,7 @@ export function JournalsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Générer les journaux par défaut"
                         />
                     </GenerateJournals>
@@ -60,7 +60,7 @@ export function JournalsPage() {
                                 )
                             }
                             return (
-                                <div className={css({ h: "fit", w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                                <div className={css({ height: "fit", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                                     {
                                         sortedJournals.map((journal) => (
                                             <Link
@@ -71,7 +71,7 @@ export function JournalsPage() {
                                                     idYear: params.idYear,
                                                     idJournal: journal.id
                                                 }}
-                                                className={css({ w: "full", p: "2", borderBottomWidth: "1px", borderColor: "neutral/10", _last: { borderStyle: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { bg: "neutral/5" }, cursor: "pointer" })}
+                                                className={css({ width: "100%", p: "2", borderBottomWidth: "1px", borderColor: "neutral/10", _last: { borderStyle: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
                                             >
                                                 {`${journal.label} (${journal.code})`}
                                             </Link>

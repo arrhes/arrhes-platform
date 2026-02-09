@@ -1,4 +1,8 @@
+import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
+import { IconLogin2 } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
+import { Fragment } from "react/jsx-runtime"
 import { FormControl } from "../../components/forms/formControl.js"
 import { FormError } from "../../components/forms/formError.js"
 import { FormField } from "../../components/forms/formField.js"
@@ -11,38 +15,34 @@ import { toast } from "../../contexts/toasts/useToast.js"
 import { platformRouter } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 import { postAPI } from "../../utilities/postAPI.js"
-import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
-import { IconLogin2 } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
-import { Fragment } from "react/jsx-runtime"
 
 
 export function SignInPage() {
     return (
         <div className={css({
-            w: "full",
-            h: "full",
+            width: "100%",
+            height: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center"
         })}>
             <div className={css({
-                w: "full",
-                maxW: "sm",
+                width: "100%",
+                maxWidth: "sm",
                 display: "flex",
-                flexDir: "column",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "4"
             })}>
                 <div className={css({
-                    w: "full",
+                    width: "100%",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "4",
-                    bg: "white",
+                    backgroundColor: "white",
                     border: "1px solid",
                     borderColor: "neutral/10",
                     rounded: "md",
@@ -52,9 +52,9 @@ export function SignInPage() {
                         Connexion
                     </span>
                     <div className={css({
-                        w: "full",
+                        width: "100%",
                         display: "flex",
-                        flexDir: "column",
+                        flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "flex-start",
                         gap: "4"
@@ -65,7 +65,7 @@ export function SignInPage() {
                             submitButtonProps={{
                                 icon: <IconLogin2 />,
                                 text: "Se connecter",
-                                className: css({ w: "full", justifyContent: "center" })
+                                className: css({ width: "100%", justifyContent: "center" })
                             }}
                             submitOnPressEnterKey={true}
                             onSubmit={async (data) => {
@@ -139,12 +139,12 @@ export function SignInPage() {
                         </FormRoot>
                         <Link
                             to="/inscription"
-                            className={css({ w: "full" })}
+                            className={css({ width: "100%" })}
                         >
                             <ButtonContent
                                 variant="default"
                                 text="Pas de compte ?"
-                                className={css({ w: "full", justifyContent: "center" })}
+                                className={css({ width: "100%", justifyContent: "center" })}
                             />
                         </Link>
                     </div>

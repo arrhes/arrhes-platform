@@ -1,20 +1,20 @@
-import { css, cx } from "../../../utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
 import { ComponentProps } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 const toastIcons = {
     error: (
         <div className={css({
             p: "2",
-            w: "32px",
-            h: "32px",
+            width: "32px",
+            height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             rounded: "sm",
-            bg: "error/10",
+            backgroundColor: "error/10",
             border: "1px solid",
             borderColor: "error/50"
         })}>
@@ -24,13 +24,13 @@ const toastIcons = {
     success: (
         <div className={css({
             p: "2",
-            w: "32px",
-            h: "32px",
+            width: "32px",
+            height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             rounded: "sm",
-            bg: "success/10",
+            backgroundColor: "success/10",
             border: "1px solid",
             borderColor: "success"
         })}>
@@ -40,13 +40,13 @@ const toastIcons = {
     warning: (
         <div className={css({
             p: "2",
-            w: "32px",
-            h: "32px",
+            width: "32px",
+            height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             rounded: "sm",
-            bg: "warning/10",
+            backgroundColor: "warning/10",
             border: "1px solid",
             borderColor: "warning"
         })}>
@@ -56,13 +56,13 @@ const toastIcons = {
     information: (
         <div className={css({
             p: "2",
-            w: "32px",
-            h: "32px",
+            width: "32px",
+            height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             rounded: "sm",
-            bg: "information/10",
+            backgroundColor: "information/10",
             border: "1px solid",
             borderColor: "information"
         })}>
@@ -90,7 +90,7 @@ export function ToastContent(props: ToastContent) {
                 css({
                     pointerEvents: "auto",
                     position: "relative",
-                    w: "full",
+                    width: "100%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
@@ -99,7 +99,7 @@ export function ToastContent(props: ToastContent) {
                     rounded: "md",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    bg: "white",
+                    backgroundColor: "white",
                     transition: "all",
                     "&[data-swipe=cancel]": { transform: "translateX(0)" },
                     "&[data-swipe=end]": { transform: "translateX(var(--radix-toast-swipe-end-x))" },

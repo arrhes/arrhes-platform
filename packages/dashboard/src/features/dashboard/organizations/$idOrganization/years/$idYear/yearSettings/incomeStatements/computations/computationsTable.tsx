@@ -28,7 +28,7 @@ export function ComputationsTable(props: {
                     )
                 }
                 return (
-                    <div className={css({ h: "fit-content", w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4" })}>
+                    <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4" })}>
                         {computations.map((computation) => (
                             <Link
                                 key={computation.id}
@@ -38,9 +38,9 @@ export function ComputationsTable(props: {
                                     idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 }}
-                                className={css({ w: "full" })}
+                                className={css({ width: "100%" })}
                             >
-                                <div className={css({ p: "2", minW: "fit-content", w: "full", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { bg: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}>
+                                <div className={css({ p: "2", minwidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}>
                                     <span className={css({ color: "neutral", fontSize: "xs", lineHeight: "none" })}>
                                         {computation.number}
                                     </span>

@@ -13,8 +13,8 @@ export function Logo() {
                 className={css({
                     flexShrink: "0",
                     fill: "neutral",
-                    h: "16px",
-                    w: "16px"
+                    height: "16px",
+                    width: "16px"
                 })}
             >
                 <g>

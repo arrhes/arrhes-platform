@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DataBlockHeader(props: {
@@ -11,8 +11,8 @@ export function DataBlockHeader(props: {
             className={cx(
                 css({
                     flexShrink: "0",
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",

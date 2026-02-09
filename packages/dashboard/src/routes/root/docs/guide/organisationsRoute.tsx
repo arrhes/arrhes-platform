@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router"
-import { GuideOrganisations } from "../../../../features/docs/guide/organisations.tsx"
+import { GuideOrganisations } from "../../../../features/docs/dashboard/organisations.tsx"
 import { guideLayoutRoute } from "./guideLayoutRoute.js"
 
 

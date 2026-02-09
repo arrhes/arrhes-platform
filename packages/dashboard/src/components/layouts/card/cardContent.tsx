@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function CardContent(props: {
@@ -10,10 +10,10 @@ export function CardContent(props: {
         <div
             className={cx(
                 css({
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start"
                 }),

@@ -44,12 +44,12 @@ export function JournalReportTable(props: {
                             Compte
                         </span>
                     </Table.Header.Cell>
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
                             Débit
                         </span>
                     </Table.Header.Cell>
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
                             Crédit
                         </span>
@@ -64,13 +64,13 @@ export function JournalReportTable(props: {
                             Total
                         </span>
                     </Table.Body.Cell>
-                    <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                         <FormatPrice
                             price={totalDebit}
                             className={css({ fontWeight: "bold" })}
                         />
                     </Table.Body.Cell>
-                    <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                         <FormatPrice
                             price={totalCredit}
                             className={css({ fontWeight: "bold" })}
@@ -102,7 +102,7 @@ export function JournalReportTable(props: {
                             return (
                                 <Table.Body.Root key={record.id} className={css({ borderY: "1px solid token(colors.neutral/10)", _last: { borderBottom: "0" } })}>
                                     <Table.Body.Row className={cx(
-                                        css({ borderColor: "neutral/10", bg: "background" }),
+                                        css({ borderColor: "neutral/10", backgroundColor: "background" }),
                                         // (recordTotalDebit === recordTotalCredit) ? "" : "border border-error"
                                     )}>
                                         <Table.Body.Cell>
@@ -117,7 +117,7 @@ export function JournalReportTable(props: {
                                             </FormatText>
                                         </Table.Body.Cell>
                                         {/* <Table.Body.Cell colSpan={2} /> */}
-                                        <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                                        <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                             <FormatPrice
                                                 price={recordTotalDebit}
                                                 className={cx(
@@ -126,7 +126,7 @@ export function JournalReportTable(props: {
                                                 )}
                                             />
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                                        <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                             <FormatPrice
                                                 price={recordTotalCredit}
                                                 className={cx(
@@ -160,7 +160,7 @@ export function JournalReportTable(props: {
                                                             >
                                                                 {(account) => (
                                                                     <Fragment>
-                                                                        <FormatText className={css({ overflow: "visible" })}>
+                                                                        <FormatText className={css({ overflowidth: "visible" })}>
                                                                             {account.number}
                                                                         </FormatText>
                                                                         <FormatText wrap={true} className={css({ color: "neutral/50" })}>
@@ -170,10 +170,10 @@ export function JournalReportTable(props: {
                                                                 )}
                                                             </DataWrapper>
                                                         </Table.Body.Cell>
-                                                        <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                                                        <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                                             <FormatPrice price={recordRow.debit} />
                                                         </Table.Body.Cell>
-                                                        <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                                                        <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                                             <FormatPrice price={recordRow.credit} />
                                                         </Table.Body.Cell>
                                                     </Table.Body.Row>

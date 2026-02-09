@@ -1,6 +1,6 @@
-import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes } from 'react'
 import { FieldError } from 'react-hook-form'
+import { css, cx } from "../../utilities/cn.js"
 
 
 type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
@@ -24,15 +24,15 @@ export function InputText(props: InputText) {
         <div
             className={cx(
                 css({
-                    w: "full",
-                    h: "32px",
+                    width: "100%",
+                    height: "32px",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: "2",
                     border: "1px solid",
                     rounded: "sm",
-                    _focusWithin: { borderColor: "neutral/50", shadow: "inset" }
+                    _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
                 }),
                 css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
                 props.className
@@ -42,12 +42,12 @@ export function InputText(props: InputText) {
                 {...props}
                 type="text"
                 className={css({
-                    w: "full",
-                    h: "full",
+                    width: "100%",
+                    height: "100%",
                     fontSize: "sm",
                     lineHeight: "none",
                     _placeholder: { color: "neutral/25" },
-                    bg: "transparent",
+                    backgroundColor: "transparent",
                     p: "2",
                     rounded: "md"
                 })}

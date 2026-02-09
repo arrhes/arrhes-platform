@@ -1,8 +1,8 @@
 
 
-import { css, cx } from "../../../utilities/cn.js"
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DropdownTrigger(props:
@@ -14,7 +14,7 @@ export function DropdownTrigger(props:
             className={cx(
                 css({
                     cursor: "pointer",
-                    w: "fit",
+                    width: "fit",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",

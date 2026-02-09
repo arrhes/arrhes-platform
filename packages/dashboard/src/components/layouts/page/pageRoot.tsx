@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 type PageRoot = {
@@ -12,17 +12,17 @@ export function PageRoot(props: PageRoot) {
         <div
             className={cx(
                 css({
-                    w: "full",
+                    width: "100%",
                     flexShrink: "0",
                     flex: "1",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    overflow: "auto",
+                    overflowidth: "auto",
                     p: "4",
                     gap: "4",
-                    bg: "white",
+                    backgroundColor: "white",
                     borderTop: "1px solid",
                     borderColor: "neutral/10",
                     md: {

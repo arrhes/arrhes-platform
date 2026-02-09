@@ -43,17 +43,17 @@ export function AccountsTable(props: {
                     .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
                 return (
-                    <div className={css({ h: "fit", w: "fit", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4", gap: "4" })}>
+                    <div className={css({ height: "fit", width: "fit", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4", gap: "4" })}>
                         <InputDebounced
                             value={globalFilter ?? ""}
                             onChange={(value) => setGlobalFilter(value ?? "")}
                         >
                             <InputText
                                 placeholder="Recherche"
-                                className={css({ maxW: "320px" })}
+                                className={css({ maxWidth: "320px" })}
                             />
                         </InputDebounced>
-                        <div className={css({ h: "fit", w: "fit", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                        <div className={css({ height: "fit", width: "fit", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                             {
                                 (groupedAccounts.length !== 0)
                                     ? (null)

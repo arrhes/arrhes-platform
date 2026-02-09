@@ -1,8 +1,8 @@
 import { Button } from "@arrhes/ui"
-import { css, cx } from "../../utilities/cn.js"
 import { IconEye, IconEyeClosed } from '@tabler/icons-react'
 import { InputHTMLAttributes, forwardRef, useState } from 'react'
 import { FieldError } from 'react-hook-form'
+import { css, cx } from "../../utilities/cn.js"
 
 
 type InputPassword = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
@@ -31,14 +31,14 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
             <div
                 className={cx(
                     css({
-                        w: "full",
-                        h: "32px",
+                        width: "100%",
+                        height: "32px",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
                         border: "1px solid",
                         rounded: "sm",
-                        _focusWithin: { borderColor: "neutral/50", shadow: "inset" }
+                        _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
                     }),
                     css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
                     props.className
@@ -48,12 +48,12 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                     {...props}
                     type={showPassword ? "text" : "password"}
                     className={css({
-                        w: "full",
-                        h: "32px",
+                        width: "100%",
+                        height: "32px",
                         fontSize: "sm",
                         lineHeight: "none",
                         _placeholder: { color: "neutral/50" },
-                        bg: "transparent",
+                        backgroundColor: "transparent",
                         p: "2",
                         rounded: "md"
                     })}
@@ -65,7 +65,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                 <Button
                     onClick={handleClickShowPassword}
                     className={css({
-                        _hover: { bg: "neutral/5" },
+                        _hover: { backgroundColor: "neutral/5" },
                         rounded: "md",
                         p: "2"
                     })}

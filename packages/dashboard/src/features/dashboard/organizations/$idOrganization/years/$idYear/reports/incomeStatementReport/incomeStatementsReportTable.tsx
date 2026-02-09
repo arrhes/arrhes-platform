@@ -22,7 +22,7 @@ export function IncomeStatementsReportTable(props: {
             <Table.Header.Root>
                 <Table.Header.Row>
                     <Table.Header.Cell />
-                    <Table.Header.Cell className={css({ w: "[1%]" })} align="right">
+                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
                         <span className={css({ color: "neutral/75", fontSize: "sm" })}>
                             Net
                         </span>
@@ -135,7 +135,7 @@ export function IncomeStatementsReportTable(props: {
                                         index === 0 ? css({ borderTop: "1px solid token(colors.neutral/25)", borderBottomColor: "neutral/5" }) : ""
                                     )}
                                 >
-                                    <Table.Body.Cell align="right" className={css({ w: "full", display: "flex", justifyContent: "end", gap: "2" })}>
+                                    <Table.Body.Cell align="right" className={css({ width: "100%", display: "flex", justifyContent: "end", gap: "2" })}>
                                         <FormatText
                                             className={css({ whiteSpace: "normal", textAlign: "right" })}
                                         >
@@ -147,7 +147,7 @@ export function IncomeStatementsReportTable(props: {
                                             {`(${computationIncomeStatementsLabel})`}
                                         </FormatText>
                                     </Table.Body.Cell>
-                                    <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+                                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                         <FormatPrice price={computationAmount} />
                                     </Table.Body.Cell>
                                 </Table.Body.Row>

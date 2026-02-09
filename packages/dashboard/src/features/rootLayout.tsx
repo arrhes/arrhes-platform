@@ -1,39 +1,44 @@
+import { Outlet } from "@tanstack/react-router"
 import { css } from "../utilities/cn.js"
 import { useDeviceDetect } from "../utilities/useDeviceDetect.js"
-import { Outlet } from "@tanstack/react-router"
 
 
 export function RootLayout() {
     const { isMobile } = useDeviceDetect()
 
     if (isMobile === true) {
-        <div className={css({
-            w: "full",
-            h: "full",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            bg: "warning/5",
-            p: "4"
-        })}>
+        <div
+            className={css({
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "warning/5",
+                p: "4"
+            })}
+        >
             <span className={css({ color: "warning" })}>
-                La plateforme n'est pas encore disponible sur mobile. Veuillez utiliser un ordinateur.
+                La plateforme n'est pas encore disponible sur mobile.
+                <br />
+                Veuillez utiliser un ordinateur ou passer votre navigateur mobile en mode ordinateur.
             </span>
         </div>
     }
     return (
-        <div className={css({
-            position: "relative",
-            minH: "full",
-            h: "fit",
-            w: "full",
-            maxW: "full",
-            display: "flex",
-            flexDir: "column",
-            justifyContent: "flex-start",
-            alignItems: "stretch",
-            overflow: "auto"
-        })}>
+        <div
+            className={css({
+                position: "relative",
+                minHeight: "100dvh",
+                width: "100dvw",
+                maxWidth: "100dvw",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "start",
+                overflowX: "hidden",
+            })}
+        >
             <Outlet />
         </div>
     )

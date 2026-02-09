@@ -22,7 +22,7 @@ export default defineConfig({
                 error: { value: "#C91D1D" },
                 warning: { value: "#E8B130" },
                 information: { value: "#309be8" },
-                primary: { value: "#2563eb" },
+                primary: { value: "#005b96" },
             },
             fonts: {
                 mono: { value: '"Sometype Mono", monospace' },
@@ -40,11 +40,19 @@ export default defineConfig({
                 sm: { value: "rgba(17, 17, 26, 0.1) 0px 1px 4px" },
             },
             sizes: {
-                maxSm: { value: "320px" },
-                maxMd: { value: "768px" },
-                maxLg: { value: "1024px" },
-                maxXl: { value: "1280px" },
+                xs: { value: "320px" },
+                sm: { value: "576px" },
+                md: { value: "768px" },
+                lg: { value: "1024px" },
+                xl: { value: "1280px" },
             },
+            fontSizes: {
+                xs: { value: "0.75rem" },
+                sm: { value: "0.875rem" },
+                md: { value: "1rem" },
+                lg: { value: "1.25rem" },
+                xl: { value: "1.5rem" },
+            }
         },
         breakpoints: {
             sm: "320px",

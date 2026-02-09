@@ -23,8 +23,8 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
     }
 
     return (
-        <div className={css({ w: "full", mt: "auto", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "2" })}>
-            <div className={css({ w: "full", display: "flex", flexDir: "row", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+        <div className={css({ width: "100%", marginTop: "auto", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "2" })}>
+            <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                 {
                     (props.previousCallback === undefined) ? null : (
                         <Button
@@ -42,7 +42,7 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
                 />
             </div>
             {(!props.stepCount && !props.stepName) ? null :
-                <div className={css({ w: "full", display: "flex", flexDir: "row", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>
+                <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>
                     {(!props.stepCount) ? null : <span className={css({ fontSize: "sm", color: "neutral/50" })}>{props.stepCount}</span>}
                     {(!props.stepName) ? null : <span className={css({ fontSize: "sm", color: "neutral/50" })}>{props.stepName}</span>}
                 </div>

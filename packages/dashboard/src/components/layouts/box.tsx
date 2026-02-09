@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function Box(props: {
@@ -10,13 +10,13 @@ export function Box(props: {
         <div
             className={cx(
                 css({
-                    minW: "0",
-                    w: "full",
-                    maxW: "full",
-                    h: "fit",
+                    minwidth: "0",
+                    width: "100%",
+                    maxWidth: "100%",
+                    height: "fit",
                     flexShrink: "0",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     overflowX: "auto",

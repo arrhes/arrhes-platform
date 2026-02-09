@@ -1,7 +1,7 @@
-import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from 'react-imask'
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function InputPrice(props:
@@ -27,8 +27,8 @@ export function InputPrice(props:
     return (
         <div className={cx(
             css({
-                h: "32px",
-                w: "full",
+                height: "32px",
+                width: "100%",
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
@@ -60,14 +60,14 @@ export function InputPrice(props:
                 value={input(props.value)}
                 className={css({
                     rounded: "inherit",
-                    w: "full",
+                    width: "100%",
                     fontSize: "base",
                     _placeholder: { color: "neutral/25" },
                     p: "2",
-                    _focus: { shadow: "inset", bg: "neutral/5" },
-                    overflow: "hidden",
+                    _focus: { shadowidth: "inset", backgroundColor: "neutral/5" },
+                    overflowidth: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflow: "ellipsis"
+                    textOverflowidth: "ellipsis"
                 })}
                 inputMode="decimal"
             />

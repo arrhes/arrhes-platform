@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { forwardRef } from "react"
+import { css, cx } from "../../utilities/cn.js"
 import { useFormField } from "./useFormField.js"
 
 
@@ -17,7 +17,7 @@ export const FormError = forwardRef<
             id={formMessageId}
             className={cx(
                 css({
-                    w: "full",
+                    width: "100%",
                     fontSize: "xs",
                     color: "error"
                 }),

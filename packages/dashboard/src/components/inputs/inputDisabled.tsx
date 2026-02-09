@@ -1,6 +1,6 @@
-import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
+import { css, cx } from "../../utilities/cn.js"
 
 
 type InputDisabled = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
@@ -17,16 +17,16 @@ export function InputDisabled(props: InputDisabled) {
             className={cx(
                 css({
                     position: "relative",
-                    w: "full",
+                    width: "100%",
                     display: "flex",
-                    flexDir: "row",
+                    flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: "2",
                     p: "2",
                     border: "1px solid",
                     rounded: "md",
-                    bg: "neutral",
+                    backgroundColor: "neutral",
                     fontSize: "sm"
                 }),
                 css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" })

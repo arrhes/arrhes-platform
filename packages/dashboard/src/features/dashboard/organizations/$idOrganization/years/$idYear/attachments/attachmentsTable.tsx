@@ -89,7 +89,7 @@ export function AttachmentsTable(props: {
             >
                 <ButtonContent
                     variant="primary"
-                    icon={<IconPlus />}
+                    leftIcon={<IconPlus />}
                     text="Ajouter un fichier"
                 />
             </CreateOneAttachment>

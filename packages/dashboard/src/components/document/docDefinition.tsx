@@ -7,22 +7,29 @@ export function DocDefinition(props: {
 }) {
     return (
         <div className={css({
-            p: "4",
-            rounded: "lg",
-            bg: "neutral/5",
+            p: "5",
+            rounded: "xl",
+            backgroundColor: "white",
             border: "1px solid",
             borderColor: "neutral/10",
-            mb: "4"
+            borderLeft: "3px solid",
+            borderLeftColor: "primary"
         })}>
             <dt className={css({
-                fontWeight: "medium",
+                fontWeight: "semibold",
                 color: "neutral",
+                fontSize: "sm",
                 mb: "1"
-            })}>{props.term}</dt>
+            })}>
+                {props.term}
+            </dt>
             <dd className={css({
                 fontSize: "sm",
-                color: "neutral/70"
-            })}>{props.definition}</dd>
+                color: "neutral/60",
+                lineHeight: "1.6"
+            })}>
+                {props.definition}
+            </dd>
         </div>
     )
 }

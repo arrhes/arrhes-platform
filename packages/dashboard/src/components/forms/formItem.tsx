@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { HTMLAttributes, useId } from "react"
+import { css, cx } from "../../utilities/cn.js"
 import { FormItemContext } from "./formItemContext.js"
 
 
@@ -14,9 +14,9 @@ export function FormItem(props: FormItem) {
                 {...props}
                 className={cx(
                     css({
-                        w: "full",
+                        width: "100%",
                         display: "flex",
-                        flexDir: "column",
+                        flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "flex-start",
                         gap: "1"

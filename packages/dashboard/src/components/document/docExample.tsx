@@ -1,3 +1,4 @@
+import { IconInfoCircle } from "@tabler/icons-react"
 import { css } from "../../utilities/cn.js"
 
 
@@ -7,24 +8,47 @@ export function DocExample(props: {
 }) {
     return (
         <div className={css({
-            p: "4",
-            rounded: "lg",
+            p: "5",
+            rounded: "xl",
             border: "1px solid",
             borderColor: "information/20",
-            bg: "information/5",
-            mb: "4"
+            backgroundColor: "information/5"
         })}>
             {props.title && (
-                <p className={css({
-                    fontSize: "xs",
-                    fontWeight: "medium",
-                    color: "information",
-                    mb: "2"
-                })}>Exemple : {props.title}</p>
+                <div className={css({
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "2",
+                    mb: "3"
+                })}>
+                    <IconInfoCircle className={css({
+                        width: "4",
+                        height: "4",
+                        color: "information"
+                    })} />
+                    <span className={css({
+                        fontSize: "sm",
+                        fontWeight: "semibold",
+                        color: "information"
+                    })}>
+                        Exemple : {props.title}
+                    </span>
+                </div>
             )}
             <div className={css({
                 fontSize: "sm",
-                color: "neutral/80"
+                color: "neutral/80",
+                lineHeight: "1.6",
+                "& ol": {
+                    spaceY: "2",
+                    pl: "0",
+                    listStyle: "none"
+                },
+                "& ol li": {
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "2"
+                }
             })}>
                 {props.children}
             </div>

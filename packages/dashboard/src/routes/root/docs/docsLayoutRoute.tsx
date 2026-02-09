@@ -6,7 +6,7 @@ import { rootLayoutRoute } from "../../rootLayoutRoute.js"
 
 export const docsLayoutRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,
-    path: "/docs",
+    path: "/documentation",
     pendingComponent: () => (
         <CircularLoader />
     ),

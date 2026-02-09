@@ -1,11 +1,11 @@
 import { deleteOneAttachmentRouteDefinition, readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { Button } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
 import * as v from "valibot"
 import { Dialog } from "../../../../../../../../components/overlays/dialog/dialog.tsx"
-import { css } from "@arrhes/ui/utilities/cn.js"
-import { Button } from "@arrhes/ui"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
 import { platformRouter } from "../../../../../../../../routes/platformRouter.tsx"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
@@ -76,7 +76,7 @@ export function DeleteOneAttachment(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer ce fichier ?
                             </Dialog.Title>

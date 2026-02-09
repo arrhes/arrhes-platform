@@ -32,7 +32,7 @@ export function AccountPage() {
                 {(account) => {
                     return (
                         <Fragment>
-                            <Section.Item className={css({ flexDir: "row" })}>
+                            <Section.Item className={css({ flexDirection: "row" })}>
                                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                                     <Link
                                         to="/organisations/$idOrganization/exercices/$idYear/paramètres/comptes"
@@ -43,7 +43,7 @@ export function AccountPage() {
                                     >
                                         <ButtonContent
                                             variant="default"
-                                            icon={<IconChevronLeft />}
+                                            leftIcon={<IconChevronLeft />}
                                             text="Retour"
                                         />
                                     </Link>
@@ -70,7 +70,7 @@ export function AccountPage() {
                                     </DeleteOneAccount>
                                 </div>
                             </Section.Item>
-                            <Section.Item className={css({ flexDir: "column" })}>
+                            <Section.Item className={css({ flexDirection: "column" })}>
                                 <DataBlock.Root>
                                     <DataBlock.Header>
                                         <TitleComponent>

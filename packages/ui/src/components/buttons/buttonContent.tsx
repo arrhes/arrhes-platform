@@ -21,48 +21,6 @@ const colorMap: Record<ButtonColor, "neutral" | "danger" | "success"> = {
 // Button style variants (GitHub Primer inspired)
 export type ButtonVariant = "default" | "primary" | "outline" | "invisible"
 
-// Button sizes (GitHub Primer inspired)
-export type ButtonSize = "small" | "medium" | "large"
-
-
-export type ButtonContentProps = {
-    variant?: ButtonVariant
-    color?: ButtonColor
-    size?: ButtonSize
-    text?: string
-    title?: string
-    icon?: ReactElement<IconProps & React.RefAttributes<Icon>>
-    rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
-    isLoading?: boolean
-    disabled?: boolean
-    isActive?: boolean
-    className?: string
-}
-
-// Size configurations
-const sizeStyles = {
-    small: {
-        height: "28px",
-        padding: "0 8px",
-        fontSize: "12px",
-        iconSize: 14,
-        gap: "4px",
-    },
-    medium: {
-        height: "32px",
-        padding: "0 12px",
-        fontSize: "14px",
-        iconSize: 16,
-        gap: "6px",
-    },
-    large: {
-        height: "40px",
-        padding: "0 16px",
-        fontSize: "14px",
-        iconSize: 20,
-        gap: "8px",
-    },
-}
 
 // GitHub Primer-inspired style configurations
 const variantStyles = {
@@ -72,16 +30,16 @@ const variantStyles = {
             borderWidth: "1px",
             borderStyle: "solid",
             borderColor: "rgba(31, 35, 40, 0.15)",
-            bg: "success",
+            bg: "primary",
             color: "white",
             fontWeight: "medium",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
             _hover: {
-                bg: "#2da44e",
+                bg: "primary/90",
                 filter: "brightness(0.95)",
             },
             _active: {
-                bg: "#298e46",
+                bg: "primary/90",
             },
         }),
         colors: {
@@ -232,12 +190,21 @@ const variantStyles = {
  * Styled to match GitHub's Primer design system
  * Can be used standalone or wrapped by Button/Link for click handling
  */
-export function ButtonContent(props: ButtonContentProps) {
+export function ButtonContent(props: {
+    variant?: ButtonVariant
+    color?: ButtonColor
+    text?: string
+    title?: string
+    leftIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+    rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+    isLoading?: boolean
+    disabled?: boolean
+    isActive?: boolean
+    className?: string
+}) {
     const variant = props.variant ?? "default"
     const rawColor = props.color ?? "neutral"
     const color = colorMap[rawColor] // Map legacy colors
-    const size = props.size ?? "medium"
-    const sizeConfig = sizeStyles[size]
     const styles = variantStyles[variant].colors[color]
 
     const baseContainerStyles = css({
@@ -245,6 +212,8 @@ export function ButtonContent(props: ButtonContentProps) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        gap: "0.5rem",
+        padding: "0.5rem",
         borderRadius: "md",
         boxSizing: "border-box",
         cursor: "pointer",
@@ -252,26 +221,20 @@ export function ButtonContent(props: ButtonContentProps) {
         _disabled: { opacity: 0.5, cursor: "not-allowed" },
     })
 
-    const sizeContainerStyles = css({
-        height: sizeConfig.height,
-        padding: sizeConfig.padding,
-        gap: sizeConfig.gap,
-        fontSize: sizeConfig.fontSize,
-    })
 
     const iconOnlyStyles = props.text === undefined
         ? css({
-            width: sizeConfig.height,
+            width: "auto",
             padding: "0",
             justifyContent: "center"
         })
         : ""
 
     const iconBaseStyles = css({
-        minWidth: `${sizeConfig.iconSize}px`,
-        width: `${sizeConfig.iconSize}px`,
-        minHeight: `${sizeConfig.iconSize}px`,
-        height: `${sizeConfig.iconSize}px`,
+        minWidth: `1rem`,
+        width: `1rem`,
+        minHeight: `1rem`,
+        height: `1rem`,
         flexShrink: 0,
     })
 
@@ -279,6 +242,7 @@ export function ButtonContent(props: ButtonContentProps) {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
+        fontSize: "0.875rem",
         lineHeight: "1",
     })
 
@@ -292,7 +256,6 @@ export function ButtonContent(props: ButtonContentProps) {
             aria-disabled={props.disabled || props.isLoading}
             className={cx(
                 baseContainerStyles,
-                sizeContainerStyles,
                 iconOnlyStyles,
                 variantStyles[variant].base,
                 styles.container,
@@ -302,7 +265,7 @@ export function ButtonContent(props: ButtonContentProps) {
             {/* Loading spinner */}
             {props.isLoading && (
                 <CircularLoader
-                    size={sizeConfig.iconSize}
+                    size={16}
                     className={cx(
                         iconBaseStyles,
                         variant === "primary" ? css({ stroke: "white" }) : styles.icon
@@ -311,9 +274,9 @@ export function ButtonContent(props: ButtonContentProps) {
             )}
 
             {/* Left icon */}
-            {props.icon && !props.isLoading && cloneElement(props.icon, {
+            {props.leftIcon && !props.isLoading && cloneElement(props.leftIcon, {
                 "aria-disabled": props.disabled,
-                size: sizeConfig.iconSize,
+                size: 16,
                 className: cx(
                     iconBaseStyles,
                     variant === "primary"
@@ -342,38 +305,42 @@ export function ButtonContent(props: ButtonContentProps) {
             {/* Right icon */}
             {props.rightIcon && (
                 <div className={css({ display: "flex", alignItems: "center", justifyContent: "center" })}>
-                    {props.isLoading ? (
-                        <CircularLoader
-                            size={sizeConfig.iconSize - 4}
-                            className={cx(
-                                css({
-                                    minWidth: `${sizeConfig.iconSize - 4}px`,
-                                    width: `${sizeConfig.iconSize - 4}px`,
-                                    minHeight: `${sizeConfig.iconSize - 4}px`,
-                                    height: `${sizeConfig.iconSize - 4}px`
-                                }),
-                                variant === "primary" ? css({ stroke: "white" }) : styles.icon
-                            )}
-                        />
-                    ) : (
-                        cloneElement(props.rightIcon, {
-                            "aria-disabled": props.disabled,
-                            size: sizeConfig.iconSize - 4,
-                            className: cx(
-                                css({
-                                    minWidth: `${sizeConfig.iconSize - 4}px`,
-                                    width: `${sizeConfig.iconSize - 4}px`,
-                                    minHeight: `${sizeConfig.iconSize - 4}px`,
-                                    height: `${sizeConfig.iconSize - 4}px`,
-                                    _disabled: { color: "neutral/50" },
-                                }),
-                                variant === "primary"
-                                    ? css({ color: "white" })
-                                    : (styles as typeof variantStyles.outline.colors.neutral).rightIcon ?? styles.icon
-                            ),
-                            strokeWidth: 1.75
-                        })
-                    )}
+                    {
+                        props.isLoading
+                            ? (
+                                <CircularLoader
+                                    size={16 - 4}
+                                    className={cx(
+                                        css({
+                                            minWidth: "1rem",
+                                            width: "1rem",
+                                            minHeight: "1rem",
+                                            height: "1rem",
+                                        }),
+                                        variant === "primary" ? css({ stroke: "white" }) : styles.icon
+                                    )}
+                                />
+                            )
+                            : (
+                                cloneElement(props.rightIcon, {
+                                    "aria-disabled": props.disabled,
+                                    size: 16 - 4,
+                                    className: cx(
+                                        css({
+                                            minWidth: "1rem",
+                                            width: "1rem",
+                                            minHeight: "1rem",
+                                            height: "1rem",
+                                            _disabled: { color: "neutral/50" },
+                                        }),
+                                        variant === "primary"
+                                            ? css({ color: "white" })
+                                            : (styles as typeof variantStyles.outline.colors.neutral).rightIcon ?? styles.icon
+                                    ),
+                                    strokeWidth: 1.75
+                                })
+                            )
+                    }
                 </div>
             )}
         </div>

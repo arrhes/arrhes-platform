@@ -1,11 +1,11 @@
 import { deleteOneRecordRowRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Button } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
 import * as v from "valibot"
 import { Dialog } from "../../../../../../../../../components/overlays/dialog/dialog.tsx"
-import { css } from "@arrhes/ui/utilities/cn.js"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
 import { platformRouter } from "../../../../../../../../../routes/platformRouter.tsx"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
@@ -13,7 +13,7 @@ import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
 
 
 export function DeleteOneRecordRow(props: {
-    recordRow: v.InferOutput<typeof returnedSchemas.recordRow>
+    recordRowidth: v.InferOutput<typeof returnedSchemas.recordRow>
     children: ReactElement<ComponentPropsWithRef<'div'>>
 }) {
     const [open, setOpen] = useState(false)
@@ -22,7 +22,7 @@ export function DeleteOneRecordRow(props: {
         const deleteResponse = await postAPI({
             routeDefinition: deleteOneRecordRowRouteDefinition,
             body: {
-                idRecordRow: props.recordRow.id,
+                idRecordRowidth: props.recordRow.id,
                 idOrganization: props.recordRow.idOrganization,
                 idYear: props.recordRow.idYear,
             }
@@ -78,7 +78,7 @@ export function DeleteOneRecordRow(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer ce mouvement ?
                             </Dialog.Title>

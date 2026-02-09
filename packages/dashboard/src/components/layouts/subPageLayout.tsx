@@ -1,8 +1,8 @@
 import { ButtonContent } from "@arrhes/ui"
-import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
-import { css, cx } from "../../utilities/cn.js"
 import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import { JSX } from "react"
+import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function SubPageLayout(props: {
@@ -22,9 +22,9 @@ export function SubPageLayout(props: {
         <div className={css({
             flex: "1",
             flexShrink: "1",
-            w: "full",
-            maxW: "full",
-            h: "fit",
+            width: "100%",
+            maxWidth: "100%",
+            height: "fit",
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "flex-start",
@@ -35,9 +35,9 @@ export function SubPageLayout(props: {
                     ? (null)
                     : (
                         <div className={css({
-                            w: "fit",
+                            width: "fit",
                             display: "flex",
-                            flexDir: "column",
+                            flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
                             gap: "2",
@@ -56,7 +56,7 @@ export function SubPageLayout(props: {
                                             key={tab.to}
                                             aria-current={isActive}
                                             className={css({
-                                                w: "full",
+                                                width: "100%",
                                                 display: "flex",
                                                 justifyContent: "flex-start",
                                                 alignItems: "stretch",
@@ -67,7 +67,7 @@ export function SubPageLayout(props: {
                                                 to={tab.to}
                                                 params={tab.params}
                                                 className={css({
-                                                    w: "full",
+                                                    width: "100%",
                                                     display: "flex",
                                                     justifyContent: "flex-start",
                                                     alignItems: "center",
@@ -76,12 +76,12 @@ export function SubPageLayout(props: {
                                             >
                                                 <ButtonContent
                                                     variant="invisible"
-                                                    icon={tab.icon}
+                                                    leftIcon={tab.icon}
                                                     text={tab.label}
                                                     color="neutral"
                                                     isActive={isActive}
                                                     className={css({
-                                                        w: "full",
+                                                        width: "100%",
                                                         transition: "all",
                                                         transitionDuration: "200ms",
                                                         transitionTimingFunction: "ease-in-out"
@@ -92,10 +92,10 @@ export function SubPageLayout(props: {
                                                 className={cx(
                                                     css({
                                                         flexShrink: "0",
-                                                        w: "2px",
-                                                        rounded: "full"
+                                                        width: "2px",
+                                                        rounded: "100%"
                                                     }),
-                                                    isActive ? css({ bg: "neutral" }) : css({ bg: "transparent" })
+                                                    isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
                                                 )}
                                             />
                                         </div>
@@ -108,11 +108,11 @@ export function SubPageLayout(props: {
             <div className={css({
                 flexShrink: "1",
                 minH: "fit",
-                minW: "0",
-                w: "full",
-                maxW: "full",
+                minwidth: "0",
+                width: "100%",
+                maxWidth: "100%",
                 display: "flex",
-                flexDir: "column",
+                flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch"
             })}>

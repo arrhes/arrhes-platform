@@ -53,10 +53,10 @@ export function AccountItem(props: {
                     idYear: props.idYear,
                     idAccount: props.account.id,
                 }}
-                className={css({ w: "full" })}
+                className={css({ width: "100%" })}
             >
                 <div
-                    className={css({ minW: "fit", w: "full", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { bg: "neutral/5" }, borderBottomWidth: "1px", borderColor: "neutral/5", _last: { borderBottomWidth: "0" } })}
+                    className={css({ minwidth: "fit", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottomWidth: "1px", borderColor: "neutral/5", _last: { borderBottomWidth: "0" } })}
                 // style={{
                 //     paddingLeft: `${(1 + props.level) * 12}px`
                 // }}
@@ -67,7 +67,7 @@ export function AccountItem(props: {
                             : (
                                 <pre
                                     className={cx(
-                                        css({ color: "neutral/25", fontSize: "22px", lineHeight: "none", h: "full", verticalAlign: "middle", textAlign: "left" }),
+                                        css({ color: "neutral/25", fontSize: "22px", lineHeight: "none", height: "100%", verticalAlign: "middle", textAlign: "left" }),
                                         props.account.isMandatory ? "" : ""
                                     )}
                                     dangerouslySetInnerHTML={{

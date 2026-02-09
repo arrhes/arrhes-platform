@@ -1,5 +1,5 @@
-import { css } from "../../utilities/cn.js"
 import { ComponentProps } from "react"
+import { css } from "../../utilities/cn.js"
 import { FormatBase } from "./formatBase.js"
 
 
@@ -12,15 +12,15 @@ export function FormatError(props: {
         <FormatBase className={props.className}>
             <span className={css({
                 display: "inline-flex",
-                flexDir: "row",
+                flexDirection: "row",
                 justifyContent: "flex-start",
                 alignItems: "center",
                 fontSize: "sm",
                 fontWeight: "semibold",
                 color: "error/75",
                 whiteSpace: "nowrap",
-                overflow: "auto",
-                textOverflow: "ellipsis"
+                overflowidth: "auto",
+                textOverflowidth: "ellipsis"
             })}>
                 {props.text}
             </span>

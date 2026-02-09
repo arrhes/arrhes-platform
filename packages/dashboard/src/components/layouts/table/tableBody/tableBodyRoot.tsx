@@ -1,5 +1,5 @@
-import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../../utilities/cn.js"
 
 
 export function TableBodyRoot(props: {
@@ -9,7 +9,7 @@ export function TableBodyRoot(props: {
     return (
         <tbody
             className={cx(
-                css({ w: "full" }),
+                css({ width: "100%" }),
                 props.className
             )}
             children={props.children}

@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { ComponentProps } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 type FormatNull = {
@@ -12,15 +12,15 @@ export function FormatNull(props: FormatNull) {
         <span className={cx(
             css({
                 display: "inline-flex",
-                flexDir: "row",
+                flexDirection: "row",
                 justifyContent: "flex-start",
                 alignItems: "center",
                 fontSize: "sm",
                 fontStyle: "italic",
                 color: "neutral/25",
                 whiteSpace: "nowrap",
-                overflow: "auto",
-                textOverflow: "ellipsis"
+                overflowidth: "auto",
+                textOverflowidth: "ellipsis"
             }),
             props.className
         )}>

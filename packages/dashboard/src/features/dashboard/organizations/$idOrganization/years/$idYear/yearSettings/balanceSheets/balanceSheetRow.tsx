@@ -27,17 +27,17 @@ export function BalanceSheetRow(props: {
                 idYear: props.idYear,
                 idBalanceSheet: props.balanceSheet.id,
             }}
-            className={css({ w: "full" })}
+            className={css({ width: "100%" })}
         >
             <div
                 className={css({
-                    minW: "fit-content",
-                    w: "full",
+                    minwidth: "fit-content",
+                    width: "100%",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
                     gap: "2",
-                    _hover: { bg: "neutral/5" },
+                    _hover: { backgroundColor: "neutral/5" },
                     borderBottom: "1px solid",
                     borderColor: "neutral/5",
                     _last: { borderBottom: "0" }
@@ -55,7 +55,7 @@ export function BalanceSheetRow(props: {
                                     color: "neutral/25",
                                     fontSize: "[22px]",
                                     lineHeight: "none",
-                                    h: "full",
+                                    height: "100%",
                                     verticalAlign: "middle",
                                     textAlign: "left"
                                 })}

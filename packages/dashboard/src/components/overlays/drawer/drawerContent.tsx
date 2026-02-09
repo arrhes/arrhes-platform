@@ -1,7 +1,7 @@
 
-import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentProps } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DrawerContent(props:
@@ -14,14 +14,14 @@ export function DrawerContent(props:
                     position: "fixed",
                     zIndex: "10",
                     inset: "0",
-                    w: "full",
-                    h: "full",
+                    width: "100%",
+                    height: "100%",
                     display: "flex",
                     justifyContent: "flex-end",
                     alignItems: "center",
-                    overflow: "auto",
+                    overflowidth: "auto",
                     p: "2",
-                    bg: "neutral/25",
+                    backgroundColor: "neutral/25",
                     "&[data-state=open]": {
                         animation: "fadeIn 0.2s ease-out"
                     },
@@ -37,15 +37,15 @@ export function DrawerContent(props:
                     }}
                     className={cx(
                         css({
-                            minW: "full",
-                            w: "full",
-                            maxW: "full",
-                            h: "full",
-                            overflow: "auto",
-                            bg: "white",
+                            minwidth: "100%",
+                            width: "100%",
+                            maxWidth: "100%",
+                            height: "100%",
+                            overflowidth: "auto",
+                            backgroundColor: "white",
                             rounded: "md",
                             display: "flex",
-                            flexDir: "column",
+                            flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
                             border: "2px solid",
@@ -61,9 +61,9 @@ export function DrawerContent(props:
                                 animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
                             },
                             md: {
-                                minW: "md",
-                                maxW: "md",
-                                maxH: "full"
+                                minwidth: "md",
+                                maxWidth: "md",
+                                maxH: "100%"
                             }
                         }),
                         props.className

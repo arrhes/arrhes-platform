@@ -76,7 +76,7 @@ export function DeleteOneComputationIncomeStatement(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer cette ligne de compte de résultat ?
                             </Dialog.Title>

@@ -1,6 +1,6 @@
-import { css, cx } from "../../../utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { ComponentProps } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 type ToastViewport = ComponentProps<typeof ToastPrimitives.Viewport>
@@ -16,18 +16,18 @@ export function ToastViewport(props: ToastViewport) {
                     zIndex: "100",
                     display: "flex",
                     maxH: "screen",
-                    w: "full",
-                    flexDir: "column-reverse",
+                    width: "100%",
+                    flexDirection: "column-reverse",
                     gap: "1",
                     p: "4",
                     right: "0",
                     sm: {
                         top: "auto",
-                        flexDir: "column"
+                        flexDirection: "column"
                     },
                     md: {
                         bottom: "0",
-                        maxW: "420px"
+                        maxWidth: "420px"
                     }
                 }),
                 props.className

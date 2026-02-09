@@ -17,14 +17,14 @@ export function RecordLabelsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ w: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                     <CreateOneRecordLabel
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter une catégorie"
                         />
                     </CreateOneRecordLabel>
@@ -49,7 +49,7 @@ export function RecordLabelsPage() {
                                 )
                             }
                             return (
-                                <div className={css({ h: "fit-content", w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                                <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                                     {
                                         sortedRecordLabels.map((recordLabel) => (
                                             <Link
@@ -60,7 +60,7 @@ export function RecordLabelsPage() {
                                                     idYear: params.idYear,
                                                     idRecordLabel: recordLabel.id
                                                 }}
-                                                className={css({ w: "full", p: "2", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { bg: "neutral/5" }, cursor: "pointer" })}
+                                                className={css({ width: "100%", p: "2", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
                                             >
                                                 {`${recordLabel.label}`}
                                             </Link>

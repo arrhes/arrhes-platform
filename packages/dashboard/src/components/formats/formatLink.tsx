@@ -1,7 +1,7 @@
 import { Button } from "@arrhes/ui"
+import { ComponentProps } from "react"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { css } from "../../utilities/cn.js"
-import { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
 
@@ -24,8 +24,8 @@ export function FormatLink(props: FormatLinkProps) {
             <Button
                 onClick={() => copyContent(props.text)}
                 className={css({
-                    w: "full",
-                    overflow: "auto",
+                    width: "100%",
+                    overflowidth: "auto",
                     rounded: "none"
                 })}
             >
@@ -33,11 +33,11 @@ export function FormatLink(props: FormatLinkProps) {
                     textAlign: "left",
                     textDecoration: "underline",
                     _hover: { textDecoration: "none" },
-                    maxW: "full",
+                    maxWidth: "100%",
                     overflowWrap: "normal",
                     whiteSpace: "nowrap",
-                    overflow: "auto",
-                    textOverflow: "ellipsis"
+                    overflowidth: "auto",
+                    textOverflowidth: "ellipsis"
                 })}>
                     {props.text}
                 </span>

@@ -13,15 +13,15 @@ export function OrganizationsPage() {
     return (
         <Page.Root>
             <Page.Content>
-                <div className={css({ w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
-                    <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "center" })}>
+                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
+                    <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" })}>
                         <span className={css({ fontSize: "2xl" })}>
                             Mes organisations
                         </span>
                         <AddNewOrganization>
                             <ButtonContent
                                 variant="default"
-                                icon={<IconBuildingPlus />}
+                                leftIcon={<IconBuildingPlus />}
                                 text="Ajouter une organisation"
                             />
                         </AddNewOrganization>
@@ -40,7 +40,7 @@ export function OrganizationsPage() {
                                 )
                             }
                             return (
-                                <div className={css({ w: "full", display: "flex", flexDir: "column", gap: "3" })}>
+                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", gap: "3" })}>
                                     {organizationUsers.map((organizationUser) => (
                                         <OrganizationCard
                                             key={organizationUser.id}

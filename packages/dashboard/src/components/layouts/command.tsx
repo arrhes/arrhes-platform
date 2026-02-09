@@ -1,8 +1,8 @@
-import { css, cx } from "../../utilities/cn.js"
 import { Dialog, DialogContent, DialogProps } from "@radix-ui/react-dialog"
 import { IconSearch } from "@tabler/icons-react"
 import { Command as CommandPrimitive } from "cmdk"
 import * as React from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export const Command = React.forwardRef<
@@ -14,12 +14,12 @@ export const Command = React.forwardRef<
         className={cx(
             css({
                 display: "flex",
-                h: "full",
-                w: "full",
-                flexDir: "column",
-                overflow: "auto",
+                height: "100%",
+                width: "100%",
+                flexDirection: "column",
+                overflowidth: "auto",
                 rounded: "inherit",
-                bg: "white"
+                backgroundColor: "white"
             }),
             className
         )}
@@ -33,9 +33,9 @@ export const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
     return (
         <Dialog {...props}>
             <DialogContent className={css({
-                overflow: "auto",
+                overflowidth: "auto",
                 p: "0",
-                shadow: "lg"
+                shadowidth: "lg"
             })}>
                 <Command className={css({
                     "& [cmdk-group-heading]": {
@@ -50,19 +50,19 @@ export const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
                         px: "2"
                     },
                     "& [cmdk-input-wrapper] svg": {
-                        h: "5",
-                        w: "5"
+                        height: "5",
+                        width: "5"
                     },
                     "& [cmdk-input]": {
-                        h: "12"
+                        height: "12"
                     },
                     "& [cmdk-item]": {
                         px: "2",
                         py: "3"
                     },
                     "& [cmdk-item] svg": {
-                        h: "5",
-                        w: "5"
+                        height: "5",
+                        width: "5"
                     }
                 })}>
                     {children}
@@ -77,7 +77,7 @@ export const CommandInput = React.forwardRef<
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
     <div className={css({
-        h: "40px",
+        height: "40px",
         display: "flex",
         alignItems: "center",
         gap: "2",
@@ -86,8 +86,8 @@ export const CommandInput = React.forwardRef<
         borderColor: "neutral/10"
     })} cmdk-input-wrapper="">
         <IconSearch className={css({
-            h: "4",
-            w: "4",
+            height: "4",
+            width: "4",
             flexShrink: "0",
             opacity: "0.5"
         })} />
@@ -96,9 +96,9 @@ export const CommandInput = React.forwardRef<
             className={cx(
                 css({
                     display: "flex",
-                    w: "full",
+                    width: "100%",
                     rounded: "md",
-                    bg: "transparent",
+                    backgroundColor: "transparent",
                     fontSize: "base",
                     outline: "none",
                     _placeholder: { color: "neutral/50" },
@@ -163,7 +163,7 @@ export const CommandGroup = React.forwardRef<
         ref={ref}
         className={cx(
             css({
-                overflow: "auto",
+                overflowidth: "auto",
                 color: "slate.950",
                 "& [cmdk-group-heading]": {
                     px: "2",
@@ -188,8 +188,8 @@ export const CommandSeparator = React.forwardRef<
         className={cx(
             css({
                 mx: "-1",
-                h: "1px",
-                bg: "slate.200"
+                height: "1px",
+                backgroundColor: "slate.200"
             }),
             className
         )}
@@ -216,7 +216,7 @@ export const CommandItem = React.forwardRef<
                 fontSize: "sm",
                 outline: "none",
                 _selected: {
-                    bg: "slate.100",
+                    backgroundColor: "slate.100",
                     color: "slate.900"
                 },
                 _disabled: {

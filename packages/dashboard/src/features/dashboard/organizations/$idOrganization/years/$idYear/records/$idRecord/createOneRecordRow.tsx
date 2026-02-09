@@ -184,12 +184,12 @@ export function CreateOneRecordRow(props: {
                                         )}
                                     />
                                 </div>
-                                <div className={css({ width: "full", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
+                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
                                     <FormLabel
                                         label="Mouvement ajouté aux calculs ?"
                                         isRequired={false}
                                     />
-                                    <div className={css({ width: "full", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
+                                    <div className={css({ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
                                         <FormField
                                             control={form.control}
                                             name="isComputedForJournalReport"

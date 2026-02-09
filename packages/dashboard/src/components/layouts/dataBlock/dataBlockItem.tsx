@@ -1,7 +1,7 @@
-import { Tooltip } from "../../../components/overlays/tooltip/tooltip.js"
-import { css } from "../../../utilities/cn.js"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
 import { Fragment, ReactElement } from "react"
+import { Tooltip } from "../../../components/overlays/tooltip/tooltip.js"
+import { css } from "../../../utilities/cn.js"
 
 
 export function DataBlockItem(props: {
@@ -34,7 +34,7 @@ export function DataBlockItem(props: {
                                     }
                                 })} />
                             </Tooltip.Trigger>
-                            <Tooltip.Content className={css({ bg: "neutral" })}>
+                            <Tooltip.Content className={css({ backgroundColor: "neutral" })}>
                                 <p className={css({
                                     wordBreak: "break-word",
                                     hyphens: "auto",

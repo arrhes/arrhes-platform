@@ -47,7 +47,7 @@ export function BalanceSheetReportPage() {
                                         {(balanceSheets) => {
                                             return (
                                                 <Section.Item>
-                                                    <div className={css({ w: "full", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
+                                                    <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
                                                         <DownloadBalanceSheetReport
                                                             idOrganization={params.idOrganization}
                                                             idYear={params.idYear}
@@ -60,7 +60,7 @@ export function BalanceSheetReportPage() {
                                                             />
                                                         </DownloadBalanceSheetReport>
                                                     </div>
-                                                    <div className={css({ w: "full", display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "start", gap: "4", flexWrap: "wrap" })}>
+                                                    <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "start", gap: "4", flexWrap: "wrap" })}>
                                                         <Box className={css({ gap: "4" })}>
                                                             <TitleComponent className={css({ p: "4" })}>
                                                                 Actif

@@ -1,9 +1,9 @@
-import { Button, type ButtonProps } from "@arrhes/ui"
-import { css, cx } from "../../utilities/cn.js"
+import { Button } from "@arrhes/ui"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { ReactElement, useEffect, useRef } from "react"
 import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
 import * as v from "valibot"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function FormRoot<
@@ -46,27 +46,27 @@ export function FormRoot<
         <FormProvider {...form}>
             <form
                 className={css({
-                    w: "full",
+                    width: "100%",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start"
                 })}
             //  onSubmit={}
             >
                 <div className={css({
-                    w: "full",
-                    maxW: "md",
+                    width: "100%",
+                    maxWidth: "md",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
                     gap: "4"
                 })}>
                     <div className={css({
-                        w: "full",
+                        width: "100%",
                         display: "flex",
-                        flexDir: "column",
+                        flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
                         gap: "2"

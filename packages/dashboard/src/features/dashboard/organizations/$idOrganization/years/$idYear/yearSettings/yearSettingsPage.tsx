@@ -24,8 +24,8 @@ export function YearSettingsPage() {
             {(year) => {
                 return (
                     <Box>
-                        <div className={css({ w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                            <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4", borderBottom: "1px solid", borderColor: "neutral/10" })}>
+                        <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4", borderBottom: "1px solid", borderColor: "neutral/10" })}>
                                 <span>
                                     Modifier les informations de l'exercice
                                 </span>
@@ -34,12 +34,12 @@ export function YearSettingsPage() {
                                 >
                                     <ButtonContent
                                         variant="default"
-                                        icon={<IconPencil />}
+                                        leftIcon={<IconPencil />}
                                         text="Modifier"
                                     />
                                 </UpdateOneYear>
                             </div>
-                            <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4" })}>
+                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4" })}>
                                 <span>
                                     Supprimer l'exercice
                                 </span>
@@ -48,7 +48,7 @@ export function YearSettingsPage() {
                                 >
                                     <ButtonContent
                                         variant="default"
-                                        icon={<IconTrash />}
+                                        leftIcon={<IconTrash />}
                                         text="Supprimer"
                                         color="error"
                                     />

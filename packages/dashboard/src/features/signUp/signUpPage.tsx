@@ -1,4 +1,8 @@
+import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
+import { IconUserPlus } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
+import { Fragment } from "react/jsx-runtime"
 import { FormControl } from "../../components/forms/formControl.js"
 import { FormError } from "../../components/forms/formError.js"
 import { FormField } from "../../components/forms/formField.js"
@@ -11,28 +15,24 @@ import { toast } from "../../contexts/toasts/useToast.js"
 import { platformRouter } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 import { postAPI } from "../../utilities/postAPI.js"
-import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
-import { IconUserPlus } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
-import { Fragment } from "react/jsx-runtime"
 
 
 export function SignUpPage() {
     return (
-        <div className={css({ w: "full", h: "full", display: "flex", justifyContent: "center", alignItems: "center" })}>
-            <div className={css({ w: "full", maxW: "sm", display: "flex", flexDir: "column", justifyContent: "center", alignItems: "center", gap: "4" })}>
-                <div className={css({ w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4", bg: "white", border: "1px solid", borderColor: "neutral/10", rounded: "md", p: "8" })}>
+        <div className={css({ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" })}>
+            <div className={css({ width: "100%", maxWidth: "sm", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "4" })}>
+                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4", backgroundColor: "white", border: "1px solid", borderColor: "neutral/10", rounded: "md", p: "8" })}>
                     <span className={css({ fontSize: "xl" })}>
                         Inscription
                     </span>
-                    <div className={css({ w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
+                    <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
                         <FormRoot
                             schema={signUpRouteDefinition.schemas.body}
                             defaultValues={{}}
                             submitButtonProps={{
                                 icon: <IconUserPlus />,
                                 text: "Inscription",
-                                className: css({ w: "full", justifyContent: "center" })
+                                className: css({ width: "100%", justifyContent: "center" })
                             }}
                             submitOnPressEnterKey={true}
                             onSubmit={async (data) => {
@@ -132,12 +132,12 @@ export function SignUpPage() {
                         </FormRoot>
                         <Link
                             to="/connexion"
-                            className={css({ w: "full" })}
+                            className={css({ width: "100%" })}
                         >
                             <ButtonContent
                                 variant="default"
                                 text="Déjà inscrit ?"
-                                className={css({ w: "full", justifyContent: "center" })}
+                                className={css({ width: "100%", justifyContent: "center" })}
                             />
                         </Link>
                     </div>

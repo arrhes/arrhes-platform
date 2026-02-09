@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function SectionItem(props: {
@@ -10,13 +10,13 @@ export function SectionItem(props: {
         <div
             className={cx(
                 css({
-                    flexGrow: "1",
-                    minW: "0",
-                    w: "full",
-                    maxW: "full",
-                    h: "fit",
+                    flexGrowidth: "1",
+                    minwidth: "0",
+                    width: "100%",
+                    maxWidth: "100%",
+                    height: "fit",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "4"

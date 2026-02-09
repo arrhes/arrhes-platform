@@ -45,12 +45,12 @@ export function RecordRowsTable(props: {
                                     idOrganization: props.record.idOrganization,
                                     idYear: props.record.idYear,
                                     idRecord: row.original.idRecord,
-                                    idRecordRow: row.original.id
+                                    idRecordRowidth: row.original.id
                                 }}
                             >
                                 <ButtonContent
                                     variant="invisible"
-                                    icon={<IconEye />}
+                                    leftIcon={<IconEye />}
                                     text={undefined}
                                 />
                             </Link>
@@ -82,7 +82,7 @@ export function RecordRowsTable(props: {
                         >
                             {(account) => (
                                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
-                                    <FormatText className={css({ overflow: "visible" })}>
+                                    <FormatText className={css({ overflowidth: "visible" })}>
                                         {account.number}
                                     </FormatText>
                                     <FormatText wrap={true} className={css({ color: "neutral/50" })}>
@@ -132,7 +132,7 @@ export function RecordRowsTable(props: {
                 //         idOrganization: props.record.idOrganization,
                 //         idYear: props.record.idYear,
                 //         idRecord: row.original.idRecord,
-                //         idRecordRow: row.original.id
+                //         idRecordRowidth: row.original.id
                 //     }
                 // })
             }}
@@ -143,7 +143,7 @@ export function RecordRowsTable(props: {
                 >
                     <ButtonContent
                         variant="primary"
-                        icon={<IconPlus />}
+                        leftIcon={<IconPlus />}
                         text="Ajouter un mouvement"
                     />
                 </CreateOneRecordRow>
@@ -152,7 +152,7 @@ export function RecordRowsTable(props: {
                 >
                     <ButtonContent
                         variant="default"
-                        icon={<IconEdit />}
+                        leftIcon={<IconEdit />}
                         text="Modifier plusieurs mouvements"
                     />
                 </UpdateManyRecordRows>

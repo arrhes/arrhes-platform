@@ -1,12 +1,12 @@
 import { Button } from "@arrhes/ui"
+import { IconCheck, IconSelector, IconX } from "@tabler/icons-react"
+import { CommandEmpty, CommandLoading } from "cmdk"
+import { Fragment, useState } from "react"
 import { FormatNull } from "../../components/formats/formatNull.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
 import { Command, CommandInput, CommandItem, CommandList } from "../../components/layouts/command.js"
 import { Popover } from "../../components/overlays/popover/popover.js"
 import { css, cx } from "../../utilities/cn.js"
-import { IconCheck, IconSelector, IconX } from "@tabler/icons-react"
-import { CommandEmpty, CommandLoading } from "cmdk"
-import { Fragment, useState } from "react"
 
 
 
@@ -41,10 +41,10 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
         .filter((option) => !props.selectedOptions.some((x) => x.key === option.key))
 
     return (
-        <div className={css({ display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "1" })}>
-            <div className={css({ display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", p: "2", w: "full", rounded: "md", border: "1px solid", borderColor: "neutral/25", _disabled: { cursor: "not-allowed", opacity: "50" }, maxH: "[256px]", overflow: "auto", minH: "[40px]" })}>
+        <div className={css({ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "1" })}>
+            <div className={css({ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", p: "2", width: "100%", rounded: "md", border: "1px solid", borderColor: "neutral/25", _disabled: { cursor: "not-allowed", opacity: "50" }, maxH: "[256px]", overflowidth: "auto", minH: "[40px]" })}>
                 {(props.selectedOptions.length === 0) ? (
-                    <div className={css({ w: "full", h: "full", display: "flex", justifyContent: "flex-start", alignItems: "center" })}>
+                    <div className={css({ width: "100%", height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" })}>
                         <FormatNull text={props.emptyLabel ?? "Nothing selected"} />
                     </div>
                 ) : (
@@ -69,7 +69,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                     <Button
                         role="combobox"
                         data-open={open}
-                        className={css({ w: "full" })}
+                        className={css({ width: "100%" })}
                         onClick={() => {
                             if (props.isDisabled) return
                             setOpen(!open)
@@ -78,7 +78,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                     >
                         <div className={cx(
                             css({
-                                w: "full",
+                                width: "100%",
                                 display: "grid",
                                 gridTemplateColumns: "auto min-content",
                                 alignItems: "center",
@@ -87,13 +87,13 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                 border: "1px solid",
                                 borderColor: "neutral/25",
                                 rounded: "md",
-                                _groupFocus: { borderColor: "neutral/50", shadow: "outer", bg: "neutral/5" },
-                                "&[data-open=true]": { borderColor: "neutral/50", bg: "neutral/5", shadow: "outer" }
+                                _groupFocus: { borderColor: "neutral/50", shadowidth: "outer", backgroundColor: "neutral/5" },
+                                "&[data-open=true]": { borderColor: "neutral/50", backgroundColor: "neutral/5", shadowidth: "outer" }
                             })
                         )}
                         >
-                            <span className={css({ w: "full", h: "fit-content", textAlign: "left", color: "neutral/50", fontSize: "sm" })}>{props.placeholder}</span>
-                            <IconSelector className={css({ h: "4", w: "4", flexShrink: "0", opacity: "50" })} />
+                            <span className={css({ width: "100%", height: "fit-content", textAlign: "left", color: "neutral/50", fontSize: "sm" })}>{props.placeholder}</span>
+                            <IconSelector className={css({ height: "4", width: "4", flexShrink: "0", opacity: "50" })} />
                         </div>
                     </Button>
                 </Popover.Trigger>
@@ -104,7 +104,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                         >
                             <Command
                                 className={cx(
-                                    css({ w: "full" }),
+                                    css({ width: "100%" }),
                                     props.className
                                 )}
                                 filter={(value, search) => {
@@ -123,9 +123,9 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                         )
                                         : (null)
                                 }
-                                <CommandList className={css({ maxH: "[256px]", overflow: "auto", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch" })}>
+                                <CommandList className={css({ maxH: "[256px]", overflowidth: "auto", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch" })}>
                                     <CommandEmpty>
-                                        <div className={css({ position: "relative", h: "[40px]", p: "3", display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: "default", userSelect: "none", rounded: "sm", outline: "none", _disabled: { pointerEvents: "none", opacity: "50" } })}>
+                                        <div className={css({ position: "relative", height: "[40px]", p: "3", display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: "default", userSelect: "none", rounded: "sm", outline: "none", _disabled: { pointerEvents: "none", opacity: "50" } })}>
                                             <span className={css({ color: "neutral/10", textAlign: "left", fontStyle: "italic" })}>
                                                 No result
                                             </span>
@@ -150,14 +150,14 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                                     className={cx(
                                                         css({
                                                             p: "3",
-                                                            h: "[40px]",
+                                                            height: "[40px]",
                                                             display: "flex",
                                                             justifyContent: "space-between",
                                                             alignItems: "center",
-                                                            overflow: "auto",
+                                                            overflowidth: "auto",
                                                             gap: "3"
                                                         }),
-                                                        isSelected ? css({ bg: "neutral/10" }) : css({ bg: "none", _hover: { bg: "neutral/5" } })
+                                                        isSelected ? css({ backgroundColor: "neutral/10" }) : css({ backgroundColor: "none", _hover: { backgroundColor: "neutral/5" } })
                                                     )}
                                                 >
                                                     <span
@@ -167,7 +167,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                                     </span>
                                                     <IconCheck
                                                         className={cx(
-                                                            css({ h: "4", w: "4", stroke: "neutral" }),
+                                                            css({ height: "4", width: "4", stroke: "neutral" }),
                                                             isSelected ? css({ opacity: "100" }) : css({ opacity: "0" })
                                                         )}
                                                     />

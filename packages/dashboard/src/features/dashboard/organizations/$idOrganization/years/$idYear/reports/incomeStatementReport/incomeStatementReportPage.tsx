@@ -63,7 +63,7 @@ export function IncomeStatementReportPage() {
                                                                 {(computationIncomeStatements) => {
                                                                     return (
                                                                         <Section.Item>
-                                                                            <div className={css({ w: "full", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
+                                                                            <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
                                                                                 <DownloadIncomeStatementReport
                                                                                     idOrganization={params.idOrganization}
                                                                                     idYear={params.idYear}

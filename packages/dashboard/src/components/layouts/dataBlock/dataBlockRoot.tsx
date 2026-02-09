@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DataBlockRoot(props: {
@@ -11,10 +11,10 @@ export function DataBlockRoot(props: {
             className={cx(
                 css({
                     flexShrink: "0",
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
                     gap: "2"

@@ -1,7 +1,7 @@
-import { css, cx } from "../../utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from "react-imask"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function InputDate(props:
@@ -38,8 +38,8 @@ export function InputDate(props:
         <div
             className={cx(
                 css({
-                    h: "32px",
-                    w: "full",
+                    height: "32px",
+                    width: "100%",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
@@ -47,7 +47,7 @@ export function InputDate(props:
                     border: "1px solid",
                     borderColor: "neutral/20",
                     rounded: "sm",
-                    _focusWithin: { borderColor: "neutral/50", shadow: "inset" }
+                    _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
                 }),
                 css(props.error ? { borderColor: "error" } : {}),
                 props.className
@@ -89,13 +89,13 @@ export function InputDate(props:
                 value={input(props.value)}
                 className={css({
                     rounded: "inherit",
-                    w: "full",
+                    width: "100%",
                     fontSize: "sm",
                     _placeholder: { color: "neutral/25" },
                     p: "2",
-                    overflow: "hidden",
+                    overflowidth: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflow: "ellipsis"
+                    textOverflowidth: "ellipsis"
                 })}
                 inputMode="decimal"
             />

@@ -36,7 +36,7 @@ export function ConnectAccountsToIncomeStatements(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous connecter les comptes aux lignes de compte de résultat par défault ?
                             </Dialog.Title>

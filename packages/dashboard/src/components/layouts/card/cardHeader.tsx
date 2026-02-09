@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 
@@ -11,8 +11,8 @@ export function CardHeader(props: {
         <div
             className={cx(
                 css({
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "flex-start",

@@ -1,15 +1,8 @@
 import { type ComponentProps, type MouseEvent, type ReactNode, useState } from "react"
 import { css, cx } from "../../utilities/cn.ts"
 import { sleep } from "../../utilities/sleep.ts"
-import { type ButtonContentProps, ButtonContent } from "./buttonContent"
+import { ButtonContent } from "./buttonContent"
 
-
-export type ButtonProps = Omit<ComponentProps<"button">, "color">
-    & ButtonContentProps
-    & {
-        hasLoader?: boolean
-        children?: ReactNode
-    }
 
 /**
  * Button component with loading state handling and variant support
@@ -17,7 +10,13 @@ export type ButtonProps = Omit<ComponentProps<"button">, "color">
  * Combines button behavior with ButtonContent visual styles
  * Can render children directly or use ButtonContent for structured content
  */
-export function Button(props: ButtonProps) {
+export function Button(props:
+    & Omit<ComponentProps<"button">, "color">
+    & ComponentProps<typeof ButtonContent>
+    & {
+        hasLoader?: boolean
+        children?: ReactNode
+    }) {
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleClick(e: MouseEvent<HTMLButtonElement>) {
@@ -33,7 +32,7 @@ export function Button(props: ButtonProps) {
 
     // Extract content props from button props
     const {
-        variant, color, size, text, icon, rightIcon, isActive,
+        variant, color, text, leftIcon, rightIcon, isActive,
         hasLoader, className, disabled, title, children,
         ...buttonProps
     } = props
@@ -70,10 +69,9 @@ export function Button(props: ButtonProps) {
                 <ButtonContent
                     variant={variant}
                     color={color}
-                    size={size}
                     text={text}
                     title={title ?? text}
-                    icon={icon}
+                    leftIcon={leftIcon}
                     rightIcon={rightIcon}
                     isLoading={hasLoader !== false ? isLoading : undefined}
                     disabled={disabled}

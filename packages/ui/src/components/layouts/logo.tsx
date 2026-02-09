@@ -1,19 +1,20 @@
 import { IconAbacus } from "@tabler/icons-react"
 import type { ComponentProps } from "react"
-import { cx, css } from "../../utilities/cn.ts"
+import { ButtonContent } from "../buttons/buttonContent.tsx"
 
 
 export function Logo(props: {
     className?: ComponentProps<'div'>['className']
-    size?: number
+    withText?: boolean
 }) {
     return (
-        <IconAbacus
-            size={props.size ?? 16}
-            className={cx(
-                css({ stroke: "neutral/50" }),
-                props.className
-            )}
+        <ButtonContent
+            leftIcon={<IconAbacus />}
+            text={
+                props.withText
+                    ? "Arrhes"
+                    : undefined
+            }
         />
     )
 }

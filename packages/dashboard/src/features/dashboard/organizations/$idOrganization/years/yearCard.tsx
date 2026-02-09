@@ -1,5 +1,5 @@
 import { readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { cx, css } from "@arrhes/ui/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconCalendar, IconChevronRight, IconLock } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import * as v from "valibot"
@@ -26,23 +26,23 @@ export function YearCard(props: {
                 idYear: year.id
             }}
             className={cx(
-                css({ w: "full", p: "4", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4" }),
+                css({ width: "100%", p: "4", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4" }),
                 css({ border: "1px solid", borderColor: "neutral/10", rounded: "md" }),
-                css({ _hover: { borderColor: "neutral/20", bg: "neutral/2" }, transition: "colors", cursor: "pointer" })
+                css({ _hover: { borderColor: "neutral/20", backgroundColor: "neutral/2" }, transition: "colors", cursor: "pointer" })
             )}
         >
             <div className={css({ display: "flex", alignItems: "center", gap: "4" })}>
                 <div className={cx(
-                    css({ w: "12", h: "12", display: "flex", alignItems: "center", justifyContent: "center", rounded: "md" }),
-                    year.isClosed ? css({ bg: "neutral/10" }) : css({ bg: "success/5" })
+                    css({ width: "12", height: "12", display: "flex", alignItems: "center", justifyContent: "center", rounded: "md" }),
+                    year.isClosed ? css({ backgroundColor: "neutral/10" }) : css({ backgroundColor: "success/5" })
                 )}>
                     {year.isClosed ? (
-                        <IconLock className={css({ w: "6", h: "6", color: "neutral/50" })} />
+                        <IconLock className={css({ width: "6", height: "6", color: "neutral/50" })} />
                     ) : (
-                        <IconCalendar className={css({ w: "6", h: "6", color: "success/70" })} />
+                        <IconCalendar className={css({ width: "6", height: "6", color: "success/70" })} />
                     )}
                 </div>
-                <div className={css({ display: "flex", flexDir: "column", gap: "1" })}>
+                <div className={css({ display: "flex", flexDirection: "column", gap: "1" })}>
                     <span className={css({ fontSize: "base", fontWeight: "medium", color: "neutral" })}>
                         {year.label}
                     </span>
@@ -65,7 +65,7 @@ export function YearCard(props: {
                         color="success"
                     />
                 )}
-                <IconChevronRight className={css({ w: "5", h: "5", color: "neutral/30" })} />
+                <IconChevronRight className={css({ width: "5", height: "5", color: "neutral/30" })} />
             </div>
         </Link>
     )

@@ -1,8 +1,8 @@
 
 import { Button } from "@arrhes/ui"
-import { css } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
+import { css } from "../../../utilities/cn.js"
 
 
 export function DrawerHeader(props: {
@@ -10,7 +10,7 @@ export function DrawerHeader(props: {
 }) {
     return (
         <div className={css({
-            w: "full",
+            width: "100%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",

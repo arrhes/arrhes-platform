@@ -20,14 +20,14 @@ export function IncomeStatementsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ minW: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
+                <div className={css({ minwidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
                     <CreateOneIncomeStatement
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter une ligne de compte de résultat"
                         />
                     </CreateOneIncomeStatement>
@@ -37,7 +37,7 @@ export function IncomeStatementsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Générer les lignes de compte de résultat par défaut"
                         />
                     </GenerateIncomeStatements>
@@ -47,7 +47,7 @@ export function IncomeStatementsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconLine />}
+                            leftIcon={<IconLine />}
                             text="Connecter les comptes aux lignes de compte de résultat par défaut"
                         />
                     </ConnectAccountsToIncomeStatements>
@@ -60,14 +60,14 @@ export function IncomeStatementsPage() {
                 </Box>
             </Section.Item>
             <Section.Item>
-                <div className={css({ w: "full", display: "flex", justifyContent: "flex-end", alignItems: "flex-start", gap: "2" })}>
+                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "flex-start", gap: "2" })}>
                     <CreateOneComputation
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter une ligne de calcul"
                         />
                     </CreateOneComputation>
@@ -77,7 +77,7 @@ export function IncomeStatementsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Générer les calculs par défaut"
                         />
                     </GenerateComputations>

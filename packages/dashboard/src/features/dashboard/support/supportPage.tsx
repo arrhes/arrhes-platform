@@ -26,7 +26,7 @@ export function SupportPage() {
                         >
                             <ButtonContent
                                 variant="default"
-                                icon={<IconMail />}
+                                leftIcon={<IconMail />}
                                 text="Email"
                             />
                         </a>
@@ -35,7 +35,7 @@ export function SupportPage() {
                         >
                             <ButtonContent
                                 variant="default"
-                                icon={<IconBrandGithub />}
+                                leftIcon={<IconBrandGithub />}
                                 text="Github"
                             />
                         </a>
@@ -44,7 +44,7 @@ export function SupportPage() {
                         >
                             <ButtonContent
                                 variant="default"
-                                icon={<IconBrandLinkedin />}
+                                leftIcon={<IconBrandLinkedin />}
                                 text="LinkedIn"
                             />
                         </a>

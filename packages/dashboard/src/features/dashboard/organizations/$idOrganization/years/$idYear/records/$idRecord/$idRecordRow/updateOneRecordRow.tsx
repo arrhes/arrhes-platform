@@ -22,7 +22,7 @@ import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
 
 
 export function UpdateOneRecordRow(props: {
-    recordRow: v.InferOutput<typeof returnedSchemas.recordRow>
+    recordRowidth: v.InferOutput<typeof returnedSchemas.recordRow>
     children: JSX.Element
 }) {
     const [open, setOpen] = useState(false)
@@ -44,7 +44,7 @@ export function UpdateOneRecordRow(props: {
                         schema={updateOneRecordRowRouteDefinition.schemas.body}
                         defaultValues={{
                             ...props.recordRow,
-                            idRecordRow: props.recordRow.id,
+                            idRecordRowidth: props.recordRow.id,
                         }}
                         submitButtonProps={{
                             icon: <IconPencil />,
@@ -80,7 +80,7 @@ export function UpdateOneRecordRow(props: {
                                 body: {
                                     idOrganization: props.recordRow.idOrganization,
                                     idYear: props.recordRow.idYear,
-                                    idRecordRow: props.recordRow.id,
+                                    idRecordRowidth: props.recordRow.id,
                                 },
                             })
 
@@ -178,12 +178,12 @@ export function UpdateOneRecordRow(props: {
                                         )}
                                     />
                                 </div>
-                                <div className={css({ width: "full", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
+                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
                                     <FormLabel
                                         label="Mouvement ajouté aux calculs ?"
                                         isRequired={false}
                                     />
-                                    <div className={css({ width: "full", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
+                                    <div className={css({ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
                                         <FormField
                                             control={form.control}
                                             name="isComputedForJournalReport"

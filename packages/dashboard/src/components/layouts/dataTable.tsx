@@ -1,9 +1,4 @@
 import { Button } from "@arrhes/ui"
-import { FormatNull } from "../../components/formats/formatNull.js"
-import { InputDebounced } from "../../components/inputs/inputDebounced.js"
-import { InputText } from "../../components/inputs/inputText.js"
-import { CircularLoader } from "../../components/layouts/circularLoader.js"
-import { css, cx } from "../../utilities/cn.js"
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
@@ -17,6 +12,11 @@ import {
     useReactTable
 } from '@tanstack/react-table'
 import { ReactElement, useMemo, useState } from "react"
+import { FormatNull } from "../../components/formats/formatNull.js"
+import { InputDebounced } from "../../components/inputs/inputDebounced.js"
+import { InputText } from "../../components/inputs/inputText.js"
+import { CircularLoader } from "../../components/layouts/circularLoader.js"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
@@ -55,18 +55,18 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     return (
         <div className={css({
             flexShrink: "0",
-            w: "full",
-            h: "fit",
+            width: "100%",
+            height: "fit",
             display: "flex",
-            flexDir: "column",
+            flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "stretch",
             gap: "3"
         })}>
             <div className={css({
                 flexShrink: "0",
-                w: "full",
-                h: "fit",
+                width: "100%",
+                height: "fit",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
@@ -78,7 +78,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 >
                     <InputText
                         placeholder="Recherche"
-                        className={css({ maxW: "320px" })}
+                        className={css({ maxWidth: "320px" })}
                     />
                 </InputDebounced>
                 <div className={css({
@@ -91,39 +91,39 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 </div>
             </div>
             <div className={css({
-                w: "full",
-                maxW: "full",
+                width: "100%",
+                maxWidth: "100%",
                 maxH: "600px",
                 p: "0",
                 display: "flex",
-                flexDir: "column",
+                flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                overflow: "auto",
+                overflowidth: "auto",
                 rounded: "md",
                 border: "1px solid",
                 borderColor: "neutral/10"
             })}>
                 <table className={css({
-                    w: "full",
-                    maxW: "full",
-                    h: "full",
-                    maxH: "full",
+                    width: "100%",
+                    maxWidth: "100%",
+                    height: "100%",
+                    maxH: "100%",
                     borderCollapse: "collapse"
                 })}>
                     <thead className={css({
-                        w: "full",
+                        width: "100%",
                         position: "sticky",
                         top: "0",
-                        bg: "white"
+                        backgroundColor: "white"
                     })}>
-                        <tr className={css({ w: "full" })}>
+                        <tr className={css({ width: "100%" })}>
                             {table.getFlatHeaders().map((header) => {
                                 return (
                                     <th
                                         key={header.id}
                                         colSpan={header.colSpan}
-                                        className={css({ w: "fit" })}
+                                        className={css({ width: "fit" })}
                                     >
                                         <div className={css({
                                             display: "flex",
@@ -152,8 +152,8 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         </tr>
                     </thead>
                     <tbody className={css({
-                        w: "full",
-                        h: "fit"
+                        width: "100%",
+                        height: "fit"
                     })}>
                         {
                             table.getRowModel().rows.length > 0
@@ -180,22 +180,22 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                     }}
                                     className={cx(
                                         css({
-                                            w: "full",
+                                            width: "100%",
                                             borderBottom: "1px solid",
                                             borderBottomColor: "neutral/5",
                                             _last: { borderBottom: "0" }
                                         }),
                                         !props.onRowClick ? undefined : css({
                                             cursor: "pointer",
-                                            _hover: { bg: "neutral/5" }
+                                            _hover: { backgroundColor: "neutral/5" }
                                         })
                                     )}
                                 >
                                     {row.getVisibleCells().map(cell => {
                                         return (
                                             <td key={cell.id} className={css({
-                                                w: "fit",
-                                                _last: { w: "1%" }
+                                                width: "fit",
+                                                _last: { width: "1%" }
                                             })}>
                                                 <div className={css({
                                                     display: "flex",

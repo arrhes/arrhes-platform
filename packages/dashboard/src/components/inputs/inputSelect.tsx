@@ -1,11 +1,11 @@
 import { Button } from "@arrhes/ui"
+import { IconCheck, IconChevronDown } from "@tabler/icons-react"
+import { InputHTMLAttributes, useState } from 'react'
+import { FieldError } from 'react-hook-form'
 import { FormatNull } from "../../components/formats/formatNull.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
 import { Popover } from "../../components/overlays/popover/popover.js"
 import { css, cx } from "../../utilities/cn.js"
-import { IconCheck, IconChevronDown } from "@tabler/icons-react"
-import { InputHTMLAttributes, useState } from 'react'
-import { FieldError } from 'react-hook-form'
 
 
 export function InputSelect<TValue extends string>(props:
@@ -50,7 +50,7 @@ export function InputSelect<TValue extends string>(props:
                         setOpen(!open)
                     }}
                     className={cx(
-                        css({ w: "full" }),
+                        css({ width: "100%" }),
                         "group",
                         css(props.isDisabled ? { cursor: "not-allowed" } : {}),
                         props.className
@@ -59,8 +59,8 @@ export function InputSelect<TValue extends string>(props:
                 >
                     <div className={cx(
                         css({
-                            w: "full",
-                            h: "32px",
+                            width: "100%",
+                            height: "32px",
                             display: "flex",
                             justifyContent: "flex-start",
                             alignItems: "center",
@@ -68,8 +68,8 @@ export function InputSelect<TValue extends string>(props:
                             rounded: "sm",
                             p: "2",
                             border: "1px solid",
-                            _hover: { shadow: "inset" },
-                            _focusWithin: { borderColor: "neutral/50", shadow: "inset" }
+                            _hover: { shadowidth: "inset" },
+                            _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
                         }),
                         css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
                         props.className
@@ -77,13 +77,13 @@ export function InputSelect<TValue extends string>(props:
                         <span
                             className={cx(
                                 css({
-                                    w: "full",
-                                    h: "full",
+                                    width: "100%",
+                                    height: "100%",
                                     fontSize: "sm",
                                     fontWeight: "medium",
                                     lineHeight: "none",
                                     whiteSpace: "nowrap",
-                                    textOverflow: "ellipsis",
+                                    textOverflowidth: "ellipsis",
                                     rounded: "sm",
                                     textAlign: "left"
                                 }),
@@ -99,10 +99,10 @@ export function InputSelect<TValue extends string>(props:
                             size={16}
                             className={css({
                                 stroke: "neutral",
-                                minW: "16px",
-                                w: "16px",
+                                minwidth: "16px",
+                                width: "16px",
                                 minH: "16px",
-                                h: "16px"
+                                height: "16px"
                             })}
                             strokeWidth={2}
                         />
@@ -115,11 +115,11 @@ export function InputSelect<TValue extends string>(props:
                 <div className={css({
                     minH: "32px",
                     maxH: "256px",
-                    overflow: "auto",
-                    w: "full",
+                    overflowidth: "auto",
+                    width: "100%",
                     p: "2",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "1"
@@ -154,7 +154,7 @@ export function InputSelect<TValue extends string>(props:
                                         className={cx(
                                             css({
                                                 position: "relative",
-                                                w: "full",
+                                                width: "100%",
                                                 display: "flex",
                                                 justifyContent: "space-between",
                                                 alignItems: "center",
@@ -165,8 +165,8 @@ export function InputSelect<TValue extends string>(props:
                                                 cursor: "pointer"
                                             }),
                                             css(option.key === props.value
-                                                ? { bg: "neutral/5", borderColor: "neutral/5" }
-                                                : { bg: "none", _hover: { bg: "neutral/5", borderColor: "neutral/5" } }
+                                                ? { backgroundColor: "neutral/5", borderColor: "neutral/5" }
+                                                : { backgroundColor: "none", _hover: { backgroundColor: "neutral/5", borderColor: "neutral/5" } }
                                             )
                                         )}
                                     >
@@ -185,10 +185,10 @@ export function InputSelect<TValue extends string>(props:
                                         <IconCheck
                                             className={cx(
                                                 css({
-                                                    minW: "16px",
-                                                    w: "16px",
+                                                    minwidth: "16px",
+                                                    width: "16px",
                                                     minH: "16px",
-                                                    h: "16px",
+                                                    height: "16px",
                                                     color: "neutral"
                                                 }),
                                                 css(option.key === props.value

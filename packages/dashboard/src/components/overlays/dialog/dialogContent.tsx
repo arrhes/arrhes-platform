@@ -1,7 +1,7 @@
 
-import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentPropsWithRef } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 import { DialogOverlay } from "./dialogOverlay.js"
 import { DialogPortal } from "./dialogPortal.js"
 
@@ -17,15 +17,15 @@ export function DialogContent(props:
                     onClick={(e) => e.preventDefault()}
                     className={cx(
                         css({
-                            minW: "full",
-                            w: "full",
-                            maxW: "md",
-                            h: "fit",
-                            maxH: "full",
-                            bg: "white",
+                            minwidth: "100%",
+                            width: "100%",
+                            maxWidth: "md",
+                            height: "fit",
+                            maxH: "100%",
+                            backgroundColor: "white",
                             rounded: "md",
                             display: "flex",
-                            flexDir: "column",
+                            flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
                             border: "1px solid",
@@ -38,7 +38,7 @@ export function DialogContent(props:
                                 animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
                             },
                             md: {
-                                minW: "md"
+                                minwidth: "md"
                             }
                         }),
                         props.className

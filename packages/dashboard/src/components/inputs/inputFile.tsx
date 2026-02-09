@@ -1,7 +1,7 @@
 import { Button } from "@arrhes/ui"
-import { css } from "../../utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
+import { css } from "../../utilities/cn.js"
 
 
 export function InputFile(props:
@@ -19,11 +19,11 @@ export function InputFile(props:
     return (
         <div
             className={css({
-                w: "full",
+                width: "100%",
                 border: "1px solid",
                 borderColor: "neutral/20",
                 borderStyle: "dashed",
-                _hover: { bg: "neutral/5" },
+                _hover: { backgroundColor: "neutral/5" },
                 rounded: "sm",
                 display: "flex",
                 justifyContent: "center",
@@ -49,14 +49,14 @@ export function InputFile(props:
                     }
                 }}
                 accept={!props.type ? "*" : "image/*"}
-                className={css({ display: "none", w: "full", h: "full" })}
+                className={css({ display: "none", width: "100%", height: "100%" })}
             />
             <Button
                 onClick={(_event) => { inputRef.current?.click() }}
                 className={css({
                     cursor: "pointer",
-                    w: "full",
-                    h: "full",
+                    width: "100%",
+                    height: "100%",
                     p: { base: "2", md: "3" },
                     display: "flex",
                     justifyContent: "center",

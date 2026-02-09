@@ -18,14 +18,14 @@ export function BalanceSheetsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ minW: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
+                <div className={css({ minwidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
                     <CreateOneBalanceSheet
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter une ligne de bilan"
                         />
                     </CreateOneBalanceSheet>
@@ -35,7 +35,7 @@ export function BalanceSheetsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Générer les lignes de bilan par défaut"
                         />
                     </GenerateBalanceSheets>
@@ -45,12 +45,12 @@ export function BalanceSheetsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconLine />}
+                            leftIcon={<IconLine />}
                             text="Connecter les comptes aux lignes de bilan par défaut"
                         />
                     </ConnectAccountsToBalanceSheets>
                 </div>
-                <div className={css({ w: "full", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start", gap: "2", flexWrap: "wrap" })}>
+                <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start", gap: "2", flexWrap: "wrap" })}>
                     <Box className={css({ p: "4", gap: "4", maxH: "[640px]" })}>
                         <TitleComponent>
                             Actif

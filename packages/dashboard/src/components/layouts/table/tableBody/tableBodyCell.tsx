@@ -1,5 +1,5 @@
-import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../../utilities/cn.js"
 
 
 export function TableBodyCell(props: {
@@ -13,7 +13,7 @@ export function TableBodyCell(props: {
         <td
             className={cx(
                 css({
-                    w: "fit",
+                    width: "fit",
                     p: "2",
                     verticalAlign: "top"
                 }),

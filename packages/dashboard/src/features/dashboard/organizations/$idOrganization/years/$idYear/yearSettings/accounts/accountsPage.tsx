@@ -16,14 +16,14 @@ export function AccountsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ w: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                     <CreateOneAccount
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Ajouter un compte"
                         />
                     </CreateOneAccount>
@@ -33,7 +33,7 @@ export function AccountsPage() {
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconPlus />}
+                            leftIcon={<IconPlus />}
                             text="Générer les comptes par défaut"
                         />
                     </GenerateAccounts>

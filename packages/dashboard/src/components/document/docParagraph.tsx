@@ -6,9 +6,9 @@ export function DocParagraph(props: {
 }) {
     return (
         <p className={css({
-            color: "neutral/80",
-            lineHeight: "relaxed",
-            mb: "4"
+            color: "neutral/70",
+            lineHeight: "1.75",
+            fontSize: "sm"
         })}>
             {props.children}
         </p>

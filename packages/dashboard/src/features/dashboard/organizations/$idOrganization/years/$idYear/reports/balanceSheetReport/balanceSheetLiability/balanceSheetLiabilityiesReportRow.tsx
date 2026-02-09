@@ -1,4 +1,4 @@
-import { cx, css } from "@arrhes/ui/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { FormatPrice } from "../../../../../../../../../components/formats/formatPrice.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { Table } from "../../../../../../../../../components/layouts/table/table.tsx"
@@ -16,7 +16,7 @@ export function BalanceSheetLiabilitiesReportRow(props: {
         <Table.Body.Row
             className={cx(
                 "",
-                props.number ? css({ bg: "neutral/5" }) : ""
+                props.number ? css({ backgroundColor: "neutral/5" }) : ""
             )}
         >
             <Table.Body.Cell style={{ paddingLeft: `${props.level * 16 + 8}px` }} >
@@ -29,7 +29,7 @@ export function BalanceSheetLiabilitiesReportRow(props: {
                     {props.number} {props.label}
                 </FormatText>
             </Table.Body.Cell>
-            <Table.Body.Cell className={css({ w: "[1%]" })} align="right">
+            <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                 {
                     (props.isAmountDisplayed === true)
                         ? (

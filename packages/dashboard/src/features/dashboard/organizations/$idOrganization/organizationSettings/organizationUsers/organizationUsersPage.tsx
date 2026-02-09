@@ -14,13 +14,13 @@ export function OrganizationUsersPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ w: "full", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                     <CreateOneOrganizationUser
                         idOrganization={params.idOrganization}
                     >
                         <ButtonContent
                             variant="primary"
-                            icon={<IconUserPlus />}
+                            leftIcon={<IconUserPlus />}
                             text="Ajouter un utilisateur"
                         />
                     </CreateOneOrganizationUser>

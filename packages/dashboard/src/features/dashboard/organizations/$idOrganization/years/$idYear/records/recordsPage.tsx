@@ -163,7 +163,7 @@ export function RecordsPage() {
                                 >
                                     <ButtonContent
                                         variant="primary"
-                                        icon={<IconPlus />}
+                                        leftIcon={<IconPlus />}
                                         text="Ajouter une écriture"
                                     />
                                 </CreateOneRecord>

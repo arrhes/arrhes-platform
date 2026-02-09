@@ -1,5 +1,5 @@
-import { css, cx } from "../../utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 type FormatBase = {
@@ -12,9 +12,9 @@ export function FormatBase(props: FormatBase) {
         <div
             className={cx(
                 css({
-                    w: "fit",
-                    maxW: "full",
-                    overflow: "auto",
+                    width: "fit",
+                    maxWidth: "100%",
+                    overflowidth: "auto",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center"

@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DataBlockContent(props: {
@@ -11,8 +11,8 @@ export function DataBlockContent(props: {
             className={cx(
                 css({
                     flexShrink: "0",
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "grid",
                     gridTemplateColumns: "max-content auto",
                     columnGap: "4",

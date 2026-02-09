@@ -1,8 +1,8 @@
 
 import { Button, ButtonContent } from "@arrhes/ui"
-import { css, cx } from "../../utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { ComponentProps, JSX } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function InputToggle<TValue extends (string | boolean)>(props:
@@ -19,8 +19,8 @@ export function InputToggle<TValue extends (string | boolean)>(props:
 ) {
     return (
         <div className={css({
-            w: "fit",
-            h: "32px",
+            width: "fit",
+            height: "32px",
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
@@ -28,7 +28,7 @@ export function InputToggle<TValue extends (string | boolean)>(props:
             borderColor: "neutral/20",
             rounded: "sm",
             cursor: "pointer",
-            _focus: { borderColor: "neutral/50", shadow: "inset" },
+            _focus: { borderColor: "neutral/50", shadowidth: "inset" },
             outline: "none"
         })}
         >
@@ -60,14 +60,14 @@ export function InputToggle<TValue extends (string | boolean)>(props:
                                         border: "none"
                                     }),
                                     css(isSelected ? {
-                                        bg: "neutral/10",
+                                        backgroundColor: "neutral/10",
                                         outline: "1px solid",
                                         outlineColor: "neutral",
                                         rounded: "sm"
                                     } : {})
                                 )}
                                 text={option.label}
-                                icon={option.icon}
+                                leftIcon={option.icon}
                             />
                         </Button>
                     )

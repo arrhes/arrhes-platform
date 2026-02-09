@@ -27,10 +27,10 @@ export function IncomeStatementRow(props: {
                 idYear: props.idYear,
                 idIncomeStatement: props.incomeStatement.id,
             }}
-            className={css({ w: "full" })}
+            className={css({ width: "100%" })}
         >
             <div
-                className={css({ minW: "fit-content", w: "full", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { bg: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}
+                className={css({ minwidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}
             // style={{
             //     paddingLeft: `${(1 + props.level) * 12}px`
             // }}
@@ -40,7 +40,7 @@ export function IncomeStatementRow(props: {
                         ? (null)
                         : (
                             <pre
-                                className={css({ color: "neutral/25", fontSize: "22px", lineHeight: "1", h: "full", verticalAlign: "middle", textAlign: "left" })}
+                                className={css({ color: "neutral/25", fontSize: "22px", lineHeight: "1", height: "100%", verticalAlign: "middle", textAlign: "left" })}
                                 dangerouslySetInnerHTML={{
                                     __html: prefix
                                 }}

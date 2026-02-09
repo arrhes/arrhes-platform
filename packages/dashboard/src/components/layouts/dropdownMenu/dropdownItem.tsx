@@ -1,6 +1,6 @@
-import { css } from "../../../utilities/cn.js"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
+import { css } from "../../../utilities/cn.js"
 
 
 export function DropdownItem(props:
@@ -10,7 +10,7 @@ export function DropdownItem(props:
         <DropdownMenuItem
             {...props}
             className={css({
-                w: "full",
+                width: "100%",
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",

@@ -34,17 +34,17 @@ export function BalanceSheetTable(props: {
                     .sort((a, b) => Number(a.number) - Number(b.number))
 
                 return (
-                    <div className={css({ h: "fit-content", w: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
+                    <div className={css({ height: "fit-content", width: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
                         <InputDebounced
                             value={globalFilter ?? ""}
                             onChange={(value) => setGlobalFilter(value ?? "")}
                         >
                             <InputText
                                 placeholder="Recherche"
-                                className={css({ maxW: "[320px]" })}
+                                className={css({ maxWidth: "[320px]" })}
                             />
                         </InputDebounced>
-                        <div className={css({ h: "fit-content", w: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                        <div className={css({ height: "fit-content", width: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                             {
                                 (filteredBalanceSheets.length !== 0)
                                     ? (null)

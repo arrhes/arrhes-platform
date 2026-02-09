@@ -1,8 +1,8 @@
 import { ButtonContent } from "@arrhes/ui"
-import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
-import { css, cx } from "../../utilities/cn.js"
 import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import { JSX } from "react"
+import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function PageLayout(props: {
@@ -22,20 +22,20 @@ export function PageLayout(props: {
         <div className={css({
             flex: "1",
             flexShrink: "0",
-            w: "full",
+            width: "100%",
             minH: "fit",
             display: "flex",
-            flexDir: "column",
+            flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            overflow: "auto"
+            overflowidth: "auto"
         })}>
             {
                 props.tabs === undefined
                     ? null
                     : (
                         <div className={css({
-                            w: "full",
+                            width: "100%",
                             display: "flex",
                             justifyContent: "flex-start",
                             alignItems: "center",
@@ -55,7 +55,7 @@ export function PageLayout(props: {
                                             aria-current={isActive}
                                             className={css({
                                                 display: "flex",
-                                                flexDir: "column",
+                                                flexDirection: "column",
                                                 justifyContent: "center",
                                                 alignItems: "center",
                                                 gap: "2"
@@ -73,7 +73,7 @@ export function PageLayout(props: {
                                             >
                                                 <ButtonContent
                                                     variant="invisible"
-                                                    icon={tab.icon}
+                                                    leftIcon={tab.icon}
                                                     text={tab.label}
                                                     color="neutral"
                                                     isActive={isActive}
@@ -88,14 +88,14 @@ export function PageLayout(props: {
                                                 className={cx(
                                                     css({
                                                         flexShrink: "0",
-                                                        w: "full",
-                                                        h: "2px",
-                                                        rounded: "full",
+                                                        width: "100%",
+                                                        height: "2px",
+                                                        rounded: "100%",
                                                         transition: "all",
                                                         transitionDuration: "200ms",
                                                         transitionTimingFunction: "ease-in-out"
                                                     }),
-                                                    isActive ? css({ bg: "neutral" }) : css({ bg: "transparent" })
+                                                    isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
                                                 )}
                                             />
                                         </div>
@@ -108,7 +108,7 @@ export function PageLayout(props: {
             <div className={css({
                 flex: "1",
                 flexShrink: "0",
-                w: "full",
+                width: "100%",
                 minH: "fit",
                 display: "flex",
                 justifyContent: "flex-start",

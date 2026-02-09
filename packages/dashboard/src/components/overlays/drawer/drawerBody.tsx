@@ -1,5 +1,5 @@
-import { css } from "../../../utilities/cn.js"
 import { JSX } from "react"
+import { css } from "../../../utilities/cn.js"
 
 
 export function DrawerBody(props: {
@@ -7,9 +7,9 @@ export function DrawerBody(props: {
 }) {
     return (
         <div className={css({
-            w: "full",
+            width: "100%",
             display: "flex",
-            flexDir: "column",
+            flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
             gap: "4",

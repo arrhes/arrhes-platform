@@ -1,121 +1,135 @@
-import { DocDefinition } from "../../../components/document/docDefinition.tsx";
-import { DocExample } from "../../../components/document/docExample.tsx";
-import { DocLink } from "../../../components/document/docLink.tsx";
-import { DocList } from "../../../components/document/docList.tsx";
-import { DocNextPage } from "../../../components/document/docNextPage.tsx";
-import { DocParagraph } from "../../../components/document/docParagraph.tsx";
-import { DocSection } from "../../../components/document/docSection.tsx";
+import { DocDefinition } from "../../../components/document/docDefinition.js"
+import { DocExample } from "../../../components/document/docExample.js"
+import { DocHeader } from "../../../components/document/docHeader.js"
+import { DocLink } from "../../../components/document/docLink.js"
+import { DocList } from "../../../components/document/docList.js"
+import { DocNextPage } from "../../../components/document/docNextPage.js"
+import { DocParagraph } from "../../../components/document/docParagraph.js"
+import { DocSection } from "../../../components/document/docSection.js"
+import { DocTip } from "../../../components/document/docTip.js"
+import { css } from "../../../utilities/cn.js"
 
 
 export function ComptabiliteIntroduction() {
     return (
-        <div>
-            <h1 className="text-3xl font-bold mb-2">Introduction a la comptabilite</h1>
-            <p className="text-neutral/50 mb-8">Comprendre les fondamentaux de la comptabilite</p>
+        <div className={css({
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem"
+        })}>
+            <DocHeader
+                title="Introduction à la comptabilité"
+                description="Comprendre les fondamentaux de la comptabilité"
+            />
 
-            <DocSection title="Qu'est-ce que la comptabilite ?">
+            <DocSection title="Qu'est-ce que la comptabilité ?">
                 <DocParagraph>
-                    La comptabilite est un systeme d'organisation de l'information financiere.
-                    Elle permet d'enregistrer, classer et analyser toutes les operations economiques
+                    La comptabilité est un système d'organisation de l'information financière.
+                    Elle permet d'enregistrer, classer et analyser toutes les opérations économiques
                     d'une organisation (entreprise, association, etc.).
                 </DocParagraph>
                 <DocParagraph>
-                    A l'origine, la comptabilite est nee du besoin de controler les mouvements d'argent
-                    et de limiter les risques de detournement. Pour cela, seule une personne designee
-                    (le caissier) est habilitee a percevoir et verser de l'argent, et toutes les operations
-                    doivent etre justifiees par des pieces.
+                    À l'origine, la comptabilité est née du besoin de contrôler les mouvements d'argent
+                    et de limiter les risques de détournement. Pour cela, seule une personne désignée
+                    (le caissier) est habilitée à percevoir et verser de l'argent, et toutes les opérations
+                    doivent être justifiées par des pièces.
                 </DocParagraph>
                 <DocParagraph>
-                    En termes simples, la comptabilite repond a deux questions essentielles :
+                    En termes simples, la comptabilité répond à deux questions essentielles :
                 </DocParagraph>
                 <DocList items={[
-                    "D'ou vient l'argent ? (les ressources)",
-                    "Ou va l'argent ? (les emplois)"
+                    "D'où vient l'argent ? (les ressources)",
+                    "Où va l'argent ? (les emplois)"
                 ]} />
             </DocSection>
 
-            <DocSection title="Pourquoi tenir une comptabilite ?">
+            <DocSection title="Pourquoi tenir une comptabilité ?">
                 <DocParagraph>
-                    La tenue d'une comptabilite est obligatoire pour la plupart des structures en France.
-                    Au-dela de l'obligation legale, elle offre plusieurs avantages :
+                    La tenue d'une comptabilité est obligatoire pour la plupart des structures en France.
+                    Au-delà de l'obligation légale, elle offre plusieurs avantages :
                 </DocParagraph>
                 <DocList items={[
-                    "Connaitre la situation financiere de votre organisation a tout moment",
-                    "Prendre des decisions eclairees basees sur des chiffres reels",
-                    "Justifier vos operations aupres de l'administration fiscale",
-                    "Calculer le benefice ou la perte de l'exercice",
+                    "Connaître la situation financière de votre organisation à tout moment",
+                    "Prendre des décisions éclairées basées sur des chiffres réels",
+                    "Justifier vos opérations auprès de l'administration fiscale",
+                    "Calculer le bénéfice ou la perte de l'exercice",
                     "Communiquer avec vos partenaires (banques, fournisseurs, membres)"
                 ]} />
             </DocSection>
 
             <DocSection title="L'exercice comptable">
                 <DocParagraph>
-                    Le temps est decoupe en periodes appelees <strong>exercices</strong>, generalement d'un an.
-                    A la fin de chaque exercice, l'entreprise doit calculer son resultat (benefice ou perte)
-                    et presenter ses comptes.
+                    Le temps est découpé en périodes appelées <strong>exercices</strong>, généralement d'un an.
+                    À la fin de chaque exercice, l'entreprise doit calculer son résultat (bénéfice ou perte)
+                    et présenter ses comptes.
                 </DocParagraph>
                 <DocDefinition
                     term="Exercice comptable"
-                    definition="Periode de 12 mois (generalement l'annee civile) pendant laquelle on enregistre les operations. A la fin de l'exercice, on etablit les documents de synthese (bilan, compte de resultat)."
+                    definition="Période de 12 mois (généralement l'année civile) pendant laquelle on enregistre les opérations. À la fin de l'exercice, on établit les documents de synthèse (bilan, compte de résultat)."
                 />
                 <DocParagraph>
-                    Le benefice de l'exercice est la difference entre le patrimoine de fin d'exercice
-                    et le patrimoine initial. Si l'entreprise a reussi dans ses activites, elle dispose
-                    a la fin de l'exercice d'un patrimoine superieur a celui du debut.
+                    Le bénéfice de l'exercice est la différence entre le patrimoine de fin d'exercice
+                    et le patrimoine initial. Si l'entreprise a réussi dans ses activités, elle dispose
+                    à la fin de l'exercice d'un patrimoine supérieur à celui du début.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Les principes fondamentaux">
                 <DocDefinition
                     term="Partie double"
-                    definition="Chaque operation comptable affecte au moins deux comptes : l'un est debite, l'autre est credite. Le total des debits doit toujours etre egal au total des credits. Ce principe garantit l'equilibre de la comptabilite."
+                    definition="Chaque opération comptable affecte au moins deux comptes : l'un est débité, l'autre est crédité. Le total des débits doit toujours être égal au total des crédits. Ce principe garantit l'équilibre de la comptabilité."
                 />
                 <DocDefinition
-                    term="Piece justificative"
-                    definition="Document qui prouve la realite d'une operation (facture, releve bancaire, ticket de caisse...). Chaque ecriture comptable doit etre justifiee par une piece. C'est le fondement du controle comptable."
+                    term="Pièce justificative"
+                    definition="Document qui prouve la réalité d'une opération (facture, relevé bancaire, ticket de caisse...). Chaque écriture comptable doit être justifiée par une pièce. C'est le fondement du contrôle comptable."
                 />
                 <DocDefinition
                     term="Enregistrement chronologique"
-                    definition="Les ecritures doivent etre passees regulierement dans l'ordre chronologique. Tout retour en arriere est impossible : les erreurs sont corrigees par des ecritures de sens contraire, jamais effacees."
+                    definition="Les écritures doivent être passées régulièrement dans l'ordre chronologique. Tout retour en arrière est impossible : les erreurs sont corrigées par des écritures de sens contraire, jamais effacées."
                 />
 
                 <DocExample title="La partie double en action">
-                    <p>Vous achetez des fournitures de bureau pour 100 euros en especes.</p>
-                    <p className="mt-2">Cette operation se traduit par :</p>
-                    <ul className="mt-1 ml-4">
-                        <li>Debit du compte Fournitures : +100 euros (vous avez plus de fournitures)</li>
-                        <li>Credit du compte Caisse : -100 euros (vous avez moins d'especes)</li>
+                    <p>Vous achetez des fournitures de bureau pour 100 euros en espèces.</p>
+                    <p className={css({ marginTop: "3" })}>Cette opération se traduit par :</p>
+                    <ul className={css({ marginTop: "2", ml: "4", spaceY: "1" })}>
+                        <li>Débit du compte Fournitures : +100 euros (vous avez plus de fournitures)</li>
+                        <li>Crédit du compte Caisse : -100 euros (vous avez moins d'espèces)</li>
                     </ul>
-                    <p className="mt-2">Total debits = Total credits = 100 euros</p>
+                    <p className={css({ marginTop: "3", fontWeight: "medium" })}>Total débits = Total crédits = 100 euros</p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Vocabulaire essentiel">
                 <DocDefinition
-                    term="Debit"
-                    definition="Cote gauche d'un compte. Le mot vient du latin debere (devoir) : il indique que le caissier doit pouvoir rendre l'argent entre dans sa caisse. Pour les comptes d'actif et de charges, un debit represente une augmentation."
+                    term="Débit"
+                    definition="Côté gauche d'un compte. Le mot vient du latin debere (devoir) : il indique que le caissier doit pouvoir rendre l'argent entré dans sa caisse. Pour les comptes d'actif et de charges, un débit représente une augmentation."
                 />
                 <DocDefinition
-                    term="Credit"
-                    definition="Cote droit d'un compte. Le mot vient du latin credere (croire) : en echange d'une sortie d'argent, le caissier recoit une piece justificative qui lui permet d'etre cru lors d'un controle. Pour les comptes de passif et de produits, un credit represente une augmentation."
+                    term="Crédit"
+                    definition="Côté droit d'un compte. Le mot vient du latin credere (croire) : en échange d'une sortie d'argent, le caissier reçoit une pièce justificative qui lui permet d'être cru lors d'un contrôle. Pour les comptes de passif et de produits, un crédit représente une augmentation."
                 />
                 <DocDefinition
                     term="Solde"
-                    definition="Difference entre le total des debits et le total des credits d'un compte. Un compte est debiteur si les debits sont superieurs aux credits, crediteur dans le cas contraire."
+                    definition="Différence entre le total des débits et le total des crédits d'un compte. Un compte est débiteur si les débits sont supérieurs aux crédits, créditeur dans le cas contraire."
                 />
             </DocSection>
 
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
-                    Ces concepts sont directement appliques dans Arrhes. Lorsque vous{" "}
-                    <DocLink to="/docs/guide/ecritures">saisissez une ecriture</DocLink>,
-                    le logiciel vous demande de specifier les comptes a debiter et a crediter,
-                    et verifie automatiquement que l'equilibre est respecte.
+                    Ces concepts sont directement appliqués dans Arrhes. Lorsque vous{" "}
+                    <DocLink to="/documentation/dashboard/ecritures">saisissez une écriture</DocLink>,
+                    le logiciel vous demande de spécifier les comptes à débiter et à créditer,
+                    et vérifie automatiquement que l'équilibre est respecté.
                 </DocParagraph>
             </DocSection>
 
+            <DocTip variant="info">
+                Maintenant que vous connaissez les bases de la comptabilité, découvrez comment
+                les comptes sont organisés dans la page suivante.
+            </DocTip>
+
             <DocNextPage
-                to="/docs/comptabilite/comptes"
+                to="/documentation/comptabilite/comptes"
                 label="Les comptes comptables"
             />
         </div>

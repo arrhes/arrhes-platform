@@ -1,6 +1,6 @@
-import { css, cx } from "../../../utilities/cn.js"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 import { ComponentProps } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 type PopoverContent = ComponentProps<typeof PopoverPrimitive.Content>
@@ -17,16 +17,16 @@ export function PopoverContent(props: PopoverContent) {
                 className={cx(
                     css({
                         zIndex: "10",
-                        bg: "white",
+                        backgroundColor: "white",
                         rounded: "md",
-                        shadow: "md",
+                        shadowidth: "md",
                         display: "flex",
-                        flexDir: "column",
+                        flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
                         gap: "0",
-                        minW: "var(--radix-popover-trigger-width)",
-                        maxW: "var(--radix-popover-trigger-width)",
+                        minwidth: "var(--radix-popover-trigger-width)",
+                        maxWidth: "var(--radix-popover-trigger-width)",
                         border: "1px solid",
                         borderColor: "neutral/10"
                     }),

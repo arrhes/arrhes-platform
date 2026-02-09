@@ -1,6 +1,6 @@
+import { ComponentProps } from "react"
 import { FormatNull } from "../../components/formats/formatNull.js"
 import { css, cx } from "../../utilities/cn.js"
-import { ComponentProps } from "react"
 
 
 export function formatPrice(parameters: {
@@ -38,8 +38,8 @@ export function FormatPrice(props: {
     return (
         <span className={cx(
             css({
-                w: "fit",
-                maxW: "full",
+                width: "fit",
+                maxWidth: "100%",
                 fontSize: "sm"
             }),
             processedPrice === 0 ? css({ color: "neutral/25" }) : undefined,

@@ -1,14 +1,14 @@
 
 import { Button } from "@arrhes/ui"
+import { IconCheck, IconChevronDown } from "@tabler/icons-react"
+import { ComponentProps, useEffect, useState } from "react"
+import { FieldError } from "react-hook-form"
 import { FormatNull } from "../../components/formats/formatNull.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
 import { Virtualizer } from "../../components/layouts/virtualizer.js"
 import { Popover } from "../../components/overlays/popover/popover.js"
 import { css, cx } from "../../utilities/cn.js"
 import { debounce } from "../../utilities/debounce.js"
-import { IconCheck, IconChevronDown } from "@tabler/icons-react"
-import { ComponentProps, useEffect, useState } from "react"
-import { FieldError } from "react-hook-form"
 
 
 export function InputCombobox<TValue extends string>(props: {
@@ -55,7 +55,7 @@ export function InputCombobox<TValue extends string>(props: {
                     }}
                     data-open={open}
                     className={cx(
-                        css({ w: "full" }),
+                        css({ width: "100%" }),
                         props.isDisabled ? css({ cursor: "not-allowed" }) : "",
                         props.className
                     )}
@@ -64,8 +64,8 @@ export function InputCombobox<TValue extends string>(props: {
                 >
                     <div className={cx(
                         css({
-                            w: "full",
-                            h: "[32px]",
+                            width: "100%",
+                            height: "[32px]",
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
@@ -73,8 +73,8 @@ export function InputCombobox<TValue extends string>(props: {
                             rounded: "sm",
                             p: "2",
                             border: "1px solid",
-                            _hover: { shadow: "inner" },
-                            _focusWithin: { borderColor: "neutral/50", shadow: "inner" }
+                            _hover: { shadowidth: "inner" },
+                            _focusWithin: { borderColor: "neutral/50", shadowidth: "inner" }
                         }),
                         (props.error === undefined) ? css({ borderColor: "neutral/25" }) : css({ borderColor: "error" }),
                         props.className
@@ -82,13 +82,13 @@ export function InputCombobox<TValue extends string>(props: {
                         <span
                             className={cx(
                                 css({
-                                    w: "full",
-                                    h: "full",
+                                    width: "100%",
+                                    height: "100%",
                                     fontSize: "sm",
                                     fontWeight: "medium",
                                     lineHeight: "none",
                                     whiteSpace: "nowrap",
-                                    textOverflow: "ellipsis",
+                                    textOverflowidth: "ellipsis",
                                     rounded: "sm",
                                     textAlign: "left"
                                 }),
@@ -102,7 +102,7 @@ export function InputCombobox<TValue extends string>(props: {
                         </span>
                         <IconChevronDown
                             size={16}
-                            className={css({ stroke: "neutral", minW: "[16px]", w: "[16px]", minH: "[16px]", h: "[16px]" })}
+                            className={css({ stroke: "neutral", minwidth: "[16px]", width: "[16px]", minH: "[16px]", height: "[16px]" })}
                             strokeWidth={2}
                         />
                     </div>
@@ -113,11 +113,11 @@ export function InputCombobox<TValue extends string>(props: {
                     ? (null)
                     : (
                         <Popover.Content align="start">
-                            <div className={css({ w: "full", h: "[32px]", display: "flex", justifyContent: "flex-start", alignItems: "center", p: "2", borderBottom: "1px solid", borderColor: "neutral/10" })}>
+                            <div className={css({ width: "100%", height: "[32px]", display: "flex", justifyContent: "flex-start", alignItems: "center", p: "2", borderBottom: "1px solid", borderColor: "neutral/10" })}>
                                 <input
                                     type="text"
                                     className={css({
-                                        w: "full",
+                                        width: "100%",
                                         fontSize: "sm",
                                         lineHeight: "none",
                                         _placeholder: { color: "neutral/25" }
@@ -126,7 +126,7 @@ export function InputCombobox<TValue extends string>(props: {
                                     onChange={(e) => setRawQuery(e.currentTarget.value)}
                                 />
                             </div>
-                            <div className={css({ h: "fit-content", maxH: "[256px]", w: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
+                            <div className={css({ height: "fit-content", maxH: "[256px]", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
                                 {
                                     (props.isLoading === false)
                                         ? (null)
@@ -163,8 +163,8 @@ export function InputCombobox<TValue extends string>(props: {
                                                 }}
                                                 className={cx(
                                                     css({
-                                                        w: "full",
-                                                        h: "fit-content",
+                                                        width: "100%",
+                                                        height: "fit-content",
                                                         display: "flex",
                                                         justifyContent: "space-between",
                                                         alignItems: "center",
@@ -172,7 +172,7 @@ export function InputCombobox<TValue extends string>(props: {
                                                         p: "2",
                                                         cursor: "pointer"
                                                     }),
-                                                    (currentOption?.key === option.key) ? css({ bg: "neutral/5" }) : css({ bg: "none", _hover: { bg: "neutral/5" } })
+                                                    (currentOption?.key === option.key) ? css({ backgroundColor: "neutral/5" }) : css({ backgroundColor: "none", _hover: { backgroundColor: "neutral/5" } })
                                                 )}
                                             >
                                                 <span

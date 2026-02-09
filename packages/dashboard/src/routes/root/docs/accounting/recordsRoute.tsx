@@ -5,7 +5,7 @@ import { accountingLayoutRoute } from "./accountingLayoutRoute.tsx"
 
 export const recordsRoute = createRoute({
     getParentRoute: () => accountingLayoutRoute,
-    path: "/écritures",
+    path: "/ecritures",
     beforeLoad: () => ({
         title: "Les ecritures comptables - Arrhes"
     }),

@@ -1,6 +1,6 @@
-import { css, cx } from "../../utilities/cn.js"
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentProps, ReactElement, useRef } from "react"
+import { css, cx } from "../../utilities/cn.js"
 
 
 export function Virtualizer<TData extends unknown>(props: {
@@ -22,13 +22,13 @@ export function Virtualizer<TData extends unknown>(props: {
             ref={parentRef}
             className={cx(
                 css({
-                    w: "full",
-                    h: "full",
+                    width: "100%",
+                    height: "100%",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    overflow: "auto"
+                    overflowidth: "auto"
                 }),
                 props.className
             )}
@@ -36,10 +36,10 @@ export function Virtualizer<TData extends unknown>(props: {
             <div
                 className={css({
                     position: "relative",
-                    w: "full",
-                    h: "fit",
+                    width: "100%",
+                    height: "fit",
                     display: "flex",
-                    flexDir: "column",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start"
                 })}
@@ -55,8 +55,8 @@ export function Virtualizer<TData extends unknown>(props: {
                             top: "0",
                             left: "0",
                             minH: "fit",
-                            h: "fit",
-                            w: "full"
+                            height: "fit",
+                            width: "100%"
                         })}
                         style={{
                             height: `${virtualItem.size}px`,

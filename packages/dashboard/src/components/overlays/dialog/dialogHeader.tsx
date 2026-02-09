@@ -1,9 +1,9 @@
 
 import { Button } from "@arrhes/ui"
-import { css, cx } from "../../../utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DialogHeader(props:
@@ -14,7 +14,7 @@ export function DialogHeader(props:
             {...props}
             className={cx(
                 css({
-                    w: "full",
+                    width: "100%",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",

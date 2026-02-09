@@ -58,7 +58,7 @@ export function RecordPage() {
                                     return (
                                         <Section.Root>
                                             <Section.Item>
-                                                <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
+                                                <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
                                                     <Link
                                                         to="/organisations/$idOrganization/exercices/$idYear/écritures"
                                                         params={{
@@ -68,7 +68,7 @@ export function RecordPage() {
                                                     >
                                                         <ButtonContent
                                                             variant="default"
-                                                            icon={<IconChevronLeft />}
+                                                            leftIcon={<IconChevronLeft />}
                                                             text="Retour"
                                                         />
                                                     </Link>
@@ -78,7 +78,7 @@ export function RecordPage() {
                                                         >
                                                             <ButtonContent
                                                                 variant="primary"
-                                                                icon={<IconPencil />}
+                                                                leftIcon={<IconPencil />}
                                                                 text="Modifier"
                                                             />
                                                         </UpdateOneRecord>
@@ -87,7 +87,7 @@ export function RecordPage() {
                                                         >
                                                             <ButtonContent
                                                                 variant="default"
-                                                                icon={<IconCopyCheck />}
+                                                                leftIcon={<IconCopyCheck />}
                                                                 text="Dupliquer"
                                                             />
                                                         </DuplicateOneRecord>
@@ -96,7 +96,7 @@ export function RecordPage() {
                                                         >
                                                             <ButtonContent
                                                                 variant="default"
-                                                                icon={<IconTrash />}
+                                                                leftIcon={<IconTrash />}
                                                                 title="Supprimer"
                                                                 color="error"
                                                             />
@@ -140,7 +140,7 @@ export function RecordPage() {
                                                         )
                                                 }
                                             </Section.Item>
-                                            <Section.Item className={css({ flexDir: "column" })}>
+                                            <Section.Item className={css({ flexDirection: "column" })}>
                                                 <DataBlock.Root>
                                                     <DataBlock.Header>
                                                         <TitleComponent>

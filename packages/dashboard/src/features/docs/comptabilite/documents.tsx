@@ -1,199 +1,225 @@
-import { DocDefinition } from "../../../components/document/docDefinition.tsx";
-import { DocExample } from "../../../components/document/docExample.tsx";
-import { DocLink } from "../../../components/document/docLink.tsx";
-import { DocList } from "../../../components/document/docList.tsx";
-import { DocNextPage } from "../../../components/document/docNextPage.tsx";
-import { DocParagraph } from "../../../components/document/docParagraph.tsx";
-import { DocSection } from "../../../components/document/docSection.tsx";
-import { DocTable } from "../../../components/document/docTable.tsx";
+import { DocDefinition } from "../../../components/document/docDefinition.js"
+import { DocExample } from "../../../components/document/docExample.js"
+import { DocHeader } from "../../../components/document/docHeader.js"
+import { DocLink } from "../../../components/document/docLink.js"
+import { DocList } from "../../../components/document/docList.js"
+import { DocNextPage } from "../../../components/document/docNextPage.js"
+import { DocParagraph } from "../../../components/document/docParagraph.js"
+import { DocSection } from "../../../components/document/docSection.js"
+import { DocTable } from "../../../components/document/docTable.js"
+import { DocTip } from "../../../components/document/docTip.js"
+import { css } from "../../../utilities/cn.js"
 
 
 export function ComptabiliteDocuments() {
     return (
-        <div>
-            <h1 className="text-3xl font-bold mb-2">Les documents comptables</h1>
-            <p className="text-neutral/50 mb-8">Les etats de synthese et leur signification</p>
+        <div className={css({
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem"
+        })}>
+            <DocHeader
+                title="Les documents comptables"
+                description="Les états de synthèse et leur signification"
+            />
 
-            <DocSection title="Les documents de synthese">
+            <DocSection title="Les documents de synthèse">
                 <DocParagraph>
-                    A la fin de chaque exercice comptable, les ecritures sont agregees pour produire
-                    des documents de synthese. Ces documents offrent une vision globale de la situation
-                    financiere et des performances de l'organisation.
+                    À la fin de chaque exercice comptable, les écritures sont agrégées pour produire
+                    des documents de synthèse. Ces documents offrent une vision globale de la situation
+                    financière et des performances de l'organisation.
                 </DocParagraph>
                 <DocParagraph>
                     Les deux documents principaux sont le <strong>bilan</strong> et le{" "}
-                    <strong>compte de resultat</strong>. Ils sont complementaires et se lisent ensemble.
+                    <strong>compte de résultat</strong>. Ils sont complémentaires et se lisent ensemble.
                 </DocParagraph>
             </DocSection>
 
-            <DocSection title="Le calcul du benefice">
+            <DocSection title="Le calcul du bénéfice">
                 <DocParagraph>
-                    Le benefice (ou la perte) d'une entreprise peut etre calcule de deux manieres
-                    equivalentes, ce qui constitue un controle fondamental de la comptabilite :
+                    Le bénéfice (ou la perte) d'une entreprise peut être calculé de deux manières
+                    équivalentes, ce qui constitue un contrôle fondamental de la comptabilité :
                 </DocParagraph>
 
                 <DocDefinition
                     term="Par le patrimoine"
-                    definition="Benefice = Patrimoine a la fin - Patrimoine au debut. Si l'entreprise possede plus a la fin qu'au debut, elle s'est enrichie."
+                    definition="Bénéfice = Patrimoine à la fin - Patrimoine au début. Si l'entreprise possède plus à la fin qu'au début, elle s'est enrichie."
                 />
                 <DocDefinition
-                    term="Par les operations"
-                    definition="Benefice = Produits - Charges. La somme de ce qu'on a gagne moins la somme de ce qu'on a depense."
+                    term="Par les opérations"
+                    definition="Bénéfice = Produits - Charges. La somme de ce qu'on a gagné moins la somme de ce qu'on a dépensé."
                 />
 
                 <DocParagraph>
-                    Ces deux calculs doivent donner le meme resultat. C'est la coherence entre
-                    le bilan (patrimoine) et le compte de resultat (operations) qui garantit
-                    l'exactitude de la comptabilite.
+                    Ces deux calculs doivent donner le même résultat. C'est la cohérence entre
+                    le bilan (patrimoine) et le compte de résultat (opérations) qui garantit
+                    l'exactitude de la comptabilité.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Le bilan">
                 <DocDefinition
                     term="Bilan"
-                    definition="Photographie du patrimoine de l'organisation a une date donnee. Il montre ce que l'organisation possede (actif) et comment elle l'a finance (passif)."
+                    definition="Photographie du patrimoine de l'organisation à une date donnée. Il montre ce que l'organisation possède (actif) et comment elle l'a financé (passif)."
                 />
 
                 <DocParagraph>
-                    Le bilan est construit a partir des <strong>soldes des comptes d'agents</strong> :
+                    Le bilan est construit à partir des <strong>soldes des comptes d'agents</strong> :
                 </DocParagraph>
                 <DocList items={[
-                    "Les soldes debiteurs forment l'actif (ce que les agents nous doivent : banque, clients...)",
-                    "Les soldes crediteurs forment le passif (ce que nous devons aux agents : fournisseurs, Etat, proprietaires...)"
+                    "Les soldes débiteurs forment l'actif (ce que les agents nous doivent : banque, clients...)",
+                    "Les soldes créditeurs forment le passif (ce que nous devons aux agents : fournisseurs, État, propriétaires...)"
                 ]} />
 
                 <DocTable
-                    headers={["ACTIF (ce que l'on a)", "PASSIF (comment c'est finance)"]}
+                    headers={["ACTIF (ce que l'on a)", "PASSIF (comment c'est financé)"]}
                     rows={[
-                        ["Actif immobilise (biens durables)", "Capitaux propres (apports, reserves, resultat)"],
-                        ["Actif circulant (stocks, creances)", "Dettes (emprunts, fournisseurs)"],
-                        ["Tresorerie (banque, caisse)", ""],
+                        ["Actif immobilisé (biens durables)", "Capitaux propres (apports, réserves, résultat)"],
+                        ["Actif circulant (stocks, créances)", "Dettes (emprunts, fournisseurs)"],
+                        ["Trésorerie (banque, caisse)", ""],
                     ]}
                 />
 
                 <DocParagraph>
-                    L'equation fondamentale du bilan est : <strong>Actif = Passif + Resultat</strong>.
-                    Le resultat vient equilibrer le bilan : un benefice augmente le passif (les capitaux propres),
+                    L'équation fondamentale du bilan est : <strong>Actif = Passif + Résultat</strong>.
+                    Le résultat vient équilibrer le bilan : un bénéfice augmente le passif (les capitaux propres),
                     une perte le diminue.
                 </DocParagraph>
 
-                <DocExample title="Lecture simplifiee d'un bilan">
-                    <p>Une association presente le bilan suivant :</p>
-                    <div className="grid grid-cols-2 gap-4 mt-2">
+                <DocExample title="Lecture simplifiée d'un bilan">
+                    <p className={css({ fontSize: "sm" })}>Une association présente le bilan suivant :</p>
+                    <div className={css({
+                        display: "grid",
+                        gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
+                        gap: "4",
+                        marginTop: "3"
+                    })}>
                         <div>
-                            <p className="font-medium">ACTIF</p>
-                            <ul className="text-xs mt-1">
-                                <li>Materiel informatique : 2 000</li>
+                            <p className={css({ fontWeight: "medium", mb: "1" })}>ACTIF</p>
+                            <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
+                                <li>Matériel informatique : 2 000</li>
                                 <li>Banque : 5 000</li>
-                                <li><strong>Total : 7 000</strong></li>
+                                <li className={css({ fontWeight: "semibold", marginTop: "1" })}>Total : 7 000</li>
                             </ul>
                         </div>
                         <div>
-                            <p className="font-medium">PASSIF</p>
-                            <ul className="text-xs mt-1">
+                            <p className={css({ fontWeight: "medium", mb: "1" })}>PASSIF</p>
+                            <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
                                 <li>Fonds associatifs : 6 000</li>
                                 <li>Dettes fournisseurs : 1 000</li>
-                                <li><strong>Total : 7 000</strong></li>
+                                <li className={css({ fontWeight: "semibold", marginTop: "1" })}>Total : 7 000</li>
                             </ul>
                         </div>
                     </div>
-                    <p className="mt-2 text-xs">L'association possede 7 000 euros de biens, finances par ses fonds propres et une dette.</p>
+                    <p className={css({ marginTop: "3", fontSize: "xs", color: "neutral/60" })}>
+                        L'association possède 7 000 euros de biens, financés par ses fonds propres et une dette.
+                    </p>
                 </DocExample>
             </DocSection>
 
-            <DocSection title="Le compte de resultat">
+            <DocSection title="Le compte de résultat">
                 <DocDefinition
-                    term="Compte de resultat"
-                    definition="Film de l'activite sur une periode. Il compare les produits (ce qu'on gagne) aux charges (ce qu'on depense) pour determiner le resultat (benefice ou perte)."
+                    term="Compte de résultat"
+                    definition="Film de l'activité sur une période. Il compare les produits (ce qu'on gagne) aux charges (ce qu'on dépense) pour déterminer le résultat (bénéfice ou perte)."
                 />
 
                 <DocParagraph>
-                    Le compte de resultat est construit a partir des <strong>comptes d'operations</strong> (classes 6 et 7).
-                    Il repond a la question : l'entreprise a-t-elle gagne ou perdu de l'argent sur la periode ?
+                    Le compte de résultat est construit à partir des <strong>comptes d'opérations</strong> (classes 6 et 7).
+                    Il répond à la question : l'entreprise a-t-elle gagné ou perdu de l'argent sur la période ?
                 </DocParagraph>
 
                 <DocList items={[
-                    "Produits - Charges = Resultat",
-                    "Si Produits > Charges : benefice (ou excedent pour une association)",
-                    "Si Produits < Charges : perte (ou deficit)"
+                    "Produits - Charges = Résultat",
+                    "Si Produits > Charges : bénéfice (ou excédent pour une association)",
+                    "Si Produits < Charges : perte (ou déficit)"
                 ]} />
 
-                <DocExample title="Compte de resultat simplifie">
-                    <div className="grid grid-cols-2 gap-4">
+                <DocExample title="Compte de résultat simplifié">
+                    <div className={css({
+                        display: "grid",
+                        gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
+                        gap: "4"
+                    })}>
                         <div>
-                            <p className="font-medium">CHARGES</p>
-                            <ul className="text-xs mt-1">
+                            <p className={css({ fontWeight: "medium", mb: "1" })}>CHARGES</p>
+                            <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
                                 <li>Achats : 3 000</li>
                                 <li>Loyer : 6 000</li>
                                 <li>Salaires : 20 000</li>
-                                <li><strong>Total : 29 000</strong></li>
+                                <li className={css({ fontWeight: "semibold", marginTop: "1" })}>Total : 29 000</li>
                             </ul>
                         </div>
                         <div>
-                            <p className="font-medium">PRODUITS</p>
-                            <ul className="text-xs mt-1">
+                            <p className={css({ fontWeight: "medium", mb: "1" })}>PRODUITS</p>
+                            <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
                                 <li>Ventes : 25 000</li>
                                 <li>Subventions : 8 000</li>
-                                <li><strong>Total : 33 000</strong></li>
+                                <li className={css({ fontWeight: "semibold", marginTop: "1" })}>Total : 33 000</li>
                             </ul>
                         </div>
                     </div>
-                    <p className="mt-2 font-medium">Resultat = 33 000 - 29 000 = 4 000 euros (benefice)</p>
+                    <p className={css({ marginTop: "3", fontWeight: "medium", color: "success" })}>
+                        Résultat = 33 000 - 29 000 = 4 000 euros (bénéfice)
+                    </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Les capitaux propres">
                 <DocParagraph>
-                    Les capitaux propres representent ce que l'entreprise doit a ses proprietaires.
-                    Ils comprennent plusieurs elements :
+                    Les capitaux propres représentent ce que l'entreprise doit à ses propriétaires.
+                    Ils comprennent plusieurs éléments :
                 </DocParagraph>
 
                 <DocDefinition
                     term="Capital"
-                    definition="Apports initiaux des associes ou fondateurs. Il reste generalement stable sauf augmentation ou reduction de capital."
+                    definition="Apports initiaux des associés ou fondateurs. Il reste généralement stable sauf augmentation ou réduction de capital."
                 />
                 <DocDefinition
-                    term="Reserves"
-                    definition="Benefices des annees passees qui ont ete conserves dans l'entreprise (non distribues aux associes)."
+                    term="Réserves"
+                    definition="Bénéfices des années passées qui ont été conservés dans l'entreprise (non distribués aux associés)."
                 />
                 <DocDefinition
-                    term="Report a nouveau"
-                    definition="Resultat de l'exercice precedent en attente d'affectation (mise en reserve ou distribution)."
+                    term="Report à nouveau"
+                    definition="Résultat de l'exercice précédent en attente d'affectation (mise en réserve ou distribution)."
                 />
                 <DocDefinition
-                    term="Resultat de l'exercice"
-                    definition="Benefice ou perte de l'annee en cours, tel que calcule par le compte de resultat."
+                    term="Résultat de l'exercice"
+                    definition="Bénéfice ou perte de l'année en cours, tel que calculé par le compte de résultat."
                 />
 
-                <DocExample title="Affectation du resultat">
-                    <p>Une entreprise realise un benefice de 10 000 euros. Les associes decident :</p>
-                    <ul className="mt-2 ml-4 text-sm">
-                        <li>Distribution de dividendes : 4 000 euros (verses aux associes)</li>
-                        <li>Mise en reserve : 6 000 euros (conserves dans l'entreprise)</li>
+                <DocExample title="Affectation du résultat">
+                    <p className={css({ fontSize: "sm" })}>
+                        Une entreprise réalise un bénéfice de 10 000 euros. Les associés décident :
+                    </p>
+                    <ul className={css({ marginTop: "2", ml: "4", fontSize: "sm", color: "neutral/70" })}>
+                        <li>Distribution de dividendes : 4 000 euros (versés aux associés)</li>
+                        <li>Mise en réserve : 6 000 euros (conservés dans l'entreprise)</li>
                     </ul>
-                    <p className="mt-2 text-xs">Les reserves augmentent de 6 000 euros, renforcant les capitaux propres.</p>
+                    <p className={css({ marginTop: "2", fontSize: "xs", color: "neutral/60" })}>
+                        Les réserves augmentent de 6 000 euros, renforçant les capitaux propres.
+                    </p>
                 </DocExample>
             </DocSection>
 
-            <DocSection title="La balance : document de controle">
+            <DocSection title="La balance : document de contrôle">
                 <DocDefinition
                     term="Balance"
-                    definition="Liste de tous les comptes avec leur solde (debiteur ou crediteur). C'est l'outil de controle essentiel de la comptabilite."
+                    definition="Liste de tous les comptes avec leur solde (débiteur ou créditeur). C'est l'outil de contrôle essentiel de la comptabilité."
                 />
 
                 <DocParagraph>
-                    La balance verifie plusieurs equilibres :
+                    La balance vérifie plusieurs équilibres :
                 </DocParagraph>
                 <DocList items={[
-                    "Total des debits = Total des credits (principe de la partie double)",
-                    "Total des soldes debiteurs = Total des soldes crediteurs",
-                    "Les comptes d'actif ont generalement un solde debiteur",
-                    "Les comptes de passif ont generalement un solde crediteur"
+                    "Total des débits = Total des crédits (principe de la partie double)",
+                    "Total des soldes débiteurs = Total des soldes créditeurs",
+                    "Les comptes d'actif ont généralement un solde débiteur",
+                    "Les comptes de passif ont généralement un solde créditeur"
                 ]} />
 
                 <DocExample title="Extrait de balance">
                     <DocTable
-                        headers={["Compte", "Intitule", "Debit", "Credit", "Solde"]}
+                        headers={["Compte", "Intitulé", "Débit", "Crédit", "Solde"]}
                         rows={[
                             ["101", "Capital", "", "10 000", "10 000 Cr"],
                             ["411", "Clients", "5 000", "3 000", "2 000 Db"],
@@ -203,64 +229,73 @@ export function ComptabiliteDocuments() {
                             ["706", "Prestations", "", "4 000", "4 000 Cr"],
                         ]}
                     />
-                    <p className="mt-2 text-xs">Total debits = Total credits. La balance est equilibree.</p>
+                    <p className={css({ marginTop: "2", fontSize: "xs", color: "neutral/60" })}>
+                        Total débits = Total crédits. La balance est équilibrée.
+                    </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Les autres documents">
                 <DocDefinition
                     term="Grand livre"
-                    definition="Liste de tous les comptes avec le detail de leurs mouvements. Permet de verifier le detail de chaque compte."
+                    definition="Liste de tous les comptes avec le détail de leurs mouvements. Permet de vérifier le détail de chaque compte."
                 />
                 <DocDefinition
                     term="Journal"
-                    definition="Liste chronologique de toutes les ecritures passees. Permet de retrouver l'historique des operations."
+                    definition="Liste chronologique de toutes les écritures passées. Permet de retrouver l'historique des opérations."
                 />
                 <DocDefinition
                     term="Annexe"
-                    definition="Document obligatoire qui complete le bilan et le compte de resultat avec des informations complementaires (methodes comptables, engagements hors bilan...)."
+                    definition="Document obligatoire qui complète le bilan et le compte de résultat avec des informations complémentaires (méthodes comptables, engagements hors bilan...)."
                 />
 
                 <DocParagraph>
-                    Ces documents intermediaires sont utilises tout au long de l'annee pour controler
-                    la comptabilite et preparer les documents de synthese.
+                    Ces documents intermédiaires sont utilisés tout au long de l'année pour contrôler
+                    la comptabilité et préparer les documents de synthèse.
                 </DocParagraph>
             </DocSection>
 
-            <DocSection title="Le lien entre bilan et compte de resultat">
+            <DocSection title="Le lien entre bilan et compte de résultat">
                 <DocParagraph>
-                    Le resultat du compte de resultat vient s'ajouter aux capitaux propres du bilan.
+                    Le résultat du compte de résultat vient s'ajouter aux capitaux propres du bilan.
                     C'est ce qui fait le lien entre les deux documents :
                 </DocParagraph>
                 <DocList items={[
-                    "Un benefice augmente les capitaux propres (l'organisation s'est enrichie)",
+                    "Un bénéfice augmente les capitaux propres (l'organisation s'est enrichie)",
                     "Une perte diminue les capitaux propres (l'organisation s'est appauvrie)"
                 ]} />
 
                 <DocParagraph>
-                    On peut aussi exprimer le resultat comme la variation du patrimoine net :
+                    On peut aussi exprimer le résultat comme la variation du patrimoine net :
                 </DocParagraph>
-                <DocExample title="Verification par le patrimoine">
-                    <p><strong>Resultat = Variation des creances - Variation des dettes</strong></p>
-                    <p className="mt-2 text-sm">
-                        Si les creances (ce qu'on possede) ont augmente de 5 000 euros et les dettes
-                        de 2 000 euros, le resultat est de 3 000 euros : l'entreprise s'est enrichie de
-                        la difference.
+                <DocExample title="Vérification par le patrimoine">
+                    <p className={css({ fontWeight: "semibold" })}>
+                        Résultat = Variation des créances - Variation des dettes
+                    </p>
+                    <p className={css({ marginTop: "2", fontSize: "sm", color: "neutral/70" })}>
+                        Si les créances (ce qu'on possède) ont augmenté de 5 000 euros et les dettes
+                        de 2 000 euros, le résultat est de 3 000 euros : l'entreprise s'est enrichie de
+                        la différence.
                     </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
-                    Arrhes genere automatiquement tous ces documents a partir de vos ecritures.
-                    Consultez le guide sur les <DocLink to="/docs/guide/rapports">rapports</DocLink>{" "}
-                    pour apprendre a generer et interpreter ces documents dans le logiciel.
+                    Arrhes génère automatiquement tous ces documents à partir de vos écritures.
+                    Consultez le guide sur les <DocLink to="/documentation/dashboard/rapports">rapports</DocLink>{" "}
+                    pour apprendre à générer et interpréter ces documents dans le logiciel.
                 </DocParagraph>
             </DocSection>
 
+            <DocTip variant="success">
+                Félicitations ! Vous avez terminé le cours de comptabilité. Vous maîtrisez maintenant
+                les concepts fondamentaux pour utiliser Arrhes efficacement.
+            </DocTip>
+
             <DocNextPage
-                to="/docs/guide/demarrage"
-                label="Guide : Demarrer avec Arrhes"
+                to="/documentation/dashboard/demarrage"
+                label="Guide : Démarrer avec Arrhes"
             />
         </div>
     )

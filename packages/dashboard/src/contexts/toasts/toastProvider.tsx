@@ -16,7 +16,7 @@ export function ToasterProvider() {
                             {...props}
                             key={id}
                         >
-                            <div className={css({ display: "flex", flexDir: "column", justifyContent: "center", alignItems: "flex-start" })}>
+                            <div className={css({ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start" })}>
                                 {
                                     (title === undefined)
                                         ? null

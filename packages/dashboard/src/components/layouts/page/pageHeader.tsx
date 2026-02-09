@@ -1,5 +1,5 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 
@@ -13,9 +13,9 @@ export function PageHeader(props: {
         <div
             className={cx(
                 css({
-                    w: "full",
-                    maxW: "xl",
-                    h: "fit",
+                    width: "100%",
+                    maxWidth: "xl",
+                    height: "fit",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "flex-start",
@@ -26,7 +26,7 @@ export function PageHeader(props: {
         >
             <div className={css({
                 display: "flex",
-                flexDir: "column",
+                flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "flex-start"
             })}>

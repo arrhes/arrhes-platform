@@ -1,5 +1,5 @@
-import { css, cx } from "../../../../utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
+import { css, cx } from "../../../../utilities/cn.js"
 
 
 export function TableHeaderCell(props: {
@@ -12,7 +12,7 @@ export function TableHeaderCell(props: {
         <th
             className={cx(
                 css({
-                    w: "fit",
+                    width: "fit",
                     p: "2",
                     verticalAlign: "middle"
                 }),

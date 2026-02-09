@@ -1,7 +1,7 @@
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { Link, useParams } from "@tanstack/react-router"
-import { Button, ButtonContent } from "@arrhes/ui"
 import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatFileSize } from "../../../../../../../../components/formats/formatFileSize.tsx"
@@ -42,7 +42,7 @@ export function AttachmentPage() {
                                         >
                                             <ButtonContent
                                                 variant="default"
-                                                icon={<IconChevronLeft />}
+                                                leftIcon={<IconChevronLeft />}
                                                 text="Retour"
                                             />
                                         </Link>
@@ -69,7 +69,7 @@ export function AttachmentPage() {
                                         </DeleteOneAttachment>
                                     </div>
                                 </Section.Item>
-                                <Section.Item className={css({ flexDir: "column" })}>
+                                <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
                                         <DataBlock.Header>
                                             <TitleComponent>
@@ -104,7 +104,7 @@ export function AttachmentPage() {
                                         attachment={attachment}
                                     />
                                 </Section.Item>
-                                <Section.Item className={css({ flexDir: "column" })}>
+                                <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
                                         <DataBlock.Header>
                                             <TitleComponent>

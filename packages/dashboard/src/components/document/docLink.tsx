@@ -11,7 +11,14 @@ export function DocLink(props: {
             to={props.to}
             className={css({
                 color: "primary",
-                _hover: { textDecoration: "underline" }
+                fontWeight: "medium",
+                textDecoration: "underline",
+                textDecorationColor: "primary/30",
+                textUnderlineOffset: "2px",
+                _hover: {
+                    textDecorationColor: "primary"
+                },
+                transition: "all 0.15s"
             })}
         >
             {props.children}

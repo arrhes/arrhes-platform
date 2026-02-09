@@ -12,15 +12,15 @@ import { Breadcrumbs } from "../breadcrumbs.js"
 
 export function DashboardLayout() {
     return (
-        <div className={css({ position: "relative", minH: "full", h: "fit-content", w: "full", maxW: "full", display: "flex", flexDir: "column", justifyContent: "flex-start", alignItems: "stretch", overflow: "auto" })}>
-            <div className={css({ w: "full", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "2", p: "4" })}>
+        <div className={css({ position: "relative", minH: "100%", height: "fit-content", width: "100%", maxWidth: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", overflowidth: "auto" })}>
+            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "2", p: "4" })}>
                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                     <Link
                         to="/"
                     >
                         <ButtonContent
                             variant="invisible"
-                            icon={<IconAbacus />}
+                            leftIcon={<IconAbacus />}
                         />
                     </Link>
                     {/* <span>
@@ -32,24 +32,24 @@ export function DashboardLayout() {
                     className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}
                 >
                     <Link
-                        to="/docs"
-                        className={css({ w: "fit-content" })}
+                        to="/documentation"
+                        className={css({ width: "fit-content" })}
                         aria-label="Documentation"
                     >
                         <ButtonContent
                             variant="default"
-                            icon={<IconBook2 />}
+                            leftIcon={<IconBook2 />}
                             text="Documentation"
                         />
                     </Link>
                     <Dropdown.Root>
                         <Dropdown.Trigger
-                            className={css({ w: "full" })}
+                            className={css({ width: "100%" })}
                         >
                             <ButtonContent
                                 variant="default"
-                                icon={<IconUser />}
-                                className={css({ w: "full" })}
+                                leftIcon={<IconUser />}
+                                className={css({ width: "100%" })}
                             />
                         </Dropdown.Trigger>
                         <Dropdown.Content
@@ -62,7 +62,7 @@ export function DashboardLayout() {
                                             <ButtonGhostContent
                                                 icon={<IconSettings />}
                                                 text="Settings"
-                                                className={css({ w: "full" })}
+                                                className={css({ width: "100%" })}
                                             />
                                         </Menubar.Item>
                                     </Link> */}
@@ -73,44 +73,44 @@ export function DashboardLayout() {
                                             <ButtonGhostContent
                                                 icon={<IconRosetteDiscountCheck />}
                                                 text="Subscription"
-                                                className={css({ w: "full" })}
+                                                className={css({ width: "100%" })}
                                             />
                                         </Menubar.Item>
                                     </Link> */}
                             {/* <Dropdown.Item>
                                 <Link
                                     to="/paramètres"
-                                    className={css({ w: "full" })}
+                                    className={css({ width: "100%" })}
                                 >
                                     <ButtonGhostContent
                                         icon={<IconSettings />}
                                         text="Paramètres"
-                                        className={css({ w: "full" })}
+                                        className={css({ width: "100%" })}
                                     />
                                 </Link>
                             </Dropdown.Item> */}
                             {/* <Dropdown.Item>
                                 <Link
                                     to="/organisations"
-                                    className={css({ w: "full" })}
+                                    className={css({ width: "100%" })}
                                 >
                                     <ButtonGhostContent
                                         icon={<IconBuilding />}
                                         text="Organisations"
-                                        className={css({ w: "full" })}
+                                        className={css({ width: "100%" })}
                                     />
                                 </Link>
                             </Dropdown.Item> */}
                             <Dropdown.Item>
                                 <Link
                                     to="/dashboard/support"
-                                    className={css({ w: "full" })}
+                                    className={css({ width: "100%" })}
                                 >
                                     <ButtonContent
                                         variant="invisible"
-                                        icon={<IconLifebuoy />}
+                                        leftIcon={<IconLifebuoy />}
                                         text="Support"
-                                        className={css({ w: "full" })}
+                                        className={css({ width: "100%" })}
                                     />
                                 </Link>
                             </Dropdown.Item>
@@ -121,7 +121,7 @@ export function DashboardLayout() {
                                     icon={<IconLogout />}
                                     text="Se déconnecter"
                                     color="error"
-                                    className={css({ w: "full" })}
+                                    className={css({ width: "100%" })}
                                     onClick={async () => {
                                         await postAPI({
                                             routeDefinition: signOutRouteDefinition,

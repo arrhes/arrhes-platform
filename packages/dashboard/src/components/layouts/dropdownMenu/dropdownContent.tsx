@@ -1,6 +1,6 @@
-import { css, cx } from "../../../utilities/cn.js"
 import { DropdownMenuContent, DropdownMenuPortal } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
+import { css, cx } from "../../../utilities/cn.js"
 
 
 
@@ -17,18 +17,18 @@ export function DropdownContent(props:
                 sideOffset={props.sideOffset || 6}
                 className={cx(
                     css({
-                        bg: "white",
+                        backgroundColor: "white",
                         rounded: "md",
                         p: "2",
-                        shadow: "lg",
+                        shadowidth: "lg",
                         display: "flex",
-                        flexDir: "column",
+                        flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
                         gap: "0",
                         border: "1px solid",
                         borderColor: "neutral/20",
-                        minW: "var(--radix-dropdown-menu-trigger-width)"
+                        minwidth: "var(--radix-dropdown-menu-trigger-width)"
                     }),
                     props.className
                 )}
