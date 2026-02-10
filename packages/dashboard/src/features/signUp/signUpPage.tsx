@@ -1,7 +1,6 @@
 import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
-import { IconUserPlus } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
+import { ButtonContent, Logo, Separator } from "@arrhes/ui"
+import { IconBook2, IconLogin2, IconUserPlus } from "@tabler/icons-react"
 import { Fragment } from "react/jsx-runtime"
 import { FormControl } from "../../components/forms/formControl.js"
 import { FormError } from "../../components/forms/formError.js"
@@ -11,6 +10,7 @@ import { FormLabel } from "../../components/forms/formLabel.js"
 import { FormRoot } from "../../components/forms/formRoot.js"
 import { InputPassword } from "../../components/inputs/inputPassword.js"
 import { InputText } from "../../components/inputs/inputText.js"
+import { LinkButton } from "../../components/linkButton.js"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { platformRouter } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
@@ -19,136 +19,213 @@ import { postAPI } from "../../utilities/postAPI.js"
 
 export function SignUpPage() {
     return (
-        <div className={css({ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" })}>
-            <div className={css({ width: "100%", maxWidth: "sm", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "4" })}>
-                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4", backgroundColor: "white", border: "1px solid", borderColor: "neutral/10", rounded: "md", p: "8" })}>
-                    <span className={css({ fontSize: "xl" })}>
-                        Inscription
-                    </span>
-                    <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
-                        <FormRoot
-                            schema={signUpRouteDefinition.schemas.body}
-                            defaultValues={{}}
-                            submitButtonProps={{
-                                icon: <IconUserPlus />,
-                                text: "Inscription",
-                                className: css({ width: "100%", justifyContent: "center" })
-                            }}
-                            submitOnPressEnterKey={true}
-                            onSubmit={async (data) => {
-                                if (data.password !== data.passwordCheck) {
-                                    toast({ title: "Les mots de passe ne correspondent pas", variant: "error" })
-                                    return false
-                                }
-
-                                const response = await postAPI({
-                                    routeDefinition: signUpRouteDefinition,
-                                    body: data,
-                                })
-                                if (!response.ok) {
-                                    toast({ title: "Inscription impossible", variant: "error" })
-                                    return false
-                                }
-
-                                toast({ title: "Inscription réussie", variant: "success" })
-                                return true
-                            }}
-                            onCancel={undefined}
-                            onSuccess={() => {
-                                platformRouter.navigate({
-                                    to: "/",
-                                    reloadDocument: true
-                                })
-                            }}
+        <div className={css({
+            width: "100%",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "start",
+            alignItems: "stretch",
+            backgroundColor: "background"
+        })}>
+            {/* Main content */}
+            <section className={css({
+                width: "100%",
+                flex: "1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingX: "1rem",
+                paddingY: "4rem",
+            })}>
+                <div className={css({
+                    width: "100%",
+                    maxWidth: "sm",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1.5rem",
+                    padding: "2rem",
+                    borderRadius: "lg",
+                    border: "1px solid",
+                    borderColor: "neutral/10",
+                    backgroundColor: "white",
+                })}>
+                    <div
+                        className={css({
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "start",
+                            gap: "0.5rem",
+                        })}
+                    >
+                        <LinkButton to="/">
+                            <Logo withText />
+                        </LinkButton>
+                        <LinkButton
+                            to="/documentation"
                         >
-                            {(form) => (
-                                <Fragment>
-                                    <FormField
-                                        control={form.control}
-                                        name="email"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel
-                                                    label="Email"
-                                                    isRequired={false}
-                                                    description={undefined}
-                                                    tooltip={undefined}
+                            <ButtonContent
+                                variant="invisible"
+                                leftIcon={<IconBook2 />}
+                                text="Documentation"
+                                className={css({ width: "100%", justifyContent: "center" })}
+                            />
+                        </LinkButton>
+                    </div>
+
+                    <div className={css({
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                    })}>
+                        <h1 className={css({
+                            fontSize: "lg",
+                            fontWeight: "bold",
+                            color: "neutral",
+                        })}>
+                            Inscription
+                        </h1>
+                        <p className={css({
+                            color: "neutral/60",
+                            fontSize: "sm",
+                        })}>
+                            Créez votre compte gratuitement
+                        </p>
+                    </div>
+
+                    <FormRoot
+                        schema={signUpRouteDefinition.schemas.body}
+                        defaultValues={{}}
+                        submitButtonProps={{
+                            leftIcon: <IconUserPlus />,
+                            text: "Créer un compte",
+                            className: css({ width: "100%", justifyContent: "center" })
+                        }}
+                        submitOnPressEnterKey={true}
+                        onSubmit={async (data) => {
+                            if (data.password !== data.passwordCheck) {
+                                toast({ title: "Les mots de passe ne correspondent pas", variant: "error" })
+                                return false
+                            }
+
+                            const response = await postAPI({
+                                routeDefinition: signUpRouteDefinition,
+                                body: data,
+                            })
+                            if (!response.ok) {
+                                toast({ title: "Inscription impossible", variant: "error" })
+                                return false
+                            }
+
+                            toast({ title: "Inscription réussie", variant: "success" })
+                            return true
+                        }}
+                        onCancel={undefined}
+                        onSuccess={() => {
+                            platformRouter.navigate({
+                                to: "/dashboard",
+                                reloadDocument: true
+                            })
+                        }}
+                    >
+                        {(form) => (
+                            <Fragment>
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Email"
+                                                isRequired={false}
+                                                description={undefined}
+                                                tooltip={undefined}
+                                            />
+                                            <FormControl>
+                                                <InputText
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    type="email"
                                                 />
-                                                <FormControl>
-                                                    <InputText
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                        type="email"
-                                                    />
-                                                </FormControl>
-                                                <FormError />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="password"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel
-                                                    label="Mot de passe"
-                                                    isRequired={false}
-                                                    description={undefined}
-                                                    tooltip={undefined}
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="password"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Mot de passe"
+                                                isRequired={false}
+                                                description={undefined}
+                                                tooltip={undefined}
+                                            />
+                                            <FormControl>
+                                                <InputPassword
+                                                    value={field.value}
+                                                    onChange={field.onChange}
                                                 />
-                                                <FormControl>
-                                                    <InputPassword
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <FormError />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="passwordCheck"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel
-                                                    label="Mot de passe (encore)"
-                                                    isRequired={false}
-                                                    description={undefined}
-                                                    tooltip={undefined}
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="passwordCheck"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Mot de passe (encore)"
+                                                isRequired={false}
+                                                description={undefined}
+                                                tooltip={undefined}
+                                            />
+                                            <FormControl>
+                                                <InputPassword
+                                                    value={field.value}
+                                                    onChange={field.onChange}
                                                 />
-                                                <FormControl>
-                                                    <InputPassword
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <FormError />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </Fragment>
-                            )}
-                        </FormRoot>
-                        <Link
-                            to="/connexion"
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                            </Fragment>
+                        )}
+                    </FormRoot>
+
+                    <Separator />
+
+                    <div
+                        className={css({
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "start",
+                            alignItems: "stretch",
+                            gap: "0.5rem",
+                        })}
+                    >
+                        <LinkButton
+                            to="/sign-in"
                             className={css({ width: "100%" })}
                         >
                             <ButtonContent
                                 variant="default"
-                                text="Déjà inscrit ?"
+                                leftIcon={<IconLogin2 />}
+                                text="Se connecter"
                                 className={css({ width: "100%", justifyContent: "center" })}
                             />
-                        </Link>
+                        </LinkButton>
                     </div>
                 </div>
-            </div>
-            {/* <Link
-                        to="/connexion/identifiants"
-                        className={css({ textDecoration: "underline", _hover: { textDecoration: "none" }, color: "neutral/50" })}
-                    >
-                        Mot de passe oublié ?
-                    </Link> */}
+            </section>
         </div>
     )
 }

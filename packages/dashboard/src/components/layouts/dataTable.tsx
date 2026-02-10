@@ -1,4 +1,4 @@
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
@@ -94,13 +94,13 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 width: "100%",
                 maxWidth: "100%",
                 maxH: "600px",
-                p: "0",
+                padding: "0",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                overflowidth: "auto",
-                rounded: "md",
+                overflowY: "auto",
+                borderRadius: "md",
                 border: "1px solid",
                 borderColor: "neutral/10"
             })}>
@@ -130,21 +130,22 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                             justifyContent: "flex-start",
                                             alignItems: "center",
                                             gap: "2",
-                                            p: "2",
+                                            padding: "1rem",
                                             borderBottom: "1px solid",
                                             borderBottomColor: "neutral/10",
                                             borderTop: "2px solid",
                                             borderTopColor: "white"
                                         })}>
-                                            <Button
-                                                variant="invisible"
-                                                onClick={header.column.getToggleSortingHandler()}
-                                                icon={{
-                                                    asc: <IconSortAscending size={16} />,
-                                                    desc: <IconSortDescending size={16} />,
-                                                }[String(header.column.getIsSorted())] ?? undefined}
-                                                text={header.column.columnDef.header?.toString()}
-                                            />
+                                            <Button onClick={header.column.getToggleSortingHandler()}>
+                                                <ButtonContent
+                                                    variant="invisible"
+                                                    leftIcon={{
+                                                        asc: <IconSortAscending size={16} />,
+                                                        desc: <IconSortDescending size={16} />,
+                                                    }[String(header.column.getIsSorted())] ?? undefined}
+                                                    text={header.column.columnDef.header?.toString()}
+                                                />
+                                            </Button>
                                         </div>
                                     </th>
                                 )
@@ -163,7 +164,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                         <td>
                                             <FormatNull
                                                 text="Pas de données"
-                                                className={css({ p: "2" })}
+                                                className={css({ padding: "1rem" })}
                                             />
                                         </td>
                                     </tr>
@@ -201,7 +202,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                                     display: "flex",
                                                     justifyContent: "flex-start",
                                                     alignItems: "center",
-                                                    p: "2"
+                                                    padding: "1rem"
                                                 })}>
                                                     {flexRender(
                                                         cell.column.columnDef.cell,

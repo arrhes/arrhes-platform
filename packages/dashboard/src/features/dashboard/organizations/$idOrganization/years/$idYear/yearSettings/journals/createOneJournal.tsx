@@ -44,7 +44,7 @@ export function CreateOneJournal(props: {
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter le journal",
                         }}
                         onSubmit={async (data) => {

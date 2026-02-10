@@ -1,5 +1,5 @@
 import { readAllAccountsRouteDefinition, readAllBalanceSheetsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconDownload } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -52,17 +52,16 @@ export function BalanceSheetReportPage() {
                                                             idOrganization={params.idOrganization}
                                                             idYear={params.idYear}
                                                         >
-                                                            <Button
-                                                                icon={<IconDownload />}
+                                                            <ButtonContent
+                                                                leftIcon={<IconDownload />}
                                                                 text="Télécharger en pdf"
-                                                                hasLoader={true}
                                                                 variant="default"
                                                             />
                                                         </DownloadBalanceSheetReport>
                                                     </div>
                                                     <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "start", gap: "4", flexWrap: "wrap" })}>
                                                         <Box className={css({ gap: "4" })}>
-                                                            <TitleComponent className={css({ p: "4" })}>
+                                                            <TitleComponent className={css({ padding: "4" })}>
                                                                 Actif
                                                             </TitleComponent>
                                                             <BalanceSheetAssetsReportTable
@@ -72,7 +71,7 @@ export function BalanceSheetReportPage() {
                                                             />
                                                         </Box>
                                                         <Box className={css({ gap: "4" })}>
-                                                            <TitleComponent className={css({ p: "4" })}>
+                                                            <TitleComponent className={css({ padding: "4" })}>
                                                                 Passif
                                                             </TitleComponent>
                                                             <BalanceSheetLiabilitiesReportTable

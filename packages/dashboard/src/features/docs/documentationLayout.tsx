@@ -5,8 +5,9 @@ import {
     IconMenu2,
     IconX
 } from "@tabler/icons-react"
-import { Link, Outlet, useRouterState } from "@tanstack/react-router"
+import { Outlet, useRouterState } from "@tanstack/react-router"
 import { useState } from "react"
+import { LinkButton } from "../../components/linkButton.js"
 import { css, cx } from "../../utilities/cn.js"
 import { SectionTab } from "./components/sectionTab.js"
 import { SidebarNavigation } from "./components/sidebarNavigation.js"
@@ -66,7 +67,7 @@ export function DocumentationLayout() {
                 })}>
                     <div className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
@@ -94,13 +95,13 @@ export function DocumentationLayout() {
                                 }
                             </button>
 
-                            <Link to="/">
+                            <LinkButton to="/">
                                 <Logo withText />
-                            </Link>
+                            </LinkButton>
 
                             <span className={css({ color: "neutral/20", display: { base: "none", sm: "block" } })}>/</span>
 
-                            <Link to="/documentation" className={css({
+                            <LinkButton to="/documentation" className={css({
                                 display: { base: "none", sm: "flex" },
                                 alignItems: "center",
                                 gap: "0.25rem",
@@ -113,7 +114,7 @@ export function DocumentationLayout() {
                                     leftIcon={<IconBook2 />}
                                     text="Documentation"
                                 />
-                            </Link>
+                            </LinkButton>
                         </div>
 
                         <nav className={css({
@@ -131,17 +132,19 @@ export function DocumentationLayout() {
                                     leftIcon={<IconBrandGithub />}
                                 />
                             </a>
-                            {/* <Link to="/">
+                            {/* <LinkButton to="/">
                                 <ButtonContent
                                     text="Retour au site"
                                 />
-                            </Link> */}
-                            <Link to="/dashboard">
+                            </LinkButton> */}
+                            <LinkButton
+                                to="/dashboard"
+                            >
                                 <ButtonContent
                                     variant="primary"
                                     text="Dashboard"
                                 />
-                            </Link>
+                            </LinkButton>
                         </nav>
                     </div>
                 </div>
@@ -158,7 +161,7 @@ export function DocumentationLayout() {
                 })}>
                     <div className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         alignItems: "center",
                         gap: "0.25rem",
@@ -186,7 +189,7 @@ export function DocumentationLayout() {
             })}>
                 <div className={css({
                     width: "100%",
-                    maxWidth: "lg",
+                    maxWidth: "xl",
                     display: "flex",
                     flex: "1",
                 })}>

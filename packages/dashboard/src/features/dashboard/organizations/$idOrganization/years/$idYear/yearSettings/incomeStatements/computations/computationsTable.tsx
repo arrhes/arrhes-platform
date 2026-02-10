@@ -28,11 +28,11 @@ export function ComputationsTable(props: {
                     )
                 }
                 return (
-                    <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4" })}>
+                    <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", padding: "4" })}>
                         {computations.map((computation) => (
                             <Link
                                 key={computation.id}
-                                to="/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation"
+                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation"
                                 params={{
                                     idComputation: computation.id,
                                     idOrganization: props.idOrganization,
@@ -40,7 +40,7 @@ export function ComputationsTable(props: {
                                 }}
                                 className={css({ width: "100%" })}
                             >
-                                <div className={css({ p: "2", minwidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}>
+                                <div className={css({ padding: "1rem", minWidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}>
                                     <span className={css({ color: "neutral", fontSize: "xs", lineHeight: "none" })}>
                                         {computation.number}
                                     </span>

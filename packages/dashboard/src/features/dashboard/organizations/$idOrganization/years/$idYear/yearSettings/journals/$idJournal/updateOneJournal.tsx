@@ -43,7 +43,7 @@ export function UpdateOneJournal(props: {
                             idJournal: props.journal.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier le journal",
                         }}
                         onSubmit={async (data) => {

@@ -5,14 +5,19 @@ import { rootLayoutRoute } from "./rootLayoutRoute.js"
 export const catchRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,
     path: '$',
-    beforeLoad: ({ context }) => {
+    beforeLoad: ({ context, location }) => {
+        if (location.pathname.startsWith("/documentation")) {
+            throw redirect({
+                to: "/documentation"
+            })
+        }
         if (context.isAuthenticated === true) {
             throw redirect({
-                to: "/"
+                to: "/dashboard"
             })
         }
         throw redirect({
-            to: "/connexion"
+            to: "/sign-in"
         })
     }
 })

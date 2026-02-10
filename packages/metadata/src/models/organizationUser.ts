@@ -1,8 +1,8 @@
+import { relations } from "drizzle-orm"
+import { AnyPgColumn, boolean, pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
 import { idColumn } from "../components/models/idColumn.js"
 import { organizationUserStatus } from "../components/values/organizationUserStatus.js"
-import { relations } from "drizzle-orm"
-import { AnyPgColumn, boolean, pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
 import { organizationModel } from "./organization.js"
 import { userModel } from "./user.js"
 

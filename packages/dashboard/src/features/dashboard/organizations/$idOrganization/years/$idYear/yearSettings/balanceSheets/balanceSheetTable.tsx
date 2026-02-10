@@ -51,7 +51,7 @@ export function BalanceSheetTable(props: {
                                     : (
                                         <FormatNull
                                             text="Aucune ligne de bilan n'a été trouvée"
-                                            className={css({ p: "2" })}
+                                            className={css({ padding: "1rem" })}
                                         />
                                     )
                             }

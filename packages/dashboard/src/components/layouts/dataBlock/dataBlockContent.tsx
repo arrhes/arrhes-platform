@@ -17,10 +17,10 @@ export function DataBlockContent(props: {
                     gridTemplateColumns: "max-content auto",
                     columnGap: "4",
                     rowGap: "2",
-                    p: "4",
+                    padding: "4",
                     border: "1px solid",
                     borderColor: "neutral/20",
-                    rounded: "md"
+                    borderRadius: "md"
                 }),
                 props.className
             )}

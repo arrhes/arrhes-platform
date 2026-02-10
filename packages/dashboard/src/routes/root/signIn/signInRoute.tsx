@@ -6,7 +6,7 @@ import { rootLayoutRoute } from "../../rootLayoutRoute.js"
 
 export const signInRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,
-    path: '/connexion',
+    path: '/sign-in',
     pendingComponent: () => <CircularLoader />,
     beforeLoad: async ({ context }) => {
         if (context.isAuthenticated === true) {

@@ -1,6 +1,6 @@
 import { generateIncomeStatementsRouteDefinition, readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconRefresh } from "@tabler/icons-react"
 import { JSX, useState } from "react"
@@ -36,7 +36,7 @@ export function GenerateIncomeStatements(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous générer les lignes de compte de résultat par défaut ?
                             </Dialog.Title>
@@ -47,16 +47,10 @@ export function GenerateIncomeStatements(props: {
                             </Dialog.Description>
                         </div>
                         <Dialog.Footer>
+                            <Button onClick={() => { setOpen(false) }}>
+                                <ButtonContent variant="invisible" text="Annuler" />
+                            </Button>
                             <Button
-                                variant="invisible"
-                                text="Annuler"
-                                onClick={() => {
-                                    setOpen(false)
-                                }}
-                            />
-                            <Button
-                                variant="primary"
-                                icon={<IconRefresh />}
                                 onClick={async () => {
                                     const response = await postAPI({
                                         routeDefinition: generateIncomeStatementsRouteDefinition,
@@ -83,9 +77,10 @@ export function GenerateIncomeStatements(props: {
                                     setOpen(false)
                                     return true
                                 }}
-                                text="Générer les lignes de compte de résultat"
                                 hasLoader
-                            />
+                            >
+                                <ButtonContent variant="primary" leftIcon={<IconRefresh />} text="Générer les lignes de compte de résultat" />
+                            </Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 )

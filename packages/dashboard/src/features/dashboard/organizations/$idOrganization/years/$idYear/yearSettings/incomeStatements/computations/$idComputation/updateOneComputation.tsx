@@ -43,7 +43,7 @@ export function UpdateOneComputation(props: {
                             idComputation: props.computation.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier la ligne de calcul",
                         }}
                         onSubmit={async (data) => {

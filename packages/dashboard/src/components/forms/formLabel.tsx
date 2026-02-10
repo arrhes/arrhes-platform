@@ -82,7 +82,7 @@ export function FormLabel(props: FormLabel) {
                                 _hover: { color: "neutral", fill: "neutral/5" }
                             })} />
                         </TooltipTrigger>
-                        <TooltipContent className={css({ backgroundColor: "neutral", p: "2" })}>
+                        <TooltipContent className={css({ backgroundColor: "neutral", padding: "1rem" })}>
                             <p className={css({
                                 overflowWrap: "break-word",
                                 hyphens: "auto",

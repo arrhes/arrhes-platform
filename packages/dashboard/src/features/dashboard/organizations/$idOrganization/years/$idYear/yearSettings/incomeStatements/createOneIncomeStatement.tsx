@@ -46,7 +46,7 @@ export function CreateOneIncomeStatement(props: {
                             idIncomeStatementParent: null,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter la ligne de compte de résultat",
                         }}
                         onSubmit={async (data) => {

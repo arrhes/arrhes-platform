@@ -45,7 +45,7 @@ export function CreateOneYear(props: {
                             label: undefined,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter l'exercice",
                         }}
                         onSubmit={async (data) => {

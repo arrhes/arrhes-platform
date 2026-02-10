@@ -23,7 +23,7 @@ export function DialogOverlay(props:
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    p: "6",
+                    padding: "6",
                     backgroundColor: "neutral/20",
                     "&[data-state=open]": {
                         animation: "fadeIn 0.2s ease-out"

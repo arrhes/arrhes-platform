@@ -17,16 +17,17 @@ export function PopoverContent(props: PopoverContent) {
                 className={cx(
                     css({
                         zIndex: "10",
+                        padding: "0.5rem",
                         backgroundColor: "white",
-                        rounded: "md",
-                        shadowidth: "md",
+                        borderRadius: "lg",
+                        boxShadow: "md",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
-                        gap: "0",
-                        minwidth: "var(--radix-popover-trigger-width)",
-                        maxWidth: "var(--radix-popover-trigger-width)",
+                        gap: "0.5rem",
+                        minWidth: "var(--radix-popover-trigger-width)",
+                        // maxWidth: "var(--radix-popover-trigger-width)",
                         border: "1px solid",
                         borderColor: "neutral/10"
                     }),

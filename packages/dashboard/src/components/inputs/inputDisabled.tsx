@@ -23,9 +23,9 @@ export function InputDisabled(props: InputDisabled) {
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: "2",
-                    p: "2",
+                    padding: "1rem",
                     border: "1px solid",
-                    rounded: "md",
+                    borderRadius: "md",
                     backgroundColor: "neutral",
                     fontSize: "sm"
                 }),

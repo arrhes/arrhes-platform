@@ -10,8 +10,8 @@ export function SectionRoot(props: {
         <div
             className={cx(
                 css({
-                    flexGrowidth: "1",
-                    minwidth: "0",
+                    flexGrow: "1",
+                    minWidth: "0",
                     width: "100%",
                     maxWidth: "100%",
                     height: "fit",

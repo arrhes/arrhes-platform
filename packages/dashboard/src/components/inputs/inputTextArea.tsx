@@ -35,17 +35,17 @@ export function InputTextArea(props:
                     justifyContent: "center",
                     alignItems: "center",
                     gap: "2",
-                    p: "2",
+                    padding: "1rem",
                     border: "1px solid",
-                    rounded: "sm",
+                    borderRadius: "sm",
                     fontSize: "sm",
                     _placeholder: { color: "neutral/50" },
-                    _focus: { borderColor: "neutral/50", shadowidth: "inset" },
+                    _focus: { borderColor: "neutral/50", boxShadow: "inset" },
                     outline: "none",
                     flexShrink: "0",
                     resize: "none",
                     height: "fit",
-                    overflowidth: "auto"
+                    overflowY: "auto"
                 }),
                 css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
                 props.className

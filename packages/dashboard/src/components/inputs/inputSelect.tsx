@@ -65,11 +65,11 @@ export function InputSelect<TValue extends string>(props:
                             justifyContent: "flex-start",
                             alignItems: "center",
                             gap: "2",
-                            rounded: "sm",
-                            p: "2",
+                            borderRadius: "sm",
+                            padding: "1rem",
                             border: "1px solid",
-                            _hover: { shadowidth: "inset" },
-                            _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
+                            _hover: { boxShadow: "inset" },
+                            _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
                         }),
                         css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
                         props.className
@@ -83,8 +83,8 @@ export function InputSelect<TValue extends string>(props:
                                     fontWeight: "medium",
                                     lineHeight: "none",
                                     whiteSpace: "nowrap",
-                                    textOverflowidth: "ellipsis",
-                                    rounded: "sm",
+                                    textOverflow: "ellipsis",
+                                    borderRadius: "sm",
                                     textAlign: "left"
                                 }),
                                 css(currentOption === undefined ? { color: "neutral/50" } : { color: "neutral" })
@@ -99,7 +99,7 @@ export function InputSelect<TValue extends string>(props:
                             size={16}
                             className={css({
                                 stroke: "neutral",
-                                minwidth: "16px",
+                                minWidth: "16px",
                                 width: "16px",
                                 minH: "16px",
                                 height: "16px"
@@ -115,9 +115,9 @@ export function InputSelect<TValue extends string>(props:
                 <div className={css({
                     minH: "32px",
                     maxH: "256px",
-                    overflowidth: "auto",
+                    overflowY: "auto",
                     width: "100%",
-                    p: "2",
+                    padding: "1rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
@@ -159,8 +159,8 @@ export function InputSelect<TValue extends string>(props:
                                                 justifyContent: "space-between",
                                                 alignItems: "center",
                                                 gap: "2",
-                                                p: "2",
-                                                rounded: "sm",
+                                                padding: "1rem",
+                                                borderRadius: "sm",
                                                 border: "1px solid transparent",
                                                 cursor: "pointer"
                                             }),
@@ -185,7 +185,7 @@ export function InputSelect<TValue extends string>(props:
                                         <IconCheck
                                             className={cx(
                                                 css({
-                                                    minwidth: "16px",
+                                                    minWidth: "16px",
                                                     width: "16px",
                                                     minH: "16px",
                                                     height: "16px",

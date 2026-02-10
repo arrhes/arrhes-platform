@@ -1,6 +1,6 @@
 import { deleteOneAttachmentRouteDefinition, readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
@@ -44,7 +44,7 @@ export function DeleteOneAttachment(props: {
         toast({ title: "Fichier supprimé", variant: "success" })
 
         platformRouter.navigate({
-            to: "/organisations/$idOrganization/exercices/$idYear/fichiers",
+            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers",
             params: {
                 idOrganization: props.attachment.idOrganization,
                 idYear: props.attachment.idYear
@@ -76,7 +76,7 @@ export function DeleteOneAttachment(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer ce fichier ?
                             </Dialog.Title>
@@ -87,19 +87,12 @@ export function DeleteOneAttachment(props: {
                             </Dialog.Description>
                         </div>
                         <Dialog.Footer>
-                            <Button
-                                variant="invisible"
-                                text="Annuler"
-                                onClick={() => onCancel()}
-                            />
-                            <Button
-                                variant="primary"
-                                icon={<IconTrash />}
-                                color="error"
-                                onClick={() => onSubmit()}
-                                text="Supprimer le fichier"
-                                hasLoader
-                            />
+                            <Button onClick={() => onCancel()}>
+                                <ButtonContent variant="invisible" text="Annuler" />
+                            </Button>
+                            <Button onClick={() => onSubmit()} hasLoader>
+                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer le fichier" />
+                            </Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 )

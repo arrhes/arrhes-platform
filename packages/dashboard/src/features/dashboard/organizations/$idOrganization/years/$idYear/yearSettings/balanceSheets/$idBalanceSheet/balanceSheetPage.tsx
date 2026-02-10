@@ -1,9 +1,10 @@
 import { readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
@@ -31,8 +32,8 @@ export function BalanceSheetPage() {
                     <Section.Root>
                         <Section.Item className={css({ flexDirection: "row" })}>
                             <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
-                                <Link
-                                    to="/organisations/$idOrganization/exercices/$idYear/paramètres/bilan"
+                                <LinkButton
+                                    to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/bilan"
                                     params={{
                                         idOrganization: balanceSheet.idOrganization,
                                         idYear: balanceSheet.idYear,
@@ -43,25 +44,24 @@ export function BalanceSheetPage() {
                                         leftIcon={<IconChevronLeft />}
                                         text="Retour"
                                     />
-                                </Link>
+                                </LinkButton>
                             </div>
                             <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                 <UpdateOneBalanceSheet
                                     balanceSheet={balanceSheet}
                                 >
-                                    <Button
+                                    <ButtonContent
                                         variant="primary"
-                                        icon={<IconPencil />}
+                                        leftIcon={<IconPencil />}
                                         text="Modifier"
                                     />
                                 </UpdateOneBalanceSheet>
                                 <DeleteOneBalanceSheet
                                     balanceSheet={balanceSheet}
                                 >
-                                    <Button
+                                    <ButtonContent
                                         variant="default"
-                                        icon={<IconTrash />}
-                                        title="Supprimer"
+                                        leftIcon={<IconTrash />}
                                         color="error"
                                     />
                                 </DeleteOneBalanceSheet>

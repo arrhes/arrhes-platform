@@ -53,7 +53,7 @@ export function CreateOneRecordRow(props: {
                             isComputedForIncomeStatementReport: true,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter le mouvement",
                         }}
                         onSubmit={async (data) => {

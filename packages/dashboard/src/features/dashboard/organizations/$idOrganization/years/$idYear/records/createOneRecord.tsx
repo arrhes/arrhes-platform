@@ -49,7 +49,7 @@ export function CreateOneRecord(props: {
                             idJournal: null,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter l'écriture",
                         }}
                         onSubmit={async (data) => {
@@ -64,7 +64,7 @@ export function CreateOneRecord(props: {
 
                             toast({ title: "Écriture ajoutée avec succès", variant: "success" })
                             platformRouter.navigate({
-                                to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
+                                to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
                                 params: {
                                     idOrganization: props.idOrganization,
                                     idYear: props.idYear,

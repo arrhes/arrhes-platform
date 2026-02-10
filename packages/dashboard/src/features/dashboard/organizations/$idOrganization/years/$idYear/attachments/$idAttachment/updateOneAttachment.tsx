@@ -49,7 +49,7 @@ export function UpdateOneAttachment(props: {
                             idAttachment: props.attachment.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier le fichier",
                         }}
                         onSubmit={async (data) => {

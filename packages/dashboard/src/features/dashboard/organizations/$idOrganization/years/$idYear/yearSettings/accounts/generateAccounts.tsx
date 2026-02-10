@@ -46,7 +46,7 @@ export function GenerateAccounts(props: {
                             isReplicatingAccounts: false,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Générer les comptes",
                         }}
                         onSubmit={async (data) => {

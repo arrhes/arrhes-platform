@@ -46,8 +46,8 @@ export function InputDate(props:
                     gap: "2",
                     border: "1px solid",
                     borderColor: "neutral/20",
-                    rounded: "sm",
-                    _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
+                    borderRadius: "sm",
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
                 }),
                 css(props.error ? { borderColor: "error" } : {}),
                 props.className
@@ -88,14 +88,14 @@ export function InputDate(props:
                 onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
                 className={css({
-                    rounded: "inherit",
+                    borderRadius: "inherit",
                     width: "100%",
                     fontSize: "sm",
                     _placeholder: { color: "neutral/25" },
-                    p: "2",
-                    overflowidth: "hidden",
+                    padding: "1rem",
+                    overflow: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflowidth: "ellipsis"
+                    textOverflow: "ellipsis"
                 })}
                 inputMode="decimal"
             />

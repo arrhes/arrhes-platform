@@ -47,7 +47,7 @@ export function AccountItem(props: {
     return (
         <Fragment>
             <Link
-                to="/organisations/$idOrganization/exercices/$idYear/paramètres/comptes/$idAccount"
+                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/comptes/$idAccount"
                 params={{
                     idOrganization: props.idOrganization,
                     idYear: props.idYear,
@@ -56,7 +56,7 @@ export function AccountItem(props: {
                 className={css({ width: "100%" })}
             >
                 <div
-                    className={css({ minwidth: "fit", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottomWidth: "1px", borderColor: "neutral/5", _last: { borderBottomWidth: "0" } })}
+                    className={css({ minWidth: "fit", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottomWidth: "1px", borderColor: "neutral/5", _last: { borderBottomWidth: "0" } })}
                 // style={{
                 //     paddingLeft: `${(1 + props.level) * 12}px`
                 // }}
@@ -76,7 +76,7 @@ export function AccountItem(props: {
                                 />
                             )
                     }
-                    <div className={css({ p: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                    <div className={css({ padding: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                         <span className={cx(
                             css({ color: "neutral", fontSize: "xs", lineHeight: "none" }),
                             props.account.isMandatory ? css({ fontWeight: "bold" }) : ""

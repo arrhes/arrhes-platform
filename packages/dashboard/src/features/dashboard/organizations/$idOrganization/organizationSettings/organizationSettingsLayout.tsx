@@ -16,13 +16,13 @@ export function OrganizationSettingsLayout() {
                         {
                             label: "Général",
                             icon: <IconSettings />,
-                            to: "/organisations/$idOrganization/paramètres",
+                            to: "/dashboard/organisations/$idOrganization/paramètres",
                             params: { idOrganization: params.idOrganization, }
                         },
                         {
                             label: "Membres",
                             icon: <IconUsers />,
-                            to: "/organisations/$idOrganization/paramètres/membres",
+                            to: "/dashboard/organisations/$idOrganization/paramètres/membres",
                             params: { idOrganization: params.idOrganization, }
                         },
                     ]}

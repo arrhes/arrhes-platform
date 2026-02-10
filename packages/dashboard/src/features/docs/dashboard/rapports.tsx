@@ -160,8 +160,8 @@ export function GuideRapports() {
             {/* Completion box */}
             <div className={css({
                 marginTop: "12",
-                p: "6",
-                rounded: "xl",
+                padding: "6",
+                borderRadius: "xl",
                 backgroundColor: "success/8",
                 border: "1px solid",
                 borderColor: "success/20"

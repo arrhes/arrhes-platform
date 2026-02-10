@@ -17,11 +17,11 @@ export function DrawerContent(props:
                     width: "100%",
                     height: "100%",
                     display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    overflowidth: "auto",
-                    p: "2",
-                    backgroundColor: "neutral/25",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "flex-end",
+                    padding: "1rem",
+                    backgroundColor: "neutral/10",
                     "&[data-state=open]": {
                         animation: "fadeIn 0.2s ease-out"
                     },
@@ -32,27 +32,22 @@ export function DrawerContent(props:
             >
                 <DialogPrimitive.Content
                     {...props}
-                    onClick={(e) => {
-                        e.stopPropagation()
-                    }}
+                    onClick={(e) => e.preventDefault()}
                     className={cx(
                         css({
-                            minwidth: "100%",
+                            minWidth: "100%",
                             width: "100%",
                             maxWidth: "100%",
                             height: "100%",
-                            overflowidth: "auto",
+                            overflowY: "auto",
                             backgroundColor: "white",
-                            rounded: "md",
+                            borderRadius: "md",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
-                            border: "2px solid",
+                            border: "1px solid",
                             borderColor: "neutral/10",
-                            outline: "1px solid",
-                            outlineOffset: "-3px",
-                            outlineColor: "neutral/50",
                             transitionDuration: "200ms",
                             "&[data-state=open]": {
                                 animation: "fadeIn 0.2s ease-out, zoomIn 0.2s ease-out"
@@ -61,9 +56,8 @@ export function DrawerContent(props:
                                 animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
                             },
                             md: {
-                                minwidth: "md",
+                                minWidth: "md",
                                 maxWidth: "md",
-                                maxH: "100%"
                             }
                         }),
                         props.className

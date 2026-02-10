@@ -1,7 +1,7 @@
 import { ButtonContent } from "@arrhes/ui"
 import { IconBook, IconChevronRight } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import { DocLinkCard } from "../../components/document/docLinkCard.js"
+import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -102,13 +102,15 @@ export function DocumentationIndex() {
                     display: "flex",
                     gap: "0.5rem",
                 })}>
-                    <Link to="/documentation/fonctionnalites">
+                    <LinkButton
+                        to="/documentation/fonctionnalites"
+                    >
                         <ButtonContent
                             variant="default"
                             text="Voir les fonctionnalités"
                             rightIcon={<IconChevronRight />}
                         />
-                    </Link>
+                    </LinkButton>
                 </div>
             </div>
         </div>

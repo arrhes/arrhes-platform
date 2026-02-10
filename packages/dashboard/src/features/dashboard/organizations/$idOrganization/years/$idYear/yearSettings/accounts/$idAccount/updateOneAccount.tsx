@@ -46,7 +46,7 @@ export function UpdateOneAccount(props: {
                             idAccount: props.account.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier le compte",
                         }}
                         onSubmit={async (data) => {

@@ -21,7 +21,7 @@ export function IncomeStatementRow(props: {
 
     return (
         <Link
-            to="/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/$idIncomeStatement"
+            to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/$idIncomeStatement"
             params={{
                 idOrganization: props.idOrganization,
                 idYear: props.idYear,
@@ -30,7 +30,7 @@ export function IncomeStatementRow(props: {
             className={css({ width: "100%" })}
         >
             <div
-                className={css({ minwidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}
+                className={css({ minWidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}
             // style={{
             //     paddingLeft: `${(1 + props.level) * 12}px`
             // }}
@@ -47,7 +47,7 @@ export function IncomeStatementRow(props: {
                             />
                         )
                 }
-                <div className={css({ p: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                <div className={css({ padding: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                     <span className={css({ color: "neutral", fontSize: "xs", lineHeight: "1" })}>
                         {props.incomeStatement.number}
                     </span>

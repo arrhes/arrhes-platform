@@ -37,8 +37,8 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                         justifyContent: "space-between",
                         alignItems: "center",
                         border: "1px solid",
-                        rounded: "sm",
-                        _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
+                        borderRadius: "sm",
+                        _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
                     }),
                     css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
                     props.className
@@ -54,8 +54,8 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                         lineHeight: "none",
                         _placeholder: { color: "neutral/50" },
                         backgroundColor: "transparent",
-                        p: "2",
-                        rounded: "md"
+                        padding: "1rem",
+                        borderRadius: "md"
                     })}
                     ref={ref}
                     value={input(props.value)}
@@ -66,8 +66,8 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                     onClick={handleClickShowPassword}
                     className={css({
                         _hover: { backgroundColor: "neutral/5" },
-                        rounded: "md",
-                        p: "2"
+                        borderRadius: "md",
+                        padding: "1rem"
                     })}
                     tabIndex={-1}
                 >

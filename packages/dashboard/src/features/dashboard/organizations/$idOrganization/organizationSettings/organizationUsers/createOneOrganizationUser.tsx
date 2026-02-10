@@ -44,7 +44,7 @@ export function CreateOneOrganizationUser(props: {
                             isAdmin: false,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter l'utilisateur",
                         }}
                         onSubmit={async (data) => {

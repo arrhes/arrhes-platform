@@ -43,7 +43,7 @@ export function AccountsTable(props: {
                     .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
                 return (
-                    <div className={css({ height: "fit", width: "fit", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4", gap: "4" })}>
+                    <div className={css({ height: "fit", width: "fit", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", padding: "4", gap: "4" })}>
                         <InputDebounced
                             value={globalFilter ?? ""}
                             onChange={(value) => setGlobalFilter(value ?? "")}
@@ -60,7 +60,7 @@ export function AccountsTable(props: {
                                     : (
                                         <FormatNull
                                             text="Aucun compte n'a été trouvé"
-                                            className={css({ p: "2" })}
+                                            className={css({ padding: "1rem" })}
                                         />
                                     )
                             }

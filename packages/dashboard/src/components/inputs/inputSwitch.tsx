@@ -31,13 +31,13 @@ export function InputSwitch(props: InputSwitch) {
                     flexShrink: "0",
                     cursor: "pointer",
                     alignItems: "center",
-                    rounded: "100%",
+                    borderRadius: "100%",
                     border: "1px solid",
                     borderColor: "neutral/25",
                     _disabled: { cursor: "not-allowed", opacity: "0.5" },
                     backgroundColor: "white",
                     _checked: { backgroundColor: "success/5", borderColor: "neutral" },
-                    _focus: { shadowidth: "inset" }
+                    _focus: { boxShadow: "inset" }
                 }),
                 props.className
             )}
@@ -51,11 +51,11 @@ export function InputSwitch(props: InputSwitch) {
                     display: "block",
                     height: "4",
                     width: "4",
-                    rounded: "100%",
+                    borderRadius: "100%",
                     _checked: { backgroundColor: "neutral", transform: "translateX(18px)" },
                     backgroundColor: "neutral/10",
                     transform: "translateX(4px)",
-                    shadowidth: "lg",
+                    boxShadow: "lg",
                     transition: "transform"
                 })}
             />

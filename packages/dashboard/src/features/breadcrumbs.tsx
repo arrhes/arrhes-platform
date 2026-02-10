@@ -1,71 +1,78 @@
+import { readOneOrganizationRouteDefinition, readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
-import { css } from "../utilities/cn.js"
 import { IconSlash } from "@tabler/icons-react"
-import { Link, useRouterState } from "@tanstack/react-router"
+import { useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
+import { LinkButton } from "../components/linkButton.js"
+import { css } from "../utilities/cn.js"
+import { useDataFromAPI } from "../utilities/useHTTPData.js"
 
 
 export function Breadcrumbs() {
     const routerState = useRouterState()
     const currentMatch = routerState.matches.at(-1)
-    const params = currentMatch?.params ?? {}
+    const params = currentMatch?.params as Record<string, string> | undefined
 
-    const idOrganization = ("idOrganization" in params)
-        ? String(params.idOrganization)
-        : null
+    const idOrganization = params?.idOrganization ?? null
+    const idYear = params?.idYear ?? null
 
-    const idYear = ("idYear" in params)
-        ? String(params.idYear)
-        : null
+    const organizationQuery = useDataFromAPI({
+        routeDefinition: readOneOrganizationRouteDefinition,
+        body: { idOrganization: idOrganization ?? "" },
+        enabled: idOrganization !== null,
+    })
+
+    const yearQuery = useDataFromAPI({
+        routeDefinition: readOneYearRouteDefinition,
+        body: {
+            idOrganization: idOrganization ?? "",
+            idYear: idYear ?? "",
+        },
+        enabled: idOrganization !== null && idYear !== null,
+    })
+
+    const organizationName = organizationQuery.data?.name ?? idOrganization
+    const yearName = yearQuery.data?.label ?? idYear
 
     if (idOrganization === null) {
-        return (null)
+        return null
     }
+
     return (
         <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "1" })}>
-            {
-                (idOrganization === null)
-                    ? (null)
-                    : (
-                        <Link
-                            to="/organisations/$idOrganization"
-                            params={{
-                                idOrganization: idOrganization,
-                            }}
-                        >
-                            <ButtonContent
-                                variant="invisible"
-                                text={idOrganization}
-                                isActive={(idYear === null)}
-                            />
-                        </Link>
-                    )
-            }
-            {
-                (idYear === null)
-                    ? (null)
-                    : (
-                        <Fragment>
-                            <IconSlash
-                                size={16}
-                                className={css({ stroke: "neutral/25" })}
-                            />
-                            <Link
-                                to="/organisations/$idOrganization/exercices/$idYear/écritures"
-                                params={{
-                                    idOrganization: idOrganization,
-                                    idYear: idYear,
-                                }}
-                            >
-                                <ButtonContent
-                                    variant="invisible"
-                                    text={idYear}
-                                    isActive={true}
-                                />
-                            </Link>
-                        </Fragment>
-                    )
-            }
+            <LinkButton
+                to="/dashboard/organisations/$idOrganization"
+                params={{
+                    idOrganization: idOrganization,
+                }}
+            >
+                <ButtonContent
+                    variant="invisible"
+                    text={organizationName ?? ""}
+                // isActive={idYear === null}
+                />
+            </LinkButton>
+            {idYear !== null && (
+                <Fragment>
+                    <IconSlash
+                        size={16}
+                        className={css({ stroke: "neutral/25" })}
+                    />
+                    <LinkButton
+                        to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures"
+                        params={{
+                            idOrganization: idOrganization,
+                            idYear: idYear,
+                        }}
+                    >
+                        <ButtonContent
+                            variant="invisible"
+                            text={yearName ?? ""}
+                        // isActive={true}
+                        />
+                    </LinkButton>
+                </Fragment>
+            )}
         </div>
     )
 }

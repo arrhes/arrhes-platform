@@ -2,12 +2,10 @@ import { ComponentProps, ReactElement } from "react"
 import { css, cx } from "../../../utilities/cn.js"
 
 
-type PageRoot = {
+export function PageRoot(props: {
     children: ReactElement | ReactElement[]
     className?: ComponentProps<'div'>['className']
-}
-
-export function PageRoot(props: PageRoot) {
+}) {
     return (
         <div
             className={cx(
@@ -15,18 +13,15 @@ export function PageRoot(props: PageRoot) {
                     width: "100%",
                     flexShrink: "0",
                     flex: "1",
+                    paddingY: "2rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    overflowidth: "auto",
-                    p: "4",
-                    gap: "4",
+                    overflowY: "auto",
+                    gap: "1rem",
                     backgroundColor: "white",
-                    borderTop: "1px solid",
-                    borderColor: "neutral/10",
                     md: {
-                        p: "8",
                         gap: "8"
                     }
                 }),

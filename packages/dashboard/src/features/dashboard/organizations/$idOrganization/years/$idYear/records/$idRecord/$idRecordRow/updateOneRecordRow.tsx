@@ -22,7 +22,7 @@ import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
 
 
 export function UpdateOneRecordRow(props: {
-    recordRowidth: v.InferOutput<typeof returnedSchemas.recordRow>
+    recordRow: v.InferOutput<typeof returnedSchemas.recordRow>
     children: JSX.Element
 }) {
     const [open, setOpen] = useState(false)
@@ -44,10 +44,10 @@ export function UpdateOneRecordRow(props: {
                         schema={updateOneRecordRowRouteDefinition.schemas.body}
                         defaultValues={{
                             ...props.recordRow,
-                            idRecordRowidth: props.recordRow.id,
+                                    idRecordRow: props.recordRow.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier le mouvement",
                         }}
                         onSubmit={async (data) => {
@@ -80,7 +80,7 @@ export function UpdateOneRecordRow(props: {
                                 body: {
                                     idOrganization: props.recordRow.idOrganization,
                                     idYear: props.recordRow.idYear,
-                                    idRecordRowidth: props.recordRow.id,
+                            idRecordRow: props.recordRow.id,
                                 },
                             })
 

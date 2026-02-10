@@ -1,9 +1,11 @@
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
+import type { ButtonColor, ButtonVariant } from "@arrhes/ui"
+import type { Icon, IconProps } from "@tabler/icons-react"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { ReactElement, useEffect, useRef } from "react"
 import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
 import * as v from "valibot"
-import { css, cx } from "../../utilities/cn.js"
+import { css } from "../../utilities/cn.js"
 
 
 export function FormRoot<
@@ -17,7 +19,15 @@ export function FormRoot<
     onSuccess: ((data: v.InferOutput<U>) => void) | (() => Promise<void>) | undefined
     resetOnSubmit?: boolean
     submitOnPressEnterKey?: boolean
-    submitButtonProps: Parameters<typeof Button>[0]
+    submitButtonProps: {
+        text?: string
+        title?: string
+        color?: ButtonColor
+        variant?: ButtonVariant
+        className?: string
+        leftIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+        rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+    }
     children: (form: UseFormReturn<v.InferOutput<U>, any, v.InferOutput<U>>) => ReactElement
 }) {
     const form = useForm<T>({
@@ -52,7 +62,6 @@ export function FormRoot<
                     justifyContent: "flex-start",
                     alignItems: "flex-start"
                 })}
-            //  onSubmit={}
             >
                 <div className={css({
                     width: "100%",
@@ -61,7 +70,7 @@ export function FormRoot<
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
-                    gap: "4"
+                    gap: "1.5rem"
                 })}>
                     <div className={css({
                         width: "100%",
@@ -69,20 +78,16 @@ export function FormRoot<
                         flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
-                        gap: "2"
+                        gap: "1rem"
                     })}>
                         {props.children(form)}
                     </div>
                     <Button
-                        {...props.submitButtonProps}
-                        variant="primary"
                         ref={submitButtonRef}
-                        className={cx(
-                            "",
-                            props.submitButtonProps.className
-                        )}
+                        className={props.submitButtonProps.className}
                         type="button"
                         hasLoader={true}
+                        title={props.submitButtonProps.title ?? props.submitButtonProps.text}
                         onClick={async (event) => {
                             event.preventDefault()
 
@@ -101,7 +106,15 @@ export function FormRoot<
                                 await props.onSuccess(data)
                             }
                         }}
-                    />
+                    >
+                        <ButtonContent
+                            variant={props.submitButtonProps.variant ?? "primary"}
+                            text={props.submitButtonProps.text}
+                            color={props.submitButtonProps.color}
+                            leftIcon={props.submitButtonProps.leftIcon}
+                            rightIcon={props.submitButtonProps.rightIcon}
+                        />
+                    </Button>
                 </div>
             </form>
         </FormProvider>

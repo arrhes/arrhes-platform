@@ -16,7 +16,7 @@ export function ReportsLayout() {
                         {
                             label: "Livre-journal",
                             icon: <IconListNumbers />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/documents/livre-journal",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/livre-journal",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -25,7 +25,7 @@ export function ReportsLayout() {
                         {
                             label: "Grand livre",
                             icon: <IconListDetails />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/documents/grand-livre",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/grand-livre",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -34,7 +34,7 @@ export function ReportsLayout() {
                         {
                             label: "Balance",
                             icon: <IconScale />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/documents/balance",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/balance",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -43,7 +43,7 @@ export function ReportsLayout() {
                         {
                             label: "Bilan",
                             icon: <IconFileReport />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/documents/bilan",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/bilan",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -52,7 +52,7 @@ export function ReportsLayout() {
                         {
                             label: "Compte de résultat",
                             icon: <IconFileDiff />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/documents/compte-de-résultat",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/compte-de-résultat",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,

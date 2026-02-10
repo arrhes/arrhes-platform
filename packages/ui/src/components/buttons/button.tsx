@@ -1,83 +1,87 @@
-import { type ComponentProps, type MouseEvent, type ReactNode, useState } from "react"
+import { type ComponentProps, type MouseEvent, type ReactNode, createContext, forwardRef, useContext, useState } from "react"
 import { css, cx } from "../../utilities/cn.ts"
 import { sleep } from "../../utilities/sleep.ts"
-import { ButtonContent } from "./buttonContent"
 
 
 /**
- * Button component with loading state handling and variant support
- * Styled to match GitHub's Primer design system
- * Combines button behavior with ButtonContent visual styles
- * Can render children directly or use ButtonContent for structured content
+ * Context for passing loading state from Button to ButtonContent
  */
-export function Button(props:
-    & Omit<ComponentProps<"button">, "color">
-    & ComponentProps<typeof ButtonContent>
-    & {
-        hasLoader?: boolean
-        children?: ReactNode
-    }) {
+const ButtonLoadingContext = createContext<boolean>(false)
+
+/**
+ * Hook to access the loading state from a parent Button
+ * Returns false if not within a Button context
+ */
+export function useButtonLoading() {
+    return useContext(ButtonLoadingContext)
+}
+
+
+type ButtonProps = Omit<ComponentProps<"button">, "children"> & {
+    hasLoader?: boolean
+    children: ReactNode
+    title?: string
+}
+
+/**
+ * Button component - a neutral container for clickable elements
+ * Handles click events, loading state, and disabled state
+ * Use composition with ButtonContent for styled button content
+ * 
+ * @example
+ * <Button onClick={handleClick} hasLoader>
+ *   <ButtonContent variant="primary" text="Submit" />
+ * </Button>
+ */
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props, ref) {
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleClick(e: MouseEvent<HTMLButtonElement>) {
         if (props.onClick === undefined) return
-        if (props.hasLoader === false) return props.onClick(e)
+        if (!props.hasLoader) {
+            props.onClick(e)
+            return
+        }
 
         setIsLoading(true)
         await Promise.all([sleep(100), props.onClick(e)])
         setIsLoading(false)
-
-        e.preventDefault()
     }
 
-    // Extract content props from button props
     const {
-        variant, color, text, leftIcon, rightIcon, isActive,
         hasLoader, className, disabled, title, children,
         ...buttonProps
     } = props
 
-    // If children are provided, render them directly instead of ButtonContent
-    const hasChildren = children !== undefined
-
     return (
-        <button
-            {...buttonProps}
-            className={cx(
-                css({
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    width: "fit-content",
-                    maxWidth: "100%",
-                    height: "fit-content",
-                    maxHeight: "fit-content",
-                    bg: "transparent",
-                    border: "none",
-                    padding: "0",
-                    _disabled: { cursor: "not-allowed" },
-                }),
-                className
-            )}
-            onClick={handleClick}
-            type={props.type ?? "button"}
-            disabled={disabled || isLoading}
-            title={title ?? text}
-        >
-            {hasChildren ? children : (
-                <ButtonContent
-                    variant={variant}
-                    color={color}
-                    text={text}
-                    title={title ?? text}
-                    leftIcon={leftIcon}
-                    rightIcon={rightIcon}
-                    isLoading={hasLoader !== false ? isLoading : undefined}
-                    disabled={disabled}
-                    isActive={isActive}
-                />
-            )}
-        </button>
+        <ButtonLoadingContext.Provider value={isLoading}>
+            <button
+                {...buttonProps}
+                ref={ref}
+                className={cx(
+                    css({
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        width: "fit-content",
+                        maxWidth: "100%",
+                        height: "fit-content",
+                        maxHeight: "fit-content",
+                        bg: "transparent",
+                        border: "none",
+                        padding: "0",
+                        _disabled: { cursor: "not-allowed" },
+                    }),
+                    className
+                )}
+                onClick={handleClick}
+                type={props.type ?? "button"}
+                disabled={disabled || isLoading}
+                title={title}
+            >
+                {children}
+            </button>
+        </ButtonLoadingContext.Provider>
     )
-}
+})

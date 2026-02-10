@@ -8,7 +8,7 @@ export function DocTable(props: {
     return (
         <div className={css({
             overflowX: "auto",
-            rounded: "xl",
+            borderRadius: "xl",
             border: "1px solid",
             borderColor: "neutral/10",
             backgroundColor: "white"

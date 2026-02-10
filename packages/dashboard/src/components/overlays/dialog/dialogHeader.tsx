@@ -1,5 +1,5 @@
 
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
@@ -18,7 +18,7 @@ export function DialogHeader(props:
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    p: "4"
+                    padding: "4"
                 }),
                 props.className
             )}
@@ -31,10 +31,16 @@ export function DialogHeader(props:
                 {props.children}
             </div>
             <DialogPrimitive.Close asChild>
-                <Button
-                    variant="invisible"
-                    icon={<IconX />}
-                />
+                <button
+                    type="button"
+                    aria-label="Fermer"
+                    className={css({ display: "flex", alignItems: "center" })}
+                >
+                    <ButtonContent
+                        variant="invisible"
+                        leftIcon={<IconX />}
+                    />
+                </button>
             </DialogPrimitive.Close>
         </div>
     )

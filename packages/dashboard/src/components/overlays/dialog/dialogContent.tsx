@@ -17,13 +17,13 @@ export function DialogContent(props:
                     onClick={(e) => e.preventDefault()}
                     className={cx(
                         css({
-                            minwidth: "100%",
+                            minWidth: "100%",
                             width: "100%",
                             maxWidth: "md",
                             height: "fit",
                             maxH: "100%",
                             backgroundColor: "white",
-                            rounded: "md",
+                            borderRadius: "md",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "flex-start",
@@ -38,7 +38,7 @@ export function DialogContent(props:
                                 animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
                             },
                             md: {
-                                minwidth: "md"
+                                minWidth: "md"
                             }
                         }),
                         props.className

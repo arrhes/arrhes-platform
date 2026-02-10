@@ -1,6 +1,6 @@
 import { deleteOneYearRouteDefinition, readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
@@ -42,7 +42,7 @@ export function DeleteOneYear(props: {
         toast({ title: "Exercice supprimé", variant: "success" })
 
         platformRouter.navigate({
-            to: "/organisations/$idOrganization/exercices",
+            to: "/dashboard/organisations/$idOrganization/exercices",
             params: {
                 idOrganization: props.year.idOrganization
             }
@@ -72,7 +72,7 @@ export function DeleteOneYear(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer cet exercice ?
                             </Dialog.Title>
@@ -83,19 +83,12 @@ export function DeleteOneYear(props: {
                             </Dialog.Description>
                         </div>
                         <Dialog.Footer>
-                            <Button
-                                variant="invisible"
-                                text="Annuler"
-                                onClick={() => onCancel()}
-                            />
-                            <Button
-                                variant="primary"
-                                icon={<IconTrash />}
-                                color="error"
-                                onClick={() => onSubmit()}
-                                text="Supprimer l'exercice"
-                                hasLoader
-                            />
+                            <Button onClick={() => onCancel()}>
+                                <ButtonContent variant="invisible" text="Annuler" />
+                            </Button>
+                            <Button onClick={() => onSubmit()} hasLoader>
+                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer l'exercice" />
+                            </Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 )

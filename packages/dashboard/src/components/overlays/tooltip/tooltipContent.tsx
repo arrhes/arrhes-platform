@@ -12,9 +12,9 @@ export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Con
             className={cx(
                 css({
                     zIndex: "50",
-                    overflowidth: "auto",
+                    overflowY: "auto",
                     maxWidth: "xs",
-                    rounded: "md",
+                    borderRadius: "md",
                     backgroundColor: "white",
                     px: "4",
                     py: "3",

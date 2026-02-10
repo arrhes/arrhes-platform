@@ -7,7 +7,7 @@ export const organizationRoute = createRoute({
     path: "/",
     beforeLoad: ({ params }) => {
         throw redirect({
-            to: "/organisations/$idOrganization/exercices",
+            to: "/dashboard/organisations/$idOrganization/exercices",
             params: params
         })
     },

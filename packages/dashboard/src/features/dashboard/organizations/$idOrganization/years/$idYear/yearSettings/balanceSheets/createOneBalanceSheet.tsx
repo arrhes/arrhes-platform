@@ -48,7 +48,7 @@ export function CreateOneBalanceSheet(props: {
                             side: "asset",
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter la ligne de bilan",
                         }}
                         onSubmit={async (data) => {

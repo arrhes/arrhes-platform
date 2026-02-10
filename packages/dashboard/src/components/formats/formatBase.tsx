@@ -14,7 +14,7 @@ export function FormatBase(props: FormatBase) {
                 css({
                     width: "fit",
                     maxWidth: "100%",
-                    overflowidth: "auto",
+                    overflow: "auto",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center"

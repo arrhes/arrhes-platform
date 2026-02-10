@@ -11,12 +11,12 @@ export const Table = {
     Root: TableRoot,
     Header: {
         Root: TableHeaderRoot,
-        Rowidth: TableHeaderRow,
+        Row: TableHeaderRow,
         Cell: TableHeaderCell
     },
     Body: {
         Root: TableBodyRoot,
-        Rowidth: TableBodyRow,
+        Row: TableBodyRow,
         Cell: TableBodyCell
     }
 }

@@ -44,7 +44,7 @@ export function RecordLabelsPage() {
                                 return (
                                     <FormatNull
                                         text="Aucune catégorie"
-                                        className={css({ p: "2" })}
+                                        className={css({ padding: "1rem" })}
                                     />
                                 )
                             }
@@ -54,13 +54,13 @@ export function RecordLabelsPage() {
                                         sortedRecordLabels.map((recordLabel) => (
                                             <Link
                                                 key={recordLabel.id}
-                                                to="/organisations/$idOrganization/exercices/$idYear/paramètres/catégories/$idRecordLabel"
+                                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/catégories/$idRecordLabel"
                                                 params={{
                                                     idOrganization: params.idOrganization,
                                                     idYear: params.idYear,
                                                     idRecordLabel: recordLabel.id
                                                 }}
-                                                className={css({ width: "100%", p: "2", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
+                                                className={css({ width: "100%", padding: "1rem", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
                                             >
                                                 {`${recordLabel.label}`}
                                             </Link>

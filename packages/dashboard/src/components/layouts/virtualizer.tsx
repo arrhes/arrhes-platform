@@ -28,7 +28,7 @@ export function Virtualizer<TData extends unknown>(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    overflowidth: "auto"
+                    overflowY: "auto"
                 }),
                 props.className
             )}

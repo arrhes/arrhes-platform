@@ -12,12 +12,25 @@ import { OrganizationCard } from "./organizationCard.tsx"
 export function OrganizationsPage() {
     return (
         <Page.Root>
+            <Page.Header>
+                <Page.Title>
+                    Mes organisations
+                </Page.Title>
+            </Page.Header>
             <Page.Content>
-                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "4" })}>
-                    <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" })}>
-                        <span className={css({ fontSize: "2xl" })}>
-                            Mes organisations
-                        </span>
+                <div
+                    className={css({
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        gap: "1rem"
+                    })}
+                >
+                    <div
+                        className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}
+                    >
                         <AddNewOrganization>
                             <ButtonContent
                                 variant="default"
@@ -26,31 +39,40 @@ export function OrganizationsPage() {
                             />
                         </AddNewOrganization>
                     </div>
-                    <DataWrapper
-                        routeDefinition={getAllMyOrganizationsRouteDefinition}
-                        body={{}}
+                    <div
+                        className={css({
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            border: "1px solid",
+                            borderColor: "neutral/10",
+                            borderRadius: "lg",
+                        })}
                     >
-                        {(organizationUsers) => {
-                            if (organizationUsers.length === 0) {
+                        <DataWrapper
+                            routeDefinition={getAllMyOrganizationsRouteDefinition}
+                            body={{}}
+                        >
+                            {(organizationUsers) => {
+                                if (organizationUsers.length === 0) {
+                                    return (
+                                        <FormatNull
+                                            text="Aucune organisation"
+                                            className={css({ padding: "1rem" })}
+                                        />
+                                    )
+                                }
                                 return (
-                                    <FormatNull
-                                        text="Aucune organisation"
-                                        className={css({ p: "2" })}
-                                    />
-                                )
-                            }
-                            return (
-                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", gap: "3" })}>
-                                    {organizationUsers.map((organizationUser) => (
+                                    organizationUsers.map((organizationUser) => (
                                         <OrganizationCard
                                             key={organizationUser.id}
                                             organizationUser={organizationUser}
                                         />
-                                    ))}
-                                </div>
-                            )
-                        }}
-                    </DataWrapper>
+                                    ))
+                                )
+                            }}
+                        </DataWrapper>
+                    </div>
                 </div>
             </Page.Content>
         </Page.Root>

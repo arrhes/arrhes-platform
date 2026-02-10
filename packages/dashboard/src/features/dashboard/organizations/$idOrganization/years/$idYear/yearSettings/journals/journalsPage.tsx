@@ -55,7 +55,7 @@ export function JournalsPage() {
                                 return (
                                     <FormatNull
                                         text="Aucun journal"
-                                        className={css({ p: "2" })}
+                                        className={css({ padding: "1rem" })}
                                     />
                                 )
                             }
@@ -65,13 +65,13 @@ export function JournalsPage() {
                                         sortedJournals.map((journal) => (
                                             <Link
                                                 key={journal.id}
-                                                to="/organisations/$idOrganization/exercices/$idYear/paramètres/journaux/$idJournal"
+                                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/journaux/$idJournal"
                                                 params={{
                                                     idOrganization: params.idOrganization,
                                                     idYear: params.idYear,
                                                     idJournal: journal.id
                                                 }}
-                                                className={css({ width: "100%", p: "2", borderBottomWidth: "1px", borderColor: "neutral/10", _last: { borderStyle: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
+                                                className={css({ width: "100%", padding: "1rem", borderBottomWidth: "1px", borderColor: "neutral/10", _last: { borderStyle: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
                                             >
                                                 {`${journal.label} (${journal.code})`}
                                             </Link>

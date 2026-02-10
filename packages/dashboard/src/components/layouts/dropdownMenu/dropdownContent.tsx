@@ -18,17 +18,17 @@ export function DropdownContent(props:
                 className={cx(
                     css({
                         backgroundColor: "white",
-                        rounded: "md",
-                        p: "2",
-                        shadowidth: "lg",
+                        borderRadius: "lg",
+                        padding: "0.5em",
+                        boxShadow: "lg",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
-                        gap: "0",
+                        gap: "0.5rem",
                         border: "1px solid",
                         borderColor: "neutral/20",
-                        minwidth: "var(--radix-dropdown-menu-trigger-width)"
+                        minWidth: "var(--radix-dropdown-menu-trigger-width)"
                     }),
                     props.className
                 )}

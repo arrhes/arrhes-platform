@@ -7,7 +7,7 @@ export const computationsRoute = createRoute({
     path: "/",
     beforeLoad: ({ params }) => {
         throw redirect({
-            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat",
+            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat",
             params: params
         })
     },

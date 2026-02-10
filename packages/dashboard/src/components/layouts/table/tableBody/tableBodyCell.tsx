@@ -14,7 +14,7 @@ export function TableBodyCell(props: {
             className={cx(
                 css({
                     width: "fit",
-                    p: "2",
+                    padding: "1rem",
                     verticalAlign: "top"
                 }),
                 props.className

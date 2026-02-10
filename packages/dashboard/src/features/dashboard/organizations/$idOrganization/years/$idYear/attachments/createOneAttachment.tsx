@@ -50,7 +50,7 @@ export function CreateOneAttachment(props: {
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter le fichier",
                         }}
                         onSubmit={async (data) => {

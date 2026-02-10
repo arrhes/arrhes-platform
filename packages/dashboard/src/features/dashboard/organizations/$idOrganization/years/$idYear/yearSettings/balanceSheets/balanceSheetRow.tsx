@@ -21,7 +21,7 @@ export function BalanceSheetRow(props: {
 
     return (
         <Link
-            to="/organisations/$idOrganization/exercices/$idYear/paramètres/bilan/$idBalanceSheet"
+            to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/bilan/$idBalanceSheet"
             params={{
                 idOrganization: props.idOrganization,
                 idYear: props.idYear,
@@ -31,7 +31,7 @@ export function BalanceSheetRow(props: {
         >
             <div
                 className={css({
-                    minwidth: "fit-content",
+                    minWidth: "fit-content",
                     width: "100%",
                     display: "flex",
                     justifyContent: "flex-start",
@@ -65,7 +65,7 @@ export function BalanceSheetRow(props: {
                             />
                         )
                 }
-                <div className={css({ p: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                <div className={css({ padding: "1", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
                     <span className={css({
                         color: "neutral",
                         fontSize: "xs",

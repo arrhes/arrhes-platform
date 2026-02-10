@@ -7,13 +7,13 @@ import { css, cx } from "../../../utilities/cn.js"
 const toastIcons = {
     error: (
         <div className={css({
-            p: "2",
+            padding: "1rem",
             width: "32px",
             height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            rounded: "sm",
+            borderRadius: "sm",
             backgroundColor: "error/10",
             border: "1px solid",
             borderColor: "error/50"
@@ -23,13 +23,13 @@ const toastIcons = {
     ),
     success: (
         <div className={css({
-            p: "2",
+            padding: "1rem",
             width: "32px",
             height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            rounded: "sm",
+            borderRadius: "sm",
             backgroundColor: "success/10",
             border: "1px solid",
             borderColor: "success"
@@ -39,13 +39,13 @@ const toastIcons = {
     ),
     warning: (
         <div className={css({
-            p: "2",
+            padding: "1rem",
             width: "32px",
             height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            rounded: "sm",
+            borderRadius: "sm",
             backgroundColor: "warning/10",
             border: "1px solid",
             borderColor: "warning"
@@ -55,13 +55,13 @@ const toastIcons = {
     ),
     information: (
         <div className={css({
-            p: "2",
+            padding: "1rem",
             width: "32px",
             height: "32px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            rounded: "sm",
+            borderRadius: "sm",
             backgroundColor: "information/10",
             border: "1px solid",
             borderColor: "information"
@@ -95,8 +95,8 @@ export function ToastContent(props: ToastContent) {
                     alignItems: "center",
                     justifyContent: "flex-start",
                     gap: "4",
-                    p: "2",
-                    rounded: "md",
+                    padding: "1rem",
+                    borderRadius: "md",
                     border: "1px solid",
                     borderColor: "neutral/10",
                     backgroundColor: "white",

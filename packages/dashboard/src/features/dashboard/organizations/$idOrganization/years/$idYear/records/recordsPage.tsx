@@ -10,7 +10,7 @@ import { DataTable } from "../../../../../../../components/layouts/dataTable.js"
 import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.js"
 import { Page } from "../../../../../../../components/layouts/page/page.js"
 import { platformRouter } from "../../../../../../../routes/platformRouter.js"
-import { recordsRoute } from "../../../../../../../routes/root/docs/accounting/recordsRoute.js"
+import { recordsRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/recordsRoute.js"
 import { CreateOneRecord } from "./createOneRecord.js"
 
 
@@ -148,7 +148,7 @@ export function RecordsPage() {
                                 ]}
                                 onRowClick={(row) => {
                                     platformRouter.navigate({
-                                        to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
+                                        to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
                                         params: {
                                             idOrganization: row.original.idOrganization,
                                             idYear: row.original.idYear,

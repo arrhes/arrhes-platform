@@ -16,7 +16,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Général",
                             icon: <IconSettings />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -25,7 +25,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Plan des comptes",
                             icon: <IconSitemap />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/comptes",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/comptes",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -34,7 +34,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Journaux",
                             icon: <IconNews />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/journaux",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/journaux",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -43,7 +43,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Catégories",
                             icon: <IconLabel />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/catégories",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/catégories",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -52,7 +52,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Bilan",
                             icon: <IconFileReport />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/bilan",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/bilan",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
@@ -61,7 +61,7 @@ export function YearSettingsLayout() {
                         {
                             label: "Compte de résultat",
                             icon: <IconFileDiff />,
-                            to: "/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat",
+                            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat",
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,

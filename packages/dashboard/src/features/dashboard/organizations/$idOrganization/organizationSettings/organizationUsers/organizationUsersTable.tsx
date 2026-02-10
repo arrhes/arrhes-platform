@@ -28,7 +28,7 @@ export function OrganizationUsersTable(props: {
                         return (
                             <FormatNull
                                 text="Aucune organisation"
-                                className={css({ p: "4" })}
+                                className={css({ padding: "4" })}
                             />
                         )
                     }
@@ -38,7 +38,7 @@ export function OrganizationUsersTable(props: {
                                 return (
                                     <div
                                         key={organizationUser.id}
-                                        className={css({ width: "100%", p: "4", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "space-between", alignItems: "center" })}
+                                        className={css({ width: "100%", padding: "4", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "space-between", alignItems: "center" })}
                                     >
                                         <span>
                                             {organizationUser.user.email}

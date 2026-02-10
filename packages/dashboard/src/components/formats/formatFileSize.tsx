@@ -28,9 +28,9 @@ export function FormatFileSize(props: FormatFileSize) {
             <span className={css({
                 width: "fit",
                 maxWidth: "100%",
-                overflowidth: "hidden",
+                overflow: "hidden",
                 whiteSpace: "nowrap",
-                textOverflowidth: "ellipsis",
+                textOverflow: "ellipsis",
                 fontSize: "base",
                 wordBreak: "break-word"
             })}>

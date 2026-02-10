@@ -1,4 +1,4 @@
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css, cx } from "../../../utilities/cn.js"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { IconX } from "@tabler/icons-react"
@@ -24,10 +24,16 @@ export function ToastClose(props: ToastClose) {
             toast-close=""
             asChild
         >
-            <Button
-                variant="invisible"
-                icon={<IconX />}
-            />
+            <button
+                type="button"
+                aria-label="Fermer"
+                className={css({ display: "flex", alignItems: "center" })}
+            >
+                <ButtonContent
+                    variant="invisible"
+                    leftIcon={<IconX />}
+                />
+            </button>
         </ToastPrimitives.Close>
     )
 }

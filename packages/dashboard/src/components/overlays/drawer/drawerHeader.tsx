@@ -1,5 +1,5 @@
 
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { css } from "../../../utilities/cn.js"
@@ -13,11 +13,11 @@ export function DrawerHeader(props: {
             width: "100%",
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-start",
-            gap: "4",
+            alignItems: "center",
+            gap: "1rem",
             borderBottom: "1px solid",
-            borderColor: "neutral/5",
-            p: "4"
+            borderBottomColor: "neutral/10",
+            padding: "1rem"
         })}>
             <DialogPrimitive.Title>
                 {
@@ -31,10 +31,16 @@ export function DrawerHeader(props: {
                 }
             </DialogPrimitive.Title>
             <DialogPrimitive.Close asChild>
-                <Button
-                    variant="invisible"
-                    icon={<IconX />}
-                />
+                <button
+                    type="button"
+                    aria-label="Fermer"
+                    className={css({ display: "flex", alignItems: "center" })}
+                >
+                    <ButtonContent
+                        variant="invisible"
+                        leftIcon={<IconX />}
+                    />
+                </button>
             </DialogPrimitive.Close>
         </div>
     )

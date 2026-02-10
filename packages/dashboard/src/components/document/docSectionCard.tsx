@@ -2,6 +2,8 @@ import { ButtonContent } from "@arrhes/ui"
 import { IconChevronRight } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import type { ReactNode } from "react"
+import { LinkButton } from "../linkButton.js"
+import type { ValidRoutes } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -13,7 +15,7 @@ export function DocSectionCard(props: {
     title: string
     description: string
     links: { to: string; label: string }[]
-    ctaTo: string
+    ctaTo: ValidRoutes
     ctaLabel: string
 }) {
     const colorStyles: Record<DocSectionCardColor, { bg: string; color: string }> = {
@@ -111,13 +113,13 @@ export function DocSectionCard(props: {
             </div>
 
             {/* CTA */}
-            <Link to={props.ctaTo}>
+            <LinkButton to={props.ctaTo}>
                 <ButtonContent
                     variant="default"
                     text={props.ctaLabel}
                     rightIcon={<IconChevronRight />}
                 />
-            </Link>
+            </LinkButton>
         </div>
     )
 }

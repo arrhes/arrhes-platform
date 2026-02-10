@@ -15,7 +15,7 @@ export function RootLayout() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "warning/5",
-                p: "4"
+                padding: "4"
             })}
         >
             <span className={css({ color: "warning" })}>

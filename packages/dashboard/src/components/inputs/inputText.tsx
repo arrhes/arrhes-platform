@@ -31,8 +31,8 @@ export function InputText(props: InputText) {
                     alignItems: "center",
                     gap: "2",
                     border: "1px solid",
-                    rounded: "sm",
-                    _focusWithin: { borderColor: "neutral/50", shadowidth: "inset" }
+                    borderRadius: "sm",
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
                 }),
                 css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
                 props.className
@@ -48,8 +48,8 @@ export function InputText(props: InputText) {
                     lineHeight: "none",
                     _placeholder: { color: "neutral/25" },
                     backgroundColor: "transparent",
-                    p: "2",
-                    rounded: "md"
+                    padding: "1rem",
+                    borderRadius: "md"
                 })}
                 value={input(props.value)}
                 onChange={(e) => {

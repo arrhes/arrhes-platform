@@ -25,8 +25,8 @@ export function FormatLink(props: FormatLinkProps) {
                 onClick={() => copyContent(props.text)}
                 className={css({
                     width: "100%",
-                    overflowidth: "auto",
-                    rounded: "none"
+                    overflow: "auto",
+                    borderRadius: "none"
                 })}
             >
                 <span className={css({
@@ -36,8 +36,8 @@ export function FormatLink(props: FormatLinkProps) {
                     maxWidth: "100%",
                     overflowWrap: "normal",
                     whiteSpace: "nowrap",
-                    overflowidth: "auto",
-                    textOverflowidth: "ellipsis"
+                    overflow: "auto",
+                    textOverflow: "ellipsis"
                 })}>
                     {props.text}
                 </span>

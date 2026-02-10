@@ -40,7 +40,7 @@ export function UpdateOneOrganization(props: {
                         schema={updateOneOrganizationRouteDefinition.schemas.body}
                         defaultValues={props.organization}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier l'organisation",
                         }}
                         onSubmit={async (data) => {

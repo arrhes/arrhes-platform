@@ -1,15 +1,15 @@
 import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEdit, IconEye, IconPencil, IconPlus } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
 import { DataTable } from "../../../../../../../../components/layouts/dataTable.tsx"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 import { UpdateOneRecordRow } from "./$idRecordRow/updateOneRecordRow.tsx"
 import { CreateOneRecordRow } from "./createOneRecordRow.tsx"
 import { UpdateManyRecordRows } from "./updateManyRecordRows.tsx"
@@ -33,19 +33,19 @@ export function RecordRowsTable(props: {
                             <UpdateOneRecordRow
                                 recordRow={row.original}
                             >
-                                <Button
+                                <ButtonContent
                                     variant="invisible"
-                                    icon={<IconPencil />}
+                                    leftIcon={<IconPencil />}
                                     text={undefined}
                                 />
                             </UpdateOneRecordRow>
-                            <Link
-                                to="/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow"
+                            <LinkButton
+                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow"
                                 params={{
                                     idOrganization: props.record.idOrganization,
                                     idYear: props.record.idYear,
                                     idRecord: row.original.idRecord,
-                                    idRecordRowidth: row.original.id
+                                    idRecordRow: row.original.id
                                 }}
                             >
                                 <ButtonContent
@@ -53,7 +53,7 @@ export function RecordRowsTable(props: {
                                     leftIcon={<IconEye />}
                                     text={undefined}
                                 />
-                            </Link>
+                            </LinkButton>
                         </div>
                     ),
                     filterFn: 'includesString'
@@ -82,7 +82,7 @@ export function RecordRowsTable(props: {
                         >
                             {(account) => (
                                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
-                                    <FormatText className={css({ overflowidth: "visible" })}>
+                                    <FormatText className={css({ overflow: "visible" })}>
                                         {account.number}
                                     </FormatText>
                                     <FormatText wrap={true} className={css({ color: "neutral/50" })}>
@@ -127,12 +127,12 @@ export function RecordRowsTable(props: {
             ]}
             onRowClick={(row) => {
                 // platformRouter.navigate({
-                //     to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow",
+                //     to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow",
                 //     params: {
                 //         idOrganization: props.record.idOrganization,
                 //         idYear: props.record.idYear,
                 //         idRecord: row.original.idRecord,
-                //         idRecordRowidth: row.original.id
+                //         idRecordRow: row.original.id
                 //     }
                 // })
             }}

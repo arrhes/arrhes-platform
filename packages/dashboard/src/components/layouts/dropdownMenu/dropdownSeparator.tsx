@@ -15,7 +15,6 @@ export function DropdownSeparator(props:
                     width: "100%",
                     height: "1px",
                     backgroundColor: "neutral/10",
-                    my: "2"
                 }),
                 props.className
             )}

@@ -1,4 +1,4 @@
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "../../utilities/cn.js"
 
 
@@ -27,19 +27,20 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
             <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                 {
                     (props.previousCallback === undefined) ? null : (
-                        <Button
-                            variant="invisible"
-                            text={props.previousLabel}
-                            onClick={handlePrevious}
-                        />
+                        <Button onClick={handlePrevious}>
+                            <ButtonContent
+                                variant="invisible"
+                                text={props.previousLabel}
+                            />
+                        </Button>
                     )
                 }
-                <Button
-                    variant="primary"
-                    text={props.nextLabel}
-                    onClick={handleNext}
-                    hasLoader
-                />
+                <Button onClick={handleNext} hasLoader>
+                    <ButtonContent
+                        variant="primary"
+                        text={props.nextLabel}
+                    />
+                </Button>
             </div>
             {(!props.stepCount && !props.stepName) ? null :
                 <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>

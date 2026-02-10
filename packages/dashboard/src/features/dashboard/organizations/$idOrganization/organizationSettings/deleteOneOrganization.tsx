@@ -1,6 +1,6 @@
 import { deleteOneOrganizationRouteDefinition, getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
@@ -40,7 +40,7 @@ export function DeleteOneOrganization(props: {
 
         toast({ title: "Organisation supprimée", variant: "success" })
 
-        platformRouter.navigate({ to: "/organisations" })
+        platformRouter.navigate({ to: "/dashboard/organisations" })
         setOpen(false)
     }
 
@@ -66,7 +66,7 @@ export function DeleteOneOrganization(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer cette organisation ?
                             </Dialog.Title>
@@ -77,19 +77,12 @@ export function DeleteOneOrganization(props: {
                             </Dialog.Description>
                         </div>
                         <Dialog.Footer>
-                            <Button
-                                variant="invisible"
-                                text="Annuler"
-                                onClick={() => onCancel()}
-                            />
-                            <Button
-                                variant="primary"
-                                icon={<IconTrash />}
-                                color="error"
-                                onClick={() => onSubmit()}
-                                text="Supprimer l'organisation"
-                                hasLoader
-                            />
+                            <Button onClick={() => onCancel()}>
+                                <ButtonContent variant="invisible" text="Annuler" />
+                            </Button>
+                            <Button onClick={() => onSubmit()} hasLoader>
+                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer l'organisation" />
+                            </Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 )

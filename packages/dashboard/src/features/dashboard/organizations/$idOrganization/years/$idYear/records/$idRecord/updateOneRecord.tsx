@@ -45,7 +45,7 @@ export function UpdateOneRecord(props: {
                             idRecord: props.record.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier l'écriture",
                         }}
                         onSubmit={async (data) => {

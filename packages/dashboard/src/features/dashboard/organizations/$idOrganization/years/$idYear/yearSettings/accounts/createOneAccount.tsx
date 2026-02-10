@@ -50,7 +50,7 @@ export function CreateOneAccount(props: {
                             type: "balance-sheet",
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter le compte",
                         }}
                         onSubmit={async (data) => {

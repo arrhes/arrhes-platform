@@ -45,7 +45,7 @@ export function CreateOneComputationIncomeStatement(props: {
                             operation: "plus",
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter le terme du calcul",
                         }}
                         onSubmit={async (data) => {

@@ -1,8 +1,9 @@
 import { ButtonContent } from "@arrhes/ui"
-import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
+import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import { JSX } from "react"
 import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
 import { css, cx } from "../../utilities/cn.js"
+import { LinkButton } from "../linkButton.js"
 
 
 export function SubPageLayout(props: {
@@ -28,7 +29,7 @@ export function SubPageLayout(props: {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: "4"
+            gap: "8"
         })}>
             {
                 props.tabs === undefined
@@ -40,9 +41,10 @@ export function SubPageLayout(props: {
                             flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
-                            gap: "2",
+                            gap: "3",
                             borderRight: "1px solid",
-                            borderColor: "neutral/10"
+                            borderColor: "neutral/10",
+                            pr: "4"
                         })}>
                             {
                                 props.tabs.map((tab) => {
@@ -63,7 +65,7 @@ export function SubPageLayout(props: {
                                                 gap: "2"
                                             })}
                                         >
-                                            <Link
+                                            <LinkButton
                                                 to={tab.to}
                                                 params={tab.params}
                                                 className={css({
@@ -87,13 +89,13 @@ export function SubPageLayout(props: {
                                                         transitionTimingFunction: "ease-in-out"
                                                     })}
                                                 />
-                                            </Link>
+                                            </LinkButton>
                                             <div
                                                 className={cx(
                                                     css({
                                                         flexShrink: "0",
                                                         width: "2px",
-                                                        rounded: "100%"
+                                                        borderRadius: "100%"
                                                     }),
                                                     isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
                                                 )}
@@ -108,13 +110,14 @@ export function SubPageLayout(props: {
             <div className={css({
                 flexShrink: "1",
                 minH: "fit",
-                minwidth: "0",
+                minWidth: "0",
                 width: "100%",
                 maxWidth: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
-                alignItems: "stretch"
+                alignItems: "stretch",
+                paddingY: "2"
             })}>
                 <Outlet />
             </div>

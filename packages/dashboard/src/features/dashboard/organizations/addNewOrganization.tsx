@@ -1,4 +1,5 @@
 import { addNewOrganizationRouteDefinition, getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { Button } from "@arrhes/ui"
 import { IconPlus } from "@tabler/icons-react"
 import { JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
@@ -27,7 +28,9 @@ export function AddNewOrganization(props: {
             onOpenChange={setOpen}
         >
             <Drawer.Trigger>
-                {props.children}
+                <Button>
+                    {props.children}
+                </Button>
             </Drawer.Trigger>
             <Drawer.Content>
                 <Drawer.Header
@@ -40,7 +43,7 @@ export function AddNewOrganization(props: {
                             scope: "company",
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter l'organisation",
                         }}
                         onSubmit={async (data) => {

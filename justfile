@@ -15,7 +15,6 @@ dev-up:
     @echo "  Services:"
     @echo "    Dashboard:  http://localhost:5173"
     @echo "    API:        http://localhost:3000"
-    @echo "    Website:    http://localhost:5174"
     @echo ""
     @echo "  Infrastructure:"
     @echo "    PostgreSQL: localhost:5432"

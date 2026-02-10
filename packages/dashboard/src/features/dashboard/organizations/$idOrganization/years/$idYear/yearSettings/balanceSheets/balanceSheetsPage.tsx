@@ -18,7 +18,7 @@ export function BalanceSheetsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ minwidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
+                <div className={css({ minWidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
                     <CreateOneBalanceSheet
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}
@@ -51,7 +51,7 @@ export function BalanceSheetsPage() {
                     </ConnectAccountsToBalanceSheets>
                 </div>
                 <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start", gap: "2", flexWrap: "wrap" })}>
-                    <Box className={css({ p: "4", gap: "4", maxH: "[640px]" })}>
+                    <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
                         <TitleComponent>
                             Actif
                         </TitleComponent>
@@ -61,7 +61,7 @@ export function BalanceSheetsPage() {
                             filter={(balanceSheet) => balanceSheet.side === "asset"}
                         />
                     </Box>
-                    <Box className={css({ p: "4", gap: "4", maxH: "[640px]" })}>
+                    <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
                         <TitleComponent>
                             Passif
                         </TitleComponent>

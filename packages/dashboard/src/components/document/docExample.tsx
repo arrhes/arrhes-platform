@@ -8,8 +8,8 @@ export function DocExample(props: {
 }) {
     return (
         <div className={css({
-            p: "5",
-            rounded: "xl",
+            padding: "5",
+            borderRadius: "xl",
             border: "1px solid",
             borderColor: "information/20",
             backgroundColor: "information/5"

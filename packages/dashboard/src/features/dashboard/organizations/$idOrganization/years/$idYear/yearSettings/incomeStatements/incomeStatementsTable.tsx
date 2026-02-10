@@ -32,7 +32,7 @@ export function IncomeStatementsTable(props: {
                     .sort((a, b) => Number(a.number) - Number(b.number))
 
                 return (
-                    <div className={css({ height: "fit-content", width: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", p: "4", gap: "4" })}>
+                    <div className={css({ height: "fit-content", width: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", padding: "4", gap: "4" })}>
                         <InputDebounced
                             value={globalFilter ?? ""}
                             onChange={(value) => setGlobalFilter(value ?? "")}
@@ -49,7 +49,7 @@ export function IncomeStatementsTable(props: {
                                     : (
                                         <FormatNull
                                             text="Aucune ligne de compte de résultat n'a été trouvée"
-                                            className={css({ p: "2" })}
+                                            className={css({ padding: "1rem" })}
                                         />
                                     )
                             }

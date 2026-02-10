@@ -23,7 +23,7 @@ export function DocIndexLink(props: {
             <span className={css({
                 width: "1.5",
                 height: "1.5",
-                rounded: "100%",
+                borderRadius: "100%",
                 backgroundColor: "currentColor",
                 opacity: 0.5
             })} />

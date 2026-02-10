@@ -46,14 +46,14 @@ export function Banner(props: {
             className={cx(
                 css({
                     width: "100%",
-                    p: "4",
+                    padding: "4",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "2",
-                    rounded: "md"
+                    borderRadius: "md"
                 }),
-                banners[props?.variant ?? "neutral"].bg,
+                banners[props?.variant ?? "neutral"].backgroundColor,
                 props.className
             )}
         >

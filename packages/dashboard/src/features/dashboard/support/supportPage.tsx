@@ -10,13 +10,13 @@ export function SupportPage() {
     return (
         <Page.Root>
             <Page.Content>
-                <Box className={css({ p: "4", gap: "4" })}>
+                <Box className={css({ padding: "4", gap: "4" })}>
                     <span>
                         N'hésitez pas à contacter le support
                     </span>
                     <ContactSupportForm />
                 </Box>
-                <Box className={css({ p: "4", gap: "4" })}>
+                <Box className={css({ padding: "4", gap: "4" })}>
                     <span>
                         Vous pouvez aussi nous contacter directement via les moyens suivant
                     </span>

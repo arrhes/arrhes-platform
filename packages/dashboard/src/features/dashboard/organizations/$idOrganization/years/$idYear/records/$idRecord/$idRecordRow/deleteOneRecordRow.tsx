@@ -1,6 +1,6 @@
 import { deleteOneRecordRowRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconTrash } from "@tabler/icons-react"
 import { ComponentPropsWithRef, ReactElement, useState } from "react"
@@ -13,7 +13,7 @@ import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
 
 
 export function DeleteOneRecordRow(props: {
-    recordRowidth: v.InferOutput<typeof returnedSchemas.recordRow>
+    recordRow: v.InferOutput<typeof returnedSchemas.recordRow>
     children: ReactElement<ComponentPropsWithRef<'div'>>
 }) {
     const [open, setOpen] = useState(false)
@@ -22,7 +22,7 @@ export function DeleteOneRecordRow(props: {
         const deleteResponse = await postAPI({
             routeDefinition: deleteOneRecordRowRouteDefinition,
             body: {
-                idRecordRowidth: props.recordRow.id,
+                idRecordRow: props.recordRow.id,
                 idOrganization: props.recordRow.idOrganization,
                 idYear: props.recordRow.idYear,
             }
@@ -45,7 +45,7 @@ export function DeleteOneRecordRow(props: {
         toast({ title: "Écriture supprimée", variant: "success" })
 
         platformRouter.navigate({
-            to: "/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
+            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord",
             params: {
                 idOrganization: props.recordRow.idOrganization,
                 idYear: props.recordRow.idYear,
@@ -78,7 +78,7 @@ export function DeleteOneRecordRow(props: {
                 : (
                     <Dialog.Content>
                         <Dialog.Header />
-                        <div className={css({ p: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
                             <Dialog.Title>
                                 Voulez-vous supprimer ce mouvement ?
                             </Dialog.Title>
@@ -89,19 +89,12 @@ export function DeleteOneRecordRow(props: {
                             </Dialog.Description>
                         </div>
                         <Dialog.Footer>
-                            <Button
-                                variant="invisible"
-                                text="Annuler"
-                                onClick={() => onCancel()}
-                            />
-                            <Button
-                                variant="primary"
-                                icon={<IconTrash />}
-                                color="error"
-                                onClick={() => onSubmit()}
-                                text="Supprimer le mouvement"
-                                hasLoader
-                            />
+                            <Button onClick={() => onCancel()}>
+                                <ButtonContent variant="invisible" text="Annuler" />
+                            </Button>
+                            <Button onClick={() => onSubmit()} hasLoader>
+                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer le mouvement" />
+                            </Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 )

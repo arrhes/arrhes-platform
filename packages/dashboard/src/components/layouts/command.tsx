@@ -17,8 +17,8 @@ export const Command = React.forwardRef<
                 height: "100%",
                 width: "100%",
                 flexDirection: "column",
-                overflowidth: "auto",
-                rounded: "inherit",
+                overflowY: "auto",
+                borderRadius: "inherit",
                 backgroundColor: "white"
             }),
             className
@@ -33,9 +33,9 @@ export const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
     return (
         <Dialog {...props}>
             <DialogContent className={css({
-                overflowidth: "auto",
-                p: "0",
-                shadowidth: "lg"
+                overflowY: "auto",
+                padding: "0",
+                boxShadow: "lg"
             })}>
                 <Command className={css({
                     "& [cmdk-group-heading]": {
@@ -81,7 +81,7 @@ export const CommandInput = React.forwardRef<
         display: "flex",
         alignItems: "center",
         gap: "2",
-        p: "2",
+        padding: "1rem",
         borderBottom: "1px solid",
         borderColor: "neutral/10"
     })} cmdk-input-wrapper="">
@@ -97,7 +97,7 @@ export const CommandInput = React.forwardRef<
                 css({
                     display: "flex",
                     width: "100%",
-                    rounded: "md",
+                    borderRadius: "md",
                     backgroundColor: "transparent",
                     fontSize: "base",
                     outline: "none",
@@ -163,7 +163,7 @@ export const CommandGroup = React.forwardRef<
         ref={ref}
         className={cx(
             css({
-                overflowidth: "auto",
+                overflowY: "auto",
                 color: "slate.950",
                 "& [cmdk-group-heading]": {
                     px: "2",
@@ -210,7 +210,7 @@ export const CommandItem = React.forwardRef<
                 cursor: "default",
                 userSelect: "none",
                 alignItems: "center",
-                rounded: "sm",
+                borderRadius: "sm",
                 px: "2",
                 py: "1.5",
                 fontSize: "sm",

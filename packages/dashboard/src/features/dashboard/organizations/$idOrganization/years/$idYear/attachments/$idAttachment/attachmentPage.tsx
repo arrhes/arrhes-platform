@@ -1,8 +1,9 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
+import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatFileSize } from "../../../../../../../../components/formats/formatFileSize.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
@@ -33,8 +34,8 @@ export function AttachmentPage() {
                             <Section.Root>
                                 <Section.Item>
                                     <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
-                                        <Link
-                                            to="/organisations/$idOrganization/exercices/$idYear/fichiers"
+                                        <LinkButton
+                                            to="/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers"
                                             params={{
                                                 idOrganization: attachment.idOrganization,
                                                 idYear: attachment.idYear,
@@ -45,25 +46,24 @@ export function AttachmentPage() {
                                                 leftIcon={<IconChevronLeft />}
                                                 text="Retour"
                                             />
-                                        </Link>
+                                        </LinkButton>
                                     </div>
                                     <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                         <UpdateOneAttachment
                                             attachment={attachment}
                                         >
-                                            <Button
+                                            <ButtonContent
                                                 variant="primary"
-                                                icon={<IconPencil />}
+                                                leftIcon={<IconPencil />}
                                                 text="Modifier"
                                             />
                                         </UpdateOneAttachment>
                                         <DeleteOneAttachment
                                             attachment={attachment}
                                         >
-                                            <Button
+                                            <ButtonContent
                                                 variant="default"
-                                                icon={<IconTrash />}
-                                                title="Supprimer"
+                                                leftIcon={<IconTrash />}
                                                 color="error"
                                             />
                                         </DeleteOneAttachment>

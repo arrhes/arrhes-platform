@@ -44,7 +44,7 @@ export function UpdateOneComputationIncomeStatement(props: {
                             idComputationIncomeStatement: props.computationIncomeStatement.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier le terme du calcul",
                         }}
                         onSubmit={async (data) => {

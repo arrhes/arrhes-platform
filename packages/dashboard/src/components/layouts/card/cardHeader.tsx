@@ -17,7 +17,7 @@ export function CardHeader(props: {
                     justifyContent: "space-between",
                     alignItems: "flex-start",
                     gap: "2",
-                    p: "2"
+                    padding: "1rem"
                 }),
                 props.className
             )}

@@ -1,5 +1,5 @@
 import { readAllAccountsRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllComputationsRouteDefinition, readAllIncomeStatementsRouteDefinition, readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconDownload } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -68,10 +68,9 @@ export function IncomeStatementReportPage() {
                                                                                     idOrganization={params.idOrganization}
                                                                                     idYear={params.idYear}
                                                                                 >
-                                                                                    <Button
-                                                                                        icon={<IconDownload />}
+                                                                                    <ButtonContent
+                                                                                        leftIcon={<IconDownload />}
                                                                                         text="Télécharger en pdf"
-                                                                                        hasLoader={true}
                                                                                         variant="default"
                                                                                     />
                                                                                 </DownloadIncomeStatementReport>

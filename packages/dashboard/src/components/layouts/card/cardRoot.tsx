@@ -19,10 +19,10 @@ export function CardRoot(props: CardRoot) {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
-                    overflowidth: "auto",
+                    overflowY: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    rounded: "md"
+                    borderRadius: "md"
                 }),
                 props.className
             )}

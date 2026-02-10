@@ -13,7 +13,7 @@ export function TableHeaderCell(props: {
             className={cx(
                 css({
                     width: "fit",
-                    p: "2",
+                    padding: "1rem",
                     verticalAlign: "middle"
                 }),
                 props.className

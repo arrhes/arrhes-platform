@@ -1,9 +1,9 @@
 import { ButtonContent } from "@arrhes/ui"
 import { IconChevronRight, IconLayout, IconRocket } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import { DocLink } from "../../components/document/docLink.js"
 import { DocLinkCard } from "../../components/document/docLinkCard.js"
 import { DocTip } from "../../components/document/docTip.js"
+import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -83,13 +83,15 @@ export function DashboardIndex() {
                         et comprendre les bases du logiciel.
                     </p>
                 </div>
-                <Link to="/documentation/dashboard/demarrage">
+                <LinkButton
+                    to="/documentation/dashboard/demarrage"
+                >
                     <ButtonContent
                         variant="primary"
                         text="Commencer"
                         rightIcon={<IconChevronRight />}
                     />
-                </Link>
+                </LinkButton>
             </div>
 
             {/* Guide sections */}

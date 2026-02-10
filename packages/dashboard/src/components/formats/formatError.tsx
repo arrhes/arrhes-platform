@@ -19,8 +19,8 @@ export function FormatError(props: {
                 fontWeight: "semibold",
                 color: "error/75",
                 whiteSpace: "nowrap",
-                overflowidth: "auto",
-                textOverflowidth: "ellipsis"
+                overflow: "auto",
+                textOverflow: "ellipsis"
             })}>
                 {props.text}
             </span>

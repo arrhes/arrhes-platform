@@ -46,7 +46,7 @@ export function UpdateManyRecordRows(props: {
                             idRecord: props.record.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier les mouvements",
                         }}
                         onSubmit={async (data) => {

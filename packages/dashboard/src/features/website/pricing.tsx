@@ -13,7 +13,7 @@ import {
     IconUserPlus,
     IconUsers
 } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../../components/linkButton.js"
 import { FeatureItem } from "./featureItem.tsx"
 
 
@@ -82,14 +82,16 @@ export function Pricing() {
                     <FeatureItem icon={<IconCalculator />} text="[dev] Comptabilité analytique" />
                 </div>
 
-                <Link to="/inscription">
+                <LinkButton
+                    to="/sign-up"
+                >
                     <ButtonContent
                         variant="default"
                         leftIcon={<IconUserPlus />}
                         text="Créer un compte"
                         className={css({ width: "100%" })}
                     />
-                </Link>
+                </LinkButton>
             </div>
 
             {/* Pro Plan */}
@@ -145,13 +147,13 @@ export function Pricing() {
                     <FeatureItem icon={<IconSparkles />} text="Assistant IA" highlighted />
                     <FeatureItem icon={<IconLifebuoy />} text="Support prioritaire" highlighted />
                 </div>
-                {/* <Link to="/sign-up">
+                {/* <LinkButton to="/sign-up">
                         <ButtonContent
                             variant="primary"
                             text="Essayer gratuitement"
                             className={css({ width: "100%" })}
                         />
-                    </Link> */}
+                    </LinkButton> */}
             </div>
         </div>
     )

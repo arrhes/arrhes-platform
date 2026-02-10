@@ -43,7 +43,7 @@ export function YearsPage() {
                                 return (
                                     <FormatNull
                                         text="Aucun exercice"
-                                        className={css({ p: "4", width: "100%" })}
+                                        className={css({ padding: "4", width: "100%" })}
                                     />
                                 )
                             }

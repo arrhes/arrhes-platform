@@ -1,0 +1,49 @@
+import { Link } from "@tanstack/react-router"
+import type { ComponentProps, ReactNode } from "react"
+import type { ValidParams, ValidRoutes } from "../routes/platformRouter.js"
+import { css, cx } from "../utilities/cn.js"
+
+
+/**
+ * LinkButton - a neutral container wrapping TanStack Router's Link
+ * Use with composition pattern (children)
+ * 
+ * @example
+ * <LinkButton to="/dashboard">
+ *   <ButtonContent variant="primary" text="Go to Dashboard" leftIcon={<IconHome />} />
+ * </LinkButton>
+ */
+export function LinkButton(props: {
+    to: ValidRoutes
+    params?: ValidParams
+    target?: ComponentProps<typeof Link>["target"]
+    rel?: ComponentProps<typeof Link>["rel"]
+    title?: string
+    disabled?: boolean
+    className?: string
+    children: ReactNode
+}) {
+    return (
+        <Link
+            to={props.to}
+            params={props.params}
+            target={props.target}
+            rel={props.rel}
+            className={cx(
+                css({
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    width: "fit-content",
+                    maxWidth: "100%",
+                    _disabled: { cursor: "not-allowed", pointerEvents: "none" },
+                }),
+                props.className
+            )}
+            aria-disabled={props.disabled}
+            title={props.title}
+        >
+            {props.children}
+        </Link>
+    )
+}

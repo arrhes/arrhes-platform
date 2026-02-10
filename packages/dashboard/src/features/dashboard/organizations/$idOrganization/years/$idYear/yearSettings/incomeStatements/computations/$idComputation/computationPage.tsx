@@ -1,10 +1,11 @@
 import { readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { FormatDateTime } from "../../../../../../../../../../components/formats/formatDateTime.tsx"
+import { LinkButton } from "../../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../../components/layouts/dataWrapper.tsx"
@@ -34,8 +35,8 @@ export function ComputationPage() {
                         <Fragment>
                             <Section.Item className={css({ flexDirection: "row" })}>
                                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
-                                    <Link
-                                        to="/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs"
+                                    <LinkButton
+                                        to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs"
                                         params={{
                                             idOrganization: params.idOrganization,
                                             idYear: params.idYear,
@@ -46,25 +47,24 @@ export function ComputationPage() {
                                             leftIcon={<IconChevronLeft />}
                                             text="Retour"
                                         />
-                                    </Link>
+                                    </LinkButton>
                                 </div>
                                 <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                     <UpdateOneComputation
                                         computation={computation}
                                     >
-                                        <Button
+                                        <ButtonContent
                                             variant="primary"
-                                            icon={<IconPencil />}
+                                            leftIcon={<IconPencil />}
                                             text="Modifier"
                                         />
                                     </UpdateOneComputation>
                                     <DeleteOneComputation
                                         computation={computation}
                                     >
-                                        <Button
+                                        <ButtonContent
                                             variant="default"
-                                            icon={<IconTrash />}
-                                            title="Supprimer"
+                                            leftIcon={<IconTrash />}
                                             color="error"
                                         />
                                     </DeleteOneComputation>

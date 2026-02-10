@@ -7,7 +7,7 @@ export const yearRoute = createRoute({
     path: "/",
     beforeLoad: ({ params }) => {
         throw redirect({
-            to: "/organisations/$idOrganization/exercices/$idYear/écritures",
+            to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures",
             params: params
         })
     },

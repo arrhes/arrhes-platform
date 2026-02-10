@@ -45,7 +45,7 @@ export function UpdateOneBalanceSheet(props: {
                             idBalanceSheet: props.balanceSheet.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier la ligne de bilan",
                         }}
                         onSubmit={async (data) => {

@@ -1,9 +1,10 @@
 import { IconCheck } from "@tabler/icons-react"
+import { ReactNode } from "react"
 import { css } from "../../utilities/cn.js"
 
 
 export function DocList(props: {
-    items: string[]
+    items: ReactNode[]
     variant?: "bullet" | "check"
 }) {
     const variant = props.variant ?? "bullet"
@@ -31,7 +32,7 @@ export function DocList(props: {
                         <span className={css({
                             width: "1.5",
                             height: "1.5",
-                            rounded: "100%",
+                            borderRadius: "100%",
                             backgroundColor: "neutral/30",
                             marginTop: "2",
                             flexShrink: 0

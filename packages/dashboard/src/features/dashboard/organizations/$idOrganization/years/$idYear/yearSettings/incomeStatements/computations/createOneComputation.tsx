@@ -44,7 +44,7 @@ export function CreateOneComputation(props: {
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter la ligne de calcul",
                         }}
                         onSubmit={async (data) => {

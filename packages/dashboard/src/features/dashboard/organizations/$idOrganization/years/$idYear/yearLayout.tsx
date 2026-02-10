@@ -1,19 +1,19 @@
 import { IconFolders, IconPencil, IconReport, IconSettings } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
+import { PageNavigation } from "../../../../../../components/layouts/page/pageNavigation.tsx"
 import { yearLayoutRoute } from "../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearLayoutRoute.tsx"
-import { PageLayout } from "../../../../../../components/layouts/pageLayout.tsx"
 
 
 export function YearLayout() {
     const params = useParams({ from: yearLayoutRoute.id })
 
     return (
-        <PageLayout
+        <PageNavigation
             tabs={[
                 {
                     label: "Écritures",
                     icon: <IconPencil />,
-                    to: "/organisations/$idOrganization/exercices/$idYear/écritures",
+                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures",
                     params: {
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,
@@ -22,7 +22,7 @@ export function YearLayout() {
                 {
                     label: "Stockage de fichiers",
                     icon: <IconFolders />,
-                    to: "/organisations/$idOrganization/exercices/$idYear/fichiers",
+                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers",
                     params: {
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,
@@ -31,7 +31,7 @@ export function YearLayout() {
                 {
                     label: "Documents comptables",
                     icon: <IconReport />,
-                    to: "/organisations/$idOrganization/exercices/$idYear/documents",
+                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents",
                     params: {
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,
@@ -40,7 +40,7 @@ export function YearLayout() {
                 {
                     label: "Paramètres",
                     icon: <IconSettings />,
-                    to: "/organisations/$idOrganization/exercices/$idYear/paramètres",
+                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres",
                     params: {
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,

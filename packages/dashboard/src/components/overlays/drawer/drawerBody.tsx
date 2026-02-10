@@ -12,8 +12,8 @@ export function DrawerBody(props: {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: "4",
-            p: "4"
+            gap: "1rem",
+            padding: "1rem"
         })}>
             {props.children}
         </div>

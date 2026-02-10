@@ -16,7 +16,7 @@ export function FormatText(props: {
                 fontSize: "sm",
                 wordBreak: "break-word",
                 overflowX: "hidden",
-                textOverflowidth: "ellipsis"
+                textOverflow: "ellipsis"
             }),
             !props.wrap ? css({ whiteSpace: "nowrap" }) : undefined,
             props.className

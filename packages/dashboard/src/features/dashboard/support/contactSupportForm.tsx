@@ -22,7 +22,7 @@ export function ContactSupportForm() {
                 category: "bug",
             }}
             submitButtonProps={{
-                icon: <IconSend />,
+                leftIcon: <IconSend />,
                 text: "Envoyer le message",
             }}
             onSubmit={async (data) => {

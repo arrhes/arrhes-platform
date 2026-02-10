@@ -1,6 +1,6 @@
 import { ButtonContent } from "@arrhes/ui"
 import { IconChevronRight } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -40,7 +40,7 @@ export function ComptabiliteIndex() {
                 flexDirection: { base: "column", md: "row" },
                 gap: "1.5rem",
             })}>
-                <Link
+                <LinkButton
                     to="/documentation/comptabilite/comptes"
                 >
                     <ButtonContent
@@ -48,7 +48,7 @@ export function ComptabiliteIndex() {
                         text="Commencer directement"
                         rightIcon={<IconChevronRight />}
                     />
-                </Link>
+                </LinkButton>
             </div>
         </div>
     )

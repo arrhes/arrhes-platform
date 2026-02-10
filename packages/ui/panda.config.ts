@@ -11,6 +11,28 @@ export default defineConfig({
     // Files to exclude
     exclude: [],
 
+    globalFontface: {
+        Monaspace: {
+            src: 'url(/src/assets/fonts/Monaspace Neon Var.woff2) format("woff2")',
+            fontWeight: "unset",
+            fontStyle: 'normal',
+            fontDisplay: 'swap',
+            fontVariant: "contextual",
+            lineGapOverride: "normal",
+            fontFeatureSettings: "calt",
+        }
+    },
+
+    globalCss: {
+        "*": {
+            color: "neutral",
+            margin: 0,
+            padding: 0,
+            fontFamily: "Monaspace, monospace",
+            fontWeight: "300",
+        }
+    },
+
     // Useful for theme customization
     theme: {
         tokens: {

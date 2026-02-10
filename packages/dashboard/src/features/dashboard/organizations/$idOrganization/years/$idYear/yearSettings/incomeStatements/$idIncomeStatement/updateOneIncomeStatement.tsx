@@ -44,7 +44,7 @@ export function UpdateOneIncomeStatement(props: {
                             idIncomeStatement: props.incomeStatement.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier la ligne de compte de résultat",
                         }}
                         onSubmit={async (data) => {

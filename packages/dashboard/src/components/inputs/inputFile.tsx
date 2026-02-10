@@ -24,7 +24,7 @@ export function InputFile(props:
                 borderColor: "neutral/20",
                 borderStyle: "dashed",
                 _hover: { backgroundColor: "neutral/5" },
-                rounded: "sm",
+                borderRadius: "sm",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
@@ -57,7 +57,7 @@ export function InputFile(props:
                     cursor: "pointer",
                     width: "100%",
                     height: "100%",
-                    p: { base: "2", md: "3" },
+                    padding: { base: "2", md: "3" },
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center"

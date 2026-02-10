@@ -2,7 +2,7 @@ import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, rea
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconCopyCheck, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
@@ -14,6 +14,7 @@ import { DataWrapper } from "../../../../../../../../components/layouts/dataWrap
 import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
 import { TitleComponent } from "../../../../../../../../components/layouts/title.tsx"
+import { LinkButton } from "../../../../../../../../components/linkButton.js"
 import { recordRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/$idRecord/recordRoute.tsx"
 import { compareAmounts } from "../../../../../../../../utilities/compareAmounts.ts"
 import { DeleteOneRecord } from "./deleteOneRecord.tsx"
@@ -59,8 +60,8 @@ export function RecordPage() {
                                         <Section.Root>
                                             <Section.Item>
                                                 <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
-                                                    <Link
-                                                        to="/organisations/$idOrganization/exercices/$idYear/écritures"
+                                                    <LinkButton
+                                                        to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures"
                                                         params={{
                                                             idOrganization: params.idOrganization,
                                                             idYear: params.idYear,
@@ -71,7 +72,7 @@ export function RecordPage() {
                                                             leftIcon={<IconChevronLeft />}
                                                             text="Retour"
                                                         />
-                                                    </Link>
+                                                    </LinkButton>
                                                     <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                                         <UpdateOneRecord
                                                             record={record}
@@ -117,7 +118,7 @@ export function RecordPage() {
                                                     </div>
                                                 </div>
                                             </Section.Item>
-                                            <Section.Item className={css({ p: "0" })}>
+                                            <Section.Item className={css({ padding: "0" })}>
                                                 {
                                                     (record.idAttachment === null)
                                                         ? (null)

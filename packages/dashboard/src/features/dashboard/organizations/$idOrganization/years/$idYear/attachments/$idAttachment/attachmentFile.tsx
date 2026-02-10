@@ -37,7 +37,7 @@ export function AttachmentFile(props: {
     return (
         <embed
             title={props.attachment.reference}
-            className={css({ width: "100%", minH: "fit", height: "768px", maxH: "768px", border: "1px solid", borderColor: "neutral/20", rounded: "md", p: "4" })}
+            className={css({ width: "100%", minH: "fit", height: "768px", maxH: "768px", border: "1px solid", borderColor: "neutral/20", borderRadius: "md", padding: "4" })}
             src={attachmentSignedUrlResponse.data.url}
             type={props.attachment.type ?? undefined}
         />

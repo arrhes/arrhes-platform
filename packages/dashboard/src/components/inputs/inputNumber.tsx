@@ -34,7 +34,7 @@ export function InputPrice(props:
                 alignItems: "stretch",
                 border: "1px solid",
                 borderColor: "neutral/20",
-                rounded: "sm"
+                borderRadius: "sm"
             }),
             css(props.error ? { borderColor: "error" } : {}),
             props.className
@@ -59,15 +59,15 @@ export function InputPrice(props:
                 onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
                 className={css({
-                    rounded: "inherit",
+                    borderRadius: "inherit",
                     width: "100%",
                     fontSize: "base",
                     _placeholder: { color: "neutral/25" },
-                    p: "2",
-                    _focus: { shadowidth: "inset", backgroundColor: "neutral/5" },
-                    overflowidth: "hidden",
+                    padding: "1rem",
+                    _focus: { boxShadow: "inset", backgroundColor: "neutral/5" },
+                    overflow: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflowidth: "ellipsis"
+                    textOverflow: "ellipsis"
                 })}
                 inputMode="decimal"
             />

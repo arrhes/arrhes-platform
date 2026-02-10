@@ -20,7 +20,7 @@ export function IncomeStatementsPage() {
     return (
         <Section.Root>
             <Section.Item>
-                <div className={css({ minwidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
+                <div className={css({ minWidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
                     <CreateOneIncomeStatement
                         idOrganization={params.idOrganization}
                         idYear={params.idYear}

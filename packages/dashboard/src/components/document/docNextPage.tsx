@@ -20,15 +20,15 @@ export function DocNextPage(props: {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    p: "5",
-                    rounded: "xl",
+                    padding: "5",
+                    borderRadius: "xl",
                     border: "1px solid",
                     borderColor: "neutral/10",
                     backgroundColor: "white",
                     transition: "all 0.2s",
                     _hover: {
                         borderColor: "primary/30",
-                        shadowidth: "sm",
+                        boxShadow: "sm",
                         transform: "translateX(4px)"
                     }
                 })}

@@ -74,7 +74,7 @@ export function AttachmentsTable(props: {
             ]}
             onRowClick={(row) => {
                 platformRouter.navigate({
-                    to: "/organisations/$idOrganization/exercices/$idYear/fichiers/$idAttachment",
+                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idAttachment",
                     params: {
                         idOrganization: props.idOrganization,
                         idYear: props.idYear,

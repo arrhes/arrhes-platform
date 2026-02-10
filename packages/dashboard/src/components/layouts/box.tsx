@@ -10,7 +10,7 @@ export function Box(props: {
         <div
             className={cx(
                 css({
-                    minwidth: "0",
+                    minWidth: "0",
                     width: "100%",
                     maxWidth: "100%",
                     height: "fit",
@@ -22,7 +22,7 @@ export function Box(props: {
                     overflowX: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    rounded: "md"
+                    borderRadius: "md"
                 }),
                 props.className
             )}

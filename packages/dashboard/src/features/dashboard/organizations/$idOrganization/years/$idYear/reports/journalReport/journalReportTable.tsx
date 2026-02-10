@@ -160,7 +160,7 @@ export function JournalReportTable(props: {
                                                             >
                                                                 {(account) => (
                                                                     <Fragment>
-                                                                        <FormatText className={css({ overflowidth: "visible" })}>
+                                                                        <FormatText className={css({ overflow: "visible" })}>
                                                                             {account.number}
                                                                         </FormatText>
                                                                         <FormatText wrap={true} className={css({ color: "neutral/50" })}>

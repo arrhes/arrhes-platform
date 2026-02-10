@@ -16,7 +16,7 @@ export function ToastAction(props:
                     flexShrink: "0",
                     alignItems: "center",
                     justifyContent: "center",
-                    rounded: "md",
+                    borderRadius: "md",
                     border: "1px solid",
                     backgroundColor: "transparent",
                     px: "3",

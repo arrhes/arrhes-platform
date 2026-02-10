@@ -9,6 +9,7 @@ export function Logo(props: {
 }) {
     return (
         <ButtonContent
+            variant="invisible"
             leftIcon={<IconAbacus />}
             text={
                 props.withText

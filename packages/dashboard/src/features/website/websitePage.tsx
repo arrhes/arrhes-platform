@@ -6,6 +6,7 @@ import {
     IconUser
 } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 import { HeroIllustration } from "./heroIllustration.js"
 import { Pricing } from "./pricing.js"
@@ -45,7 +46,7 @@ export function WebsitePage() {
                 <div
                     className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "start",
@@ -74,19 +75,22 @@ export function WebsitePage() {
                                 leftIcon={<IconBrandGithub />}
                             />
                         </a>
-                        <Link to="/documentation">
+                        <LinkButton
+                            to="/documentation"
+                        >
                             <ButtonContent
                                 leftIcon={<IconBook2 />}
                                 text="Documentation"
                             />
-                        </Link>
-                        <Link to="/dashboard">
+                        </LinkButton>
+                        <LinkButton
+                            to="/dashboard"
+                        >
                             <ButtonContent
                                 variant="primary"
-                                // leftIcon={<IconAppWindow />}
                                 text="Dashboard"
                             />
-                        </Link>
+                        </LinkButton>
                     </nav>
                 </div>
             </header>
@@ -108,7 +112,7 @@ export function WebsitePage() {
                 <div
                     className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         flexDirection: { base: "column", md: "row" },
                         justifyContent: "space-between",
@@ -170,20 +174,24 @@ export function WebsitePage() {
                             alignItems: "center",
                             gap: "0.5rem"
                         })}>
-                            <Link to="/sign-up">
+                            <LinkButton
+                                to="/sign-up"
+                            >
                                 <ButtonContent
                                     variant="primary"
                                     leftIcon={<IconUser />}
                                     text="Créer un compte"
                                 />
-                            </Link>
-                            <Link to="/documentation">
+                            </LinkButton>
+                            <LinkButton
+                                to="/documentation"
+                            >
                                 <ButtonContent
                                     variant="default"
                                     leftIcon={<IconBook2 />}
                                     text="En savoir plus"
                                 />
-                            </Link>
+                            </LinkButton>
                         </div>
                     </div>
 
@@ -218,7 +226,7 @@ export function WebsitePage() {
                 <div
                     className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "start",
@@ -265,7 +273,7 @@ export function WebsitePage() {
                 <div
                     className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "start",
@@ -292,14 +300,15 @@ export function WebsitePage() {
                         <br />
                         Apprenez les concepts essentiels : partie double, plan comptable, écritures, journaux...
                     </p>
-                    <Link to="/documentation/comptabilite">
+                    <LinkButton
+                        to="/documentation/comptabilite"
+                    >
                         <ButtonContent
                             variant="default"
                             leftIcon={<IconBook2 />}
                             text="Découvrir le cours"
-                        // rightIcon={<IconChevronRight />}
                         />
-                    </Link>
+                    </LinkButton>
                 </div>
             </section>
 
@@ -320,7 +329,7 @@ export function WebsitePage() {
                 <div
                     className={css({
                         width: "100%",
-                        maxWidth: "lg",
+                        maxWidth: "xl",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
@@ -338,14 +347,15 @@ export function WebsitePage() {
                     >
                         <Logo withText />
                     </Button> */}
-                    <Link to="/documentation/mentions-legales">
+                    <LinkButton
+                        to="/documentation/mentions-legales"
+                    >
                         <ButtonContent
                             variant="invisible"
                             leftIcon={<IconGavel />}
                             text="Mentions légales"
-                        // rightIcon={<IconChevronRight />}
                         />
-                    </Link>
+                    </LinkButton>
                 </div>
             </footer>
         </div>

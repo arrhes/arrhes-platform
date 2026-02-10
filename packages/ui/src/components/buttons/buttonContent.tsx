@@ -2,6 +2,7 @@ import type { Icon, IconProps } from "@tabler/icons-react"
 import { cloneElement, type ReactElement } from "react"
 import { css, cx } from "../../utilities/cn.ts"
 import { CircularLoader } from "../layouts/circularLoader"
+import { useButtonLoading } from "./button"
 
 
 // Color variants available for all button styles (GitHub Primer inspired)
@@ -159,13 +160,18 @@ const variantStyles = {
             },
             _active: {
                 bg: "neutral/12",
+                backgroundColor: "primary/10"
             },
         }),
         colors: {
             neutral: {
-                container: css({}),
+                container: css({
+                    _active: {
+                        backgroundColor: "primary/10"
+                    }
+                }),
                 icon: css({ color: "neutral/70" }),
-                text: css({ color: "neutral/70" }),
+                text: css({ color: "neutral" }),
             },
             danger: {
                 container: css({
@@ -189,6 +195,9 @@ const variantStyles = {
  * ButtonContent renders the visual content of a button (icon, text, loader)
  * Styled to match GitHub's Primer design system
  * Can be used standalone or wrapped by Button/Link for click handling
+ * 
+ * When used inside a Button with hasLoader, loading state is automatically
+ * propagated via context and will show the spinner without manual isLoading prop
  */
 export function ButtonContent(props: {
     variant?: ButtonVariant
@@ -207,6 +216,10 @@ export function ButtonContent(props: {
     const color = colorMap[rawColor] // Map legacy colors
     const styles = variantStyles[variant].colors[color]
 
+    // Use loading state from context if not explicitly set via props
+    const contextLoading = useButtonLoading()
+    const isLoading = props.isLoading ?? contextLoading
+
     const baseContainerStyles = css({
         width: "fit-content",
         display: "flex",
@@ -217,7 +230,9 @@ export function ButtonContent(props: {
         borderRadius: "md",
         boxSizing: "border-box",
         cursor: "pointer",
-        transition: "all 0.1s ease-in-out",
+        transition: "all",
+        transitionDuration: "200ms",
+        transitionTimingFunction: "ease-in-out",
         _disabled: { opacity: 0.5, cursor: "not-allowed" },
     })
 
@@ -246,24 +261,34 @@ export function ButtonContent(props: {
         lineHeight: "1",
     })
 
+    const baseContainerActiveStyles = props.isActive
+        ? css({ backgroundColor: "background" })
+        : ""
+
+    const leftIconActiveStyles = props.isActive
+        ? css({ color: "primary" })
+        : ""
+
     const textActiveStyles = props.isActive
-        ? css({ fontWeight: "bold" })
+        ? css({ color: "primary" })
         : ""
 
     return (
         <div
             title={props.title ?? props.text}
-            aria-disabled={props.disabled || props.isLoading}
+            aria-current={props.isActive || isLoading}
+            aria-disabled={props.disabled || isLoading}
             className={cx(
                 baseContainerStyles,
                 iconOnlyStyles,
+                baseContainerActiveStyles,
                 variantStyles[variant].base,
                 styles.container,
                 props.className
             )}
         >
             {/* Loading spinner */}
-            {props.isLoading && (
+            {isLoading && (
                 <CircularLoader
                     size={16}
                     className={cx(
@@ -274,11 +299,12 @@ export function ButtonContent(props: {
             )}
 
             {/* Left icon */}
-            {props.leftIcon && !props.isLoading && cloneElement(props.leftIcon, {
+            {props.leftIcon && !isLoading && cloneElement(props.leftIcon, {
                 "aria-disabled": props.disabled,
                 size: 16,
                 className: cx(
                     iconBaseStyles,
+                    leftIconActiveStyles,
                     variant === "primary"
                         ? css({ color: "white", _disabled: { color: "white/50" } })
                         : styles.icon
@@ -289,7 +315,7 @@ export function ButtonContent(props: {
             {/* Text label */}
             {props.text && (
                 <span
-                    aria-disabled={props.disabled || props.isLoading}
+                    aria-disabled={props.disabled || isLoading}
                     className={cx(
                         textBaseStyles,
                         textActiveStyles,
@@ -306,7 +332,7 @@ export function ButtonContent(props: {
             {props.rightIcon && (
                 <div className={css({ display: "flex", alignItems: "center", justifyContent: "center" })}>
                     {
-                        props.isLoading
+                        isLoading
                             ? (
                                 <CircularLoader
                                     size={16 - 4}

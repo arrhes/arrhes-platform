@@ -43,7 +43,7 @@ export function UpdateOneRecordLabel(props: {
                             idRecordLabel: props.recordLabel.id,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Modifier la catégorie",
                         }}
                         onSubmit={async (data) => {

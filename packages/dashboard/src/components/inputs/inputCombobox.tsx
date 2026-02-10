@@ -70,11 +70,11 @@ export function InputCombobox<TValue extends string>(props: {
                             justifyContent: "space-between",
                             alignItems: "center",
                             gap: "2",
-                            rounded: "sm",
-                            p: "2",
+                            borderRadius: "sm",
+                            padding: "1rem",
                             border: "1px solid",
-                            _hover: { shadowidth: "inner" },
-                            _focusWithin: { borderColor: "neutral/50", shadowidth: "inner" }
+                            _hover: { boxShadow: "inner" },
+                            _focusWithin: { borderColor: "neutral/50", boxShadow: "inner" }
                         }),
                         (props.error === undefined) ? css({ borderColor: "neutral/25" }) : css({ borderColor: "error" }),
                         props.className
@@ -88,8 +88,8 @@ export function InputCombobox<TValue extends string>(props: {
                                     fontWeight: "medium",
                                     lineHeight: "none",
                                     whiteSpace: "nowrap",
-                                    textOverflowidth: "ellipsis",
-                                    rounded: "sm",
+                                    textOverflow: "ellipsis",
+                                    borderRadius: "sm",
                                     textAlign: "left"
                                 }),
                                 (currentOption === undefined) ? css({ color: "neutral/50" }) : css({ color: "neutral" })
@@ -102,7 +102,7 @@ export function InputCombobox<TValue extends string>(props: {
                         </span>
                         <IconChevronDown
                             size={16}
-                            className={css({ stroke: "neutral", minwidth: "[16px]", width: "[16px]", minH: "[16px]", height: "[16px]" })}
+                            className={css({ stroke: "neutral", minWidth: "[16px]", width: "[16px]", minH: "[16px]", height: "[16px]" })}
                             strokeWidth={2}
                         />
                     </div>
@@ -113,7 +113,7 @@ export function InputCombobox<TValue extends string>(props: {
                     ? (null)
                     : (
                         <Popover.Content align="start">
-                            <div className={css({ width: "100%", height: "[32px]", display: "flex", justifyContent: "flex-start", alignItems: "center", p: "2", borderBottom: "1px solid", borderColor: "neutral/10" })}>
+                            <div className={css({ width: "100%", height: "[32px]", display: "flex", justifyContent: "flex-start", alignItems: "center", padding: "1rem", borderBottom: "1px solid", borderColor: "neutral/10" })}>
                                 <input
                                     type="text"
                                     className={css({
@@ -140,7 +140,7 @@ export function InputCombobox<TValue extends string>(props: {
                                         : (
                                             <FormatNull
                                                 text="Pas de résultat"
-                                                className={css({ p: "2" })}
+                                                className={css({ padding: "1rem" })}
                                             />
                                         )
                                 }
@@ -169,7 +169,7 @@ export function InputCombobox<TValue extends string>(props: {
                                                         justifyContent: "space-between",
                                                         alignItems: "center",
                                                         gap: "2",
-                                                        p: "2",
+                                                        padding: "1rem",
                                                         cursor: "pointer"
                                                     }),
                                                     (currentOption?.key === option.key) ? css({ backgroundColor: "neutral/5" }) : css({ backgroundColor: "none", _hover: { backgroundColor: "neutral/5" } })

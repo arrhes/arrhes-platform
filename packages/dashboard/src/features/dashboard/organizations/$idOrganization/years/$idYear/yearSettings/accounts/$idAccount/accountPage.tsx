@@ -2,9 +2,10 @@ import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/rout
 import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { FormatBoolean } from "../../../../../../../../../components/formats/formatBoolean.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
@@ -34,8 +35,8 @@ export function AccountPage() {
                         <Fragment>
                             <Section.Item className={css({ flexDirection: "row" })}>
                                 <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
-                                    <Link
-                                        to="/organisations/$idOrganization/exercices/$idYear/paramètres/comptes"
+                                    <LinkButton
+                                        to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/comptes"
                                         params={{
                                             idOrganization: account.idOrganization,
                                             idYear: account.idYear,
@@ -46,27 +47,30 @@ export function AccountPage() {
                                             leftIcon={<IconChevronLeft />}
                                             text="Retour"
                                         />
-                                    </Link>
+                                    </LinkButton>
                                 </div>
                                 <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                     <UpdateOneAccount
                                         account={account}
                                     >
-                                        <Button
-                                            variant="primary"
-                                            icon={<IconPencil />}
-                                            text="Modifier"
-                                        />
+                                        <Button title="Modifier">
+                                            <ButtonContent
+                                                variant="primary"
+                                                leftIcon={<IconPencil />}
+                                                text="Modifier"
+                                            />
+                                        </Button>
                                     </UpdateOneAccount>
                                     <DeleteOneAccount
                                         account={account}
                                     >
-                                        <Button
-                                            variant="default"
-                                            icon={<IconTrash />}
-                                            title="Supprimer"
-                                            color="error"
-                                        />
+                                        <Button title="Supprimer">
+                                            <ButtonContent
+                                                variant="default"
+                                                leftIcon={<IconTrash />}
+                                                color="error"
+                                            />
+                                        </Button>
                                     </DeleteOneAccount>
                                 </div>
                             </Section.Item>

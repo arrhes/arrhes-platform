@@ -20,20 +20,20 @@ export function YearCard(props: {
 
     return (
         <Link
-            to="/organisations/$idOrganization/exercices/$idYear"
+            to="/dashboard/organisations/$idOrganization/exercices/$idYear"
             params={{
                 idOrganization: idOrganization,
                 idYear: year.id
             }}
             className={cx(
-                css({ width: "100%", p: "4", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4" }),
-                css({ border: "1px solid", borderColor: "neutral/10", rounded: "md" }),
+                css({ width: "100%", padding: "4", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4" }),
+                css({ border: "1px solid", borderColor: "neutral/10", borderRadius: "md" }),
                 css({ _hover: { borderColor: "neutral/20", backgroundColor: "neutral/2" }, transition: "colors", cursor: "pointer" })
             )}
         >
             <div className={css({ display: "flex", alignItems: "center", gap: "4" })}>
                 <div className={cx(
-                    css({ width: "12", height: "12", display: "flex", alignItems: "center", justifyContent: "center", rounded: "md" }),
+                    css({ width: "12", height: "12", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "md" }),
                     year.isClosed ? css({ backgroundColor: "neutral/10" }) : css({ backgroundColor: "success/5" })
                 )}>
                     {year.isClosed ? (

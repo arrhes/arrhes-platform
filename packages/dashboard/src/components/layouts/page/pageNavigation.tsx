@@ -1,11 +1,12 @@
 import { ButtonContent } from "@arrhes/ui"
-import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
+import { useMatches, useRouterState } from "@tanstack/react-router"
 import { JSX } from "react"
-import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
-import { css, cx } from "../../utilities/cn.js"
+import { ValidParams, ValidRoutes } from "../../../routes/platformRouter.js"
+import { css } from "../../../utilities/cn.js"
+import { LinkButton } from "../../linkButton.js"
 
 
-export function PageLayout(props: {
+export function PageNavigation(props: {
     tabs: Array<{
         label: string
         icon: JSX.Element
@@ -20,15 +21,16 @@ export function PageLayout(props: {
 
     return (
         <div className={css({
-            flex: "1",
             flexShrink: "0",
             width: "100%",
-            minH: "fit",
+            minHeight: "fit",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            overflowidth: "auto"
+            justifyContent: "start",
+            alignItems: "center",
+            padding: "1rem",
+            borderBottom: "1px solid",
+            borderBottomColor: "neutral/10",
         })}>
             {
                 props.tabs === undefined
@@ -36,11 +38,11 @@ export function PageLayout(props: {
                     : (
                         <div className={css({
                             width: "100%",
+                            maxWidth: "xl",
                             display: "flex",
                             justifyContent: "flex-start",
                             alignItems: "center",
-                            gap: "2",
-                            px: "4"
+                            gap: "0.5rem",
                         })}>
                             {
                                 props.tabs.map((tab) => {
@@ -61,15 +63,9 @@ export function PageLayout(props: {
                                                 gap: "2"
                                             })}
                                         >
-                                            <Link
+                                            <LinkButton
                                                 to={tab.to}
                                                 params={tab.params}
-                                                className={css({
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    gap: "2"
-                                                })}
                                             >
                                                 <ButtonContent
                                                     variant="invisible"
@@ -77,27 +73,22 @@ export function PageLayout(props: {
                                                     text={tab.label}
                                                     color="neutral"
                                                     isActive={isActive}
-                                                    className={css({
-                                                        transition: "all",
-                                                        transitionDuration: "200ms",
-                                                        transitionTimingFunction: "ease-in-out"
-                                                    })}
                                                 />
-                                            </Link>
-                                            <div
+                                            </LinkButton>
+                                            {/* <div
                                                 className={cx(
                                                     css({
                                                         flexShrink: "0",
                                                         width: "100%",
                                                         height: "2px",
-                                                        rounded: "100%",
+                                                        borderRadius: "100%",
                                                         transition: "all",
                                                         transitionDuration: "200ms",
                                                         transitionTimingFunction: "ease-in-out"
                                                     }),
                                                     isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
                                                 )}
-                                            />
+                                            /> */}
                                         </div>
                                     )
                                 })
@@ -105,19 +96,6 @@ export function PageLayout(props: {
                         </div>
                     )
             }
-            <div className={css({
-                flex: "1",
-                flexShrink: "0",
-                width: "100%",
-                minH: "fit",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "stretch",
-                overflowX: "hidden",
-                overflowY: "auto"
-            })}>
-                <Outlet />
-            </div>
         </div>
     )
 }

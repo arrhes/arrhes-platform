@@ -19,8 +19,8 @@ export function FormatNull(props: FormatNull) {
                 fontStyle: "italic",
                 color: "neutral/25",
                 whiteSpace: "nowrap",
-                overflowidth: "auto",
-                textOverflowidth: "ellipsis"
+                overflow: "auto",
+                textOverflow: "ellipsis"
             }),
             props.className
         )}>

@@ -42,7 +42,7 @@ export function UpdateOneYear(props: {
                         schema={updateOneYearRouteDefinition.schemas.body}
                         defaultValues={props.year}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier l'exercice",
                         }}
                         onSubmit={async (data) => {

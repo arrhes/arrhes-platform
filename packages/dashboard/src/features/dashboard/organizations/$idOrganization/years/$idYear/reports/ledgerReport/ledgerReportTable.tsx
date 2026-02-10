@@ -92,7 +92,7 @@ export function LedgerReportTable(props: {
                                 >
                                     <Table.Body.Row className={css({ borderColor: "neutral/10", backgroundColor: "background" })}>
                                         <Table.Body.Cell className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
-                                            <FormatText className={css({ overflowidth: "visible" })}>
+                                            <FormatText className={css({ overflow: "visible" })}>
                                                 {account.number}
                                             </FormatText>
                                             <FormatText wrap={true} className={css({ color: "neutral/50" })}>

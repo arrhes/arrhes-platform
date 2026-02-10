@@ -1,4 +1,4 @@
-import { Button } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { IconCheck, IconSelector, IconX } from "@tabler/icons-react"
 import { CommandEmpty, CommandLoading } from "cmdk"
 import { Fragment, useState } from "react"
@@ -42,7 +42,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
 
     return (
         <div className={css({ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", gap: "1" })}>
-            <div className={css({ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", p: "2", width: "100%", rounded: "md", border: "1px solid", borderColor: "neutral/25", _disabled: { cursor: "not-allowed", opacity: "50" }, maxH: "[256px]", overflowidth: "auto", minH: "[40px]" })}>
+            <div className={css({ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", padding: "1rem", width: "100%", borderRadius: "md", border: "1px solid", borderColor: "neutral/25", _disabled: { cursor: "not-allowed", opacity: "50" }, maxH: "[256px]", overflowY: "auto", minH: "[40px]" })}>
                 {(props.selectedOptions.length === 0) ? (
                     <div className={css({ width: "100%", height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" })}>
                         <FormatNull text={props.emptyLabel ?? "Nothing selected"} />
@@ -50,15 +50,16 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                 ) : (
                     props.selectedOptions.map((option, index) => (
                         <Fragment key={option.key}>
-                            <div className={css({ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "2", rounded: "md" })} >
-                                <span className={css({ p: "2" })}>
+                            <div className={css({ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "2", borderRadius: "md" })} >
+                                <span className={css({ padding: "1rem" })}>
                                     {option.label}
                                 </span>
-                                <Button
-                                    variant="invisible"
-                                    onClick={() => handleUnselect(index)}
-                                    icon={<IconX />}
-                                />
+                                <Button onClick={() => handleUnselect(index)}>
+                                    <ButtonContent
+                                        variant="invisible"
+                                        leftIcon={<IconX />}
+                                    />
+                                </Button>
                             </div>
                         </Fragment>
                     ))
@@ -83,12 +84,12 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                 gridTemplateColumns: "auto min-content",
                                 alignItems: "center",
                                 gap: "2",
-                                p: "2",
+                                padding: "1rem",
                                 border: "1px solid",
                                 borderColor: "neutral/25",
-                                rounded: "md",
-                                _groupFocus: { borderColor: "neutral/50", shadowidth: "outer", backgroundColor: "neutral/5" },
-                                "&[data-open=true]": { borderColor: "neutral/50", backgroundColor: "neutral/5", shadowidth: "outer" }
+                                borderRadius: "md",
+                                _groupFocus: { borderColor: "neutral/50", boxShadow: "outer", backgroundColor: "neutral/5" },
+                                "&[data-open=true]": { borderColor: "neutral/50", backgroundColor: "neutral/5", boxShadow: "outer" }
                             })
                         )}
                         >
@@ -123,9 +124,9 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                         )
                                         : (null)
                                 }
-                                <CommandList className={css({ maxH: "[256px]", overflowidth: "auto", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch" })}>
+                                <CommandList className={css({ maxH: "[256px]", overflowY: "auto", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch" })}>
                                     <CommandEmpty>
-                                        <div className={css({ position: "relative", height: "[40px]", p: "3", display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: "default", userSelect: "none", rounded: "sm", outline: "none", _disabled: { pointerEvents: "none", opacity: "50" } })}>
+                                        <div className={css({ position: "relative", height: "[40px]", padding: "3", display: "flex", justifyContent: "flex-start", alignItems: "center", cursor: "default", userSelect: "none", borderRadius: "sm", outline: "none", _disabled: { pointerEvents: "none", opacity: "50" } })}>
                                             <span className={css({ color: "neutral/10", textAlign: "left", fontStyle: "italic" })}>
                                                 No result
                                             </span>
@@ -149,12 +150,12 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                                     }}
                                                     className={cx(
                                                         css({
-                                                            p: "3",
+                                                            padding: "3",
                                                             height: "[40px]",
                                                             display: "flex",
                                                             justifyContent: "space-between",
                                                             alignItems: "center",
-                                                            overflowidth: "auto",
+                                                            overflowY: "auto",
                                                             gap: "3"
                                                         }),
                                                         isSelected ? css({ backgroundColor: "neutral/10" }) : css({ backgroundColor: "none", _hover: { backgroundColor: "neutral/5" } })

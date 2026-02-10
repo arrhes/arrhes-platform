@@ -1,7 +1,7 @@
 import { Badge } from "@arrhes/ui"
 import { IconChartBar, IconMessageCircle } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import { DocLinkCard } from "../../components/document/docLinkCard.js"
+import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -137,13 +137,13 @@ export function AiIndex() {
                     <span className={css({ fontWeight: "semibold", color: "neutral" })}>Plan Pro requis : </span>
                     Les fonctionnalités d'intelligence artificielle sont disponibles exclusivement
                     avec le plan Pro. {" "}
-                    <Link to="/documentation/tarifs" className={css({
+                    <LinkButton to="/documentation/tarifs" className={css({
                         color: "primary",
                         fontWeight: "medium",
                         _hover: { textDecoration: "underline" }
                     })}>
                         En savoir plus sur les tarifs
-                    </Link>
+                    </LinkButton>
                 </p>
             </div>
         </div>

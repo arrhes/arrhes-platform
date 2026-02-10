@@ -1,6 +1,6 @@
 import { readAllComputationIncomeStatementsRouteDefinition, readOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../../../../components/formats/formatDateTime.tsx"
@@ -70,7 +70,7 @@ export function ComputationIncomeStatementsTable(props: {
                         ]}
                         onRowClick={(row) => {
                             platformRouter.navigate({
-                                to: "/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation/$idComputationIncomeStatement",
+                                to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation/$idComputationIncomeStatement",
                                 params: {
                                     idOrganization: row.original.idOrganization,
                                     idYear: row.original.idYear,
@@ -83,9 +83,9 @@ export function ComputationIncomeStatementsTable(props: {
                         <CreateOneComputationIncomeStatement
                             computation={props.computation}
                         >
-                            <Button
+                            <ButtonContent
                                 variant="primary"
-                                icon={<IconPlus />}
+                                leftIcon={<IconPlus />}
                                 text="Ajouter"
                             />
                         </CreateOneComputationIncomeStatement>

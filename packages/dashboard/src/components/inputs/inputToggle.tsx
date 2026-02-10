@@ -26,9 +26,9 @@ export function InputToggle<TValue extends (string | boolean)>(props:
             alignItems: "center",
             border: "1px solid",
             borderColor: "neutral/20",
-            rounded: "sm",
+            borderRadius: "sm",
             cursor: "pointer",
-            _focus: { borderColor: "neutral/50", shadowidth: "inset" },
+            _focus: { borderColor: "neutral/50", boxShadow: "inset" },
             outline: "none"
         })}
         >
@@ -56,14 +56,14 @@ export function InputToggle<TValue extends (string | boolean)>(props:
                                 className={cx(
                                     css({
                                         transition: "all 200ms ease-in-out",
-                                        rounded: "none",
+                                        borderRadius: "none",
                                         border: "none"
                                     }),
                                     css(isSelected ? {
                                         backgroundColor: "neutral/10",
                                         outline: "1px solid",
                                         outlineColor: "neutral",
-                                        rounded: "sm"
+                                        borderRadius: "sm"
                                     } : {})
                                 )}
                                 text={option.label}

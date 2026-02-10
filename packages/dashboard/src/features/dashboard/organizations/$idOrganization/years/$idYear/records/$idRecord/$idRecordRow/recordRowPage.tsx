@@ -1,9 +1,10 @@
 import { readOneAccountRouteDefinition, readOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { FormatBoolean } from "../../../../../../../../../components/formats/formatBoolean.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatNull } from "../../../../../../../../../components/formats/formatNull.tsx"
 import { FormatPrice } from "../../../../../../../../../components/formats/formatPrice.tsx"
@@ -29,7 +30,7 @@ export function RecordRowPage() {
                     body={{
                         idOrganization: params.idOrganization,
                         idYear: params.idYear,
-                        idRecordRowidth: params.idRecordRow,
+                        idRecordRow: params.idRecordRow,
                     }}
                 >
                     {(recordRow) => {
@@ -37,8 +38,8 @@ export function RecordRowPage() {
                             <Section.Root>
                                 <Section.Item>
                                     <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
-                                        <Link
-                                            to="/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord"
+                                        <LinkButton
+                                            to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord"
                                             params={{
                                                 idOrganization: recordRow.idOrganization,
                                                 idYear: recordRow.idYear,
@@ -50,24 +51,23 @@ export function RecordRowPage() {
                                                 leftIcon={<IconChevronLeft />}
                                                 text="Retour"
                                             />
-                                        </Link>
+                                        </LinkButton>
                                         <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                             <UpdateOneRecordRow
                                                 recordRow={recordRow}
                                             >
-                                                <Button
+                                                <ButtonContent
                                                     variant="primary"
-                                                    icon={<IconPencil />}
+                                                    leftIcon={<IconPencil />}
                                                     text="Modifier"
                                                 />
                                             </UpdateOneRecordRow>
                                             <DeleteOneRecordRow
                                                 recordRow={recordRow}
                                             >
-                                                <Button
+                                                <ButtonContent
                                                     variant="default"
-                                                    icon={<IconTrash />}
-                                                    title="Supprimer"
+                                                    leftIcon={<IconTrash />}
                                                     color="error"
                                                 />
                                             </DeleteOneRecordRow>

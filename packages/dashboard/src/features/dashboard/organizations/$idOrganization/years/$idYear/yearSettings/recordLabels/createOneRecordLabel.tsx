@@ -44,7 +44,7 @@ export function CreateOneRecordLabel(props: {
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
-                            icon: <IconPlus />,
+                            leftIcon: <IconPlus />,
                             text: "Ajouter la catégorie",
                         }}
                         onSubmit={async (data) => {

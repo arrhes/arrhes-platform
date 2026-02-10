@@ -19,7 +19,7 @@ export function ToastViewport(props: ToastViewport) {
                     width: "100%",
                     flexDirection: "column-reverse",
                     gap: "1",
-                    p: "4",
+                    padding: "4",
                     right: "0",
                     sm: {
                         top: "auto",

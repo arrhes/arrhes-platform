@@ -24,7 +24,7 @@ export function OrganizationSettingsPage() {
                 return (
                     <Box>
                         <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4", borderBottom: "1px solid", borderColor: "neutral/10" })}>
+                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", padding: "4", borderBottom: "1px solid", borderColor: "neutral/10" })}>
                                 <span>
                                     Modifier les informations de l'organisation
                                 </span>
@@ -38,7 +38,7 @@ export function OrganizationSettingsPage() {
                                     />
                                 </UpdateOneOrganization>
                             </div>
-                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", p: "4" })}>
+                            <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4", padding: "4" })}>
                                 <span>
                                     Supprimer l'organisation
                                 </span>

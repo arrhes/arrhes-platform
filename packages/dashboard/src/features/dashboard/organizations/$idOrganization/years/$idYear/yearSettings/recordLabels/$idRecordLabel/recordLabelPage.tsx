@@ -2,8 +2,9 @@ import { readOneRecordLabelRouteDefinition } from "@arrhes/application-metadata/
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
@@ -31,8 +32,8 @@ export function RecordLabelPage() {
                     <Section.Root>
                         <Section.Item className={css({ flexDirection: "row" })}>
                             <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
-                                <Link
-                                    to="/organisations/$idOrganization/exercices/$idYear/paramètres/catégories"
+                                <LinkButton
+                                    to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/catégories"
                                     params={{
                                         idOrganization: recordLabel.idOrganization,
                                         idYear: recordLabel.idYear,
@@ -43,7 +44,7 @@ export function RecordLabelPage() {
                                         leftIcon={<IconChevronLeft />}
                                         text="Retour"
                                     />
-                                </Link>
+                                </LinkButton>
                             </div>
                             <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
                                 <UpdateOneRecordLabel

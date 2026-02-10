@@ -1,14 +1,15 @@
+import { ReactNode } from "react"
 import { css } from "../../utilities/cn.js"
 
 
 export function DocDefinition(props: {
     term: string
-    definition: string
+    definition: ReactNode
 }) {
     return (
         <div className={css({
-            p: "5",
-            rounded: "xl",
+            padding: "5",
+            borderRadius: "xl",
             backgroundColor: "white",
             border: "1px solid",
             borderColor: "neutral/10",

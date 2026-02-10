@@ -2,7 +2,7 @@ import { ComponentProps } from "react"
 import { css, cx } from "../../utilities/cn.js"
 
 
-export type ChipColors = "neutral" | "error" | "warning" | "success" | "information"
+export type ChipColors = keyof typeof chipColors
 
 const chipColors = {
     "neutral": {
@@ -34,7 +34,7 @@ const chipColors = {
 
 export function Chip(props: {
     text: string | null | undefined
-    color?: ChipColors
+    color?: keyof typeof chipColors
     className?: ComponentProps<'div'>['className']
 }) {
     if (props.text === null) {
@@ -50,15 +50,15 @@ export function Chip(props: {
                 css({
                     width: "fit",
                     height: "fit",
-                    px: "2",
-                    py: "1",
+                    paddingX: "0.5rem",
+                    paddingY: "0.25rem",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
                     border: "none"
                 }),
                 chipColors[props?.color ?? "neutral"].border,
-                chipColors[props?.color ?? "neutral"].bg,
+                chipColors[props?.color ?? "neutral"].backgroundColor,
                 props.className
             )}
         >
@@ -67,7 +67,7 @@ export function Chip(props: {
                     css({
                         fontSize: "10px",
                         lineHeight: "none",
-                        color: "neutral/75"
+                        color: "none"
                     }),
                     chipColors[props?.color ?? "neutral"].text
                 )}

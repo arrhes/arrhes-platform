@@ -1,10 +1,10 @@
+import { routeDefinition } from "@arrhes/application-metadata/utilities"
+import { ComponentProps, ReactElement, Suspense } from "react"
+import * as v from "valibot"
 import { FormatError } from "../../components/formats/formatError.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
 import { css, cx } from "../../utilities/cn.js"
 import { useDataFromAPI } from "../../utilities/useHTTPData.js"
-import { routeDefinition } from "@arrhes/application-metadata/utilities"
-import { ComponentProps, ReactElement, Suspense } from "react"
-import * as v from "valibot"
 
 
 export function DataWrapper<
@@ -29,7 +29,7 @@ export function DataWrapper<
                     {...props.loaderProps}
                     text={props.loaderProps?.text ?? "Chargement des données..."}
                     className={cx(
-                        css({ p: "2" }),
+                        css({ padding: "1rem" }),
                         props.loaderProps?.className,
                     )}
                 />
@@ -39,7 +39,7 @@ export function DataWrapper<
             <FormatError
                 {...props.errorProps}
                 text={props.errorProps?.text ?? "Erreur lors de la récupération des données."}
-                className={css({ p: "2" })}
+                className={css({ padding: "1rem" })}
             />
         )
     }

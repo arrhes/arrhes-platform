@@ -40,7 +40,7 @@ export function UpdateOneOrganizationUser(props: {
                         schema={updateOneOrganizationUserRouteDefinition.schemas.body}
                         defaultValues={props.organizationUser}
                         submitButtonProps={{
-                            icon: <IconPencil />,
+                            leftIcon: <IconPencil />,
                             text: "Modifier l'utilisateur",
                         }}
                         onSubmit={async (data) => {
