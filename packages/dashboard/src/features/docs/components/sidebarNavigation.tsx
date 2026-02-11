@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router"
+import { ButtonContent } from "@arrhes/ui"
 import type { ReactNode } from "react"
-import { css, cx } from "../../../utilities/cn.js"
+import { LinkButton } from "../../../components/linkButton.js"
+import { css } from "../../../utilities/cn.js"
 
 
 export interface NavigationSection {
@@ -46,38 +47,19 @@ export function SidebarNavigation(props: {
                         gap: "0.25rem"
                     })}>
                         {section.items.map((item) => (
-                            <Link
+                            <LinkButton
                                 key={item.path}
                                 to={item.path}
                                 onClick={props.onItemClick}
-                                className={cx(
-                                    css({
-                                        paddingX: "0.75rem",
-                                        paddingY: "0.5rem",
-                                        borderRadius: "md",
-                                        fontSize: "sm",
-                                        transition: "all 0.15s",
-                                    }),
-                                    css(props.pathname === item.path
-                                        ? {
-                                            backgroundColor: "primary/8",
-                                            color: "primary",
-                                            fontWeight: "medium",
-                                            borderColor: "primary"
-                                        }
-                                        : {
-                                            color: "neutral",
-                                            _hover: {
-                                                backgroundColor: "neutral/5",
-                                                color: "neutral",
-                                                borderColor: "neutral/20"
-                                            }
-                                        }
-                                    )
-                                )}
+                                className={css({ width: "100%", })}
                             >
-                                {item.label}
-                            </Link>
+                                <ButtonContent
+                                    variant="invisible"
+                                    text={item.label}
+                                    isActive={props.pathname === item.path}
+                                    className={css({ width: "100%", justifyContent: "start" })}
+                                />
+                            </LinkButton>
                         ))}
                     </div>
                 </div>

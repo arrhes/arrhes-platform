@@ -28,8 +28,8 @@ export function RecordsPage() {
                     }}
                 >
                     {(records) => {
-                        const recordsData = records
-                            .sort((a, b) => b.date.localeCompare(a.date))
+                        const recordsData = [...records]
+                            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
                         return (
                             <DataTable
@@ -136,7 +136,7 @@ export function RecordsPage() {
                                         filterFn: 'includesString'
                                     },
                                     {
-                                        accessorKey: 'lastUpdatedOn',
+                                        accessorKey: 'lastUpdatedAt',
                                         header: "Dernière mise à jour le",
                                         cell: ({ row }) => (
                                             <FormatDateTime

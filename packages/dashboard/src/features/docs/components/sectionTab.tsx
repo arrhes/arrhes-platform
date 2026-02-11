@@ -1,16 +1,17 @@
-import { Link } from "@tanstack/react-router"
-import type { ReactNode } from "react"
-import { css, cx } from "../../../utilities/cn.js"
+import { ButtonContent } from "@arrhes/ui"
+import { Icon, IconProps } from "@tabler/icons-react"
+import { ReactElement } from "react"
+import { LinkButton } from "../../../components/linkButton.js"
 
 
 export interface DocSection {
     id: string
     label: string
     path: string
-    icon: ReactNode
+    icon: ReactElement<IconProps & React.RefAttributes<Icon>>
     navigation: Record<string, {
         title: string
-        icon: ReactNode
+        icon: ReactElement<IconProps & React.RefAttributes<Icon>>
         items: { path: string; label: string }[]
     }>
 }
@@ -21,42 +22,15 @@ export function SectionTab(props: {
     isActive: boolean
 }) {
     return (
-        <Link
+        <LinkButton
             to={props.section.path}
-            className={cx(
-                css({
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.375rem",
-                    paddingX: "0.75rem",
-                    paddingY: "0.5rem",
-                    borderRadius: "md",
-                    fontSize: "sm",
-                    fontWeight: "medium",
-                    transition: "all 0.15s",
-                    whiteSpace: "nowrap",
-                    "& svg": {
-                        width: "1rem",
-                        height: "1rem"
-                    }
-                }),
-                css(props.isActive
-                    ? {
-                        backgroundColor: "primary/10",
-                        color: "primary",
-                    }
-                    : {
-                        color: "neutral/60",
-                        _hover: {
-                            backgroundColor: "neutral/5",
-                            color: "neutral"
-                        }
-                    }
-                )
-            )}
         >
-            {props.section.icon}
-            {props.section.label}
-        </Link>
+            <ButtonContent
+                variant="invisible"
+                leftIcon={props.section.icon}
+                text={props.section.label}
+                isActive={props.isActive}
+            />
+        </LinkButton>
     )
 }

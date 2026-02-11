@@ -1,7 +1,6 @@
 import { ButtonContent } from "@arrhes/ui"
-import { IconChevronRight, IconLayout, IconRocket } from "@tabler/icons-react"
+import { IconChevronRight, IconRocket } from "@tabler/icons-react"
 import { DocLink } from "../../components/document/docLink.js"
-import { DocLinkCard } from "../../components/document/docLinkCard.js"
 import { DocTip } from "../../components/document/docTip.js"
 import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
@@ -37,7 +36,7 @@ export function DashboardIndex() {
                 </p>
             </div>
 
-            {/* Quick start card */}
+
             <div className={css({
                 padding: "1.5rem",
                 borderRadius: "lg",
@@ -94,42 +93,20 @@ export function DashboardIndex() {
                 </LinkButton>
             </div>
 
-            {/* Guide sections */}
-            <div className={css({
-                display: "grid",
-                gridTemplateColumns: { base: "1fr", sm: "repeat(2, 1fr)" },
-                gap: "1rem",
-            })}>
-                <DocLinkCard
-                    icon={<IconRocket />}
-                    iconColor="success"
-                    title="Démarrage"
-                    description="Créez votre compte, configurez votre organisation et paramétrez votre plan comptable."
-                    to="/documentation/dashboard/demarrage"
-                />
-                <DocLinkCard
-                    icon={<IconLayout />}
-                    iconColor="success"
-                    title="Organisations"
-                    description="Gérez vos organisations, invitez des collaborateurs et configurez les permissions."
-                    to="/documentation/dashboard/organisations"
-                />
-                <DocLinkCard
-                    icon={<IconLayout />}
-                    iconColor="success"
-                    title="Saisie des écritures"
-                    description="Apprenez à saisir vos écritures comptables rapidement et efficacement."
-                    to="/documentation/dashboard/ecritures"
-                />
-                <DocLinkCard
-                    icon={<IconLayout />}
-                    iconColor="success"
-                    title="Rapports"
-                    description="Générez vos documents comptables : bilan, compte de résultat, balance et plus."
-                    to="/documentation/dashboard/rapports"
-                />
-            </div>
-
+            <DocTip variant="info">
+                <span>
+                    Vous avez trouvé un bug ? Vous souhaitez ajouter une fonctionnalité ?{" "}
+                    <a
+                        className={css({ color: "primary", fontWeight: "semibold", _hover: { textDecoration: "underline" } })}
+                        href="https://github.com/arrhes/arrhes-platform/issues"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ouvrez un ticket sur GitHub
+                    </a>
+                    {" "}pour que nous puissions discuter de ça rapidement.
+                </span>
+            </DocTip>
 
             {/* Tip box */}
             <DocTip variant="tip">

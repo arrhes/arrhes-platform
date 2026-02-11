@@ -32,7 +32,7 @@ export function DrawerContent(props:
             >
                 <DialogPrimitive.Content
                     {...props}
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e) => e.stopPropagation()}
                     className={cx(
                         css({
                             minWidth: "100%",

@@ -28,9 +28,11 @@ export function PageNavigation(props: {
             flexDirection: "column",
             justifyContent: "start",
             alignItems: "center",
-            padding: "1rem",
+            paddingX: "1rem",
+            paddingY: "0.5rem",
             borderBottom: "1px solid",
             borderBottomColor: "neutral/10",
+            backgroundColor: "background",
         })}>
             {
                 props.tabs === undefined

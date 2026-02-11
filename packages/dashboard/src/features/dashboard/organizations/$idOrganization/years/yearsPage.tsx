@@ -48,7 +48,14 @@ export function YearsPage() {
                                 )
                             }
                             return (
-                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", gap: "3" })}>
+                                <div className={css({
+                                    width: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    border: "1px solid",
+                                    borderColor: "neutral/10",
+                                    borderRadius: "lg",
+                                })}>
                                     {years.map((year) => (
                                         <YearCard
                                             key={year.id}

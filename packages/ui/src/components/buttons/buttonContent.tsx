@@ -245,24 +245,8 @@ export function ButtonContent(props: {
         })
         : ""
 
-    const iconBaseStyles = css({
-        minWidth: `1rem`,
-        width: `1rem`,
-        minHeight: `1rem`,
-        height: `1rem`,
-        flexShrink: 0,
-    })
-
-    const textBaseStyles = css({
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        fontSize: "0.875rem",
-        lineHeight: "1",
-    })
-
     const baseContainerActiveStyles = props.isActive
-        ? css({ backgroundColor: "background" })
+        ? css({ backgroundColor: "neutral/5" })
         : ""
 
     const leftIconActiveStyles = props.isActive
@@ -292,7 +276,13 @@ export function ButtonContent(props: {
                 <CircularLoader
                     size={16}
                     className={cx(
-                        iconBaseStyles,
+                        css({
+                            minWidth: `1rem`,
+                            width: `1rem`,
+                            minHeight: `1rem`,
+                            height: `1rem`,
+                            flexShrink: 0,
+                        }),
                         variant === "primary" ? css({ stroke: "white" }) : styles.icon
                     )}
                 />
@@ -303,7 +293,13 @@ export function ButtonContent(props: {
                 "aria-disabled": props.disabled,
                 size: 16,
                 className: cx(
-                    iconBaseStyles,
+                    css({
+                        minWidth: `1rem`,
+                        width: `1rem`,
+                        minHeight: `1rem`,
+                        height: `1rem`,
+                        flexShrink: 0,
+                    }),
                     leftIconActiveStyles,
                     variant === "primary"
                         ? css({ color: "white", _disabled: { color: "white/50" } })
@@ -317,7 +313,13 @@ export function ButtonContent(props: {
                 <span
                     aria-disabled={props.disabled || isLoading}
                     className={cx(
-                        textBaseStyles,
+                        css({
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            fontSize: "0.875rem",
+                            lineHeight: "1",
+                        }),
                         textActiveStyles,
                         variant === "primary"
                             ? css({ color: "white", _disabled: { opacity: 0.5 } })

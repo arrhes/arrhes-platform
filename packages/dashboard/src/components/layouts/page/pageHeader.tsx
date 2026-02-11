@@ -12,6 +12,7 @@ export function PageHeader(props: {
             className={cx(
                 css({
                     width: "100%",
+                    maxWidth: "xl",
                     height: "fit",
                     display: "flex",
                     flexDirection: "column",

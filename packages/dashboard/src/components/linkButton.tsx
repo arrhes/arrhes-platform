@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router"
-import type { ComponentProps, ReactNode } from "react"
+import type { ComponentProps, MouseEventHandler, ReactNode } from "react"
 import type { ValidParams, ValidRoutes } from "../routes/platformRouter.js"
 import { css, cx } from "../utilities/cn.js"
 
@@ -21,6 +21,7 @@ export function LinkButton(props: {
     title?: string
     disabled?: boolean
     className?: string
+    onClick?: MouseEventHandler<HTMLAnchorElement> | undefined
     children: ReactNode
 }) {
     return (
@@ -42,6 +43,7 @@ export function LinkButton(props: {
             )}
             aria-disabled={props.disabled}
             title={props.title}
+            onClick={props.onClick}
         >
             {props.children}
         </Link>

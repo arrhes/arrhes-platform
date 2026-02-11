@@ -35,16 +35,24 @@ export function SubPageLayout(props: {
                 props.tabs === undefined
                     ? (null)
                     : (
-                        <div className={css({
-                            width: "fit",
+                        <aside className={css({
+                            width: "16rem",
+                            flexShrink: 0,
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
                             gap: "3",
                             borderRight: "1px solid",
-                            borderColor: "neutral/10",
-                            pr: "4"
+                            borderRightColor: "neutral/10",
+                            backgroundColor: "white",
+                            position: "sticky",
+                            top: "0",
+                            height: "fit-content",
+                            maxHeight: "100vh",
+                            overflowY: "auto",
+                            paddingRight: "4",
+                            paddingY: "2"
                         })}>
                             {
                                 props.tabs.map((tab) => {
@@ -104,7 +112,7 @@ export function SubPageLayout(props: {
                                     )
                                 })
                             }
-                        </div>
+                        </aside>
                     )
             }
             <div className={css({
