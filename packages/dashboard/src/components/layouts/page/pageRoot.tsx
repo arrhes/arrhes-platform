@@ -13,17 +13,14 @@ export function PageRoot(props: {
                     width: "100%",
                     flexShrink: "0",
                     flex: "1",
-                    paddingY: "2rem",
+                    paddingY: "4rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "center",
                     overflowY: "auto",
-                    gap: "1rem",
+                    gap: "2rem",
                     backgroundColor: "white",
-                    md: {
-                        gap: "8"
-                    }
                 }),
                 props.className
             )}

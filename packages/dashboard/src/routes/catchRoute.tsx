@@ -17,7 +17,7 @@ export const catchRoute = createRoute({
             })
         }
         throw redirect({
-            to: "/sign-in"
+            to: "/connexion"
         })
     }
 })

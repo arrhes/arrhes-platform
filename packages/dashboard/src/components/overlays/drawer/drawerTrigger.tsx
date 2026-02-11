@@ -1,18 +1,32 @@
 
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentProps } from "react"
+import { Button } from "@arrhes/ui"
+import { JSX } from "react"
+import { css } from "../../../utilities/cn.js"
+import { useDrawerContext } from "./drawerRoot.js"
 
 
-export function DrawerTrigger(props:
-    ComponentProps<typeof DialogPrimitive.Trigger>
-) {
+export function DrawerTrigger(props: {
+    children: JSX.Element
+}) {
+    const { setOpen } = useDrawerContext()
+
     return (
-        <DialogPrimitive.Trigger
-            {...props}
-            className={props.className}
-            asChild
+        <Button
+            onClick={() => setOpen(true)}
+            className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                cursor: "pointer",
+                width: "fit-content",
+                maxWidth: "100%",
+                height: "fit-content",
+                bg: "transparent",
+                border: "none",
+                padding: "0",
+            })}
         >
             {props.children}
-        </DialogPrimitive.Trigger>
+        </Button>
     )
 }

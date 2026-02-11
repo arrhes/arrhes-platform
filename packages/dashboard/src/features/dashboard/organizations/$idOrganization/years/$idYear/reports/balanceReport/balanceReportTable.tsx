@@ -121,13 +121,15 @@ export function BalanceReportTable(props: {
 
                             return (
                                 <Table.Body.Row key={account.id} className={css({ borderColor: "neutral/5" })}>
-                                    <Table.Body.Cell className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
-                                        <FormatText className={css({ overflow: "visible" })}>
-                                            {account.number}
-                                        </FormatText>
-                                        <FormatText wrap={true} className={css({ color: "neutral/50" })}>
-                                            {account.label}
-                                        </FormatText>
+                                    <Table.Body.Cell>
+                                        <div className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
+                                            <FormatText className={css({ overflow: "visible" })}>
+                                                {account.number}
+                                            </FormatText>
+                                            <FormatText wrap={true} className={css({ color: "neutral/50" })}>
+                                                {account.label}
+                                            </FormatText>
+                                        </div>
                                     </Table.Body.Cell>
                                     <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                         <FormatPrice price={accountTotalDebit} />

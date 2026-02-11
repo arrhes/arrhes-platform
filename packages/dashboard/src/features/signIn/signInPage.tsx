@@ -61,15 +61,15 @@ export function SignInPage() {
                         })}
                     >
                         <LinkButton to="/">
-                            <Logo withText />
+                            <Logo />
                         </LinkButton>
                         <LinkButton
                             to="/documentation"
+                            title="Documentation"
                         >
                             <ButtonContent
                                 variant="invisible"
                                 leftIcon={<IconBook2 />}
-                                text="Documentation"
                                 className={css({ width: "100%", justifyContent: "center" })}
                             />
                         </LinkButton>
@@ -187,7 +187,7 @@ export function SignInPage() {
                         })}
                     >
                         <LinkButton
-                            to="/sign-up"
+                            to="/inscription"
                             className={css({ width: "100%" })}
                         >
                             <ButtonContent

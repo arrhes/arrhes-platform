@@ -1,25 +1,23 @@
 import { getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { Link } from "@tanstack/react-router"
+import { LinkContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import * as v from "valibot"
 import { Chip } from "../../../components/layouts/chip.tsx"
+import { ListTable } from "../../../components/layouts/listTable/listTable.tsx"
+import { LinkButton } from "../../../components/linkButton.tsx"
 
 
-type OrganizationUser = v.InferOutput<typeof getAllMyOrganizationsRouteDefinition.schemas.return>[number]
-
-export function OrganizationCard(props: {
-    organizationUser: OrganizationUser
+export function OrganizationListTableRow(props: {
+    organizationUser: v.InferOutput<typeof getAllMyOrganizationsRouteDefinition.schemas.return>[number]
 }) {
-    const { organizationUser } = props
-    const organization = organizationUser.organization
+    const organization = props.organizationUser.organization
 
-    const scopeLabel = organization.scope === "company" ? "Entreprise" : "Association"
+    const scopeLabel = (organization.scope === "company")
+        ? "Entreprise"
+        : "Association"
 
     return (
-        <div className={cx(
-            css({ width: "100%", padding: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "4" }),
-            css({ borderBottom: "1px solid", borderBottomColor: "neutral/10", _last: { borderBottom: "none", } }),
-        )}>
+        <ListTable.Row>
             <div className={css({ width: "100%", display: "flex", flexDirection: "column", gap: "0.5rem" })}>
                 <div
                     className={css({
@@ -31,20 +29,24 @@ export function OrganizationCard(props: {
                         gap: "1rem"
                     })}
                 >
-                    <Link
+                    <LinkButton
                         to="/dashboard/organisations/$idOrganization"
                         params={{
                             idOrganization: organization.id
                         }}
-                        className={css({
-                            fontSize: "base",
-                            fontWeight: "semibold",
-                            color: "primary",
-                            _hover: { textDecoration: "underline" },
-                        })}
                     >
-                        {organization.name}
-                    </Link>
+                        <LinkContent
+                            className={css({
+                                fontSize: "base",
+                                fontWeight: "semibold",
+                                color: "primary",
+                                textDecoration: "none",
+                                _hover: { textDecoration: "underline" },
+                            })}
+                        >
+                            {organization.name}
+                        </LinkContent>
+                    </LinkButton>
                     <div
                         className={css({
                             display: "flex",
@@ -53,13 +55,13 @@ export function OrganizationCard(props: {
                             gap: "0.5rem"
                         })}
                     >
-                        {organizationUser.isAdmin && (
+                        {props.organizationUser.isAdmin && (
                             <Chip
                                 text="Administrateur"
                                 color="success"
                             />
                         )}
-                        {organizationUser.status === "invited" && (
+                        {props.organizationUser.status === "invited" && (
                             <Chip
                                 text="En attente"
                                 color="warning"
@@ -79,6 +81,6 @@ export function OrganizationCard(props: {
                     )}
                 </div>
             </div>
-        </div>
+        </ListTable.Row>
     )
 }

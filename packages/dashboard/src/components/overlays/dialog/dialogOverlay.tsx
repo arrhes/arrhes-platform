@@ -24,7 +24,7 @@ export function DialogOverlay(props:
                     justifyContent: "center",
                     alignItems: "center",
                     padding: "6",
-                    backgroundColor: "neutral/20",
+                    backgroundColor: "neutral/10",
                     "&[data-state=open]": {
                         animation: "fadeIn 0.2s ease-out"
                     },

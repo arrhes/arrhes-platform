@@ -1,5 +1,5 @@
 import { IconLoader2 } from "@tabler/icons-react"
-import { cx, css } from "../../utilities/cn.ts"
+import { css, cx } from "../../utilities/cn.ts"
 
 
 export function CircularLoader(props: {
@@ -13,7 +13,7 @@ export function CircularLoader(props: {
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
-                gap: "2",
+                gap: "0.5rem",
             }),
             props.className
         )}>

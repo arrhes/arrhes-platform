@@ -1,13 +1,15 @@
 
 import { ButtonContent } from "@arrhes/ui"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { css } from "../../../utilities/cn.js"
+import { useDrawerContext } from "./drawerRoot.js"
 
 
 export function DrawerHeader(props: {
     title: string | undefined
 }) {
+    const { setOpen } = useDrawerContext()
+
     return (
         <div className={css({
             width: "100%",
@@ -16,10 +18,10 @@ export function DrawerHeader(props: {
             alignItems: "center",
             gap: "1rem",
             borderBottom: "1px solid",
-            borderBottomColor: "neutral/10",
-            padding: "1rem"
+            borderBottomColor: "neutral/5",
+            padding: "1rem",
         })}>
-            <DialogPrimitive.Title>
+            <span>
                 {
                     (props.title === undefined)
                         ? (null)
@@ -29,19 +31,18 @@ export function DrawerHeader(props: {
                             </span>
                         )
                 }
-            </DialogPrimitive.Title>
-            <DialogPrimitive.Close asChild>
-                <button
-                    type="button"
-                    aria-label="Fermer"
-                    className={css({ display: "flex", alignItems: "center" })}
-                >
-                    <ButtonContent
-                        variant="invisible"
-                        leftIcon={<IconX />}
-                    />
-                </button>
-            </DialogPrimitive.Close>
+            </span>
+            <button
+                type="button"
+                aria-label="Fermer"
+                className={css({ display: "flex", alignItems: "center" })}
+                onClick={() => setOpen(false)}
+            >
+                <ButtonContent
+                    variant="invisible"
+                    leftIcon={<IconX />}
+                />
+            </button>
         </div>
     )
 }

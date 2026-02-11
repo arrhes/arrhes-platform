@@ -1,17 +1,17 @@
-import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../linkButton.js"
+import type { ValidRoutes } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 
 
 export function DocIndexLink(props: {
-    to: string
+    to: ValidRoutes
     label: string
 }) {
     return (
-        <Link
+        <LinkButton
             to={props.to}
             className={css({
-                display: "flex",
-                alignItems: "center",
+                width: "100%",
                 gap: "2",
                 py: "1.5",
                 fontSize: "sm",
@@ -28,6 +28,6 @@ export function DocIndexLink(props: {
                 opacity: 0.5
             })} />
             {props.label}
-        </Link>
+        </LinkButton>
     )
 }

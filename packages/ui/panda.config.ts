@@ -44,7 +44,7 @@ export default defineConfig({
                 error: { value: "#C91D1D" },
                 warning: { value: "#E8B130" },
                 information: { value: "#309be8" },
-                primary: { value: "#005b96" },
+                primary: { value: "#041E42" },
             },
             fonts: {
                 mono: { value: '"Sometype Mono", monospace' },

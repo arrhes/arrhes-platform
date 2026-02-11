@@ -5,7 +5,6 @@ import {
     IconGavel,
     IconUser
 } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import { LinkButton } from "../../components/linkButton.js"
 import { css } from "../../utilities/cn.js"
 import { HeroIllustration } from "./heroIllustration.js"
@@ -53,11 +52,11 @@ export function WebsitePage() {
                         gap: "1rem",
                     })}
                 >
-                    <Link
+                    <LinkButton
                         to="/"
                     >
                         <Logo withText />
-                    </Link>
+                    </LinkButton>
                     <nav
                         className={css({
                             display: "flex",
@@ -114,7 +113,7 @@ export function WebsitePage() {
                         width: "100%",
                         maxWidth: "xl",
                         display: "flex",
-                        flexDirection: { base: "column", md: "row" },
+                        flexDirection: "row",
                         justifyContent: "space-between",
                         alignItems: "center",
                         gap: "3rem",
@@ -175,7 +174,7 @@ export function WebsitePage() {
                             gap: "0.5rem"
                         })}>
                             <LinkButton
-                                to="/sign-up"
+                                to="/inscription"
                             >
                                 <ButtonContent
                                     variant="primary"
@@ -201,8 +200,8 @@ export function WebsitePage() {
                             display: { base: "none", md: "flex" },
                             justifyContent: "center",
                             alignItems: "center",
-                            flex: "1",
-                            maxWidth: "20rem",
+                            // flex: "1",
+                            // maxWidth: "20rem",
                         })}
                     >
                         <HeroIllustration />

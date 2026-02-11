@@ -1,6 +1,5 @@
 import { readOneOrganizationRouteDefinition, readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
-import { IconSlash } from "@tabler/icons-react"
 import { useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { LinkButton } from "../components/linkButton.js"
@@ -54,10 +53,15 @@ export function Breadcrumbs() {
             </LinkButton>
             {idYear !== null && (
                 <Fragment>
-                    <IconSlash
+                    <span
+                        className={css({ color: "neutral/25", padding: "0.25rem", })}
+                    >
+                        /
+                    </span>
+                    {/* <IconSlash
                         size={16}
                         className={css({ stroke: "neutral/25" })}
-                    />
+                    /> */}
                     <LinkButton
                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures"
                         params={{

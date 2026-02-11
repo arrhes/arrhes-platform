@@ -1,5 +1,4 @@
-import { createRoute } from "@tanstack/react-router"
-import { OrganizationSettingsLayout } from "../../../../../../features/dashboard/organizations/$idOrganization/organizationSettings/organizationSettingsLayout.js"
+import { createRoute, Outlet } from "@tanstack/react-router"
 import { organizationLayoutRoute } from "../../../../../../routes/root/dashboard/organizations/$idOrganization/organizationLayoutRoute.js"
 
 
@@ -10,6 +9,6 @@ export const organizationSettingsLayoutRoute = createRoute({
         title: "Paramètres"
     }),
     component: () => (
-        <OrganizationSettingsLayout />
+        <Outlet />
     )
 })

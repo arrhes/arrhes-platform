@@ -1,48 +1,24 @@
 
 import { Toast } from "../../components/overlays/toast/toast.js"
-import { css } from "../../utilities/cn.js"
 import { useToast } from "./useToast.js"
 
 
 export function ToasterProvider() {
-    const { toasts } = useToast()
+    const { toasts, dismiss } = useToast()
 
     return (
-        <Toast.Provider>
+        <Toast.Viewport>
             {
-                toasts.map(function ({ id, title, description, action, ...props }) {
+                toasts.map(function (toast) {
                     return (
-                        <Toast.Content
-                            {...props}
-                            key={id}
-                        >
-                            <div className={css({ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start" })}>
-                                {
-                                    (title === undefined)
-                                        ? null
-                                        : (
-                                            <Toast.Title>
-                                                {title}
-                                            </Toast.Title>
-                                        )
-                                }
-                                {
-                                    (description === undefined)
-                                        ? null
-                                        : (
-                                            <Toast.Description>
-                                                {description}
-                                            </Toast.Description>
-                                        )
-                                }
-                            </div>
-                            {action}
-                            <Toast.Close />
-                        </Toast.Content>
+                        <Toast.Item
+                            key={toast.id}
+                            toast={toast}
+                            onDismiss={dismiss}
+                        />
                     )
                 })
             }
-            <Toast.Viewport />
-        </Toast.Provider>
+        </Toast.Viewport>
     )
 }

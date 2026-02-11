@@ -1,15 +1,12 @@
-import { readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
-import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
-import { Box } from "../../../../../../../../components/layouts/box.tsx"
-import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { useParams } from "@tanstack/react-router"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
 import { journalsRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoute.tsx"
 import { CreateOneJournal } from "./createOneJournal.tsx"
 import { GenerateJournals } from "./generateJournals.tsx"
+import { JournalsListTable } from "./journalsListTable.tsx"
 
 
 export function JournalsPage() {
@@ -40,48 +37,10 @@ export function JournalsPage() {
                         />
                     </GenerateJournals>
                 </div>
-                <Box>
-                    <DataWrapper
-                        routeDefinition={readAllJournalsRouteDefinition}
-                        body={{
-                            idOrganization: params.idOrganization,
-                            idYear: params.idYear
-                        }}
-                    >
-                        {(journals) => {
-                            const sortedJournals = journals.sort((a, b) => a.createdAt.localeCompare(b.createdAt))
-
-                            if (sortedJournals.length === 0) {
-                                return (
-                                    <FormatNull
-                                        text="Aucun journal"
-                                        className={css({ padding: "1rem" })}
-                                    />
-                                )
-                            }
-                            return (
-                                <div className={css({ height: "fit", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                                    {
-                                        sortedJournals.map((journal) => (
-                                            <Link
-                                                key={journal.id}
-                                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/journaux/$idJournal"
-                                                params={{
-                                                    idOrganization: params.idOrganization,
-                                                    idYear: params.idYear,
-                                                    idJournal: journal.id
-                                                }}
-                                                className={css({ width: "100%", padding: "1rem", borderBottomWidth: "1px", borderColor: "neutral/10", _last: { borderStyle: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
-                                            >
-                                                {`${journal.label} (${journal.code})`}
-                                            </Link>
-                                        ))
-                                    }
-                                </div>
-                            )
-                        }}
-                    </DataWrapper>
-                </Box>
+                <JournalsListTable
+                    idOrganization={params.idOrganization}
+                    idYear={params.idYear}
+                />
             </Section.Item>
         </Section.Root>
     )

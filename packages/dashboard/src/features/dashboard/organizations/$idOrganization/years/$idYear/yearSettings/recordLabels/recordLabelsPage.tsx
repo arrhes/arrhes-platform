@@ -1,14 +1,11 @@
-import { readAllRecordLabelsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
-import { Link, useParams } from "@tanstack/react-router"
-import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
-import { Box } from "../../../../../../../../components/layouts/box.tsx"
-import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { useParams } from "@tanstack/react-router"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
 import { recordLabelsRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsRoute.tsx"
 import { CreateOneRecordLabel } from "./createOneRecordLabel.tsx"
+import { RecordLabelsListTable } from "./recordLabelsListTable.tsx"
 
 
 export function RecordLabelsPage() {
@@ -29,48 +26,10 @@ export function RecordLabelsPage() {
                         />
                     </CreateOneRecordLabel>
                 </div>
-                <Box>
-                    <DataWrapper
-                        routeDefinition={readAllRecordLabelsRouteDefinition}
-                        body={{
-                            idOrganization: params.idOrganization,
-                            idYear: params.idYear
-                        }}
-                    >
-                        {(recordLabels) => {
-                            const sortedRecordLabels = recordLabels.sort((a, b) => a.createdAt.localeCompare(b.createdAt))
-
-                            if (sortedRecordLabels.length === 0) {
-                                return (
-                                    <FormatNull
-                                        text="Aucune catégorie"
-                                        className={css({ padding: "1rem" })}
-                                    />
-                                )
-                            }
-                            return (
-                                <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                                    {
-                                        sortedRecordLabels.map((recordLabel) => (
-                                            <Link
-                                                key={recordLabel.id}
-                                                to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/catégories/$idRecordLabel"
-                                                params={{
-                                                    idOrganization: params.idOrganization,
-                                                    idYear: params.idYear,
-                                                    idRecordLabel: recordLabel.id
-                                                }}
-                                                className={css({ width: "100%", padding: "1rem", borderBottom: "1px solid", borderColor: "neutral/10", _last: { borderBottom: "none" }, display: "flex", justifyContent: "flex-start", alignItems: "center", _hover: { backgroundColor: "neutral/5" }, cursor: "pointer" })}
-                                            >
-                                                {`${recordLabel.label}`}
-                                            </Link>
-                                        ))
-                                    }
-                                </div>
-                            )
-                        }}
-                    </DataWrapper>
-                </Box>
+                <RecordLabelsListTable
+                    idOrganization={params.idOrganization}
+                    idYear={params.idYear}
+                />
             </Section.Item>
         </Section.Root>
     )

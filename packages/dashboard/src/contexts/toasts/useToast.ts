@@ -1,16 +1,18 @@
-import { Toast } from "../../components/overlays/toast/toast.js"
-import { ToastContent } from "../../components/overlays/toast/toastContent.js"
-import { ComponentProps, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 
 
 const TOAST_LIMIT = 8
-const TOAST_REMOVE_DELAY = 20000
+const TOAST_REMOVE_DELAY = 2000
 
-type ToasterToast = ComponentProps<typeof ToastContent> & {
+export type ToastVariant = "error" | "success" | "warning" | "information"
+
+export type ToasterToast = {
     id: string
     title?: ReactNode
     description?: ReactNode
-    action?: ReactNode
+    variant?: ToastVariant
+    open?: boolean
+    itemID?: string
 }
 
 const actionTypes = {
@@ -88,8 +90,6 @@ export const reducer = (state: State, action: Action): State => {
         case "DISMISS_TOAST": {
             const { toastId } = action
 
-            // ! Side effects ! - This could be extracted into a dismissToast() action,
-            // but I'll keep it here for simplicity
             if (toastId) {
                 addToRemoveQueue(toastId)
             } else {
@@ -153,9 +153,6 @@ function toast({ ...props }: Toast) {
             ...props,
             id,
             open: true,
-            onOpenChange: (open: boolean) => {
-                if (!open) dismiss()
-            },
         },
     })
 
@@ -188,4 +185,3 @@ function useToast() {
 }
 
 export { toast, useToast }
-

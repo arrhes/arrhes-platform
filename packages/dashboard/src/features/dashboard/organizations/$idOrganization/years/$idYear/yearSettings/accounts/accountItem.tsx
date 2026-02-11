@@ -1,8 +1,8 @@
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { Link } from "@tanstack/react-router"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
+import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 
 
 export function AccountItem(props: {
@@ -46,7 +46,7 @@ export function AccountItem(props: {
 
     return (
         <Fragment>
-            <Link
+            <LinkButton
                 to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/comptes/$idAccount"
                 params={{
                     idOrganization: props.idOrganization,
@@ -91,7 +91,7 @@ export function AccountItem(props: {
                         </span>
                     </div>
                 </div>
-            </Link>
+            </LinkButton>
         </Fragment>
     )
 }

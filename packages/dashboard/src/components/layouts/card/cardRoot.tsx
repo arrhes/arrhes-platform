@@ -2,12 +2,10 @@ import { ComponentProps, ReactElement } from "react"
 import { css, cx } from "../../../utilities/cn.js"
 
 
-type CardRoot = {
+export function CardRoot(props: {
     children: ReactElement | ReactElement[]
     className?: ComponentProps<'div'>['className']
-}
-
-export function CardRoot(props: CardRoot) {
+}) {
     return (
         <div
             className={cx(
@@ -22,7 +20,7 @@ export function CardRoot(props: CardRoot) {
                     overflowY: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    borderRadius: "md"
+                    borderRadius: "lg"
                 }),
                 props.className
             )}

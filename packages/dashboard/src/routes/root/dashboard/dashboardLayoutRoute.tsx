@@ -13,7 +13,7 @@ export const dashboardLayoutRoute = createRoute({
     beforeLoad: ({ context }) => {
         if (context.isAuthenticated !== true) {
             throw redirect({
-                to: "/sign-in"
+                to: "/connexion"
             })
         }
     },

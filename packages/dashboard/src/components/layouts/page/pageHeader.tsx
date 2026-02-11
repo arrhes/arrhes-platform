@@ -18,7 +18,7 @@ export function PageHeader(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: "1rem",
+                    gap: "0.5rem",
                 }),
                 props.className
             )}

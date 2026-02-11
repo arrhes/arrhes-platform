@@ -451,142 +451,328 @@ async function seed() {
             // ==========================================
             console.log("Creating sample records and record rows...")
 
-            // Get some accounts for sample entries
-            const account512 = newAccounts.find(a => a.originalNumber === 512) // Banque
-            const account401 = newAccounts.find(a => a.originalNumber === 401) // Fournisseurs (we need to check if it exists)
-            const account411 = newAccounts.find(a => a.originalNumber === 411) // Clients
-            const account706 = newAccounts.find(a => a.originalNumber === 706) // Prestations de services
-            const account607 = newAccounts.find(a => a.originalNumber === 607) // Achats de marchandises
-            const account44566 = newAccounts.find(a => a.originalNumber === 44566) // TVA deductible
-            const account44571 = newAccounts.find(a => a.originalNumber === 44571) // TVA collectee
+            // Account lookup helper
+            const acc = (num: number) => newAccounts.find(a => a.originalNumber === num)
 
+            // Journal lookup
             const journalVT = journalByCode.get("VT")
             const journalAC = journalByCode.get("AC")
             const journalBQ = journalByCode.get("BQ")
+            const journalOD = journalByCode.get("OD")
 
-            const sampleRecords: {
-                record: typeof models.record.$inferInsert
-                rows: typeof models.recordRow.$inferInsert[]
-            }[] = []
+            // Record label lookup by label text
+            const rlByLabel = new Map(newRecordLabels.map(rl => [rl.label, rl]))
 
-            // Sample sale record
-            if (journalVT && account411 && account706 && account44571) {
+            // Helper: build a record + rows entry
+            function makeRecord(
+                journal: typeof newJournals[number],
+                label: string,
+                date: Date,
+                idRecordLabel: string | null,
+                rows: { idAccount: string; label: string; debit: string; credit: string }[]
+            ) {
                 const recordId = generateId()
-                sampleRecords.push({
+                return {
                     record: {
                         id: recordId,
                         idOrganization: populatedOrganization.id,
                         idYear: newYear.id,
-                        idJournal: journalVT.id,
+                        idJournal: journal.id,
                         idAttachment: null,
-                        idRecordLabel: newRecordLabels[2].id, // Vente client
-                        label: "Facture client FC001",
-                        date: new Date(currentDate.getFullYear(), 0, 15).toISOString(),
+                        idRecordLabel: idRecordLabel,
+                        label: label,
+                        date: date.toISOString(),
                         createdAt: createdAt,
-                    },
-                    rows: [
-                        {
-                            id: generateId(),
-                            idOrganization: populatedOrganization.id,
-                            idYear: newYear.id,
-                            idRecord: recordId,
-                            idAccount: account411.id,
-                            isComputedForJournalReport: false,
-                            isComputedForLedgerReport: false,
-                            isComputedForBalanceReport: false,
-                            isComputedForBalanceSheetReport: false,
-                            isComputedForIncomeStatementReport: false,
-                            label: "Client - Facture FC001",
-                            debit: "1200.00",
-                            credit: "0.00",
-                            createdAt: createdAt,
-                        },
-                        {
-                            id: generateId(),
-                            idOrganization: populatedOrganization.id,
-                            idYear: newYear.id,
-                            idRecord: recordId,
-                            idAccount: account706.id,
-                            isComputedForJournalReport: false,
-                            isComputedForLedgerReport: false,
-                            isComputedForBalanceReport: false,
-                            isComputedForBalanceSheetReport: false,
-                            isComputedForIncomeStatementReport: false,
-                            label: "Prestation de services",
-                            debit: "0.00",
-                            credit: "1000.00",
-                            createdAt: createdAt,
-                        },
-                        {
-                            id: generateId(),
-                            idOrganization: populatedOrganization.id,
-                            idYear: newYear.id,
-                            idRecord: recordId,
-                            idAccount: account44571.id,
-                            isComputedForJournalReport: false,
-                            isComputedForLedgerReport: false,
-                            isComputedForBalanceReport: false,
-                            isComputedForBalanceSheetReport: false,
-                            isComputedForIncomeStatementReport: false,
-                            label: "TVA collectee",
-                            debit: "0.00",
-                            credit: "200.00",
-                            createdAt: createdAt,
-                        },
-                    ],
-                })
+                    } satisfies typeof models.record.$inferInsert,
+                    rows: rows.map((r) => ({
+                        id: generateId(),
+                        idOrganization: populatedOrganization.id,
+                        idYear: newYear.id,
+                        idRecord: recordId,
+                        idAccount: r.idAccount,
+                        isComputedForJournalReport: false,
+                        isComputedForLedgerReport: false,
+                        isComputedForBalanceReport: false,
+                        isComputedForBalanceSheetReport: false,
+                        isComputedForIncomeStatementReport: false,
+                        label: r.label,
+                        debit: r.debit,
+                        credit: r.credit,
+                        createdAt: createdAt,
+                    } satisfies typeof models.recordRow.$inferInsert)),
+                }
             }
 
-            // Sample bank receipt record
-            if (journalBQ && account512 && account411) {
-                const recordId = generateId()
-                sampleRecords.push({
-                    record: {
-                        id: recordId,
-                        idOrganization: populatedOrganization.id,
-                        idYear: newYear.id,
-                        idJournal: journalBQ.id,
-                        idAttachment: null,
-                        idRecordLabel: null,
-                        label: "Encaissement client",
-                        date: new Date(currentDate.getFullYear(), 1, 1).toISOString(),
-                        createdAt: createdAt,
-                    },
-                    rows: [
-                        {
-                            id: generateId(),
-                            idOrganization: populatedOrganization.id,
-                            idYear: newYear.id,
-                            idRecord: recordId,
-                            idAccount: account512.id,
-                            isComputedForJournalReport: false,
-                            isComputedForLedgerReport: false,
-                            isComputedForBalanceReport: false,
-                            isComputedForBalanceSheetReport: false,
-                            isComputedForIncomeStatementReport: false,
-                            label: "Encaissement FC001",
-                            debit: "1200.00",
-                            credit: "0.00",
-                            createdAt: createdAt,
-                        },
-                        {
-                            id: generateId(),
-                            idOrganization: populatedOrganization.id,
-                            idYear: newYear.id,
-                            idRecord: recordId,
-                            idAccount: account411.id,
-                            isComputedForJournalReport: false,
-                            isComputedForLedgerReport: false,
-                            isComputedForBalanceReport: false,
-                            isComputedForBalanceSheetReport: false,
-                            isComputedForIncomeStatementReport: false,
-                            label: "Reglement client",
-                            debit: "0.00",
-                            credit: "1200.00",
-                            createdAt: createdAt,
-                        },
-                    ],
-                })
+            const y = currentDate.getFullYear()
+            const sampleRecords: ReturnType<typeof makeRecord>[] = []
+
+            // ---- SALES (VT) ----
+            if (journalVT && acc(411) && acc(706) && acc(707) && acc(44571)) {
+                // FC001 — Prestation de services (January)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC001", new Date(y, 0, 15),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC001", debit: "1200.00", credit: "0.00" },
+                    { idAccount: acc(706)!.id, label: "Prestation de services", debit: "0.00", credit: "1000.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "200.00" },
+                ]))
+                // FC002 — Vente de marchandises (February)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC002", new Date(y, 1, 3),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC002", debit: "3600.00", credit: "0.00" },
+                    { idAccount: acc(707)!.id, label: "Vente de marchandises", debit: "0.00", credit: "3000.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "600.00" },
+                ]))
+                // FC003 — Prestation (March)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC003", new Date(y, 2, 10),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC003", debit: "2400.00", credit: "0.00" },
+                    { idAccount: acc(706)!.id, label: "Prestation de services", debit: "0.00", credit: "2000.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "400.00" },
+                ]))
+                // FC004 — Vente de marchandises (May)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC004", new Date(y, 4, 20),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC004", debit: "960.00", credit: "0.00" },
+                    { idAccount: acc(707)!.id, label: "Vente de marchandises", debit: "0.00", credit: "800.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "160.00" },
+                ]))
+                // FC005 — Prestation (July)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC005", new Date(y, 6, 8),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC005", debit: "5400.00", credit: "0.00" },
+                    { idAccount: acc(706)!.id, label: "Prestation de services", debit: "0.00", credit: "4500.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "900.00" },
+                ]))
+                // FC006 — Vente (September)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC006", new Date(y, 8, 12),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC006", debit: "1800.00", credit: "0.00" },
+                    { idAccount: acc(707)!.id, label: "Vente de marchandises", debit: "0.00", credit: "1500.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "300.00" },
+                ]))
+                // FC007 — Prestation (November)
+                sampleRecords.push(makeRecord(journalVT, "Facture client FC007", new Date(y, 10, 5),
+                    rlByLabel.get("Vente client")?.id ?? null, [
+                    { idAccount: acc(411)!.id, label: "Client - Facture FC007", debit: "3000.00", credit: "0.00" },
+                    { idAccount: acc(706)!.id, label: "Prestation de services", debit: "0.00", credit: "2500.00" },
+                    { idAccount: acc(44571)!.id, label: "TVA collectee 20%", debit: "0.00", credit: "500.00" },
+                ]))
+            }
+
+            // ---- PURCHASES (AC) ----
+            if (journalAC && acc(401) && acc(44566)) {
+                // Achat de marchandises (January)
+                if (acc(607)) {
+                    sampleRecords.push(makeRecord(journalAC, "Facture fournisseur FF001", new Date(y, 0, 10),
+                        rlByLabel.get("Facture fournisseur")?.id ?? null, [
+                        { idAccount: acc(607)!.id, label: "Achats de marchandises", debit: "2500.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "500.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Fournisseur - FF001", debit: "0.00", credit: "3000.00" },
+                    ]))
+                }
+                // Loyer mensuel — January to June (monthly)
+                if (acc(613)) {
+                    for (let m = 0; m < 6; m++) {
+                        sampleRecords.push(makeRecord(journalAC, `Loyer bureau - ${String(m + 1).padStart(2, "0")}/${y}`, new Date(y, m, 1),
+                            rlByLabel.get("Loyer mensuel")?.id ?? null, [
+                            { idAccount: acc(613)!.id, label: "Loyer bureau mensuel", debit: "1500.00", credit: "0.00" },
+                            { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "300.00", credit: "0.00" },
+                            { idAccount: acc(401)!.id, label: "Bailleur - loyer", debit: "0.00", credit: "1800.00" },
+                        ]))
+                    }
+                }
+                // Fournitures de bureau (March)
+                if (acc(606)) {
+                    sampleRecords.push(makeRecord(journalAC, "Facture fournitures bureau", new Date(y, 2, 18),
+                        rlByLabel.get("Facture fournisseur")?.id ?? null, [
+                        { idAccount: acc(606)!.id, label: "Fournitures de bureau", debit: "350.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "70.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Fournisseur - fournitures", debit: "0.00", credit: "420.00" },
+                    ]))
+                }
+                // Assurance annuelle (January)
+                if (acc(616)) {
+                    sampleRecords.push(makeRecord(journalAC, "Prime assurance RC Pro", new Date(y, 0, 5),
+                        null, [
+                        { idAccount: acc(616)!.id, label: "Assurance RC Pro annuelle", debit: "1800.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Assureur", debit: "0.00", credit: "1800.00" },
+                    ]))
+                }
+                // Honoraires comptable (April)
+                if (acc(622)) {
+                    sampleRecords.push(makeRecord(journalAC, "Honoraires expert-comptable T1", new Date(y, 3, 15),
+                        null, [
+                        { idAccount: acc(622)!.id, label: "Honoraires comptable", debit: "2000.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "400.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Expert-comptable", debit: "0.00", credit: "2400.00" },
+                    ]))
+                }
+                // Abonnement internet — January to June (monthly)
+                if (acc(626)) {
+                    for (let m = 0; m < 6; m++) {
+                        sampleRecords.push(makeRecord(journalAC, `Abonnement internet - ${String(m + 1).padStart(2, "0")}/${y}`, new Date(y, m, 5),
+                            rlByLabel.get("Abonnement internet")?.id ?? null, [
+                            { idAccount: acc(626)!.id, label: "Abonnement internet", debit: "49.00", credit: "0.00" },
+                            { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "9.80", credit: "0.00" },
+                            { idAccount: acc(401)!.id, label: "FAI - abonnement", debit: "0.00", credit: "58.80" },
+                        ]))
+                    }
+                }
+                // Déplacement professionnel (June)
+                if (acc(625)) {
+                    sampleRecords.push(makeRecord(journalAC, "Frais deplacement salon professionnel", new Date(y, 5, 22),
+                        null, [
+                        { idAccount: acc(625)!.id, label: "Deplacement salon Paris", debit: "450.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 10%", debit: "45.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Agence de voyage", debit: "0.00", credit: "495.00" },
+                    ]))
+                }
+                // Achat marchandises supplémentaire (August)
+                if (acc(607)) {
+                    sampleRecords.push(makeRecord(journalAC, "Facture fournisseur FF002", new Date(y, 7, 5),
+                        rlByLabel.get("Facture fournisseur")?.id ?? null, [
+                        { idAccount: acc(607)!.id, label: "Achats de marchandises", debit: "4200.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "840.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "Fournisseur - FF002", debit: "0.00", credit: "5040.00" },
+                    ]))
+                }
+            }
+
+            // ---- SALAIRES (OD) ----
+            if (journalOD && acc(641) && acc(645) && acc(421) && acc(431)) {
+                // Monthly payroll — January to June
+                for (let m = 0; m < 6; m++) {
+                    const monthStr = String(m + 1).padStart(2, "0")
+                    sampleRecords.push(makeRecord(journalOD, `Salaires ${monthStr}/${y}`, new Date(y, m, 28),
+                        rlByLabel.get("Salaires")?.id ?? null, [
+                        { idAccount: acc(641)!.id, label: "Remunerations brutes", debit: "3500.00", credit: "0.00" },
+                        { idAccount: acc(421)!.id, label: "Salaire net a payer", debit: "0.00", credit: "2730.00" },
+                        { idAccount: acc(431)!.id, label: "Cotisations salariales URSSAF", debit: "0.00", credit: "770.00" },
+                    ]))
+                    sampleRecords.push(makeRecord(journalOD, `Charges sociales ${monthStr}/${y}`, new Date(y, m, 28),
+                        rlByLabel.get("Charges sociales")?.id ?? null, [
+                        { idAccount: acc(645)!.id, label: "Charges patronales", debit: "1540.00", credit: "0.00" },
+                        { idAccount: acc(431)!.id, label: "Cotisations patronales URSSAF", debit: "0.00", credit: "1540.00" },
+                    ]))
+                }
+            }
+
+            // ---- BANK (BQ) — Receipts and payments ----
+            if (journalBQ && acc(512)) {
+                // Client payments (matching sales invoices)
+                if (acc(411)) {
+                    sampleRecords.push(makeRecord(journalBQ, "Encaissement client FC001", new Date(y, 1, 1),
+                        null, [
+                        { idAccount: acc(512)!.id, label: "Encaissement FC001", debit: "1200.00", credit: "0.00" },
+                        { idAccount: acc(411)!.id, label: "Reglement client FC001", debit: "0.00", credit: "1200.00" },
+                    ]))
+                    sampleRecords.push(makeRecord(journalBQ, "Encaissement client FC002", new Date(y, 2, 5),
+                        null, [
+                        { idAccount: acc(512)!.id, label: "Encaissement FC002", debit: "3600.00", credit: "0.00" },
+                        { idAccount: acc(411)!.id, label: "Reglement client FC002", debit: "0.00", credit: "3600.00" },
+                    ]))
+                    sampleRecords.push(makeRecord(journalBQ, "Encaissement client FC003", new Date(y, 3, 2),
+                        null, [
+                        { idAccount: acc(512)!.id, label: "Encaissement FC003", debit: "2400.00", credit: "0.00" },
+                        { idAccount: acc(411)!.id, label: "Reglement client FC003", debit: "0.00", credit: "2400.00" },
+                    ]))
+                    sampleRecords.push(makeRecord(journalBQ, "Encaissement client FC005", new Date(y, 7, 1),
+                        null, [
+                        { idAccount: acc(512)!.id, label: "Encaissement FC005", debit: "5400.00", credit: "0.00" },
+                        { idAccount: acc(411)!.id, label: "Reglement client FC005", debit: "0.00", credit: "5400.00" },
+                    ]))
+                }
+                // Supplier payments
+                if (acc(401)) {
+                    sampleRecords.push(makeRecord(journalBQ, "Reglement fournisseur FF001", new Date(y, 1, 10),
+                        null, [
+                        { idAccount: acc(401)!.id, label: "Reglement fournisseur FF001", debit: "3000.00", credit: "0.00" },
+                        { idAccount: acc(512)!.id, label: "Paiement FF001", debit: "0.00", credit: "3000.00" },
+                    ]))
+                    // Loyer payments — January to June
+                    for (let m = 0; m < 6; m++) {
+                        sampleRecords.push(makeRecord(journalBQ, `Paiement loyer ${String(m + 1).padStart(2, "0")}/${y}`, new Date(y, m, 5),
+                            rlByLabel.get("Loyer mensuel")?.id ?? null, [
+                            { idAccount: acc(401)!.id, label: "Reglement bailleur", debit: "1800.00", credit: "0.00" },
+                            { idAccount: acc(512)!.id, label: "Paiement loyer", debit: "0.00", credit: "1800.00" },
+                        ]))
+                    }
+                    // Assurance payment
+                    sampleRecords.push(makeRecord(journalBQ, "Paiement assurance RC Pro", new Date(y, 0, 20),
+                        null, [
+                        { idAccount: acc(401)!.id, label: "Reglement assureur", debit: "1800.00", credit: "0.00" },
+                        { idAccount: acc(512)!.id, label: "Paiement assurance", debit: "0.00", credit: "1800.00" },
+                    ]))
+                    // Internet payments — January to June
+                    for (let m = 0; m < 6; m++) {
+                        sampleRecords.push(makeRecord(journalBQ, `Paiement internet ${String(m + 1).padStart(2, "0")}/${y}`, new Date(y, m, 10),
+                            rlByLabel.get("Abonnement internet")?.id ?? null, [
+                            { idAccount: acc(401)!.id, label: "Reglement FAI", debit: "58.80", credit: "0.00" },
+                            { idAccount: acc(512)!.id, label: "Paiement abonnement internet", debit: "0.00", credit: "58.80" },
+                        ]))
+                    }
+                    // Honoraires payment
+                    sampleRecords.push(makeRecord(journalBQ, "Paiement honoraires comptable", new Date(y, 4, 10),
+                        null, [
+                        { idAccount: acc(401)!.id, label: "Reglement expert-comptable", debit: "2400.00", credit: "0.00" },
+                        { idAccount: acc(512)!.id, label: "Paiement honoraires", debit: "0.00", credit: "2400.00" },
+                    ]))
+                    // Deplacement payment
+                    sampleRecords.push(makeRecord(journalBQ, "Paiement frais deplacement", new Date(y, 6, 2),
+                        null, [
+                        { idAccount: acc(401)!.id, label: "Reglement agence voyage", debit: "495.00", credit: "0.00" },
+                        { idAccount: acc(512)!.id, label: "Paiement deplacement", debit: "0.00", credit: "495.00" },
+                    ]))
+                    // FF002 payment
+                    sampleRecords.push(makeRecord(journalBQ, "Reglement fournisseur FF002", new Date(y, 8, 1),
+                        null, [
+                        { idAccount: acc(401)!.id, label: "Reglement fournisseur FF002", debit: "5040.00", credit: "0.00" },
+                        { idAccount: acc(512)!.id, label: "Paiement FF002", debit: "0.00", credit: "5040.00" },
+                    ]))
+                }
+                // Salary payments — January to June
+                if (acc(421)) {
+                    for (let m = 0; m < 6; m++) {
+                        sampleRecords.push(makeRecord(journalBQ, `Virement salaire ${String(m + 1).padStart(2, "0")}/${y}`, new Date(y, m + 1, 1),
+                            rlByLabel.get("Salaires")?.id ?? null, [
+                            { idAccount: acc(421)!.id, label: "Paiement salaire net", debit: "2730.00", credit: "0.00" },
+                            { idAccount: acc(512)!.id, label: "Virement salaire", debit: "0.00", credit: "2730.00" },
+                        ]))
+                    }
+                }
+                // Social charges payments — quarterly
+                if (acc(431)) {
+                    for (const quarter of [0, 3]) {
+                        const qLabel = quarter === 0 ? "T1" : "T2"
+                        sampleRecords.push(makeRecord(journalBQ, `Paiement cotisations URSSAF ${qLabel}`, new Date(y, quarter + 3, 15),
+                            rlByLabel.get("Charges sociales")?.id ?? null, [
+                            { idAccount: acc(431)!.id, label: `Reglement URSSAF ${qLabel}`, debit: "6930.00", credit: "0.00" },
+                            { idAccount: acc(512)!.id, label: `Paiement URSSAF ${qLabel}`, debit: "0.00", credit: "6930.00" },
+                        ]))
+                    }
+                }
+                // Electricite — bimonthly
+                if (acc(606) && acc(401)) {
+                    for (const m of [1, 3, 5]) {
+                        sampleRecords.push(makeRecord(journalBQ, `Prelevement electricite`, new Date(y, m, 15),
+                            rlByLabel.get("Electricite")?.id ?? null, [
+                            { idAccount: acc(401)!.id, label: "Fournisseur electricite", debit: "180.00", credit: "0.00" },
+                            { idAccount: acc(512)!.id, label: "Paiement electricite", debit: "0.00", credit: "180.00" },
+                        ]))
+                    }
+                }
+            }
+
+            // ---- ELECTRICITE purchases (AC) ----
+            if (journalAC && acc(606) && acc(44566) && acc(401)) {
+                for (const m of [1, 3, 5]) {
+                    sampleRecords.push(makeRecord(journalAC, `Facture electricite bimestrielle`, new Date(y, m, 10),
+                        rlByLabel.get("Electricite")?.id ?? null, [
+                        { idAccount: acc(606)!.id, label: "Electricite bureau", debit: "150.00", credit: "0.00" },
+                        { idAccount: acc(44566)!.id, label: "TVA deductible 20%", debit: "30.00", credit: "0.00" },
+                        { idAccount: acc(401)!.id, label: "EDF", debit: "0.00", credit: "180.00" },
+                    ]))
+                }
             }
 
             // Insert records
@@ -607,7 +793,7 @@ async function seed() {
             console.log(`- ${newComputations.length} computations created`)
             console.log(`- ${newComputationIncomeStatements.length} computation-income statement links created`)
             console.log(`- ${newRecordLabels.length} record labels created`)
-            console.log(`- ${sampleRecords.length} sample records created`)
+            console.log(`- ${sampleRecords.length} sample records created (${sampleRecords.reduce((sum, r) => sum + r.rows.length, 0)} record rows)`)
         })
 
     } catch (error) {

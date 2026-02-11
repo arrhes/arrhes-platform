@@ -48,9 +48,8 @@ export function DashboardLayout() {
                         gap: "0.5rem",
                     })}>
                         <LinkButton to="/dashboard">
-                            <Logo withText />
+                            <Logo />
                         </LinkButton>
-                        <span className={css({ color: "neutral/20" })}>/</span>
                         <Breadcrumbs />
                     </div>
                     <nav className={css({

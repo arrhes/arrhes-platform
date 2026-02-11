@@ -15,12 +15,12 @@ export function DataBlockContent(props: {
                     height: "fit",
                     display: "grid",
                     gridTemplateColumns: "max-content auto",
-                    columnGap: "4",
-                    rowGap: "2",
-                    padding: "4",
+                    columnGap: "6",
+                    padding: "0",
                     border: "1px solid",
-                    borderColor: "neutral/20",
-                    borderRadius: "md"
+                    borderColor: "neutral/10",
+                    borderRadius: "md",
+                    overflow: "hidden"
                 }),
                 props.className
             )}

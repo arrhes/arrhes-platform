@@ -1,12 +1,13 @@
 import { readAllAccountsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
+import { IconListNumbers } from "@tabler/icons-react"
 import { useState } from "react"
 import * as v from "valibot"
-import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
 import { InputDebounced } from "../../../../../../../../components/inputs/inputDebounced.tsx"
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { AccountItem } from "./accountItem.tsx"
 import { sortAccounts } from "./sortAccounts.tsx"
 
@@ -26,12 +27,6 @@ export function AccountsTable(props: {
             }}
         >
             {(accounts) => {
-                // const filteredAccounts = accounts.filter((account) => {
-                //     const processedAccount = `${account.number} ${account.label}`.toLowerCase()
-                //     const processedFilter = globalFilter.toLowerCase()
-                //     return processedAccount.includes(processedFilter)
-                // })
-
                 const groupedAccounts = sortAccounts({
                     accounts: accounts,
                 })
@@ -54,16 +49,13 @@ export function AccountsTable(props: {
                             />
                         </InputDebounced>
                         <div className={css({ height: "fit", width: "fit", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                            {
-                                (groupedAccounts.length !== 0)
-                                    ? (null)
-                                    : (
-                                        <FormatNull
-                                            text="Aucun compte n'a été trouvé"
-                                            className={css({ padding: "1rem" })}
-                                        />
-                                    )
-                            }
+                            {groupedAccounts.length === 0 && (
+                                <EmptyState
+                                    icon={<IconListNumbers size={48} />}
+                                    title={globalFilter ? "Aucun compte trouvé" : "Aucun compte"}
+                                    subtitle={globalFilter ? undefined : "Ajoutez un compte pour commencer"}
+                                />
+                            )}
                             {groupedAccounts.map((sortedAccount, index) => (
                                 <AccountItem
                                     key={sortedAccount.account.id}

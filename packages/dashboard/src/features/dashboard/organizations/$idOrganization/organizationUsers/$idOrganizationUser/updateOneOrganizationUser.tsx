@@ -1,6 +1,6 @@
-import { createOneOrganizationUserRouteDefinition, readAllOrganizationUsersRouteDefinition } from "@arrhes/application-metadata/routes"
+import { readAllOrganizationUsersRouteDefinition, updateOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { IconPlus } from "@tabler/icons-react"
+import { IconPencil } from "@tabler/icons-react"
 import { JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import * as v from "valibot"
@@ -10,7 +10,6 @@ import { FormField } from "../../../../../../components/forms/formField.tsx"
 import { FormItem } from "../../../../../../components/forms/formItem.tsx"
 import { FormLabel } from "../../../../../../components/forms/formLabel.tsx"
 import { FormRoot } from "../../../../../../components/forms/formRoot.tsx"
-import { InputText } from "../../../../../../components/inputs/inputText.tsx"
 import { InputToggle } from "../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../contexts/toasts/useToast.ts"
@@ -18,8 +17,8 @@ import { invalidateData } from "../../../../../../utilities/invalidateData.ts"
 import { postAPI } from "../../../../../../utilities/postAPI.ts"
 
 
-export function CreateOneOrganizationUser(props: {
-    idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
+export function UpdateOneOrganizationUser(props: {
+    organizationUser: v.InferOutput<typeof returnedSchemas.organizationUser>
     children: JSX.Element
 }) {
     const [open, setOpen] = useState(false)
@@ -34,30 +33,27 @@ export function CreateOneOrganizationUser(props: {
             </Drawer.Trigger>
             <Drawer.Content>
                 <Drawer.Header
-                    title="Ajouter un nouvel utilisateur"
+                    title="Modifier l'utilisateur"
                 />
                 <Drawer.Body>
                     <FormRoot
-                        schema={createOneOrganizationUserRouteDefinition.schemas.body}
-                        defaultValues={{
-                            idOrganization: props.idOrganization,
-                            isAdmin: false,
-                        }}
+                        schema={updateOneOrganizationUserRouteDefinition.schemas.body}
+                        defaultValues={props.organizationUser}
                         submitButtonProps={{
-                            leftIcon: <IconPlus />,
-                            text: "Ajouter l'utilisateur",
+                            leftIcon: <IconPencil />,
+                            text: "Modifier l'utilisateur",
                         }}
                         onSubmit={async (data) => {
                             const response = await postAPI({
-                                routeDefinition: createOneOrganizationUserRouteDefinition,
+                                routeDefinition: updateOneOrganizationUserRouteDefinition,
                                 body: data,
                             })
                             if (!response.ok) {
-                                toast({ title: "Impossible d'ajouter l'utilisateur", variant: "error" })
+                                toast({ title: "Impossible de modifier l'utilisateur", variant: "error" })
                                 return false
                             }
 
-                            toast({ title: "Utilisateur ajouté avec succès", variant: "success" })
+                            toast({ title: "Utilisateur modifié avec succès", variant: "success" })
                             return true
                         }}
                         onCancel={undefined}
@@ -66,7 +62,7 @@ export function CreateOneOrganizationUser(props: {
                             await invalidateData({
                                 routeDefinition: readAllOrganizationUsersRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization
+                                    idOrganization: props.organizationUser.idOrganization
                                 },
                             })
 
@@ -94,28 +90,6 @@ export function CreateOneOrganizationUser(props: {
                                                         { value: true, label: "Oui" },
                                                         { value: false, label: "Non" }
                                                     ]}
-                                                />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="user.email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Email de l'utilisateur"
-                                                description={undefined}
-                                                isRequired={true}
-                                                tooltip={undefined}
-                                            />
-                                            <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
                                                 />
                                             </FormControl>
                                             <FormError />

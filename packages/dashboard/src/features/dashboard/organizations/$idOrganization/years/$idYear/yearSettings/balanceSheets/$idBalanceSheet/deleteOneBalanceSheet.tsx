@@ -1,11 +1,8 @@
 import { deleteOneBalanceSheetRouteDefinition, readAllBalanceSheetsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
-import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconTrash } from "@tabler/icons-react"
-import { ComponentPropsWithRef, ReactElement, useState } from "react"
+import { ComponentPropsWithRef, ReactElement } from "react"
 import * as v from "valibot"
-import { Dialog } from "../../../../../../../../../components/overlays/dialog/dialog.tsx"
+import { DeleteConfirmation } from "../../../../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
 import { platformRouter } from "../../../../../../../../../routes/platformRouter.tsx"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
@@ -16,8 +13,6 @@ export function DeleteOneBalanceSheet(props: {
     balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>
     children: ReactElement<ComponentPropsWithRef<'div'>>
 }) {
-    const [open, setOpen] = useState(false)
-
     async function onSubmit() {
         const deleteResponse = await postAPI({
             routeDefinition: deleteOneBalanceSheetRouteDefinition,
@@ -50,53 +45,16 @@ export function DeleteOneBalanceSheet(props: {
                 idYear: props.balanceSheet.idYear
             },
         })
-
-        setOpen(false)
-    }
-
-    async function onCancel() {
-        setOpen(false)
     }
 
     return (
-        <Dialog.Root
-            open={open}
-            onOpenChange={(value) => setOpen(value)}
+        <DeleteConfirmation
+            title="Voulez-vous supprimer cette ligne de bilan ?"
+            description={<>Cette action supprimera la ligne de bilan et toutes les données associées.<br />Cette action est irréversible.</>}
+            submitText="Supprimer la ligne de bilan"
+            onSubmit={onSubmit}
         >
-            <Dialog.Trigger
-                onClick={(event) => {
-                    setOpen(true)
-                    event.preventDefault()
-                }}
-            >
-                {props.children}
-            </Dialog.Trigger>
-            {(open === false)
-                ? (null)
-                : (
-                    <Dialog.Content>
-                        <Dialog.Header />
-                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
-                            <Dialog.Title>
-                                Voulez-vous supprimer cette ligne de bilan ?
-                            </Dialog.Title>
-                            <Dialog.Description>
-                                Cette action supprimera la ligne de bilan et toutes les données associées.
-                                <br />
-                                Cette action est irréversible.
-                            </Dialog.Description>
-                        </div>
-                        <Dialog.Footer>
-                            <Button onClick={() => onCancel()}>
-                                <ButtonContent variant="invisible" text="Annuler" />
-                            </Button>
-                            <Button onClick={() => onSubmit()} hasLoader>
-                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer la ligne de bilan" />
-                            </Button>
-                        </Dialog.Footer>
-                    </Dialog.Content>
-                )
-            }
-        </Dialog.Root>
+            {props.children}
+        </DeleteConfirmation>
     )
 }

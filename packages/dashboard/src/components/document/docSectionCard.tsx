@@ -1,6 +1,5 @@
 import { ButtonContent } from "@arrhes/ui"
 import { IconChevronRight } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import type { ReactNode } from "react"
 import { LinkButton } from "../linkButton.js"
 import type { ValidRoutes } from "../../routes/platformRouter.js"
@@ -14,7 +13,7 @@ export function DocSectionCard(props: {
     iconColor?: DocSectionCardColor
     title: string
     description: string
-    links: { to: string; label: string }[]
+    links: { to: ValidRoutes; label: string }[]
     ctaTo: ValidRoutes
     ctaLabel: string
 }) {
@@ -82,12 +81,11 @@ export function DocSectionCard(props: {
                 flex: "1"
             })}>
                 {props.links.map((link) => (
-                    <Link
+                    <LinkButton
                         key={link.to}
                         to={link.to}
                         className={css({
-                            display: "flex",
-                            alignItems: "center",
+                            width: "100%",
                             gap: "0.5rem",
                             paddingY: "0.5rem",
                             paddingX: "0.5rem",
@@ -108,7 +106,7 @@ export function DocSectionCard(props: {
                             backgroundColor: "neutral/30"
                         })} />
                         {link.label}
-                    </Link>
+                    </LinkButton>
                 ))}
             </div>
 

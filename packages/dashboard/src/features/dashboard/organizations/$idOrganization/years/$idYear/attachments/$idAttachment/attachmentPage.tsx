@@ -10,7 +10,6 @@ import { FormatText } from "../../../../../../../../components/formats/formatTex
 import { DataBlock } from "../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../components/layouts/title.tsx"
 import { attachmentLayoutRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute.tsx"
 import { AttachmentData } from "./attachmentData.tsx"
 import { AttachmentFile } from "./attachmentFile.tsx"
@@ -71,11 +70,7 @@ export function AttachmentPage() {
                                 </Section.Item>
                                 <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
-                                        <DataBlock.Header>
-                                            <TitleComponent>
-                                                Informations
-                                            </TitleComponent>
-                                        </DataBlock.Header>
+                                        <DataBlock.Header title="Informations" />
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Référence">
                                                 <FormatText>
@@ -106,11 +101,7 @@ export function AttachmentPage() {
                                 </Section.Item>
                                 <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
-                                        <DataBlock.Header>
-                                            <TitleComponent>
-                                                Métadonnées
-                                            </TitleComponent>
-                                        </DataBlock.Header>
+                                        <DataBlock.Header title="Métadonnées" />
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Ajouté le">
                                                 <FormatDateTime date={attachment.createdAt} />

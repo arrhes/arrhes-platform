@@ -1,5 +1,5 @@
 import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -11,7 +11,7 @@ import { FormatText } from "../../../../../../../../../components/formats/format
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../../components/layouts/title.tsx"
+
 import { accountRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountRoute.tsx"
 import { DeleteOneAccount } from "./deleteOneAccount.tsx"
 import { UpdateOneAccount } from "./updateOneAccount.tsx"
@@ -53,34 +53,27 @@ export function AccountPage() {
                                     <UpdateOneAccount
                                         account={account}
                                     >
-                                        <Button title="Modifier">
-                                            <ButtonContent
-                                                variant="primary"
-                                                leftIcon={<IconPencil />}
-                                                text="Modifier"
-                                            />
-                                        </Button>
+                                        <ButtonContent
+                                            variant="primary"
+                                            leftIcon={<IconPencil />}
+                                            text="Modifier"
+                                        />
                                     </UpdateOneAccount>
                                     <DeleteOneAccount
                                         account={account}
                                     >
-                                        <Button title="Supprimer">
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconTrash />}
-                                                color="error"
-                                            />
-                                        </Button>
+                                        <ButtonContent
+                                            variant="default"
+                                            leftIcon={<IconTrash />}
+                                            title="Supprimer"
+                                            color="error"
+                                        />
                                     </DeleteOneAccount>
                                 </div>
                             </Section.Item>
                             <Section.Item className={css({ flexDirection: "column" })}>
                                 <DataBlock.Root>
-                                    <DataBlock.Header>
-                                        <TitleComponent>
-                                            Informations
-                                        </TitleComponent>
-                                    </DataBlock.Header>
+                                    <DataBlock.Header title="Informations" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Numéro">
                                             <FormatText>
@@ -115,11 +108,7 @@ export function AccountPage() {
                             </Section.Item>
                             <Section.Item>
                                 <DataBlock.Root>
-                                    <DataBlock.Header>
-                                        <TitleComponent>
-                                            Métadonnées
-                                        </TitleComponent>
-                                    </DataBlock.Header>
+                                    <DataBlock.Header title="Métadonnées" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Ajouté le">
                                             <FormatDateTime date={account.createdAt} />

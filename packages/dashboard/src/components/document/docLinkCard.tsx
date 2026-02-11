@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router"
 import type { ReactNode } from "react"
+import { LinkButton } from "../linkButton.js"
+import type { ValidRoutes } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 
 
@@ -10,7 +11,7 @@ export function DocLinkCard(props: {
     iconColor?: DocLinkCardColor
     title: string
     description: string
-    to: string
+    to: ValidRoutes
 }) {
     const colorStyles: Record<DocLinkCardColor, { bg: string; color: string }> = {
         information: { bg: "information/10", color: "information" },
@@ -21,10 +22,10 @@ export function DocLinkCard(props: {
     const style = colorStyles[props.iconColor ?? "primary"]
 
     return (
-        <Link
+        <LinkButton
             to={props.to}
             className={css({
-                display: "flex",
+                width: "100%",
                 flexDirection: "column",
                 gap: "0.75rem",
                 padding: "1.5rem",
@@ -69,6 +70,6 @@ export function DocLinkCard(props: {
             })}>
                 {props.description}
             </p>
-        </Link>
+        </LinkButton>
     )
 }

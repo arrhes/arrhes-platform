@@ -6,7 +6,7 @@ import { rootLayoutRoute } from "../../rootLayoutRoute.js"
 
 export const signUpRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,
-    path: '/sign-up',
+    path: '/inscription',
     pendingComponent: () => (
         <CircularLoader />
     ),

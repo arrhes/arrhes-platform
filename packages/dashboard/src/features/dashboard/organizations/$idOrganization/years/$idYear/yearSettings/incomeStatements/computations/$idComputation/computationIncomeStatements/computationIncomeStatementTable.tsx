@@ -1,14 +1,14 @@
 import { readAllComputationIncomeStatementsRouteDefinition, readOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
-import { IconPlus } from "@tabler/icons-react"
+import { IconEye, IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatText } from "../../../../../../../../../../../components/formats/formatText.tsx"
 import { Chip } from "../../../../../../../../../../../components/layouts/chip.tsx"
 import { DataTable } from "../../../../../../../../../../../components/layouts/dataTable.tsx"
 import { DataWrapper } from "../../../../../../../../../../../components/layouts/dataWrapper.tsx"
-import { platformRouter } from "../../../../../../../../../../../routes/platformRouter.tsx"
+import { LinkButton } from "../../../../../../../../../../../components/linkButton.tsx"
 import { CreateOneComputationIncomeStatement } from "./createOneComputationIncomeStatement.tsx"
 
 
@@ -30,6 +30,29 @@ export function ComputationIncomeStatementsTable(props: {
                         data={computationIncomeStatements}
                         isLoading={false}
                         columns={[
+                            {
+                                accessorKey: 'actions',
+                                header: ' ',
+                                cell: ({ row }) => (
+                                    <LinkButton
+                                        to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation/$idComputationIncomeStatement"
+                                        params={{
+                                            idOrganization: row.original.idOrganization,
+                                            idYear: row.original.idYear,
+                                            idComputation: row.original.idComputation,
+                                            idComputationIncomeStatement: row.original.id,
+                                        }}
+                                    >
+                                        <ButtonContent
+                                            variant="invisible"
+                                            leftIcon={<IconEye />}
+                                            text={undefined}
+                                        />
+                                    </LinkButton>
+                                ),
+                                enableSorting: false,
+                                enableGlobalFilter: false,
+                            },
                             {
                                 accessorKey: 'idStatement',
                                 header: 'Poste du compte de résultat',
@@ -68,17 +91,6 @@ export function ComputationIncomeStatementsTable(props: {
                                 filterFn: 'includesString'
                             }
                         ]}
-                        onRowClick={(row) => {
-                            platformRouter.navigate({
-                                to: "/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation/$idComputationIncomeStatement",
-                                params: {
-                                    idOrganization: row.original.idOrganization,
-                                    idYear: row.original.idYear,
-                                    idComputation: row.original.idComputation,
-                                    idComputationIncomeStatement: row.original.id,
-                                }
-                            })
-                        }}
                     >
                         <CreateOneComputationIncomeStatement
                             computation={props.computation}

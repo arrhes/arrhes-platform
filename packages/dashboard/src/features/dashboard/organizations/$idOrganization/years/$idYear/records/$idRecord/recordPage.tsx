@@ -13,7 +13,6 @@ import { DataBlock } from "../../../../../../../../components/layouts/dataBlock/
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../components/layouts/title.tsx"
 import { LinkButton } from "../../../../../../../../components/linkButton.js"
 import { recordRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/$idRecord/recordRoute.tsx"
 import { compareAmounts } from "../../../../../../../../utilities/compareAmounts.ts"
@@ -143,11 +142,7 @@ export function RecordPage() {
                                             </Section.Item>
                                             <Section.Item className={css({ flexDirection: "column" })}>
                                                 <DataBlock.Root>
-                                                    <DataBlock.Header>
-                                                        <TitleComponent>
-                                                            Informations
-                                                        </TitleComponent>
-                                                    </DataBlock.Header>
+                                                    <DataBlock.Header title="Informations" />
                                                     <DataBlock.Content>
                                                         <DataBlock.Item label="Libellé">
                                                             <FormatText>
@@ -223,11 +218,7 @@ export function RecordPage() {
                                                     </DataBlock.Content>
                                                 </DataBlock.Root>
                                                 <DataBlock.Root>
-                                                    <DataBlock.Header>
-                                                        <TitleComponent>
-                                                            Détail
-                                                        </TitleComponent>
-                                                    </DataBlock.Header>
+                                                    <DataBlock.Header title="Détail" />
                                                     <DataBlock.Content>
                                                         {/* <DataBlock.Item label="Écriture simulée ?">
                                                             <FormatBoolean boolean={record.isComputed} />
@@ -241,11 +232,7 @@ export function RecordPage() {
                                                     </DataBlock.Content>
                                                 </DataBlock.Root>
                                                 <DataBlock.Root>
-                                                    <DataBlock.Header>
-                                                        <TitleComponent>
-                                                            Métadonnées
-                                                        </TitleComponent>
-                                                    </DataBlock.Header>
+                                                    <DataBlock.Header title="Métadonnées" />
                                                     <DataBlock.Content>
                                                         <DataBlock.Item label="Ajoutée le">
                                                             <FormatDateTime date={record.createdAt} />

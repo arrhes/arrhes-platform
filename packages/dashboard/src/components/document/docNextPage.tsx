@@ -1,10 +1,11 @@
 import { IconArrowRight } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../linkButton.js"
+import type { ValidRoutes } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
 
 
 export function DocNextPage(props: {
-    to: string
+    to: ValidRoutes
     label: string
 }) {
     return (
@@ -14,11 +15,10 @@ export function DocNextPage(props: {
             borderTop: "1px solid",
             borderColor: "neutral/10"
         })}>
-            <Link
+            <LinkButton
                 to={props.to}
                 className={css({
-                    display: "flex",
-                    alignItems: "center",
+                    width: "100%",
                     justifyContent: "space-between",
                     padding: "5",
                     borderRadius: "xl",
@@ -59,7 +59,7 @@ export function DocNextPage(props: {
                     height: "5",
                     color: "primary"
                 })} />
-            </Link>
+            </LinkButton>
         </div>
     )
 }

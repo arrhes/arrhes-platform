@@ -1,9 +1,9 @@
 import { createRoute, Outlet } from "@tanstack/react-router"
-import { organizationSettingsLayoutRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute.js"
+import { organizationLayoutRoute } from "../organizationLayoutRoute.tsx"
 
 
 export const organizationUsersLayoutRoute = createRoute({
-    getParentRoute: () => organizationSettingsLayoutRoute,
+    getParentRoute: () => organizationLayoutRoute,
     path: "/membres",
     beforeLoad: () => ({
         title: "Membres"

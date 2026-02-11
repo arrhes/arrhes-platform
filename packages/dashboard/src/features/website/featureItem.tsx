@@ -6,6 +6,7 @@ export function FeatureItem(props: {
     icon: ReactNode
     text: string
     highlighted?: boolean
+    isDev?: boolean
 }) {
     return (
         <div
@@ -27,15 +28,41 @@ export function FeatureItem(props: {
             >
                 {props.icon}
             </div>
-            <span
+            <div
                 className={css({
-                    fontSize: "sm",
-                    color: props.highlighted ? "primary" : "neutral",
-                    fontWeight: props.highlighted ? "medium" : "normal",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    flexWrap: "wrap",
                 })}
             >
-                {props.text}
-            </span>
+                {props.isDev && (
+                    <span
+                        className={css({
+                            fontSize: "xs",
+                            textTransform: "uppercase",
+                            letterSpacing: "wider",
+                            fontWeight: "medium",
+                            paddingX: "0.4rem",
+                            paddingY: "0.15rem",
+                            borderRadius: "full",
+                            backgroundColor: "success/5",
+                            color: "success",
+                        })}
+                    >
+                        en développement
+                    </span>
+                )}
+                <span
+                    className={css({
+                        fontSize: "sm",
+                        color: props.highlighted ? "primary" : "neutral",
+                        fontWeight: props.highlighted ? "medium" : "normal",
+                    })}
+                >
+                    {props.text}
+                </span>
+            </div>
         </div>
     )
 }

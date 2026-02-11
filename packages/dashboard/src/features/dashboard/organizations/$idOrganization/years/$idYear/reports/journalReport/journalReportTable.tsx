@@ -149,26 +149,28 @@ export function JournalReportTable(props: {
                                                                 {recordRow.label}
                                                             </FormatText>
                                                         </Table.Body.Cell>
-                                                        <Table.Body.Cell className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
-                                                            <DataWrapper
-                                                                routeDefinition={readOneAccountRouteDefinition}
-                                                                body={{
-                                                                    idOrganization: recordRow.idOrganization,
-                                                                    idYear: recordRow.idYear,
-                                                                    idAccount: recordRow.idAccount
-                                                                }}
-                                                            >
-                                                                {(account) => (
-                                                                    <Fragment>
-                                                                        <FormatText className={css({ overflow: "visible" })}>
-                                                                            {account.number}
-                                                                        </FormatText>
-                                                                        <FormatText wrap={true} className={css({ color: "neutral/50" })}>
-                                                                            {account.label}
-                                                                        </FormatText>
-                                                                    </Fragment>
-                                                                )}
-                                                            </DataWrapper>
+                                                        <Table.Body.Cell>
+                                                            <div className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
+                                                                <DataWrapper
+                                                                    routeDefinition={readOneAccountRouteDefinition}
+                                                                    body={{
+                                                                        idOrganization: recordRow.idOrganization,
+                                                                        idYear: recordRow.idYear,
+                                                                        idAccount: recordRow.idAccount
+                                                                    }}
+                                                                >
+                                                                    {(account) => (
+                                                                        <Fragment>
+                                                                            <FormatText className={css({ overflow: "visible" })}>
+                                                                                {account.number}
+                                                                            </FormatText>
+                                                                            <FormatText wrap={true} className={css({ color: "neutral/50" })}>
+                                                                                {account.label}
+                                                                            </FormatText>
+                                                                        </Fragment>
+                                                                    )}
+                                                                </DataWrapper>
+                                                            </div>
                                                         </Table.Body.Cell>
                                                         <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                                             <FormatPrice price={recordRow.debit} />

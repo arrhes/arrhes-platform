@@ -2,12 +2,10 @@ import { ComponentProps } from "react"
 import { css, cx } from "../../utilities/cn.js"
 
 
-type FormatNull = {
+export function FormatNull(props: {
     text?: string
     className?: ComponentProps<'span'>['className']
-}
-
-export function FormatNull(props: FormatNull) {
+}) {
     return (
         <span className={cx(
             css({

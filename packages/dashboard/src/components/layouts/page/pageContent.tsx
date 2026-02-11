@@ -19,7 +19,7 @@ export function PageContent(props: PageContent) {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: "6"
+                    gap: "1rem"
                 }),
                 props.className
             )}

@@ -1,5 +1,5 @@
 import { Button, ButtonContent } from "@arrhes/ui"
-import { IconSortAscending, IconSortDescending } from "@tabler/icons-react"
+import { IconChevronDown, IconChevronLeft, IconChevronRight, IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
     Row,
@@ -8,10 +8,11 @@ import {
     getCoreRowModel,
     getExpandedRowModel,
     getFilteredRowModel,
+    getPaginationRowModel,
     getSortedRowModel,
     useReactTable
 } from '@tanstack/react-table'
-import { ReactElement, useMemo, useState } from "react"
+import { Fragment, ReactElement, useMemo, useState } from "react"
 import { FormatNull } from "../../components/formats/formatNull.js"
 import { InputDebounced } from "../../components/inputs/inputDebounced.js"
 import { InputText } from "../../components/inputs/inputText.js"
@@ -24,7 +25,9 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     data: Array<TData>
     isLoading?: boolean
     columns: Array<ColumnDef<TData>>
+    pageSize?: number
     onRowClick?: (context: Row<TData>) => void
+    renderSubComponent?: (context: { row: Row<TData> }) => ReactElement | null
 }) {
 
     const memoizedData = useMemo(() => props.data, [props.data])
@@ -37,14 +40,20 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
             ...column,
             enableMultiSort: true
         })),
-        getRowCanExpand: () => true,
+        getRowCanExpand: () => !!props.renderSubComponent,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getExpandedRowModel: getExpandedRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         onGlobalFilterChange: setGlobalFilter,
         onSortingChange: setSorting,
         enableMultiSort: true,
+        initialState: {
+            pagination: {
+                pageSize: props.pageSize ?? 10
+            }
+        },
         state: {
             globalFilter,
             sorting,
@@ -93,13 +102,11 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
             <div className={css({
                 width: "100%",
                 maxWidth: "100%",
-                maxH: "600px",
                 padding: "0",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                overflowY: "auto",
                 borderRadius: "md",
                 border: "1px solid",
                 borderColor: "neutral/10"
@@ -118,6 +125,9 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         backgroundColor: "white"
                     })}>
                         <tr className={css({ width: "100%" })}>
+                            {props.renderSubComponent && (
+                                <th className={css({ width: "1%" })} />
+                            )}
                             {table.getFlatHeaders().map((header) => {
                                 return (
                                     <th
@@ -172,52 +182,148 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         }
                         {table.getRowModel().rows.map((row) => {
                             return (
-                                <tr
-                                    key={row.id}
-                                    onClick={(event) => {
-                                        event.stopPropagation()
-                                        if (!props.onRowClick) return
-                                        props.onRowClick(row)
-                                    }}
-                                    className={cx(
-                                        css({
+                                <Fragment key={row.id}>
+                                    <tr
+                                        onClick={(event) => {
+                                            event.stopPropagation()
+                                            if (!props.onRowClick) return
+                                            props.onRowClick(row)
+                                        }}
+                                        className={cx(
+                                            css({
+                                                width: "100%",
+                                                borderBottom: "1px solid",
+                                                borderBottomColor: "neutral/5",
+                                                _last: { borderBottom: "0" }
+                                            }),
+                                            !props.onRowClick ? undefined : css({
+                                                cursor: "pointer",
+                                                _hover: { backgroundColor: "neutral/5" }
+                                            }),
+                                            row.getIsExpanded() ? css({
+                                                borderBottomColor: "neutral/10"
+                                            }) : undefined
+                                        )}
+                                    >
+                                        {props.renderSubComponent && (
+                                            <td className={css({ width: "1%" })}>
+                                                <div className={css({
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    padding: "0.5rem"
+                                                })}>
+                                                    <Button
+                                                        onClick={(event) => {
+                                                            event.stopPropagation()
+                                                            row.toggleExpanded()
+                                                        }}
+                                                    >
+                                                        <ButtonContent
+                                                            variant="invisible"
+                                                            leftIcon={row.getIsExpanded()
+                                                                ? <IconChevronDown size={16} />
+                                                                : <IconChevronRight size={16} />
+                                                            }
+                                                            text={undefined}
+                                                        />
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        )}
+                                        {row.getVisibleCells().map(cell => {
+                                            return (
+                                                <td key={cell.id} className={css({
+                                                    width: "fit",
+                                                    _last: { width: "1%" }
+                                                })}>
+                                                    <div className={css({
+                                                        display: "flex",
+                                                        justifyContent: "flex-start",
+                                                        alignItems: "center",
+                                                        padding: "1rem"
+                                                    })}>
+                                                        {flexRender(
+                                                            cell.column.columnDef.cell,
+                                                            cell.getContext()
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            )
+                                        })}
+                                    </tr>
+                                    {row.getIsExpanded() && props.renderSubComponent && (
+                                        <tr className={css({
                                             width: "100%",
                                             borderBottom: "1px solid",
                                             borderBottomColor: "neutral/5",
+                                            backgroundColor: "neutral/2",
                                             _last: { borderBottom: "0" }
-                                        }),
-                                        !props.onRowClick ? undefined : css({
-                                            cursor: "pointer",
-                                            _hover: { backgroundColor: "neutral/5" }
-                                        })
-                                    )}
-                                >
-                                    {row.getVisibleCells().map(cell => {
-                                        return (
-                                            <td key={cell.id} className={css({
-                                                width: "fit",
-                                                _last: { width: "1%" }
-                                            })}>
-                                                <div className={css({
-                                                    display: "flex",
-                                                    justifyContent: "flex-start",
-                                                    alignItems: "center",
-                                                    padding: "1rem"
-                                                })}>
-                                                    {flexRender(
-                                                        cell.column.columnDef.cell,
-                                                        cell.getContext()
-                                                    )}
-                                                </div>
+                                        })}>
+                                            <td
+                                                colSpan={row.getVisibleCells().length + 1}
+                                                className={css({ padding: "0" })}
+                                            >
+                                                {props.renderSubComponent({ row })}
                                             </td>
-                                        )
-                                    })}
-                                </tr>
+                                        </tr>
+                                    )}
+                                </Fragment>
                             )
                         })}
                     </tbody>
                 </table>
             </div>
+            {table.getPageCount() > 1 && (
+                <div className={css({
+                    flexShrink: "0",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "4"
+                })}>
+                    <span className={css({
+                        fontSize: "sm",
+                        color: "neutral/50"
+                    })}>
+                        {table.getFilteredRowModel().rows.length} résultat{table.getFilteredRowModel().rows.length > 1 ? "s" : ""}
+                    </span>
+                    <div className={css({
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        gap: "2"
+                    })}>
+                        <Button
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                        >
+                            <ButtonContent
+                                variant="default"
+                                leftIcon={<IconChevronLeft size={16} />}
+                                text={undefined}
+                            />
+                        </Button>
+                        <span className={css({
+                            fontSize: "sm",
+                            color: "neutral/50"
+                        })}>
+                            Page {table.getState().pagination.pageIndex + 1} sur {table.getPageCount()}
+                        </span>
+                        <Button
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                        >
+                            <ButtonContent
+                                variant="default"
+                                leftIcon={<IconChevronRight size={16} />}
+                                text={undefined}
+                            />
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

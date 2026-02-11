@@ -11,14 +11,14 @@ export function DialogFooter(props:
             {...props}
             className={cx(
                 css({
-                    padding: "4",
+                    padding: "1rem",
                     borderTop: "1px solid",
-                    borderColor: "neutral/10",
+                    borderTopColor: "neutral/5",
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "flex-end",
                     alignItems: "center",
-                    gap: "2"
+                    gap: "0.5rem"
                 }),
                 props.className
             )}

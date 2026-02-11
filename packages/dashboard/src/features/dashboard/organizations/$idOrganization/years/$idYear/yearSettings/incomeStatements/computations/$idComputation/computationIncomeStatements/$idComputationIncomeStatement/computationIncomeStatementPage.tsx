@@ -11,7 +11,7 @@ import { Chip } from "../../../../../../../../../../../../components/layouts/chi
 import { DataBlock } from "../../../../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../../../../../components/layouts/title.tsx"
+
 import { computationIncomeStatementLayoutRoute } from "../../../../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/$idComputationIncomeStatement/computationIncomeStatementLayoutRoute.tsx"
 import { DeleteOneComputationIncomeStatement } from "./deleteOneComputationIncomeStatement.tsx"
 import { UpdateOneComputationIncomeStatement } from "./updateOneComputationIncomeStatement.tsx"
@@ -72,11 +72,7 @@ export function ComputationIncomeStatementPage() {
                             </Section.Item>
                             <Section.Item className={css({ flexDirection: "column" })}>
                                 <DataBlock.Root>
-                                    <DataBlock.Header>
-                                        <TitleComponent>
-                                            Informations
-                                        </TitleComponent>
-                                    </DataBlock.Header>
+                                    <DataBlock.Header title="Informations" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Poste du compte de résultat">
                                             <DataWrapper
@@ -102,11 +98,7 @@ export function ComputationIncomeStatementPage() {
                                     </DataBlock.Content>
                                 </DataBlock.Root>
                                 <DataBlock.Root>
-                                    <DataBlock.Header>
-                                        <TitleComponent>
-                                            Métadonnées
-                                        </TitleComponent>
-                                    </DataBlock.Header>
+                                    <DataBlock.Header title="Métadonnées" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Ajouté le">
                                             <FormatDateTime date={computationIncomeStatement.createdAt} />

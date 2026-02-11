@@ -20,6 +20,7 @@ import { FeatureItem } from "./featureItem.tsx"
 export function Pricing() {
     return (
         <div className={css({
+            width: "100%",
             display: "grid",
             gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
             gap: "1.5rem",
@@ -78,12 +79,12 @@ export function Pricing() {
                     <FeatureItem icon={<IconUsers />} text="Multiple accès par organisation" />
                     <FeatureItem icon={<IconFileText />} text="Génération de la liasse fiscale" />
                     <FeatureItem icon={<IconFileText />} text="Export du Fichier des Écritures Comptable (FEC)" />
-                    <FeatureItem icon={<IconSettings />} text="[dev] Accès à l'API" />
-                    <FeatureItem icon={<IconCalculator />} text="[dev] Comptabilité analytique" />
+                    <FeatureItem icon={<IconSettings />} text="Accès à l'API" isDev />
+                    <FeatureItem icon={<IconCalculator />} text="Comptabilité analytique" isDev />
                 </div>
 
                 <LinkButton
-                    to="/sign-up"
+                    to="/inscription"
                 >
                     <ButtonContent
                         variant="default"
@@ -123,10 +124,10 @@ export function Pricing() {
                         })}>
                             Plan professionel
                         </h2>
-                        <Badge>Pour nous soutenir</Badge>
+                        <Badge>Soutenir le projet</Badge>
                     </div>
                     <span>
-                        20,00€ / mois (HT)
+                        30,00€ / mois (HT)
                     </span>
                     <p className={css({
                         fontSize: "sm",
@@ -143,11 +144,11 @@ export function Pricing() {
                     flex: "1"
                 })}>
                     <FeatureItem icon={<IconCheck />} text="Tout le plan gratuit" />
-                    <FeatureItem icon={<IconCloudUpload />} text="Stockage illimité de documents" highlighted />
+                    <FeatureItem icon={<IconCloudUpload />} text="Stockage de documents (jusqu'à 1To)" highlighted />
                     <FeatureItem icon={<IconSparkles />} text="Assistant IA" highlighted />
                     <FeatureItem icon={<IconLifebuoy />} text="Support prioritaire" highlighted />
                 </div>
-                {/* <LinkButton to="/sign-up">
+                {/* <LinkButton to="/inscription">
                         <ButtonContent
                             variant="primary"
                             text="Essayer gratuitement"

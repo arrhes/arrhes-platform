@@ -125,17 +125,6 @@ export function RecordRowsTable(props: {
                     filterFn: 'includesString'
                 }
             ]}
-            onRowClick={(row) => {
-                // platformRouter.navigate({
-                //     to: "/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow",
-                //     params: {
-                //         idOrganization: props.record.idOrganization,
-                //         idYear: props.record.idYear,
-                //         idRecord: row.original.idRecord,
-                //         idRecordRow: row.original.id
-                //     }
-                // })
-            }}
         >
             <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>
                 <CreateOneRecordRow

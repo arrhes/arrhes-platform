@@ -1,8 +1,8 @@
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Link } from "@tanstack/react-router"
 import { ComponentProps } from "react"
 import * as v from "valibot"
+import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 
 
 export function BalanceSheetRow(props: {
@@ -20,7 +20,7 @@ export function BalanceSheetRow(props: {
         }`
 
     return (
-        <Link
+        <LinkButton
             to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/bilan/$idBalanceSheet"
             params={{
                 idOrganization: props.idOrganization,
@@ -84,6 +84,6 @@ export function BalanceSheetRow(props: {
                     </span>
                 </div>
             </div>
-        </Link>
+        </LinkButton>
     )
 }

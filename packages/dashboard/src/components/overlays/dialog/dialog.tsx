@@ -1,3 +1,4 @@
+import { DialogBody } from "./dialogBody.js"
 import { DialogContent } from "./dialogContent.js"
 import { DialogDescription } from "./dialogDescription.js"
 import { DialogFooter } from "./dialogFooter.js"
@@ -11,6 +12,7 @@ import { DialogTrigger } from "./dialogTrigger.js"
 
 export const Dialog = {
     Content: DialogContent,
+    Body: DialogBody,
     Description: DialogDescription,
     Footer: DialogFooter,
     Header: DialogHeader,

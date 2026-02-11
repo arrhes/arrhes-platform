@@ -18,15 +18,18 @@ export function DialogHeader(props:
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    padding: "4"
+                    padding: "1rem",
+                    borderBottom: "1px solid",
+                    borderBottomColor: "neutral/5",
                 }),
                 props.className
             )}
         >
             <div className={css({
                 display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "flex-start"
+                justifyContent: "start",
+                alignItems: "center",
+                gap: "0.5rem",
             })}>
                 {props.children}
             </div>

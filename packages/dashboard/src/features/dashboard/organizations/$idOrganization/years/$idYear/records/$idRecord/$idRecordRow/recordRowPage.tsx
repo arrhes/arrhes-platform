@@ -13,7 +13,6 @@ import { DataBlock } from "../../../../../../../../../components/layouts/dataBlo
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Page } from "../../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../../components/layouts/title.tsx"
 import { recordRowRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/recordRowRoute.tsx"
 import { DeleteOneRecordRow } from "./deleteOneRecordRow.tsx"
 import { UpdateOneRecordRow } from "./updateOneRecordRow.tsx"
@@ -76,11 +75,7 @@ export function RecordRowPage() {
                                 </Section.Item>
                                 <Section.Item className={css({ flexDirection: "column" })}>
                                     <DataBlock.Root>
-                                        <DataBlock.Header>
-                                            <TitleComponent>
-                                                Informations
-                                            </TitleComponent>
-                                        </DataBlock.Header>
+                                        <DataBlock.Header title="Informations" />
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Libellé">
                                                 <FormatText>
@@ -132,11 +127,7 @@ export function RecordRowPage() {
                                         </DataBlock.Content>
                                     </DataBlock.Root>
                                     <DataBlock.Root>
-                                        <DataBlock.Header>
-                                            <TitleComponent>
-                                                Métadonnées
-                                            </TitleComponent>
-                                        </DataBlock.Header>
+                                        <DataBlock.Header title="Métadonnées" />
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Ajouté le">
                                                 <FormatDateTime date={recordRow.createdAt} />

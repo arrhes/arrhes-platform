@@ -318,7 +318,7 @@ export function ButtonContent(props: {
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
                             fontSize: "0.875rem",
-                            lineHeight: "1",
+                            lineHeight: "1rem",
                         }),
                         textActiveStyles,
                         variant === "primary"

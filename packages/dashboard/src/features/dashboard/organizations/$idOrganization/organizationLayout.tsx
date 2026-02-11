@@ -1,4 +1,4 @@
-import { IconCalendarEvent, IconSettings } from "@tabler/icons-react"
+import { IconCalendarEvent, IconSettings, IconUsers } from "@tabler/icons-react"
 import { Outlet, useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { PageNavigation } from "../../../../components/layouts/page/pageNavigation.tsx"
@@ -13,9 +13,17 @@ export function OrganizationLayout() {
             <PageNavigation
                 tabs={[
                     {
-                        label: "Exercices fiscaux",
+                        label: "Exercices",
                         icon: <IconCalendarEvent />,
                         to: "/dashboard/organisations/$idOrganization/exercices",
+                        params: {
+                            idOrganization: params.idOrganization,
+                        },
+                    },
+                    {
+                        label: "Membres",
+                        icon: <IconUsers />,
+                        to: "/dashboard/organisations/$idOrganization/membres",
                         params: {
                             idOrganization: params.idOrganization,
                         },

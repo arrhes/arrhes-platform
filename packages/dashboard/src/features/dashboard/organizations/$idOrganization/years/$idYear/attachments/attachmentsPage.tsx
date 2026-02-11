@@ -1,4 +1,5 @@
 import { readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { Button, ButtonContent } from "@arrhes/ui"
 import { IconLayoutGrid, IconLayoutList } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { useState } from "react"
@@ -26,49 +27,26 @@ export function AttachmentsPage() {
                     display: "flex",
                     justifyContent: "flex-end",
                     alignItems: "center",
-                    gap: "1",
-                    mb: "4"
+                    gap: "0.25rem",
                 })}>
-                    <button
+                    <Button
                         onClick={() => setViewMode("grid")}
-                        className={css({
-                            padding: "1rem",
-                            borderRadius: "md",
-                            border: "1px solid",
-                            borderColor: viewMode === "grid" ? "primary" : "neutral/10",
-                            backgroundColor: viewMode === "grid" ? "primary/10" : "transparent",
-                            color: viewMode === "grid" ? "primary" : "neutral/60",
-                            cursor: "pointer",
-                            transition: "all 0.15s",
-                            _hover: {
-                                borderColor: "primary/50",
-                                backgroundColor: "primary/5"
-                            }
-                        })}
-                        title="Vue grille"
+                        title="Grille"
                     >
-                        <IconLayoutGrid size={18} />
-                    </button>
-                    <button
+                        <ButtonContent
+                            leftIcon={<IconLayoutGrid />}
+                            isActive={viewMode === "grid"}
+                        />
+                    </Button>
+                    <Button
                         onClick={() => setViewMode("list")}
-                        className={css({
-                            padding: "1rem",
-                            borderRadius: "md",
-                            border: "1px solid",
-                            borderColor: viewMode === "list" ? "primary" : "neutral/10",
-                            backgroundColor: viewMode === "list" ? "primary/10" : "transparent",
-                            color: viewMode === "list" ? "primary" : "neutral/60",
-                            cursor: "pointer",
-                            transition: "all 0.15s",
-                            _hover: {
-                                borderColor: "primary/50",
-                                backgroundColor: "primary/5"
-                            }
-                        })}
-                        title="Vue liste"
+                        title="Liste"
                     >
-                        <IconLayoutList size={18} />
-                    </button>
+                        <ButtonContent
+                            leftIcon={<IconLayoutList />}
+                            isActive={viewMode === "list"}
+                        />
+                    </Button>
                 </div>
 
                 <DataWrapper

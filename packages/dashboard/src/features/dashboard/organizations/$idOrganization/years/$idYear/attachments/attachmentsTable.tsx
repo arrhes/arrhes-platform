@@ -1,6 +1,6 @@
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
-import { IconPlus } from "@tabler/icons-react"
+import { IconEye, IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
 import { FormatDateTime } from "../../../../../../../components/formats/formatDateTime.js"
@@ -8,7 +8,7 @@ import { FormatFileSize } from "../../../../../../../components/formats/formatFi
 import { FormatNull } from "../../../../../../../components/formats/formatNull.js"
 import { FormatText } from "../../../../../../../components/formats/formatText.js"
 import { DataTable } from "../../../../../../../components/layouts/dataTable.js"
-import { platformRouter } from "../../../../../../../routes/platformRouter.js"
+import { LinkButton } from "../../../../../../../components/linkButton.js"
 import { CreateOneAttachment } from "./createOneAttachment.js"
 
 
@@ -25,6 +25,28 @@ export function AttachmentsTable(props: {
             data={attachmentsData}
             isLoading={false}
             columns={[
+                {
+                    accessorKey: 'actions',
+                    header: ' ',
+                    cell: ({ row }) => (
+                        <LinkButton
+                            to="/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idAttachment"
+                            params={{
+                                idOrganization: props.idOrganization,
+                                idYear: props.idYear,
+                                idAttachment: row.original.id
+                            }}
+                        >
+                            <ButtonContent
+                                variant="invisible"
+                                leftIcon={<IconEye />}
+                                text={undefined}
+                            />
+                        </LinkButton>
+                    ),
+                    enableSorting: false,
+                    enableGlobalFilter: false,
+                },
                 {
                     accessorKey: 'reference',
                     header: 'Référence',
@@ -72,16 +94,6 @@ export function AttachmentsTable(props: {
                     filterFn: 'includesString'
                 }
             ]}
-            onRowClick={(row) => {
-                platformRouter.navigate({
-                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idAttachment",
-                    params: {
-                        idOrganization: props.idOrganization,
-                        idYear: props.idYear,
-                        idAttachment: row.original.id
-                    }
-                })
-            }}
         >
             <CreateOneAttachment
                 idOrganization={props.idOrganization}

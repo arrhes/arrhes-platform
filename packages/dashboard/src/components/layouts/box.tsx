@@ -14,7 +14,7 @@ export function Box(props: {
                     width: "100%",
                     maxWidth: "100%",
                     height: "fit",
-                    flexShrink: "0",
+                    flexShrink: "1",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
@@ -22,7 +22,7 @@ export function Box(props: {
                     overflowX: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    borderRadius: "md"
+                    borderRadius: "lg"
                 }),
                 props.className
             )}

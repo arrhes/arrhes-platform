@@ -1,12 +1,13 @@
 import { readAllBalanceSheetsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
+import { IconScale } from "@tabler/icons-react"
 import { useState } from "react"
 import * as v from "valibot"
-import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
 import { InputDebounced } from "../../../../../../../../components/inputs/inputDebounced.tsx"
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { BalanceSheetItem } from "./balanceSheetItem.tsx"
 import { getBalanceSheetChildren } from "./getBalanceSheetChildren.tsx"
 
@@ -45,16 +46,13 @@ export function BalanceSheetTable(props: {
                             />
                         </InputDebounced>
                         <div className={css({ height: "fit-content", width: "fit-content", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" })}>
-                            {
-                                (filteredBalanceSheets.length !== 0)
-                                    ? (null)
-                                    : (
-                                        <FormatNull
-                                            text="Aucune ligne de bilan n'a été trouvée"
-                                            className={css({ padding: "1rem" })}
-                                        />
-                                    )
-                            }
+                            {filteredBalanceSheets.length === 0 && (
+                                <EmptyState
+                                    icon={<IconScale size={48} />}
+                                    title={globalFilter ? "Aucune ligne trouvée" : "Aucune ligne de bilan"}
+                                    subtitle={globalFilter ? undefined : "Ajoutez une ligne pour commencer"}
+                                />
+                            )}
                             {filteredBalanceSheets.map((balanceSheet) => {
                                 const balanceSheetChildren = getBalanceSheetChildren({
                                     balanceSheet: balanceSheet,

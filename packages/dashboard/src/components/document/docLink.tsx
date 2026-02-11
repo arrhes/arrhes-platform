@@ -1,13 +1,14 @@
+import { LinkButton } from "../linkButton.js"
+import type { ValidRoutes } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
-import { Link } from "@tanstack/react-router"
 
 
 export function DocLink(props: {
-    to: string
+    to: ValidRoutes
     children: React.ReactNode
 }) {
     return (
-        <Link
+        <LinkButton
             to={props.to}
             className={css({
                 color: "primary",
@@ -22,6 +23,6 @@ export function DocLink(props: {
             })}
         >
             {props.children}
-        </Link>
+        </LinkButton>
     )
 }

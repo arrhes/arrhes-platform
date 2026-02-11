@@ -1,8 +1,8 @@
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Link } from "@tanstack/react-router"
 import { ComponentProps } from "react"
 import * as v from "valibot"
+import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 
 
 export function IncomeStatementRow(props: {
@@ -20,7 +20,7 @@ export function IncomeStatementRow(props: {
         }`
 
     return (
-        <Link
+        <LinkButton
             to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/$idIncomeStatement"
             params={{
                 idOrganization: props.idOrganization,
@@ -56,6 +56,6 @@ export function IncomeStatementRow(props: {
                     </span>
                 </div>
             </div>
-        </Link>
+        </LinkButton>
     )
 }

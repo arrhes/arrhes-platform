@@ -6,7 +6,7 @@ export const attachmentsLayoutRoute = createRoute({
     getParentRoute: () => yearLayoutRoute,
     path: "/fichiers",
     beforeLoad: () => ({
-        title: "Stockage de fichiers"
+        title: "Stockage"
     }),
     component: () => (
         <Outlet />

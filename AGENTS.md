@@ -1,23 +1,24 @@
 # Agent Guidelines
 
 ## Commands
-- Build (all packages): `pnpm build` (recursive across packages)
-- Dev (parallel): `pnpm dev`
-- Lint: `pnpm -w --filter packages/platform run lint` (or `cd packages/platform && npm run lint`)
-- Test: repository has no global test framework; to run a single package/test, install its dev deps and run that package's test script, e.g. `cd packages/tools && pnpm test` or `pnpm -w --filter packages/tools test`
+- Build all: `pnpm build` — Dev all: `pnpm dev` — Docker: `just dev up` / `just dev down` / `just dev reset`
+- Lint dashboard: `pnpm --filter @arrhes/application-dashboard run lint`
+- Typecheck dashboard: `packages/dashboard/node_modules/.bin/tsc --noEmit --project packages/dashboard/tsconfig.json`
+- No test framework exists in this repository.
+
+## Monorepo Layout
+`packages/{api, dashboard, metadata, tools, ui}` — all ESM (`"type": "module"`), TypeScript strict mode.
+- **api** (`@arrhes/application-api`): Hono backend, Drizzle ORM, PostgreSQL, Nodemailer, Puppeteer, S3
+- **dashboard** (`@arrhes/application-dashboard`): React 19, TanStack Router/Query/Table, React Hook Form, Radix UI primitives, Panda CSS
+- **metadata** (`@arrhes/application-metadata`): Shared models, schemas (valibot), route definitions. Consumed via subpath exports (`@arrhes/application-metadata/models`, `/schemas`, `/routes`, `/components`)
+- **ui** (`@arrhes/ui`): Shared components/styles/fonts using Panda CSS. Consumed via `@arrhes/ui`, `@arrhes/ui/utilities/cn.js`, `@arrhes/ui/styled-system/css`
+- **tools** (`@arrhes/application-tools`): DB migrations/seeds via drizzle-kit and tsx scripts
 
 ## Code Style
-- Imports: external deps first, then internal; use package-specific path prefixes: `#/` (api), `#/*` (platform), `#src/*` (metadata)
-- Formatting & Types: TypeScript strict mode enabled; ES modules (`"type": "module"`); API uses Hono JSX; Platform uses React with StrictMode; use `valibot` for validation
-- Naming: models `camelCase` with `Model` suffix (e.g. `accountModel`), files `camelCase.ts[x]`, components `PascalCase.tsx`, utilities `camelCase.ts`
-- Error handling: prefer try/catch with structured logging; handle `uncaughtException` and `unhandledRejection` in server entry; return structured error responses via Hono
-
-## Contributing Notes
-- Monorepo layout: `packages/{api,platform,metadata,tools}`
-- Prefer editing existing files; follow local tsconfig and lint rules
-- Running a single test: use package scope with PNPM filters: `pnpm -w --filter packages/<pkg> test`
-
-## Tooling Rules
-- No Cursor or Copilot rules detected in `.cursor/` or `.github/copilot-instructions.md`; if added, include them here and follow their directives.
-
-(Keep this file short; agents must follow these conventions when modifying code.)
+- **Imports**: all use relative paths with `.ts`/`.tsx` extensions (dashboard) or `.js` extensions (api, metadata). Cross-package via `@arrhes/*`. No path aliases are used in practice. Order: workspace packages → external deps → relative internal.
+- **Files**: all `camelCase.ts[x]` (including components). Barrel files are `_index.ts`.
+- **Exports**: components `PascalCase` functions, models/schemas/utilities `camelCase`. Models use `Model` suffix (`accountModel`), schemas have no suffix.
+- **Validation**: `import * as v from "valibot"` — use `v.object()`, `v.string()`, `v.InferOutput<>`.
+- **Styling**: Panda CSS via `css()` and `cx()` from `@arrhes/ui/utilities/cn.js`. Component variants via `class-variance-authority`.
+- **IDs**: nanoid with custom alphabet, 16 chars.
+- **Error handling**: try/catch with structured logging in API; toast notifications in dashboard; structured error responses via Hono.

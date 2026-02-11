@@ -1,37 +1,31 @@
-import * as ToastPrimitives from "@radix-ui/react-toast"
-import { ComponentProps } from "react"
-import { css, cx } from "../../../utilities/cn.js"
+import { createPortal } from "react-dom"
+import { ReactNode } from "react"
+import { css } from "../../../utilities/cn.js"
 
 
-type ToastViewport = ComponentProps<typeof ToastPrimitives.Viewport>
+type ToastViewportProps = {
+    children: ReactNode
+}
 
-export function ToastViewport(props: ToastViewport) {
-    return (
-        <ToastPrimitives.Viewport
-            {...props}
-            className={cx(
-                css({
-                    position: "fixed",
-                    top: "0",
-                    zIndex: "100",
-                    display: "flex",
-                    maxH: "screen",
-                    width: "100%",
-                    flexDirection: "column-reverse",
-                    gap: "1",
-                    padding: "4",
-                    right: "0",
-                    sm: {
-                        top: "auto",
-                        flexDirection: "column"
-                    },
-                    md: {
-                        bottom: "0",
-                        maxWidth: "420px"
-                    }
-                }),
-                props.className
-            )}
-        />
+export function ToastViewport(props: ToastViewportProps) {
+    return createPortal(
+        <div
+            className={css({
+                position: "fixed",
+                bottom: "0",
+                right: "0",
+                zIndex: "100",
+                display: "flex",
+                flexDirection: "column",
+                gap: "2",
+                padding: "4",
+                width: "100%",
+                maxWidth: "420px",
+                pointerEvents: "none",
+            })}
+        >
+            {props.children}
+        </div>,
+        document.body
     )
 }

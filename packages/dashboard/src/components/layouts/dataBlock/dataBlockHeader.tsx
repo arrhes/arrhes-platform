@@ -1,9 +1,9 @@
-import { ComponentProps, ReactElement } from "react"
+import { ComponentProps } from "react"
 import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DataBlockHeader(props: {
-    children: null | ReactElement | (null | ReactElement)[]
+    title: string
     className?: ComponentProps<'div'>['className']
 }) {
     return (
@@ -21,7 +21,13 @@ export function DataBlockHeader(props: {
                 props.className
             )}
         >
-            {props.children}
+            <span className={css({
+                textTransform: "uppercase",
+                color: "neutral/25",
+                fontSize: "base"
+            })}>
+                {props.title}
+            </span>
         </div>
     )
 }

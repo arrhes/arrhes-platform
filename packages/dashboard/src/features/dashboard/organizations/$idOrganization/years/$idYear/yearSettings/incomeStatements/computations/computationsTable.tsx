@@ -1,10 +1,11 @@
 import { readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Link } from "@tanstack/react-router"
+import { IconCalculator } from "@tabler/icons-react"
 import * as v from "valibot"
-import { FormatNull } from "../../../../../../../../../components/formats/formatNull.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
+import { EmptyState } from "../../../../../../../../../components/layouts/emptyState.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 
 
 export function ComputationsTable(props: {
@@ -22,15 +23,17 @@ export function ComputationsTable(props: {
             {(computations) => {
                 if (computations.length === 0) {
                     return (
-                        <FormatNull
-                            text="Aucune ligne de calcul"
+                        <EmptyState
+                            icon={<IconCalculator size={48} />}
+                            title="Aucune ligne de calcul"
+                            subtitle="Ajoutez une ligne de calcul pour commencer"
                         />
                     )
                 }
                 return (
                     <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", padding: "4" })}>
                         {computations.map((computation) => (
-                            <Link
+                            <LinkButton
                                 key={computation.id}
                                 to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation"
                                 params={{
@@ -48,7 +51,7 @@ export function ComputationsTable(props: {
                                         {computation.label}
                                     </span>
                                 </div>
-                            </Link>
+                            </LinkButton>
                         ))}
                     </div>
                 )

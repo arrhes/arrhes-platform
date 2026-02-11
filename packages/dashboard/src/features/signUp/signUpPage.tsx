@@ -61,15 +61,15 @@ export function SignUpPage() {
                         })}
                     >
                         <LinkButton to="/">
-                            <Logo withText />
+                            <Logo />
                         </LinkButton>
                         <LinkButton
                             to="/documentation"
+                            title="Documentation"
                         >
                             <ButtonContent
                                 variant="invisible"
                                 leftIcon={<IconBook2 />}
-                                text="Documentation"
                                 className={css({ width: "100%", justifyContent: "center" })}
                             />
                         </LinkButton>
@@ -213,7 +213,7 @@ export function SignUpPage() {
                         })}
                     >
                         <LinkButton
-                            to="/sign-in"
+                            to="/connexion"
                             className={css({ width: "100%" })}
                         >
                             <ButtonContent

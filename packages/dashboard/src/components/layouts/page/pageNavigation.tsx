@@ -31,7 +31,7 @@ export function PageNavigation(props: {
             paddingX: "1rem",
             paddingY: "0.5rem",
             borderBottom: "1px solid",
-            borderBottomColor: "neutral/10",
+            borderBottomColor: "neutral/5",
             backgroundColor: "background",
         })}>
             {
@@ -54,44 +54,19 @@ export function PageNavigation(props: {
                                         : currentPath.includes(matchRoute.routeId)
 
                                     return (
-                                        <div
+                                        <LinkButton
                                             key={tab.to}
-                                            aria-current={isActive}
-                                            className={css({
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                gap: "2"
-                                            })}
+                                            to={tab.to}
+                                            params={tab.params}
                                         >
-                                            <LinkButton
-                                                to={tab.to}
-                                                params={tab.params}
-                                            >
-                                                <ButtonContent
-                                                    variant="invisible"
-                                                    leftIcon={tab.icon}
-                                                    text={tab.label}
-                                                    color="neutral"
-                                                    isActive={isActive}
-                                                />
-                                            </LinkButton>
-                                            {/* <div
-                                                className={cx(
-                                                    css({
-                                                        flexShrink: "0",
-                                                        width: "100%",
-                                                        height: "2px",
-                                                        borderRadius: "100%",
-                                                        transition: "all",
-                                                        transitionDuration: "200ms",
-                                                        transitionTimingFunction: "ease-in-out"
-                                                    }),
-                                                    isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
-                                                )}
-                                            /> */}
-                                        </div>
+                                            <ButtonContent
+                                                variant="invisible"
+                                                leftIcon={tab.icon}
+                                                text={tab.label}
+                                                color="neutral"
+                                                isActive={isActive}
+                                            />
+                                        </LinkButton>
                                     )
                                 })
                             }

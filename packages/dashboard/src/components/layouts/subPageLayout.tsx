@@ -1,18 +1,24 @@
 import { ButtonContent } from "@arrhes/ui"
 import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
-import { JSX } from "react"
+import { ReactNode } from "react"
 import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
-import { css, cx } from "../../utilities/cn.js"
+import { css } from "../../utilities/cn.js"
 import { LinkButton } from "../linkButton.js"
 
 
-export function SubPageLayout(props: {
-    tabs: Array<{
+export interface SubPageSection {
+    title: string
+    icon: ReactNode
+    items: Array<{
         label: string
-        icon: JSX.Element
         to: ValidRoutes
         params: ValidParams
-    }> | undefined
+    }>
+}
+
+
+export function SubPageLayout(props: {
+    sections: Record<string, SubPageSection> | undefined
 }) {
     const routeMatches = useMatches()
     const currentPath = useRouterState({
@@ -29,10 +35,9 @@ export function SubPageLayout(props: {
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: "8"
         })}>
             {
-                props.tabs === undefined
+                props.sections === undefined
                     ? (null)
                     : (
                         <aside className={css({
@@ -42,7 +47,7 @@ export function SubPageLayout(props: {
                             flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "stretch",
-                            gap: "3",
+                            gap: "0.5rem",
                             borderRight: "1px solid",
                             borderRightColor: "neutral/10",
                             backgroundColor: "white",
@@ -52,66 +57,59 @@ export function SubPageLayout(props: {
                             maxHeight: "100vh",
                             overflowY: "auto",
                             paddingRight: "4",
-                            paddingY: "2"
+                            paddingY: "2",
+                            paddingLeft: 0,
                         })}>
-                            {
-                                props.tabs.map((tab) => {
-                                    const matchRoute = routeMatches.find((match) => match.fullPath.includes(tab.to ?? ""))
-                                    const isActive = (matchRoute === undefined)
-                                        ? false
-                                        : currentPath === matchRoute.routeId
+                            {Object.entries(props.sections).map(([key, section]) => (
+                                <div key={key} className={css({ marginBottom: "0.5rem" })}>
+                                    <div className={css({
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "0.5rem",
+                                        padding: "0.5rem",
+                                        fontSize: "xs",
+                                        fontWeight: "semibold",
+                                        color: "neutral/40",
+                                        textTransform: "uppercase",
+                                        letterSpacing: "wider",
+                                    })}>
+                                        {section.icon}
+                                        {section.title}
+                                    </div>
+                                    <div className={css({
+                                        marginTop: "0.25rem",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "0.25rem",
+                                    })}>
+                                        {section.items.map((item) => {
+                                            const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.includes(item.to ?? ""))
+                                            const isActive = (matchRoute === undefined)
+                                                ? false
+                                                : currentPath === matchRoute.routeId
 
-                                    return (
-                                        <div
-                                            key={tab.to}
-                                            aria-current={isActive}
-                                            className={css({
-                                                width: "100%",
-                                                display: "flex",
-                                                justifyContent: "flex-start",
-                                                alignItems: "stretch",
-                                                gap: "2"
-                                            })}
-                                        >
-                                            <LinkButton
-                                                to={tab.to}
-                                                params={tab.params}
-                                                className={css({
-                                                    width: "100%",
-                                                    display: "flex",
-                                                    justifyContent: "flex-start",
-                                                    alignItems: "center",
-                                                    gap: "2"
-                                                })}
-                                            >
-                                                <ButtonContent
-                                                    variant="invisible"
-                                                    leftIcon={tab.icon}
-                                                    text={tab.label}
-                                                    color="neutral"
-                                                    isActive={isActive}
-                                                    className={css({
-                                                        width: "100%",
-                                                        transition: "all",
-                                                        transitionDuration: "200ms",
-                                                        transitionTimingFunction: "ease-in-out"
-                                                    })}
-                                                />
-                                            </LinkButton>
-                                            <div
-                                                className={cx(
-                                                    css({
-                                                        flexShrink: "0",
-                                                        width: "2px",
-                                                        borderRadius: "100%"
-                                                    }),
-                                                    isActive ? css({ backgroundColor: "neutral" }) : css({ backgroundColor: "transparent" })
-                                                )}
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
+                                            return (
+                                                <LinkButton
+                                                    key={item.to}
+                                                    to={item.to}
+                                                    params={item.params}
+                                                    className={css({ width: "100%" })}
+                                                >
+                                                    <ButtonContent
+                                                        variant="invisible"
+                                                        text={item.label}
+                                                        isActive={isActive}
+                                                        className={css({
+                                                            width: "100%",
+                                                            justifyContent: "start",
+                                                        })}
+                                                    />
+                                                </LinkButton>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
                         </aside>
                     )
             }
@@ -125,7 +123,7 @@ export function SubPageLayout(props: {
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                paddingY: "2"
+                paddingLeft: "2rem"
             })}>
                 <Outlet />
             </div>

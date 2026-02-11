@@ -23,7 +23,7 @@ export function DialogContent(props:
                             height: "fit",
                             maxH: "100%",
                             backgroundColor: "white",
-                            borderRadius: "md",
+                            borderRadius: "lg",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "flex-start",

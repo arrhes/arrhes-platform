@@ -15,12 +15,18 @@ export function DataBlockItem(props: {
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
-                gap: "2"
+                gap: "2",
+                padding: "3",
+                paddingLeft: "4",
+                borderBottom: "1px solid",
+                borderBottomColor: "neutral/5"
             })}>
                 <span className={css({
                     textTransform: "uppercase",
-                    fontSize: "sm",
-                    color: "neutral/50"
+                    fontSize: "xs",
+                    fontWeight: "medium",
+                    letterSpacing: "wide",
+                    color: "neutral/40"
                 })}>{props.label}</span>
                 {
                     (!props.description) ? null : (
@@ -50,10 +56,14 @@ export function DataBlockItem(props: {
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
-                gap: "2"
+                gap: "2",
+                padding: "3",
+                paddingRight: "4",
+                borderBottom: "1px solid",
+                borderBottomColor: "neutral/5"
             })}>
                 {
-                    !(props.children instanceof String) ? props.children :
+                    typeof props.children !== "string" ? props.children :
                         (
                             <span>{props.children}</span>
                         )

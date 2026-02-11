@@ -1,23 +1,18 @@
 import { deleteOneYearRouteDefinition, readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
-import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconTrash } from "@tabler/icons-react"
-import { ComponentPropsWithRef, ReactElement, useState } from "react"
+import { ComponentPropsWithRef, ReactElement } from "react"
 import * as v from "valibot"
-import { Dialog } from "../../../../../../../components/overlays/dialog/dialog.js"
-import { toast } from "../../../../../../../contexts/toasts/useToast.js"
-import { platformRouter } from "../../../../../../../routes/platformRouter.js"
-import { invalidateData } from "../../../../../../../utilities/invalidateData.js"
-import { postAPI } from "../../../../../../../utilities/postAPI.js"
+import { DeleteConfirmation } from "../../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
+import { toast } from "../../../../../../../contexts/toasts/useToast.ts"
+import { platformRouter } from "../../../../../../../routes/platformRouter.tsx"
+import { invalidateData } from "../../../../../../../utilities/invalidateData.ts"
+import { postAPI } from "../../../../../../../utilities/postAPI.ts"
 
 
 export function DeleteOneYear(props: {
     year: v.InferOutput<typeof returnedSchemas.year>
     children: ReactElement<ComponentPropsWithRef<'div'>>
 }) {
-    const [open, setOpen] = useState(false)
-
     async function onSubmit() {
         const deleteResponse = await postAPI({
             routeDefinition: deleteOneYearRouteDefinition,
@@ -47,52 +42,16 @@ export function DeleteOneYear(props: {
                 idOrganization: props.year.idOrganization
             }
         })
-        setOpen(false)
-    }
-
-    async function onCancel() {
-        setOpen(false)
     }
 
     return (
-        <Dialog.Root
-            open={open}
-            onOpenChange={(value) => setOpen(value)}
+        <DeleteConfirmation
+            title="Voulez-vous supprimer cet exercice ?"
+            description={<>Cette action supprimera l'exercice et toutes les données associées.<br />Cette action est irréversible.</>}
+            submitText="Supprimer l'exercice"
+            onSubmit={onSubmit}
         >
-            <Dialog.Trigger
-                onClick={(event) => {
-                    setOpen(true)
-                    event.preventDefault()
-                }}
-            >
-                {props.children}
-            </Dialog.Trigger>
-            {(open === false)
-                ? (null)
-                : (
-                    <Dialog.Content>
-                        <Dialog.Header />
-                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
-                            <Dialog.Title>
-                                Voulez-vous supprimer cet exercice ?
-                            </Dialog.Title>
-                            <Dialog.Description>
-                                Cette action supprimera l'exercice et toutes les données associées.
-                                <br />
-                                Cette action est irréversible.
-                            </Dialog.Description>
-                        </div>
-                        <Dialog.Footer>
-                            <Button onClick={() => onCancel()}>
-                                <ButtonContent variant="invisible" text="Annuler" />
-                            </Button>
-                            <Button onClick={() => onSubmit()} hasLoader>
-                                <ButtonContent variant="primary" leftIcon={<IconTrash />} color="error" text="Supprimer l'exercice" />
-                            </Button>
-                        </Dialog.Footer>
-                    </Dialog.Content>
-                )
-            }
-        </Dialog.Root>
+            {props.children}
+        </DeleteConfirmation>
     )
 }

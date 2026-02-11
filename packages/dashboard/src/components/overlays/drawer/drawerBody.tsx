@@ -13,7 +13,7 @@ export function DrawerBody(props: {
             justifyContent: "flex-start",
             alignItems: "flex-start",
             gap: "1rem",
-            padding: "1rem"
+            padding: "2rem"
         })}>
             {props.children}
         </div>

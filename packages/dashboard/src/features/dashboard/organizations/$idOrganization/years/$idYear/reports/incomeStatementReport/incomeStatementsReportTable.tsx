@@ -135,17 +135,19 @@ export function IncomeStatementsReportTable(props: {
                                         index === 0 ? css({ borderTop: "1px solid token(colors.neutral/25)", borderBottomColor: "neutral/5" }) : ""
                                     )}
                                 >
-                                    <Table.Body.Cell align="right" className={css({ width: "100%", display: "flex", justifyContent: "end", gap: "2" })}>
-                                        <FormatText
-                                            className={css({ whiteSpace: "normal", textAlign: "right" })}
-                                        >
-                                            {computation.label}
-                                        </FormatText>
-                                        <FormatText
-                                            className={css({ whiteSpace: "normal", textAlign: "right", color: "neutral/50" })}
-                                        >
-                                            {`(${computationIncomeStatementsLabel})`}
-                                        </FormatText>
+                                    <Table.Body.Cell align="right">
+                                        <div className={css({ width: "100%", display: "flex", justifyContent: "end", gap: "2" })}>
+                                            <FormatText
+                                                className={css({ whiteSpace: "normal", textAlign: "right" })}
+                                            >
+                                                {computation.label}
+                                            </FormatText>
+                                            <FormatText
+                                                className={css({ whiteSpace: "normal", textAlign: "right", color: "neutral/50" })}
+                                            >
+                                                {`(${computationIncomeStatementsLabel})`}
+                                            </FormatText>
+                                        </div>
                                     </Table.Body.Cell>
                                     <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
                                         <FormatPrice price={computationAmount} />

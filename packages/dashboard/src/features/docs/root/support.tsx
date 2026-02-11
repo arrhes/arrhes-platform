@@ -1,5 +1,5 @@
 import { IconBook, IconBrandGithub, IconMail } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
+import { LinkButton } from "../../../components/linkButton.js"
 import { css } from "../../../utilities/cn.js"
 
 
@@ -186,11 +186,10 @@ export function Support() {
                     flexDirection: "column",
                     gap: "0.75rem",
                 })}>
-                    <Link
+                    <LinkButton
                         to="/documentation/dashboard"
                         className={css({
-                            display: "flex",
-                            alignItems: "center",
+                            width: "100%",
                             gap: "0.75rem",
                             padding: "1rem",
                             borderRadius: "lg",
@@ -224,13 +223,12 @@ export function Support() {
                                 Apprenez à utiliser Arrhes efficacement
                             </p>
                         </div>
-                    </Link>
+                    </LinkButton>
 
-                    <Link
+                    <LinkButton
                         to="/documentation/comptabilite"
                         className={css({
-                            display: "flex",
-                            alignItems: "center",
+                            width: "100%",
                             gap: "0.75rem",
                             padding: "1rem",
                             borderRadius: "lg",
@@ -264,7 +262,7 @@ export function Support() {
                                 Les bases de la comptabilité expliquées simplement
                             </p>
                         </div>
-                    </Link>
+                    </LinkButton>
                 </div>
             </div>
 

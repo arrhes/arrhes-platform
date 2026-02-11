@@ -22,7 +22,7 @@ export function YearLayout() {
                         },
                     },
                     {
-                        label: "Stockage de fichiers",
+                        label: "Stockage",
                         icon: <IconFolders />,
                         to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers",
                         params: {
