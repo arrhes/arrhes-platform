@@ -244,9 +244,9 @@ export function WebsitePage() {
                         fontSize: "md",
                         color: "neutral/60",
                     })}>
-                        Un logiciel de comptabilité conçu pour être simple, transparent et facile à utiliser,
+                        Un logiciel de comptabilité conçu pour être simple et transparent, tout en respectant les exigences de la comptabilité française.
                         <br />
-                        tout en respectant les exigences de la comptabilité française.
+                        Il s'adresse à tous ceux qui souhaitent reprendre la main sur leur comptabilité.
                     </p>
 
                     {/* Pricing columns */}
@@ -300,7 +300,7 @@ export function WebsitePage() {
                         Apprenez les concepts essentiels : partie double, plan comptable, écritures, journaux...
                     </p>
                     <LinkButton
-                        to="/documentation/comptabilite"
+                        to="/documentation/comptabilité"
                     >
                         <ButtonContent
                             variant="default"
@@ -347,7 +347,7 @@ export function WebsitePage() {
                         <Logo withText />
                     </Button> */}
                     <LinkButton
-                        to="/documentation/mentions-legales"
+                        to="/documentation/mentions-légales"
                     >
                         <ButtonContent
                             variant="invisible"

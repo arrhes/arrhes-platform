@@ -7,41 +7,46 @@ import { journalsRoute } from "../../../../../../../../routes/root/dashboard/org
 import { CreateOneJournal } from "./createOneJournal.tsx"
 import { GenerateJournals } from "./generateJournals.tsx"
 import { JournalsListTable } from "./journalsListTable.tsx"
+import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 
 
 export function JournalsPage() {
     const params = useParams({ from: journalsRoute.id })
 
     return (
-        <Section.Root>
-            <Section.Item>
-                <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                    <CreateOneJournal
-                        idOrganization={params.idOrganization}
-                        idYear={params.idYear}
-                    >
-                        <ButtonContent
-                            variant="primary"
-                            leftIcon={<IconPlus />}
-                            text="Ajouter un journal"
+        <Page.Root>
+            <Page.Content>
+                <Section.Root>
+                    <Section.Item>
+                        <div className={css({ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                            <CreateOneJournal
+                                idOrganization={params.idOrganization}
+                                idYear={params.idYear}
+                            >
+                                <ButtonContent
+                                    variant="primary"
+                                    leftIcon={<IconPlus />}
+                                    text="Ajouter un journal"
+                                />
+                            </CreateOneJournal>
+                            <GenerateJournals
+                                idOrganization={params.idOrganization}
+                                idYear={params.idYear}
+                            >
+                                <ButtonContent
+                                    variant="default"
+                                    leftIcon={<IconPlus />}
+                                    text="Générer les journaux par défaut"
+                                />
+                            </GenerateJournals>
+                        </div>
+                        <JournalsListTable
+                            idOrganization={params.idOrganization}
+                            idYear={params.idYear}
                         />
-                    </CreateOneJournal>
-                    <GenerateJournals
-                        idOrganization={params.idOrganization}
-                        idYear={params.idYear}
-                    >
-                        <ButtonContent
-                            variant="default"
-                            leftIcon={<IconPlus />}
-                            text="Générer les journaux par défaut"
-                        />
-                    </GenerateJournals>
-                </div>
-                <JournalsListTable
-                    idOrganization={params.idOrganization}
-                    idYear={params.idYear}
-                />
-            </Section.Item>
-        </Section.Root>
+                    </Section.Item>
+                </Section.Root>
+            </Page.Content>
+        </Page.Root>
     )
 }

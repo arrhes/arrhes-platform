@@ -76,8 +76,8 @@ export function Pricing() {
                     <FeatureItem icon={<IconAppWindow />} text="Accès illimité à l'application" />
                     <FeatureItem icon={<IconCloudUpload />} text="Stockage de documents (jusqu'à 1Go)" />
                     <FeatureItem icon={<IconBuildings />} text="Multiple organisations" />
-                    <FeatureItem icon={<IconUsers />} text="Multiple accès par organisation" />
-                    <FeatureItem icon={<IconFileText />} text="Génération de la liasse fiscale" />
+                    <FeatureItem icon={<IconUsers />} text="Multiple membres" />
+                    <FeatureItem icon={<IconFileText />} text="Génération des documents de synthèse pour la liasse fiscale" />
                     <FeatureItem icon={<IconFileText />} text="Export du Fichier des Écritures Comptable (FEC)" />
                     <FeatureItem icon={<IconSettings />} text="Accès à l'API" isDev />
                     <FeatureItem icon={<IconCalculator />} text="Comptabilité analytique" isDev />

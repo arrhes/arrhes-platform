@@ -1,9 +1,9 @@
 import { readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
-import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.tsx"
+import { Page } from "../../../../../../../components/layouts/page/page.tsx"
 import { SettingsSection } from "../../../../../../../components/layouts/settingsSection/settingsSection.tsx"
 import { yearSettingsRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute.tsx"
 import { DeleteOneYear } from "./deleteOneYear.tsx"
@@ -14,12 +14,7 @@ export function YearSettingsPage() {
     const params = useParams({ from: yearSettingsRoute.id })
 
     return (
-        <div className={css({
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem"
-        })}>
+        <Page.Content>
             <DataWrapper
                 routeDefinition={readOneYearRouteDefinition}
                 body={{
@@ -66,6 +61,6 @@ export function YearSettingsPage() {
                     )
                 }}
             </DataWrapper>
-        </div>
+        </Page.Content>
     )
 }

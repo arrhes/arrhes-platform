@@ -7,48 +7,47 @@ export function DocExample(props: {
     children: React.ReactNode
 }) {
     return (
-        <div className={css({
-            padding: "5",
-            borderRadius: "xl",
-            border: "1px solid",
-            borderColor: "information/20",
-            backgroundColor: "information/5"
-        })}>
+        <div
+            className={css({
+                padding: "1rem",
+                borderRadius: "lg",
+                border: "1px solid",
+                borderColor: "information/20",
+                backgroundColor: "information/5",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                gap: "1rem",
+            })}
+        >
             {props.title && (
-                <div className={css({
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "2",
-                    mb: "3"
-                })}>
+                <div
+                    className={css({
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                    })}
+                >
                     <IconInfoCircle className={css({
-                        width: "4",
-                        height: "4",
+                        flexShrink: "0",
+                        width: "1.5rem",
+                        height: "1.5rem",
                         color: "information"
                     })} />
                     <span className={css({
-                        fontSize: "sm",
+                        fontSize: "md",
                         fontWeight: "semibold",
                         color: "information"
                     })}>
-                        Exemple : {props.title}
+                        {props.title}
                     </span>
                 </div>
             )}
             <div className={css({
-                fontSize: "sm",
-                color: "neutral/80",
-                lineHeight: "1.6",
-                "& ol": {
-                    spaceY: "2",
-                    pl: "0",
-                    listStyle: "none"
-                },
-                "& ol li": {
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "2"
-                }
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                gap: "0.5rem",
             })}>
                 {props.children}
             </div>

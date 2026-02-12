@@ -11,7 +11,7 @@ export function ListTableRow(props: {
             className={cx(
                 css({
                     width: "100%",
-                    padding: "2rem",
+                    padding: "1.5rem",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",

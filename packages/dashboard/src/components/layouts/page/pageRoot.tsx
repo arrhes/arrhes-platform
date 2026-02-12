@@ -13,7 +13,6 @@ export function PageRoot(props: {
                     width: "100%",
                     flexShrink: "0",
                     flex: "1",
-                    paddingY: "4rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",

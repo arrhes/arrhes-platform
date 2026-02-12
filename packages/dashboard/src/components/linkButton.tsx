@@ -32,9 +32,9 @@ export function LinkButton(props: {
             rel={props.rel}
             className={cx(
                 css({
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
+                    // display: "flex",
+                    // justifyContent: "flex-start",
+                    // alignItems: "center",
                     width: "fit-content",
                     maxWidth: "100%",
                     _disabled: { cursor: "not-allowed", pointerEvents: "none" },

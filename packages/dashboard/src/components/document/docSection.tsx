@@ -10,22 +10,30 @@ export function DocSection(props: {
         .replace(/\s+/g, '-')
 
     return (
-        <section className={css({ mb: "10" })}>
+        <section
+            className={css({
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+            })}
+        >
             <h2
                 id={id}
                 className={css({
                     fontSize: "xl",
                     fontWeight: "semibold",
                     color: "neutral",
-                    mb: "4",
-                    pb: "2",
-                    borderBottom: "1px solid",
-                    borderColor: "neutral/10"
                 })}
             >
                 {props.title}
             </h2>
-            <div className={css({ spaceY: "4" })}>
+            <div
+                className={css({
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                })}
+            >
                 {props.children}
             </div>
         </section>

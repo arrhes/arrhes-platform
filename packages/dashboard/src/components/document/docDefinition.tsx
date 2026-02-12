@@ -8,8 +8,8 @@ export function DocDefinition(props: {
 }) {
     return (
         <div className={css({
-            padding: "5",
-            borderRadius: "xl",
+            padding: "1rem",
+            borderRadius: "lg",
             backgroundColor: "white",
             border: "1px solid",
             borderColor: "neutral/10",
@@ -20,7 +20,6 @@ export function DocDefinition(props: {
                 fontWeight: "semibold",
                 color: "neutral",
                 fontSize: "sm",
-                mb: "1"
             })}>
                 {props.term}
             </dt>

@@ -2,12 +2,10 @@ import { ComponentProps, ReactElement } from "react"
 import { css, cx } from "../../../utilities/cn.js"
 
 
-type PageContent = {
+export function PageContent(props: {
     className?: ComponentProps<'div'>['className']
     children: ReactElement | ReactElement[]
-}
-
-export function PageContent(props: PageContent) {
+}) {
     return (
         <div
             className={cx(
@@ -15,6 +13,7 @@ export function PageContent(props: PageContent) {
                     width: "100%",
                     maxWidth: "xl",
                     height: "fit",
+                    paddingY: "2rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",

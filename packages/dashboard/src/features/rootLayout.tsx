@@ -30,8 +30,8 @@ export function RootLayout() {
             className={css({
                 position: "relative",
                 minHeight: "100dvh",
-                width: "100dvw",
-                maxWidth: "100dvw",
+                width: "100%",
+                maxWidth: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "start",

@@ -1,67 +1,60 @@
 import { AnyRoute } from "@tanstack/react-router"
-import { accountingIndexRoute } from "./accounting/accountingIndexRoute.js"
-import { accountingLayoutRoute } from "./accounting/accountingLayoutRoute.js"
-import { accountsRoute } from "./accounting/accountsRoute.js"
-import { documentsRoute } from "./accounting/documentsRoute.js"
-import { recordsRoute } from "./accounting/recordsRoute.js"
-import { aiAnalyseRoute } from "./ai/analyseRoute.js"
-import { aiAssistantRoute } from "./ai/assistantRoute.js"
-import { aiIndexRoute } from "./ai/aiIndexRoute.js"
-import { aiLayoutRoute } from "./ai/aiLayoutRoute.js"
-import { apiIndexRoute } from "./api/apiIndexRoute.js"
-import { apiLayoutRoute } from "./api/apiLayoutRoute.js"
-import { cguRoute } from "./general/cguRoute.js"
-import { confidentialiteRoute } from "./general/confidentialiteRoute.js"
+import { accountingDocLayoutRoute } from "./accounting/accountingDocLayoutRoute.js"
+import { accountsAccountingDocRoute } from "./accounting/accountsAccountingDocRoute.js"
+import { introductionAccountingDocRoute } from "./accounting/introductionAccountingDocRoute.js"
+import { recordsAccountingDocRoute } from "./accounting/recordsAccountingDocRoute.js"
+import { reportsAccountingDocRoute } from "./accounting/reportsAccountingDocRoute.js"
+import { rootAccountingDocRoute } from "./accounting/rootAccountingDocRoute.js"
+import { attachmentsDashboardDocRoute } from "./dashboard/attachmentsDashboardDocRoute.js"
+import { dashboardDocLayoutRoute } from "./dashboard/dashboardDocLayoutRoute.js"
+import { gettingStartedDashboardDocRoute } from "./dashboard/gettingStartedDashboardDocRoute.js"
+import { organizationsDashboardDocRoute } from "./dashboard/organizationsDashboardDocRoute.js"
+import { recordsDashboardDocRoute } from "./dashboard/recordsDashboardDocRoute.js"
+import { reportsDashboardDocRoute } from "./dashboard/reportsDashboardDocRoute.js"
+import { rootDashboardDocRoute } from "./dashboard/rootDashboardDocRoute.js"
+import { yearsDashboardDocRoute } from "./dashboard/yearsDashboardDocRoute.js"
 import { docsLayoutRoute } from "./docsLayoutRoute.js"
-import { docsRootRoute } from "./docsRootRoute.js"
-import { fonctionnalitesRoute } from "./general/fonctionnalitesRoute.js"
-import { guideDemarrageRoute } from "./guide/demarrageRoute.js"
-import { guideIndexRoute } from "./guide/guideIndexRoute.js"
-import { guideLayoutRoute } from "./guide/guideLayoutRoute.js"
-import { guideOrganisationsRoute } from "./guide/organisationsRoute.js"
-import { guideRapportsRoute } from "./guide/rapportsRoute.js"
-import { guideRecordRowsRoute } from "./guide/recordRowsRoute.js"
-import { mentionsLegalesRoute } from "./general/mentionsLegalesRoute.js"
-import { supportRoute } from "./general/supportRoute.js"
-import { tarifsRoute } from "./general/tarifsRoute.js"
+import { featuresGeneralDocRoute } from "./root/featuresGeneralDocRoute.js"
+import { generalDocLayoutRoute } from "./root/generalDocLayoutRoute.js"
+import { legalGeneralDocRoute } from "./root/legalGeneralDocRoute.js"
+import { pricingGeneralDocRoute } from "./root/pricingGeneralDocRoute.js"
+import { privacyGeneralDocRoute } from "./root/privacyGeneralDocRoute.js"
+import { rootGeneralDocRoute } from "./root/rootGeneralDocRoute.js"
+import { supportGeneralDocRoute } from "./root/supportGeneralDocRoute.js"
+import { termsGeneralDocRoute } from "./root/termsGeneralDocRoute.js"
+import { whitepaperGeneralDocRoute } from "./root/whitepaperGeneralDocRoute.js"
 
 
 export const docsTree: AnyRoute = docsLayoutRoute.addChildren([
     // General section (root)
-    docsRootRoute,
-    fonctionnalitesRoute,
-    tarifsRoute,
-    supportRoute,
-    mentionsLegalesRoute,
-    cguRoute,
-    confidentialiteRoute,
+    generalDocLayoutRoute.addChildren([
+        rootGeneralDocRoute,
+        featuresGeneralDocRoute,
+        pricingGeneralDocRoute,
+        whitepaperGeneralDocRoute,
+        supportGeneralDocRoute,
+        legalGeneralDocRoute,
+        termsGeneralDocRoute,
+        privacyGeneralDocRoute,
+    ]),
 
     // Comptabilite section (cours de comptabilité)
-    accountingLayoutRoute.addChildren([
-        accountingIndexRoute,
-        accountsRoute,
-        recordsRoute,
-        documentsRoute,
+    accountingDocLayoutRoute.addChildren([
+        rootAccountingDocRoute,
+        introductionAccountingDocRoute,
+        accountsAccountingDocRoute,
+        recordsAccountingDocRoute,
+        reportsAccountingDocRoute,
     ]),
 
     // Dashboard section (guide d'utilisation)
-    guideLayoutRoute.addChildren([
-        guideIndexRoute,
-        guideDemarrageRoute,
-        guideOrganisationsRoute,
-        guideRecordRowsRoute,
-        guideRapportsRoute,
-    ]),
-
-    // API section (single page - under development)
-    apiLayoutRoute.addChildren([
-        apiIndexRoute,
-    ]),
-
-    // AI section
-    aiLayoutRoute.addChildren([
-        aiIndexRoute,
-        aiAssistantRoute,
-        aiAnalyseRoute,
+    dashboardDocLayoutRoute.addChildren([
+        rootDashboardDocRoute,
+        gettingStartedDashboardDocRoute,
+        organizationsDashboardDocRoute,
+        yearsDashboardDocRoute,
+        recordsDashboardDocRoute,
+        attachmentsDashboardDocRoute,
+        reportsDashboardDocRoute,
     ]),
 ])

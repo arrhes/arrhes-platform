@@ -9,16 +9,16 @@ import { Outlet, useRouterState } from "@tanstack/react-router"
 import { useState } from "react"
 import { LinkButton } from "../../components/linkButton.js"
 import { css, cx } from "../../utilities/cn.js"
-import { SectionTab } from "./components/sectionTab.js"
-import { SidebarNavigation } from "./components/sidebarNavigation.js"
 import { docSections } from "./docSections.js"
+import { SectionTab } from "./sectionTab.js"
+import { SidebarNavigation } from "./sidebarNavigation.js"
 
 
 type DocSectionId = keyof typeof docSections
 
 
 function getCurrentSection(pathname: string): DocSectionId {
-    if (pathname.startsWith("/documentation/comptabilite")) return "comptabilite"
+    if (pathname.startsWith("/documentation/comptabilité")) return "comptabilite"
     if (pathname.startsWith("/documentation/dashboard")) return "dashboard"
     // if (pathname.startsWith("/documentation/api")) return "api"
     // if (pathname.startsWith("/documentation/ai")) return "ai"
@@ -214,13 +214,9 @@ export function DocumentationLayout() {
                             width: "16rem",
                             borderRight: "1px solid",
                             borderRightColor: "neutral/10",
-                            backgroundColor: "white",
-                            position: "sticky",
-                            top: "120px",
-                            height: "calc(100vh - 120px)",
                             overflowY: "auto",
                             flexShrink: 0,
-                            display: { base: "none", lg: "block" }
+                            display: "flex"
                         }),
                         mobileMenuOpen && css({
                             display: "block",

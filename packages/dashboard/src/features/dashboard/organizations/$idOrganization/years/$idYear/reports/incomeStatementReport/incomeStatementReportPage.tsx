@@ -9,97 +9,102 @@ import { Section } from "../../../../../../../../components/layouts/section/sect
 import { incomeStatementReportRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/reports/incomeStatementReportRoute.tsx"
 import { DownloadIncomeStatementReport } from "./downloadIncomeStatementReport.tsx"
 import { IncomeStatementsReportTable } from "./incomeStatementsReportTable.tsx"
+import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 
 
 export function IncomeStatementReportPage() {
     const params = useParams({ from: incomeStatementReportRoute.id })
 
     return (
-        <Section.Root>
-            <DataWrapper
-                routeDefinition={readAllAccountsRouteDefinition}
-                body={{
-                    idOrganization: params.idOrganization,
-                    idYear: params.idYear,
-                }}
-            >
-                {(accounts) => {
-                    return (
-                        <DataWrapper
-                            routeDefinition={readAllRecordRowsRouteDefinition}
-                            body={{
-                                idOrganization: params.idOrganization,
-                                idYear: params.idYear,
-                                idRecord: undefined,
-                            }}
-                        >
-                            {(recordRows) => {
-                                return (
-                                    <DataWrapper
-                                        routeDefinition={readAllIncomeStatementsRouteDefinition}
-                                        body={{
-                                            idOrganization: params.idOrganization,
-                                            idYear: params.idYear,
-                                        }}
-                                    >
-                                        {(incomeStatements) => {
-                                            return (
-                                                <DataWrapper
-                                                    routeDefinition={readAllComputationsRouteDefinition}
-                                                    body={{
-                                                        idOrganization: params.idOrganization,
-                                                        idYear: params.idYear,
-                                                    }}
-                                                >
-                                                    {(computations) => {
-                                                        return (
-                                                            <DataWrapper
-                                                                routeDefinition={readAllComputationIncomeStatementsRouteDefinition}
-                                                                body={{
-                                                                    idOrganization: params.idOrganization,
-                                                                    idYear: params.idYear,
-                                                                }}
-                                                            >
-                                                                {(computationIncomeStatements) => {
-                                                                    return (
-                                                                        <Section.Item>
-                                                                            <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
-                                                                                <DownloadIncomeStatementReport
-                                                                                    idOrganization={params.idOrganization}
-                                                                                    idYear={params.idYear}
-                                                                                >
-                                                                                    <ButtonContent
-                                                                                        leftIcon={<IconDownload />}
-                                                                                        text="Télécharger en pdf"
-                                                                                        variant="default"
-                                                                                    />
-                                                                                </DownloadIncomeStatementReport>
-                                                                            </div>
-                                                                            <Box>
-                                                                                <IncomeStatementsReportTable
-                                                                                    incomeStatements={incomeStatements}
-                                                                                    computations={computations}
-                                                                                    computationIncomeStatements={computationIncomeStatements}
-                                                                                    recordRows={recordRows.filter((recordRow) => recordRow.isComputedForIncomeStatementReport === true)}
-                                                                                    accounts={accounts.filter((account) => account.type === "income-statement")}
-                                                                                />
-                                                                            </Box>
-                                                                        </Section.Item>
-                                                                    )
-                                                                }}
-                                                            </DataWrapper>
-                                                        )
-                                                    }}
-                                                </DataWrapper>
-                                            )
-                                        }}
-                                    </DataWrapper>
-                                )
-                            }}
-                        </DataWrapper>
-                    )
-                }}
-            </DataWrapper>
-        </Section.Root>
+        <Page.Root>
+            <Page.Content>
+                <Section.Root>
+                    <DataWrapper
+                        routeDefinition={readAllAccountsRouteDefinition}
+                        body={{
+                            idOrganization: params.idOrganization,
+                            idYear: params.idYear,
+                        }}
+                    >
+                        {(accounts) => {
+                            return (
+                                <DataWrapper
+                                    routeDefinition={readAllRecordRowsRouteDefinition}
+                                    body={{
+                                        idOrganization: params.idOrganization,
+                                        idYear: params.idYear,
+                                        idRecord: undefined,
+                                    }}
+                                >
+                                    {(recordRows) => {
+                                        return (
+                                            <DataWrapper
+                                                routeDefinition={readAllIncomeStatementsRouteDefinition}
+                                                body={{
+                                                    idOrganization: params.idOrganization,
+                                                    idYear: params.idYear,
+                                                }}
+                                            >
+                                                {(incomeStatements) => {
+                                                    return (
+                                                        <DataWrapper
+                                                            routeDefinition={readAllComputationsRouteDefinition}
+                                                            body={{
+                                                                idOrganization: params.idOrganization,
+                                                                idYear: params.idYear,
+                                                            }}
+                                                        >
+                                                            {(computations) => {
+                                                                return (
+                                                                    <DataWrapper
+                                                                        routeDefinition={readAllComputationIncomeStatementsRouteDefinition}
+                                                                        body={{
+                                                                            idOrganization: params.idOrganization,
+                                                                            idYear: params.idYear,
+                                                                        }}
+                                                                    >
+                                                                        {(computationIncomeStatements) => {
+                                                                            return (
+                                                                                <Section.Item>
+                                                                                    <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "start", gap: "2" })}>
+                                                                                        <DownloadIncomeStatementReport
+                                                                                            idOrganization={params.idOrganization}
+                                                                                            idYear={params.idYear}
+                                                                                        >
+                                                                                            <ButtonContent
+                                                                                                leftIcon={<IconDownload />}
+                                                                                                text="Télécharger en pdf"
+                                                                                                variant="default"
+                                                                                            />
+                                                                                        </DownloadIncomeStatementReport>
+                                                                                    </div>
+                                                                                    <Box>
+                                                                                        <IncomeStatementsReportTable
+                                                                                            incomeStatements={incomeStatements}
+                                                                                            computations={computations}
+                                                                                            computationIncomeStatements={computationIncomeStatements}
+                                                                                            recordRows={recordRows.filter((recordRow) => recordRow.isComputedForIncomeStatementReport === true)}
+                                                                                            accounts={accounts.filter((account) => account.type === "income-statement")}
+                                                                                        />
+                                                                                    </Box>
+                                                                                </Section.Item>
+                                                                            )
+                                                                        }}
+                                                                    </DataWrapper>
+                                                                )
+                                                            }}
+                                                        </DataWrapper>
+                                                    )
+                                                }}
+                                            </DataWrapper>
+                                        )
+                                    }}
+                                </DataWrapper>
+                            )
+                        }}
+                    </DataWrapper>
+                </Section.Root>
+            </Page.Content>
+        </Page.Root>
     )
 }

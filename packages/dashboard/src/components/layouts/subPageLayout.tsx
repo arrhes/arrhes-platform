@@ -6,19 +6,16 @@ import { css } from "../../utilities/cn.js"
 import { LinkButton } from "../linkButton.js"
 
 
-export interface SubPageSection {
-    title: string
-    icon: ReactNode
-    items: Array<{
-        label: string
-        to: ValidRoutes
-        params: ValidParams
-    }>
-}
-
-
 export function SubPageLayout(props: {
-    sections: Record<string, SubPageSection> | undefined
+    sections: Record<string, {
+        title: string
+        icon: ReactNode
+        items: Array<{
+            label: string
+            to: ValidRoutes
+            params: ValidParams
+        }>
+    }> | undefined
 }) {
     const routeMatches = useMatches()
     const currentPath = useRouterState({
@@ -26,106 +23,119 @@ export function SubPageLayout(props: {
     })
 
     return (
-        <div className={css({
-            flex: "1",
-            flexShrink: "1",
-            width: "100%",
-            maxWidth: "100%",
-            height: "fit",
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-        })}>
-            {
-                props.sections === undefined
-                    ? (null)
-                    : (
-                        <aside className={css({
-                            width: "16rem",
-                            flexShrink: 0,
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "stretch",
-                            gap: "0.5rem",
-                            borderRight: "1px solid",
-                            borderRightColor: "neutral/10",
-                            backgroundColor: "white",
-                            position: "sticky",
-                            top: "0",
-                            height: "fit-content",
-                            maxHeight: "100vh",
-                            overflowY: "auto",
-                            paddingRight: "4",
-                            paddingY: "2",
-                            paddingLeft: 0,
-                        })}>
-                            {Object.entries(props.sections).map(([key, section]) => (
-                                <div key={key} className={css({ marginBottom: "0.5rem" })}>
-                                    <div className={css({
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "0.5rem",
-                                        padding: "0.5rem",
-                                        fontSize: "xs",
-                                        fontWeight: "semibold",
-                                        color: "neutral/40",
-                                        textTransform: "uppercase",
-                                        letterSpacing: "wider",
-                                    })}>
-                                        {section.icon}
-                                        {section.title}
-                                    </div>
-                                    <div className={css({
-                                        marginTop: "0.25rem",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: "0.25rem",
-                                    })}>
+        <div
+            className={css({
+                width: "100%",
+                flexShrink: "0",
+                flex: "1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                overflowY: "auto",
+            })}
+        >
+            <div className={css({
+                flex: "1",
+                flexShrink: "1",
+                width: "100%",
+                maxWidth: "xl",
+                height: "fit",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+            })}>
+                {
+                    props.sections === undefined
+                        ? (null)
+                        : (
+                            <aside className={css({
+                                minWidth: "16rem",
+                                flexShrink: 0,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "stretch",
+                                gap: "0.5rem",
+                                borderRight: "1px solid",
+                                borderRightColor: "neutral/10",
+                                backgroundColor: "white",
+                                position: "sticky",
+                                top: "0",
+                                height: "fit-content",
+                                maxHeight: "100vh",
+                                overflowY: "auto",
+                                padding: "1rem",
+                                paddingLeft: 0,
+                            })}>
+                                {Object.entries(props.sections).map(([key, section]) => (
+                                    <div key={key} className={css({ marginBottom: "0.5rem" })}>
+                                        <div className={css({
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: "0.5rem",
+                                            padding: "0.5rem",
+                                            fontSize: "xs",
+                                            fontWeight: "semibold",
+                                            color: "neutral/40",
+                                            textTransform: "uppercase",
+                                            letterSpacing: "wider",
+                                        })}>
+                                            {section.icon}
+                                            {section.title}
+                                        </div>
+                                        <div className={css({
+                                            marginTop: "0.25rem",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: "0.25rem",
+                                        })}>
                                         {section.items.map((item) => {
-                                            const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.includes(item.to ?? ""))
+                                            const normalizedTo = (item.to ?? "").replace(/\/+$/, "")
+                                            const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.replace(/\/+$/, "") === normalizedTo)
                                             const isActive = (matchRoute === undefined)
                                                 ? false
                                                 : currentPath === matchRoute.routeId
 
-                                            return (
-                                                <LinkButton
-                                                    key={item.to}
-                                                    to={item.to}
-                                                    params={item.params}
-                                                    className={css({ width: "100%" })}
-                                                >
-                                                    <ButtonContent
-                                                        variant="invisible"
-                                                        text={item.label}
-                                                        isActive={isActive}
-                                                        className={css({
-                                                            width: "100%",
-                                                            justifyContent: "start",
-                                                        })}
-                                                    />
-                                                </LinkButton>
-                                            )
-                                        })}
+                                                return (
+                                                    <LinkButton
+                                                        key={item.to}
+                                                        to={item.to}
+                                                        params={item.params}
+                                                        className={css({ width: "100%" })}
+                                                    >
+                                                        <ButtonContent
+                                                            variant="invisible"
+                                                            text={item.label}
+                                                            isActive={isActive}
+                                                            className={css({
+                                                                width: "100%",
+                                                                justifyContent: "start",
+                                                            })}
+                                                        />
+                                                    </LinkButton>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </aside>
-                    )
-            }
-            <div className={css({
-                flexShrink: "1",
-                minH: "fit",
-                minWidth: "0",
-                width: "100%",
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                alignItems: "stretch",
-                paddingLeft: "2rem"
-            })}>
-                <Outlet />
+                                ))}
+                            </aside>
+                        )
+                }
+                <div className={css({
+                    flexShrink: "1",
+                    minH: "fit",
+                    minWidth: "0",
+                    width: "100%",
+                    maxWidth: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    paddingLeft: "2rem"
+                })}>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

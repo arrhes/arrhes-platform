@@ -1,6 +1,6 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconBook, IconGavel, IconHeadset, IconHome, IconInfoCircle, IconLayout } from "@tabler/icons-react"
-import { DocSection } from "./components/sectionTab.tsx"
+import { IconBook, IconGavel, IconHome, IconInfoCircle, IconLayout } from "@tabler/icons-react"
+import { DocSection } from "./sectionTab.tsx"
 
 
 export // Documentation sections configuration
@@ -16,7 +16,8 @@ export // Documentation sections configuration
                     icon: <IconHome className={css({ width: "1rem", height: "1rem" })} />,
                     items: [
                         { path: "/documentation", label: "Accueil" },
-                        { path: "/documentation/fonctionnalites", label: "Fonctionnalités" },
+                        { path: "/documentation/fonctionnalités", label: "Fonctionnalités" },
+                        { path: "/documentation/philosophie", label: "Philosophie" },
                         { path: "/documentation/tarifs", label: "Tarifs" },
                         { path: "/documentation/support", label: "Support" },
                     ]
@@ -25,9 +26,9 @@ export // Documentation sections configuration
                     title: "Légal",
                     icon: <IconGavel className={css({ width: "1rem", height: "1rem" })} />,
                     items: [
-                        { path: "/documentation/mentions-legales", label: "Mentions légales" },
+                        { path: "/documentation/mentions-légales", label: "Mentions légales" },
                         { path: "/documentation/cgu", label: "Conditions Générales d'Utilisation" },
-                        { path: "/documentation/confidentialite", label: "Politique de confidentialité" },
+                        { path: "/documentation/confidentialité", label: "Politique de confidentialité" },
                     ]
                 }
             }
@@ -35,17 +36,17 @@ export // Documentation sections configuration
         comptabilite: {
             id: "comptabilite",
             label: "Comptabilité",
-            path: "/documentation/comptabilite",
+            path: "/documentation/comptabilité",
             icon: <IconBook />,
             navigation: {
                 cours: {
                     title: "Cours de comptabilité",
                     icon: <IconBook className={css({ width: "1rem", height: "1rem" })} />,
                     items: [
-                        { path: "/documentation/comptabilite", label: "Introduction" },
-                        { path: "/documentation/comptabilite/comptes", label: "Les comptes" },
-                        { path: "/documentation/comptabilite/ecritures", label: "Les écritures" },
-                        { path: "/documentation/comptabilite/documents", label: "Les documents" },
+                        { path: "/documentation/comptabilité", label: "Introduction" },
+                        { path: "/documentation/comptabilité/comptes", label: "Les comptes" },
+                        { path: "/documentation/comptabilité/écritures", label: "Les écritures" },
+                        { path: "/documentation/comptabilité/documents", label: "Les documents" },
                     ]
                 }
             }
@@ -61,10 +62,12 @@ export // Documentation sections configuration
                     icon: <IconLayout className={css({ width: "1rem", height: "1rem" })} />,
                     items: [
                         { path: "/documentation/dashboard", label: "Accueil" },
-                        { path: "/documentation/dashboard/demarrage", label: "Démarrage" },
+                        { path: "/documentation/dashboard/démarrage", label: "Démarrage" },
                         { path: "/documentation/dashboard/organisations", label: "Organisations" },
-                        { path: "/documentation/dashboard/ecritures", label: "Saisie des écritures" },
-                        { path: "/documentation/dashboard/rapports", label: "Rapports" },
+                        { path: "/documentation/dashboard/exercices", label: "Exercices" },
+                        { path: "/documentation/dashboard/écritures", label: "Saisie des écritures" },
+                        { path: "/documentation/dashboard/stockage", label: "Stockage" },
+                        { path: "/documentation/dashboard/documents", label: "Documents comptables" },
                     ]
                 }
             }

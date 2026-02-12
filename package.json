@@ -2,6 +2,7 @@
   "name": "arrhes",
   "version": "1.0.0",
   "private": true,
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "pnpm --recursive --if-present --parallel --filter='./packages/**' run dev",
     "build": "pnpm --recursive --if-present --filter='./packages/**' run build"

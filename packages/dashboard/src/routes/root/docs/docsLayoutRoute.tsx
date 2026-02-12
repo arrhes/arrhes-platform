@@ -11,7 +11,7 @@ export const docsLayoutRoute = createRoute({
         <CircularLoader />
     ),
     beforeLoad: () => ({
-        title: "Documentation - Arrhes"
+        title: "Documentation"
     }),
     component: () => (
         <DocumentationLayout />
