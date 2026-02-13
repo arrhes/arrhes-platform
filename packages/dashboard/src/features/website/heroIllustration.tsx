@@ -4,7 +4,7 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 export function HeroIllustration() {
     const dim = css({ color: "neutral/30" })
     const muted = css({ color: "neutral/50" })
-    const text = css({ color: "neutral/80" })
+    const text = css({ color: "neutral/100" })
     const accent = css({ color: "primary" })
     const accentDim = css({ color: "primary/50" })
     const success = css({ color: "success" })
@@ -18,7 +18,7 @@ export function HeroIllustration() {
                 fontFamily: "mono",
                 fontSize: "xs",
                 lineHeight: "1.35",
-                color: "neutral/80",
+                color: "neutral/100",
                 whiteSpace: "pre",
                 userSelect: "none",
             })}

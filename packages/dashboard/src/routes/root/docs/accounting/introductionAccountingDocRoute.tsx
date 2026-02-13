@@ -5,7 +5,7 @@ import { accountingDocLayoutRoute } from "./accountingDocLayoutRoute.js"
 
 export const introductionAccountingDocRoute = createRoute({
     getParentRoute: () => accountingDocLayoutRoute,
-    path: "/",
+    path: "/introduction",
     beforeLoad: () => ({
         title: "Introduction au cours de comptabilité"
     }),

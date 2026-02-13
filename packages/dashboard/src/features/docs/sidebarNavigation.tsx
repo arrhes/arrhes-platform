@@ -14,7 +14,6 @@ export interface NavigationSection {
 export function SidebarNavigation(props: {
     navigation: Record<string, NavigationSection>
     pathname: string
-    onItemClick: () => void
 }) {
     return (
         <nav className={css({
@@ -51,7 +50,6 @@ export function SidebarNavigation(props: {
                             <LinkButton
                                 key={item.path}
                                 to={item.path}
-                                onClick={props.onItemClick}
                                 className={css({ width: "100%", })}
                             >
                                 <ButtonContent

@@ -1,5 +1,5 @@
-import { createPortal } from "react-dom"
 import { ReactNode } from "react"
+import { createPortal } from "react-dom"
 import { css } from "../../../utilities/cn.js"
 
 
@@ -17,10 +17,10 @@ export function ToastViewport(props: ToastViewportProps) {
                 zIndex: "100",
                 display: "flex",
                 flexDirection: "column",
-                gap: "2",
-                padding: "4",
+                gap: "0.5rem",
+                padding: "1rem",
                 width: "100%",
-                maxWidth: "420px",
+                maxWidth: "sm",
                 pointerEvents: "none",
             })}
         >

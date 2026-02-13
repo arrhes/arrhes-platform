@@ -51,7 +51,7 @@ async function startServer() {
 
                 res.writeHead(response.status, {
                     ...Object.fromEntries(response.headers),
-                    "Set-Cookie": response.headers.get("Set-Cookie") ? response.headers.get("Set-Cookie")?.split(", ") : []
+                    "Set-Cookie": response.headers.getSetCookie()
                 })
 
                 if (response.body) {

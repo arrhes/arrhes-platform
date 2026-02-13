@@ -1,7 +1,7 @@
 import { readAllOrganizationUsersRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconPencil, IconUserX } from "@tabler/icons-react"
+import { IconUserEdit, IconUserX } from "@tabler/icons-react"
 import * as v from "valibot"
 import { Chip } from "../../../../../components/layouts/chip.tsx"
 import { ListTable } from "../../../../../components/layouts/listTable/listTable.tsx"
@@ -68,8 +68,8 @@ export function OrganizationUserListTableRow(props: {
                     >
                         <ButtonContent
                             variant="default"
-                            leftIcon={<IconPencil />}
-                            title="Modifier"
+                            leftIcon={<IconUserEdit />}
+                            title="Changer les droits"
                         />
                     </UpdateOneOrganizationUser>
                     <DeleteOneOrganizationUser

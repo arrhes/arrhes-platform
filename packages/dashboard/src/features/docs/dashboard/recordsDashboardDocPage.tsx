@@ -140,8 +140,8 @@ export function RecordsDashboardDocPage() {
             </DocSection>
 
             <DocNextPage
-                to="/documentation/dashboard/documents"
-                label="Générer des rapports"
+                to="/documentation/dashboard/stockage"
+                label="Espace de stockage"
             />
         </DocRoot>
     )

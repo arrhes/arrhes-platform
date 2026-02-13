@@ -53,6 +53,7 @@ export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
     }
     catch (error: unknown) {
 
+        // const cookieSecurity = getCookieSecurityOptions(c.var.env.ENV)
         // c.res.headers.append(
         //     "Set-Cookie",
         //     serializeCookie({
@@ -61,8 +62,7 @@ export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
         //         options: {
         //             maxAge: userSessionCookieMaxAge,
         //             httpOnly: true,
-        //             secure: true,
-        //             sameSite: "None",
+        //             ...cookieSecurity,
         //             domain: c.var.env.COOKIES_DOMAIN,
         //             path: "/",
         //         }
@@ -76,8 +76,7 @@ export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
         //         options: {
         //             maxAge: userSessionCookieMaxAge,
         //             httpOnly: false,
-        //             secure: true,
-        //             sameSite: "None",
+        //             ...cookieSecurity,
         //             domain: c.var.env.COOKIES_DOMAIN,
         //             path: "/",
         //         }

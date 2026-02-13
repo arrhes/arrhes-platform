@@ -7,6 +7,7 @@ import { Popover } from "../../components/overlays/popover/popover.js"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { platformRouter } from "../../routes/platformRouter.js"
 import { css } from "../../utilities/cn.js"
+import { deleteCookies } from "../../utilities/cookies/deleteCookies.js"
 import { postAPI } from "../../utilities/postAPI.js"
 import { Breadcrumbs } from "../breadcrumbs.js"
 
@@ -31,7 +32,7 @@ export function DashboardLayout() {
                 alignItems: "center",
                 padding: "1rem",
                 borderBottom: "1px solid",
-                borderColor: "neutral/8",
+                borderColor: "neutral/10",
                 backgroundColor: "white",
             })}>
                 <div className={css({
@@ -104,10 +105,17 @@ export function DashboardLayout() {
                                 <Button
                                     className={css({ width: "100%" })}
                                     onClick={async () => {
-                                        await postAPI({
-                                            routeDefinition: signOutRouteDefinition,
-                                            body: {},
-                                        })
+                                        try {
+                                            await postAPI({
+                                                routeDefinition: signOutRouteDefinition,
+                                                body: {},
+                                            })
+                                        } catch {
+                                            // If the API is unreachable, we still want to
+                                            // log the user out on the client side.
+                                        }
+
+                                        deleteCookies()
                                         toast({ title: "Déconnexion réussie", variant: "success" })
 
                                         platformRouter.navigate({

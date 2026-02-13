@@ -43,10 +43,12 @@ export // Documentation sections configuration
                     title: "Cours de comptabilité",
                     icon: <IconBook className={css({ width: "1rem", height: "1rem" })} />,
                     items: [
-                        { path: "/documentation/comptabilité", label: "Introduction" },
+                        { path: "/documentation/comptabilité", label: "Accueil" },
+                        { path: "/documentation/comptabilité/introduction", label: "Introduction" },
                         { path: "/documentation/comptabilité/comptes", label: "Les comptes" },
                         { path: "/documentation/comptabilité/écritures", label: "Les écritures" },
                         { path: "/documentation/comptabilité/documents", label: "Les documents" },
+                        { path: "/documentation/comptabilité/glossaire", label: "Glossaire" },
                     ]
                 }
             }

@@ -14,7 +14,7 @@ export function Separator(props: {
             aria-orientation={orientation}
             className={cx(
                 css({
-                    backgroundColor: "neutral/8",
+                    backgroundColor: "neutral/10",
                     flexShrink: 0,
                 }),
                 orientation === "horizontal"

@@ -20,6 +20,7 @@ export function PageRoot(props: {
                     overflowY: "auto",
                     gap: "2rem",
                     backgroundColor: "white",
+                    padding: "1rem",
                 }),
                 props.className
             )}

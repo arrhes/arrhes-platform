@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from "react"
 
 const TOAST_LIMIT = 8
 const TOAST_REMOVE_DELAY = 2000
+const TOAST_AUTO_DISMISS_DELAY = 4000
 
 export type ToastVariant = "error" | "success" | "warning" | "information"
 
@@ -73,11 +74,15 @@ const addToRemoveQueue = (toastId: string) => {
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case "ADD_TOAST":
+        case "ADD_TOAST": {
+            const deduplicated = action.toast.itemID
+                ? state.toasts.filter(x => x.itemID !== action.toast.itemID)
+                : state.toasts
             return {
                 ...state,
-                toasts: [action.toast, ...state.toasts.filter(x => x.itemID !== action.toast.itemID)].slice(0, TOAST_LIMIT),
+                toasts: [action.toast, ...deduplicated].slice(0, TOAST_LIMIT),
             }
+        }
 
         case "UPDATE_TOAST":
             return {
@@ -156,6 +161,10 @@ function toast({ ...props }: Toast) {
         },
     })
 
+    setTimeout(() => {
+        dispatch({ type: "DISMISS_TOAST", toastId: id })
+    }, TOAST_AUTO_DISMISS_DELAY)
+
     return {
         id: id,
         dismiss,
@@ -166,7 +175,7 @@ function toast({ ...props }: Toast) {
 function useToast() {
     const [state, setState] = useState<State>(memoryState)
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    // biome-ignore lint/correctness/useExhaustiveDependencies: subscribe once on mount
     useEffect(() => {
         listeners.push(setState)
         return () => {
@@ -175,7 +184,7 @@ function useToast() {
                 listeners.splice(index, 1)
             }
         }
-    }, [state])
+    }, [])
 
     return {
         ...state,

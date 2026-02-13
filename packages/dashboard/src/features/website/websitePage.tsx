@@ -35,7 +35,7 @@ export function WebsitePage() {
                     alignItems: "center",
                     padding: "1rem",
                     borderBottom: "1px solid",
-                    borderColor: "neutral/8",
+                    borderColor: "neutral/10",
                     backgroundColor: "white",
                     position: "sticky",
                     top: "0",
@@ -105,7 +105,7 @@ export function WebsitePage() {
                     paddingX: "1rem",
                     paddingY: "4rem",
                     borderBottom: "1px solid",
-                    borderColor: "neutral/8"
+                    borderColor: "neutral/10"
                 })}
             >
                 <div
@@ -266,7 +266,7 @@ export function WebsitePage() {
                     paddingY: "4rem",
                     // backgroundColor: "white",
                     borderTop: "1px solid",
-                    borderColor: "neutral/8"
+                    borderTopColor: "neutral/10"
                 })}
             >
                 <div
@@ -320,7 +320,7 @@ export function WebsitePage() {
                     alignItems: "start",
                     padding: "1rem",
                     borderTop: "1px solid",
-                    borderColor: "neutral/8",
+                    borderTopColor: "neutral/10",
                     backgroundColor: "white",
                     marginTop: "auto"
                 })}

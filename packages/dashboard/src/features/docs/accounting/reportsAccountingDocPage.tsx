@@ -8,7 +8,6 @@ import { DocParagraph } from "../../../components/document/docParagraph.js"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
-import { DocTip } from "../../../components/document/docTip.js"
 import { css } from "../../../utilities/cn.js"
 
 
@@ -285,14 +284,14 @@ export function ReportsAccountingDocPage() {
                 </DocParagraph>
             </DocSection>
 
-            <DocTip variant="success">
+            {/* <DocTip variant="success">
                 Félicitations ! Vous avez terminé le cours de comptabilité. Vous maîtrisez maintenant
                 les concepts fondamentaux pour utiliser Arrhes efficacement.
-            </DocTip>
+            </DocTip> */}
 
             <DocNextPage
-                to="/documentation/dashboard/démarrage"
-                label="Guide : Démarrer avec Arrhes"
+                to="/documentation/comptabilité/glossaire"
+                label="Glossaire comptable"
             />
         </DocRoot>
     )

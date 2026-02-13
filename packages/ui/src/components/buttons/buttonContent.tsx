@@ -156,7 +156,7 @@ const variantStyles = {
             borderColor: "transparent",
             bg: "transparent",
             _hover: {
-                bg: "neutral/8",
+                bg: "neutral/10",
             },
             _active: {
                 bg: "neutral/12",

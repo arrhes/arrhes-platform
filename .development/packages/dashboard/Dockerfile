@@ -22,7 +22,7 @@ RUN npm install -g "pnpm@${PNPM_VERSION}" && \
 WORKDIR /workspace
 
 # Copy package manifests for dependency installation
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY package.json pnpm-workspace.yaml ./
 
 COPY packages/metadata ./packages/metadata
 COPY packages/ui ./packages/ui

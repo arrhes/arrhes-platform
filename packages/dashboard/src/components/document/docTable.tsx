@@ -43,7 +43,7 @@ export function DocTable(props: {
                     {props.rows.map((row, rowIndex) => (
                         <tr key={rowIndex} className={css({
                             borderBottom: "1px solid",
-                            borderColor: "neutral/8",
+                            borderColor: "neutral/10",
                             _last: { borderBottom: "none" },
                             _hover: { backgroundColor: "neutral/3" },
                             transition: "colors"

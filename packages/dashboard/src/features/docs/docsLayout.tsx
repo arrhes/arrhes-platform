@@ -1,12 +1,9 @@
 import { ButtonContent, Logo } from "@arrhes/ui"
 import {
     IconBook2,
-    IconBrandGithub,
-    IconMenu2,
-    IconX
+    IconBrandGithub
 } from "@tabler/icons-react"
 import { Outlet, useRouterState } from "@tanstack/react-router"
-import { useState } from "react"
 import { LinkButton } from "../../components/linkButton.js"
 import { css, cx } from "../../utilities/cn.js"
 import { docSections } from "./docSections.js"
@@ -26,9 +23,8 @@ function getCurrentSection(pathname: string): DocSectionId {
 }
 
 
-export function DocumentationLayout() {
+export function DocsLayout() {
     const pathname = useRouterState({ select: (s) => s.location.pathname })
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     const currentSectionId = getCurrentSection(pathname)
     const currentSection = docSections[currentSectionId]
@@ -49,7 +45,7 @@ export function DocumentationLayout() {
                 justifyContent: "start",
                 alignItems: "center",
                 borderBottom: "1px solid",
-                borderColor: "neutral/8",
+                borderColor: "neutral/10",
                 backgroundColor: "white",
                 position: "sticky",
                 top: "0",
@@ -63,7 +59,7 @@ export function DocumentationLayout() {
                     alignItems: "center",
                     padding: "1rem",
                     borderBottom: "1px solid",
-                    borderColor: "neutral/8",
+                    borderColor: "neutral/10",
                 })}>
                     <div className={css({
                         width: "100%",
@@ -78,23 +74,6 @@ export function DocumentationLayout() {
                             alignItems: "center",
                             gap: "0.5rem"
                         })}>
-                            {/* Mobile menu button */}
-                            <button
-                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className={css({
-                                    display: { base: "flex", lg: "none" },
-                                    padding: "0.5rem",
-                                    borderRadius: "md",
-                                    color: "neutral/60",
-                                    _hover: { backgroundColor: "neutral/5", color: "neutral" }
-                                })}
-                            >
-                                {mobileMenuOpen
-                                    ? <IconX className={css({ width: "1.25rem", height: "1.25rem" })} />
-                                    : <IconMenu2 className={css({ width: "1.25rem", height: "1.25rem" })} />
-                                }
-                            </button>
-
                             <LinkButton to="/">
                                 <Logo withText />
                             </LinkButton>
@@ -185,7 +164,8 @@ export function DocumentationLayout() {
                 justifyContent: "start",
                 alignItems: "center",
                 backgroundColor: "white",
-                flex: "1"
+                flex: "1",
+                padding: "1rem",
             })}>
                 <div className={css({
                     width: "100%",
@@ -193,21 +173,6 @@ export function DocumentationLayout() {
                     display: "flex",
                     flex: "1",
                 })}>
-                    {/* Mobile sidebar overlay */}
-                    {mobileMenuOpen && (
-                        <div
-                            className={css({
-                                display: { base: "block", lg: "none" },
-                                position: "fixed",
-                                inset: "0",
-                                top: "120px",
-                                backgroundColor: "neutral/50",
-                                zIndex: "15"
-                            })}
-                            onClick={() => setMobileMenuOpen(false)}
-                        />
-                    )}
-
                     {/* Sidebar */}
                     <aside className={cx(
                         css({
@@ -217,20 +182,11 @@ export function DocumentationLayout() {
                             overflowY: "auto",
                             flexShrink: 0,
                             display: "flex"
-                        }),
-                        mobileMenuOpen && css({
-                            display: "block",
-                            position: "fixed",
-                            left: "0",
-                            top: "120px",
-                            zIndex: "16",
-                            boxShadow: "lg"
                         })
                     )}>
                         <SidebarNavigation
                             navigation={currentSection.navigation}
                             pathname={pathname}
-                            onItemClick={() => setMobileMenuOpen(false)}
                         />
                     </aside>
 

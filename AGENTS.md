@@ -19,6 +19,6 @@
 - **Files**: all `camelCase.ts[x]` (including components). Barrel files are `_index.ts`.
 - **Exports**: components `PascalCase` functions, models/schemas/utilities `camelCase`. Models use `Model` suffix (`accountModel`), schemas have no suffix.
 - **Validation**: `import * as v from "valibot"` — use `v.object()`, `v.string()`, `v.InferOutput<>`.
-- **Styling**: Panda CSS via `css()` and `cx()` from `@arrhes/ui/utilities/cn.js`. Component variants via `class-variance-authority`.
+- **Styling**: Panda CSS via `css()` and `cx()` from `@arrhes/ui/utilities/cn.js`.
 - **IDs**: nanoid with custom alphabet, 16 chars.
 - **Error handling**: try/catch with structured logging in API; toast notifications in dashboard; structured error responses via Hono.

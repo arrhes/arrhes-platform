@@ -7,4 +7,4 @@
 set -e
 
 echo "📦 Installing workspace dependencies..."
-pnpm install
+pnpm install --no-frozen-lockfile

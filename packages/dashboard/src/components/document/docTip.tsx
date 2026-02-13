@@ -7,45 +7,49 @@ import {
 import { css } from "../../utilities/cn.js"
 
 
-type DocTipVariant = "tip" | "warning" | "info" | "success"
 
-const variantConfig: Record<DocTipVariant, {
+const variantConfig: Record<"tip" | "warning" | "info" | "success", {
     icon: React.ReactNode
     label: string
     backgroundColor: string
     borderColor: string
+    accentColor: string
     iconColor: string
     labelColor: string
 }> = {
     tip: {
         icon: <IconBulb />,
         label: "Conseil",
-        backgroundColor: "warning/8",
-        borderColor: "warning/20",
+        backgroundColor: "warning/5",
+        borderColor: "warning/10",
+        accentColor: "warning",
         iconColor: "warning",
         labelColor: "warning"
     },
     warning: {
         icon: <IconAlertTriangle />,
         label: "Attention",
-        backgroundColor: "danger/8",
-        borderColor: "danger/20",
-        iconColor: "danger",
-        labelColor: "danger"
+        backgroundColor: "error/5",
+        borderColor: "error/10",
+        accentColor: "error",
+        iconColor: "error",
+        labelColor: "error"
     },
     info: {
         icon: <IconInfoCircle />,
         label: "Information",
-        backgroundColor: "information/8",
-        borderColor: "information/20",
+        backgroundColor: "information/5",
+        borderColor: "information/10",
+        accentColor: "information",
         iconColor: "information",
         labelColor: "information"
     },
     success: {
         icon: <IconCircleCheck />,
         label: "Félicitations",
-        backgroundColor: "success/8",
-        borderColor: "success/20",
+        backgroundColor: "success/5",
+        borderColor: "success/10",
+        accentColor: "success",
         iconColor: "success",
         labelColor: "success"
     }
@@ -53,7 +57,7 @@ const variantConfig: Record<DocTipVariant, {
 
 
 export function DocTip(props: {
-    variant?: DocTipVariant
+    variant?: keyof typeof variantConfig
     label?: string
     children: React.ReactNode
 }) {
@@ -63,54 +67,52 @@ export function DocTip(props: {
 
     return (
         <div className={css({
-            padding: "1.5rem",
+            padding: "1.25rem",
             borderRadius: "lg",
             backgroundColor: config.backgroundColor,
             border: "1px solid",
-            borderColor: config.borderColor
+            borderColor: config.borderColor,
+            borderLeft: "3px solid",
+            borderLeftColor: config.accentColor,
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
         })}>
             <div className={css({
                 display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "0.75rem"
+                alignItems: "center",
+                gap: "0.375rem",
             })}>
                 <div className={css({
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem"
+                    width: "0.875rem",
+                    height: "0.875rem",
+                    flexShrink: 0,
+                    color: config.iconColor,
+                    "& svg": {
+                        width: "100%",
+                        height: "100%",
+                        stroke: config.iconColor,
+                    }
                 })}>
-                    <div className={css({
-                        width: "1.25rem",
-                        height: "1.25rem",
-                        flexShrink: 0,
-                        color: config.iconColor,
-                        "& svg": {
-                            width: "100%",
-                            height: "100%"
-                        }
-                    })}>
-                        {config.icon}
-                    </div>
-                    <span className={css({
-                        fontWeight: "semibold",
-                        color: config.labelColor,
-                        fontSize: "md",
-                    })}>
-                        {label}
-                    </span>
+                    {config.icon}
                 </div>
-                <div className={css({ flex: "1" })}>
-
-                    <span className={css({
-                        fontSize: "sm",
-                        color: "neutral/80",
-                        lineHeight: "relaxed"
-                    })}>
-                        {props.children}
-                    </span>
-                </div>
+                <span className={css({
+                    fontSize: "xs",
+                    fontWeight: "medium",
+                    color: config.labelColor,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                })}>
+                    {label}
+                </span>
             </div>
+            <span className={css({
+                fontSize: "sm",
+                color: "neutral/70",
+                lineHeight: "1.6"
+            })}>
+                {props.children}
+            </span>
         </div>
     )
 }

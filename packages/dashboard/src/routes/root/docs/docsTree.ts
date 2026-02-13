@@ -1,6 +1,7 @@
 import { AnyRoute } from "@tanstack/react-router"
 import { accountingDocLayoutRoute } from "./accounting/accountingDocLayoutRoute.js"
 import { accountsAccountingDocRoute } from "./accounting/accountsAccountingDocRoute.js"
+import { glossaryAccountingDocRoute } from "./accounting/glossaryAccountingDocRoute.js"
 import { introductionAccountingDocRoute } from "./accounting/introductionAccountingDocRoute.js"
 import { recordsAccountingDocRoute } from "./accounting/recordsAccountingDocRoute.js"
 import { reportsAccountingDocRoute } from "./accounting/reportsAccountingDocRoute.js"
@@ -45,6 +46,7 @@ export const docsTree: AnyRoute = docsLayoutRoute.addChildren([
         accountsAccountingDocRoute,
         recordsAccountingDocRoute,
         reportsAccountingDocRoute,
+        glossaryAccountingDocRoute,
     ]),
 
     // Dashboard section (guide d'utilisation)

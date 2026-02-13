@@ -33,6 +33,7 @@ export function SubPageLayout(props: {
                 justifyContent: "flex-start",
                 alignItems: "center",
                 overflowY: "auto",
+                paddingX: "1rem",
             })}
         >
             <div className={css({
@@ -90,12 +91,12 @@ export function SubPageLayout(props: {
                                             flexDirection: "column",
                                             gap: "0.25rem",
                                         })}>
-                                        {section.items.map((item) => {
-                                            const normalizedTo = (item.to ?? "").replace(/\/+$/, "")
-                                            const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.replace(/\/+$/, "") === normalizedTo)
-                                            const isActive = (matchRoute === undefined)
-                                                ? false
-                                                : currentPath === matchRoute.routeId
+                                            {section.items.map((item) => {
+                                                const normalizedTo = (item.to ?? "").replace(/\/+$/, "")
+                                                const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.replace(/\/+$/, "") === normalizedTo)
+                                                const isActive = (matchRoute === undefined)
+                                                    ? false
+                                                    : currentPath === matchRoute.routeId
 
                                                 return (
                                                     <LinkButton
@@ -132,7 +133,6 @@ export function SubPageLayout(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
-                    paddingLeft: "2rem"
                 })}>
                     <Outlet />
                 </div>

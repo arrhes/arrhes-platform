@@ -1,4 +1,3 @@
-import { IconCircleCheck } from "@tabler/icons-react"
 import { DocExample } from "../../../components/document/docExample.js"
 import { DocHeader } from "../../../components/document/docHeader.js"
 import { DocLink } from "../../../components/document/docLink.js"
@@ -7,7 +6,6 @@ import { DocParagraph } from "../../../components/document/docParagraph.js"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function ReportsDashboardDocPage() {
@@ -157,48 +155,6 @@ export function ReportsDashboardDocPage() {
                     "Transmettez les exports à votre expert-comptable pour la révision annuelle"
                 ]} />
             </DocSection>
-
-            {/* Completion box */}
-            <div className={css({
-                marginTop: "12",
-                padding: "6",
-                borderRadius: "xl",
-                backgroundColor: "success/8",
-                border: "1px solid",
-                borderColor: "success/20"
-            })}>
-                <div className={css({
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "4"
-                })}>
-                    <IconCircleCheck className={css({
-                        width: "6",
-                        height: "6",
-                        color: "success",
-                        flexShrink: 0,
-                        marginTop: "0.5"
-                    })} />
-                    <div>
-                        <h3 className={css({
-                            fontWeight: "semibold",
-                            color: "success",
-                            mb: "2"
-                        })}>
-                            Félicitations !
-                        </h3>
-                        <p className={css({
-                            fontSize: "sm",
-                            color: "neutral/70",
-                            lineHeight: "relaxed"
-                        })}>
-                            Vous avez terminé le guide d'utilisation d'Arrhes. Vous maîtrisez maintenant
-                            les fonctionnalités essentielles pour gérer votre comptabilité. N'hésitez pas
-                            à consulter le <DocLink to="/documentation/comptabilité">cours de comptabilité</DocLink> si vous souhaitez approfondir vos connaissances.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </DocRoot>
     )
 }

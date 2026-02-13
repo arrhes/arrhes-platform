@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
 import { CircularLoader } from "../../../components/layouts/circularLoader.js"
-import { DocumentationLayout } from "../../../features/docs/documentationLayout.js"
+import { DocsLayout } from "../../../features/docs/docsLayout.js"
 import { rootLayoutRoute } from "../../rootLayoutRoute.js"
 
 
@@ -14,6 +14,6 @@ export const docsLayoutRoute = createRoute({
         title: "Documentation"
     }),
     component: () => (
-        <DocumentationLayout />
+        <DocsLayout />
     )
 })

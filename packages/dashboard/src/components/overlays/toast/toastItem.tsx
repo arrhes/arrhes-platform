@@ -1,10 +1,11 @@
 import { Button, ButtonContent } from "@arrhes/ui"
-import { IconAlertTriangle, IconCircleCheck, IconInfoSquare, IconX } from "@tabler/icons-react"
-import { css } from "../../../utilities/cn.js"
+import { Icon, IconAlertTriangle, IconCircleCheck, IconInfoSquare, IconProps, IconX } from "@tabler/icons-react"
+import { ReactElement } from "react"
 import { ToasterToast, ToastVariant } from "../../../contexts/toasts/useToast.js"
+import { css } from "../../../utilities/cn.js"
 
 
-const toastIcons: Record<ToastVariant, React.ReactNode> = {
+const toastIcons: Record<ToastVariant, ReactElement<IconProps & React.RefAttributes<Icon>>> = {
     error: (
         <IconAlertTriangle size={20} className={css({ color: "error" })} />
     ),
@@ -19,12 +20,10 @@ const toastIcons: Record<ToastVariant, React.ReactNode> = {
     )
 }
 
-type ToastItemProps = {
+export function ToastItem(props: {
     toast: ToasterToast
     onDismiss: (id: string) => void
-}
-
-export function ToastItem(props: ToastItemProps) {
+}) {
     const variant = props.toast.variant ?? "information"
 
     return (
@@ -36,8 +35,8 @@ export function ToastItem(props: ToastItemProps) {
                 display: props.toast.open ? "flex" : "none",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                gap: "4",
-                padding: "4",
+                gap: "0.5rem",
+                padding: "1rem",
                 borderRadius: "lg",
                 border: "1px solid",
                 borderColor: "neutral/10",
@@ -45,7 +44,18 @@ export function ToastItem(props: ToastItemProps) {
                 boxShadow: "sm",
             })}
         >
-            {toastIcons[variant]}
+            <div
+                className={css({
+                    width: "fit-content",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem",
+                })}
+            >
+                {toastIcons[variant]}
+            </div>
             <div
                 className={css({
                     display: "flex",

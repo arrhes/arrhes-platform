@@ -6,7 +6,7 @@ import { getRemoteAddress } from "../../utilities/getRemoteAddress.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { selectOne } from "../../utilities/sql/selectOne.js"
-import { cookiePrefix, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
 import { bodyValidator } from "../../validators/bodyValidator.js"
 import { models } from "@arrhes/application-metadata/models"
 import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
@@ -56,6 +56,7 @@ export const signInRoute = publicFactory.createApp()
             })
 
             // Set cookies
+            const cookieSecurity = getCookieSecurityOptions(c.var.env.ENV)
             c.res.headers.append(
                 "Set-Cookie",
                 serializeCookie({
@@ -67,8 +68,7 @@ export const signInRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: true,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }
@@ -82,8 +82,7 @@ export const signInRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: false,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }

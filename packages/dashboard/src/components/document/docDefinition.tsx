@@ -1,3 +1,4 @@
+import { IconBookmark } from "@tabler/icons-react"
 import { ReactNode } from "react"
 import { css } from "../../utilities/cn.js"
 
@@ -8,14 +9,39 @@ export function DocDefinition(props: {
 }) {
     return (
         <div className={css({
-            padding: "1rem",
+            padding: "1.25rem",
             borderRadius: "lg",
             backgroundColor: "white",
             border: "1px solid",
-            borderColor: "neutral/10",
+            borderColor: "neutral/15",
             borderLeft: "3px solid",
-            borderLeftColor: "primary"
+            borderLeftColor: "neutral/15",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.25rem",
         })}>
+            <div className={css({
+                display: "flex",
+                alignItems: "center",
+                gap: "0.375rem",
+                marginBottom: "0.25rem",
+            })}>
+                <IconBookmark className={css({
+                    width: "0.875rem",
+                    height: "0.875rem",
+                    color: "primary/50",
+                    flexShrink: 0,
+                })} />
+                <span className={css({
+                    fontSize: "xs",
+                    fontWeight: "medium",
+                    color: "primary/60",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                })}>
+                    Définition
+                </span>
+            </div>
             <dt className={css({
                 fontWeight: "semibold",
                 color: "neutral",

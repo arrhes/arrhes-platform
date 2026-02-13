@@ -9,10 +9,12 @@ export function DocExample(props: {
     return (
         <div
             className={css({
-                padding: "1rem",
+                padding: "1.25rem",
                 borderRadius: "lg",
                 border: "1px solid",
-                borderColor: "information/20",
+                borderColor: "information/10",
+                borderLeft: "3px solid",
+                borderLeftColor: "information/10",
                 backgroundColor: "information/5",
                 display: "flex",
                 flexDirection: "column",
@@ -30,12 +32,12 @@ export function DocExample(props: {
                 >
                     <IconInfoCircle className={css({
                         flexShrink: "0",
-                        width: "1.5rem",
-                        height: "1.5rem",
+                        width: "1rem",
+                        height: "1rem",
                         color: "information"
                     })} />
                     <span className={css({
-                        fontSize: "md",
+                        fontSize: "sm",
                         fontWeight: "semibold",
                         color: "information"
                     })}>
