@@ -1,5 +1,5 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
-import { css } from "../../../utilities/cn.js"
 
 
 

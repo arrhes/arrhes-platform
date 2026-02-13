@@ -1,5 +1,5 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ReactNode } from "react"
-import { css } from "../../utilities/cn.js"
 
 
 export function DocList(props: {

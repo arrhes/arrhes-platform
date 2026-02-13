@@ -1,4 +1,4 @@
-import { css, cx } from "../../utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconStarFilled } from '@tabler/icons-react'
 import { InputHTMLAttributes, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'

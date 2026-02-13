@@ -1,7 +1,7 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
 import { Fragment, ReactElement } from "react"
 import { Tooltip } from "../../../components/overlays/tooltip/tooltip.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function DataBlockItem(props: {

@@ -1,6 +1,6 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 import { ComponentProps } from "react"
-import { css, cx } from "../../../utilities/cn.js"
 
 
 type PopoverContent = ComponentProps<typeof PopoverPrimitive.Content>

@@ -1,9 +1,9 @@
 import { LinkContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBrandGithub, IconMail } from "@tabler/icons-react"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocTip } from "../../../components/document/docTip.js"
 import { LinkButton } from "../../../components/linkButton.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function SupportGeneralDocPage() {

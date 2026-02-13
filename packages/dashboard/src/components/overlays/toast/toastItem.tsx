@@ -1,8 +1,8 @@
 import { Button, ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { Icon, IconAlertTriangle, IconCircleCheck, IconInfoSquare, IconProps, IconX } from "@tabler/icons-react"
 import { ReactElement } from "react"
 import { ToasterToast, ToastVariant } from "../../../contexts/toasts/useToast.js"
-import { css } from "../../../utilities/cn.js"
 
 
 const toastIcons: Record<ToastVariant, ReactElement<IconProps & React.RefAttributes<Icon>>> = {

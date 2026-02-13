@@ -1,5 +1,5 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconInfoCircle } from "@tabler/icons-react"
-import { css } from "../../utilities/cn.js"
 
 
 export function DocExample(props: {

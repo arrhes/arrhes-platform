@@ -1,3 +1,4 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DocDefinition } from "../../../components/document/docDefinition.js"
 import { DocExample } from "../../../components/document/docExample.js"
 import { DocHeader } from "../../../components/document/docHeader.js"
@@ -7,7 +8,6 @@ import { DocParagraph } from "../../../components/document/docParagraph.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
 import { DocTip } from "../../../components/document/docTip.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function AccountsAccountingDocPage() {

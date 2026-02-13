@@ -1,7 +1,7 @@
 import { Button } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
-import { css } from "../../utilities/cn.js"
 
 
 export function InputFile(props:

@@ -1,8 +1,8 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { Dialog, DialogContent, DialogProps } from "@radix-ui/react-dialog"
 import { IconSearch } from "@tabler/icons-react"
 import { Command as CommandPrimitive } from "cmdk"
 import * as React from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export const Command = React.forwardRef<

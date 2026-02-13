@@ -1,7 +1,7 @@
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import type { ValidRoutes } from "../../routes/platformRouter.js"
-import { css } from "../../utilities/cn.js"
 import { LinkButton } from "../linkButton.js"
 
 

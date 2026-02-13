@@ -1,6 +1,6 @@
-import { LinkButton } from "../linkButton.js"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import type { ValidRoutes } from "../../routes/platformRouter.js"
-import { css } from "../../utilities/cn.js"
+import { LinkButton } from "../linkButton.js"
 
 
 export function DocLink(props: {

@@ -1,6 +1,6 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
-import { css } from "../../../utilities/cn.js"
 
 
 export function DropdownLabel(props:

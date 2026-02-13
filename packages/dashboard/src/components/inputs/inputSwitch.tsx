@@ -1,7 +1,7 @@
 
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { ComponentProps } from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 type InputSwitch = Omit<ComponentProps<typeof SwitchPrimitives.Root>, "value" | "onChange"> & {

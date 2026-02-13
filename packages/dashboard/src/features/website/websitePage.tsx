@@ -1,4 +1,5 @@
 import { Badge, ButtonContent, Logo } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import {
     IconBook2,
     IconBrandGithub,
@@ -6,7 +7,6 @@ import {
     IconUser
 } from "@tabler/icons-react"
 import { LinkButton } from "../../components/linkButton.js"
-import { css } from "../../utilities/cn.js"
 import { HeroIllustration } from "./heroIllustration.js"
 import { Pricing } from "./pricing.js"
 

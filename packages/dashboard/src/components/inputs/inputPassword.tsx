@@ -1,8 +1,8 @@
 import { Button } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconEye, IconEyeClosed } from '@tabler/icons-react'
 import { InputHTMLAttributes, forwardRef, useState } from 'react'
 import { FieldError } from 'react-hook-form'
-import { css, cx } from "../../utilities/cn.js"
 
 
 type InputPassword = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {

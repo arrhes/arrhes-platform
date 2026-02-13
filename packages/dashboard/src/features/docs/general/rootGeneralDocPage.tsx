@@ -1,8 +1,8 @@
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { LinkButton } from "../../../components/linkButton.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function RootGeneralDocPage() {

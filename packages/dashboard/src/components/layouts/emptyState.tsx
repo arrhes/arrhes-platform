@@ -1,5 +1,5 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement, ReactNode } from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export function EmptyState(props: {

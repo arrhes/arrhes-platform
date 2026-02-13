@@ -1,3 +1,4 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DocExample } from "../../../components/document/docExample.js"
 import { DocHeader } from "../../../components/document/docHeader.js"
 import { DocLink } from "../../../components/document/docLink.js"
@@ -7,7 +8,6 @@ import { DocParagraph } from "../../../components/document/docParagraph.js"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function RecordsDashboardDocPage() {

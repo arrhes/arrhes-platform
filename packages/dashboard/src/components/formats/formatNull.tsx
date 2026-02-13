@@ -1,5 +1,5 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export function FormatNull(props: {

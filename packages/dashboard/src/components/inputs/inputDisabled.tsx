@@ -1,6 +1,6 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { InputHTMLAttributes, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
-import { css, cx } from "../../utilities/cn.js"
 
 
 type InputDisabled = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {

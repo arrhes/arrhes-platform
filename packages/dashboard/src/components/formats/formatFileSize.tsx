@@ -1,7 +1,7 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 import { FormatBase } from "../../components/formats/formatBase.js"
 import { FormatNull } from "../../components/formats/formatNull.js"
-import { css } from "../../utilities/cn.js"
 
 
 const sizes = ['o', 'ko', 'Mo', 'Go', 'To']

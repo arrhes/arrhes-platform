@@ -1,6 +1,6 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentProps, ReactElement, useRef } from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export function Virtualizer<TData extends unknown>(props: {

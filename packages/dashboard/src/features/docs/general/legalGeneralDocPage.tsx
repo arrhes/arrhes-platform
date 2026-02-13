@@ -1,9 +1,9 @@
 import { LinkContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DocLastUpdate } from "../../../components/document/docLastUpdate.js"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocTextSection } from "../../../components/document/docTextSection.js"
 import { DocTip } from "../../../components/document/docTip.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function LegalGeneralDocPage() {

@@ -1,8 +1,8 @@
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import { ReactNode } from "react"
 import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
-import { css } from "../../utilities/cn.js"
 import { LinkButton } from "../linkButton.js"
 
 

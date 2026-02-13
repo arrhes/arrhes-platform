@@ -1,8 +1,8 @@
 
 
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
-import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DropdownTrigger(props:

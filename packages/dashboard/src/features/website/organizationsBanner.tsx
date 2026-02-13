@@ -1,8 +1,8 @@
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBuilding } from "@tabler/icons-react"
 import { Box } from "../../components/layouts/box.js"
 import { LinkButton } from "../../components/linkButton.js"
-import { css } from "../../utilities/cn.js"
 
 
 export function OrganizationsBanner() {

@@ -1,9 +1,9 @@
 
 import { ButtonContent } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
-import { css, cx } from "../../../utilities/cn.js"
 
 
 export function DialogHeader(props:

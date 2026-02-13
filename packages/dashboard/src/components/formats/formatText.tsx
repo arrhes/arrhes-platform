@@ -1,5 +1,5 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
-import { css, cx } from "../../utilities/cn.js"
 import { FormatNull } from "./formatNull.js"
 
 

@@ -1,5 +1,5 @@
 import { Button, ButtonContent } from "@arrhes/ui"
-import { css } from "../../utilities/cn.js"
+import { css } from "@arrhes/ui/utilities/cn.js"
 
 
 export type FormSubmit<T> = {

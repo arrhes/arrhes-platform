@@ -1,7 +1,7 @@
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconExternalLink } from "@tabler/icons-react"
 import { Box } from "../../components/layouts/box.js"
-import { css } from "../../utilities/cn.js"
 
 
 export function DocumentationBanner() {

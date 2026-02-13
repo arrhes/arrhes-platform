@@ -1,6 +1,6 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 import { FormatNull } from "../../components/formats/formatNull.js"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export function formatPrice(parameters: {

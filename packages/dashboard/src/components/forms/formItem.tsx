@@ -1,5 +1,5 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { HTMLAttributes, useId } from "react"
-import { css, cx } from "../../utilities/cn.js"
 import { FormItemContext } from "./formItemContext.js"
 
 

@@ -1,3 +1,4 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import {
     IconBook,
     IconFileText,
@@ -5,7 +6,6 @@ import {
     IconUsers
 } from "@tabler/icons-react"
 import { DocRoot } from "../../../../components/document/docRoot.js"
-import { css } from "../../../../utilities/cn.js"
 import { FeatureCard } from "./featureCard.js"
 
 

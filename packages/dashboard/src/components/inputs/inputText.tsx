@@ -1,6 +1,6 @@
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { InputHTMLAttributes } from 'react'
 import { FieldError } from 'react-hook-form'
-import { css, cx } from "../../utilities/cn.js"
 
 
 type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {

@@ -1,5 +1,5 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DocRoot } from "../../../../components/document/docRoot.js"
-import { css } from "../../../../utilities/cn.js"
 import { Pricing } from "../../../website/pricing.js"
 import { FaqItem } from "./faqItem.js"
 

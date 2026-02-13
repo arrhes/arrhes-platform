@@ -1,10 +1,10 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import {
     IconAlertTriangle,
     IconBulb,
     IconCircleCheck,
     IconInfoCircle
 } from "@tabler/icons-react"
-import { css } from "../../utilities/cn.js"
 
 
 

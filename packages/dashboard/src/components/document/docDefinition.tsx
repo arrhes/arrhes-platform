@@ -1,6 +1,6 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBookmark } from "@tabler/icons-react"
 import { ReactNode } from "react"
-import { css } from "../../utilities/cn.js"
 
 
 export function DocDefinition(props: {

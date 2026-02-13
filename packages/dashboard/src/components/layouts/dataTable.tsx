@@ -1,4 +1,5 @@
 import { Button, ButtonContent } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronDown, IconChevronLeft, IconChevronRight, IconSortAscending, IconSortDescending } from "@tabler/icons-react"
 import {
     ColumnDef,
@@ -17,7 +18,6 @@ import { FormatNull } from "../../components/formats/formatNull.js"
 import { InputDebounced } from "../../components/inputs/inputDebounced.js"
 import { InputText } from "../../components/inputs/inputText.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
-import { css, cx } from "../../utilities/cn.js"
 
 
 export function DataTable<TData extends Record<keyof TData, unknown>>(props: {

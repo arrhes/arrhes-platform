@@ -1,9 +1,9 @@
 import { routeDefinition } from "@arrhes/application-metadata/utilities"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement, Suspense } from "react"
 import * as v from "valibot"
 import { FormatError } from "../../components/formats/formatError.js"
 import { CircularLoader } from "../../components/layouts/circularLoader.js"
-import { css, cx } from "../../utilities/cn.js"
 import { useDataFromAPI } from "../../utilities/useHTTPData.js"
 
 

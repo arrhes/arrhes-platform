@@ -1,7 +1,7 @@
 import { Button } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 import { toast } from "../../contexts/toasts/useToast.js"
-import { css } from "../../utilities/cn.js"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
 

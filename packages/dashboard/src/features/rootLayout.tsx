@@ -1,5 +1,5 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { Outlet } from "@tanstack/react-router"
-import { css } from "../utilities/cn.js"
 import { useDeviceDetect } from "../utilities/useDeviceDetect.js"
 
 

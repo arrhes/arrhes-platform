@@ -1,8 +1,8 @@
 
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { IconInfoSquare } from "@tabler/icons-react"
 import { HTMLAttributes } from "react"
-import { css } from "../../utilities/cn.js"
 import { useFormField } from "./useFormField.js"
 
 

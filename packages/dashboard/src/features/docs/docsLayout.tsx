@@ -1,11 +1,11 @@
 import { ButtonContent, Logo } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import {
     IconBook2,
     IconBrandGithub
 } from "@tabler/icons-react"
 import { Outlet, useRouterState } from "@tanstack/react-router"
 import { LinkButton } from "../../components/linkButton.js"
-import { css, cx } from "../../utilities/cn.js"
 import { docSections } from "./docSections.js"
 import { SectionTab } from "./sectionTab.js"
 import { SidebarNavigation } from "./sidebarNavigation.js"

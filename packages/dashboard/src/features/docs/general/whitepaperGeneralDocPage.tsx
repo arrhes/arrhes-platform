@@ -1,7 +1,7 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { DocLastUpdate } from "../../../components/document/docLastUpdate.js"
 import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocTextSection } from "../../../components/document/docTextSection.js"
-import { css } from "../../../utilities/cn.js"
 
 
 export function WhitepaperGeneralDocPage() {

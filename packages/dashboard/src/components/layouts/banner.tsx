@@ -1,7 +1,7 @@
 import { colorVariant } from "@arrhes/application-metadata/components"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconAlertHexagon, IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
 import { ComponentProps, ReactElement } from "react"
-import { css, cx } from "../../utilities/cn.js"
 
 
 
