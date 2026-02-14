@@ -1,5 +1,6 @@
 import { readAllRecordRowsRouteDefinition, readAllRecordsRouteDefinition, readOneAccountRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEye, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
@@ -12,7 +13,6 @@ import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper
 import { Page } from "../../../../../../../components/layouts/page/page.js"
 import { LinkButton } from "../../../../../../../components/linkButton.js"
 import { recordsRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/recordsRoute.js"
-import { css } from "../../"@arrhes/ui/utilities / cn.js"
 import { CreateOneRecord } from "./createOneRecord.js"
 
 

@@ -1,5 +1,6 @@
 import { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconFile, IconFileTypePdf, IconPhoto, IconPlus } from "@tabler/icons-react"
 import { useState } from "react"
 import * as v from "valibot"
@@ -10,7 +11,6 @@ import { InputText } from "../../../../../../../components/inputs/inputText.js"
 import { Box } from "../../../../../../../components/layouts/box.js"
 import { EmptyState } from "../../../../../../../components/layouts/emptyState.js"
 import { platformRouter } from "../../../../../../../routes/platformRouter.js"
-import { css, cx } from "../../"@arrhes/ui/utilities / cn.js"
 import { CreateOneAttachment } from "./createOneAttachment.js"
 
 
