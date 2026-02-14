@@ -74,6 +74,11 @@ Vous avez trois options pour développer Arrhes :
 
 ## Prérequis
 
+> **Windows :** Certains chemins du repository sont longs et peuvent dépasser la limite par défaut de Windows. Avant de cloner, exécutez la commande suivante depuis une invite de commandes **administrateur** :
+> ```
+> git config --system core.longpaths true
+> ```
+
 ### Option 1 : Dev Container
 
 - **Docker** et **Docker Compose** : https://www.docker.com/get-started
@@ -154,8 +159,8 @@ C'est tout ! PostgreSQL, RustFS et MailHog seront lancés automatiquement dans d
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Ouvrir dans VS Code/Cursor**
@@ -216,8 +221,8 @@ C'est tout ! Vous êtes prêt à développer. 🎉
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Installer les dépendances**
@@ -243,8 +248,8 @@ Vous devriez voir tous les packages workspace listés.
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/arrhes-platform.git
+cd arrhes-platform
 ```
 
 **Étape 2 : Installer les dépendances**

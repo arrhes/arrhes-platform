@@ -52,6 +52,11 @@ Proposez des améliorations d'interface
 
 Avant de commencer à contribuer, configurez votre environnement de développement :
 
+> **Windows :** Certains chemins du repository sont longs et peuvent dépasser la limite par défaut de Windows. Avant de cloner, exécutez la commande suivante depuis une invite de commandes **administrateur** :
+> ```
+> git config --system core.longpaths true
+> ```
+
 1. **Fork le repository** sur votre compte GitHub
 
 2. **Cloner votre fork**
@@ -62,7 +67,7 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
 
 3. **Ajouter le repository principal comme remote**
    ```bash
-   git remote add upstream https://github.com/arrhes/arrhes-application.git
+   git remote add upstream https://github.com/arrhes/arrhes-platform.git
    ```
 
 4. **Choisir votre méthode de développement**
@@ -538,8 +543,8 @@ Plusieurs utilisateurs ont demandé cette fonctionnalité pour faire des analyse
 - [Documentation d'architecture](ARCHITECTURE.md)
 - [Guide de développement](DEVELOPMENT.md)
 - [Configuration](CONFIGURATION.md)
-- [Issues GitHub](https://github.com/arrhes/arrhes-application/issues)
-- [Discussions GitHub](https://github.com/arrhes/arrhes-application/discussions)
+- [Issues GitHub](https://github.com/arrhes/arrhes-platform/issues)
+- [Discussions GitHub](https://github.com/arrhes/arrhes-platform/discussions)
 
 ## Questions ?
 
