@@ -12,7 +12,7 @@ import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper
 import { Page } from "../../../../../../../components/layouts/page/page.js"
 import { LinkButton } from "../../../../../../../components/linkButton.js"
 import { recordsRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/recordsRoute.js"
-import { css } from "../../../../../../../utilities/cn.js"
+import { css } from "../../"@arrhes/ui/utilities / cn.js"
 import { CreateOneRecord } from "./createOneRecord.js"
 
 

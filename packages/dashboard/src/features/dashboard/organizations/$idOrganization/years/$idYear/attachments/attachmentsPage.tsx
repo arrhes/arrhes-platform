@@ -6,7 +6,7 @@ import { useState } from "react"
 import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.js"
 import { Page } from "../../../../../../../components/layouts/page/page.js"
 import { attachmentsLayoutRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/attachments/attachmentsLayoutRoute.js"
-import { css } from "../../../../../../../utilities/cn.js"
+import { css } from "../../"@arrhes/ui/utilities / cn.js"
 import { AttachmentsGrid } from "./attachmentsGrid.js"
 import { AttachmentsTable } from "./attachmentsTable.js"
 
