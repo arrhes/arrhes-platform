@@ -154,8 +154,8 @@ C'est tout ! PostgreSQL, RustFS et MailHog seront lancés automatiquement dans d
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/platform.git
+cd platform
 ```
 
 **Étape 2 : Ouvrir dans VS Code/Cursor**
@@ -216,8 +216,8 @@ C'est tout ! Vous êtes prêt à développer. 🎉
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/platform.git
+cd platform
 ```
 
 **Étape 2 : Installer les dépendances**
@@ -243,8 +243,8 @@ Vous devriez voir tous les packages workspace listés.
 **Étape 1 : Cloner le repository**
 
 ```bash
-git clone https://github.com/arrhes/arrhes-application.git
-cd arrhes-application
+git clone https://github.com/arrhes/platform.git
+cd platform
 ```
 
 **Étape 2 : Installer les dépendances**

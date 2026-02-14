@@ -1,6 +1,6 @@
 set shell := ["bash", "-cu"]
 COMPOSE_FILE := ".development/compose.yml"
-PROJECT := "arrhes-application"
+PROJECT := "platform"
 
 dev cmd:
     @just dev-{{cmd}}

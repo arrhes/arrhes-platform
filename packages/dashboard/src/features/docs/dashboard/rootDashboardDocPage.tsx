@@ -79,7 +79,7 @@ export function RootDashboardDocPage() {
                 <span>
                     Vous avez trouvé un bug ? Vous souhaitez ajouter une fonctionnalité ?{" "}
                     <a
-                        href="https://github.com/arrhes/arrhes-platform/issues"
+                        href="https://github.com/arrhes/platform/issues"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

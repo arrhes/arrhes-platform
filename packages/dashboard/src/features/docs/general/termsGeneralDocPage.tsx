@@ -98,7 +98,7 @@ export function TermsGeneralDocPage() {
                     <p>
                         Le code source d'Arrhes est distribué sous licence {" "}
                         <a
-                            href="https://raw.githubusercontent.com/arrhes/arrhes-platform/refs/heads/main/LICENSE"
+                            href="https://raw.githubusercontent.com/arrhes/platform/refs/heads/main/LICENSE"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
