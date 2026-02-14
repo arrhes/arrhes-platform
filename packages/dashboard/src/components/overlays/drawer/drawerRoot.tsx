@@ -1,17 +1,36 @@
 
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentProps } from "react"
+import { createContext, JSX, useContext } from "react"
 
 
-export function DrawerRoot(props:
-    ComponentProps<typeof DialogPrimitive.Root>
-) {
+type DrawerContextType = {
+    open: boolean
+    setOpen: (open: boolean) => void
+}
+
+const DrawerContext = createContext<DrawerContextType | null>(null)
+
+export function useDrawerContext() {
+    const context = useContext(DrawerContext)
+    if (context === null) {
+        throw new Error("useDrawerContext must be used within a DrawerRoot")
+    }
+    return context
+}
+
+
+export function DrawerRoot(props: {
+    open: boolean
+    onOpenChange: (open: boolean) => void
+    children: JSX.Element | JSX.Element[]
+}) {
     return (
-        <DialogPrimitive.Root
-            {...props}
-            modal={true}
+        <DrawerContext.Provider
+            value={{
+                open: props.open,
+                setOpen: props.onOpenChange,
+            }}
         >
             {props.children}
-        </DialogPrimitive.Root>
+        </DrawerContext.Provider>
     )
 }

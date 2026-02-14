@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { HTMLAttributes, useId } from "react"
 import { FormItemContext } from "./formItemContext.js"
 
@@ -12,7 +12,17 @@ export function FormItem(props: FormItem) {
         <FormItemContext.Provider value={{ id }}>
             <div
                 {...props}
-                className={cn("w-full flex flex-col justify-start items-start gap-1", props.className)}
+                className={cx(
+                    css({
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        gap: "1"
+                    }),
+                    props.className
+                )}
             />
         </FormItemContext.Provider>
     )

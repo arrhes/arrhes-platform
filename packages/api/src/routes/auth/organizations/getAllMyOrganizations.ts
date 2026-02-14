@@ -1,6 +1,6 @@
-import { authFactory } from "#/factories/authFactory.js"
-import { response } from "#/utilities/response.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
+import { authFactory } from "../../../factories/authFactory.js"
+import { response } from "../../../utilities/response.js"
+import { bodyValidator } from "../../../validators/bodyValidator.js"
 import { getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 

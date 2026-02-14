@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 
 
@@ -8,8 +8,13 @@ export function PageSeparator(props: PageSeparator) {
     return (
         <div
             className={
-                cn(
-                    "w-full h-[1px] border-b border-neutral/10",
+                cx(
+                    css({
+                        width: "100%",
+                        height: "1px",
+                        borderBottom: "1px solid",
+                        borderColor: "neutral/10"
+                    }),
                     props.className
                 )
             }

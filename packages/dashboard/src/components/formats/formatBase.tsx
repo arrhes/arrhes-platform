@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
 
 
@@ -10,8 +10,15 @@ type FormatBase = {
 export function FormatBase(props: FormatBase) {
     return (
         <div
-            className={cn(
-                "w-fit max-w-full overflow-auto flex justify-start items-center",
+            className={cx(
+                css({
+                    width: "fit",
+                    maxWidth: "100%",
+                    overflow: "auto",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center"
+                }),
                 props.className
             )}
         >

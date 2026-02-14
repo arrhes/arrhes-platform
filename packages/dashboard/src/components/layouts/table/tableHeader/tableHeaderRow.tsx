@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,8 @@ export function TableHeaderRow(props: {
 }) {
     return (
         <tr
-            className={cn(
-                "w-full",
+            className={cx(
+                css({ width: "100%" }),
                 props.className
             )}
             children={props.children}

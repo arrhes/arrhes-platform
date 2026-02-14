@@ -1,6 +1,6 @@
-import { routePath } from "#src/components/_index.js"
-import { attachmentSchema } from "#src/schemas/attachment.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../../components/_index.js"
+import { attachmentSchema } from "../../../../../../../../schemas/attachment.js"
+import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

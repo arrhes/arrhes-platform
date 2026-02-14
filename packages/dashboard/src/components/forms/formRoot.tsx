@@ -1,6 +1,8 @@
-import { ButtonPlain } from "#/components/buttons/buttonPlain.js"
-import { cn } from "#/utilities/cn.js"
+import type { ButtonColor, ButtonVariant } from "@arrhes/ui"
+import { Button, ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { valibotResolver } from "@hookform/resolvers/valibot"
+import type { Icon, IconProps } from "@tabler/icons-react"
 import { ReactElement, useEffect, useRef } from "react"
 import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
 import * as v from "valibot"
@@ -17,7 +19,15 @@ export function FormRoot<
     onSuccess: ((data: v.InferOutput<U>) => void) | (() => Promise<void>) | undefined
     resetOnSubmit?: boolean
     submitOnPressEnterKey?: boolean
-    submitButtonProps: Parameters<typeof ButtonPlain>[0]
+    submitButtonProps: {
+        text?: string
+        title?: string
+        color?: ButtonColor
+        variant?: ButtonVariant
+        className?: string
+        leftIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+        rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
+    }
     children: (form: UseFormReturn<v.InferOutput<U>, any, v.InferOutput<U>>) => ReactElement
 }) {
     const form = useForm<T>({
@@ -45,22 +55,39 @@ export function FormRoot<
     return (
         <FormProvider {...form}>
             <form
-                className="w-full flex flex-col justify-start items-start"
-            //  onSubmit={}
+                className={css({
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start"
+                })}
             >
-                <div className="w-full max-w-md flex flex-col justify-start items-stretch gap-4">
-                    <div className="w-full flex flex-col justify-start items-stretch gap-2">
+                <div className={css({
+                    width: "100%",
+                    maxWidth: "md",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    gap: "1.5rem"
+                })}>
+                    <div className={css({
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "stretch",
+                        gap: "1rem"
+                    })}>
                         {props.children(form)}
                     </div>
-                    <ButtonPlain
-                        {...props.submitButtonProps}
+                    <Button
                         ref={submitButtonRef}
-                        className={cn(
-                            "",
-                            props.submitButtonProps.className
-                        )}
+                        className={props.submitButtonProps.className}
                         type="button"
                         hasLoader={true}
+                        title={props.submitButtonProps.title ?? props.submitButtonProps.text}
                         onClick={async (event) => {
                             event.preventDefault()
 
@@ -79,7 +106,15 @@ export function FormRoot<
                                 await props.onSuccess(data)
                             }
                         }}
-                    />
+                    >
+                        <ButtonContent
+                            variant={props.submitButtonProps.variant ?? "primary"}
+                            text={props.submitButtonProps.text}
+                            color={props.submitButtonProps.color}
+                            leftIcon={props.submitButtonProps.leftIcon}
+                            rightIcon={props.submitButtonProps.rightIcon}
+                        />
+                    </Button>
                 </div>
             </form>
         </FormProvider>

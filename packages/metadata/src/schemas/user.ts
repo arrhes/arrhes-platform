@@ -1,7 +1,7 @@
-import { booleanSchema, dateTimeSchema, emailSchema, stringSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
-import { userModel } from "#src/models/user.js"
+import { booleanSchema, dateTimeSchema, emailSchema, stringSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { varcharSchema } from "../components/schemas/varcharSchema.js"
+import { userModel } from "../models/user.js"
 import * as v from "valibot"
 
 

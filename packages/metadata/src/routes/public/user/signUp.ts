@@ -1,6 +1,6 @@
-import { passwordSchema, routePath } from "#src/components/_index.js"
-import { userSchema } from "#src/schemas/user.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { passwordSchema, routePath } from "../../../components/_index.js"
+import { userSchema } from "../../../schemas/user.js"
+import { routeDefinition } from "../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

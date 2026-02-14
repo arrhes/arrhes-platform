@@ -1,18 +1,31 @@
-import { cn } from "#/utilities/cn.js"
-import * as ToastPrimitives from "@radix-ui/react-toast"
-import { ComponentProps } from "react"
+import { css } from "@arrhes/ui/utilities/cn.js"
+import { ReactNode } from "react"
+import { createPortal } from "react-dom"
 
 
-type ToastViewport = ComponentProps<typeof ToastPrimitives.Viewport>
+type ToastViewportProps = {
+    children: ReactNode
+}
 
-export function ToastViewport(props: ToastViewport) {
-    return (
-        <ToastPrimitives.Viewport
-            {...props}
-            className={cn(
-                "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse gap-1 p-4 md:bottom-0 right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-                props.className
-            )}
-        />
+export function ToastViewport(props: ToastViewportProps) {
+    return createPortal(
+        <div
+            className={css({
+                position: "fixed",
+                bottom: "0",
+                right: "0",
+                zIndex: "100",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                padding: "1rem",
+                width: "100%",
+                maxWidth: "sm",
+                pointerEvents: "none",
+            })}
+        >
+            {props.children}
+        </div>,
+        document.body
     )
 }

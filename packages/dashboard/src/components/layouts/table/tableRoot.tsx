@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,12 @@ export function TableRoot(props: {
 }) {
     return (
         <table
-            className={cn(
-                "w-full h-fit border-collapse",
+            className={cx(
+                css({
+                    width: "100%",
+                    height: "fit",
+                    borderCollapse: "collapse"
+                }),
                 props.className
             )}
             children={props.children}

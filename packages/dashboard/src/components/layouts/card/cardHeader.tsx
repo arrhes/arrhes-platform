@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactNode } from "react"
 
 
@@ -9,8 +9,16 @@ export function CardHeader(props: {
 }) {
     return (
         <div
-            className={cn(
-                "w-full h-fit flex justify-between items-start gap-2 p-2",
+            className={cx(
+                css({
+                    width: "100%",
+                    height: "fit",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: "2",
+                    padding: "1rem"
+                }),
                 props.className
             )}
         >

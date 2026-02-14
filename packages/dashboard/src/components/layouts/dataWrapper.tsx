@@ -1,10 +1,10 @@
-import { FormatError } from "#/components/formats/formatError.js"
-import { CircularLoader } from "#/components/layouts/circularLoader.js"
-import { cn } from "#/utilities/cn.js"
-import { useHTTPData } from "#/utilities/useHTTPData.js"
 import { routeDefinition } from "@arrhes/application-metadata/utilities"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement, Suspense } from "react"
 import * as v from "valibot"
+import { FormatError } from "../../components/formats/formatError.js"
+import { CircularLoader } from "../../components/layouts/circularLoader.js"
+import { useDataFromAPI } from "../../utilities/useHTTPData.js"
 
 
 export function DataWrapper<
@@ -17,7 +17,7 @@ export function DataWrapper<
     loaderProps?: ComponentProps<typeof CircularLoader>
     errorProps?: ComponentProps<typeof FormatError>
 }) {
-    const response = useHTTPData({
+    const response = useDataFromAPI({
         routeDefinition: props.routeDefinition,
         body: props.body,
     })
@@ -28,8 +28,8 @@ export function DataWrapper<
                 <CircularLoader
                     {...props.loaderProps}
                     text={props.loaderProps?.text ?? "Chargement des données..."}
-                    className={cn(
-                        "p-2",
+                    className={cx(
+                        css({ padding: "1rem" }),
                         props.loaderProps?.className,
                     )}
                 />
@@ -39,7 +39,7 @@ export function DataWrapper<
             <FormatError
                 {...props.errorProps}
                 text={props.errorProps?.text ?? "Erreur lors de la récupération des données."}
-                className="p-2"
+                className={css({ padding: "1rem" })}
             />
         )
     }

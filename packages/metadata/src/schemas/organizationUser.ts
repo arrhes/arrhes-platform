@@ -1,7 +1,7 @@
-import { booleanSchema, dateTimeSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { organizationUserStatus } from "#src/components/values/organizationUserStatus.js"
-import { organizationUserModel } from "#src/models/organizationUser.js"
+import { booleanSchema, dateTimeSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { organizationUserStatus } from "../components/values/organizationUserStatus.js"
+import { organizationUserModel } from "../models/organizationUser.js"
 import * as v from "valibot"
 
 

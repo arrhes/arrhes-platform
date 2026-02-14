@@ -1,7 +1,7 @@
-import { dateTimeSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { varcharSchema } from "#src/components/schemas/varcharSchema.js"
-import { recordLabelModel } from "#src/models/recordLabel.js"
+import { dateTimeSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { varcharSchema } from "../components/schemas/varcharSchema.js"
+import { recordLabelModel } from "../models/recordLabel.js"
 import * as v from "valibot"
 
 

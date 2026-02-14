@@ -8,7 +8,7 @@ export function DropdownRoot(props:
     return (
         <DropdownMenu
             {...props}
-            modal={true}
+            modal={false}
         >
             {props.children}
         </DropdownMenu>

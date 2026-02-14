@@ -1,7 +1,6 @@
 
-import { Button } from "#/components/buttons/button.js"
-import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
-import { cn } from "#/utilities/cn.js"
+import { Button, ButtonContent } from "@arrhes/ui"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { ComponentProps, JSX } from "react"
 
@@ -19,10 +18,19 @@ export function InputToggle<TValue extends (string | boolean)>(props:
     }
 ) {
     return (
-        <div className={cn(
-            "w-fit h-[32px] flex justify-start items-center border border-neutral/20 rounded-sm cursor-pointer",
-            "focus:border-neutral/50 focus:shadow-inner outline-none",
-        )}
+        <div className={css({
+            width: "fit",
+            height: "32px",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            border: "1px solid",
+            borderColor: "neutral/20",
+            borderRadius: "sm",
+            cursor: "pointer",
+            _focus: { borderColor: "neutral/50", boxShadow: "inset" },
+            outline: "none"
+        })}
         >
             {
                 props.options.map((option, index) => {
@@ -37,17 +45,29 @@ export function InputToggle<TValue extends (string | boolean)>(props:
                                 }
                                 props.onChange(option.value)
                             }}
-                            className={cn(
-                                "border-r border-neutral/5 last:border-none"
-                            )}
+                            className={css({
+                                borderRight: "1px solid",
+                                borderColor: "neutral/5",
+                                _last: { borderRight: "none" }
+                            })}
                         >
-                            <ButtonGhostContent
-                                className={cn(
-                                    "duration-200 ease-in-out rounded-none border-none",
-                                    (isSelected === true) ? "bg-neutral/10 outline outline-solid outline-neutral rounded-sm" : ""
+                            <ButtonContent
+                                variant="invisible"
+                                className={cx(
+                                    css({
+                                        transition: "all 200ms ease-in-out",
+                                        borderRadius: "none",
+                                        border: "none"
+                                    }),
+                                    css(isSelected ? {
+                                        backgroundColor: "neutral/10",
+                                        outline: "1px solid",
+                                        outlineColor: "neutral",
+                                        borderRadius: "sm"
+                                    } : {})
                                 )}
                                 text={option.label}
-                                icon={option.icon}
+                                leftIcon={option.icon}
                             />
                         </Button>
                     )

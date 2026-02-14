@@ -1,4 +1,4 @@
-import { sendSupportMessageRoute } from "#/routes/auth/support/sendSupportMessage.js"
+import { sendSupportMessageRoute } from "../../../routes/auth/support/sendSupportMessage.js"
 
 
 export const supportRoutes = [

@@ -1,16 +1,25 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 
 
-type FormatNull = {
+export function FormatNull(props: {
     text?: string
     className?: ComponentProps<'span'>['className']
-}
-
-export function FormatNull(props: FormatNull) {
+}) {
     return (
-        <span className={cn(
-            "inline-flex flex-row justify-start items-center text-sm italic text-neutral/25 whitespace-nowrap overflow-auto text-ellipsis",
+        <span className={cx(
+            css({
+                display: "inline-flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                fontSize: "sm",
+                fontStyle: "italic",
+                color: "neutral/25",
+                whiteSpace: "nowrap",
+                overflow: "auto",
+                textOverflow: "ellipsis"
+            }),
             props.className
         )}>
             {props.text ?? "/"}

@@ -1,4 +1,4 @@
-import { Chip } from "#/components/layouts/chip.js"
+import { Chip } from "../../components/layouts/chip.js"
 import { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 

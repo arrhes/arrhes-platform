@@ -1,8 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './assets/css/fonts.css'
 import './assets/css/root.css'
-import './assets/css/theme.css'
 import { RootProvider } from "./contexts/rootProvider.js"
 
 

@@ -1,17 +1,25 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
-type PageContent = {
+export function PageContent(props: {
     className?: ComponentProps<'div'>['className']
     children: ReactElement | ReactElement[]
-}
-
-export function PageContent(props: PageContent) {
+}) {
     return (
         <div
-            className={cn(
-                "w-full max-w-xl h-fit flex flex-col justify-start items-start gap-4",
+            className={cx(
+                css({
+                    width: "100%",
+                    maxWidth: "xl",
+                    height: "fit",
+                    paddingY: "2rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "1rem"
+                }),
                 props.className
             )}
         >

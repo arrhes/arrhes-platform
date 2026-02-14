@@ -1,6 +1,6 @@
-import { routePath } from "#src/components/_index.js"
-import { organizationUserSchema, organizationUserSchemaReturn } from "#src/schemas/organizationUser.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../components/_index.js"
+import { organizationUserSchema, organizationUserSchemaReturn } from "../../../../../../schemas/organizationUser.js"
+import { routeDefinition } from "../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

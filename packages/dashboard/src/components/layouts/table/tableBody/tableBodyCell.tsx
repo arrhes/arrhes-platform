@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -11,8 +11,12 @@ export function TableBodyCell(props: {
 }) {
     return (
         <td
-            className={cn(
-                "w-fit p-2 align-top",
+            className={cx(
+                css({
+                    width: "fit",
+                    padding: "1rem",
+                    verticalAlign: "top"
+                }),
                 props.className
             )}
             colSpan={props.colSpan}

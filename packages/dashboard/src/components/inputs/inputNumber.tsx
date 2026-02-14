@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from 'react-imask'
@@ -25,9 +25,18 @@ export function InputPrice(props:
     }
 
     return (
-        <div className={cn(
-            "h-[32px] w-full flex justify-start items-stretch border border-neutral/20 rounded-sm",
-            (!props.error) ? "" : "border-error",
+        <div className={cx(
+            css({
+                height: "32px",
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "stretch",
+                border: "1px solid",
+                borderColor: "neutral/20",
+                borderRadius: "sm"
+            }),
+            css(props.error ? { borderColor: "error" } : {}),
             props.className
         )}>
             <IMaskInput
@@ -49,11 +58,17 @@ export function InputPrice(props:
                 // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
                 onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
-                className={cn(
-                    "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",
-                    "focus:shadow-inner focus:bg-neutral/5",
-                    "overflow-hidden whitespace-nowrap text-ellipsis"
-                )}
+                className={css({
+                    borderRadius: "inherit",
+                    width: "100%",
+                    fontSize: "base",
+                    _placeholder: { color: "neutral/25" },
+                    padding: "1rem",
+                    _focus: { boxShadow: "inset", backgroundColor: "neutral/5" },
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis"
+                })}
                 inputMode="decimal"
             />
         </div>

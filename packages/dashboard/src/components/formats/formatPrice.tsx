@@ -1,6 +1,6 @@
-import { FormatNull } from "#/components/formats/formatNull.js"
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
+import { FormatNull } from "../../components/formats/formatNull.js"
 
 
 export function formatPrice(parameters: {
@@ -36,9 +36,13 @@ export function FormatPrice(props: {
         ? 0
         : price
     return (
-        <span className={cn(
-            "w-fit max-w-full text-sm",
-            processedPrice === 0 ? "text-neutral/25" : "",
+        <span className={cx(
+            css({
+                width: "fit",
+                maxWidth: "100%",
+                fontSize: "sm"
+            }),
+            processedPrice === 0 ? css({ color: "neutral/25" }) : undefined,
             props.className
         )}>
             {processedPrice < 0

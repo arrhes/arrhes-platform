@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,19 @@ export function SectionItem(props: {
 }) {
     return (
         <div
-            className={cn(
-                "grow min-w-0 w-full max-w-full h-fit flex flex-col justify-start items-start gap-4",
+            className={cx(
+                css({
+                    flexGrow: "1",
+                    minWidth: "0",
+                    width: "100%",
+                    maxWidth: "100%",
+                    height: "fit",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    gap: "4"
+                }),
                 props.className
             )}
             children={props.children}

@@ -24,10 +24,14 @@ dist
 *.tsbuildinfo
 
 # Environment files (mounted separately per service)
+# Exclude all .env files except development ones
 .env
-**/.env
 .env.*
-**/.env.*
+packages/**/.env
+packages/**/.env.*
+
+# Keep development environment files (needed for Docker builds)
+!.development/packages/**/.env
 
 # Logs
 logs

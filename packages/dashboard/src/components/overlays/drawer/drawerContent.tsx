@@ -1,39 +1,127 @@
 
-import { cn } from "#/utilities/cn.js"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentProps } from "react"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
+import { JSX, useCallback, useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
+import { useDrawerContext } from "./drawerRoot.js"
 
 
-export function DrawerContent(props:
-    ComponentProps<typeof DialogPrimitive.Content>
-) {
-    return (
-        <DialogPrimitive.Portal>
-            <DialogPrimitive.Overlay
-                className={cn(
-                    "fixed z-10 inset-0 w-full h-full flex justify-end items-center overflow-auto p-2 bg-neutral/25",
-                    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+export function DrawerContent(props: {
+    children: JSX.Element | JSX.Element[]
+    className?: string
+}) {
+    const { open, setOpen } = useDrawerContext()
+    const [mounted, setMounted] = useState(false)
+    const [visible, setVisible] = useState(false)
+    const contentRef = useRef<HTMLDivElement>(null)
+
+    // Mount when open becomes true, then trigger visible for animations
+    useEffect(() => {
+        if (open) {
+            setMounted(true)
+            // Trigger animation on next frame after mount
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    setVisible(true)
+                })
+            })
+        } else {
+            setVisible(false)
+            const timer = setTimeout(() => {
+                setMounted(false)
+            }, 200)
+            return () => clearTimeout(timer)
+        }
+    }, [open])
+
+    // Handle Escape key
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+            setOpen(false)
+        }
+    }, [setOpen])
+
+    useEffect(() => {
+        if (mounted) {
+            document.addEventListener("keydown", handleKeyDown)
+            // Prevent body scroll when drawer is open
+            const originalOverflow = document.body.style.overflow
+            document.body.style.overflow = "hidden"
+            return () => {
+                document.removeEventListener("keydown", handleKeyDown)
+                document.body.style.overflow = originalOverflow
+            }
+        }
+    }, [mounted, handleKeyDown])
+
+    if (!mounted) return null
+
+    return createPortal(
+        <>
+            {/* Overlay */}
+            <div
+                className={cx(
+                    css({
+                        position: "fixed",
+                        zIndex: "10",
+                        inset: "0",
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "neutral/10",
+                        transition: "opacity 0.2s ease",
+                    }),
+                    visible
+                        ? css({ opacity: 1 })
+                        : css({ opacity: 0 }),
+                )}
+                onClick={() => setOpen(false)}
+                aria-hidden="true"
+            />
+            {/* Content */}
+            <div
+                ref={contentRef}
+                role="dialog"
+                aria-modal="true"
+                className={cx(
+                    css({
+                        position: "fixed",
+                        zIndex: "10",
+                        top: "1rem",
+                        right: "1rem",
+                        bottom: "1rem",
+                        minWidth: "100%",
+                        width: "100%",
+                        maxWidth: "calc(100% - 2rem)",
+                        height: "calc(100% - 2rem)",
+                        overflowY: "auto",
+                        backgroundColor: "white",
+                        borderRadius: "lg",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "stretch",
+                        border: "1px solid",
+                        borderColor: "neutral/10",
+                        transition: "opacity 0.2s ease, transform 0.2s ease",
+                        md: {
+                            minWidth: "md",
+                            maxWidth: "md",
+                        }
+                    }),
+                    visible
+                        ? css({
+                            opacity: 1,
+                            transform: "scale(1)",
+                        })
+                        : css({
+                            opacity: 0,
+                            transform: "scale(0.96)",
+                        }),
+                    props.className,
                 )}
             >
-                <DialogPrimitive.Content
-                    {...props}
-                    onClick={(e) => {
-                        e.stopPropagation()
-                    }}
-                    className={cn(
-                        "min-w-full md:min-w-md w-full max-w-full md:max-w-md h-full md:max-h-full overflow-auto bg-white rounded-md",
-                        "flex flex-col justify-start items-stretch",
-                        "border-solid border-2 border-neutral/10",
-                        "outline-solid outline-1 outline-offset-[-3px] outline-neutral/50",
-                        "duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-                        props.className
-                    )}
-                // onInteractOutside={e => e.preventDefault()}
-                // onPointerDownOutside={e => e.preventDefault()}
-                >
-                    {props.children}
-                </DialogPrimitive.Content>
-            </DialogPrimitive.Overlay>
-        </DialogPrimitive.Portal>
+                {props.children}
+            </div>
+        </>,
+        document.body,
     )
 }

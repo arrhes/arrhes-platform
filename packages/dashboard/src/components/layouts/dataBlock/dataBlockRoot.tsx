@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -8,8 +8,17 @@ export function DataBlockRoot(props: {
 }) {
     return (
         <div
-            className={cn(
-                "shrink-0 w-full h-fit flex flex-col justify-start items-stretch gap-2",
+            className={cx(
+                css({
+                    flexShrink: "0",
+                    width: "100%",
+                    height: "fit",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    gap: "2"
+                }),
                 props.className
             )}
             children={props.children}

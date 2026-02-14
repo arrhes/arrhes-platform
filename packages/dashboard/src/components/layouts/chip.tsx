@@ -1,40 +1,40 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 
 
-export type ChipColors = "neutral" | "error" | "warning" | "success" | "information"
+export type ChipColors = keyof typeof chipColors
 
 const chipColors = {
     "neutral": {
-        bg: "bg-neutral/5",
-        border: "border-neutral/10",
-        text: "text-neutral"
+        backgroundColor: css({ backgroundColor: "neutral/5" }),
+        border: css({ borderColor: "neutral/10" }),
+        text: css({ color: "neutral" })
     },
     "information": {
-        bg: "bg-information/5",
-        border: "border-information/10",
-        text: "text-information"
+        backgroundColor: css({ backgroundColor: "information/5" }),
+        border: css({ borderColor: "information/10" }),
+        text: css({ color: "information" })
     },
     "error": {
-        bg: "bg-error/5",
-        border: "border-error/10",
-        text: "text-error"
+        backgroundColor: css({ backgroundColor: "error/5" }),
+        border: css({ borderColor: "error/10" }),
+        text: css({ color: "error" })
     },
     "warning": {
-        bg: "bg-warning/5",
-        border: "border-warning/10",
-        text: "text-warning"
+        backgroundColor: css({ backgroundColor: "warning/5" }),
+        border: css({ borderColor: "warning/10" }),
+        text: css({ color: "warning" })
     },
     "success": {
-        bg: "bg-success/5",
-        border: "border-success/10",
-        text: "text-success"
+        backgroundColor: css({ backgroundColor: "success/5" }),
+        border: css({ borderColor: "success/10" }),
+        text: css({ color: "success" })
     }
 }
 
 export function Chip(props: {
     text: string | null | undefined
-    color?: ChipColors
+    color?: keyof typeof chipColors
     className?: ComponentProps<'div'>['className']
 }) {
     if (props.text === null) {
@@ -46,17 +46,29 @@ export function Chip(props: {
 
     return (
         <div
-            className={cn(
-                "w-fit h-fit px-2 py-1 flex justify-start items-center",
-                "border-none",
+            className={cx(
+                css({
+                    width: "fit",
+                    height: "fit",
+                    paddingX: "0.5rem",
+                    paddingY: "0.25rem",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    border: "none"
+                }),
                 chipColors[props?.color ?? "neutral"].border,
-                chipColors[props?.color ?? "neutral"].bg,
+                chipColors[props?.color ?? "neutral"].backgroundColor,
                 props.className
             )}
         >
             <span
-                className={cn(
-                    "text-[10px] leading-none text-neutral/75",
+                className={cx(
+                    css({
+                        fontSize: "10px",
+                        lineHeight: "none",
+                        color: "none"
+                    }),
                     chipColors[props?.color ?? "neutral"].text
                 )}
             >

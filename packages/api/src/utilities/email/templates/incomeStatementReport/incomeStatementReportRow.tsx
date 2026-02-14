@@ -1,5 +1,5 @@
-import { PriceFormat } from "#/utilities/email/templates/components/price/priceFormat.js"
-import { Table } from "#/utilities/email/templates/components/table/table.js"
+import { PriceFormat } from "../components/price/priceFormat.js"
+import { Table } from "../components/table/table.js"
 import { css, cx, Style } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 

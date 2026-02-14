@@ -279,7 +279,7 @@ export function MyComponent({ title, description, onClose }: MyComponentProps) {
 }
 ```
 
-**Éviter les inline styles** (utiliser Tailwind CSS)
+**Éviter les inline styles** (utiliser Panda CSS)
 ```typescript
 // ✅ Bon
 <div className="flex items-center gap-2">

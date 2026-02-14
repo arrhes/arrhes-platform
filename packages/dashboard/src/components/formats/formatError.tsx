@@ -1,3 +1,4 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 
@@ -9,7 +10,18 @@ export function FormatError(props: {
 }) {
     return (
         <FormatBase className={props.className}>
-            <span className="inline-flex flex-row justify-start items-center text-sm font-semibold text-error/75 whitespace-nowrap overflow-auto text-ellipsis">
+            <span className={css({
+                display: "inline-flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                fontSize: "sm",
+                fontWeight: "semibold",
+                color: "error/75",
+                whiteSpace: "nowrap",
+                overflow: "auto",
+                textOverflow: "ellipsis"
+            })}>
                 {props.text}
             </span>
         </FormatBase>

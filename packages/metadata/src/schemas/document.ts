@@ -1,6 +1,6 @@
-import { dateTimeSchema, documentType, stringSchema } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { documentModel } from "#src/models/document.js"
+import { dateTimeSchema, documentType, stringSchema } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { documentModel } from "../models/document.js"
 import * as v from "valibot"
 
 

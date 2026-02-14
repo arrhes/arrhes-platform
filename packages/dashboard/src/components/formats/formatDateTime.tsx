@@ -1,3 +1,4 @@
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { ComponentProps } from "react"
 import { FormatNull } from "./formatNull.js"
 
@@ -43,9 +44,18 @@ export function FormatDateTime(props: FormatDateTime) {
     if ((date.getMinutes()) < 10) minute = "0" + minute
 
     return (
-        <div className="flex justify-start items-center gap-1">
-            <span className="text-sm">{`${[day, month, year].join('/')}`}</span>
-            <span className="text-xs leading-none text-neutral/75">{`${[hour, minute].join(':')}`}</span>
+        <div className={css({
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: "1"
+        })}>
+            <span className={css({ fontSize: "sm" })}>{`${[day, month, year].join('/')}`}</span>
+            <span className={css({
+                fontSize: "xs",
+                lineHeight: "none",
+                color: "neutral/75"
+            })}>{`${[hour, minute].join(':')}`}</span>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuContent, DropdownMenuPortal } from "@radix-ui/react-dropdown-menu"
 import { ComponentPropsWithRef } from "react"
 
@@ -15,10 +15,21 @@ export function DropdownContent(props:
                 alignOffset={props.alignOffset || 0}
                 side={props.side || "bottom"}
                 sideOffset={props.sideOffset || 6}
-                className={cn(
-                    "bg-white rounded-md p-2 shadow-lg flex flex-col justify-start items-stretch gap-0",
-                    "border border-neutral/20",
-                    "min-w-[var(--radix-dropdown-menu-trigger-width)]",
+                className={cx(
+                    css({
+                        backgroundColor: "white",
+                        borderRadius: "lg",
+                        padding: "0.5em",
+                        boxShadow: "lg",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "stretch",
+                        gap: "0.5rem",
+                        border: "1px solid",
+                        borderColor: "neutral/20",
+                        minWidth: "var(--radix-dropdown-menu-trigger-width)"
+                    }),
                     props.className
                 )}
             >

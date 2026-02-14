@@ -1,21 +1,32 @@
 
-import { cn } from "#/utilities/cn.js"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentProps } from "react"
+import { Button } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
+import { JSX } from "react"
+import { useDrawerContext } from "./drawerRoot.js"
 
 
-export function DrawerTrigger(props:
-    ComponentProps<typeof DialogPrimitive.Trigger>
-) {
+export function DrawerTrigger(props: {
+    children: JSX.Element
+}) {
+    const { setOpen } = useDrawerContext()
+
     return (
-        <DialogPrimitive.Trigger
-            {...props}
-            className={cn(
-                "cursor-pointer group",
-                props.className
-            )}
+        <Button
+            onClick={() => setOpen(true)}
+            className={css({
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                cursor: "pointer",
+                width: "fit-content",
+                maxWidth: "100%",
+                height: "fit-content",
+                bg: "transparent",
+                border: "none",
+                padding: "0",
+            })}
         >
             {props.children}
-        </DialogPrimitive.Trigger>
+        </Button>
     )
 }

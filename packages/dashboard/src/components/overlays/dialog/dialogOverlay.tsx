@@ -1,5 +1,5 @@
 
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ComponentPropsWithRef } from "react"
 
@@ -12,9 +12,26 @@ export function DialogOverlay(props:
         <DialogPrimitive.Overlay
             {...props}
             // style={{ zIndex: 100 }}
-            className={cn(
-                "fixed z-10 inset-0 w-full h-full flex flex-col justify-center items-center p-6 bg-neutral/20",
-                "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            className={cx(
+                css({
+                    position: "fixed",
+                    zIndex: "10",
+                    inset: "0",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "6",
+                    backgroundColor: "neutral/10",
+                    "&[data-state=open]": {
+                        animation: "fadeIn 0.2s ease-out"
+                    },
+                    "&[data-state=closed]": {
+                        animation: "fadeOut 0.2s ease-in"
+                    }
+                }),
                 props.className
             )}
         />

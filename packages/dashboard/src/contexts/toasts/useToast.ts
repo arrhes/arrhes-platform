@@ -1,16 +1,19 @@
-import { Toast } from "#/components/overlays/toast/toast.js"
-import { ToastContent } from "#/components/overlays/toast/toastContent.js"
-import { ComponentProps, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 
 
 const TOAST_LIMIT = 8
-const TOAST_REMOVE_DELAY = 20000
+const TOAST_REMOVE_DELAY = 2000
+const TOAST_AUTO_DISMISS_DELAY = 4000
 
-type ToasterToast = ComponentProps<typeof ToastContent> & {
+export type ToastVariant = "error" | "success" | "warning" | "information"
+
+export type ToasterToast = {
     id: string
     title?: ReactNode
     description?: ReactNode
-    action?: ReactNode
+    variant?: ToastVariant
+    open?: boolean
+    itemID?: string
 }
 
 const actionTypes = {
@@ -71,11 +74,15 @@ const addToRemoveQueue = (toastId: string) => {
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case "ADD_TOAST":
+        case "ADD_TOAST": {
+            const deduplicated = action.toast.itemID
+                ? state.toasts.filter(x => x.itemID !== action.toast.itemID)
+                : state.toasts
             return {
                 ...state,
-                toasts: [action.toast, ...state.toasts.filter(x => x.itemID !== action.toast.itemID)].slice(0, TOAST_LIMIT),
+                toasts: [action.toast, ...deduplicated].slice(0, TOAST_LIMIT),
             }
+        }
 
         case "UPDATE_TOAST":
             return {
@@ -88,8 +95,6 @@ export const reducer = (state: State, action: Action): State => {
         case "DISMISS_TOAST": {
             const { toastId } = action
 
-            // ! Side effects ! - This could be extracted into a dismissToast() action,
-            // but I'll keep it here for simplicity
             if (toastId) {
                 addToRemoveQueue(toastId)
             } else {
@@ -153,11 +158,12 @@ function toast({ ...props }: Toast) {
             ...props,
             id,
             open: true,
-            onOpenChange: (open: boolean) => {
-                if (!open) dismiss()
-            },
         },
     })
+
+    setTimeout(() => {
+        dispatch({ type: "DISMISS_TOAST", toastId: id })
+    }, TOAST_AUTO_DISMISS_DELAY)
 
     return {
         id: id,
@@ -169,7 +175,7 @@ function toast({ ...props }: Toast) {
 function useToast() {
     const [state, setState] = useState<State>(memoryState)
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    // biome-ignore lint/correctness/useExhaustiveDependencies: subscribe once on mount
     useEffect(() => {
         listeners.push(setState)
         return () => {
@@ -178,7 +184,7 @@ function useToast() {
                 listeners.splice(index, 1)
             }
         }
-    }, [state])
+    }, [])
 
     return {
         ...state,
@@ -188,4 +194,3 @@ function useToast() {
 }
 
 export { toast, useToast }
-

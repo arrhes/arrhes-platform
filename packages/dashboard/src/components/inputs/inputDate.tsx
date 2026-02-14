@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { InputHTMLAttributes } from "react"
 import { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from "react-imask"
@@ -36,10 +36,20 @@ export function InputDate(props:
 
     return (
         <div
-            className={cn(
-                "h-[32px] w-full flex justify-start items-stretch gap-2 border border-neutral/20 rounded-sm",
-                "focus-within:border-neutral/50 focus-within:shadow-inner",
-                (!props.error) ? "" : "border-error",
+            className={cx(
+                css({
+                    height: "32px",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    gap: "2",
+                    border: "1px solid",
+                    borderColor: "neutral/20",
+                    borderRadius: "sm",
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
+                }),
+                css(props.error ? { borderColor: "error" } : {}),
                 props.className
             )}
         >
@@ -77,10 +87,16 @@ export function InputDate(props:
                 placeholder={"JJ / MM / YYYY"}
                 onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
-                className={cn(
-                    "rounded-[inherit] w-full text-sm placeholder:text-neutral/25 p-2",
-                    "overflow-hidden whitespace-nowrap text-ellipsis",
-                )}
+                className={css({
+                    borderRadius: "inherit",
+                    width: "100%",
+                    fontSize: "sm",
+                    _placeholder: { color: "neutral/25" },
+                    padding: "1rem",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis"
+                })}
                 inputMode="decimal"
             />
         </div>

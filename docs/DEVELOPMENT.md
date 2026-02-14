@@ -952,7 +952,7 @@ pnpm dlx drizzle-kit studio --config=packages/tools/drizzle.config.ts
 - **TanStack Router** : https://tanstack.com/router/
 - **TanStack Query** : https://tanstack.com/query/
 - **Radix UI** : https://www.radix-ui.com/
-- **Tailwind CSS** : https://tailwindcss.com/
+- **Panda CSS** : https://panda-css.com/
 
 ---
 

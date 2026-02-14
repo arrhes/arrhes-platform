@@ -1,16 +1,20 @@
-import { ButtonGhostContent } from "#/components/buttons/buttonGhostContent.js"
-import { ValidParams, ValidRoutes } from "#/routes/platformRouter.js"
-import { cn } from "#/utilities/cn.js"
-import { Link, Outlet, useMatches, useRouterState } from "@tanstack/react-router"
-import { JSX } from "react"
+import { ButtonContent } from "@arrhes/ui"
+import { css } from "@arrhes/ui/utilities/cn.js"
+import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
+import { ReactNode } from "react"
+import { ValidParams, ValidRoutes } from "../../routes/platformRouter.js"
+import { LinkButton } from "../linkButton.js"
 
 
 export function SubPageLayout(props: {
-    tabs: Array<{
-        label: string
-        icon: JSX.Element
-        to: ValidRoutes
-        params: ValidParams
+    sections: Record<string, {
+        title: string
+        icon: ReactNode
+        items: Array<{
+            label: string
+            to: ValidRoutes
+            params: ValidParams
+        }>
     }> | undefined
 }) {
     const routeMatches = useMatches()
@@ -19,53 +23,119 @@ export function SubPageLayout(props: {
     })
 
     return (
-        <div className="flex-1 shrink w-full max-w-full h-fit flex justify-start items-start gap-4">
-            {
-                props.tabs === undefined
-                    ? (null)
-                    : (
-                        <div className="w-fit flex flex-col justify-start items-stretch gap-2 border-r border-neutral/10">
-                            {
-                                props.tabs.map((tab) => {
-                                    const matchRoute = routeMatches.find((match) => match.fullPath.includes(tab.to ?? ""))
-                                    const isActive = (matchRoute === undefined)
-                                        ? false
-                                        : currentPath === matchRoute.routeId
-
-                                    return (
-                                        <div
-                                            key={tab.to}
-                                            aria-current={isActive}
-                                            className="w-full flex justify-start items-stretch gap-2 group"
-                                        >
-                                            <Link
-                                                to={tab.to}
-                                                params={tab.params}
-                                                className="w-full flex justify-start items-center gap-2"
-                                            >
-                                                <ButtonGhostContent
-                                                    icon={tab.icon}
-                                                    text={tab.label}
-                                                    color="neutral"
-                                                    isActive={isActive}
-                                                    className="w-full transition-all duration-200 ease-in-out"
-                                                />
-                                            </Link>
-                                            <div
-                                                className={cn(
-                                                    "shrink-0 w-[2px] rounded-full",
-                                                    isActive ? "bg-neutral" : "bg-transparent"
-                                                )}
-                                            />
+        <div
+            className={css({
+                width: "100%",
+                flexShrink: "0",
+                flex: "1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                overflowY: "auto",
+                paddingX: "1rem",
+            })}
+        >
+            <div className={css({
+                flex: "1",
+                flexShrink: "1",
+                width: "100%",
+                maxWidth: "xl",
+                height: "fit",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+            })}>
+                {
+                    props.sections === undefined
+                        ? (null)
+                        : (
+                            <aside className={css({
+                                minWidth: "16rem",
+                                flexShrink: 0,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "stretch",
+                                gap: "0.5rem",
+                                borderRight: "1px solid",
+                                borderRightColor: "neutral/10",
+                                backgroundColor: "white",
+                                position: "sticky",
+                                top: "0",
+                                height: "fit-content",
+                                maxHeight: "100vh",
+                                overflowY: "auto",
+                                padding: "1rem",
+                                paddingLeft: 0,
+                            })}>
+                                {Object.entries(props.sections).map(([key, section]) => (
+                                    <div key={key} className={css({ marginBottom: "0.5rem" })}>
+                                        <div className={css({
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: "0.5rem",
+                                            padding: "0.5rem",
+                                            fontSize: "xs",
+                                            fontWeight: "semibold",
+                                            color: "neutral/40",
+                                            textTransform: "uppercase",
+                                            letterSpacing: "wider",
+                                        })}>
+                                            {section.icon}
+                                            {section.title}
                                         </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    )
-            }
-            <div className="shrink min-h-fit min-w-0 w-full max-w-full flex flex-col justify-start items-stretch">
-                <Outlet />
+                                        <div className={css({
+                                            marginTop: "0.25rem",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: "0.25rem",
+                                        })}>
+                                            {section.items.map((item) => {
+                                                const normalizedTo = (item.to ?? "").replace(/\/+$/, "")
+                                                const matchRoute = [...routeMatches].reverse().find((match) => match.fullPath.replace(/\/+$/, "") === normalizedTo)
+                                                const isActive = (matchRoute === undefined)
+                                                    ? false
+                                                    : currentPath === matchRoute.routeId
+
+                                                return (
+                                                    <LinkButton
+                                                        key={item.to}
+                                                        to={item.to}
+                                                        params={item.params}
+                                                        className={css({ width: "100%" })}
+                                                    >
+                                                        <ButtonContent
+                                                            variant="invisible"
+                                                            text={item.label}
+                                                            isActive={isActive}
+                                                            className={css({
+                                                                width: "100%",
+                                                                justifyContent: "start",
+                                                            })}
+                                                        />
+                                                    </LinkButton>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
+                            </aside>
+                        )
+                }
+                <div className={css({
+                    flexShrink: "1",
+                    minH: "fit",
+                    minWidth: "0",
+                    width: "100%",
+                    maxWidth: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                })}>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

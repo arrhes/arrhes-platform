@@ -1,4 +1,4 @@
-import { authFactory } from "#/factories/authFactory.js"
+import { authFactory } from "../factories/authFactory.js"
 
 
 export const userVerificationMiddleware = authFactory.createMiddleware(async (c, next) => {

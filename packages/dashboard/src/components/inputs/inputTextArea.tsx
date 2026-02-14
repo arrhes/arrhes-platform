@@ -1,4 +1,4 @@
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { ComponentPropsWithRef, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
 
@@ -27,11 +27,27 @@ export function InputTextArea(props:
         <textarea
             {...props}
             ref={textAreaRef}
-            className={cn(
-                "w-full min-h-[128px] flex justify-center items-center gap-2 p-2 border rounded-sm text-sm placeholder:text-neutral/50",
-                "focus:border-neutral/50 focus:shadow-inner outline-none",
-                (!props.error) ? "border-neutral/25" : "border-error",
-                "shrink-0 resize-none field-sizing-content h-fit overflow-auto",
+            className={cx(
+                css({
+                    width: "100%",
+                    minH: "128px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "2",
+                    padding: "1rem",
+                    border: "1px solid",
+                    borderRadius: "sm",
+                    fontSize: "sm",
+                    _placeholder: { color: "neutral/50" },
+                    _focus: { borderColor: "neutral/50", boxShadow: "inset" },
+                    outline: "none",
+                    flexShrink: "0",
+                    resize: "none",
+                    height: "fit",
+                    overflowY: "auto"
+                }),
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
                 props.className
             )}
             value={input(props.value)}
@@ -45,4 +61,4 @@ export function InputTextArea(props:
             }}
         />
     )
-} 
+}

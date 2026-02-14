@@ -1,4 +1,4 @@
-import { cookiePrefix } from "#/utilities/variables.js"
+import { cookiePrefix } from "../../utilities/variables.js"
 import { getCookie } from "./getCookie.js"
 
 

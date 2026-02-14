@@ -121,46 +121,17 @@ services:
     ports:
       - "5173:5173"  # Vite dev server
     volumes:
-      # Source code - bind-mounted for live editing (synced between host and container)
-      - ../packages:/workspace/packages:cached
-      - ../package.json:/workspace/package.json:cached
-      - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
-      - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
-      - ../.development:/workspace/.development:cached
-      
-      # Environment file
-      - ./packages/dashboard/.env:/workspace/packages/dashboard/.env:cached
-      
-      # Runtime files - isolated in Docker volumes (NOT on host)
-      - dashboard_node_modules:/workspace/node_modules
-      - metadata_build:/workspace/packages/metadata/build
-      - pnpm_store:/root/.local/share/pnpm/store
-
-  # Website - Public-facing website (React + Vite)
-  website:
-    build:
-      context: ..
-      dockerfile: .development/packages/website/Dockerfile
-      args:
-        NODE_VERSION: "25.2.1"
-        PNPM_VERSION: "10.26.1"
-    ports:
-      - "5174:5173"  # Host:Container (Vite runs on 5173 inside, exposed as 5174 on host)
-    volumes:
-      # Source code - bind-mounted for live editing (synced between host and container)
-      - ../packages:/workspace/packages:cached
-      - ../package.json:/workspace/package.json:cached
-      - ../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
-      - ../pnpm-lock.yaml:/workspace/pnpm-lock.yaml:cached
-      - ../.development:/workspace/.development:cached
-      
-      # Environment file
-      - ./packages/website/.env:/workspace/packages/website/.env:cached
-      
-      # Runtime files - isolated in Docker volumes (NOT on host)
-      - website_node_modules:/workspace/node_modules
-      - metadata_build:/workspace/packages/metadata/build
-      - pnpm_store:/root/.local/share/pnpm/store
+      # Source code only - bind-mounted for live editing
+      # node_modules and metadata/build stay inside the image (installed at build time)
+      - ../packages/dashboard/src:/workspace/packages/dashboard/src:cached
+      - ../packages/dashboard/public:/workspace/packages/dashboard/public:cached
+      - ../packages/dashboard/vite.config.ts:/workspace/packages/dashboard/vite.config.ts:cached
+      - ../packages/dashboard/tsconfig.json:/workspace/packages/dashboard/tsconfig.json:cached
+      - ../packages/dashboard/panda.config.ts:/workspace/packages/dashboard/panda.config.ts:cached
+      # Shared UI package for live editing
+      - ../packages/ui/src:/workspace/packages/ui/src:cached
+      - ../packages/ui/tsconfig.json:/workspace/packages/ui/tsconfig.json:cached
+      - ../packages/ui/panda.config.ts:/workspace/packages/ui/panda.config.ts:cached
 
 # ==============================================================================
 # Named Volumes (Runtime data isolated from host)
@@ -168,8 +139,6 @@ services:
 volumes:
   # Application runtime dependencies - isolated per service
   api_node_modules:
-  dashboard_node_modules:
-  website_node_modules:
   
   # Shared build output - metadata package used by multiple services
   metadata_build:

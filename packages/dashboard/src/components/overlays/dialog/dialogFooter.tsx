@@ -1,5 +1,5 @@
 
-import { cn } from "#/utilities/cn.js"
+import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { HTMLAttributes } from "react"
 
 
@@ -9,8 +9,17 @@ export function DialogFooter(props:
     return (
         <div
             {...props}
-            className={cn(
-                "p-4 border-t border-neutral/10 flex flex-wrap justify-end items-center gap-2",
+            className={cx(
+                css({
+                    padding: "1rem",
+                    borderTop: "1px solid",
+                    borderTopColor: "neutral/5",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    gap: "0.5rem"
+                }),
                 props.className
             )}
         />
