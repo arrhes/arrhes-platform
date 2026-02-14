@@ -1,16 +1,16 @@
-import { publicFactory } from "#/factories/publicFactory.js"
-import { serializeCookie } from "#/utilities/cookies/serializeCookie.js"
-import { signString } from "#/utilities/cookies/signString.js"
-import { Exception } from "#/utilities/exception.js"
-import { generateVerificationToken } from "#/utilities/generateVerificationToken.js"
-import { getRemoteAddress } from "#/utilities/getRemoteAddress.js"
-import { response } from "#/utilities/response.js"
-import { insertOne } from "#/utilities/sql/insertOne.js"
-import { cookiePrefix, userSessionCookieMaxAge } from "#/utilities/variables.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { signUpRouteDefinition } from "@arrhes/metadata/routes"
-import { generateId } from "@arrhes/metadata/utilities"
+import { publicFactory } from "../../factories/publicFactory.js"
+import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
+import { signString } from "../../utilities/cookies/signString.js"
+import { Exception } from "../../utilities/exception.js"
+import { generateVerificationToken } from "../../utilities/generateVerificationToken.js"
+import { getRemoteAddress } from "../../utilities/getRemoteAddress.js"
+import { response } from "../../utilities/response.js"
+import { insertOne } from "../../utilities/sql/insertOne.js"
+import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { bodyValidator } from "../../validators/bodyValidator.js"
+import { models } from "@arrhes/application-metadata/models"
+import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { pbkdf2Sync } from "crypto"
 
 
@@ -72,6 +72,7 @@ export const signUpRoute = publicFactory.createApp()
 
 
             // Set cookies
+            const cookieSecurity = getCookieSecurityOptions(c.var.env.ENV)
             c.res.headers.append(
                 "Set-Cookie",
                 serializeCookie({
@@ -83,8 +84,7 @@ export const signUpRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: true,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }
@@ -98,8 +98,7 @@ export const signUpRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: false,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }

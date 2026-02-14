@@ -1,6 +1,6 @@
-import { routePath } from "#src/components/_index.js"
-import { recordSchema, recordSchemaReturn } from "#src/schemas/record.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../../components/_index.js"
+import { recordSchema, recordSchemaReturn } from "../../../../../../../../schemas/record.js"
+import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

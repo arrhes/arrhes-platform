@@ -1,7 +1,7 @@
-import { authFactory } from "#/factories/authFactory.js"
-import { response } from "#/utilities/response.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
-import { readUserSessionRouteDefinition } from "@arrhes/metadata/routes"
+import { authFactory } from "../../../factories/authFactory.js"
+import { response } from "../../../utilities/response.js"
+import { bodyValidator } from "../../../validators/bodyValidator.js"
+import { readUserSessionRouteDefinition } from "@arrhes/application-metadata/routes"
 
 
 export const readUserSessionRoute = authFactory.createApp()

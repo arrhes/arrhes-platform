@@ -1,4 +1,4 @@
-import { validate } from "#/utilities/validate.js"
+import { validate } from "../utilities/validate.js"
 import * as v from "valibot"
 
 
@@ -23,7 +23,7 @@ const envSchema = v.object({
     SQL_DATABASE_URL: v.string(),
 
     STORAGE_ENDPOINT: v.string(),
-    STORAGE_NAME: v.string(),
+    STORAGE_BUCKET_NAME: v.string(),
     STORAGE_ACCESS_KEY: v.string(),
     STORAGE_SECRET_KEY: v.string(),
 

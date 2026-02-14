@@ -1,17 +1,10 @@
-import { modelSchemas } from "@arrhes/metadata/models"
 import { and, eq } from "drizzle-orm"
-import { drizzle } from "drizzle-orm/postgres-js"
-import postgres from "postgres"
-import { env } from '../env.js'
-
-
-const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
-const db = drizzle(connection, { schema: modelSchemas })
+import { dbClient } from "../dbClient.js"
 
 
 async function recordRows() {
     try {
-        await db.transaction(async (tx) => {
+        await dbClient.transaction(async (tx) => {
 
 
             // recordrows

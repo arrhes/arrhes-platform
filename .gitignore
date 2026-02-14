@@ -5,9 +5,12 @@ build
 .env
 .npmrc
 .continue
-.dev
 .old
 .vscode
 
 pnpm-lock.yaml
+.pnpm-store
+
 *.tsbuildinfo
+
+styled-system

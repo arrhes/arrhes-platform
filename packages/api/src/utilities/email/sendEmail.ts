@@ -1,6 +1,6 @@
-import { Exception } from "#/utilities/exception.js"
-import { getClients } from "#/utilities/getClients.js"
-import { getEnv } from "#/utilities/getEnv.js"
+import { Exception } from "../../utilities/exception.js"
+import { getClients } from "../../utilities/getClients.js"
+import { getEnv } from "../../utilities/getEnv.js"
 
 
 export async function sendEmail(parameters: {

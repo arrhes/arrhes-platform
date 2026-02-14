@@ -1,6 +1,6 @@
-import { dbClient } from "#/dbClient.js"
 import { TableConfig } from "drizzle-orm"
 import { PgInsertValue, PgTable } from "drizzle-orm/pg-core"
+import { dbClient } from "../dbClient.js"
 
 
 export async function insertOne<

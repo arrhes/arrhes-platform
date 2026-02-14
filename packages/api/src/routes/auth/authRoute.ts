@@ -1,9 +1,9 @@
-import { authFactory } from "#/factories/authFactory.js"
-import { authMiddleware } from "#/middlewares/authMiddleware.js"
-import { organizationsRoutes } from "#/routes/auth/organizations/organizationsRoutes.js"
-import { settingsRoutes } from "#/routes/auth/settings/settingsRoutes.js"
-import { supportRoutes } from "#/routes/auth/support/supportRoutes.js"
-import { routePath } from "@arrhes/metadata/components"
+import { authFactory } from "../../factories/authFactory.js"
+import { authMiddleware } from "../../middlewares/authMiddleware.js"
+import { organizationsRoutes } from "../../routes/auth/organizations/organizationsRoutes.js"
+import { settingsRoutes } from "../../routes/auth/settings/settingsRoutes.js"
+import { supportRoutes } from "../../routes/auth/support/supportRoutes.js"
+import { routePath } from "@arrhes/application-metadata/components"
 
 
 export const authRoute = authFactory.createApp()

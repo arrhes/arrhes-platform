@@ -1,20 +1,29 @@
 {
-    "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "jsx": "react-jsx",
+        "target": "ESNext",
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
         "verbatimModuleSyntax": false,
-        "rootDir": "./src",
+        "rootDir": ".",
         "outDir": "./build",
-        "paths": {
-            "#/*": [
-                "./src/*"
-            ]
-        }
     },
     "exclude": [
         "./node_modules",
         "./build",
     ],
     "include": [
-        "./src"
+        "./src",
     ]
 }

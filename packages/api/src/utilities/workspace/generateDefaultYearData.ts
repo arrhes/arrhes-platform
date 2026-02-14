@@ -1,6 +1,6 @@
-// import { defaultAssociationAccounts, defaultAssociationBalanceSheets, defaultAssociationIncomeStatements, DefaultBalanceSheet, defaultCompanyAccounts, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations } from "@arrhes/metadata/components"
-// import { returnedSchemas } from "@arrhes/metadata/schemas"
-// import { generateId } from "@arrhes/metadata/utilities"
+// import { defaultAssociationAccounts, defaultAssociationBalanceSheets, defaultAssociationIncomeStatements, DefaultBalanceSheet, defaultCompanyAccounts, defaultCompanyBalanceSheets, defaultCompanyIncomeStatements, DefaultComputation, defaultComputations } from "@arrhes/application-metadata/components"
+// import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+// import { generateId } from "@arrhes/application-metadata/utilities"
 // import * as v from "valibot"
 
 

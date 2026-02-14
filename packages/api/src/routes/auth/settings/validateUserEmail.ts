@@ -1,10 +1,10 @@
-import { authFactory } from "#/factories/authFactory.js"
-import { Exception } from "#/utilities/exception.js"
-import { response } from "#/utilities/response.js"
-import { updateOne } from "#/utilities/sql/updateOne.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { validateUserEmailRouteDefinition } from "@arrhes/metadata/routes"
+import { authFactory } from "../../../factories/authFactory.js"
+import { Exception } from "../../../utilities/exception.js"
+import { response } from "../../../utilities/response.js"
+import { updateOne } from "../../../utilities/sql/updateOne.js"
+import { bodyValidator } from "../../../validators/bodyValidator.js"
+import { models } from "@arrhes/application-metadata/models"
+import { validateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
 
 

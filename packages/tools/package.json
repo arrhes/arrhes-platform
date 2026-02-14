@@ -1,17 +1,17 @@
 {
-    "name": "@arrhes/tools",
+    "name": "@arrhes/application-tools",
     "type": "module",
     "private": true,
     "scripts": {
-        "generate": "pnpm drizzle-kit generate --config=drizzle.config.ts",
-        "push": "pnpm drizzle-kit push --config=drizzle.config.ts",
-        "pull": "pnpm drizzle-kit introspect --config=drizzle.config.ts",
-        "migrate": "pnpm drizzle-kit migrate --config=drizzle.config.ts",
+        "generate": "pnpm drizzle-kit generate --config=./src/drizzle.config.ts",
+        "push": "pnpm drizzle-kit push --config=./src/drizzle.config.ts --force",
+        "pull": "pnpm drizzle-kit introspect --config=./src/drizzle.config.ts",
+        "migrate": "pnpm drizzle-kit migrate --config=./src/drizzle.config.ts",
         "seed": "tsx --env-file=.env ./src/seed/seed.ts",
         "clear": "tsx --env-file=.env ./src/clearDB.ts",
         "sendSQL": "tsx --env-file=.env ./src/sendSQL.ts",
         "reset": "tsx --env-file=.env ./src/clearDB.ts && pnpm run push && tsx --env-file=.env ./src/seed/seed.ts",
-        "drop": "pnpm drizzle-kit drop --config=drizzle.config.ts"
+        "drop": "pnpm drizzle-kit drop --config=./src/drizzle.config.ts"
     },
     "devDependencies": {
         "@types/node": "24.10.1",
@@ -20,7 +20,7 @@
         "typescript": "5.9.3"
     },
     "dependencies": {
-        "@arrhes/metadata": "workspace:*",
+        "@arrhes/application-metadata": "workspace:*",
         "@ngneat/falso": "8.0.2",
         "drizzle-orm": "0.44.7",
         "nanoid": "5.1.6",

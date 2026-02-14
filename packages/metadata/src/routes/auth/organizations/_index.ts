@@ -2,4 +2,4 @@ export { activateOrganizationMembershipRouteDefinition } from "./activateOrganiz
 export { addNewOrganizationRouteDefinition } from "./addNewOrganization.js"
 export { getAllMyOrganizationsRouteDefinition } from "./getAllMyOrganizations.js"
 
-export * from "#src/routes/auth/organizations/$idOrganization/_index.js"
+export * from "./$idOrganization/_index.js"

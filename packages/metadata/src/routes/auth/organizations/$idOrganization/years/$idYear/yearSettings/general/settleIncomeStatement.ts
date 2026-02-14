@@ -1,8 +1,8 @@
-import { routePath } from "#src/components/_index.js"
-import { accountSchema } from "#src/schemas/account.js"
-import { journalSchema } from "#src/schemas/journal.js"
-import { yearSchema } from "#src/schemas/year.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../../../../../../components/_index.js"
+import { accountSchema } from "../../../../../../../../schemas/account.js"
+import { journalSchema } from "../../../../../../../../schemas/journal.js"
+import { yearSchema } from "../../../../../../../../schemas/year.js"
+import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

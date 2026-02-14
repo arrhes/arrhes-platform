@@ -1,6 +1,6 @@
-import { Exception } from "#/utilities/exception.js"
-import { getClients } from "#/utilities/getClients.js"
-import { getEnv } from "#/utilities/getEnv.js"
+import { Exception } from "../../utilities/exception.js"
+import { getClients } from "../../utilities/getClients.js"
+import { getEnv } from "../../utilities/getEnv.js"
 import { GetObjectCommand } from "@aws-sdk/client-s3"
 
 
@@ -14,7 +14,7 @@ export async function getObject(parameters: {
     try {
 
         const command = new GetObjectCommand({
-            Bucket: parameters.var.env.STORAGE_NAME,
+            Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
             Key: parameters.storageKey ?? undefined
         })
 

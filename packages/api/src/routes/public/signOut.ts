@@ -1,14 +1,14 @@
-import { publicFactory } from "#/factories/publicFactory.js"
-import { parseCookies } from "#/utilities/cookies/parseCookies.js"
-import { serializeCookie } from "#/utilities/cookies/serializeCookie.js"
-import { unsignString } from "#/utilities/cookies/unsignString.js"
-import { Exception } from "#/utilities/exception.js"
-import { response } from "#/utilities/response.js"
-import { updateOne } from "#/utilities/sql/updateOne.js"
-import { cookiePrefix, userSessionCookieMaxAge } from "#/utilities/variables.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
-import { models } from "@arrhes/metadata/models"
-import { signOutRouteDefinition } from "@arrhes/metadata/routes"
+import { publicFactory } from "../../factories/publicFactory.js"
+import { parseCookies } from "../../utilities/cookies/parseCookies.js"
+import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
+import { unsignString } from "../../utilities/cookies/unsignString.js"
+import { Exception } from "../../utilities/exception.js"
+import { response } from "../../utilities/response.js"
+import { updateOne } from "../../utilities/sql/updateOne.js"
+import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { bodyValidator } from "../../validators/bodyValidator.js"
+import { models } from "@arrhes/application-metadata/models"
+import { signOutRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
 
 
@@ -50,6 +50,7 @@ export const signOutRoute = publicFactory.createApp()
             }
 
 
+            const cookieSecurity = getCookieSecurityOptions(c.var.env.ENV)
             c.res.headers.append(
                 "Set-Cookie",
                 serializeCookie({
@@ -58,8 +59,7 @@ export const signOutRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: true,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }
@@ -73,8 +73,7 @@ export const signOutRoute = publicFactory.createApp()
                     options: {
                         maxAge: userSessionCookieMaxAge,
                         httpOnly: false,
-                        secure: true,
-                        sameSite: "None",
+                        ...cookieSecurity,
                         domain: c.var.env.COOKIES_DOMAIN,
                         path: "/",
                     }

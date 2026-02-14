@@ -1,6 +1,6 @@
-import { dateTimeSchema, integerSchema, operation } from "#src/components/_index.js"
-import { idSchema } from "#src/components/schemas/idSchema.js"
-import { computationIncomeStatementModel } from "#src/models/computationIncomeStatement.js"
+import { dateTimeSchema, integerSchema, operation } from "../components/_index.js"
+import { idSchema } from "../components/schemas/idSchema.js"
+import { computationIncomeStatementModel } from "../models/computationIncomeStatement.js"
 import * as v from "valibot"
 
 

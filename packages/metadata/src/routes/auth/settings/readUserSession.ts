@@ -1,7 +1,7 @@
-import { routePath } from "#src/components/_index.js"
-import { userSchemaReturn } from "#src/schemas/user.js"
-import { userSessionSchemaReturn } from "#src/schemas/userSession.js"
-import { routeDefinition } from "#src/utilities/routeDefinition.js"
+import { routePath } from "../../../components/_index.js"
+import { userSchemaReturn } from "../../../schemas/user.js"
+import { userSessionSchemaReturn } from "../../../schemas/userSession.js"
+import { routeDefinition } from "../../../utilities/routeDefinition.js"
 import * as v from "valibot"
 
 

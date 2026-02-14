@@ -1,5 +1,5 @@
 // import { writeFile } from "fs"
-// import { DefaultAccount, defaultCompanyAccounts } from "#src/components/_index.js"
+// import { DefaultAccount, defaultCompanyAccounts } from "../components/_index.js"
 
 
 // function iterateAndAdd(parameters: {

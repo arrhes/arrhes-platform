@@ -1,7 +1,7 @@
-import { authFactory } from "#/factories/authFactory.js"
-import { response } from "#/utilities/response.js"
-import { bodyValidator } from "#/validators/bodyValidator.js"
-import { settleBalanceSheetRouteDefinition } from "@arrhes/metadata/routes"
+import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { response } from "../../../../../../../../utilities/response.js"
+import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
+import { settleBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
 
 
 export const settleBalanceSheetRoute = authFactory.createApp()

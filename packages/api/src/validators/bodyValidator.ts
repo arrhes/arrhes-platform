@@ -1,5 +1,5 @@
-import { Exception } from "#/utilities/exception.js"
-import { validate } from "#/utilities/validate.js"
+import { Exception } from "../utilities/exception.js"
+import { validate } from "../utilities/validate.js"
 import { validator } from "hono/validator"
 import * as v from "valibot"
 
