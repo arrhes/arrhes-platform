@@ -1,8 +1,8 @@
-import { booleanSchema, dateTimeSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { yearModel } from "../models/year.js"
-import * as v from "valibot"
 
 
 export const yearSchema = v.object({

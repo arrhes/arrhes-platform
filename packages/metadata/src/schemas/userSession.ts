@@ -1,7 +1,7 @@
-import { booleanSchema, dateTimeSchema, stringSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { booleanSchema, dateTimeSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { userSessionModel } from "../models/userSession.js"
-import * as v from "valibot"
 
 
 export const userSessionSchema = v.object({

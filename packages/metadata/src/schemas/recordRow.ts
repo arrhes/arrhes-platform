@@ -1,8 +1,8 @@
-import { booleanSchema, dateTimeSchema, numericSchema, stringSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { booleanSchema, dateTimeSchema, numericSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { recordRowModel } from "../models/recordRow.js"
-import * as v from "valibot"
 
 
 export const recordRowSchema = v.object({

@@ -1,5 +1,6 @@
 import { IconAbacus } from "@tabler/icons-react"
 import type { ComponentProps } from "react"
+import { css } from "../../utilities/cn.ts"
 import { ButtonContent } from "../buttons/buttonContent.tsx"
 
 
@@ -16,6 +17,9 @@ export function Logo(props: {
                     ? "Arrhes"
                     : undefined
             }
+            className={css({
+                fontFamily: "mono"
+            })}
         />
     )
 }

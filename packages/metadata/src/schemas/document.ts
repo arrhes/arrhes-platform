@@ -1,7 +1,7 @@
-import { dateTimeSchema, documentType, stringSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { dateTimeSchema, documentType, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { documentModel } from "../models/document.js"
-import * as v from "valibot"
 
 
 export const documentSchema = v.object({

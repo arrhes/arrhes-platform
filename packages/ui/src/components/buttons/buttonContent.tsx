@@ -31,8 +31,9 @@ const variantStyles = {
             borderWidth: "1px",
             borderStyle: "solid",
             borderColor: "rgba(31, 35, 40, 0.15)",
-            bg: "primary",
+            backgroundColor: "primary",
             color: "white",
+            stroke: "white",
             fontWeight: "medium",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
             _hover: {
@@ -46,7 +47,7 @@ const variantStyles = {
         colors: {
             neutral: {
                 container: css({}),
-                icon: css({ color: "white" }),
+                icon: css({ stroke: "white" }),
                 text: css({ color: "white" }),
             },
             danger: {
@@ -56,12 +57,12 @@ const variantStyles = {
                     _hover: { bg: "#c2341f" },
                     _active: { bg: "#a22015" },
                 }),
-                icon: css({ color: "white" }),
+                icon: css({ stroke: "white" }),
                 text: css({ color: "white" }),
             },
             success: {
                 container: css({}),
-                icon: css({ color: "white" }),
+                icon: css({ stroke: "white" }),
                 text: css({ color: "white" }),
             },
         },
@@ -86,21 +87,21 @@ const variantStyles = {
         colors: {
             neutral: {
                 container: css({}),
-                icon: css({ color: "neutral" }),
+                icon: css({ stroke: "neutral" }),
                 text: css({ color: "neutral" }),
             },
             danger: {
                 container: css({
                     _hover: { bg: "error/5", borderColor: "error/30" },
                 }),
-                icon: css({ color: "error" }),
+                icon: css({ stroke: "error" }),
                 text: css({ color: "error" }),
             },
             success: {
                 container: css({
                     _hover: { bg: "success/5", borderColor: "success/30" },
                 }),
-                icon: css({ color: "success" }),
+                icon: css({ stroke: "success" }),
                 text: css({ color: "success" }),
             },
         },
@@ -124,8 +125,8 @@ const variantStyles = {
         colors: {
             neutral: {
                 container: css({}),
-                icon: css({ color: "neutral" }),
-                rightIcon: css({ color: "neutral/50" }),
+                icon: css({ stroke: "neutral" }),
+                rightIcon: css({ stroke: "neutral/50" }),
                 text: css({ color: "neutral" }),
             },
             danger: {
@@ -133,8 +134,8 @@ const variantStyles = {
                     borderColor: "error/40",
                     _hover: { bg: "error/5", borderColor: "error/50" },
                 }),
-                icon: css({ color: "error" }),
-                rightIcon: css({ color: "error/50" }),
+                icon: css({ stroke: "error" }),
+                rightIcon: css({ stroke: "error/50" }),
                 text: css({ color: "error" }),
             },
             success: {
@@ -142,8 +143,8 @@ const variantStyles = {
                     borderColor: "success/40",
                     _hover: { bg: "success/5", borderColor: "success/50" },
                 }),
-                icon: css({ color: "success" }),
-                rightIcon: css({ color: "success/50" }),
+                icon: css({ stroke: "success" }),
+                rightIcon: css({ stroke: "success/50" }),
                 text: css({ color: "success" }),
             },
         },
@@ -170,21 +171,21 @@ const variantStyles = {
                         backgroundColor: "primary/10"
                     }
                 }),
-                icon: css({ color: "neutral/70" }),
+                icon: css({ stroke: "neutral/70" }),
                 text: css({ color: "neutral" }),
             },
             danger: {
                 container: css({
                     _hover: { bg: "error/8" },
                 }),
-                icon: css({ color: "error" }),
+                icon: css({ stroke: "error" }),
                 text: css({ color: "error" }),
             },
             success: {
                 container: css({
                     _hover: { bg: "success/8" },
                 }),
-                icon: css({ color: "success" }),
+                icon: css({ stroke: "success" }),
                 text: css({ color: "success" }),
             },
         },
@@ -302,7 +303,7 @@ export function ButtonContent(props: {
                     }),
                     leftIconActiveStyles,
                     variant === "primary"
-                        ? css({ color: "white", _disabled: { color: "white/50" } })
+                        ? css({ stroke: "white", _disabled: { color: "white/50" } })
                         : styles.icon
                 ),
                 strokeWidth: 1.75
@@ -319,6 +320,7 @@ export function ButtonContent(props: {
                             whiteSpace: "nowrap",
                             fontSize: "0.875rem",
                             lineHeight: "1rem",
+                            fontWeight: "400",
                         }),
                         textActiveStyles,
                         variant === "primary"

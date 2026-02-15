@@ -27,8 +27,8 @@ Arrhes est une application open source de gestion de comptabilite en partie doub
 Prérequis : [just](https://github.com/casey/just), Docker
 
 ```bash
-git clone https://github.com/arrhes/platform.git
-cd platform
+git clone https://github.com/arrhes/application.git
+cd application
 
 # Demarrer l'environnement de developpement
 just dev up
@@ -48,17 +48,17 @@ just dev logs
 Prérequis : Docker
 
 ```bash
-git clone https://github.com/arrhes/platform.git
-cd platform
+git clone https://github.com/arrhes/application.git
+cd application
 
 # Demarrer les services
-docker compose -f .development/compose.yml up -d --build
+docker compose -f .workflows/.dev/compose.yml up -d --build
 
 # Arreter les services
-docker compose -f .development/compose.yml down
+docker compose -f .workflows/.dev/compose.yml down
 
 # Consulter les logs
-docker compose -f .development/compose.yml logs -f
+docker compose -f .workflows/.dev/compose.yml logs -f
 ```
 
 ### Acces
@@ -87,10 +87,10 @@ Pour plus de détails, consultez le [guide de developpement](docs/DEVELOPMENT.md
 
 Le projet est organisé en monorepo avec les packages suivants :
 
-- **@arrhes/api** - Backend REST API (Hono, PostgreSQL)
-- **@arrhes/dashboard** - Interface web (React, TanStack Router)
-- **@arrhes/metadata** - Schémas et modèles partagés (Valibot, Drizzle ORM)
-- **@arrhes/tools** - Outils de migration et seed de base de données
+- **@arrhes/application-api** - Backend REST API (Hono, PostgreSQL)
+- **@arrhes/application-website** - Interface web (React, TanStack Router)
+- **@arrhes/application-metadata** - Schémas et modèles partagés (Valibot, Drizzle ORM)
+- **@arrhes/application-tools** - Outils de migration et seed de base de données
 - **@arrhes/ui** - Composants UI partagés
 
 Pour plus de details, consultez la [documentation d'architecture](docs/ARCHITECTURE.md).
@@ -101,8 +101,8 @@ Ce projet est sous licence AGPL-3.0. Voir le fichier [LICENSE](LICENSE) pour plu
 
 ## Support
 
-- [Signaler un bug](https://github.com/arrhes/platform/issues)
-- [Proposer une fonctionnalité](https://github.com/arrhes/platform/issues)
+- [Signaler un bug](https://github.com/arrhes/application/issues)
+- [Proposer une fonctionnalité](https://github.com/arrhes/application/issues)
 - Contact : contact@arrhes.com
 
 ---

@@ -1,7 +1,7 @@
-import { routePath, ticketType } from "../../../components/_index.js"
+import * as v from "valibot"
+import { routePath, ticketType } from "../../../components/index.js"
 import { stringSchema } from "../../../components/schemas/stringSchema.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
-import * as v from "valibot"
 
 
 

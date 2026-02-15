@@ -1,9 +1,9 @@
-import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { balanceSheetColumn } from "../components/values/balanceSheetColumn.js"
 import { accountModel } from "../models/account.js"
-import * as v from "valibot"
 
 
 export const accountSchema = v.object({

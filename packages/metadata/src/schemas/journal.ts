@@ -1,8 +1,8 @@
-import { dateTimeSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { journalModel } from "../models/journal.js"
-import * as v from "valibot"
 
 
 export const journalSchema = v.object({

@@ -1,8 +1,8 @@
-import { routePath } from "../../../../../../../../components/_index.js"
+import * as v from "valibot"
+import { routePath } from "../../../../../../../../components/index.js"
 import { booleanSchema } from "../../../../../../../../components/schemas/booleanSchema.js"
 import { accountSchema, accountSchemaReturn } from "../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
-import * as v from "valibot"
 
 
 export const generateAccountsRouteDefinition = routeDefinition({

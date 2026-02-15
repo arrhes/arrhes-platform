@@ -1,8 +1,8 @@
-import { balanceSheetSide, booleanSchema, dateTimeSchema } from "../components/_index.js"
+import * as v from "valibot"
+import { balanceSheetSide, booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { balanceSheetModel } from "../models/balanceSheet.js"
-import * as v from "valibot"
 
 
 export const balanceSheetSchema = v.object({

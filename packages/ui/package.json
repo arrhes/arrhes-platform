@@ -21,7 +21,6 @@
     },
     "scripts": {
         "prepare": "panda codegen",
-        "lint": "eslint .",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {

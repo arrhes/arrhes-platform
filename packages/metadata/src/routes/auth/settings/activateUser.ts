@@ -1,7 +1,7 @@
-import { routePath } from "../../../components/_index.js"
+import * as v from "valibot"
+import { routePath } from "../../../components/index.js"
 import { userSchema, userSchemaReturn } from "../../../schemas/user.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
-import * as v from "valibot"
 
 
 export const activateUserRouteDefinition = routeDefinition({

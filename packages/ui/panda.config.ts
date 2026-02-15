@@ -11,24 +11,14 @@ export default defineConfig({
     // Files to exclude
     exclude: [],
 
-    globalFontface: {
-        Monaspace: {
-            src: 'url(/src/assets/fonts/Monaspace Neon Var.woff2) format("woff2")',
-            fontWeight: "unset",
-            fontStyle: 'normal',
-            fontDisplay: 'swap',
-            fontVariant: "contextual",
-            lineGapOverride: "normal",
-            fontFeatureSettings: "calt",
-        }
-    },
-
     globalCss: {
         "*": {
             color: "neutral",
             margin: 0,
             padding: 0,
-            fontFamily: "Monaspace, monospace",
+        },
+        "html, body": {
+            fontFamily: "sans",
             fontWeight: "300",
         }
     },
@@ -47,7 +37,8 @@ export default defineConfig({
                 primary: { value: "#041E42" },
             },
             fonts: {
-                mono: { value: '"Sometype Mono", monospace' },
+                mono: { value: '"Monaspace", monospace' },
+                sans: { value: '"Mona Sans VF", sans-serif' },
             },
             radii: {
                 xs: { value: "0.125rem" },
@@ -74,6 +65,10 @@ export default defineConfig({
                 md: { value: "1rem" },
                 lg: { value: "1.25rem" },
                 xl: { value: "1.5rem" },
+            },
+            fontWeights: {
+                semibold: { value: "500" },
+                bold: { value: "600" },
             }
         },
         breakpoints: {

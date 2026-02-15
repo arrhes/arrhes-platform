@@ -1,7 +1,7 @@
-import { routePath, stringSchema } from "../../../components/_index.js"
+import * as v from "valibot"
+import { routePath, stringSchema } from "../../../components/index.js"
 import { userSchema } from "../../../schemas/user.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
-import * as v from "valibot"
 
 
 export const signInRouteDefinition = routeDefinition({

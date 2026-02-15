@@ -1,9 +1,9 @@
-import { routePath } from "../../../components/_index.js"
+import * as v from "valibot"
+import { routePath } from "../../../components/index.js"
 import { passwordSchema } from "../../../components/schemas/passwordSchema.js"
 import { stringSchema } from "../../../components/schemas/stringSchema.js"
 import { userSchemaReturn } from "../../../schemas/user.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
-import * as v from "valibot"
 
 
 export const updateUserPasswordRouteDefinition = routeDefinition({

@@ -1,5 +1,5 @@
-import { validate } from "../utilities/validate.js"
 import * as v from "valibot"
+import { validate } from "../utilities/validate.js"
 
 
 enum Env {
@@ -17,7 +17,7 @@ const envSchema = v.object({
     COOKIES_KEY: v.string(),
 
     API_BASE_URL: v.string(),
-    PLATFORM_BASE_URL: v.string(),
+    APPLICATION_BASE_URL: v.string(),
     WEBSITE_BASE_URL: v.string(),
 
     SQL_DATABASE_URL: v.string(),

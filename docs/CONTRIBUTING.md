@@ -1,8 +1,8 @@
 # Guide de contribution
 
-Merci de votre intérêt pour contribuer à Arrhes ! Ce document explique comment participer au développement du projet.
+Merci de votre interet pour contribuer a Arrhes ! Ce document explique comment participer au developpement du projet.
 
-## Table des matières
+## Table des matieres
 
 - [Code de conduite](#code-de-conduite)
 - [Comment contribuer](#comment-contribuer)
@@ -13,44 +13,44 @@ Merci de votre intérêt pour contribuer à Arrhes ! Ce document explique commen
 - [Tests](#tests)
 - [Code review](#code-review)
 - [Signaler un bug](#signaler-un-bug)
-- [Proposer une fonctionnalité](#proposer-une-fonctionnalité)
+- [Proposer une fonctionnalite](#proposer-une-fonctionnalité)
 
 ## Code de conduite
 
-En participant à ce projet, vous vous engagez à maintenir un environnement respectueux et inclusif. Nous attendons de tous les contributeurs :
+En participant a ce projet, vous vous engagez a maintenir un environnement respectueux et inclusif. Nous attendons de tous les contributeurs :
 
 - Respect et courtoisie envers les autres contributeurs
 - Ouverture d'esprit face aux critiques constructives
-- Concentration sur ce qui est le mieux pour la communauté
-- Empathie envers les autres membres de la communauté
+- Concentration sur ce qui est le mieux pour la communaute
+- Empathie envers les autres membres de la communaute
 
-Les comportements inacceptables incluent le harcèlement, les insultes, et tout comportement discriminatoire.
+Les comportements inacceptables incluent le harcelement, les insultes, et tout comportement discriminatoire.
 
 ## Comment contribuer
 
-Il existe plusieurs façons de contribuer à Arrhes :
+Il existe plusieurs facons de contribuer a Arrhes :
 
-### 🐛 Signaler des bugs
+### Signaler des bugs
 Ouvrez une issue sur GitHub avec le label `bug`
 
-### 💡 Proposer des fonctionnalités
+### Proposer des fonctionnalites
 Ouvrez une issue sur GitHub avec le label `enhancement`
 
-### 📝 Améliorer la documentation
+### Ameliorer la documentation
 La documentation est aussi importante que le code !
 
-### 💻 Contribuer du code
-Suivez le process décrit dans ce document
+### Contribuer du code
+Suivez le process decrit dans ce document
 
-### 🌍 Traductions
-Aidez à traduire l'application dans d'autres langues
+### Traductions
+Aidez a traduire l'application dans d'autres langues
 
-### 🎨 Design et UX
-Proposez des améliorations d'interface
+### Design et UX
+Proposez des ameliorations d'interface
 
 ## Configuration de l'environnement
 
-Avant de commencer à contribuer, configurez votre environnement de développement :
+Avant de commencer a contribuer, configurez votre environnement de developpement :
 
 1. **Fork le repository** sur votre compte GitHub
 
@@ -62,62 +62,52 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
 
 3. **Ajouter le repository principal comme remote**
    ```bash
-   git remote add upstream https://github.com/arrhes/platform.git
+   git remote add upstream https://github.com/arrhes/application.git
    ```
 
-4. **Choisir votre méthode de développement**
+4. **Choisir votre methode de developpement**
 
-   **Option A : Dev Container (Recommandé pour les nouveaux contributeurs) 🚀**
-   
-   C'est la méthode la plus simple pour démarrer rapidement :
+   **Option A : Docker Compose (Recommande)**
    
    ```bash
-   # Ouvrir dans VS Code/Cursor
-   code .  # ou cursor .
-   
-   # Cliquer sur "Reopen in Container" quand demandé
-   # Tout sera configuré automatiquement !
-   ```
-   
-   **Option B : Docker Compose**
-   
-   ```bash
-   # Installer les dépendances
+   # Installer les dependances
    pnpm install
    
    # Lancer les services
-   docker-compose up -d
+   just dev up
+   # ou
+   docker compose -f .workflows/.dev/compose.yml up -d --build
    
    # Configurer l'environnement
    # Suivez les instructions dans DEVELOPMENT.md
    ```
    
-   **Option C : Installation native**
+   **Option B : Installation native**
    
    ```bash
-   # Installer les dépendances
+   # Installer les dependances
    pnpm install
    
    # Configurer l'environnement
-   # Suivez les instructions complètes dans DEVELOPMENT.md
+   # Suivez les instructions completes dans DEVELOPMENT.md
    ```
 
-5. **Créer une branche pour votre contribution**
+5. **Creer une branche pour votre contribution**
    ```bash
    git checkout -b feature/ma-fonctionnalite
    # ou
    git checkout -b fix/mon-correctif
    ```
 
-Pour plus de détails, consultez [DEVELOPMENT.md](DEVELOPMENT.md).
+Pour plus de details, consultez [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ## Standards de code
 
 ### TypeScript
 
-- **Utiliser TypeScript strict** : Pas de `any`, sauf exception justifiée
+- **Utiliser TypeScript strict** : Pas de `any`, sauf exception justifiee
 - **Typage explicite** pour les fonctions publiques
-- **Interfaces vs Types** : Préférer `type` pour les objets simples, `interface` pour l'extension
+- **Interfaces vs Types** : Preferer `type` pour les objets simples, `interface` pour l'extension
 
 **Bon exemple :**
 ```typescript
@@ -137,7 +127,7 @@ function createUser(data: { email: string, alias: string }): User {
 
 **Mauvais exemple :**
 ```typescript
-function createUser(data: any) {  // ❌ any
+function createUser(data: any) {  // any
   return {
     id: generateId(),
     ...data,
@@ -150,8 +140,10 @@ function createUser(data: any) {  // ❌ any
 - **Variables et fonctions** : `camelCase`
 - **Types et interfaces** : `PascalCase`
 - **Constantes** : `UPPER_SNAKE_CASE` (si vraiment constante)
-- **Fichiers** : `camelCase.ts`
-- **Composants React** : `PascalCase.tsx`
+- **Fichiers** : `camelCase.ts` (y compris les composants React)
+- **Barrel files** : `_index.ts`
+- **Models** : suffixe `Model` (`accountModel`)
+- **Schemas** : pas de suffixe
 
 ```typescript
 // Variables et fonctions
@@ -166,8 +158,8 @@ interface ApiResponse { }
 const MAX_RETRY_COUNT = 3
 
 // Fichiers
-// api/routes/auth/userProfile.ts
-// platform/components/buttons/PrimaryButton.tsx
+// api/src/routes/auth/organizations/...
+// website/src/components/forms/textInput.tsx
 ```
 
 ### Structure du code
@@ -187,6 +179,10 @@ import { authFactory } from '#/factories/authFactory.js'
 import { validate } from '#/utilities/validate.js'
 ```
 
+**Note sur les extensions d'import :**
+- `packages/api/` et `packages/metadata/` : extensions `.js`
+- `packages/website/` : extensions `.ts`/`.tsx`
+
 **Ordre dans les fichiers :**
 ```typescript
 // 1. Imports
@@ -201,37 +197,61 @@ const MY_CONSTANT = 'value'
 // 4. Fonctions/composants
 export function myFunction() { }
 
-// 5. Export par défaut (si applicable)
+// 5. Export par defaut (si applicable)
 export default MyComponent
 ```
 
-### ESLint
+### Validation
 
-Le projet utilise ESLint pour maintenir la qualité du code.
+```typescript
+// Toujours importer valibot avec le namespace v
+import * as v from 'valibot'
 
-**Vérifier le linting :**
+// Utiliser v.object(), v.string(), etc.
+const mySchema = v.object({
+    name: v.string(),
+    age: v.number(),
+})
+
+// Inferer les types depuis les schemas
+type MyType = v.InferOutput<typeof mySchema>
+```
+
+### Biome
+
+Le projet utilise [Biome](https://biomejs.dev/) pour le linting et le formatage du code, configure au niveau racine du monorepo.
+
+**Verifier le linting et le formatage :**
 ```bash
-pnpm --filter platform run lint
+pnpm check
 ```
 
 **Fix automatique :**
 ```bash
-pnpm --filter platform run lint --fix
+pnpm check:fix
+```
+
+**Formatage uniquement :**
+```bash
+pnpm format:fix
 ```
 
 **Configuration :**
-- ESLint est configuré pour TypeScript et React
-- Les règles sont définies dans `packages/platform/eslint.config.js`
+- Biome est configure dans `biome.json` a la racine du projet
+- Il couvre tous les packages (api, website, metadata, tools, ui)
+- Les regles sont activees par defaut (recommended)
 
 ### Formatage
 
+Les regles de formatage sont appliquees automatiquement par Biome (`pnpm format:fix`).
+
 **Indentation :** 4 espaces (pas de tabs)
 
-**Longueur de ligne :** Pas de limite stricte, mais restez raisonnable (~120 caractères)
+**Longueur de ligne :** 120 caracteres maximum
 
-**Points-virgules :** Non requis (sauf cas spécifiques)
+**Points-virgules :** Non requis (sauf cas specifiques)
 
-**Quotes :** Simples `'` ou doubles `"` (soyez cohérent dans un fichier)
+**Quotes :** Doubles `"` de preference
 
 **Trailing commas :** Oui pour les objets et arrays multilignes
 
@@ -252,7 +272,7 @@ export function MyComponent() {
 }
 ```
 
-**Hooks en début de composant**
+**Hooks en debut de composant**
 ```typescript
 export function MyComponent() {
   // Hooks en premier
@@ -267,25 +287,27 @@ export function MyComponent() {
 }
 ```
 
-**Props destructurées**
+**Props destructurees**
 ```typescript
 export function MyComponent({ title, description, onClose }: MyComponentProps) {
   return <div>{title}</div>
 }
 ```
 
-**Éviter les inline styles** (utiliser Panda CSS)
+**Utiliser Panda CSS pour le styling** (via `@arrhes/ui`)
 ```typescript
-// ✅ Bon
-<div className="flex items-center gap-2">
+import { css, cx } from '@arrhes/ui/utilities/cn.js'
 
-// ❌ Éviter
+// Bon
+<div className={css({ display: 'flex', alignItems: 'center', gap: '2' })}>
+
+// Eviter les inline styles
 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 ```
 
 ## Convention de commits
 
-Nous utilisons une convention de commits inspirée de [Conventional Commits](https://www.conventionalcommits.org/).
+Nous utilisons une convention de commits inspiree de [Conventional Commits](https://www.conventionalcommits.org/).
 
 ### Format
 
@@ -299,28 +321,29 @@ Nous utilisons une convention de commits inspirée de [Conventional Commits](htt
 
 ### Types
 
-- `feat` : Nouvelle fonctionnalité
+- `feat` : Nouvelle fonctionnalite
 - `fix` : Correction de bug
 - `docs` : Documentation uniquement
 - `style` : Formatage, points-virgules manquants, etc.
-- `refactor` : Refactoring sans changement de fonctionnalité
-- `perf` : Amélioration de performance
+- `refactor` : Refactoring sans changement de fonctionnalite
+- `perf` : Amelioration de performance
 - `test` : Ajout ou correction de tests
-- `chore` : Maintenance, dépendances, etc.
+- `chore` : Maintenance, dependances, etc.
 
 ### Scopes (optionnel)
 
 - `api` : Backend
-- `platform` : Frontend
+- `website` : Frontend (dashboard + site vitrine)
 - `metadata` : Package metadata
-- `tools` : Outils de base de données
+- `tools` : Outils de base de donnees
+- `ui` : Composants UI partages
 - `docs` : Documentation
 
 ### Exemples
 
 ```bash
-# Nouvelle fonctionnalité
-git commit -m "feat(platform): add dark mode toggle"
+# Nouvelle fonctionnalite
+git commit -m "feat(website): add dark mode toggle"
 
 # Correction de bug
 git commit -m "fix(api): correct balance calculation in income statement"
@@ -337,10 +360,10 @@ git commit -m "chore(deps): update drizzle to v0.45"
 
 ### Description
 
-- Utiliser l'impératif ("add" et non "added" ou "adds")
-- Pas de majuscule au début
-- Pas de point à la fin
-- Maximum 72 caractères
+- Utiliser l'imperatif ("add" et non "added" ou "adds")
+- Pas de majuscule au debut
+- Pas de point a la fin
+- Maximum 72 caracteres
 
 ### Corps du commit (optionnel)
 
@@ -360,23 +383,26 @@ Users can now export balance sheets and income statements.
 
 ## Process de pull request
 
-### 1. Vérifier avant de soumettre
+### 1. Verifier avant de soumettre
 
 ```bash
-# Vérifier que tout compile
+# Verifier que tout compile
 pnpm run build
 
-# Vérifier le linting (pour platform)
-pnpm --filter platform run lint
+# Verifier le linting et le formatage
+pnpm check
+
+# Ou lancer le pipeline CI complet en local (dans Docker, pas besoin de Node.js)
+just build
 
 # Tester manuellement les changements
 pnpm run dev
 ```
 
-### 2. Mettre à jour votre branche
+### 2. Mettre a jour votre branche
 
 ```bash
-# Récupérer les derniers changements
+# Recuperer les derniers changements
 git fetch upstream
 git rebase upstream/main
 ```
@@ -387,29 +413,29 @@ git rebase upstream/main
 git push origin feature/ma-fonctionnalite
 ```
 
-### 4. Créer la pull request
+### 4. Creer la pull request
 
 Sur GitHub :
 1. Cliquez sur "New Pull Request"
-2. Sélectionnez votre branche
+2. Selectionnez votre branche
 3. Remplissez le template de PR :
 
 ```markdown
 ## Description
-Brève description des changements
+Breve description des changements
 
 ## Type de changement
 - [ ] Bug fix
-- [ ] Nouvelle fonctionnalité
+- [ ] Nouvelle fonctionnalite
 - [ ] Breaking change
 - [ ] Documentation
 
 ## Checklist
 - [ ] Mon code suit les standards du projet
-- [ ] J'ai commenté les parties complexes
-- [ ] J'ai mis à jour la documentation si nécessaire
-- [ ] Mes changements ne génèrent pas de nouveaux warnings
-- [ ] J'ai testé localement
+- [ ] J'ai commente les parties complexes
+- [ ] J'ai mis a jour la documentation si necessaire
+- [ ] Mes changements ne generent pas de nouveaux warnings
+- [ ] J'ai teste localement
 
 ## Screenshots (si applicable)
 ```
@@ -417,30 +443,30 @@ Brève description des changements
 ### 5. Attendre la review
 
 - Un mainteneur reviewera votre PR
-- Répondez aux commentaires et effectuez les modifications demandées
-- Une fois approuvée, votre PR sera mergée
+- Repondez aux commentaires et effectuez les modifications demandees
+- Une fois approuvee, votre PR sera mergee
 
 ## Tests
 
-Actuellement, le projet n'a pas de suite de tests automatisés. Les contributions pour ajouter des tests sont bienvenues !
+Actuellement, le projet n'a pas de suite de tests automatises. Les contributions pour ajouter des tests sont bienvenues !
 
 ### Tests manuels requis
 
 Avant de soumettre une PR, testez manuellement :
 
-1. **Fonctionnalité ajoutée/modifiée** : Vérifiez qu'elle fonctionne comme prévu
-2. **Régressions** : Vérifiez que vous n'avez rien cassé
-3. **Cas limites** : Testez les edge cases (valeurs vides, très grandes, etc.)
-4. **Différents navigateurs** : Chrome, Firefox, Safari (si frontend)
+1. **Fonctionnalite ajoutee/modifiee** : Verifiez qu'elle fonctionne comme prevu
+2. **Regressions** : Verifiez que vous n'avez rien casse
+3. **Cas limites** : Testez les edge cases (valeurs vides, tres grandes, etc.)
+4. **Differents navigateurs** : Chrome, Firefox, Safari (si frontend)
 
 ### Tests futurs
 
-Nous prévoyons d'ajouter :
+Nous prevoyons d'ajouter :
 - Tests unitaires (Vitest)
-- Tests d'intégration (Playwright)
+- Tests d'integration (Playwright)
 - Tests E2E (Playwright)
 
-Les contributions dans ce sens sont encouragées !
+Les contributions dans ce sens sont encouragees !
 
 ## Code review
 
@@ -454,8 +480,8 @@ Les contributions dans ce sens sont encouragées !
 ### Pour les auteurs de PR
 
 - Ne prenez pas les commentaires personnellement
-- Répondez à tous les commentaires (même avec "Done" ou "Fixed")
-- Demandez des clarifications si nécessaire
+- Repondez a tous les commentaires (meme avec "Done" ou "Fixed")
+- Demandez des clarifications si necessaire
 - Remerciez les reviewers pour leur temps
 
 ## Signaler un bug
@@ -463,12 +489,12 @@ Les contributions dans ce sens sont encouragées !
 Pour signaler un bug, ouvrez une issue sur GitHub avec :
 
 ### Titre
-Résumé clair et concis du problème
+Resume clair et concis du probleme
 
 ### Description
 - **Description du bug** : Que se passe-t-il ?
 - **Comportement attendu** : Que devrait-il se passer ?
-- **Étapes pour reproduire** :
+- **Etapes pour reproduire** :
   1. Aller sur '...'
   2. Cliquer sur '...'
   3. Voir l'erreur
@@ -476,26 +502,26 @@ Résumé clair et concis du problème
 - **Environnement** :
   - OS : [ex: Ubuntu 22.04]
   - Navigateur : [ex: Chrome 120]
-  - Version Node.js : [ex: 24.5.0]
+  - Version Node.js : [ex: 25.2.1]
   - Version : [ex: commit SHA ou release]
 
 ### Exemple
 
 ```markdown
 **Description**
-Le calcul du compte de résultat affiche des montants négatifs incorrects.
+Le calcul du compte de resultat affiche des montants negatifs incorrects.
 
 **Comportement attendu**
-Les charges doivent apparaître en positif et être soustraites du résultat.
+Les charges doivent apparaitre en positif et etre soustraites du resultat.
 
-**Étapes pour reproduire**
-1. Créer un exercice comptable
-2. Ajouter des écritures de charges
-3. Consulter le compte de résultat
-4. Observer que les montants sont négatifs
+**Etapes pour reproduire**
+1. Creer un exercice comptable
+2. Ajouter des ecritures de charges
+3. Consulter le compte de resultat
+4. Observer que les montants sont negatifs
 
 **Screenshots**
-[capture d'écran]
+[capture d'ecran]
 
 **Environnement**
 - OS: macOS 14.2
@@ -503,49 +529,49 @@ Les charges doivent apparaître en positif et être soustraites du résultat.
 - Version: commit abc123
 ```
 
-## Proposer une fonctionnalité
+## Proposer une fonctionnalite
 
-Pour proposer une nouvelle fonctionnalité, ouvrez une issue sur GitHub avec :
+Pour proposer une nouvelle fonctionnalite, ouvrez une issue sur GitHub avec :
 
 ### Titre
-Description claire de la fonctionnalité
+Description claire de la fonctionnalite
 
 ### Description
-- **Problème à résoudre** : Quel besoin cette fonctionnalité comble-t-elle ?
-- **Solution proposée** : Comment voyez-vous cette fonctionnalité ?
-- **Alternatives considérées** : Avez-vous pensé à d'autres approches ?
-- **Contexte supplémentaire** : Captures d'écran, exemples d'autres apps, etc.
+- **Probleme a resoudre** : Quel besoin cette fonctionnalite comble-t-elle ?
+- **Solution proposee** : Comment voyez-vous cette fonctionnalite ?
+- **Alternatives considerees** : Avez-vous pense a d'autres approches ?
+- **Contexte supplementaire** : Captures d'ecran, exemples d'autres apps, etc.
 
 ### Exemple
 
 ```markdown
-**Problème**
-Les utilisateurs ne peuvent pas exporter les données comptables pour les traiter dans Excel.
+**Probleme**
+Les utilisateurs ne peuvent pas exporter les donnees comptables pour les traiter dans Excel.
 
-**Solution proposée**
-Ajouter un bouton "Exporter en Excel" sur chaque état financier qui génère un fichier .xlsx avec les données formatées.
+**Solution proposee**
+Ajouter un bouton "Exporter en Excel" sur chaque etat financier qui genere un fichier .xlsx avec les donnees formatees.
 
-**Alternatives considérées**
-- Export CSV : Moins convivial mais plus simple à implémenter
-- Export PDF : Déjà disponible, mais pas éditable
+**Alternatives considerees**
+- Export CSV : Moins convivial mais plus simple a implementer
+- Export PDF : Deja disponible, mais pas editable
 
 **Contexte**
-Plusieurs utilisateurs ont demandé cette fonctionnalité pour faire des analyses complémentaires.
+Plusieurs utilisateurs ont demande cette fonctionnalite pour faire des analyses complementaires.
 ```
 
 ## Ressources additionnelles
 
 - [Documentation d'architecture](ARCHITECTURE.md)
-- [Guide de développement](DEVELOPMENT.md)
+- [Guide de developpement](DEVELOPMENT.md)
 - [Configuration](CONFIGURATION.md)
-- [Issues GitHub](https://github.com/arrhes/platform/issues)
-- [Discussions GitHub](https://github.com/arrhes/platform/discussions)
+- [Issues GitHub](https://github.com/arrhes/application/issues)
+- [Discussions GitHub](https://github.com/arrhes/application/discussions)
 
 ## Questions ?
 
-Si vous avez des questions sur la contribution, n'hésitez pas à :
+Si vous avez des questions sur la contribution, n'hesitez pas a :
 - Ouvrir une discussion sur GitHub
 - Contacter les mainteneurs
 - Consulter les issues et PR existantes
 
-Merci de contribuer à Arrhes ! 🎉
+Merci de contribuer a Arrhes !

@@ -1,8 +1,8 @@
-import { organizationScope } from "../components/_index.js"
-import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
-import { idColumn } from "../components/models/idColumn.js"
 import { relations } from "drizzle-orm"
 import { AnyPgColumn, boolean, pgEnum, pgTable, text, varchar } from "drizzle-orm/pg-core"
+import { organizationScope } from "../components/index.js"
+import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
+import { idColumn } from "../components/models/idColumn.js"
 import { organizationUserModel } from "./organizationUser.js"
 import { userModel } from "./user.js"
 

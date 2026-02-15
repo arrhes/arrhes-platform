@@ -1,7 +1,7 @@
-import { dateTimeSchema, integerSchema, operation } from "../components/_index.js"
+import * as v from "valibot"
+import { dateTimeSchema, integerSchema, operation } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { computationIncomeStatementModel } from "../models/computationIncomeStatement.js"
-import * as v from "valibot"
 
 
 export const computationIncomeStatementSchema = v.object({
