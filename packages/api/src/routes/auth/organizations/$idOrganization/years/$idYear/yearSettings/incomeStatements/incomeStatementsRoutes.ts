@@ -4,7 +4,6 @@ import { createOneIncomeStatementRoute } from "../../../../../../../../routes/au
 import { generateIncomeStatementsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/generateIncomeStatements.js"
 import { readAllIncomeStatementsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/readAllIncomeStatements.js"
 
-
 export const incomeStatementsRoutes = [
     createOneIncomeStatementRoute,
     readAllIncomeStatementsRoute,
@@ -13,4 +12,3 @@ export const incomeStatementsRoutes = [
 
     ...$idIncomeStatementRoutes,
 ]
-

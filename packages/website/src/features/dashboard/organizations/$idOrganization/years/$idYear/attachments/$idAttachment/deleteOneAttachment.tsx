@@ -1,26 +1,28 @@
-import { deleteOneAttachmentRouteDefinition, readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ComponentPropsWithRef, ReactElement } from "react"
-import * as v from "valibot"
+import {
+    deleteOneAttachmentRouteDefinition,
+    readAllAttachmentsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { ComponentPropsWithRef, ReactElement } from "react"
+import type * as v from "valibot"
 import { DeleteConfirmation } from "../../../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
 import { applicationRouter } from "../../../../../../../../routes/applicationRouter.tsx"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function DeleteOneAttachment(props: {
     attachment: v.InferOutput<typeof returnedSchemas.attachment>
-    children: ReactElement<ComponentPropsWithRef<'div'>>
+    children: ReactElement<ComponentPropsWithRef<"div">>
 }) {
     async function onSubmit() {
-        const deleteResponse = await postAPI({
+        const deleteResponse = await getResponseBodyFromAPI({
             routeDefinition: deleteOneAttachmentRouteDefinition,
             body: {
                 idAttachment: props.attachment.id,
                 idOrganization: props.attachment.idOrganization,
                 idYear: props.attachment.idYear,
-            }
+            },
         })
 
         if (deleteResponse.ok === false) {
@@ -42,7 +44,7 @@ export function DeleteOneAttachment(props: {
             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers",
             params: {
                 idOrganization: props.attachment.idOrganization,
-                idYear: props.attachment.idYear
+                idYear: props.attachment.idYear,
             },
         })
     }
@@ -50,7 +52,13 @@ export function DeleteOneAttachment(props: {
     return (
         <DeleteConfirmation
             title="Voulez-vous supprimer ce fichier ?"
-            description={<>Cette action supprimera le fichier et toutes les données associées.<br />Cette action est irréversible.</>}
+            description={
+                <>
+                    Cette action supprimera le fichier et toutes les données associées.
+                    <br />
+                    Cette action est irréversible.
+                </>
+            }
             submitText="Supprimer le fichier"
             onSubmit={onSubmit}
         >

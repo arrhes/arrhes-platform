@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { recordLabelSchema, recordLabelSchemaReturn } from "../../../../../../../../../schemas/recordLabel.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneRecordLabelRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-record-label`,
@@ -15,6 +14,6 @@ export const updateOneRecordLabelRouteDefinition = routeDefinition({
 
             label: v.optional(recordLabelSchema.entries.label),
         }),
-        return: recordLabelSchemaReturn
+        return: recordLabelSchemaReturn,
     },
 })

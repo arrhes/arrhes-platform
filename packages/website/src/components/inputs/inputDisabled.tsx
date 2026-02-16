@@ -1,7 +1,6 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { InputHTMLAttributes, useRef } from 'react'
-import { FieldError } from 'react-hook-form'
-
+import { type InputHTMLAttributes, useRef } from "react"
+import type { FieldError } from "react-hook-form"
 
 type InputDisabled = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
     error?: FieldError
@@ -27,9 +26,9 @@ export function InputDisabled(props: InputDisabled) {
                     border: "1px solid",
                     borderRadius: "md",
                     backgroundColor: "neutral",
-                    fontSize: "sm"
+                    fontSize: "sm",
                 }),
-                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" })
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
             )}
             disabled
         />

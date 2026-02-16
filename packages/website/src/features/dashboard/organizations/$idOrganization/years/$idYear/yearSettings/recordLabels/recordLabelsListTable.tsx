@@ -1,12 +1,11 @@
 import { readAllRecordLabelsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { schemas } from "@arrhes/application-metadata/schemas"
+import type { schemas } from "@arrhes/application-metadata/schemas"
 import { IconTag } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { ListTable } from "../../../../../../../../components/layouts/listTable/listTable.tsx"
 import { RecordLabelListTableRow } from "./recordLabelListTableRow.tsx"
-
 
 export function RecordLabelsListTable(props: {
     idOrganization: v.InferOutput<typeof schemas.organization>["id"]
@@ -18,7 +17,7 @@ export function RecordLabelsListTable(props: {
                 routeDefinition={readAllRecordLabelsRouteDefinition}
                 body={{
                     idOrganization: props.idOrganization,
-                    idYear: props.idYear
+                    idYear: props.idYear,
                 }}
             >
                 {(recordLabels) => {
@@ -33,14 +32,9 @@ export function RecordLabelsListTable(props: {
                             />
                         )
                     }
-                    return (
-                        sortedRecordLabels.map((recordLabel) => (
-                            <RecordLabelListTableRow
-                                key={recordLabel.id}
-                                recordLabel={recordLabel}
-                            />
-                        ))
-                    )
+                    return sortedRecordLabels.map((recordLabel) => (
+                        <RecordLabelListTableRow key={recordLabel.id} recordLabel={recordLabel} />
+                    ))
                 }}
             </DataWrapper>
         </ListTable.Root>

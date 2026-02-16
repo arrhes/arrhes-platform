@@ -1,13 +1,8 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-
-export function DialogOverlay(props:
-    ComponentPropsWithRef<typeof DialogPrimitive.Overlay>
-) {
+export function DialogOverlay(props: ComponentPropsWithRef<typeof DialogPrimitive.Overlay>) {
     return (
         <DialogPrimitive.Overlay
             {...props}
@@ -26,13 +21,13 @@ export function DialogOverlay(props:
                     padding: "6",
                     backgroundColor: "neutral/10",
                     "&[data-state=open]": {
-                        animation: "fadeIn 0.2s ease-out"
+                        animation: "fadeIn 0.2s ease-out",
                     },
                     "&[data-state=closed]": {
-                        animation: "fadeOut 0.2s ease-in"
-                    }
+                        animation: "fadeOut 0.2s ease-in",
+                    },
                 }),
-                props.className
+                props.className,
             )}
         />
     )

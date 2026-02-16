@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const createOneBalanceSheetRoute = authFactory.createApp()
+export const createOneBalanceSheetRoute = authFactory
+    .createApp()
     .post(
         createOneBalanceSheetRouteDefinition.path,
         bodyValidator(createOneBalanceSheetRouteDefinition.schemas.body),
@@ -31,7 +31,7 @@ export const createOneBalanceSheetRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -40,5 +40,5 @@ export const createOneBalanceSheetRoute = authFactory.createApp()
                 schema: createOneBalanceSheetRouteDefinition.schemas.return,
                 data: createOneBalanceSheet,
             })
-        }
+        },
     )

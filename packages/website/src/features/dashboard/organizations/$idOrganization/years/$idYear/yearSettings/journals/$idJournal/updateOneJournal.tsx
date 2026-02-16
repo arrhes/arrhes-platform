@@ -1,9 +1,13 @@
-import { readAllJournalsRouteDefinition, readOneJournalRouteDefinition, updateOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllJournalsRouteDefinition,
+    readOneJournalRouteDefinition,
+    updateOneJournalRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../components/forms/formField.tsx"
@@ -13,9 +17,8 @@ import { FormRoot } from "../../../../../../../../../components/forms/formRoot.t
 import { InputText } from "../../../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneJournal(props: {
     journal: v.InferOutput<typeof returnedSchemas.journal>
@@ -24,17 +27,10 @@ export function UpdateOneJournal(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier le journal"
-                />
+                <Drawer.Header title="Modifier le journal" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneJournalRouteDefinition.schemas.body}
@@ -47,7 +43,7 @@ export function UpdateOneJournal(props: {
                             text: "Modifier le journal",
                         }}
                         onSubmit={async (data) => {
-                            const updateJournalResponse = await postAPI({
+                            const updateJournalResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneJournalRouteDefinition,
                                 body: data,
                             })
@@ -61,7 +57,6 @@ export function UpdateOneJournal(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllJournalsRouteDefinition,
                                 body: {
@@ -116,10 +111,7 @@ export function UpdateOneJournal(props: {
                                                 isRequired={false}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

@@ -1,23 +1,29 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
+import { pbkdf2Sync } from "crypto"
+import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { generateVerificationToken } from "../../../utilities/generateVerificationToken.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
-import { pbkdf2Sync } from "crypto"
-import { eq } from "drizzle-orm"
 
-
-export const updateUserEmailRoute = authFactory.createApp()
+export const updateUserEmailRoute = authFactory
+    .createApp()
     .post(
         updateUserEmailRouteDefinition.path,
         bodyValidator(updateUserEmailRouteDefinition.schemas.body),
         async (c) => {
             const body = c.req.valid("json")
 
-            const givenPasswordHash = pbkdf2Sync(body.currentPassword, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+            const givenPasswordHash = pbkdf2Sync(
+                body.currentPassword,
+                c.var.user.passwordSalt,
+                128000,
+                64,
+                `sha512`,
+            ).toString(`hex`)
             if (givenPasswordHash !== c.var.user.passwordHash) {
                 throw new Exception({
                     statusCode: 400,
@@ -32,12 +38,10 @@ export const updateUserEmailRoute = authFactory.createApp()
                 data: {
                     emailToValidate: body.emailToValidate,
                     emailToken: generateVerificationToken(),
-                    emailTokenExpiresAt: new Date(new Date().getTime() + (60 * 60 * 1000)).toISOString(),
+                    emailTokenExpiresAt: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
                     lastUpdatedAt: new Date().toISOString(),
                 },
-                where: (table) => (
-                    eq(table.id, c.var.user.id)
-                )
+                where: (table) => eq(table.id, c.var.user.id),
             })
 
             // await sendEmail({
@@ -54,5 +58,5 @@ export const updateUserEmailRoute = authFactory.createApp()
                 schema: updateUserEmailRouteDefinition.schemas.return,
                 data: updatedEmail,
             })
-        }
+        },
     )

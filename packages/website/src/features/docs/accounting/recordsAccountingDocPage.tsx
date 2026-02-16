@@ -11,52 +11,47 @@ import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
 import { DocTip } from "../../../components/document/docTip.js"
 
-
 export function RecordsAccountingDocPage() {
     return (
         <DocRoot>
-            <DocHeader
-                title="Les écritures comptables"
-                description="Enregistrer les opérations dans les comptes"
-            />
+            <DocHeader title="Les écritures comptables" description="Enregistrer les opérations dans les comptes" />
 
             <DocSection title="Qu'est-ce qu'une écriture comptable ?">
                 <DocParagraph>
-                    Une écriture comptable est l'enregistrement d'une opération économique dans
-                    les comptes. Chaque écriture traduit un événement réel (achat, vente, paiement...)
-                    en langage comptable.
+                    Une écriture comptable est l'enregistrement d'une opération économique dans les comptes. Chaque
+                    écriture traduit un événement réel (achat, vente, paiement...) en langage comptable.
                 </DocParagraph>
                 <DocParagraph>
                     Comme vu dans l'<DocLink to="/documentation/comptabilité/introduction">introduction</DocLink>,
-                    chaque écriture respecte le principe de la partie double : elle affecte au moins
-                    deux comptes et le total des débits égale le total des crédits.
+                    chaque écriture respecte le principe de la partie double : elle affecte au moins deux comptes et le
+                    total des débits égale le total des crédits.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Le journal : registre chronologique">
                 <DocParagraph>
-                    Le <strong>journal</strong> est le document fondamental de la comptabilité. Il enregistre
-                    toutes les écritures dans l'ordre chronologique, créant ainsi une trace complète
-                    et inaltérable de l'activité de l'entreprise.
+                    Le <strong>journal</strong> est le document fondamental de la comptabilité. Il enregistre toutes les
+                    écritures dans l'ordre chronologique, créant ainsi une trace complète et inaltérable de l'activité
+                    de l'entreprise.
                 </DocParagraph>
                 <DocParagraph>
-                    Le journal a une valeur juridique : il constitue une preuve en cas de litige
-                    ou de contrôle fiscal. C'est pourquoi les écritures ne doivent jamais être effacées,
-                    mais corrigées par des écritures de contre-passation si nécessaire.
+                    Le journal a une valeur juridique : il constitue une preuve en cas de litige ou de contrôle fiscal.
+                    C'est pourquoi les écritures ne doivent jamais être effacées, mais corrigées par des écritures de
+                    contre-passation si nécessaire.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Structure d'une écriture">
-                <DocParagraph>
-                    Une écriture comptable complète contient les éléments suivants :
-                </DocParagraph>
-                <DocList items={[
-                    "La date de l'opération",
-                    "Le numéro de pièce justificative",
-                    "Le libellé (description de l'opération)",
-                    "Les comptes mouvementés avec leurs montants au débit ou au crédit",
-                    "Le journal dans lequel elle est enregistrée"
-                ]} />
+                <DocParagraph>Une écriture comptable complète contient les éléments suivants :</DocParagraph>
+                <DocList
+                    items={[
+                        "La date de l'opération",
+                        "Le numéro de pièce justificative",
+                        "Le libellé (description de l'opération)",
+                        "Les comptes mouvementés avec leurs montants au débit ou au crédit",
+                        "Le journal dans lequel elle est enregistrée",
+                    ]}
+                />
 
                 <DocExample title="Écriture d'achat de fournitures">
                     <p className={css({ fontWeight: "medium", mb: "2" })}>
@@ -78,9 +73,8 @@ export function RecordsAccountingDocPage() {
 
             <DocSection title="Les journaux auxiliaires">
                 <DocParagraph>
-                    Pour faciliter l'organisation, les écritures sont regroupées dans des journaux
-                    auxiliaires selon leur nature. Cela permet de répartir le travail et de vérifier
-                    plus facilement les opérations.
+                    Pour faciliter l'organisation, les écritures sont regroupées dans des journaux auxiliaires selon
+                    leur nature. Cela permet de répartir le travail et de vérifier plus facilement les opérations.
                 </DocParagraph>
 
                 <DocDefinition
@@ -200,15 +194,17 @@ export function RecordsAccountingDocPage() {
 
             <DocSection title="La TVA dans les écritures">
                 <DocParagraph>
-                    Si votre organisation est assujettie à la TVA, chaque opération doit distinguer
-                    le montant hors taxes (HT) et la TVA. Le compte État joue un rôle central.
+                    Si votre organisation est assujettie à la TVA, chaque opération doit distinguer le montant hors
+                    taxes (HT) et la TVA. Le compte État joue un rôle central.
                 </DocParagraph>
 
-                <DocList items={[
-                    "Sur les achats : la TVA payée est déductible (compte 4456) - l'État vous doit cette somme",
-                    "Sur les ventes : la TVA facturée est collectée (compte 4457) - vous devez cette somme à l'État",
-                    "La différence (collectée - déductible) est versée à l'État (ou remboursée si négative)"
-                ]} />
+                <DocList
+                    items={[
+                        "Sur les achats : la TVA payée est déductible (compte 4456) - l'État vous doit cette somme",
+                        "Sur les ventes : la TVA facturée est collectée (compte 4457) - vous devez cette somme à l'État",
+                        "La différence (collectée - déductible) est versée à l'État (ou remboursée si négative)",
+                    ]}
+                />
 
                 <DocExample title="Déclaration de TVA">
                     <p className={css({ mb: "2", fontSize: "sm" })}>À la fin du mois, vous avez :</p>
@@ -235,38 +231,36 @@ export function RecordsAccountingDocPage() {
 
             <DocSection title="Contrôle des écritures">
                 <DocParagraph>
-                    La <strong>balance</strong> permet de vérifier que toutes les écritures sont équilibrées.
-                    Elle liste tous les comptes avec :
+                    La <strong>balance</strong> permet de vérifier que toutes les écritures sont équilibrées. Elle liste
+                    tous les comptes avec :
                 </DocParagraph>
-                <DocList items={[
-                    "Le total des mouvements au débit",
-                    "Le total des mouvements au crédit",
-                    "Le solde (débiteur ou créditeur)"
-                ]} />
+                <DocList
+                    items={[
+                        "Le total des mouvements au débit",
+                        "Le total des mouvements au crédit",
+                        "Le solde (débiteur ou créditeur)",
+                    ]}
+                />
                 <DocParagraph>
-                    Si le total des débits n'égale pas le total des crédits, c'est qu'une erreur
-                    s'est glissée quelque part. La balance doit toujours être équilibrée.
+                    Si le total des débits n'égale pas le total des crédits, c'est qu'une erreur s'est glissée quelque
+                    part. La balance doit toujours être équilibrée.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
-                    Dans Arrhes, la <DocLink to="/documentation/dashboard/écritures">saisie des écritures</DocLink>{" "}
-                    est simplifiée. Le logiciel vérifie automatiquement l'équilibre débit/crédit
-                    et vous guide dans le choix des comptes. Vous pouvez également créer des modèles
-                    d'écritures pour les opérations répétitives.
+                    Dans Arrhes, la <DocLink to="/documentation/dashboard/écritures">saisie des écritures</DocLink> est
+                    simplifiée. Le logiciel vérifie automatiquement l'équilibre débit/crédit et vous guide dans le choix
+                    des comptes. Vous pouvez également créer des modèles d'écritures pour les opérations répétitives.
                 </DocParagraph>
             </DocSection>
 
             <DocTip variant="warning">
-                N'oubliez pas : chaque écriture doit toujours être équilibrée (total débits = total crédits).
-                Arrhes vérifie automatiquement cet équilibre lors de la saisie.
+                N'oubliez pas : chaque écriture doit toujours être équilibrée (total débits = total crédits). Arrhes
+                vérifie automatiquement cet équilibre lors de la saisie.
             </DocTip>
 
-            <DocNextPage
-                to="/documentation/comptabilité/documents"
-                label="Les documents comptables"
-            />
+            <DocNextPage to="/documentation/comptabilité/documents" label="Les documents comptables" />
         </DocRoot>
     )
 }

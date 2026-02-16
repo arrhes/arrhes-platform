@@ -5,7 +5,6 @@ import { DropdownRoot } from "./dropdownRoot.js"
 import { DropdownSeparator } from "./dropdownSeparator.js"
 import { DropdownTrigger } from "./dropdownTrigger.js"
 
-
 export const Dropdown = {
     Root: DropdownRoot,
     Trigger: DropdownTrigger,

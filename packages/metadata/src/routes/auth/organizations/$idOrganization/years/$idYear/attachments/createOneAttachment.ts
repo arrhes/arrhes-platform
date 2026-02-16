@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../components/index.js"
 import { attachmentSchema, attachmentSchemaReturn } from "../../../../../../../schemas/attachment.js"
 import { routeDefinition } from "../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneAttachmentRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-attachment`,
@@ -15,6 +14,6 @@ export const createOneAttachmentRouteDefinition = routeDefinition({
             label: v.optional(attachmentSchema.entries.label),
             date: attachmentSchema.entries.date,
         }),
-        return: attachmentSchemaReturn
+        return: attachmentSchemaReturn,
     },
 })

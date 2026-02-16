@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readAllIncomeStatementsRoute = authFactory.createApp()
+export const readAllIncomeStatementsRoute = authFactory
+    .createApp()
     .post(
         readAllIncomeStatementsRouteDefinition.path,
         bodyValidator(readAllIncomeStatementsRouteDefinition.schemas.body),
@@ -17,12 +17,7 @@ export const readAllIncomeStatementsRoute = authFactory.createApp()
             const readAllIncomeStatements = await selectMany({
                 database: c.var.clients.sql,
                 table: models.incomeStatement,
-                where: (table) => (
-                    and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idYear, body.idYear),
-                    )
-                )
+                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
             })
 
             return response({
@@ -31,5 +26,5 @@ export const readAllIncomeStatementsRoute = authFactory.createApp()
                 schema: readAllIncomeStatementsRouteDefinition.schemas.return,
                 data: readAllIncomeStatements,
             })
-        }
+        },
     )

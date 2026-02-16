@@ -4,7 +4,6 @@ import { Fragment } from "react/jsx-runtime"
 import { PageNavigation } from "../../../../components/layouts/page/pageNavigation.tsx"
 import { organizationLayoutRoute } from "../../../../routes/root/dashboard/organizations/$idOrganization/organizationLayoutRoute.tsx"
 
-
 export function OrganizationLayout() {
     const params = useParams({ from: organizationLayoutRoute.id })
 
@@ -35,7 +34,7 @@ export function OrganizationLayout() {
                         params: {
                             idOrganization: params.idOrganization,
                         },
-                    }
+                    },
                 ]}
             />
             <Outlet />

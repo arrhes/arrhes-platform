@@ -1,12 +1,7 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactNode } from "react"
+import type { ComponentProps, ReactNode } from "react"
 
-
-
-export function CardHeader(props: {
-    children?: ReactNode
-    className?: ComponentProps<'div'>['className']
-}) {
+export function CardHeader(props: { children?: ReactNode; className?: ComponentProps<"div">["className"] }) {
     return (
         <div
             className={cx(
@@ -17,9 +12,9 @@ export function CardHeader(props: {
                     justifyContent: "space-between",
                     alignItems: "flex-start",
                     gap: "2",
-                    padding: "1rem"
+                    padding: "1rem",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

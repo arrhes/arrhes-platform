@@ -3,7 +3,6 @@ import { activateOrganizationMembershipRoute } from "../../../routes/auth/organi
 import { addNewOrganizationRoute } from "../../../routes/auth/organizations/addNewOrganization.js"
 import { getAllMyOrganizationsRoute } from "../../../routes/auth/organizations/getAllMyOrganizations.js"
 
-
 export const organizationsRoutes = [
     activateOrganizationMembershipRoute,
     addNewOrganizationRoute,

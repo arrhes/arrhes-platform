@@ -8,23 +8,24 @@
 // It runs with tsx, which properly handles .js → .ts extension resolution.
 // =============================================================================
 
-import { pushSchema } from "drizzle-kit/api"
 import { modelSchemas } from "@arrhes/application-metadata/models"
-import { PgDatabase } from "drizzle-orm/pg-core"
+import { pushSchema } from "drizzle-kit/api"
 import { sql } from "drizzle-orm"
+import type { PgDatabase } from "drizzle-orm/pg-core"
 import { drizzle } from "drizzle-orm/postgres-js"
 import postgres from "postgres"
 import { env } from "./env"
-
 
 const connection = postgres(env()?.SQL_DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(connection)
 
 // Check if tables already exist (idempotency guard)
 // If any application table exists, skip the push — the schema is already in place.
-const existingTables = await db.execute(sql.raw(
-    `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE 'table_%'`
-))
+const existingTables = await db.execute(
+    sql.raw(
+        `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE 'table_%'`,
+    ),
+)
 const tableCount = Array.from(existingTables as any).length
 
 if (tableCount > 0) {
@@ -54,10 +55,7 @@ const wrappedDb = new Proxy(db, {
     },
 }) as unknown as PgDatabase<any>
 
-const { apply, hasDataLoss, warnings, statementsToExecute } = await pushSchema(
-    modelSchemas,
-    wrappedDb,
-)
+const { apply, hasDataLoss, warnings, statementsToExecute } = await pushSchema(modelSchemas, wrappedDb)
 
 if (statementsToExecute.length === 0) {
     console.log("No schema changes detected.")

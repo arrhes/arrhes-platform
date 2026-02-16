@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../components/index.js"
 import { recordSchema, recordSchemaReturn } from "../../../../../../../schemas/record.js"
 import { routeDefinition } from "../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneRecordRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-record`,
@@ -17,6 +16,6 @@ export const createOneRecordRouteDefinition = routeDefinition({
             label: recordSchema.entries.label,
             date: recordSchema.entries.date,
         }),
-        return: recordSchemaReturn
+        return: recordSchemaReturn,
     },
 })

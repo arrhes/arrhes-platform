@@ -2,11 +2,13 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 
 export function Logo() {
     return (
-        <div className={css({
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-        })}>
+        <div
+            className={css({
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            })}
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1024 1024"
@@ -14,7 +16,7 @@ export function Logo() {
                     flexShrink: "0",
                     fill: "neutral",
                     height: "16px",
-                    width: "16px"
+                    width: "16px",
                 })}
             >
                 <g>

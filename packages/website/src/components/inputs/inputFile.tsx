@@ -1,16 +1,15 @@
 import { Button } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { InputHTMLAttributes, useRef } from 'react'
-import { FieldError } from 'react-hook-form'
+import { type InputHTMLAttributes, useRef } from "react"
+import type { FieldError } from "react-hook-form"
 
-
-export function InputFile(props:
-    & Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+export function InputFile(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
         error?: FieldError
         value?: File | null
         onChange?: (value?: File | null | undefined) => void
         type?: "image"
-    }
+    },
 ) {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -27,7 +26,7 @@ export function InputFile(props:
                 borderRadius: "sm",
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
             })}
             onDrop={(event) => {
                 event.preventDefault()
@@ -52,7 +51,9 @@ export function InputFile(props:
                 className={css({ display: "none", width: "100%", height: "100%" })}
             />
             <Button
-                onClick={(_event) => { inputRef.current?.click() }}
+                onClick={(_event) => {
+                    inputRef.current?.click()
+                }}
                 className={css({
                     cursor: "pointer",
                     width: "100%",
@@ -60,7 +61,7 @@ export function InputFile(props:
                     padding: { base: "2", md: "3" },
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
                 })}
             >
                 <span className={css({ color: "neutral/75" })}>

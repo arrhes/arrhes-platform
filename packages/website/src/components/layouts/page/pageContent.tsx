@@ -1,9 +1,8 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function PageContent(props: {
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
     children: ReactElement | ReactElement[]
 }) {
     return (
@@ -18,9 +17,9 @@ export function PageContent(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: "1rem"
+                    gap: "1rem",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

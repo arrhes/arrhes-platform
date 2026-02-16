@@ -3,7 +3,6 @@ import { routePath } from "../../../components/index.js"
 import { organizationSchema, organizationSchemaReturn } from "../../../schemas/organization.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
 
-
 export const addNewOrganizationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/add-new-organization`,
@@ -14,7 +13,6 @@ export const addNewOrganizationRouteDefinition = routeDefinition({
             siren: v.optional(organizationSchema.entries.siren),
             email: v.optional(organizationSchema.entries.email),
         }),
-        return: organizationSchemaReturn
+        return: organizationSchemaReturn,
     },
 })
-

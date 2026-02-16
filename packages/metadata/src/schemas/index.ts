@@ -2,7 +2,10 @@ import { accountSchema, accountSchemaReturn } from "./account.js"
 import { attachmentSchema, attachmentSchemaReturn } from "./attachment.js"
 import { balanceSheetSchema, balanceSheetSchemaReturn } from "./balanceSheet.js"
 import { computationSchema, computationSchemaReturn } from "./computation.js"
-import { computationIncomeStatementSchema, computationIncomeStatementSchemaReturn } from "./computationIncomeStatement.js"
+import {
+    computationIncomeStatementSchema,
+    computationIncomeStatementSchemaReturn,
+} from "./computationIncomeStatement.js"
 import { incomeStatementSchema, incomeStatementSchemaReturn } from "./incomeStatement.js"
 import { journalSchema, journalSchemaReturn } from "./journal.js"
 import { organizationSchema, organizationSchemaReturn } from "./organization.js"
@@ -13,7 +16,6 @@ import { recordRowSchema, recordRowSchemaReturn } from "./recordRow.js"
 import { userSchema, userSchemaReturn } from "./user.js"
 import { userSessionSchema, userSessionSchemaReturn } from "./userSession.js"
 import { yearSchema, yearSchemaReturn } from "./year.js"
-
 
 export const schemas = {
     account: accountSchema,
@@ -32,7 +34,6 @@ export const schemas = {
     userSession: userSessionSchema,
     year: yearSchema,
 }
-
 
 export const returnedSchemas = {
     account: accountSchemaReturn,

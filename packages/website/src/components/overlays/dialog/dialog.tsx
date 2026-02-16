@@ -9,7 +9,6 @@ import { DialogRoot } from "./dialogRoot.js"
 import { DialogTitle } from "./dialogTitle.js"
 import { DialogTrigger } from "./dialogTrigger.js"
 
-
 export const Dialog = {
     Content: DialogContent,
     Body: DialogBody,

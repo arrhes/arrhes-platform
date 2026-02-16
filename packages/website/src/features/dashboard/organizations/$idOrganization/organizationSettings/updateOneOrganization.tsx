@@ -1,9 +1,12 @@
-import { readOneOrganizationRouteDefinition, updateOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readOneOrganizationRouteDefinition,
+    updateOneOrganizationRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPencil } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../components/forms/formField.tsx"
@@ -13,9 +16,8 @@ import { FormRoot } from "../../../../../components/forms/formRoot.tsx"
 import { InputText } from "../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneOrganization(props: {
     organization: v.InferOutput<typeof returnedSchemas.organization>
@@ -24,17 +26,10 @@ export function UpdateOneOrganization(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier les informations de l'organisation"
-                />
+                <Drawer.Header title="Modifier les informations de l'organisation" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneOrganizationRouteDefinition.schemas.body}
@@ -44,7 +39,7 @@ export function UpdateOneOrganization(props: {
                             text: "Modifier l'organisation",
                         }}
                         onSubmit={async (data) => {
-                            const response = await postAPI({
+                            const response = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneOrganizationRouteDefinition,
                                 body: data,
                             })
@@ -58,11 +53,10 @@ export function UpdateOneOrganization(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readOneOrganizationRouteDefinition,
                                 body: {
-                                    idOrganization: props.organization.id
+                                    idOrganization: props.organization.id,
                                 },
                             })
 
@@ -83,10 +77,7 @@ export function UpdateOneOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -104,10 +95,7 @@ export function UpdateOneOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -125,11 +113,7 @@ export function UpdateOneOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} type="email" />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { attachmentSchema } from "../../../../../../../../schemas/attachment.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneAttachmentRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-attachment`,
@@ -13,6 +12,6 @@ export const deleteOneAttachmentRouteDefinition = routeDefinition({
             idOrganization: attachmentSchema.entries.idOrganization,
             idYear: attachmentSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

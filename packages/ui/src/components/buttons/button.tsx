@@ -1,7 +1,14 @@
-import { type ComponentProps, type MouseEvent, type ReactNode, createContext, forwardRef, useContext, useState } from "react"
+import {
+    type ComponentProps,
+    createContext,
+    forwardRef,
+    type MouseEvent,
+    type ReactNode,
+    useContext,
+    useState,
+} from "react"
 import { css, cx } from "../../utilities/cn.ts"
 import { sleep } from "../../utilities/sleep.ts"
-
 
 /**
  * Context for passing loading state from Button to ButtonContent
@@ -16,7 +23,6 @@ export function useButtonLoading() {
     return useContext(ButtonLoadingContext)
 }
 
-
 type ButtonProps = Omit<ComponentProps<"button">, "children"> & {
     hasLoader?: boolean
     children: ReactNode
@@ -27,7 +33,7 @@ type ButtonProps = Omit<ComponentProps<"button">, "children"> & {
  * Button component - a neutral container for clickable elements
  * Handles click events, loading state, and disabled state
  * Use composition with ButtonContent for styled button content
- * 
+ *
  * @example
  * <Button onClick={handleClick} hasLoader>
  *   <ButtonContent variant="primary" text="Submit" />
@@ -48,10 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         setIsLoading(false)
     }
 
-    const {
-        hasLoader, className, disabled, title, children,
-        ...buttonProps
-    } = props
+    const { hasLoader, className, disabled, title, children, ...buttonProps } = props
 
     return (
         <ButtonLoadingContext.Provider value={isLoading}>
@@ -73,7 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
                         padding: "0",
                         _disabled: { cursor: "not-allowed" },
                     }),
-                    className
+                    className,
                 )}
                 onClick={handleClick}
                 type={props.type ?? "button"}

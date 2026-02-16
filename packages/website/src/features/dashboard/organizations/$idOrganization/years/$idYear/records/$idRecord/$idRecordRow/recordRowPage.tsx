@@ -4,7 +4,6 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { FormatBoolean } from "../../../../../../../../../components/formats/formatBoolean.tsx"
-import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatNull } from "../../../../../../../../../components/formats/formatNull.tsx"
 import { FormatPrice } from "../../../../../../../../../components/formats/formatPrice.tsx"
@@ -13,10 +12,10 @@ import { DataBlock } from "../../../../../../../../../components/layouts/dataBlo
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Page } from "../../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { recordRowRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/recordRowRoute.tsx"
 import { DeleteOneRecordRow } from "./deleteOneRecordRow.tsx"
 import { UpdateOneRecordRow } from "./updateOneRecordRow.tsx"
-
 
 export function RecordRowPage() {
     const params = useParams({ from: recordRowRoute.id })
@@ -36,7 +35,15 @@ export function RecordRowPage() {
                         return (
                             <Section.Root>
                                 <Section.Item>
-                                    <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
+                                    <div
+                                        className={css({
+                                            width: "100%",
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "flex-start",
+                                            gap: "2",
+                                        })}
+                                    >
                                         <LinkButton
                                             to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord"
                                             params={{
@@ -51,19 +58,22 @@ export function RecordRowPage() {
                                                 text="Retour"
                                             />
                                         </LinkButton>
-                                        <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                                            <UpdateOneRecordRow
-                                                recordRow={recordRow}
-                                            >
+                                        <div
+                                            className={css({
+                                                display: "flex",
+                                                justifyContent: "flex-end",
+                                                alignItems: "center",
+                                                gap: "2",
+                                            })}
+                                        >
+                                            <UpdateOneRecordRow recordRow={recordRow}>
                                                 <ButtonContent
                                                     variant="primary"
                                                     leftIcon={<IconPencil />}
                                                     text="Modifier"
                                                 />
                                             </UpdateOneRecordRow>
-                                            <DeleteOneRecordRow
-                                                recordRow={recordRow}
-                                            >
+                                            <DeleteOneRecordRow recordRow={recordRow}>
                                                 <ButtonContent
                                                     variant="default"
                                                     leftIcon={<IconTrash />}
@@ -78,30 +88,25 @@ export function RecordRowPage() {
                                         <DataBlock.Header title="Informations" />
                                         <DataBlock.Content>
                                             <DataBlock.Item label="Libellé">
-                                                <FormatText>
-                                                    {recordRow.label}
-                                                </FormatText>
+                                                <FormatText>{recordRow.label}</FormatText>
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Compte">
-                                                {(recordRow.idAccount === null)
-                                                    ? (<FormatNull />)
-                                                    : (
-                                                        <DataWrapper
-                                                            routeDefinition={readOneAccountRouteDefinition}
-                                                            body={{
-                                                                idOrganization: params.idOrganization,
-                                                                idYear: params.idYear,
-                                                                idAccount: recordRow.idAccount,
-                                                            }}
-                                                        >
-                                                            {(account) => (
-                                                                <span>
-                                                                    {`${account.number} - ${account.label}`}
-                                                                </span>
-                                                            )}
-                                                        </DataWrapper>
-                                                    )
-                                                }
+                                                {recordRow.idAccount === null ? (
+                                                    <FormatNull />
+                                                ) : (
+                                                    <DataWrapper
+                                                        routeDefinition={readOneAccountRouteDefinition}
+                                                        body={{
+                                                            idOrganization: params.idOrganization,
+                                                            idYear: params.idYear,
+                                                            idAccount: recordRow.idAccount,
+                                                        }}
+                                                    >
+                                                        {(account) => (
+                                                            <span>{`${account.number} - ${account.label}`}</span>
+                                                        )}
+                                                    </DataWrapper>
+                                                )}
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Débit">
                                                 <FormatPrice price={recordRow.debit} />
@@ -136,9 +141,7 @@ export function RecordRowPage() {
                                                 <FormatDateTime date={recordRow.lastUpdatedAt} />
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Id">
-                                                <FormatText>
-                                                    {recordRow.id}
-                                                </FormatText>
+                                                <FormatText>{recordRow.id}</FormatText>
                                             </DataBlock.Item>
                                         </DataBlock.Content>
                                     </DataBlock.Root>

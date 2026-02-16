@@ -1,12 +1,14 @@
 import { fileSchema } from "@arrhes/application-metadata/components"
-import { createOneAttachmentRouteDefinition, generateAttachmentPutSignedUrlRouteDefinition, readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    createOneAttachmentRouteDefinition,
+    generateAttachmentPutSignedUrlRouteDefinition,
+    readAllAttachmentsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import * as v from "valibot"
-import { invalidateData } from "../../../../../../../utilities/invalidateData.js"
-import { postAPI } from "../../../../../../../utilities/postAPI.js"
 import { FormControl } from "../../../../../../../components/forms/formControl.js"
 import { FormError } from "../../../../../../../components/forms/formError.js"
 import { FormField } from "../../../../../../../components/forms/formField.js"
@@ -18,7 +20,8 @@ import { InputFile } from "../../../../../../../components/inputs/inputFile.js"
 import { InputText } from "../../../../../../../components/inputs/inputText.js"
 import { Drawer } from "../../../../../../../components/overlays/drawer/drawer.js"
 import { toast } from "../../../../../../../contexts/toasts/useToast.js"
-
+import { getResponseBodyFromAPI } from "../../../../../../../utilities/getResponseBodyFromAPI.js"
+import { invalidateData } from "../../../../../../../utilities/invalidateData.js"
 
 export function CreateOneAttachment(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -28,22 +31,15 @@ export function CreateOneAttachment(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Ajouter un nouveau fichier"
-                />
+                <Drawer.Header title="Ajouter un nouveau fichier" />
                 <Drawer.Body>
                     <FormRoot
                         schema={v.intersect([
                             createOneAttachmentRouteDefinition.schemas.body,
-                            v.object({ file: v.optional(fileSchema) })
+                            v.object({ file: v.optional(fileSchema) }),
                         ])}
                         defaultValues={{
                             idOrganization: props.idOrganization,
@@ -54,7 +50,7 @@ export function CreateOneAttachment(props: {
                             text: "Ajouter le fichier",
                         }}
                         onSubmit={async (data) => {
-                            const createAttachmentResponse = await postAPI({
+                            const createAttachmentResponse = await getResponseBodyFromAPI({
                                 routeDefinition: createOneAttachmentRouteDefinition,
                                 body: {
                                     idOrganization: data.idOrganization,
@@ -69,9 +65,8 @@ export function CreateOneAttachment(props: {
                                 return false
                             }
 
-
                             if (data.file !== undefined) {
-                                const signedUrlResponse = await postAPI({
+                                const signedUrlResponse = await getResponseBodyFromAPI({
                                     routeDefinition: generateAttachmentPutSignedUrlRouteDefinition,
                                     body: {
                                         idOrganization: props.idOrganization,
@@ -85,13 +80,10 @@ export function CreateOneAttachment(props: {
                                     toast({ title: "Impossible de télécharger le fichier", variant: "error" })
                                     return false
                                 }
-                                const uploadFileResponse = await fetch(
-                                    signedUrlResponse.data.url,
-                                    {
-                                        method: "PUT",
-                                        body: data.file,
-                                    }
-                                )
+                                const uploadFileResponse = await fetch(signedUrlResponse.data.url, {
+                                    method: "PUT",
+                                    body: data.file,
+                                })
                                 if (uploadFileResponse.ok === false) {
                                     toast({ title: "Le fichier ne peut pas être téléchargé", variant: "error" })
                                     return false
@@ -103,7 +95,6 @@ export function CreateOneAttachment(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllAttachmentsRouteDefinition,
                                 body: {
@@ -117,21 +108,14 @@ export function CreateOneAttachment(props: {
                     >
                         {(form) => (
                             <Fragment>
-
                                 <FormField
                                     control={form.control}
                                     name="file"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Fichier"
-                                                isRequired
-                                            />
+                                            <FormLabel label="Fichier" isRequired />
                                             <FormControl>
-                                                <InputFile
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputFile value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -149,10 +133,7 @@ export function CreateOneAttachment(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputDate
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputDate value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -169,11 +150,7 @@ export function CreateOneAttachment(props: {
                                                 isRequired
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    autoFocus
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} autoFocus />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -191,10 +168,7 @@ export function CreateOneAttachment(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

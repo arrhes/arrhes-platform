@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneRecordLabelRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneRecordLabelRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const createOneRecordLabelRoute = authFactory.createApp()
+export const createOneRecordLabelRoute = authFactory
+    .createApp()
     .post(
         createOneRecordLabelRouteDefinition.path,
         bodyValidator(createOneRecordLabelRouteDefinition.schemas.body),
@@ -28,7 +28,7 @@ export const createOneRecordLabelRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -37,5 +37,5 @@ export const createOneRecordLabelRoute = authFactory.createApp()
                 schema: createOneRecordLabelRouteDefinition.schemas.return,
                 data: createOneRecordLabel,
             })
-        }
+        },
     )

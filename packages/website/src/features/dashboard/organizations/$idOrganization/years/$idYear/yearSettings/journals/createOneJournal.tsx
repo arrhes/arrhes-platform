@@ -1,9 +1,9 @@
 import { createOneJournalRouteDefinition, readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../components/forms/formField.tsx"
@@ -13,9 +13,8 @@ import { FormRoot } from "../../../../../../../../components/forms/formRoot.tsx"
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function CreateOneJournal(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -25,17 +24,10 @@ export function CreateOneJournal(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Ajouter un nouveau journal"
-                />
+                <Drawer.Header title="Ajouter un nouveau journal" />
                 <Drawer.Body>
                     <FormRoot
                         schema={createOneJournalRouteDefinition.schemas.body}
@@ -48,7 +40,7 @@ export function CreateOneJournal(props: {
                             text: "Ajouter le journal",
                         }}
                         onSubmit={async (data) => {
-                            const createJournalResponse = await postAPI({
+                            const createJournalResponse = await getResponseBodyFromAPI({
                                 routeDefinition: createOneJournalRouteDefinition,
                                 body: data,
                             })
@@ -62,7 +54,6 @@ export function CreateOneJournal(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllJournalsRouteDefinition,
                                 body: {
@@ -108,10 +99,7 @@ export function CreateOneJournal(props: {
                                                 isRequired={false}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

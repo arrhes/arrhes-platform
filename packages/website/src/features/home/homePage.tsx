@@ -1,15 +1,9 @@
 import { Badge, ButtonContent, Logo } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import {
-    IconBook2,
-    IconBrandGithub,
-    IconGavel,
-    IconUser
-} from "@tabler/icons-react"
+import { IconBook2, IconBrandGithub, IconGavel, IconUser } from "@tabler/icons-react"
 import { LinkButton } from "../../components/linkButton.js"
 import { HeroIllustration } from "./heroIllustration.js"
 import { Pricing } from "./pricing.js"
-
 
 export function HomePage() {
     return (
@@ -22,7 +16,7 @@ export function HomePage() {
                 flexDirection: "column",
                 justifyContent: "start",
                 alignItems: "stretch",
-                backgroundColor: "background"
+                backgroundColor: "background",
             })}
         >
             {/* Header */}
@@ -52,9 +46,7 @@ export function HomePage() {
                         gap: "1rem",
                     })}
                 >
-                    <LinkButton
-                        to="/"
-                    >
+                    <LinkButton to="/">
                         <Logo withText />
                     </LinkButton>
                     <nav
@@ -64,31 +56,14 @@ export function HomePage() {
                             gap: "0.5rem",
                         })}
                     >
-                        <a
-                            href="https://github.com/arrhes"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <ButtonContent
-                                variant="invisible"
-                                leftIcon={<IconBrandGithub />}
-                            />
+                        <a href="https://github.com/arrhes" target="_blank" rel="noopener noreferrer">
+                            <ButtonContent variant="invisible" leftIcon={<IconBrandGithub />} />
                         </a>
-                        <LinkButton
-                            to="/documentation"
-                        >
-                            <ButtonContent
-                                leftIcon={<IconBook2 />}
-                                text="Documentation"
-                            />
+                        <LinkButton to="/documentation">
+                            <ButtonContent leftIcon={<IconBook2 />} text="Documentation" />
                         </LinkButton>
-                        <LinkButton
-                            to="/dashboard"
-                        >
-                            <ButtonContent
-                                variant="primary"
-                                text="Dashboard"
-                            />
+                        <LinkButton to="/dashboard">
+                            <ButtonContent variant="primary" text="Dashboard" />
                         </LinkButton>
                     </nav>
                 </div>
@@ -105,7 +80,7 @@ export function HomePage() {
                     paddingX: "1rem",
                     paddingY: "4rem",
                     borderBottom: "1px solid",
-                    borderBottomColor: "neutral/10"
+                    borderBottomColor: "neutral/10",
                 })}
             >
                 <div
@@ -130,9 +105,7 @@ export function HomePage() {
                             gap: "1rem",
                         })}
                     >
-                        <Badge>
-                            Open source
-                        </Badge>
+                        <Badge>Open source</Badge>
 
                         <h1
                             className={css({
@@ -145,22 +118,23 @@ export function HomePage() {
                             })}
                         >
                             Le logiciel de comptabilité moderne et intuitif,
-                            <br />pour les {" "}
+                            <br />
+                            pour les{" "}
                             <span
                                 className={css({
                                     fontSize: "inherit",
                                     color: "primary",
-                                    fontWeight: "semibold"
+                                    fontWeight: "semibold",
                                 })}
                             >
                                 entreprises
-                            </span>
-                            {" "}et{" "}
+                            </span>{" "}
+                            et{" "}
                             <span
                                 className={css({
                                     fontSize: "inherit",
                                     color: "primary",
-                                    fontWeight: "semibold"
+                                    fontWeight: "semibold",
                                 })}
                             >
                                 associations
@@ -168,30 +142,20 @@ export function HomePage() {
                             .
                         </h1>
 
-                        <div className={css({
-                            marginTop: "1rem",
-                            display: "flex",
-                            flexDirection: { base: "column", sm: "row" },
-                            alignItems: "center",
-                            gap: "0.5rem"
-                        })}>
-                            <LinkButton
-                                to="/inscription"
-                            >
-                                <ButtonContent
-                                    variant="primary"
-                                    leftIcon={<IconUser />}
-                                    text="Créer un compte"
-                                />
+                        <div
+                            className={css({
+                                marginTop: "1rem",
+                                display: "flex",
+                                flexDirection: { base: "column", sm: "row" },
+                                alignItems: "center",
+                                gap: "0.5rem",
+                            })}
+                        >
+                            <LinkButton to="/inscription">
+                                <ButtonContent variant="primary" leftIcon={<IconUser />} text="Créer un compte" />
                             </LinkButton>
-                            <LinkButton
-                                to="/documentation"
-                            >
-                                <ButtonContent
-                                    variant="default"
-                                    leftIcon={<IconBook2 />}
-                                    text="En savoir plus"
-                                />
+                            <LinkButton to="/documentation">
+                                <ButtonContent variant="default" leftIcon={<IconBook2 />} text="En savoir plus" />
                             </LinkButton>
                         </div>
                     </div>
@@ -235,18 +199,23 @@ export function HomePage() {
                         gap: "2rem",
                     })}
                 >
-                    <h2 className={css({
-                        fontSize: "lg",
-                        fontWeight: "bold",
-                        color: "neutral",
-                    })}>
+                    <h2
+                        className={css({
+                            fontSize: "lg",
+                            fontWeight: "bold",
+                            color: "neutral",
+                        })}
+                    >
                         Pourquoi choisir Arrhes ?
                     </h2>
-                    <p className={css({
-                        fontSize: "md",
-                        color: "neutral/60",
-                    })}>
-                        Un logiciel de comptabilité conçu pour être simple et transparent, tout en respectant les exigences de la comptabilité française.
+                    <p
+                        className={css({
+                            fontSize: "md",
+                            color: "neutral/60",
+                        })}
+                    >
+                        Un logiciel de comptabilité conçu pour être simple et transparent, tout en respectant les
+                        exigences de la comptabilité française.
                         <br />
                         Il s'adresse à tous ceux qui souhaitent reprendre la main sur leur comptabilité.
                     </p>
@@ -268,7 +237,7 @@ export function HomePage() {
                     paddingY: "4rem",
                     // backgroundColor: "white",
                     borderTop: "1px solid",
-                    borderTopColor: "neutral/10"
+                    borderTopColor: "neutral/10",
                 })}
             >
                 <div
@@ -301,14 +270,8 @@ export function HomePage() {
                         <br />
                         Apprenez les concepts essentiels : partie double, plan comptable, écritures, journaux...
                     </p>
-                    <LinkButton
-                        to="/documentation/comptabilité"
-                    >
-                        <ButtonContent
-                            variant="default"
-                            leftIcon={<IconBook2 />}
-                            text="Découvrir le cours"
-                        />
+                    <LinkButton to="/documentation/comptabilité">
+                        <ButtonContent variant="default" leftIcon={<IconBook2 />} text="Découvrir le cours" />
                     </LinkButton>
                 </div>
             </section>
@@ -324,7 +287,7 @@ export function HomePage() {
                     borderTop: "1px solid",
                     borderTopColor: "neutral/10",
                     backgroundColor: "white",
-                    marginTop: "auto"
+                    marginTop: "auto",
                 })}
             >
                 <div
@@ -348,18 +311,11 @@ export function HomePage() {
                     >
                         <Logo withText />
                     </Button> */}
-                    <LinkButton
-                        to="/documentation/mentions-légales"
-                    >
-                        <ButtonContent
-                            variant="invisible"
-                            leftIcon={<IconGavel />}
-                            text="Mentions légales"
-                        />
+                    <LinkButton to="/documentation/mentions-légales">
+                        <ButtonContent variant="invisible" leftIcon={<IconGavel />} text="Mentions légales" />
                     </LinkButton>
                 </div>
             </footer>
         </div>
     )
 }
-

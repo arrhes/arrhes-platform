@@ -1,8 +1,6 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
-import { ComponentProps } from "react"
-
+import type { ComponentProps } from "react"
 
 export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Content>) {
     return (
@@ -20,13 +18,13 @@ export function TooltipContent(props: ComponentProps<typeof TooltipPrimitive.Con
                     py: "3",
                     fontSize: "xs",
                     "&[data-state=open]": {
-                        animation: "fadeIn 0.2s ease-out, zoomIn 0.2s ease-out"
+                        animation: "fadeIn 0.2s ease-out, zoomIn 0.2s ease-out",
                     },
                     "&[data-state=closed]": {
-                        animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
-                    }
+                        animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in",
+                    },
                 }),
-                props.className
+                props.className,
             )}
             {...props}
         />

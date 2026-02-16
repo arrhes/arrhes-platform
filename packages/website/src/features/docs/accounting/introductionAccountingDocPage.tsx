@@ -10,7 +10,6 @@ import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTip } from "../../../components/document/docTip.js"
 
-
 export function IntroductionAccountingDocPage() {
     return (
         <DocRoot>
@@ -21,53 +20,49 @@ export function IntroductionAccountingDocPage() {
 
             <DocSection title="Qu'est-ce que la comptabilité ?">
                 <DocParagraph>
-                    La comptabilité est un système d'organisation de l'information financière.
-                    Elle permet d'enregistrer, classer et analyser toutes les opérations économiques
-                    d'une organisation (entreprise, association, etc.).
+                    La comptabilité est un système d'organisation de l'information financière. Elle permet
+                    d'enregistrer, classer et analyser toutes les opérations économiques d'une organisation (entreprise,
+                    association, etc.).
                 </DocParagraph>
                 <DocParagraph>
-                    À l'origine, la comptabilité est née du besoin de contrôler les mouvements d'argent
-                    et de limiter les risques de détournement. Pour cela, seule une personne désignée
-                    (le caissier) est habilitée à percevoir et verser de l'argent, et toutes les opérations
-                    doivent être justifiées par des pièces.
+                    À l'origine, la comptabilité est née du besoin de contrôler les mouvements d'argent et de limiter
+                    les risques de détournement. Pour cela, seule une personne désignée (le caissier) est habilitée à
+                    percevoir et verser de l'argent, et toutes les opérations doivent être justifiées par des pièces.
                 </DocParagraph>
-                <DocParagraph>
-                    En termes simples, la comptabilité répond à deux questions essentielles :
-                </DocParagraph>
-                <DocList items={[
-                    "D'où vient l'argent ? (les ressources)",
-                    "Où va l'argent ? (les emplois)"
-                ]} />
+                <DocParagraph>En termes simples, la comptabilité répond à deux questions essentielles :</DocParagraph>
+                <DocList items={["D'où vient l'argent ? (les ressources)", "Où va l'argent ? (les emplois)"]} />
             </DocSection>
 
             <DocSection title="Pourquoi tenir une comptabilité ?">
                 <DocParagraph>
-                    La tenue d'une comptabilité est obligatoire pour la plupart des structures en France.
-                    Au-delà de l'obligation légale, elle offre plusieurs avantages :
+                    La tenue d'une comptabilité est obligatoire pour la plupart des structures en France. Au-delà de
+                    l'obligation légale, elle offre plusieurs avantages :
                 </DocParagraph>
-                <DocList items={[
-                    "Connaître la situation financière de votre organisation à tout moment",
-                    "Prendre des décisions éclairées basées sur des chiffres réels",
-                    "Justifier vos opérations auprès de l'administration fiscale",
-                    "Calculer le bénéfice ou la perte de l'exercice",
-                    "Communiquer avec vos partenaires (banques, fournisseurs, membres)"
-                ]} />
+                <DocList
+                    items={[
+                        "Connaître la situation financière de votre organisation à tout moment",
+                        "Prendre des décisions éclairées basées sur des chiffres réels",
+                        "Justifier vos opérations auprès de l'administration fiscale",
+                        "Calculer le bénéfice ou la perte de l'exercice",
+                        "Communiquer avec vos partenaires (banques, fournisseurs, membres)",
+                    ]}
+                />
             </DocSection>
 
             <DocSection title="L'exercice comptable">
                 <DocParagraph>
-                    Le temps est découpé en périodes appelées <strong>exercices</strong>, généralement d'un an.
-                    À la fin de chaque exercice, l'entreprise doit calculer son résultat (bénéfice ou perte)
-                    et présenter ses comptes.
+                    Le temps est découpé en périodes appelées <strong>exercices</strong>, généralement d'un an. À la fin
+                    de chaque exercice, l'entreprise doit calculer son résultat (bénéfice ou perte) et présenter ses
+                    comptes.
                 </DocParagraph>
                 <DocDefinition
                     term="Exercice comptable"
                     definition="Période de 12 mois (généralement l'année civile) pendant laquelle on enregistre les opérations. À la fin de l'exercice, on établit les documents de synthèse (bilan, compte de résultat)."
                 />
                 <DocParagraph>
-                    Le bénéfice de l'exercice est la différence entre le patrimoine de fin d'exercice
-                    et le patrimoine initial. Si l'entreprise a réussi dans ses activités, elle dispose
-                    à la fin de l'exercice d'un patrimoine supérieur à celui du début.
+                    Le bénéfice de l'exercice est la différence entre le patrimoine de fin d'exercice et le patrimoine
+                    initial. Si l'entreprise a réussi dans ses activités, elle dispose à la fin de l'exercice d'un
+                    patrimoine supérieur à celui du début.
                 </DocParagraph>
             </DocSection>
 
@@ -92,7 +87,9 @@ export function IntroductionAccountingDocPage() {
                         <li>Débit du compte Fournitures : +100 euros (vous avez plus de fournitures)</li>
                         <li>Crédit du compte Caisse : -100 euros (vous avez moins d'espèces)</li>
                     </ul>
-                    <p className={css({ marginTop: "3", fontWeight: "medium" })}>Total débits = Total crédits = 100 euros</p>
+                    <p className={css({ marginTop: "3", fontWeight: "medium" })}>
+                        Total débits = Total crédits = 100 euros
+                    </p>
                 </DocExample>
             </DocSection>
 
@@ -114,21 +111,18 @@ export function IntroductionAccountingDocPage() {
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
                     Ces concepts sont directement appliqués dans Arrhes. Lorsque vous{" "}
-                    <DocLink to="/documentation/dashboard/écritures">saisissez une écriture</DocLink>,
-                    le logiciel vous demande de spécifier les comptes à débiter et à créditer,
-                    et vérifie automatiquement que l'équilibre est respecté.
+                    <DocLink to="/documentation/dashboard/écritures">saisissez une écriture</DocLink>, le logiciel vous
+                    demande de spécifier les comptes à débiter et à créditer, et vérifie automatiquement que l'équilibre
+                    est respecté.
                 </DocParagraph>
             </DocSection>
 
             <DocTip variant="info">
-                Maintenant que vous connaissez les bases de la comptabilité, découvrez comment
-                les comptes sont organisés dans la page suivante.
+                Maintenant que vous connaissez les bases de la comptabilité, découvrez comment les comptes sont
+                organisés dans la page suivante.
             </DocTip>
 
-            <DocNextPage
-                to="/documentation/comptabilité/comptes"
-                label="Les comptes comptables"
-            />
+            <DocNextPage to="/documentation/comptabilité/comptes" label="Les comptes comptables" />
         </DocRoot>
     )
 }

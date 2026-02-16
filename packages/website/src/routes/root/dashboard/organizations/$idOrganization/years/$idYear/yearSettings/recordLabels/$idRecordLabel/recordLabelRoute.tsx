@@ -2,14 +2,11 @@ import { createRoute } from "@tanstack/react-router"
 import { RecordLabelPage } from "../../../../../../../../../../features/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/recordLabelPage.js"
 import { recordLabelLayoutRoute } from "./recordLabelLayoutRoute.js"
 
-
 export const recordLabelRoute = createRoute({
     getParentRoute: () => recordLabelLayoutRoute,
     path: "/",
     beforeLoad: () => ({
-        title: undefined
+        title: undefined,
     }),
-    component: () => (
-        <RecordLabelPage />
-    )
+    component: () => <RecordLabelPage />,
 })

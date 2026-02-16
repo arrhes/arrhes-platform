@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { accountSchema, accountSchemaReturn } from "../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneAccountRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-account`,
@@ -27,8 +26,8 @@ export const createOneAccountRouteDefinition = routeDefinition({
             isSelectable: accountSchema.entries.isSelectable,
             number: accountSchema.entries.number,
             label: accountSchema.entries.label,
-            type: accountSchema.entries.type
+            type: accountSchema.entries.type,
         }),
-        return: accountSchemaReturn
+        return: accountSchemaReturn,
     },
 })

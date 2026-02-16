@@ -1,19 +1,16 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { InputHTMLAttributes } from "react"
-import { FieldError } from "react-hook-form"
-import { IMask, IMaskInput } from 'react-imask'
+import type { InputHTMLAttributes } from "react"
+import type { FieldError } from "react-hook-form"
+import { IMask, IMaskInput } from "react-imask"
 
-
-export function InputPrice(props:
-    & Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange">
-    & {
+export function InputPrice(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange"> & {
         error?: FieldError
         defaultValue?: string | undefined | null
         value?: string | undefined | null
         onChange: (value: string | undefined) => void
-    }
+    },
 ) {
-
     function input(value: string | undefined | null) {
         if (value === null || value === undefined) return undefined
         return value
@@ -25,20 +22,22 @@ export function InputPrice(props:
     }
 
     return (
-        <div className={cx(
-            css({
-                height: "32px",
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "stretch",
-                border: "1px solid",
-                borderColor: "neutral/20",
-                borderRadius: "sm"
-            }),
-            css(props.error ? { borderColor: "error" } : {}),
-            props.className
-        )}>
+        <div
+            className={cx(
+                css({
+                    height: "32px",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "stretch",
+                    border: "1px solid",
+                    borderColor: "neutral/20",
+                    borderRadius: "sm",
+                }),
+                css(props.error ? { borderColor: "error" } : {}),
+                props.className,
+            )}
+        >
             <IMaskInput
                 // inputRef={props.ref}
                 mask="n"
@@ -46,8 +45,8 @@ export function InputPrice(props:
                     n: {
                         mask: IMask.MaskedNumber,
                         // from: 0,
-                        scale: 2
-                    }
+                        scale: 2,
+                    },
                 }}
                 autofix={false}
                 lazy={false}
@@ -67,11 +66,10 @@ export function InputPrice(props:
                     _focus: { boxShadow: "inset", backgroundColor: "neutral/5" },
                     overflow: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflow: "ellipsis"
+                    textOverflow: "ellipsis",
                 })}
                 inputMode="decimal"
             />
         </div>
-
     )
 }

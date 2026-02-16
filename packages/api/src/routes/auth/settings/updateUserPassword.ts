@@ -1,15 +1,15 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateUserPasswordRouteDefinition } from "@arrhes/application-metadata/routes"
+import { pbkdf2Sync } from "crypto"
+import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateUserPasswordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { pbkdf2Sync } from "crypto"
-import { eq } from "drizzle-orm"
 
-
-export const updateUserPasswordRoute = authFactory.createApp()
+export const updateUserPasswordRoute = authFactory
+    .createApp()
     .post(
         updateUserPasswordRouteDefinition.path,
         bodyValidator(updateUserPasswordRouteDefinition.schemas.body),
@@ -24,7 +24,13 @@ export const updateUserPasswordRoute = authFactory.createApp()
                 })
             }
 
-            const givenPasswordHash = pbkdf2Sync(body.currentPassword, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+            const givenPasswordHash = pbkdf2Sync(
+                body.currentPassword,
+                c.var.user.passwordSalt,
+                128000,
+                64,
+                `sha512`,
+            ).toString(`hex`)
             if (givenPasswordHash !== c.var.user.passwordHash) {
                 throw new Exception({
                     statusCode: 400,
@@ -33,7 +39,13 @@ export const updateUserPasswordRoute = authFactory.createApp()
                 })
             }
 
-            const newPasswordHash = pbkdf2Sync(body.newPassword, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+            const newPasswordHash = pbkdf2Sync(
+                body.newPassword,
+                c.var.user.passwordSalt,
+                128000,
+                64,
+                `sha512`,
+            ).toString(`hex`)
 
             const updatePassword = await updateOne({
                 database: c.var.clients.sql,
@@ -42,9 +54,7 @@ export const updateUserPasswordRoute = authFactory.createApp()
                     passwordHash: newPasswordHash,
                     lastUpdatedAt: new Date().toISOString(),
                 },
-                where: (table) => (
-                    eq(table.id, c.var.user.id)
-                )
+                where: (table) => eq(table.id, c.var.user.id),
             })
 
             return response({
@@ -53,5 +63,5 @@ export const updateUserPasswordRoute = authFactory.createApp()
                 schema: updateUserPasswordRouteDefinition.schemas.return,
                 data: updatePassword,
             })
-        }
+        },
     )

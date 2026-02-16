@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readOneComputationRoute = authFactory.createApp()
+export const readOneComputationRoute = authFactory
+    .createApp()
     .post(
         readOneComputationRouteDefinition.path,
         bodyValidator(readOneComputationRouteDefinition.schemas.body),
@@ -17,13 +17,12 @@ export const readOneComputationRoute = authFactory.createApp()
             const readOneComputation = await selectOne({
                 database: c.var.clients.sql,
                 table: models.computation,
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
-                        eq(table.id, body.idComputation)
-                    )
-                ),
+                        eq(table.id, body.idComputation),
+                    ),
             })
 
             return response({
@@ -32,5 +31,5 @@ export const readOneComputationRoute = authFactory.createApp()
                 schema: readOneComputationRouteDefinition.schemas.return,
                 data: readOneComputation,
             })
-        }
+        },
     )

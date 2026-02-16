@@ -1,24 +1,26 @@
-import { deleteOneOrganizationUserRouteDefinition, readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ComponentPropsWithRef, ReactElement } from "react"
-import * as v from "valibot"
+import {
+    deleteOneOrganizationUserRouteDefinition,
+    readOneOrganizationRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { ComponentPropsWithRef, ReactElement } from "react"
+import type * as v from "valibot"
 import { DeleteConfirmation } from "../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
 import { toast } from "../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../utilities/postAPI.ts"
-
 
 export function DeleteOneOrganizationUser(props: {
     organizationUser: v.InferOutput<typeof returnedSchemas.organizationUser>
-    children: ReactElement<ComponentPropsWithRef<'div'>>
+    children: ReactElement<ComponentPropsWithRef<"div">>
 }) {
     async function onSubmit() {
-        const deleteResponse = await postAPI({
+        const deleteResponse = await getResponseBodyFromAPI({
             routeDefinition: deleteOneOrganizationUserRouteDefinition,
             body: {
                 idOrganizationUser: props.organizationUser.id,
                 idOrganization: props.organizationUser.idOrganization,
-            }
+            },
         })
 
         if (deleteResponse.ok === false) {
@@ -29,7 +31,7 @@ export function DeleteOneOrganizationUser(props: {
         await invalidateData({
             routeDefinition: readOneOrganizationRouteDefinition,
             body: {
-                idOrganization: props.organizationUser.idOrganization
+                idOrganization: props.organizationUser.idOrganization,
             },
         })
         toast({ title: "Utilisateur supprimé de l'organisation", variant: "success" })

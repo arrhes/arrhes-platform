@@ -10,7 +10,6 @@ import { yearSettingsRoute } from "../../../../../../../routes/root/dashboard/or
 import { DeleteOneYear } from "./deleteOneYear.tsx"
 import { UpdateOneYear } from "./updateOneYear.tsx"
 
-
 export function YearSettingsPage() {
     const params = useParams({ from: yearSettingsRoute.id })
 
@@ -21,7 +20,7 @@ export function YearSettingsPage() {
                     routeDefinition={readOneYearRouteDefinition}
                     body={{
                         idOrganization: params.idOrganization,
-                        idYear: params.idYear
+                        idYear: params.idYear,
                     }}
                 >
                     {(year) => {

@@ -1,9 +1,8 @@
 import { readAllBalanceSheetsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 import { InputCombobox } from "../../../../../../../../components/inputs/inputCombobox.tsx"
 import { useDataFromAPI } from "../../../../../../../../utilities/useHTTPData.ts"
-
 
 export function BalanceSheetsSelect(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -16,7 +15,7 @@ export function BalanceSheetsSelect(props: {
         routeDefinition: readAllBalanceSheetsRouteDefinition,
         body: {
             idOrganization: props.idOrganization,
-            idYear: props.idYear
+            idYear: props.idYear,
         },
     })
 
@@ -28,14 +27,14 @@ export function BalanceSheetsSelect(props: {
             allowEmpty={true}
             placeholder="Sélectionner une ligne de bilan"
             options={
-                (balanceSheetsResponse.data === undefined)
+                balanceSheetsResponse.data === undefined
                     ? []
                     : balanceSheetsResponse.data
-                        .filter((balanceSheet) => props.side === undefined || balanceSheet.side === props.side)
-                        .map((balanceSheet) => ({
-                            key: balanceSheet.id,
-                            label: `${balanceSheet.number} ${balanceSheet.label}`
-                        }))
+                          .filter((balanceSheet) => props.side === undefined || balanceSheet.side === props.side)
+                          .map((balanceSheet) => ({
+                              key: balanceSheet.id,
+                              label: `${balanceSheet.number} ${balanceSheet.label}`,
+                          }))
             }
         />
     )

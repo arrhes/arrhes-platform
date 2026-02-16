@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { recordRowSchema, recordRowSchemaReturn } from "../../../../../../../../../schemas/recordRow.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readAllRecordRowsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-all-record-rows`,
@@ -13,6 +12,6 @@ export const readAllRecordRowsRouteDefinition = routeDefinition({
             idYear: recordRowSchema.entries.idYear,
             idRecord: v.optional(recordRowSchema.entries.idRecord),
         }),
-        return: v.array(recordRowSchemaReturn)
+        return: v.array(recordRowSchemaReturn),
     },
 })

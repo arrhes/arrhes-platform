@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const createOneRecordRoute = authFactory.createApp()
+export const createOneRecordRoute = authFactory
+    .createApp()
     .post(
         createOneRecordRouteDefinition.path,
         bodyValidator(createOneRecordRouteDefinition.schemas.body),
@@ -29,7 +29,7 @@ export const createOneRecordRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -38,5 +38,5 @@ export const createOneRecordRoute = authFactory.createApp()
                 schema: createOneRecordRouteDefinition.schemas.return,
                 data: createOneRecord,
             })
-        }
+        },
     )

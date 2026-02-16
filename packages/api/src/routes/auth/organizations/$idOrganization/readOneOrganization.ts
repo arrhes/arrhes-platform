@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../factories/authFactory.js"
 import { response } from "../../../../utilities/response.js"
 import { selectOne } from "../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readOneOrganizationRoute = authFactory.createApp()
+export const readOneOrganizationRoute = authFactory
+    .createApp()
     .post(
         readOneOrganizationRouteDefinition.path,
         bodyValidator(readOneOrganizationRouteDefinition.schemas.body),
@@ -17,20 +17,13 @@ export const readOneOrganizationRoute = authFactory.createApp()
             const organizationUser = await selectOne({
                 database: c.var.clients.sql,
                 table: models.organizationUser,
-                where: (table) => (
-                    and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idUser, c.var.user.id),
-                    )
-                )
+                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idUser, c.var.user.id)),
             })
 
             const readOneOrganization = await selectOne({
                 database: c.var.clients.sql,
                 table: models.organization,
-                where: (table) => (
-                    eq(table.id, organizationUser.idOrganization)
-                )
+                where: (table) => eq(table.id, organizationUser.idOrganization),
             })
 
             return response({
@@ -39,5 +32,5 @@ export const readOneOrganizationRoute = authFactory.createApp()
                 schema: readOneOrganizationRouteDefinition.schemas.return,
                 data: readOneOrganization,
             })
-        }
+        },
     )

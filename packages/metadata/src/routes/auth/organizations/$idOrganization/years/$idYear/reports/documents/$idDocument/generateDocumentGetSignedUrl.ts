@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { documentSchema } from "../../../../../../../../../schemas/document.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const generateDocumentGetSignedUrlRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/generate-document-get-signed-url`,
@@ -14,7 +13,7 @@ export const generateDocumentGetSignedUrlRouteDefinition = routeDefinition({
             idYear: documentSchema.entries.idYear,
         }),
         return: v.object({
-            url: v.string()
-        })
+            url: v.string(),
+        }),
     },
 })

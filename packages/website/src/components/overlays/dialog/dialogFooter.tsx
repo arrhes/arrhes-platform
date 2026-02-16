@@ -1,11 +1,7 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { HTMLAttributes } from "react"
+import type { HTMLAttributes } from "react"
 
-
-export function DialogFooter(props:
-    HTMLAttributes<HTMLDivElement>
-) {
+export function DialogFooter(props: HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             {...props}
@@ -18,9 +14,9 @@ export function DialogFooter(props:
                     flexWrap: "wrap",
                     justifyContent: "flex-end",
                     alignItems: "center",
-                    gap: "0.5rem"
+                    gap: "0.5rem",
                 }),
-                props.className
+                props.className,
             )}
         />
     )

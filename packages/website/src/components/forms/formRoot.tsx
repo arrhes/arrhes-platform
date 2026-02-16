@@ -3,15 +3,11 @@ import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import type { Icon, IconProps } from "@tabler/icons-react"
-import { ReactElement, useEffect, useRef } from "react"
-import { DefaultValues, FormProvider, useForm, UseFormReturn } from "react-hook-form"
-import * as v from "valibot"
+import { type ReactElement, useEffect, useRef } from "react"
+import { type DefaultValues, FormProvider, type UseFormReturn, useForm } from "react-hook-form"
+import type * as v from "valibot"
 
-
-export function FormRoot<
-    T extends Record<string, unknown>,
-    U extends v.GenericSchema<T>
->(props: {
+export function FormRoot<T extends Record<string, unknown>, U extends v.GenericSchema<T>>(props: {
     schema: U
     defaultValues: DefaultValues<v.InferOutput<U>>
     onSubmit: (data: v.InferOutput<U>) => Promise<boolean>
@@ -60,26 +56,30 @@ export function FormRoot<
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start"
+                    alignItems: "flex-start",
                 })}
             >
-                <div className={css({
-                    width: "100%",
-                    maxWidth: "md",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "stretch",
-                    gap: "1.5rem"
-                })}>
-                    <div className={css({
+                <div
+                    className={css({
                         width: "100%",
+                        maxWidth: "md",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "flex-start",
                         alignItems: "stretch",
-                        gap: "1rem"
-                    })}>
+                        gap: "1.5rem",
+                    })}
+                >
+                    <div
+                        className={css({
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "flex-start",
+                            alignItems: "stretch",
+                            gap: "1rem",
+                        })}
+                    >
                         {props.children(form)}
                     </div>
                     <Button

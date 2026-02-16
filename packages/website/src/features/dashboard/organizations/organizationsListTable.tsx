@@ -5,14 +5,10 @@ import { EmptyState } from "../../../components/layouts/emptyState.tsx"
 import { ListTable } from "../../../components/layouts/listTable/listTable.tsx"
 import { OrganizationListTableRow } from "./organizationListTableRow.tsx"
 
-
 export function OrganizationsListTable() {
     return (
         <ListTable.Root>
-            <DataWrapper
-                routeDefinition={getAllMyOrganizationsRouteDefinition}
-                body={{}}
-            >
+            <DataWrapper routeDefinition={getAllMyOrganizationsRouteDefinition} body={{}}>
                 {(organizationUsers) => {
                     if (organizationUsers.length === 0) {
                         return (
@@ -23,14 +19,9 @@ export function OrganizationsListTable() {
                             />
                         )
                     }
-                    return (
-                        organizationUsers.map((organizationUser) => (
-                            <OrganizationListTableRow
-                                key={organizationUser.id}
-                                organizationUser={organizationUser}
-                            />
-                        ))
-                    )
+                    return organizationUsers.map((organizationUser) => (
+                        <OrganizationListTableRow key={organizationUser.id} organizationUser={organizationUser} />
+                    ))
                 }}
             </DataWrapper>
         </ListTable.Root>

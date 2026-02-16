@@ -4,7 +4,6 @@ import { css, cx } from "../../utilities/cn.ts"
 import { CircularLoader } from "../layouts/circularLoader"
 import { useButtonLoading } from "./button"
 
-
 // Color variants available for all button styles (GitHub Primer inspired)
 // Includes legacy aliases for backward compatibility: error->danger, warning->neutral, information->neutral
 export type ButtonColor = "neutral" | "danger" | "success" | "error" | "warning" | "information"
@@ -14,14 +13,13 @@ const colorMap: Record<ButtonColor, "neutral" | "danger" | "success"> = {
     neutral: "neutral",
     danger: "danger",
     success: "success",
-    error: "danger",      // legacy alias
-    warning: "neutral",   // legacy alias (maps to neutral)
+    error: "danger", // legacy alias
+    warning: "neutral", // legacy alias (maps to neutral)
     information: "neutral", // legacy alias (maps to neutral)
 }
 
 // Button style variants (GitHub Primer inspired)
 export type ButtonVariant = "default" | "primary" | "outline" | "invisible"
-
 
 // GitHub Primer-inspired style configurations
 const variantStyles = {
@@ -161,15 +159,15 @@ const variantStyles = {
             },
             _active: {
                 bg: "neutral/12",
-                backgroundColor: "primary/10"
+                backgroundColor: "primary/10",
             },
         }),
         colors: {
             neutral: {
                 container: css({
                     _active: {
-                        backgroundColor: "primary/10"
-                    }
+                        backgroundColor: "primary/10",
+                    },
                 }),
                 icon: css({ stroke: "neutral/70" }),
                 text: css({ color: "neutral" }),
@@ -196,7 +194,7 @@ const variantStyles = {
  * ButtonContent renders the visual content of a button (icon, text, loader)
  * Styled to match GitHub's Primer design system
  * Can be used standalone or wrapped by Button/Link for click handling
- * 
+ *
  * When used inside a Button with hasLoader, loading state is automatically
  * propagated via context and will show the spinner without manual isLoading prop
  */
@@ -237,26 +235,20 @@ export function ButtonContent(props: {
         _disabled: { opacity: 0.5, cursor: "not-allowed" },
     })
 
+    const iconOnlyStyles =
+        props.text === undefined
+            ? css({
+                  width: "auto",
+                  padding: "0",
+                  justifyContent: "center",
+              })
+            : ""
 
-    const iconOnlyStyles = props.text === undefined
-        ? css({
-            width: "auto",
-            padding: "0",
-            justifyContent: "center"
-        })
-        : ""
+    const baseContainerActiveStyles = props.isActive ? css({ backgroundColor: "neutral/5" }) : ""
 
-    const baseContainerActiveStyles = props.isActive
-        ? css({ backgroundColor: "neutral/5" })
-        : ""
+    const leftIconActiveStyles = props.isActive ? css({ color: "primary" }) : ""
 
-    const leftIconActiveStyles = props.isActive
-        ? css({ color: "primary" })
-        : ""
-
-    const textActiveStyles = props.isActive
-        ? css({ color: "primary" })
-        : ""
+    const textActiveStyles = props.isActive ? css({ color: "primary" }) : ""
 
     return (
         <div
@@ -269,7 +261,7 @@ export function ButtonContent(props: {
                 baseContainerActiveStyles,
                 variantStyles[variant].base,
                 styles.container,
-                props.className
+                props.className,
             )}
         >
             {/* Loading spinner */}
@@ -284,30 +276,32 @@ export function ButtonContent(props: {
                             height: `1rem`,
                             flexShrink: 0,
                         }),
-                        variant === "primary" ? css({ stroke: "white" }) : styles.icon
+                        variant === "primary" ? css({ stroke: "white" }) : styles.icon,
                     )}
                 />
             )}
 
             {/* Left icon */}
-            {props.leftIcon && !isLoading && cloneElement(props.leftIcon, {
-                "aria-disabled": props.disabled,
-                size: 16,
-                className: cx(
-                    css({
-                        minWidth: `1rem`,
-                        width: `1rem`,
-                        minHeight: `1rem`,
-                        height: `1rem`,
-                        flexShrink: 0,
-                    }),
-                    leftIconActiveStyles,
-                    variant === "primary"
-                        ? css({ stroke: "white", _disabled: { color: "white/50" } })
-                        : styles.icon
-                ),
-                strokeWidth: 1.75
-            })}
+            {props.leftIcon &&
+                !isLoading &&
+                cloneElement(props.leftIcon, {
+                    "aria-disabled": props.disabled,
+                    size: 16,
+                    className: cx(
+                        css({
+                            minWidth: `1rem`,
+                            width: `1rem`,
+                            minHeight: `1rem`,
+                            height: `1rem`,
+                            flexShrink: 0,
+                        }),
+                        leftIconActiveStyles,
+                        variant === "primary"
+                            ? css({ stroke: "white", _disabled: { color: "white/50" } })
+                            : styles.icon,
+                    ),
+                    strokeWidth: 1.75,
+                })}
 
             {/* Text label */}
             {props.text && (
@@ -325,7 +319,7 @@ export function ButtonContent(props: {
                         textActiveStyles,
                         variant === "primary"
                             ? css({ color: "white", _disabled: { opacity: 0.5 } })
-                            : cx(styles.text, css({ _disabled: { color: "neutral/50" } }))
+                            : cx(styles.text, css({ _disabled: { color: "neutral/50" } })),
                     )}
                 >
                     {props.text}
@@ -335,42 +329,39 @@ export function ButtonContent(props: {
             {/* Right icon */}
             {props.rightIcon && (
                 <div className={css({ display: "flex", alignItems: "center", justifyContent: "center" })}>
-                    {
-                        isLoading
-                            ? (
-                                <CircularLoader
-                                    size={16 - 4}
-                                    className={cx(
-                                        css({
-                                            minWidth: "1rem",
-                                            width: "1rem",
-                                            minHeight: "1rem",
-                                            height: "1rem",
-                                        }),
-                                        variant === "primary" ? css({ stroke: "white" }) : styles.icon
-                                    )}
-                                />
-                            )
-                            : (
-                                cloneElement(props.rightIcon, {
-                                    "aria-disabled": props.disabled,
-                                    size: 16 - 4,
-                                    className: cx(
-                                        css({
-                                            minWidth: "1rem",
-                                            width: "1rem",
-                                            minHeight: "1rem",
-                                            height: "1rem",
-                                            _disabled: { color: "neutral/50" },
-                                        }),
-                                        variant === "primary"
-                                            ? css({ color: "white" })
-                                            : (styles as typeof variantStyles.outline.colors.neutral).rightIcon ?? styles.icon
-                                    ),
-                                    strokeWidth: 1.75
-                                })
-                            )
-                    }
+                    {isLoading ? (
+                        <CircularLoader
+                            size={16 - 4}
+                            className={cx(
+                                css({
+                                    minWidth: "1rem",
+                                    width: "1rem",
+                                    minHeight: "1rem",
+                                    height: "1rem",
+                                }),
+                                variant === "primary" ? css({ stroke: "white" }) : styles.icon,
+                            )}
+                        />
+                    ) : (
+                        cloneElement(props.rightIcon, {
+                            "aria-disabled": props.disabled,
+                            size: 16 - 4,
+                            className: cx(
+                                css({
+                                    minWidth: "1rem",
+                                    width: "1rem",
+                                    minHeight: "1rem",
+                                    height: "1rem",
+                                    _disabled: { color: "neutral/50" },
+                                }),
+                                variant === "primary"
+                                    ? css({ color: "white" })
+                                    : ((styles as typeof variantStyles.outline.colors.neutral).rightIcon ??
+                                          styles.icon),
+                            ),
+                            strokeWidth: 1.75,
+                        })
+                    )}
                 </div>
             )}
         </div>

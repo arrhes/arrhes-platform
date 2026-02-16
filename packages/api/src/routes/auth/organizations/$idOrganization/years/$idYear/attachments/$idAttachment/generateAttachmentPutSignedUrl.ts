@@ -1,15 +1,15 @@
+import { models } from "@arrhes/application-metadata/models"
+import { generateAttachmentPutSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 import { generatePutSignedUrl } from "../../../../../../../../utilities/storage/generatePutSignedUrl.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { generateAttachmentPutSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
+export const generateAttachmentPutSignedUrlRoute = authFactory
+    .createApp()
     .post(
         generateAttachmentPutSignedUrlRouteDefinition.path,
         bodyValidator(generateAttachmentPutSignedUrlRouteDefinition.schemas.body),
@@ -20,7 +20,7 @@ export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
                 throw new Exception({
                     internalMessage: "File size is too big",
                     statusCode: 500,
-                    externalMessage: "Fichier trop volumineux"
+                    externalMessage: "Fichier trop volumineux",
                 })
             }
             const storageKey = `organizations/${body.idOrganization}/${body.idYear}/attachments/${body.idAttachment}`
@@ -32,17 +32,15 @@ export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
                     storageKey: storageKey,
                     type: body.type,
                     size: body.size,
-                    lastUpdatedAt: new Date().toISOString()
+                    lastUpdatedAt: new Date().toISOString(),
                 },
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
-                        eq(table.id, body.idAttachment)
-                    )
-                ),
+                        eq(table.id, body.idAttachment),
+                    ),
             })
-
 
             const url = await generatePutSignedUrl({
                 var: c.var,
@@ -52,7 +50,7 @@ export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
                 metadata: {
                     idOrganization: body.idOrganization,
                     idYear: body.idYear,
-                    idUser: c.var.user.id
+                    idUser: c.var.user.id,
                 },
             })
 
@@ -65,5 +63,5 @@ export const generateAttachmentPutSignedUrlRoute = authFactory.createApp()
                     url: url,
                 },
             })
-        }
+        },
     )

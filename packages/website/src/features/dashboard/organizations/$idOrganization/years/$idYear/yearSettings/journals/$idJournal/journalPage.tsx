@@ -4,16 +4,15 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
-import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 
 import { journalRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/journals/$idJournal/journalRoute.tsx"
 import { DeleteOneJournal } from "./deleteOneJournal.tsx"
 import { UpdateOneJournal } from "./updateOneJournal.tsx"
-
 
 export function JournalPage() {
     const params = useParams({ from: journalRoute.id })
@@ -25,14 +24,21 @@ export function JournalPage() {
                 body={{
                     idOrganization: params.idOrganization,
                     idYear: params.idYear,
-                    idJournal: params.idJournal
+                    idJournal: params.idJournal,
                 }}
             >
                 {(journal) => {
                     return (
                         <>
                             <Section.Item className={css({ flexDirection: "row" })}>
-                                <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
                                     <LinkButton
                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/journaux"
                                         params={{
@@ -40,26 +46,22 @@ export function JournalPage() {
                                             idYear: journal.idYear,
                                         }}
                                     >
-                                        <ButtonContent
-                                            variant="default"
-                                            leftIcon={<IconChevronLeft />}
-                                            text="Retour"
-                                        />
+                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
-                                <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                                    <UpdateOneJournal
-                                        journal={journal}
-                                    >
-                                        <ButtonContent
-                                            variant="primary"
-                                            leftIcon={<IconPencil />}
-                                            text="Modifier"
-                                        />
+                                <div
+                                    className={css({
+                                        ml: "auto",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
+                                    <UpdateOneJournal journal={journal}>
+                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneJournal>
-                                    <DeleteOneJournal
-                                        journal={journal}
-                                    >
+                                    <DeleteOneJournal journal={journal}>
                                         <ButtonContent
                                             variant="default"
                                             leftIcon={<IconTrash />}
@@ -74,14 +76,10 @@ export function JournalPage() {
                                     <DataBlock.Header title="Informations" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Code">
-                                            <FormatText>
-                                                {journal.code}
-                                            </FormatText>
+                                            <FormatText>{journal.code}</FormatText>
                                         </DataBlock.Item>
                                         <DataBlock.Item label="Libellé">
-                                            <FormatText>
-                                                {journal.label}
-                                            </FormatText>
+                                            <FormatText>{journal.label}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>
@@ -103,9 +101,7 @@ export function JournalPage() {
                                                         {!journal.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={journal.data.lastUpdatedBy} />}
                                                     </DataBlock.Item> */}
                                         <DataBlock.Item label="Id">
-                                            <FormatText>
-                                                {journal.id}
-                                            </FormatText>
+                                            <FormatText>{journal.id}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>

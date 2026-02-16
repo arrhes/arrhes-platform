@@ -1,10 +1,9 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ComponentProps, Fragment } from "react"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { type ComponentProps, Fragment } from "react"
+import type * as v from "valibot"
 import { toRoman } from "../../../../../../../../../utilities/toRoman.ts"
 import { getBalanceSheetChildren } from "../../../yearSettings/balanceSheets/getBalanceSheetChildren.tsx"
 import { BalanceSheetAssetsReportRow } from "./balanceSheetAssetsReportRow.tsx"
-
 
 export function BalanceSheetAssetsReportItem(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -14,23 +13,22 @@ export function BalanceSheetAssetsReportItem(props: {
     balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>
     balanceSheetChildren: Array<v.InferOutput<typeof returnedSchemas.balanceSheet>>
     level: number
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
-
-    const number = (props.level === 0)
-        ? toRoman(Number(props.balanceSheet.number))
-        : null
+    const number = props.level === 0 ? toRoman(Number(props.balanceSheet.number)) : null
 
     const label = props.balanceSheet.label
 
-    const isAmountDisplayed = (props.balanceSheet.isComputed === true || props.balanceSheetChildren.length === 0)
+    const isAmountDisplayed = props.balanceSheet.isComputed === true || props.balanceSheetChildren.length === 0
 
     let grossTotalAmount = 0
     let amortizationTotalAmount = 0
     props.accounts
         .filter((account) => {
-            const hasAccount = (account.idBalanceSheetAsset === props.balanceSheet.id)
-            const hasChildrenAccount = props.balanceSheetChildren.some((balanceSheet) => (balanceSheet.id === account.idBalanceSheetAsset))
+            const hasAccount = account.idBalanceSheetAsset === props.balanceSheet.id
+            const hasChildrenAccount = props.balanceSheetChildren.some(
+                (balanceSheet) => balanceSheet.id === account.idBalanceSheetAsset,
+            )
             return hasAccount || hasChildrenAccount
         })
         .forEach((account) => {
@@ -83,29 +81,27 @@ export function BalanceSheetAssetsReportItem(props: {
                 amortizationAmount={amortizationTotalAmount}
                 isAmountDisplayed={isAmountDisplayed}
             />
-            {
-                props.balanceSheetChildren
-                    .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === props.balanceSheet.id)
-                    .map((balanceSheet) => {
-                        const balanceSheetChildren = getBalanceSheetChildren({
-                            balanceSheet: balanceSheet,
-                            balanceSheets: props.balanceSheetChildren,
-                        })
-
-                        return (
-                            <BalanceSheetAssetsReportItem
-                                key={balanceSheet.id}
-                                idOrganization={props.idOrganization}
-                                idYear={props.idYear}
-                                accounts={props.accounts}
-                                recordRows={props.recordRows}
-                                balanceSheet={balanceSheet}
-                                balanceSheetChildren={balanceSheetChildren}
-                                level={props.level + 1}
-                            />
-                        )
+            {props.balanceSheetChildren
+                .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === props.balanceSheet.id)
+                .map((balanceSheet) => {
+                    const balanceSheetChildren = getBalanceSheetChildren({
+                        balanceSheet: balanceSheet,
+                        balanceSheets: props.balanceSheetChildren,
                     })
-            }
+
+                    return (
+                        <BalanceSheetAssetsReportItem
+                            key={balanceSheet.id}
+                            idOrganization={props.idOrganization}
+                            idYear={props.idYear}
+                            accounts={props.accounts}
+                            recordRows={props.recordRows}
+                            balanceSheet={balanceSheet}
+                            balanceSheetChildren={balanceSheetChildren}
+                            level={props.level + 1}
+                        />
+                    )
+                })}
         </Fragment>
     )
 }

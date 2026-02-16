@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { attachmentSchema, attachmentSchemaReturn } from "../../../../../../../../schemas/attachment.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const generateAttachmentPutSignedUrlRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/generate-attachment-put-signed-url`,
@@ -17,7 +16,7 @@ export const generateAttachmentPutSignedUrlRouteDefinition = routeDefinition({
         }),
         return: v.object({
             attachment: attachmentSchemaReturn,
-            url: v.string()
-        })
+            url: v.string(),
+        }),
     },
 })

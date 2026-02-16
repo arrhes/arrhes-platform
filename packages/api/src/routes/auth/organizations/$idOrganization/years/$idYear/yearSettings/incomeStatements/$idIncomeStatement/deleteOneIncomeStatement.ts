@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { deleteOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../../utilities/sql/deleteOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { deleteOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const deleteOneIncomeStatementRoute = authFactory.createApp()
+export const deleteOneIncomeStatementRoute = authFactory
+    .createApp()
     .post(
         deleteOneIncomeStatementRouteDefinition.path,
         bodyValidator(deleteOneIncomeStatementRouteDefinition.schemas.body),
@@ -17,13 +17,12 @@ export const deleteOneIncomeStatementRoute = authFactory.createApp()
             const deleteOneIncomeStatement = await deleteOne({
                 database: c.var.clients.sql,
                 table: models.incomeStatement,
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idIncomeStatement),
-                    )
-                )
+                    ),
             })
 
             return response({
@@ -32,5 +31,5 @@ export const deleteOneIncomeStatementRoute = authFactory.createApp()
                 schema: deleteOneIncomeStatementRouteDefinition.schemas.return,
                 data: deleteOneIncomeStatement,
             })
-        }
+        },
     )

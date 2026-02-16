@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { journalSchema, journalSchemaReturn } from "../../../../../../../../schemas/journal.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readAllJournalsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-all-journals`,
@@ -12,6 +11,6 @@ export const readAllJournalsRouteDefinition = routeDefinition({
             idOrganization: journalSchema.entries.idOrganization,
             idYear: journalSchema.entries.idYear,
         }),
-        return: v.array(journalSchemaReturn)
+        return: v.array(journalSchemaReturn),
     },
 })

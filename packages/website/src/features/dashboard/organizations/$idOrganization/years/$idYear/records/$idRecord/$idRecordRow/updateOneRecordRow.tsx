@@ -1,10 +1,15 @@
-import { readAllAccountsRouteDefinition, readAllRecordRowsRouteDefinition, readOneRecordRowRouteDefinition, updateOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllAccountsRouteDefinition,
+    readAllRecordRowsRouteDefinition,
+    readOneRecordRowRouteDefinition,
+    updateOneRecordRowRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPencil } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../components/forms/formField.tsx"
@@ -17,9 +22,8 @@ import { InputText } from "../../../../../../../../../components/inputs/inputTex
 import { InputToggle } from "../../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneRecordRow(props: {
     recordRow: v.InferOutput<typeof returnedSchemas.recordRow>
@@ -28,30 +32,23 @@ export function UpdateOneRecordRow(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier un mouvement"
-                />
+                <Drawer.Header title="Modifier un mouvement" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneRecordRowRouteDefinition.schemas.body}
                         defaultValues={{
                             ...props.recordRow,
-                                    idRecordRow: props.recordRow.id,
+                            idRecordRow: props.recordRow.id,
                         }}
                         submitButtonProps={{
                             leftIcon: <IconPencil />,
                             text: "Modifier le mouvement",
                         }}
                         onSubmit={async (data) => {
-                            const updateRecordRowResponse = await postAPI({
+                            const updateRecordRowResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneRecordRowRouteDefinition,
                                 body: data,
                             })
@@ -65,7 +62,6 @@ export function UpdateOneRecordRow(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllRecordRowsRouteDefinition,
                                 body: {
@@ -80,7 +76,7 @@ export function UpdateOneRecordRow(props: {
                                 body: {
                                     idOrganization: props.recordRow.idOrganization,
                                     idYear: props.recordRow.idYear,
-                            idRecordRow: props.recordRow.id,
+                                    idRecordRow: props.recordRow.id,
                                 },
                             })
 
@@ -94,10 +90,7 @@ export function UpdateOneRecordRow(props: {
                                     name="label"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Libellé"
-                                                isRequired={false}
-                                            />
+                                            <FormLabel label="Libellé" isRequired={false} />
                                             <FormControl>
                                                 <InputText
                                                     value={field.value}
@@ -114,10 +107,7 @@ export function UpdateOneRecordRow(props: {
                                     name="idAccount"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Compte"
-                                                isRequired={true}
-                                            />
+                                            <FormLabel label="Compte" isRequired={true} />
                                             <FormControl>
                                                 <InputDataCombobox
                                                     value={field.value}
@@ -130,7 +120,7 @@ export function UpdateOneRecordRow(props: {
                                                     placeholder="Sélectionner un compte"
                                                     getOption={(journal) => ({
                                                         key: journal.id,
-                                                        label: `${journal.number} - ${journal.label}`
+                                                        label: `${journal.number} - ${journal.label}`,
                                                     })}
                                                 />
                                             </FormControl>
@@ -138,21 +128,22 @@ export function UpdateOneRecordRow(props: {
                                         </FormItem>
                                     )}
                                 />
-                                <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
+                                <div
+                                    className={css({
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "flex-start",
+                                        gap: "1",
+                                    })}
+                                >
                                     <FormField
                                         control={form.control}
                                         name="debit"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel
-                                                    label="Débit"
-                                                    isRequired={false}
-                                                />
+                                                <FormLabel label="Débit" isRequired={false} />
                                                 <FormControl>
-                                                    <InputPrice
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
+                                                    <InputPrice value={field.value} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormError />
                                             </FormItem>
@@ -163,43 +154,49 @@ export function UpdateOneRecordRow(props: {
                                         name="credit"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel
-                                                    label="Crédit"
-                                                    isRequired={false}
-                                                />
+                                                <FormLabel label="Crédit" isRequired={false} />
                                                 <FormControl>
-                                                    <InputPrice
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
+                                                    <InputPrice value={field.value} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormError />
                                             </FormItem>
                                         )}
                                     />
                                 </div>
-                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
-                                    <FormLabel
-                                        label="Mouvement ajouté aux calculs ?"
-                                        isRequired={false}
-                                    />
-                                    <div className={css({ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        width: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "flex-start",
+                                        alignItems: "flex-start",
+                                        gap: "2",
+                                    })}
+                                >
+                                    <FormLabel label="Mouvement ajouté aux calculs ?" isRequired={false} />
+                                    <div
+                                        className={css({
+                                            width: "100%",
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            alignItems: "flex-start",
+                                            flexWrap: "wrap",
+                                            gap: "2",
+                                        })}
+                                    >
                                         <FormField
                                             control={form.control}
                                             name="isComputedForJournalReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Journal"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Journal" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -212,17 +209,14 @@ export function UpdateOneRecordRow(props: {
                                             name="isComputedForLedgerReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Grand-livre"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Grand-livre" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -235,17 +229,14 @@ export function UpdateOneRecordRow(props: {
                                             name="isComputedForBalanceReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Balance"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Balance" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -258,17 +249,14 @@ export function UpdateOneRecordRow(props: {
                                             name="isComputedForBalanceSheetReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Bilan"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Bilan" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -281,17 +269,14 @@ export function UpdateOneRecordRow(props: {
                                             name="isComputedForIncomeStatementReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Compte de résultat"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Compte de résultat" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>

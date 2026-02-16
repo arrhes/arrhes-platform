@@ -1,15 +1,15 @@
+import { models } from "@arrhes/application-metadata/models"
+import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { generateGetSignedUrl } from "../../../../../../../../utilities/storage/generateGetSignedUrl.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { generateAttachmentGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const generateAttachmentGetSignedUrlRoute = authFactory.createApp()
+export const generateAttachmentGetSignedUrlRoute = authFactory
+    .createApp()
     .post(
         generateAttachmentGetSignedUrlRouteDefinition.path,
         bodyValidator(generateAttachmentGetSignedUrlRouteDefinition.schemas.body),
@@ -19,20 +19,19 @@ export const generateAttachmentGetSignedUrlRoute = authFactory.createApp()
             const readOneAttachment = await selectOne({
                 database: c.var.clients.sql,
                 table: models.attachment,
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
-                        eq(table.id, body.idAttachment)
-                    )
-                ),
+                        eq(table.id, body.idAttachment),
+                    ),
             })
 
             if (readOneAttachment.storageKey === null) {
                 throw new Exception({
                     internalMessage: "Attachment storage key not found",
                     statusCode: 400,
-                    externalMessage: "Le fichier associé n'existe pas"
+                    externalMessage: "Le fichier associé n'existe pas",
                 })
             }
 
@@ -46,8 +45,8 @@ export const generateAttachmentGetSignedUrlRoute = authFactory.createApp()
                 statusCode: 200,
                 schema: generateAttachmentGetSignedUrlRouteDefinition.schemas.return,
                 data: {
-                    url: url
+                    url: url,
                 },
             })
-        }
+        },
     )

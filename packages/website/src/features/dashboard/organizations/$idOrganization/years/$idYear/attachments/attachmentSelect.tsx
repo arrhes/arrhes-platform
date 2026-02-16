@@ -1,9 +1,8 @@
 import { readAllAttachmentsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 import { InputCombobox } from "../../../../../../../components/inputs/inputCombobox.tsx"
 import { useDataFromAPI } from "../../../../../../../utilities/useHTTPData.ts"
-
 
 export function AttachmentSelect(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -15,7 +14,7 @@ export function AttachmentSelect(props: {
         routeDefinition: readAllAttachmentsRouteDefinition,
         body: {
             idOrganization: props.idOrganization,
-            idYear: props.idYear
+            idYear: props.idYear,
         },
     })
 
@@ -27,12 +26,12 @@ export function AttachmentSelect(props: {
             allowEmpty={true}
             placeholder="Sélectionner une pièce justificative"
             options={
-                (attachmentsResponse.data === undefined)
+                attachmentsResponse.data === undefined
                     ? []
                     : attachmentsResponse.data.map((attachment) => ({
-                        key: attachment.id,
-                        label: attachment.reference
-                    }))
+                          key: attachment.id,
+                          label: attachment.reference,
+                      }))
             }
         />
     )

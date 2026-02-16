@@ -1,9 +1,16 @@
-import { readAllAttachmentsRouteDefinition, readAllJournalsRouteDefinition, readAllRecordLabelsRouteDefinition, readAllRecordsRouteDefinition, readOneRecordRouteDefinition, updateOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllAttachmentsRouteDefinition,
+    readAllJournalsRouteDefinition,
+    readAllRecordLabelsRouteDefinition,
+    readAllRecordsRouteDefinition,
+    readOneRecordRouteDefinition,
+    updateOneRecordRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPencil } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../components/forms/formField.tsx"
@@ -15,9 +22,8 @@ import { InputDate } from "../../../../../../../../components/inputs/inputDate.t
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneRecord(props: {
     record: v.InferOutput<typeof returnedSchemas.record>
@@ -26,17 +32,10 @@ export function UpdateOneRecord(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier une écriture"
-                />
+                <Drawer.Header title="Modifier une écriture" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneRecordRouteDefinition.schemas.body}
@@ -49,7 +48,7 @@ export function UpdateOneRecord(props: {
                             text: "Modifier l'écriture",
                         }}
                         onSubmit={async (data) => {
-                            const updateRecordResponse = await postAPI({
+                            const updateRecordResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneRecordRouteDefinition,
                                 body: data,
                             })
@@ -63,7 +62,6 @@ export function UpdateOneRecord(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllRecordsRouteDefinition,
                                 body: {
@@ -91,10 +89,7 @@ export function UpdateOneRecord(props: {
                                     name="label"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Libellé"
-                                                isRequired={true}
-                                            />
+                                            <FormLabel label="Libellé" isRequired={true} />
                                             <FormControl>
                                                 <InputText
                                                     value={field.value}
@@ -111,15 +106,9 @@ export function UpdateOneRecord(props: {
                                     name="date"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Date"
-                                                isRequired={true}
-                                            />
+                                            <FormLabel label="Date" isRequired={true} />
                                             <FormControl>
-                                                <InputDate
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputDate value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -130,10 +119,7 @@ export function UpdateOneRecord(props: {
                                     name="idJournal"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Journal"
-                                                isRequired={false}
-                                            />
+                                            <FormLabel label="Journal" isRequired={false} />
                                             <FormControl>
                                                 <InputDataCombobox
                                                     value={field.value}
@@ -146,7 +132,7 @@ export function UpdateOneRecord(props: {
                                                     placeholder="Sélectionner un journal"
                                                     getOption={(journal) => ({
                                                         key: journal.id,
-                                                        label: `(${journal.code}) ${journal.label}`
+                                                        label: `(${journal.code}) ${journal.label}`,
                                                     })}
                                                 />
                                             </FormControl>
@@ -159,10 +145,7 @@ export function UpdateOneRecord(props: {
                                     name="idRecordLabel"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Catégorie"
-                                                isRequired={false}
-                                            />
+                                            <FormLabel label="Catégorie" isRequired={false} />
                                             <FormControl>
                                                 <InputDataCombobox
                                                     value={field.value}
@@ -175,7 +158,7 @@ export function UpdateOneRecord(props: {
                                                     placeholder="Sélectionner une catégorie"
                                                     getOption={(recordLabel) => ({
                                                         key: recordLabel.id,
-                                                        label: `${recordLabel.label}`
+                                                        label: `${recordLabel.label}`,
                                                     })}
                                                 />
                                             </FormControl>
@@ -188,10 +171,7 @@ export function UpdateOneRecord(props: {
                                     name="idAttachment"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Pièce justificative"
-                                                isRequired={false}
-                                            />
+                                            <FormLabel label="Pièce justificative" isRequired={false} />
                                             <FormControl>
                                                 <InputDataCombobox
                                                     value={field.value}
@@ -204,7 +184,7 @@ export function UpdateOneRecord(props: {
                                                     placeholder="Sélectionner une pièce justificative"
                                                     getOption={(attachment) => ({
                                                         key: attachment.id,
-                                                        label: attachment.reference
+                                                        label: attachment.reference,
                                                     })}
                                                 />
                                             </FormControl>

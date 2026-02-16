@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { recordSchema } from "../../../../../../../../schemas/record.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneRecordRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-record`,
@@ -13,6 +12,6 @@ export const deleteOneRecordRouteDefinition = routeDefinition({
             idOrganization: recordSchema.entries.idOrganization,
             idYear: recordSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

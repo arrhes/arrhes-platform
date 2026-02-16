@@ -3,6 +3,7 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconLine, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { Box } from "../../../../../../../../components/layouts/box.tsx"
+import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
 import { TitleComponent } from "../../../../../../../../components/layouts/title.tsx"
 import { balanceSheetsRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetsRoute.tsx"
@@ -10,8 +11,6 @@ import { BalanceSheetTable } from "./balanceSheetTable.tsx"
 import { ConnectAccountsToBalanceSheets } from "./connectAccountsToBalanceSheets.tsx"
 import { CreateOneBalanceSheet } from "./createOneBalanceSheet.tsx"
 import { GenerateBalanceSheets } from "./generateBalanceSheets.tsx"
-import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
-
 
 export function BalanceSheetsPage() {
     const params = useParams({ from: balanceSheetsRoute.id })
@@ -21,21 +20,24 @@ export function BalanceSheetsPage() {
             <Page.Content>
                 <Section.Root>
                     <Section.Item>
-                        <div className={css({ minWidth: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2", flexWrap: "wrap" })}>
-                            <CreateOneBalanceSheet
-                                idOrganization={params.idOrganization}
-                                idYear={params.idYear}
-                            >
+                        <div
+                            className={css({
+                                minWidth: "100%",
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                alignItems: "center",
+                                gap: "2",
+                                flexWrap: "wrap",
+                            })}
+                        >
+                            <CreateOneBalanceSheet idOrganization={params.idOrganization} idYear={params.idYear}>
                                 <ButtonContent
                                     variant="primary"
                                     leftIcon={<IconPlus />}
                                     text="Ajouter une ligne de bilan"
                                 />
                             </CreateOneBalanceSheet>
-                            <GenerateBalanceSheets
-                                idOrganization={params.idOrganization}
-                                idYear={params.idYear}
-                            >
+                            <GenerateBalanceSheets idOrganization={params.idOrganization} idYear={params.idYear}>
                                 <ButtonContent
                                     variant="default"
                                     leftIcon={<IconPlus />}
@@ -53,11 +55,19 @@ export function BalanceSheetsPage() {
                                 />
                             </ConnectAccountsToBalanceSheets>
                         </div>
-                        <div className={css({ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start", gap: "2", flexWrap: "wrap" })}>
+                        <div
+                            className={css({
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                                gap: "2",
+                                flexWrap: "wrap",
+                            })}
+                        >
                             <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
-                                <TitleComponent>
-                                    Actif
-                                </TitleComponent>
+                                <TitleComponent>Actif</TitleComponent>
                                 <BalanceSheetTable
                                     idOrganization={params.idOrganization}
                                     idYear={params.idYear}
@@ -65,9 +75,7 @@ export function BalanceSheetsPage() {
                                 />
                             </Box>
                             <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
-                                <TitleComponent>
-                                    Passif
-                                </TitleComponent>
+                                <TitleComponent>Passif</TitleComponent>
                                 <BalanceSheetTable
                                     idOrganization={params.idOrganization}
                                     idYear={params.idYear}

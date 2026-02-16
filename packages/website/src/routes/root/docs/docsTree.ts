@@ -1,4 +1,4 @@
-import { AnyRoute } from "@tanstack/react-router"
+import type { AnyRoute } from "@tanstack/react-router"
 import { accountingDocLayoutRoute } from "./accounting/accountingDocLayoutRoute.js"
 import { accountsAccountingDocRoute } from "./accounting/accountsAccountingDocRoute.js"
 import { glossaryAccountingDocRoute } from "./accounting/glossaryAccountingDocRoute.js"
@@ -24,7 +24,6 @@ import { rootGeneralDocRoute } from "./root/rootGeneralDocRoute.js"
 import { supportGeneralDocRoute } from "./root/supportGeneralDocRoute.js"
 import { termsGeneralDocRoute } from "./root/termsGeneralDocRoute.js"
 import { whitepaperGeneralDocRoute } from "./root/whitepaperGeneralDocRoute.js"
-
 
 export const docsTree: AnyRoute = docsLayoutRoute.addChildren([
     // General section (root)

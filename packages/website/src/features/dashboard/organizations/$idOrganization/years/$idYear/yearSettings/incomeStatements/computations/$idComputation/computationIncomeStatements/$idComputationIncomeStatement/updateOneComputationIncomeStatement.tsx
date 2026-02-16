@@ -1,9 +1,14 @@
-import { readAllComputationIncomeStatementsRouteDefinition, readAllIncomeStatementsRouteDefinition, readOneComputationIncomeStatementRouteDefinition, updateOneComputationIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllComputationIncomeStatementsRouteDefinition,
+    readAllIncomeStatementsRouteDefinition,
+    readOneComputationIncomeStatementRouteDefinition,
+    updateOneComputationIncomeStatementRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../../../../components/forms/formField.tsx"
@@ -14,9 +19,8 @@ import { InputDataCombobox } from "../../../../../../../../../../../../component
 import { InputToggle } from "../../../../../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneComputationIncomeStatement(props: {
     computationIncomeStatement: v.InferOutput<typeof returnedSchemas.computationIncomeStatement>
@@ -25,17 +29,10 @@ export function UpdateOneComputationIncomeStatement(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier le terme du calcul"
-                />
+                <Drawer.Header title="Modifier le terme du calcul" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneComputationIncomeStatementRouteDefinition.schemas.body}
@@ -48,7 +45,7 @@ export function UpdateOneComputationIncomeStatement(props: {
                             text: "Modifier le terme du calcul",
                         }}
                         onSubmit={async (data) => {
-                            const updateComputationIncomeStatementResponse = await postAPI({
+                            const updateComputationIncomeStatementResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneComputationIncomeStatementRouteDefinition,
                                 body: data,
                             })
@@ -62,7 +59,6 @@ export function UpdateOneComputationIncomeStatement(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
                                 body: {
@@ -107,7 +103,7 @@ export function UpdateOneComputationIncomeStatement(props: {
                                                     placeholder="Sélectionner un poste du compte de résultat"
                                                     getOption={(incomeStatement) => ({
                                                         key: incomeStatement.id,
-                                                        label: `${incomeStatement.number} - ${incomeStatement.label}`
+                                                        label: `${incomeStatement.number} - ${incomeStatement.label}`,
                                                     })}
                                                 />
                                             </FormControl>
@@ -131,7 +127,7 @@ export function UpdateOneComputationIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { label: "Addition", value: "plus" },
-                                                        { label: "Soustraction", value: "minus" }
+                                                        { label: "Soustraction", value: "minus" },
                                                     ]}
                                                 />
                                             </FormControl>

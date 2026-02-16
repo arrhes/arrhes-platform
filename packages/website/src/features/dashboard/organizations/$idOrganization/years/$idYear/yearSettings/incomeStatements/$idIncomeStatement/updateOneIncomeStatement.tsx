@@ -1,9 +1,13 @@
-import { readAllIncomeStatementsRouteDefinition, readOneIncomeStatementRouteDefinition, updateOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllIncomeStatementsRouteDefinition,
+    readOneIncomeStatementRouteDefinition,
+    updateOneIncomeStatementRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../components/forms/formField.tsx"
@@ -14,9 +18,8 @@ import { InputDataCombobox } from "../../../../../../../../../components/inputs/
 import { InputText } from "../../../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateOneIncomeStatement(props: {
     incomeStatement: v.InferOutput<typeof returnedSchemas.incomeStatement>
@@ -25,17 +28,10 @@ export function UpdateOneIncomeStatement(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier la ligne de compte de résultat"
-                />
+                <Drawer.Header title="Modifier la ligne de compte de résultat" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneIncomeStatementRouteDefinition.schemas.body}
@@ -48,12 +44,15 @@ export function UpdateOneIncomeStatement(props: {
                             text: "Modifier la ligne de compte de résultat",
                         }}
                         onSubmit={async (data) => {
-                            const updateIncomeStatementResponse = await postAPI({
+                            const updateIncomeStatementResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneIncomeStatementRouteDefinition,
                                 body: data,
                             })
                             if (updateIncomeStatementResponse.ok === false) {
-                                toast({ title: "Impossible de modifier la ligne de compte de résultat", variant: "error" })
+                                toast({
+                                    title: "Impossible de modifier la ligne de compte de résultat",
+                                    variant: "error",
+                                })
                                 return false
                             }
 
@@ -62,7 +61,6 @@ export function UpdateOneIncomeStatement(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllIncomeStatementsRouteDefinition,
                                 body: {
@@ -96,10 +94,7 @@ export function UpdateOneIncomeStatement(props: {
                                                 isRequired
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -116,11 +111,7 @@ export function UpdateOneIncomeStatement(props: {
                                                 isRequired
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    autoFocus
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} autoFocus />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -147,7 +138,7 @@ export function UpdateOneIncomeStatement(props: {
                                                     placeholder="Sélectionner une ligne de compte de résultat"
                                                     getOption={(incomeStatement) => ({
                                                         key: incomeStatement.id,
-                                                        label: `(${incomeStatement.number}) ${incomeStatement.label}`
+                                                        label: `(${incomeStatement.number}) ${incomeStatement.label}`,
                                                     })}
                                                 />
                                             </FormControl>

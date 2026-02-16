@@ -10,20 +10,16 @@ import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
 
-
 export function ReportsAccountingDocPage() {
     return (
         <DocRoot>
-            <DocHeader
-                title="Les documents comptables"
-                description="Les états de synthèse et leur signification"
-            />
+            <DocHeader title="Les documents comptables" description="Les états de synthèse et leur signification" />
 
             <DocSection title="Les documents de synthèse">
                 <DocParagraph>
-                    À la fin de chaque exercice comptable, les écritures sont agrégées pour produire
-                    des documents de synthèse. Ces documents offrent une vision globale de la situation
-                    financière et des performances de l'organisation.
+                    À la fin de chaque exercice comptable, les écritures sont agrégées pour produire des documents de
+                    synthèse. Ces documents offrent une vision globale de la situation financière et des performances de
+                    l'organisation.
                 </DocParagraph>
                 <DocParagraph>
                     Les deux documents principaux sont le <strong>bilan</strong> et le{" "}
@@ -33,8 +29,8 @@ export function ReportsAccountingDocPage() {
 
             <DocSection title="Le calcul du bénéfice">
                 <DocParagraph>
-                    Le bénéfice (ou la perte) d'une entreprise peut être calculé de deux manières
-                    équivalentes, ce qui constitue un contrôle fondamental de la comptabilité :
+                    Le bénéfice (ou la perte) d'une entreprise peut être calculé de deux manières équivalentes, ce qui
+                    constitue un contrôle fondamental de la comptabilité :
                 </DocParagraph>
 
                 <DocDefinition
@@ -47,9 +43,8 @@ export function ReportsAccountingDocPage() {
                 />
 
                 <DocParagraph>
-                    Ces deux calculs doivent donner le même résultat. C'est la cohérence entre
-                    le bilan (patrimoine) et le compte de résultat (opérations) qui garantit
-                    l'exactitude de la comptabilité.
+                    Ces deux calculs doivent donner le même résultat. C'est la cohérence entre le bilan (patrimoine) et
+                    le compte de résultat (opérations) qui garantit l'exactitude de la comptabilité.
                 </DocParagraph>
             </DocSection>
 
@@ -62,10 +57,12 @@ export function ReportsAccountingDocPage() {
                 <DocParagraph>
                     Le bilan est construit à partir des <strong>soldes des comptes d'agents</strong> :
                 </DocParagraph>
-                <DocList items={[
-                    "Les soldes débiteurs forment l'actif (ce que les agents nous doivent : banque, clients...)",
-                    "Les soldes créditeurs forment le passif (ce que nous devons aux agents : fournisseurs, État, propriétaires...)"
-                ]} />
+                <DocList
+                    items={[
+                        "Les soldes débiteurs forment l'actif (ce que les agents nous doivent : banque, clients...)",
+                        "Les soldes créditeurs forment le passif (ce que nous devons aux agents : fournisseurs, État, propriétaires...)",
+                    ]}
+                />
 
                 <DocTable
                     headers={["ACTIF (ce que l'on a)", "PASSIF (comment c'est financé)"]}
@@ -77,19 +74,20 @@ export function ReportsAccountingDocPage() {
                 />
 
                 <DocParagraph>
-                    L'équation fondamentale du bilan est : <strong>Actif = Passif + Résultat</strong>.
-                    Le résultat vient équilibrer le bilan : un bénéfice augmente le passif (les capitaux propres),
-                    une perte le diminue.
+                    L'équation fondamentale du bilan est : <strong>Actif = Passif + Résultat</strong>. Le résultat vient
+                    équilibrer le bilan : un bénéfice augmente le passif (les capitaux propres), une perte le diminue.
                 </DocParagraph>
 
                 <DocExample title="Lecture simplifiée d'un bilan">
                     <p className={css({ fontSize: "sm" })}>Une association présente le bilan suivant :</p>
-                    <div className={css({
-                        display: "grid",
-                        gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
-                        gap: "4",
-                        marginTop: "3"
-                    })}>
+                    <div
+                        className={css({
+                            display: "grid",
+                            gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
+                            gap: "4",
+                            marginTop: "3",
+                        })}
+                    >
                         <div>
                             <p className={css({ fontWeight: "medium", mb: "1" })}>ACTIF</p>
                             <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
@@ -120,22 +118,26 @@ export function ReportsAccountingDocPage() {
                 />
 
                 <DocParagraph>
-                    Le compte de résultat est construit à partir des <strong>comptes d'opérations</strong> (classes 6 et 7).
-                    Il répond à la question : l'entreprise a-t-elle gagné ou perdu de l'argent sur la période ?
+                    Le compte de résultat est construit à partir des <strong>comptes d'opérations</strong> (classes 6 et
+                    7). Il répond à la question : l'entreprise a-t-elle gagné ou perdu de l'argent sur la période ?
                 </DocParagraph>
 
-                <DocList items={[
-                    "Produits - Charges = Résultat",
-                    "Si Produits > Charges : bénéfice (ou excédent pour une association)",
-                    "Si Produits < Charges : perte (ou déficit)"
-                ]} />
+                <DocList
+                    items={[
+                        "Produits - Charges = Résultat",
+                        "Si Produits > Charges : bénéfice (ou excédent pour une association)",
+                        "Si Produits < Charges : perte (ou déficit)",
+                    ]}
+                />
 
                 <DocExample title="Compte de résultat simplifié">
-                    <div className={css({
-                        display: "grid",
-                        gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
-                        gap: "4"
-                    })}>
+                    <div
+                        className={css({
+                            display: "grid",
+                            gridTemplateColumns: { base: "1fr", sm: "1fr 1fr" },
+                            gap: "4",
+                        })}
+                    >
                         <div>
                             <p className={css({ fontWeight: "medium", mb: "1" })}>CHARGES</p>
                             <ul className={css({ fontSize: "xs", color: "neutral/70" })}>
@@ -162,8 +164,8 @@ export function ReportsAccountingDocPage() {
 
             <DocSection title="Les capitaux propres">
                 <DocParagraph>
-                    Les capitaux propres représentent ce que l'entreprise doit à ses propriétaires.
-                    Ils comprennent plusieurs éléments :
+                    Les capitaux propres représentent ce que l'entreprise doit à ses propriétaires. Ils comprennent
+                    plusieurs éléments :
                 </DocParagraph>
 
                 <DocDefinition
@@ -203,15 +205,15 @@ export function ReportsAccountingDocPage() {
                     definition="Liste de tous les comptes avec leur solde (débiteur ou créditeur). C'est l'outil de contrôle essentiel de la comptabilité."
                 />
 
-                <DocParagraph>
-                    La balance vérifie plusieurs équilibres :
-                </DocParagraph>
-                <DocList items={[
-                    "Total des débits = Total des crédits (principe de la partie double)",
-                    "Total des soldes débiteurs = Total des soldes créditeurs",
-                    "Les comptes d'actif ont généralement un solde débiteur",
-                    "Les comptes de passif ont généralement un solde créditeur"
-                ]} />
+                <DocParagraph>La balance vérifie plusieurs équilibres :</DocParagraph>
+                <DocList
+                    items={[
+                        "Total des débits = Total des crédits (principe de la partie double)",
+                        "Total des soldes débiteurs = Total des soldes créditeurs",
+                        "Les comptes d'actif ont généralement un solde débiteur",
+                        "Les comptes de passif ont généralement un solde créditeur",
+                    ]}
+                />
 
                 <DocExample title="Extrait de balance">
                     <DocTable
@@ -246,41 +248,40 @@ export function ReportsAccountingDocPage() {
                 />
 
                 <DocParagraph>
-                    Ces documents intermédiaires sont utilisés tout au long de l'année pour contrôler
-                    la comptabilité et préparer les documents de synthèse.
+                    Ces documents intermédiaires sont utilisés tout au long de l'année pour contrôler la comptabilité et
+                    préparer les documents de synthèse.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Le lien entre bilan et compte de résultat">
                 <DocParagraph>
-                    Le résultat du compte de résultat vient s'ajouter aux capitaux propres du bilan.
-                    C'est ce qui fait le lien entre les deux documents :
+                    Le résultat du compte de résultat vient s'ajouter aux capitaux propres du bilan. C'est ce qui fait
+                    le lien entre les deux documents :
                 </DocParagraph>
-                <DocList items={[
-                    "Un bénéfice augmente les capitaux propres (l'organisation s'est enrichie)",
-                    "Une perte diminue les capitaux propres (l'organisation s'est appauvrie)"
-                ]} />
+                <DocList
+                    items={[
+                        "Un bénéfice augmente les capitaux propres (l'organisation s'est enrichie)",
+                        "Une perte diminue les capitaux propres (l'organisation s'est appauvrie)",
+                    ]}
+                />
 
-                <DocParagraph>
-                    On peut aussi exprimer le résultat comme la variation du patrimoine net :
-                </DocParagraph>
+                <DocParagraph>On peut aussi exprimer le résultat comme la variation du patrimoine net :</DocParagraph>
                 <DocExample title="Vérification par le patrimoine">
                     <p className={css({ fontWeight: "semibold" })}>
                         Résultat = Variation des créances - Variation des dettes
                     </p>
                     <p className={css({ marginTop: "2", fontSize: "sm", color: "neutral/70" })}>
-                        Si les créances (ce qu'on possède) ont augmenté de 5 000 euros et les dettes
-                        de 2 000 euros, le résultat est de 3 000 euros : l'entreprise s'est enrichie de
-                        la différence.
+                        Si les créances (ce qu'on possède) ont augmenté de 5 000 euros et les dettes de 2 000 euros, le
+                        résultat est de 3 000 euros : l'entreprise s'est enrichie de la différence.
                     </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
-                    Arrhes génère automatiquement tous ces documents à partir de vos écritures.
-                    Consultez le guide sur les <DocLink to="/documentation/dashboard/documents">rapports</DocLink>{" "}
-                    pour apprendre à générer et interpréter ces documents dans le logiciel.
+                    Arrhes génère automatiquement tous ces documents à partir de vos écritures. Consultez le guide sur
+                    les <DocLink to="/documentation/dashboard/documents">rapports</DocLink> pour apprendre à générer et
+                    interpréter ces documents dans le logiciel.
                 </DocParagraph>
             </DocSection>
 
@@ -289,10 +290,7 @@ export function ReportsAccountingDocPage() {
                 les concepts fondamentaux pour utiliser Arrhes efficacement.
             </DocTip> */}
 
-            <DocNextPage
-                to="/documentation/comptabilité/glossaire"
-                label="Glossaire comptable"
-            />
+            <DocNextPage to="/documentation/comptabilité/glossaire" label="Glossaire comptable" />
         </DocRoot>
     )
 }

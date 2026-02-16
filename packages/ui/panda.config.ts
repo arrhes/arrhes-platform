@@ -1,6 +1,5 @@
 import { defineConfig } from "@pandacss/dev"
 
-
 export default defineConfig({
     // Whether to use css reset
     preflight: true,
@@ -20,7 +19,7 @@ export default defineConfig({
         "html, body": {
             fontFamily: "sans",
             fontWeight: "300",
-        }
+        },
     },
 
     // Useful for theme customization
@@ -69,7 +68,7 @@ export default defineConfig({
             fontWeights: {
                 semibold: { value: "500" },
                 bold: { value: "600" },
-            }
+            },
         },
         breakpoints: {
             sm: "320px",

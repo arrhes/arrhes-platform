@@ -1,13 +1,9 @@
-
 import { Button } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { JSX } from "react"
+import type { JSX } from "react"
 import { useDrawerContext } from "./drawerRoot.js"
 
-
-export function DrawerTrigger(props: {
-    children: JSX.Element
-}) {
+export function DrawerTrigger(props: { children: JSX.Element }) {
     const { setOpen } = useDrawerContext()
 
     return (

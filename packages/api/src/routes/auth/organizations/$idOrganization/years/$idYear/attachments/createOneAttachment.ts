@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneAttachmentRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneAttachmentRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const createOneAttachmentRoute = authFactory.createApp()
+export const createOneAttachmentRoute = authFactory
+    .createApp()
     .post(
         createOneAttachmentRouteDefinition.path,
         bodyValidator(createOneAttachmentRouteDefinition.schemas.body),
@@ -31,7 +31,7 @@ export const createOneAttachmentRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -40,5 +40,5 @@ export const createOneAttachmentRoute = authFactory.createApp()
                 schema: createOneAttachmentRouteDefinition.schemas.return,
                 data: createOneAttachment,
             })
-        }
+        },
     )

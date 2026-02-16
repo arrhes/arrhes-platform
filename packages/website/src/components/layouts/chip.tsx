@@ -1,47 +1,46 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps } from "react"
-
+import type { ComponentProps } from "react"
 
 export type ChipColors = keyof typeof chipColors
 
 const chipColors = {
-    "neutral": {
+    neutral: {
         backgroundColor: css({ backgroundColor: "neutral/5" }),
         border: css({ borderColor: "neutral/10" }),
-        text: css({ color: "neutral" })
+        text: css({ color: "neutral" }),
     },
-    "information": {
+    information: {
         backgroundColor: css({ backgroundColor: "information/5" }),
         border: css({ borderColor: "information/10" }),
-        text: css({ color: "information" })
+        text: css({ color: "information" }),
     },
-    "error": {
+    error: {
         backgroundColor: css({ backgroundColor: "error/5" }),
         border: css({ borderColor: "error/10" }),
-        text: css({ color: "error" })
+        text: css({ color: "error" }),
     },
-    "warning": {
+    warning: {
         backgroundColor: css({ backgroundColor: "warning/5" }),
         border: css({ borderColor: "warning/10" }),
-        text: css({ color: "warning" })
+        text: css({ color: "warning" }),
     },
-    "success": {
+    success: {
         backgroundColor: css({ backgroundColor: "success/5" }),
         border: css({ borderColor: "success/10" }),
-        text: css({ color: "success" })
-    }
+        text: css({ color: "success" }),
+    },
 }
 
 export function Chip(props: {
     text: string | null | undefined
     color?: keyof typeof chipColors
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     if (props.text === null) {
-        return (null)
+        return null
     }
     if (props.text === undefined) {
-        return (null)
+        return null
     }
 
     return (
@@ -55,11 +54,11 @@ export function Chip(props: {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    border: "none"
+                    border: "none",
                 }),
                 chipColors[props?.color ?? "neutral"].border,
                 chipColors[props?.color ?? "neutral"].backgroundColor,
-                props.className
+                props.className,
             )}
         >
             <span
@@ -67,9 +66,9 @@ export function Chip(props: {
                     css({
                         fontSize: "10px",
                         lineHeight: "none",
-                        color: "none"
+                        color: "none",
                     }),
-                    chipColors[props?.color ?? "neutral"].text
+                    chipColors[props?.color ?? "neutral"].text,
                 )}
             >
                 {props.text}

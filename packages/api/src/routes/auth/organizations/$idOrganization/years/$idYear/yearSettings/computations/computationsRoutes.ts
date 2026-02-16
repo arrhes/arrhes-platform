@@ -3,7 +3,6 @@ import { createOneComputationRoute } from "../../../../../../../../routes/auth/o
 import { generateComputationsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/computations/generateComputations.js"
 import { readAllComputationsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/computations/readAllComputations.js"
 
-
 export const computationsRoutes = [
     createOneComputationRoute,
     readAllComputationsRoute,

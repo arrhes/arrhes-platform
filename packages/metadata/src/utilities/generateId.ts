@@ -1,5 +1,4 @@
-import { customAlphabet } from 'nanoid'
-
+import { customAlphabet } from "nanoid"
 
 export function generateId() {
     const raw = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 16)()

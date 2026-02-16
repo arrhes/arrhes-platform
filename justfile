@@ -71,3 +71,24 @@ build:
     @echo "=============================================="
     @echo "  Build succeeded"
     @echo "=============================================="
+
+# ==============================================================================
+# Tests
+# ==============================================================================
+
+# Run all unit tests (no Docker required)
+test-unit:
+    pnpm --recursive --if-present --filter='./packages/**' run test:unit
+
+# Run all integration tests (requires dev environment running)
+test-integration:
+    pnpm --filter='@arrhes/application-api' run test:integration
+
+# Run all Playwright E2E tests (requires dev environment running)
+test-e2e:
+    pnpm run test:e2e
+
+# Run all tests: unit + integration + E2E (requires dev environment running)
+test:
+    pnpm --recursive --if-present --filter='./packages/**' run test
+    pnpm run test:e2e

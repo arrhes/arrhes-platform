@@ -15,7 +15,6 @@ import * as userModel from "./user.js"
 import * as userSessionModel from "./userSession.js"
 import * as yearModel from "./year.js"
 
-
 export const models = {
     account: accountModel.accountModel,
     attachment: attachmentModel.attachmentModel,

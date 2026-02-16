@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { balanceSheetSchema, balanceSheetSchemaReturn } from "../../../../../../../../../schemas/balanceSheet.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneBalanceSheetRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-balance-sheet`,
@@ -18,6 +17,6 @@ export const updateOneBalanceSheetRouteDefinition = routeDefinition({
             number: v.optional(balanceSheetSchema.entries.number),
             label: v.optional(balanceSheetSchema.entries.label),
         }),
-        return: balanceSheetSchemaReturn
+        return: balanceSheetSchemaReturn,
     },
 })

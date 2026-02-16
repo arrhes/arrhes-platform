@@ -1,12 +1,7 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactNode } from "react"
+import type { ComponentProps, ReactNode } from "react"
 
-
-
-export function PageHeader(props: {
-    children?: ReactNode
-    className?: ComponentProps<'div'>['className']
-}) {
+export function PageHeader(props: { children?: ReactNode; className?: ComponentProps<"div">["className"] }) {
     return (
         <div
             className={cx(
@@ -20,7 +15,7 @@ export function PageHeader(props: {
                     alignItems: "flex-start",
                     gap: "0.5rem",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

@@ -1,7 +1,6 @@
 import { cookiePrefix } from "../variables.js"
 import { getCookie } from "./getCookie.js"
 
-
 export function getIsAuthenticated() {
     const isAuthenticatedRaw = getCookie(`${cookiePrefix}_${"is_auth"}`)
 

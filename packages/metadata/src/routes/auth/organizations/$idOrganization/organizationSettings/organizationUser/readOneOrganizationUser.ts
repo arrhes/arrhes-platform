@@ -4,7 +4,6 @@ import { organizationUserSchema, organizationUserSchemaReturn } from "../../../.
 import { userSchemaReturn } from "../../../../../../schemas/user.js"
 import { routeDefinition } from "../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneOrganizationUserRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-organization-user`,
@@ -19,7 +18,7 @@ export const readOneOrganizationUserRouteDefinition = routeDefinition({
                 id: userSchemaReturn.entries.id,
                 email: userSchemaReturn.entries.email,
                 alias: userSchemaReturn.entries.alias,
-            })
-        })
+            }),
+        }),
     },
 })

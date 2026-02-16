@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readOneBalanceSheetRoute = authFactory.createApp()
+export const readOneBalanceSheetRoute = authFactory
+    .createApp()
     .post(
         readOneBalanceSheetRouteDefinition.path,
         bodyValidator(readOneBalanceSheetRouteDefinition.schemas.body),
@@ -17,13 +17,12 @@ export const readOneBalanceSheetRoute = authFactory.createApp()
             const readOneBalanceSheet = await selectOne({
                 database: c.var.clients.sql,
                 table: models.balanceSheet,
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idBalanceSheet),
-                    )
-                )
+                    ),
             })
 
             return response({
@@ -32,5 +31,5 @@ export const readOneBalanceSheetRoute = authFactory.createApp()
                 schema: readOneBalanceSheetRouteDefinition.schemas.return,
                 data: readOneBalanceSheet,
             })
-        }
+        },
     )

@@ -1,11 +1,8 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-export function DropdownLabel(props:
-    ComponentPropsWithRef<typeof DropdownMenuLabel>
-) {
+export function DropdownLabel(props: ComponentPropsWithRef<typeof DropdownMenuLabel>) {
     return (
         <DropdownMenuLabel
             {...props}
@@ -14,7 +11,7 @@ export function DropdownLabel(props:
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
-                outline: "none"
+                outline: "none",
             })}
         >
             {props.children}

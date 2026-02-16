@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function PageRoot(props: {
     children: ReactElement | ReactElement[]
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     return (
         <div
@@ -22,7 +21,7 @@ export function PageRoot(props: {
                     backgroundColor: "white",
                     padding: "1rem",
                 }),
-                props.className
+                props.className,
             )}
             children={props.children}
         />

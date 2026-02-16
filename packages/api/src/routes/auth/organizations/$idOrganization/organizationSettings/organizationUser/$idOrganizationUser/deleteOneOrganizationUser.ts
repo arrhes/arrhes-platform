@@ -1,15 +1,15 @@
+import { models } from "@arrhes/application-metadata/models"
+import { deleteOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../factories/authFactory.js"
 import { Exception } from "../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../utilities/sql/deleteOne.js"
 import { selectOne } from "../../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { deleteOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const deleteOneOrganizationUserRoute = authFactory.createApp()
+export const deleteOneOrganizationUserRoute = authFactory
+    .createApp()
     .post(
         deleteOneOrganizationUserRouteDefinition.path,
         bodyValidator(deleteOneOrganizationUserRouteDefinition.schemas.body),
@@ -20,12 +20,7 @@ export const deleteOneOrganizationUserRoute = authFactory.createApp()
             const organizationUser = await selectOne({
                 database: c.var.clients.sql,
                 table: models.organizationUser,
-                where: (table) => (
-                    and(
-                        eq(table.idUser, c.var.user.id),
-                        eq(table.idOrganization, body.idOrganization),
-                    )
-                )
+                where: (table) => and(eq(table.idUser, c.var.user.id), eq(table.idOrganization, body.idOrganization)),
             })
             if (organizationUser.isAdmin === false) {
                 throw new Exception({
@@ -38,11 +33,7 @@ export const deleteOneOrganizationUserRoute = authFactory.createApp()
             const deleteOneOrganizationUser = await deleteOne({
                 database: c.var.clients.sql,
                 table: models.organizationUser,
-                where: (table) => (
-                    and(
-                        eq(table.id, body.idOrganizationUser),
-                    )
-                )
+                where: (table) => and(eq(table.id, body.idOrganizationUser)),
             })
 
             return response({
@@ -51,5 +42,5 @@ export const deleteOneOrganizationUserRoute = authFactory.createApp()
                 schema: deleteOneOrganizationUserRouteDefinition.schemas.return,
                 data: deleteOneOrganizationUser,
             })
-        }
+        },
     )

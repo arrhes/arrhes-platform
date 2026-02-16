@@ -4,7 +4,6 @@ import { TooltipProvider } from "./tooltipProvider.js"
 import { TooltipRoot } from "./tooltipRoot.js"
 import { TooltipTrigger } from "./tooltipTrigger.js"
 
-
 export const Tooltip = {
     Provider: TooltipProvider,
     Portal: TooltipPortal,

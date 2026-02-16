@@ -1,8 +1,11 @@
-import { readAllComputationIncomeStatementsRouteDefinition, readOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllComputationIncomeStatementsRouteDefinition,
+    readOneIncomeStatementRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
 import { IconEye, IconPlus } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatText } from "../../../../../../../../../../../components/formats/formatText.tsx"
 import { Chip } from "../../../../../../../../../../../components/layouts/chip.tsx"
@@ -10,7 +13,6 @@ import { DataTable } from "../../../../../../../../../../../components/layouts/d
 import { DataWrapper } from "../../../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { LinkButton } from "../../../../../../../../../../../components/linkButton.tsx"
 import { CreateOneComputationIncomeStatement } from "./createOneComputationIncomeStatement.tsx"
-
 
 export function ComputationIncomeStatementsTable(props: {
     computation: v.InferOutput<typeof returnedSchemas.computation>
@@ -31,8 +33,8 @@ export function ComputationIncomeStatementsTable(props: {
                         isLoading={false}
                         columns={[
                             {
-                                accessorKey: 'actions',
-                                header: ' ',
+                                accessorKey: "actions",
+                                header: " ",
                                 cell: ({ row }) => (
                                     <LinkButton
                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs/$idComputation/$idComputationIncomeStatement"
@@ -43,26 +45,22 @@ export function ComputationIncomeStatementsTable(props: {
                                             idComputationIncomeStatement: row.original.id,
                                         }}
                                     >
-                                        <ButtonContent
-                                            variant="invisible"
-                                            leftIcon={<IconEye />}
-                                            text={undefined}
-                                        />
+                                        <ButtonContent variant="invisible" leftIcon={<IconEye />} text={undefined} />
                                     </LinkButton>
                                 ),
                                 enableSorting: false,
                                 enableGlobalFilter: false,
                             },
                             {
-                                accessorKey: 'idStatement',
-                                header: 'Poste du compte de résultat',
+                                accessorKey: "idStatement",
+                                header: "Poste du compte de résultat",
                                 cell: ({ row }) => (
                                     <DataWrapper
                                         routeDefinition={readOneIncomeStatementRouteDefinition}
                                         body={{
                                             idOrganization: row.original.idOrganization,
                                             idYear: row.original.idYear,
-                                            idIncomeStatement: row.original.idIncomeStatement
+                                            idIncomeStatement: row.original.idIncomeStatement,
                                         }}
                                     >
                                         {(incomeStatement) => (
@@ -72,34 +70,26 @@ export function ComputationIncomeStatementsTable(props: {
                                         )}
                                     </DataWrapper>
                                 ),
-                                filterFn: 'includesString'
+                                filterFn: "includesString",
                             },
                             {
-                                accessorKey: 'operation',
-                                header: 'Opération',
+                                accessorKey: "operation",
+                                header: "Opération",
                                 cell: ({ row }) => (
-                                    <Chip
-                                        text={(row.original.operation === "plus") ? "Addition" : "Soustraction"}
-                                    />
+                                    <Chip text={row.original.operation === "plus" ? "Addition" : "Soustraction"} />
                                 ),
-                                filterFn: 'includesString'
+                                filterFn: "includesString",
                             },
                             {
-                                accessorKey: 'createdAt',
+                                accessorKey: "createdAt",
                                 header: "Ajouté le",
-                                cell: ({ row }) => (<FormatDateTime date={row.original.createdAt} />),
-                                filterFn: 'includesString'
-                            }
+                                cell: ({ row }) => <FormatDateTime date={row.original.createdAt} />,
+                                filterFn: "includesString",
+                            },
                         ]}
                     >
-                        <CreateOneComputationIncomeStatement
-                            computation={props.computation}
-                        >
-                            <ButtonContent
-                                variant="primary"
-                                leftIcon={<IconPlus />}
-                                text="Ajouter"
-                            />
+                        <CreateOneComputationIncomeStatement computation={props.computation}>
+                            <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter" />
                         </CreateOneComputationIncomeStatement>
                     </DataTable>
                 )

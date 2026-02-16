@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readAllRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readAllRecordRowsRoute = authFactory.createApp()
+export const readAllRecordRowsRoute = authFactory
+    .createApp()
     .post(
         readAllRecordRowsRouteDefinition.path,
         bodyValidator(readAllRecordRowsRouteDefinition.schemas.body),
@@ -19,21 +19,14 @@ export const readAllRecordRowsRoute = authFactory.createApp()
                 table: models.recordRow,
                 where: (table) => {
                     if (body.idRecord !== null && body.idRecord !== undefined) {
-                        return (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear),
-                                eq(table.idRecord, body.idRecord),
-                            )
-                        )
-                    }
-                    return (
-                        and(
+                        return and(
                             eq(table.idOrganization, body.idOrganization),
                             eq(table.idYear, body.idYear),
+                            eq(table.idRecord, body.idRecord),
                         )
-                    )
-                }
+                    }
+                    return and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear))
+                },
             })
 
             return response({
@@ -42,5 +35,5 @@ export const readAllRecordRowsRoute = authFactory.createApp()
                 schema: readAllRecordRowsRouteDefinition.schemas.return,
                 data: readAllRecordRows,
             })
-        }
+        },
     )

@@ -6,7 +6,6 @@ import { incomeStatementsRoutes } from "../../../../../../../routes/auth/organiz
 import { journalsRoutes } from "../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/journals/journalsRoutes.js"
 import { recordLabelsRoutes } from "../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/recordLabelsRoutes.js"
 
-
 export const yearSettingsRoute = [
     ...generalRoutes,
     ...accountsRoutes,

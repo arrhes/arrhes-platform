@@ -1,12 +1,11 @@
 import { readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconCalculator } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../../../../../components/layouts/emptyState.tsx"
 import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
-
 
 export function ComputationsTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -17,7 +16,7 @@ export function ComputationsTable(props: {
             routeDefinition={readAllComputationsRouteDefinition}
             body={{
                 idOrganization: props.idOrganization,
-                idYear: props.idYear
+                idYear: props.idYear,
             }}
         >
             {(computations) => {
@@ -31,7 +30,17 @@ export function ComputationsTable(props: {
                     )
                 }
                 return (
-                    <div className={css({ height: "fit-content", width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", padding: "4" })}>
+                    <div
+                        className={css({
+                            height: "fit-content",
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start",
+                            padding: "4",
+                        })}
+                    >
                         {computations.map((computation) => (
                             <LinkButton
                                 key={computation.id}
@@ -43,11 +52,33 @@ export function ComputationsTable(props: {
                                 }}
                                 className={css({ width: "100%" })}
                             >
-                                <div className={css({ padding: "1rem", minWidth: "fit-content", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2", _hover: { backgroundColor: "neutral/5" }, borderBottom: "1px solid", borderColor: "neutral/5", _last: { borderBottom: "0" } })}>
+                                <div
+                                    className={css({
+                                        padding: "1rem",
+                                        minWidth: "fit-content",
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        gap: "2",
+                                        _hover: { backgroundColor: "neutral/5" },
+                                        borderBottom: "1px solid",
+                                        borderColor: "neutral/5",
+                                        _last: { borderBottom: "0" },
+                                    })}
+                                >
                                     <span className={css({ color: "neutral", fontSize: "xs", lineHeight: "none" })}>
                                         {computation.number}
                                     </span>
-                                    <span className={css({ color: "neutral", fontSize: "xs", textAlign: "left", lineHeight: "none", whiteSpace: "nowrap" })}>
+                                    <span
+                                        className={css({
+                                            color: "neutral",
+                                            fontSize: "xs",
+                                            textAlign: "left",
+                                            lineHeight: "none",
+                                            whiteSpace: "nowrap",
+                                        })}
+                                    >
                                         {computation.label}
                                     </span>
                                 </div>

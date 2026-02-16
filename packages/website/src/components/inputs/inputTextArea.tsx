@@ -1,15 +1,13 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentPropsWithRef, useRef } from 'react'
-import { FieldError } from 'react-hook-form'
+import { type ComponentPropsWithRef, useRef } from "react"
+import type { FieldError } from "react-hook-form"
 
-
-export function InputTextArea(props:
-    & Omit<ComponentPropsWithRef<"textarea">, "value" | "onChange">
-    & {
+export function InputTextArea(
+    props: Omit<ComponentPropsWithRef<"textarea">, "value" | "onChange"> & {
         error?: FieldError
         value?: string | null
         onChange: (value?: string | null | undefined) => void
-    }
+    },
 ) {
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -45,10 +43,10 @@ export function InputTextArea(props:
                     flexShrink: "0",
                     resize: "none",
                     height: "fit",
-                    overflowY: "auto"
+                    overflowY: "auto",
                 }),
                 css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
-                props.className
+                props.className,
             )}
             value={input(props.value)}
             onChange={(e) => {

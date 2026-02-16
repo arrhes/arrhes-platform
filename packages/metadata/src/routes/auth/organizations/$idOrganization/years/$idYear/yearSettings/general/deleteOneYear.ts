@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { yearSchema } from "../../../../../../../../schemas/year.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneYearRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-year`,
@@ -12,6 +11,6 @@ export const deleteOneYearRouteDefinition = routeDefinition({
             idYear: yearSchema.entries.id,
             idOrganization: yearSchema.entries.idOrganization,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

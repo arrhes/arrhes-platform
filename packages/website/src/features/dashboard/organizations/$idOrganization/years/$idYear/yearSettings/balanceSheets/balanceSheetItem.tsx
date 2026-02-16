@@ -1,9 +1,8 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ComponentProps, Fragment } from "react"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { type ComponentProps, Fragment } from "react"
+import type * as v from "valibot"
 import { BalanceSheetRow } from "./balanceSheetRow.tsx"
 import { getBalanceSheetChildren } from "./getBalanceSheetChildren.tsx"
-
 
 export function BalanceSheetItem(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -11,9 +10,8 @@ export function BalanceSheetItem(props: {
     balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>
     balanceSheetChildren: Array<v.InferOutput<typeof returnedSchemas.balanceSheet>>
     level: number
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
-
     return (
         <Fragment>
             <BalanceSheetRow
@@ -22,27 +20,25 @@ export function BalanceSheetItem(props: {
                 balanceSheet={props.balanceSheet}
                 level={props.level}
             />
-            {
-                props.balanceSheetChildren
-                    .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === props.balanceSheet.id)
-                    .map((balanceSheet) => {
-                        const balanceSheetChildren = getBalanceSheetChildren({
-                            balanceSheet: balanceSheet,
-                            balanceSheets: props.balanceSheetChildren,
-                        })
-
-                        return (
-                            <BalanceSheetItem
-                                key={balanceSheet.id}
-                                idOrganization={props.idOrganization}
-                                idYear={props.idYear}
-                                balanceSheet={balanceSheet}
-                                balanceSheetChildren={balanceSheetChildren}
-                                level={props.level + 1}
-                            />
-                        )
+            {props.balanceSheetChildren
+                .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === props.balanceSheet.id)
+                .map((balanceSheet) => {
+                    const balanceSheetChildren = getBalanceSheetChildren({
+                        balanceSheet: balanceSheet,
+                        balanceSheets: props.balanceSheetChildren,
                     })
-            }
+
+                    return (
+                        <BalanceSheetItem
+                            key={balanceSheet.id}
+                            idOrganization={props.idOrganization}
+                            idYear={props.idYear}
+                            balanceSheet={balanceSheet}
+                            balanceSheetChildren={balanceSheetChildren}
+                            level={props.level + 1}
+                        />
+                    )
+                })}
         </Fragment>
     )
 }

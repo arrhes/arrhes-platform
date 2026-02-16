@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { booleanSchema, dateTimeSchema, numericSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { recordRowModel } from "../models/recordRow.js"
-
+import type { recordRowModel } from "../models/recordRow.js"
 
 export const recordRowSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -26,27 +25,23 @@ export const recordRowSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof recordRowModel.$inferSelect>
 
-
-export const recordRowSchemaReturn = v.pick(
-    recordRowSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "idRecord",
-        "idAccount",
-        "flag",
-        "isComputedForJournalReport",
-        "isComputedForLedgerReport",
-        "isComputedForBalanceReport",
-        "isComputedForBalanceSheetReport",
-        "isComputedForIncomeStatementReport",
-        "label",
-        "debit",
-        "credit",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const recordRowSchemaReturn = v.pick(recordRowSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "idRecord",
+    "idAccount",
+    "flag",
+    "isComputedForJournalReport",
+    "isComputedForLedgerReport",
+    "isComputedForBalanceReport",
+    "isComputedForBalanceSheetReport",
+    "isComputedForIncomeStatementReport",
+    "label",
+    "debit",
+    "credit",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

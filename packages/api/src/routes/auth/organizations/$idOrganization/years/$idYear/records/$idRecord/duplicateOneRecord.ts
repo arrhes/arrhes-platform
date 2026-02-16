@@ -1,3 +1,7 @@
+import { models } from "@arrhes/application-metadata/models"
+import { duplicateOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
@@ -5,13 +9,9 @@ import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { duplicateOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { and, eq } from "drizzle-orm"
 
-
-export const duplicateOneRecordRoute = authFactory.createApp()
+export const duplicateOneRecordRoute = authFactory
+    .createApp()
     .post(
         duplicateOneRecordRouteDefinition.path,
         bodyValidator(duplicateOneRecordRouteDefinition.schemas.body),
@@ -19,29 +19,26 @@ export const duplicateOneRecordRoute = authFactory.createApp()
             const body = c.req.valid("json")
 
             const duplicatedRecord = await c.var.clients.sql.transaction(async (tx) => {
-
                 const originalRecord = await selectOne({
                     database: tx,
                     table: models.record,
-                    where: (table) => (
+                    where: (table) =>
                         and(
                             eq(table.idOrganization, body.idOrganization),
                             eq(table.idYear, body.idYear),
                             eq(table.id, body.idRecord),
-                        )
-                    )
+                        ),
                 })
 
                 const originalRecordRows = await selectMany({
                     database: tx,
                     table: models.recordRow,
-                    where: (table) => (
+                    where: (table) =>
                         and(
                             eq(table.idOrganization, body.idOrganization),
                             eq(table.idYear, body.idYear),
                             eq(table.idRecord, originalRecord.id),
-                        )
-                    )
+                        ),
                 })
 
                 const duplicateRecord = await insertOne({
@@ -60,7 +57,7 @@ export const duplicateOneRecordRoute = authFactory.createApp()
                         lastUpdatedAt: null,
                         createdBy: c.var.user.id,
                         lastUpdatedBy: null,
-                    }
+                    },
                 })
 
                 const duplicateRecordRows = await insertMany({
@@ -85,12 +82,11 @@ export const duplicateOneRecordRoute = authFactory.createApp()
                         lastUpdatedAt: null,
                         createdBy: c.var.user.id,
                         lastUpdatedBy: null,
-                    }))
+                    })),
                 })
 
                 return duplicateRecord
             })
-
 
             return response({
                 context: c,
@@ -98,5 +94,5 @@ export const duplicateOneRecordRoute = authFactory.createApp()
                 schema: duplicateOneRecordRouteDefinition.schemas.return,
                 data: duplicatedRecord,
             })
-        }
+        },
     )

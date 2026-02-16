@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { recordLabelSchema, recordLabelSchemaReturn } from "../../../../../../../../schemas/recordLabel.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneRecordLabelRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-record-label`,
@@ -14,6 +13,6 @@ export const createOneRecordLabelRouteDefinition = routeDefinition({
 
             label: recordLabelSchema.entries.label,
         }),
-        return: recordLabelSchemaReturn
+        return: recordLabelSchemaReturn,
     },
 })

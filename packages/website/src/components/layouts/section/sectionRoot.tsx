@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function SectionRoot(props: {
     children: null | ReactElement | (null | ReactElement)[]
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     return (
         <div
@@ -19,9 +18,9 @@ export function SectionRoot(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: "8"
+                    gap: "8",
                 }),
-                props.className
+                props.className,
             )}
             children={props.children}
         />

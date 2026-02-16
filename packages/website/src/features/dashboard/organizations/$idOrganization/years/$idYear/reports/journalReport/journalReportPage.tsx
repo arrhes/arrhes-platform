@@ -2,11 +2,10 @@ import { readAllRecordRowsRouteDefinition, readAllRecordsRouteDefinition } from 
 import { useParams } from "@tanstack/react-router"
 import { Box } from "../../../../../../../../components/layouts/box.tsx"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
+import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
 import { journalReportRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/reports/journalReportRoute.tsx"
 import { JournalReportTable } from "./journalReportTable.tsx"
-import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
-
 
 export function JournalReportPage() {
     const params = useParams({ from: journalReportRoute.id })
@@ -30,7 +29,7 @@ export function JournalReportPage() {
                                         body={{
                                             idOrganization: params.idOrganization,
                                             idYear: params.idYear,
-                                            idRecord: undefined
+                                            idRecord: undefined,
                                         }}
                                     >
                                         {(recordRows) => {
@@ -38,7 +37,10 @@ export function JournalReportPage() {
                                                 <Box>
                                                     <JournalReportTable
                                                         records={records}
-                                                        recordRows={recordRows.filter((recordRow) => recordRow.isComputedForJournalReport === true)}
+                                                        recordRows={recordRows.filter(
+                                                            (recordRow) =>
+                                                                recordRow.isComputedForJournalReport === true,
+                                                        )}
                                                     />
                                                 </Box>
                                             )

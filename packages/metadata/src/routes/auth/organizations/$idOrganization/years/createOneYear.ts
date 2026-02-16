@@ -3,7 +3,6 @@ import { routePath } from "../../../../../components/index.js"
 import { yearSchema, yearSchemaReturn } from "../../../../../schemas/year.js"
 import { routeDefinition } from "../../../../../utilities/routeDefinition.js"
 
-
 export const createOneYearRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-year`,
@@ -15,6 +14,6 @@ export const createOneYearRouteDefinition = routeDefinition({
             startingAt: yearSchema.entries.startingAt,
             endingAt: yearSchema.entries.endingAt,
         }),
-        return: yearSchemaReturn
+        return: yearSchemaReturn,
     },
 })

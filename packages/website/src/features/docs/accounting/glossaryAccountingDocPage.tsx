@@ -7,7 +7,6 @@ import { DocRoot } from "../../../components/document/docRoot.js"
 import { DocSection } from "../../../components/document/docSection.js"
 import { DocTip } from "../../../components/document/docTip.js"
 
-
 export function GlossaryAccountingDocPage() {
     return (
         <DocRoot>
@@ -17,9 +16,8 @@ export function GlossaryAccountingDocPage() {
             />
 
             <DocParagraph>
-                Ce glossaire regroupe les définitions des termes comptables utilisés dans
-                le cours. Cliquez sur les liens pour approfondir chaque concept dans la
-                page correspondante.
+                Ce glossaire regroupe les définitions des termes comptables utilisés dans le cours. Cliquez sur les
+                liens pour approfondir chaque concept dans la page correspondante.
             </DocParagraph>
 
             <DocSection title="A">
@@ -203,18 +201,14 @@ export function GlossaryAccountingDocPage() {
             </DocSection>
 
             <DocTip variant="tip">
-                Ce glossaire est un aide-mémoire. Pour comprendre ces concepts en profondeur,
-                consultez les pages du cours :{" "}
-                <DocLink to="/documentation/comptabilité/introduction">Introduction</DocLink>,{" "}
+                Ce glossaire est un aide-mémoire. Pour comprendre ces concepts en profondeur, consultez les pages du
+                cours : <DocLink to="/documentation/comptabilité/introduction">Introduction</DocLink>,{" "}
                 <DocLink to="/documentation/comptabilité/comptes">Les comptes</DocLink>,{" "}
                 <DocLink to="/documentation/comptabilité/écritures">Les écritures</DocLink> et{" "}
                 <DocLink to="/documentation/comptabilité/documents">Les documents</DocLink>.
             </DocTip>
 
-            <DocNextPage
-                to="/documentation/dashboard/démarrage"
-                label="Guide : Démarrer avec Arrhes"
-            />
+            <DocNextPage to="/documentation/dashboard/démarrage" label="Guide : Démarrer avec Arrhes" />
         </DocRoot>
     )
 }

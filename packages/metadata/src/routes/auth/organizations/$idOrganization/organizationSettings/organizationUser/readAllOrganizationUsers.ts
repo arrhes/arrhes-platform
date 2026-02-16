@@ -4,7 +4,6 @@ import { organizationUserSchema, organizationUserSchemaReturn } from "../../../.
 import { userSchemaReturn } from "../../../../../../schemas/user.js"
 import { routeDefinition } from "../../../../../../utilities/routeDefinition.js"
 
-
 export const readAllOrganizationUsersRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-all-organization-users`,
@@ -19,8 +18,8 @@ export const readAllOrganizationUsersRouteDefinition = routeDefinition({
                     id: userSchemaReturn.entries.id,
                     email: userSchemaReturn.entries.email,
                     alias: userSchemaReturn.entries.alias,
-                })
-            })
-        )
+                }),
+            }),
+        ),
     },
 })

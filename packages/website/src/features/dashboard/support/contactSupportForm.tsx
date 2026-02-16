@@ -11,8 +11,7 @@ import { InputTextArea } from "../../../components/inputs/inputTextArea.tsx"
 import { InputToggle } from "../../../components/inputs/inputToggle.tsx"
 import { toast } from "../../../contexts/toasts/useToast.ts"
 import { applicationRouter } from "../../../routes/applicationRouter.tsx"
-import { postAPI } from "../../../utilities/postAPI.ts"
-
+import { getResponseBodyFromAPI } from "../../../utilities/getResponseBodyFromAPI.ts"
 
 export function ContactSupportForm() {
     return (
@@ -26,7 +25,7 @@ export function ContactSupportForm() {
                 text: "Envoyer le message",
             }}
             onSubmit={async (data) => {
-                const response = await postAPI({
+                const response = await getResponseBodyFromAPI({
                     routeDefinition: sendSupportMessageRouteDefinition,
                     body: data,
                 })
@@ -42,7 +41,7 @@ export function ContactSupportForm() {
             onSuccess={() => {
                 applicationRouter.navigate({
                     to: "/",
-                    reloadDocument: true
+                    reloadDocument: true,
                 })
             }}
         >
@@ -68,7 +67,6 @@ export function ContactSupportForm() {
                                             { value: "enhancement", label: "Suggestion d'amélioration" },
                                             { value: "feature", label: "Demande de fonctionnalité" },
                                             { value: "other", label: "Autre" },
-
                                         ]}
                                     />
                                 </FormControl>
@@ -88,10 +86,7 @@ export function ContactSupportForm() {
                                     tooltip={undefined}
                                 />
                                 <FormControl>
-                                    <InputTextArea
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                    />
+                                    <InputTextArea value={field.value} onChange={field.onChange} />
                                 </FormControl>
                                 <FormError />
                             </FormItem>

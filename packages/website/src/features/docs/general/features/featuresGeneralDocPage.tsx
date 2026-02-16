@@ -1,46 +1,48 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import {
-    IconBook,
-    IconFileText,
-    IconLock,
-    IconUsers
-} from "@tabler/icons-react"
+import { IconBook, IconFileText, IconLock, IconUsers } from "@tabler/icons-react"
 import { DocRoot } from "../../../../components/document/docRoot.js"
 import { FeatureCard } from "./featureCard.js"
-
 
 export function FeaturesGeneralDocPage() {
     return (
         <DocRoot>
             {/* Page header */}
-            <div className={css({
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem"
-            })}>
-                <h1 className={css({
-                    fontSize: "lg",
-                    fontWeight: "bold",
-                    color: "neutral",
-                })}>
+            <div
+                className={css({
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                })}
+            >
+                <h1
+                    className={css({
+                        fontSize: "lg",
+                        fontWeight: "bold",
+                        color: "neutral",
+                    })}
+                >
                     Fonctionnalités
                 </h1>
-                <p className={css({
-                    color: "neutral/60",
-                    fontSize: "md",
-                    lineHeight: "relaxed",
-                })}>
-                    Découvrez toutes les fonctionnalités d'Arrhes pour gérer votre comptabilité
-                    de manière simple et efficace.
+                <p
+                    className={css({
+                        color: "neutral/60",
+                        fontSize: "md",
+                        lineHeight: "relaxed",
+                    })}
+                >
+                    Découvrez toutes les fonctionnalités d'Arrhes pour gérer votre comptabilité de manière simple et
+                    efficace.
                 </p>
             </div>
 
             {/* Features grid */}
-            <div className={css({
-                display: "grid",
-                gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
-                gap: "1rem",
-            })}>
+            <div
+                className={css({
+                    display: "grid",
+                    gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
+                    gap: "1rem",
+                })}
+            >
                 <FeatureCard
                     icon={<IconBook />}
                     title="Saisie des écritures"
@@ -59,7 +61,7 @@ export function FeaturesGeneralDocPage() {
                     features={[
                         "Pièces justificatives (factures, relevés bancaires, etc.)",
                         "Visualisation des documents",
-                        "Volume offert de 1Go par organisation"
+                        "Volume offert de 1Go par organisation",
                     ]}
                 />
                 <FeatureCard
@@ -69,7 +71,7 @@ export function FeaturesGeneralDocPage() {
                     features={[
                         "Grand livre, Balance générale, Bilan comptablen Compte de résultat",
                         "Mise à jour automatique à chaque nouvelle écriture",
-                        "Export PDF"
+                        "Export PDF",
                     ]}
                 />
                 {/* <FeatureCard
@@ -91,7 +93,7 @@ export function FeaturesGeneralDocPage() {
                         "Organisations illimitées",
                         "Gestion des membres",
                         // "Rôles et permissions",
-                        "Exercices illimités"
+                        "Exercices illimités",
                     ]}
                 />
                 {/* <FeatureCard
@@ -120,11 +122,7 @@ export function FeaturesGeneralDocPage() {
                     icon={<IconLock />}
                     title="Sécurité"
                     description="Vos données sont protégées avec les meilleures pratiques de sécurité."
-                    features={[
-                        "Chiffrement bout-en-bout",
-                        "Sauvegardes automatiques",
-                        "Hébergement en France"
-                    ]}
+                    features={["Chiffrement bout-en-bout", "Sauvegardes automatiques", "Hébergement en France"]}
                 />
             </div>
         </DocRoot>

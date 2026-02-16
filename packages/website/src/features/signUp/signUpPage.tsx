@@ -14,43 +14,48 @@ import { InputText } from "../../components/inputs/inputText.js"
 import { LinkButton } from "../../components/linkButton.js"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { applicationRouter } from "../../routes/applicationRouter.js"
-import { postAPI } from "../../utilities/postAPI.js"
-
+import { getResponseBodyFromAPI } from "../../utilities/getResponseBodyFromAPI.js"
 
 export function SignUpPage() {
     return (
-        <div className={css({
-            width: "100%",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "stretch",
-            backgroundColor: "background"
-        })}>
-            {/* Main content */}
-            <section className={css({
+        <div
+            className={css({
                 width: "100%",
-                flex: "1",
+                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                paddingX: "1rem",
-                paddingY: "4rem",
-            })}>
-                <div className={css({
+                justifyContent: "start",
+                alignItems: "stretch",
+                backgroundColor: "background",
+            })}
+        >
+            {/* Main content */}
+            <section
+                className={css({
                     width: "100%",
-                    maxWidth: "sm",
+                    flex: "1",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "1.5rem",
-                    padding: "2rem",
-                    borderRadius: "lg",
-                    border: "1px solid",
-                    borderColor: "neutral/10",
-                    backgroundColor: "white",
-                })}>
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingX: "1rem",
+                    paddingY: "4rem",
+                })}
+            >
+                <div
+                    className={css({
+                        width: "100%",
+                        maxWidth: "sm",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1.5rem",
+                        padding: "2rem",
+                        borderRadius: "lg",
+                        border: "1px solid",
+                        borderColor: "neutral/10",
+                        backgroundColor: "white",
+                    })}
+                >
                     <div
                         className={css({
                             width: "100%",
@@ -63,10 +68,7 @@ export function SignUpPage() {
                         <LinkButton to="/">
                             <Logo />
                         </LinkButton>
-                        <LinkButton
-                            to="/documentation"
-                            title="Documentation"
-                        >
+                        <LinkButton to="/documentation" title="Documentation">
                             <ButtonContent
                                 variant="invisible"
                                 leftIcon={<IconBook2 />}
@@ -75,22 +77,28 @@ export function SignUpPage() {
                         </LinkButton>
                     </div>
 
-                    <div className={css({
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                    })}>
-                        <h1 className={css({
-                            fontSize: "lg",
-                            fontWeight: "bold",
-                            color: "neutral",
-                        })}>
+                    <div
+                        className={css({
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "0.5rem",
+                        })}
+                    >
+                        <h1
+                            className={css({
+                                fontSize: "lg",
+                                fontWeight: "bold",
+                                color: "neutral",
+                            })}
+                        >
                             Inscription
                         </h1>
-                        <p className={css({
-                            color: "neutral/60",
-                            fontSize: "sm",
-                        })}>
+                        <p
+                            className={css({
+                                color: "neutral/60",
+                                fontSize: "sm",
+                            })}
+                        >
                             Créez votre compte gratuitement
                         </p>
                     </div>
@@ -101,7 +109,7 @@ export function SignUpPage() {
                         submitButtonProps={{
                             leftIcon: <IconUserPlus />,
                             text: "Créer un compte",
-                            className: css({ width: "100%", justifyContent: "center" })
+                            className: css({ width: "100%", justifyContent: "center" }),
                         }}
                         submitOnPressEnterKey={true}
                         onSubmit={async (data) => {
@@ -110,7 +118,7 @@ export function SignUpPage() {
                                 return false
                             }
 
-                            const response = await postAPI({
+                            const response = await getResponseBodyFromAPI({
                                 routeDefinition: signUpRouteDefinition,
                                 body: data,
                             })
@@ -126,7 +134,7 @@ export function SignUpPage() {
                         onSuccess={() => {
                             applicationRouter.navigate({
                                 to: "/dashboard",
-                                reloadDocument: true
+                                reloadDocument: true,
                             })
                         }}
                     >
@@ -144,11 +152,7 @@ export function SignUpPage() {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} type="email" />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -166,10 +170,7 @@ export function SignUpPage() {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputPassword
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputPassword value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -187,10 +188,7 @@ export function SignUpPage() {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputPassword
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputPassword value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -212,10 +210,7 @@ export function SignUpPage() {
                             gap: "0.5rem",
                         })}
                     >
-                        <LinkButton
-                            to="/connexion"
-                            className={css({ width: "100%" })}
-                        >
+                        <LinkButton to="/connexion" className={css({ width: "100%" })}>
                             <ButtonContent
                                 variant="default"
                                 leftIcon={<IconLogin2 />}

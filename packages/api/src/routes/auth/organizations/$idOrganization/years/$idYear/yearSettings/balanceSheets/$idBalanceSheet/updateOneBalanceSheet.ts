@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const updateOneBalanceSheetRoute = authFactory.createApp()
+export const updateOneBalanceSheetRoute = authFactory
+    .createApp()
     .post(
         updateOneBalanceSheetRouteDefinition.path,
         bodyValidator(updateOneBalanceSheetRouteDefinition.schemas.body),
@@ -25,13 +25,12 @@ export const updateOneBalanceSheetRoute = authFactory.createApp()
                     lastUpdatedAt: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id,
                 },
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idBalanceSheet),
-                    )
-                )
+                    ),
             })
 
             return response({
@@ -40,5 +39,5 @@ export const updateOneBalanceSheetRoute = authFactory.createApp()
                 schema: updateOneBalanceSheetRouteDefinition.schemas.return,
                 data: updatedBalanceSheet,
             })
-        }
+        },
     )

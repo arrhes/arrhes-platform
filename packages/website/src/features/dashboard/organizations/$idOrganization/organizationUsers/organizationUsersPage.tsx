@@ -7,7 +7,6 @@ import { organizationUsersRoute } from "../../../../../routes/root/dashboard/org
 import { CreateOneOrganizationUser } from "./createOneOrganizationUser.tsx"
 import { OrganizationUsersListTable } from "./organizationUsersListTable.tsx"
 
-
 export function OrganizationUsersPage() {
     const params = useParams({ from: organizationUsersRoute.id })
 
@@ -19,22 +18,12 @@ export function OrganizationUsersPage() {
                 </Page.Title>
             </Page.Header> */}
             <Page.Content>
-                <div
-                    className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}
-                >
-                    <CreateOneOrganizationUser
-                        idOrganization={params.idOrganization}
-                    >
-                        <ButtonContent
-                            variant="outline"
-                            leftIcon={<IconUserPlus />}
-                            text="Invitez un utilisateur"
-                        />
+                <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
+                    <CreateOneOrganizationUser idOrganization={params.idOrganization}>
+                        <ButtonContent variant="outline" leftIcon={<IconUserPlus />} text="Invitez un utilisateur" />
                     </CreateOneOrganizationUser>
                 </div>
-                <OrganizationUsersListTable
-                    idOrganization={params.idOrganization}
-                />
+                <OrganizationUsersListTable idOrganization={params.idOrganization} />
             </Page.Content>
         </Page.Root>
     )

@@ -1,7 +1,6 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
-import { ComponentProps } from "react"
-
+import type { ComponentProps } from "react"
 
 type PopoverContent = ComponentProps<typeof PopoverPrimitive.Content>
 
@@ -29,9 +28,9 @@ export function PopoverContent(props: PopoverContent) {
                         minWidth: "var(--radix-popover-trigger-width)",
                         // maxWidth: "var(--radix-popover-trigger-width)",
                         border: "1px solid",
-                        borderColor: "neutral/10"
+                        borderColor: "neutral/10",
                     }),
-                    props.className
+                    props.className,
                 )}
             />
         </PopoverPrimitive.Portal>

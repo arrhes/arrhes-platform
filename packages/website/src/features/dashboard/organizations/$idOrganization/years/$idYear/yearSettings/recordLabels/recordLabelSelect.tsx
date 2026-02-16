@@ -1,9 +1,8 @@
 import { readAllRecordLabelsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 import { InputCombobox } from "../../../../../../../../components/inputs/inputCombobox.tsx"
 import { useDataFromAPI } from "../../../../../../../../utilities/useHTTPData.ts"
-
 
 export function RecordLabelSelect(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -15,7 +14,7 @@ export function RecordLabelSelect(props: {
         routeDefinition: readAllRecordLabelsRouteDefinition,
         body: {
             idOrganization: props.idOrganization,
-            idYear: props.idYear
+            idYear: props.idYear,
         },
     })
 
@@ -27,12 +26,12 @@ export function RecordLabelSelect(props: {
             allowEmpty={true}
             placeholder="Sélectionner la catégorie"
             options={
-                (recordLabelsResponse.data === undefined)
+                recordLabelsResponse.data === undefined
                     ? []
                     : recordLabelsResponse.data?.map((recordLabel) => ({
-                        key: recordLabel.id,
-                        label: `${recordLabel.label}`
-                    }))
+                          key: recordLabel.id,
+                          label: `${recordLabel.label}`,
+                      }))
             }
         />
     )

@@ -1,29 +1,24 @@
 import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Icon, IconAlertTriangle, IconCircleCheck, IconInfoSquare, IconProps, IconX } from "@tabler/icons-react"
-import { ReactElement } from "react"
-import { ToasterToast, ToastVariant } from "../../../contexts/toasts/useToast.js"
-
+import {
+    type Icon,
+    IconAlertTriangle,
+    IconCircleCheck,
+    IconInfoSquare,
+    type IconProps,
+    IconX,
+} from "@tabler/icons-react"
+import type { ReactElement } from "react"
+import type { ToasterToast, ToastVariant } from "../../../contexts/toasts/useToast.js"
 
 const toastIcons: Record<ToastVariant, ReactElement<IconProps & React.RefAttributes<Icon>>> = {
-    error: (
-        <IconAlertTriangle size={20} className={css({ color: "error" })} />
-    ),
-    success: (
-        <IconCircleCheck size={20} className={css({ color: "success" })} />
-    ),
-    warning: (
-        <IconAlertTriangle size={20} className={css({ color: "warning" })} />
-    ),
-    information: (
-        <IconInfoSquare size={20} className={css({ color: "information" })} />
-    )
+    error: <IconAlertTriangle size={20} className={css({ color: "error" })} />,
+    success: <IconCircleCheck size={20} className={css({ color: "success" })} />,
+    warning: <IconAlertTriangle size={20} className={css({ color: "warning" })} />,
+    information: <IconInfoSquare size={20} className={css({ color: "information" })} />,
 }
 
-export function ToastItem(props: {
-    toast: ToasterToast
-    onDismiss: (id: string) => void
-}) {
+export function ToastItem(props: { toast: ToasterToast; onDismiss: (id: string) => void }) {
     const variant = props.toast.variant ?? "information"
 
     return (
@@ -66,43 +61,29 @@ export function ToastItem(props: {
                     minWidth: "0",
                 })}
             >
-                {
-                    (props.toast.title === undefined)
-                        ? null
-                        : (
-                            <span
-                                className={css({
-                                    fontSize: "md",
-                                    color: "neutral",
-                                })}
-                            >
-                                {props.toast.title}
-                            </span>
-                        )
-                }
-                {
-                    (props.toast.description === undefined)
-                        ? null
-                        : (
-                            <span
-                                className={css({
-                                    fontSize: "sm",
-                                    color: "neutral/50",
-                                })}
-                            >
-                                {props.toast.description}
-                            </span>
-                        )
-                }
+                {props.toast.title === undefined ? null : (
+                    <span
+                        className={css({
+                            fontSize: "md",
+                            color: "neutral",
+                        })}
+                    >
+                        {props.toast.title}
+                    </span>
+                )}
+                {props.toast.description === undefined ? null : (
+                    <span
+                        className={css({
+                            fontSize: "sm",
+                            color: "neutral/50",
+                        })}
+                    >
+                        {props.toast.description}
+                    </span>
+                )}
             </div>
-            <Button
-                title="Fermer"
-                onClick={() => props.onDismiss(props.toast.id)}
-            >
-                <ButtonContent
-                    variant="invisible"
-                    leftIcon={<IconX />}
-                />
+            <Button title="Fermer" onClick={() => props.onDismiss(props.toast.id)}>
+                <ButtonContent variant="invisible" leftIcon={<IconX />} />
             </Button>
         </div>
     )

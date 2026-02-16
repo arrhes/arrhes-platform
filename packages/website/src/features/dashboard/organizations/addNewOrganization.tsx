@@ -1,6 +1,9 @@
-import { addNewOrganizationRouteDefinition, getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
+import {
+    addNewOrganizationRouteDefinition,
+    getAllMyOrganizationsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import { FormControl } from "../../../components/forms/formControl.tsx"
 import { FormError } from "../../../components/forms/formError.tsx"
@@ -12,27 +15,17 @@ import { InputText } from "../../../components/inputs/inputText.tsx"
 import { InputToggle } from "../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../utilities/postAPI.ts"
 
-
-export function AddNewOrganization(props: {
-    children: JSX.Element
-}) {
+export function AddNewOrganization(props: { children: JSX.Element }) {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Ajouter une nouvelle organisation"
-                />
+                <Drawer.Header title="Ajouter une nouvelle organisation" />
                 <Drawer.Body>
                     <FormRoot
                         schema={addNewOrganizationRouteDefinition.schemas.body}
@@ -44,7 +37,7 @@ export function AddNewOrganization(props: {
                             text: "Ajouter l'organisation",
                         }}
                         onSubmit={async (data) => {
-                            const response = await postAPI({
+                            const response = await getResponseBodyFromAPI({
                                 routeDefinition: addNewOrganizationRouteDefinition,
                                 body: data,
                             })
@@ -58,7 +51,6 @@ export function AddNewOrganization(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: getAllMyOrganizationsRouteDefinition,
                                 body: {},
@@ -86,7 +78,7 @@ export function AddNewOrganization(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { value: "company", label: "Entreprise" },
-                                                        { value: "association", label: "Association" }
+                                                        { value: "association", label: "Association" },
                                                     ]}
                                                 />
                                             </FormControl>
@@ -106,10 +98,7 @@ export function AddNewOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -127,10 +116,7 @@ export function AddNewOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -148,11 +134,7 @@ export function AddNewOrganization(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} type="email" />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

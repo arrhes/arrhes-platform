@@ -1,8 +1,6 @@
 import { authFactory } from "../factories/authFactory.js"
 
-
 export const userVerificationMiddleware = authFactory.createMiddleware(async (c, next) => {
-
     // if (c.var.userSession.isUserVerified === false) {
     //     throw new Exception({
     //         statusCode: 403,

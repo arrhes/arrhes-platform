@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../components/index.js"
 import { organizationUserSchema, organizationUserSchemaReturn } from "../../../../../../schemas/organizationUser.js"
 import { routeDefinition } from "../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneOrganizationUserRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-organization-user`,
@@ -13,6 +12,6 @@ export const updateOneOrganizationUserRouteDefinition = routeDefinition({
             idOrganization: organizationUserSchema.entries.idOrganization,
             isAdmin: v.optional(organizationUserSchema.entries.isAdmin),
         }),
-        return: organizationUserSchemaReturn
+        return: organizationUserSchemaReturn,
     },
 })

@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function TableBodyRow(props: {
     children: ReactElement | ReactElement[]
-    className?: ComponentProps<'tr'>['className']
+    className?: ComponentProps<"tr">["className"]
 }) {
     return (
         <tr
@@ -13,9 +12,9 @@ export function TableBodyRow(props: {
                     width: "100%",
                     borderBottom: "1px solid",
                     borderColor: "neutral/5",
-                    _last: { borderBottom: "0" }
+                    _last: { borderBottom: "0" },
                 }),
-                props.className
+                props.className,
             )}
             children={props.children}
         />

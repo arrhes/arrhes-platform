@@ -1,4 +1,10 @@
-import { readAllRecordRowsRouteDefinition, readOneAttachmentRouteDefinition, readOneJournalRouteDefinition, readOneRecordLabelRouteDefinition, readOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
+import {
+    readAllRecordRowsRouteDefinition,
+    readOneAttachmentRouteDefinition,
+    readOneJournalRouteDefinition,
+    readOneRecordLabelRouteDefinition,
+    readOneRecordRouteDefinition,
+} from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconCopyCheck, IconPencil, IconTrash } from "@tabler/icons-react"
@@ -6,7 +12,7 @@ import { useParams } from "@tanstack/react-router"
 import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
-import { formatPrice, FormatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
+import { FormatPrice, formatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
 import { Banner } from "../../../../../../../../components/layouts/banner.tsx"
 import { DataBlock } from "../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
@@ -20,7 +26,6 @@ import { DeleteOneRecord } from "./deleteOneRecord.tsx"
 import { DuplicateOneRecord } from "./duplicateOneRecord.tsx"
 import { RecordRowsTable } from "./recordRowsTable.tsx"
 import { UpdateOneRecord } from "./updateOneRecord.tsx"
-
 
 export function RecordPage() {
     const params = useParams({ from: recordRoute.id })
@@ -58,7 +63,15 @@ export function RecordPage() {
                                     return (
                                         <Section.Root>
                                             <Section.Item>
-                                                <div className={css({ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "2" })}>
+                                                <div
+                                                    className={css({
+                                                        width: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                        alignItems: "flex-start",
+                                                        gap: "2",
+                                                    })}
+                                                >
                                                     <LinkButton
                                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures"
                                                         params={{
@@ -72,28 +85,29 @@ export function RecordPage() {
                                                             text="Retour"
                                                         />
                                                     </LinkButton>
-                                                    <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                                                        <UpdateOneRecord
-                                                            record={record}
-                                                        >
+                                                    <div
+                                                        className={css({
+                                                            display: "flex",
+                                                            justifyContent: "flex-end",
+                                                            alignItems: "center",
+                                                            gap: "2",
+                                                        })}
+                                                    >
+                                                        <UpdateOneRecord record={record}>
                                                             <ButtonContent
                                                                 variant="primary"
                                                                 leftIcon={<IconPencil />}
                                                                 text="Modifier"
                                                             />
                                                         </UpdateOneRecord>
-                                                        <DuplicateOneRecord
-                                                            record={record}
-                                                        >
+                                                        <DuplicateOneRecord record={record}>
                                                             <ButtonContent
                                                                 variant="default"
                                                                 leftIcon={<IconCopyCheck />}
                                                                 text="Dupliquer"
                                                             />
                                                         </DuplicateOneRecord>
-                                                        <DeleteOneRecord
-                                                            record={record}
-                                                        >
+                                                        <DeleteOneRecord record={record}>
                                                             <ButtonContent
                                                                 variant="default"
                                                                 leftIcon={<IconTrash />}
@@ -118,102 +132,85 @@ export function RecordPage() {
                                                 </div>
                                             </Section.Item>
                                             <Section.Item className={css({ padding: "0" })}>
-                                                {
-                                                    (record.idAttachment === null)
-                                                        ? (null)
-                                                        : (
-                                                            <Banner variant="error">
-                                                                Il manque une pièce justificative.
-                                                            </Banner>
-                                                        )
-                                                }
-                                                {
-                                                    compareAmounts({
-                                                        a: totalDebit,
-                                                        b: totalCredit,
-                                                    })
-                                                        ? (null)
-                                                        : (
-                                                            <Banner variant="error">
-                                                                Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider. ({formatPrice({ price: totalDebit - totalCredit })})
-                                                            </Banner>
-                                                        )
-                                                }
+                                                {record.idAttachment === null ? null : (
+                                                    <Banner variant="error">Il manque une pièce justificative.</Banner>
+                                                )}
+                                                {compareAmounts({
+                                                    a: totalDebit,
+                                                    b: totalCredit,
+                                                }) ? null : (
+                                                    <Banner variant="error">
+                                                        Les montants au débit et au crédit sont différents, veuillez
+                                                        corriger pour pouvoir valider. (
+                                                        {formatPrice({ price: totalDebit - totalCredit })})
+                                                    </Banner>
+                                                )}
                                             </Section.Item>
                                             <Section.Item className={css({ flexDirection: "column" })}>
                                                 <DataBlock.Root>
                                                     <DataBlock.Header title="Informations" />
                                                     <DataBlock.Content>
                                                         <DataBlock.Item label="Libellé">
-                                                            <FormatText>
-                                                                {record.label}
-                                                            </FormatText>
+                                                            <FormatText>{record.label}</FormatText>
                                                         </DataBlock.Item>
                                                         <DataBlock.Item label="Date">
                                                             <FormatDate date={record.date} />
                                                         </DataBlock.Item>
                                                         <DataBlock.Item label="Journal">
-                                                            {(record.idJournal === null)
-                                                                ? (<FormatNull />)
-                                                                : (
-                                                                    <DataWrapper
-                                                                        routeDefinition={readOneJournalRouteDefinition}
-                                                                        body={{
-                                                                            idOrganization: params.idOrganization,
-                                                                            idYear: params.idYear,
-                                                                            idJournal: record.idJournal
-                                                                        }}
-                                                                    >
-                                                                        {(journal) => (
-                                                                            <span>
-                                                                                {`(${journal.code}) ${journal.label}`}
-                                                                            </span>
-                                                                        )}
-                                                                    </DataWrapper>
-                                                                )
-                                                            }
+                                                            {record.idJournal === null ? (
+                                                                <FormatNull />
+                                                            ) : (
+                                                                <DataWrapper
+                                                                    routeDefinition={readOneJournalRouteDefinition}
+                                                                    body={{
+                                                                        idOrganization: params.idOrganization,
+                                                                        idYear: params.idYear,
+                                                                        idJournal: record.idJournal,
+                                                                    }}
+                                                                >
+                                                                    {(journal) => (
+                                                                        <span>
+                                                                            {`(${journal.code}) ${journal.label}`}
+                                                                        </span>
+                                                                    )}
+                                                                </DataWrapper>
+                                                            )}
                                                         </DataBlock.Item>
                                                         <DataBlock.Item label="Catégorie">
-                                                            {(record.idRecordLabel === null)
-                                                                ? (<FormatNull />)
-                                                                : (
-                                                                    <DataWrapper
-                                                                        routeDefinition={readOneRecordLabelRouteDefinition}
-                                                                        body={{
-                                                                            idOrganization: params.idOrganization,
-                                                                            idYear: params.idYear,
-                                                                            idRecordLabel: record.idRecordLabel
-                                                                        }}
-                                                                    >
-                                                                        {(recordLabel) => (
-                                                                            <span>
-                                                                                {`${recordLabel.label}`}
-                                                                            </span>
-                                                                        )}
-                                                                    </DataWrapper>
-                                                                )
-                                                            }
+                                                            {record.idRecordLabel === null ? (
+                                                                <FormatNull />
+                                                            ) : (
+                                                                <DataWrapper
+                                                                    routeDefinition={readOneRecordLabelRouteDefinition}
+                                                                    body={{
+                                                                        idOrganization: params.idOrganization,
+                                                                        idYear: params.idYear,
+                                                                        idRecordLabel: record.idRecordLabel,
+                                                                    }}
+                                                                >
+                                                                    {(recordLabel) => (
+                                                                        <span>{`${recordLabel.label}`}</span>
+                                                                    )}
+                                                                </DataWrapper>
+                                                            )}
                                                         </DataBlock.Item>
                                                         <DataBlock.Item label="Pièce justificative">
-                                                            {(record.idAttachment === null)
-                                                                ? (<FormatNull />)
-                                                                : (
-                                                                    <DataWrapper
-                                                                        routeDefinition={readOneAttachmentRouteDefinition}
-                                                                        body={{
-                                                                            idOrganization: params.idOrganization,
-                                                                            idYear: params.idYear,
-                                                                            idAttachment: record.idAttachment
-                                                                        }}
-                                                                    >
-                                                                        {(attachment) => (
-                                                                            <span>
-                                                                                {attachment.reference}
-                                                                            </span>
-                                                                        )}
-                                                                    </DataWrapper>
-                                                                )
-                                                            }
+                                                            {record.idAttachment === null ? (
+                                                                <FormatNull />
+                                                            ) : (
+                                                                <DataWrapper
+                                                                    routeDefinition={readOneAttachmentRouteDefinition}
+                                                                    body={{
+                                                                        idOrganization: params.idOrganization,
+                                                                        idYear: params.idYear,
+                                                                        idAttachment: record.idAttachment,
+                                                                    }}
+                                                                >
+                                                                    {(attachment) => (
+                                                                        <span>{attachment.reference}</span>
+                                                                    )}
+                                                                </DataWrapper>
+                                                            )}
                                                         </DataBlock.Item>
                                                     </DataBlock.Content>
                                                 </DataBlock.Root>
@@ -247,18 +244,13 @@ export function RecordPage() {
                                                             {!record.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={record.data.lastUpdatedBy} />}
                                                         </DataBlock.Item> */}
                                                         <DataBlock.Item label="Id">
-                                                            <FormatText>
-                                                                {record.id}
-                                                            </FormatText>
+                                                            <FormatText>{record.id}</FormatText>
                                                         </DataBlock.Item>
                                                     </DataBlock.Content>
                                                 </DataBlock.Root>
                                             </Section.Item>
                                             <Section.Item>
-                                                <RecordRowsTable
-                                                    record={record}
-                                                    recordRows={recordRows}
-                                                />
+                                                <RecordRowsTable record={record} recordRows={recordRows} />
                                             </Section.Item>
                                         </Section.Root>
                                     )

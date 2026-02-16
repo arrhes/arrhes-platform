@@ -1,13 +1,12 @@
 import { readUserSessionRouteDefinition } from "@arrhes/application-metadata/routes"
-import { postAPI } from "../postAPI.js"
+import { getResponseBodyFromAPI } from "../getResponseBodyFromAPI.js"
 import { getIsAuthenticated } from "./getIsAuthenticated.js"
-
 
 export async function getUserSession() {
     const isAuthenticated = getIsAuthenticated()
 
     if (isAuthenticated === true) {
-        const response = await postAPI({
+        const response = await getResponseBodyFromAPI({
             routeDefinition: readUserSessionRouteDefinition,
             body: {},
         })

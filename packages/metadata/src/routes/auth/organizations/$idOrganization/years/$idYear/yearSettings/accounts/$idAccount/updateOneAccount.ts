@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { accountSchema, accountSchemaReturn } from "../../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneAccountRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-account`,
@@ -30,6 +29,6 @@ export const updateOneAccountRouteDefinition = routeDefinition({
             label: v.optional(accountSchema.entries.label),
             type: v.optional(accountSchema.entries.type),
         }),
-        return: accountSchemaReturn
+        return: accountSchemaReturn,
     },
 })

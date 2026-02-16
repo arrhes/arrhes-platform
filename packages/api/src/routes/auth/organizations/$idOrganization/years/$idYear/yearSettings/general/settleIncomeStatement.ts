@@ -1,10 +1,10 @@
+import { settleIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { settleIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
 
-
-export const settleIncomeStatementRoute = authFactory.createApp()
+export const settleIncomeStatementRoute = authFactory
+    .createApp()
     .post(
         settleIncomeStatementRouteDefinition.path,
         bodyValidator(settleIncomeStatementRouteDefinition.schemas.body),
@@ -127,12 +127,11 @@ export const settleIncomeStatementRoute = authFactory.createApp()
             //         ])
             // })
 
-
             return response({
                 context: c,
                 statusCode: 200,
                 schema: settleIncomeStatementRouteDefinition.schemas.return,
                 data: {},
             })
-        }
+        },
     )

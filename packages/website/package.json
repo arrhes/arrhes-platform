@@ -4,7 +4,10 @@
     "private": false,
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build"
+        "build": "tsc && vite build",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:unit": "vitest run ../../tests/website/unit"
     },
     "devDependencies": {
         "@pandacss/dev": "1.8.1",
@@ -12,8 +15,11 @@
         "@types/react": "19.2.7",
         "@types/react-dom": "19.2.3",
         "@vitejs/plugin-react": "5.1.1",
+        "@vitest/browser": "^4.0.18",
+        "playwright": "^1.58.2",
         "typescript": "5.9.3",
-        "vite": "7.2.4"
+        "vite": "7.2.4",
+        "vitest": "^4.0.18"
     },
     "dependencies": {
         "@arrhes/application-metadata": "workspace:*",

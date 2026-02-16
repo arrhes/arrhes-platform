@@ -1,11 +1,7 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { HTMLAttributes } from "react"
+import type { HTMLAttributes } from "react"
 
-
-export function DialogBody(props:
-    HTMLAttributes<HTMLDivElement>
-) {
+export function DialogBody(props: HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             {...props}
@@ -15,9 +11,9 @@ export function DialogBody(props:
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    padding: "1rem"
+                    padding: "1rem",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

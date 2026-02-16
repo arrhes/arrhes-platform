@@ -1,17 +1,19 @@
-import { deleteOneOrganizationRouteDefinition, getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ComponentPropsWithRef, ReactElement } from "react"
-import * as v from "valibot"
+import {
+    deleteOneOrganizationRouteDefinition,
+    getAllMyOrganizationsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { ComponentPropsWithRef, ReactElement } from "react"
+import type * as v from "valibot"
 import { DeleteConfirmation } from "../../../../../components/overlays/dialog/deleteConfirmation.tsx"
 import { toast } from "../../../../../contexts/toasts/useToast.ts"
 import { applicationRouter } from "../../../../../routes/applicationRouter.tsx"
+import { getResponseBodyFromAPI } from "../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../utilities/postAPI.ts"
-
 
 export function DeleteOneOrganization(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
-    children: ReactElement<ComponentPropsWithRef<'div'>>
+    children: ReactElement<ComponentPropsWithRef<"div">>
 }) {
     return (
         <DeleteConfirmation
@@ -24,34 +26,32 @@ export function DeleteOneOrganization(props: {
                 </>
             }
             submitText="Supprimer l'organisation"
-            onSubmit={
-                async () => {
-                    const deleteResponse = await postAPI({
-                        routeDefinition: deleteOneOrganizationRouteDefinition,
-                        body: {
-                            idOrganization: props.idOrganization
-                        }
-                    })
+            onSubmit={async () => {
+                const deleteResponse = await getResponseBodyFromAPI({
+                    routeDefinition: deleteOneOrganizationRouteDefinition,
+                    body: {
+                        idOrganization: props.idOrganization,
+                    },
+                })
 
-                    if (deleteResponse.ok === false) {
-                        toast({ title: "Erreur lors de la suppression de l'organisation", variant: "error" })
-                        return
-                    }
-
-                    await invalidateData({
-                        routeDefinition: getAllMyOrganizationsRouteDefinition,
-                        body: {
-                            idOrganization: props.idOrganization
-                        },
-                    })
-
-                    toast({ title: "Organisation supprimée", variant: "success" })
-
-                    applicationRouter.navigate({ to: "/dashboard/organisations" })
+                if (deleteResponse.ok === false) {
+                    toast({ title: "Erreur lors de la suppression de l'organisation", variant: "error" })
+                    return
                 }
-            }
+
+                await invalidateData({
+                    routeDefinition: getAllMyOrganizationsRouteDefinition,
+                    body: {
+                        idOrganization: props.idOrganization,
+                    },
+                })
+
+                toast({ title: "Organisation supprimée", variant: "success" })
+
+                applicationRouter.navigate({ to: "/dashboard/organisations" })
+            }}
         >
             {props.children}
-        </DeleteConfirmation >
+        </DeleteConfirmation>
     )
 }

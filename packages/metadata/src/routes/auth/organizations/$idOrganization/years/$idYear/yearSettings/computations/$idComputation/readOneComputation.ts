@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { computationSchema, computationSchemaReturn } from "../../../../../../../../../schemas/computation.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneComputationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-computation`,
@@ -13,6 +12,6 @@ export const readOneComputationRouteDefinition = routeDefinition({
             idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
         }),
-        return: computationSchemaReturn
+        return: computationSchemaReturn,
     },
 })

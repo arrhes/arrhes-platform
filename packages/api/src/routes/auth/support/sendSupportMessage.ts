@@ -1,12 +1,12 @@
+import { sendSupportMessageRouteDefinition } from "@arrhes/application-metadata/routes"
 import { authFactory } from "../../../factories/authFactory.js"
 import { sendEmail } from "../../../utilities/email/sendEmail.js"
 import { supportTemplate } from "../../../utilities/email/templates/support.js"
 import { response } from "../../../utilities/response.js"
 import { bodyValidator } from "../../../validators/bodyValidator.js"
-import { sendSupportMessageRouteDefinition } from "@arrhes/application-metadata/routes"
 
-
-export const sendSupportMessageRoute = authFactory.createApp()
+export const sendSupportMessageRoute = authFactory
+    .createApp()
     .post(
         sendSupportMessageRouteDefinition.path,
         bodyValidator(sendSupportMessageRouteDefinition.schemas.body),
@@ -20,8 +20,8 @@ export const sendSupportMessageRoute = authFactory.createApp()
                 html: supportTemplate({
                     category: body.category ?? "null",
                     date: new Date().toISOString(),
-                    message: body.message
-                })
+                    message: body.message,
+                }),
             })
 
             return response({
@@ -30,5 +30,5 @@ export const sendSupportMessageRoute = authFactory.createApp()
                 schema: sendSupportMessageRouteDefinition.schemas.return,
                 data: {},
             })
-        }
+        },
     )

@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { accountSchema } from "../../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneAccountRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-account`,
@@ -13,6 +12,6 @@ export const deleteOneAccountRouteDefinition = routeDefinition({
             idOrganization: accountSchema.entries.idOrganization,
             idYear: accountSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

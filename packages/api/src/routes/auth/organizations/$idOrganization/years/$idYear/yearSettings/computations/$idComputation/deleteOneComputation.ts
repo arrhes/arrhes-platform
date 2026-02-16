@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { deleteOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../../utilities/sql/deleteOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { deleteOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const deleteOneComputationRoute = authFactory.createApp()
+export const deleteOneComputationRoute = authFactory
+    .createApp()
     .post(
         deleteOneComputationRouteDefinition.path,
         bodyValidator(deleteOneComputationRouteDefinition.schemas.body),
@@ -17,13 +17,12 @@ export const deleteOneComputationRoute = authFactory.createApp()
             const deleteOneComputation = await deleteOne({
                 database: c.var.clients.sql,
                 table: models.computation,
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
-                        eq(table.id, body.idComputation)
-                    )
-                ),
+                        eq(table.id, body.idComputation),
+                    ),
             })
 
             return response({
@@ -32,5 +31,5 @@ export const deleteOneComputationRoute = authFactory.createApp()
                 schema: deleteOneComputationRouteDefinition.schemas.return,
                 data: deleteOneComputation,
             })
-        }
+        },
     )

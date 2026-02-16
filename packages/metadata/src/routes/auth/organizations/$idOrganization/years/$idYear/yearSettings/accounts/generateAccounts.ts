@@ -4,7 +4,6 @@ import { booleanSchema } from "../../../../../../../../components/schemas/boolea
 import { accountSchema, accountSchemaReturn } from "../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const generateAccountsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/generate-accounts`,
@@ -15,6 +14,6 @@ export const generateAccountsRouteDefinition = routeDefinition({
             isMinimalSystem: v.nullable(booleanSchema),
             isReplicatingAccounts: v.nullable(booleanSchema),
         }),
-        return: v.array(accountSchemaReturn)
+        return: v.array(accountSchemaReturn),
     },
 })

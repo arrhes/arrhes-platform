@@ -1,15 +1,15 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { and, eq } from "drizzle-orm"
 
-
-export const createOneAccountRoute = authFactory.createApp()
+export const createOneAccountRoute = authFactory
+    .createApp()
     .post(
         createOneAccountRouteDefinition.path,
         bodyValidator(createOneAccountRouteDefinition.schemas.body),
@@ -23,14 +23,12 @@ export const createOneAccountRoute = authFactory.createApp()
                     if (body.idAccountParent === null) {
                         return
                     }
-                    return (
-                        and(
-                            eq(table.idOrganization, body.idOrganization),
-                            eq(table.idYear, body.idYear),
-                            eq(table.id, body.idAccountParent),
-                        )
+                    return and(
+                        eq(table.idOrganization, body.idOrganization),
+                        eq(table.idYear, body.idYear),
+                        eq(table.id, body.idAccountParent),
                     )
-                }
+                },
             })
 
             const createOneAccount = await insertOne({
@@ -47,8 +45,10 @@ export const createOneAccountRoute = authFactory.createApp()
                     balanceSheetAssetFlow: body.balanceSheetAssetFlow ?? readOneAccount?.balanceSheetAssetFlow,
 
                     idBalanceSheetLiability: body.idBalanceSheetLiability ?? readOneAccount?.idBalanceSheetLiability,
-                    balanceSheetLiabilityColumn: body.balanceSheetLiabilityColumn ?? readOneAccount?.balanceSheetLiabilityColumn,
-                    balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow ?? readOneAccount?.balanceSheetLiabilityFlow,
+                    balanceSheetLiabilityColumn:
+                        body.balanceSheetLiabilityColumn ?? readOneAccount?.balanceSheetLiabilityColumn,
+                    balanceSheetLiabilityFlow:
+                        body.balanceSheetLiabilityFlow ?? readOneAccount?.balanceSheetLiabilityFlow,
 
                     idIncomeStatement: body.idIncomeStatement,
 
@@ -63,7 +63,7 @@ export const createOneAccountRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -72,5 +72,5 @@ export const createOneAccountRoute = authFactory.createApp()
                 schema: createOneAccountRouteDefinition.schemas.return,
                 data: createOneAccount,
             })
-        }
+        },
     )

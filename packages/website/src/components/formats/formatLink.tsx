@@ -1,14 +1,13 @@
 import { Button } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps } from "react"
+import type { ComponentProps } from "react"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
 
-
 type FormatLinkProps = {
     text: string | null
-    className?: ComponentProps<'span'>['className']
+    className?: ComponentProps<"span">["className"]
 }
 
 export function FormatLink(props: FormatLinkProps) {
@@ -26,19 +25,21 @@ export function FormatLink(props: FormatLinkProps) {
                 className={css({
                     width: "100%",
                     overflow: "auto",
-                    borderRadius: "none"
+                    borderRadius: "none",
                 })}
             >
-                <span className={css({
-                    textAlign: "left",
-                    textDecoration: "underline",
-                    _hover: { textDecoration: "none" },
-                    maxWidth: "100%",
-                    overflowWrap: "normal",
-                    whiteSpace: "nowrap",
-                    overflow: "auto",
-                    textOverflow: "ellipsis"
-                })}>
+                <span
+                    className={css({
+                        textAlign: "left",
+                        textDecoration: "underline",
+                        _hover: { textDecoration: "none" },
+                        maxWidth: "100%",
+                        overflowWrap: "normal",
+                        whiteSpace: "nowrap",
+                        overflow: "auto",
+                        textOverflow: "ellipsis",
+                    })}
+                >
                     {props.text}
                 </span>
             </Button>

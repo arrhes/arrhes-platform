@@ -1,7 +1,6 @@
-import { ApiEnv } from "../factories/apiFactory.js"
-import { models } from "@arrhes/application-metadata/models"
+import type { models } from "@arrhes/application-metadata/models"
 import { createFactory } from "hono/factory"
-
+import type { ApiEnv } from "../factories/apiFactory.js"
 
 export type AuthEnv = ApiEnv & {
     Variables: {

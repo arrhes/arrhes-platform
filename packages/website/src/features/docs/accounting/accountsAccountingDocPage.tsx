@@ -9,37 +9,33 @@ import { DocSection } from "../../../components/document/docSection.js"
 import { DocTable } from "../../../components/document/docTable.js"
 import { DocTip } from "../../../components/document/docTip.js"
 
-
 export function AccountsAccountingDocPage() {
     return (
-        <div className={css({
-            display: "flex",
-            flexDirection: "column",
-            gap: "2rem"
-        })}>
-            <DocHeader
-                title="Les comptes comptables"
-                description="Comprendre l'organisation du plan comptable"
-            />
+        <div
+            className={css({
+                display: "flex",
+                flexDirection: "column",
+                gap: "2rem",
+            })}
+        >
+            <DocHeader title="Les comptes comptables" description="Comprendre l'organisation du plan comptable" />
 
             <DocSection title="Qu'est-ce qu'un compte ?">
                 <DocParagraph>
-                    Un compte est une catégorie qui regroupe des opérations de même nature.
-                    Chaque compte possède un numéro et un intitulé qui permettent de l'identifier.
-                    Par exemple, le compte 512 - Banque regroupe toutes les opérations
-                    transitant par votre compte bancaire.
+                    Un compte est une catégorie qui regroupe des opérations de même nature. Chaque compte possède un
+                    numéro et un intitulé qui permettent de l'identifier. Par exemple, le compte 512 - Banque regroupe
+                    toutes les opérations transitant par votre compte bancaire.
                 </DocParagraph>
                 <DocParagraph>
-                    En France, les comptes sont organisés selon le Plan Comptable Général (PCG),
-                    qui définit une structure commune à toutes les organisations.
+                    En France, les comptes sont organisés selon le Plan Comptable Général (PCG), qui définit une
+                    structure commune à toutes les organisations.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Deux grandes familles de comptes">
                 <DocParagraph>
-                    Pour bien comprendre le fonctionnement des comptes, il est utile de distinguer
-                    deux grandes familles : les <strong>comptes d'operations</strong> et les{" "}
-                    <strong>comptes d'agents</strong>.
+                    Pour bien comprendre le fonctionnement des comptes, il est utile de distinguer deux grandes familles
+                    : les <strong>comptes d'operations</strong> et les <strong>comptes d'agents</strong>.
                 </DocParagraph>
 
                 <DocDefinition
@@ -54,27 +50,39 @@ export function AccountsAccountingDocPage() {
                 <DocExample title="Point de vue des comptes d'agents">
                     <p>Le compte Clients est tenu du point de vue des clients :</p>
                     <ul className={css({ marginTop: "2", ml: "4", fontSize: "sm", spaceY: "1" })}>
-                        <li>Quand un client vous doit de l'argent - le compte est <strong>débité</strong> (sa dette augmente)</li>
-                        <li>Quand il vous paye - le compte est <strong>crédité</strong> (sa dette diminue)</li>
+                        <li>
+                            Quand un client vous doit de l'argent - le compte est <strong>débité</strong> (sa dette
+                            augmente)
+                        </li>
+                        <li>
+                            Quand il vous paye - le compte est <strong>crédité</strong> (sa dette diminue)
+                        </li>
                     </ul>
-                    <p className={css({ marginTop: "3" })}>Le compte Fournisseurs est tenu du point de vue des fournisseurs :</p>
+                    <p className={css({ marginTop: "3" })}>
+                        Le compte Fournisseurs est tenu du point de vue des fournisseurs :
+                    </p>
                     <ul className={css({ marginTop: "2", ml: "4", fontSize: "sm", spaceY: "1" })}>
-                        <li>Quand vous leur devez de l'argent - le compte est <strong>crédité</strong> (leur créance augmente)</li>
-                        <li>Quand vous les payez - le compte est <strong>débité</strong> (leur créance diminue)</li>
+                        <li>
+                            Quand vous leur devez de l'argent - le compte est <strong>crédité</strong> (leur créance
+                            augmente)
+                        </li>
+                        <li>
+                            Quand vous les payez - le compte est <strong>débité</strong> (leur créance diminue)
+                        </li>
                     </ul>
                 </DocExample>
 
                 <DocParagraph>
-                    Cette distinction explique pourquoi les comptes d'actif (Banque, Caisse, Clients)
-                    augmentent au débit, tandis que les comptes de passif (Fournisseurs, Capital)
-                    augmentent au crédit : on adopte toujours le point de vue de l'agent concerné.
+                    Cette distinction explique pourquoi les comptes d'actif (Banque, Caisse, Clients) augmentent au
+                    débit, tandis que les comptes de passif (Fournisseurs, Capital) augmentent au crédit : on adopte
+                    toujours le point de vue de l'agent concerné.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Les classes de comptes">
                 <DocParagraph>
-                    Les comptes sont regroupés en 7 classes principales, numérotées de 1 à 7.
-                    Le premier chiffre du numéro de compte indique sa classe.
+                    Les comptes sont regroupés en 7 classes principales, numérotées de 1 à 7. Le premier chiffre du
+                    numéro de compte indique sa classe.
                 </DocParagraph>
 
                 <DocTable
@@ -92,7 +100,8 @@ export function AccountsAccountingDocPage() {
 
                 <DocParagraph>
                     Les classes 1 à 5 concernent le <strong>bilan</strong> (ce que vous possédez et ce que vous devez).
-                    Les classes 6 et 7 concernent le <strong>compte de résultat</strong> (ce que vous dépensez et ce que vous gagnez).
+                    Les classes 6 et 7 concernent le <strong>compte de résultat</strong> (ce que vous dépensez et ce que
+                    vous gagnez).
                 </DocParagraph>
             </DocSection>
 
@@ -126,16 +135,16 @@ export function AccountsAccountingDocPage() {
                         <li>531 - Caisse centrale</li>
                     </ul>
                     <p className={css({ marginTop: "3", fontSize: "sm", color: "neutral/60" })}>
-                        Le compte Banque est tenu du point de vue de la banque : quand elle vous doit
-                        de l'argent (votre solde est positif), le compte est débiteur.
+                        Le compte Banque est tenu du point de vue de la banque : quand elle vous doit de l'argent (votre
+                        solde est positif), le compte est débiteur.
                     </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Les comptes de gestion (classes 6 et 7)">
                 <DocParagraph>
-                    Les comptes de gestion sont des <strong>comptes d'opérations</strong> : ils enregistrent
-                    les flux économiques du point de vue de l'entreprise.
+                    Les comptes de gestion sont des <strong>comptes d'opérations</strong> : ils enregistrent les flux
+                    économiques du point de vue de l'entreprise.
                 </DocParagraph>
 
                 <DocDefinition
@@ -169,8 +178,8 @@ export function AccountsAccountingDocPage() {
 
             <DocSection title="Le compte État et la TVA">
                 <DocParagraph>
-                    L'État est traité comme un agent particulier avec plusieurs comptes dans la classe 4.
-                    Pour la TVA, on distingue deux comptes principaux :
+                    L'État est traité comme un agent particulier avec plusieurs comptes dans la classe 4. Pour la TVA,
+                    on distingue deux comptes principaux :
                 </DocParagraph>
 
                 <DocDefinition
@@ -209,16 +218,18 @@ export function AccountsAccountingDocPage() {
                 <DocExample title="Fonctionnement concret">
                     <p>Quand vous recevez de l'argent sur votre compte bancaire :</p>
                     <p className={css({ marginTop: "2" })}>- Le compte 512 (Banque) est un compte d'actif</p>
-                    <p>- Une augmentation se traduit par un <strong>débit</strong></p>
+                    <p>
+                        - Une augmentation se traduit par un <strong>débit</strong>
+                    </p>
                     <p className={css({ marginTop: "3" })}>Quand vous payez une facture depuis ce compte :</p>
-                    <p className={css({ marginTop: "2" })}>- Une diminution se traduit par un <strong>crédit</strong></p>
+                    <p className={css({ marginTop: "2" })}>
+                        - Une diminution se traduit par un <strong>crédit</strong>
+                    </p>
                 </DocExample>
             </DocSection>
 
             <DocSection title="Le journal et la balance">
-                <DocParagraph>
-                    Pour contrôler la comptabilité, deux documents sont essentiels :
-                </DocParagraph>
+                <DocParagraph>Pour contrôler la comptabilité, deux documents sont essentiels :</DocParagraph>
 
                 <DocDefinition
                     term="Le journal"
@@ -230,30 +241,26 @@ export function AccountsAccountingDocPage() {
                 />
 
                 <DocParagraph>
-                    La balance est un outil de contrôle indispensable : si elle n'est pas équilibrée,
-                    c'est qu'une erreur s'est glissée dans les écritures.
+                    La balance est un outil de contrôle indispensable : si elle n'est pas équilibrée, c'est qu'une
+                    erreur s'est glissée dans les écritures.
                 </DocParagraph>
             </DocSection>
 
             <DocSection title="Lien avec Arrhes">
                 <DocParagraph>
                     Dans Arrhes, vous pouvez{" "}
-                    <DocLink to="/documentation/dashboard/organisations">configurer votre plan comptable</DocLink>{" "}
-                    selon les besoins de votre organisation. Le logiciel propose un plan comptable
-                    par défaut adapté aux entreprises et aux associations françaises, que vous pouvez
-                    personnaliser.
+                    <DocLink to="/documentation/dashboard/organisations">configurer votre plan comptable</DocLink> selon
+                    les besoins de votre organisation. Le logiciel propose un plan comptable par défaut adapté aux
+                    entreprises et aux associations françaises, que vous pouvez personnaliser.
                 </DocParagraph>
             </DocSection>
 
             <DocTip variant="tip">
-                Retenez que le premier chiffre d'un compte indique toujours sa classe.
-                Avec un peu de pratique, vous reconnaîtrez rapidement les comptes courants.
+                Retenez que le premier chiffre d'un compte indique toujours sa classe. Avec un peu de pratique, vous
+                reconnaîtrez rapidement les comptes courants.
             </DocTip>
 
-            <DocNextPage
-                to="/documentation/comptabilité/écritures"
-                label="Les écritures comptables"
-            />
+            <DocNextPage to="/documentation/comptabilité/écritures" label="Les écritures comptables" />
         </div>
     )
 }

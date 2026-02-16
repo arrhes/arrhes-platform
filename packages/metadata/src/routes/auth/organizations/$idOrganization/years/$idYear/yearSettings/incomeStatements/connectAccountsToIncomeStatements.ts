@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { incomeStatementSchema } from "../../../../../../../../schemas/incomeStatement.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const connectAccountsToIncomeStatementsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/connect-accounts-to-income-statements`,
@@ -12,6 +11,6 @@ export const connectAccountsToIncomeStatementsRouteDefinition = routeDefinition(
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

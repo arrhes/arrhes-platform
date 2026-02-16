@@ -1,12 +1,8 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-
-export function DropdownSeparator(props:
-    ComponentPropsWithRef<typeof DropdownMenuSeparator>
-) {
+export function DropdownSeparator(props: ComponentPropsWithRef<typeof DropdownMenuSeparator>) {
     return (
         <DropdownMenuSeparator
             {...props}
@@ -16,7 +12,7 @@ export function DropdownSeparator(props:
                     height: "1px",
                     backgroundColor: "neutral/10",
                 }),
-                props.className
+                props.className,
             )}
         />
     )

@@ -1,14 +1,14 @@
+import { models } from "@arrhes/application-metadata/models"
+import { validateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
+import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { validateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
-import { eq } from "drizzle-orm"
 
-
-export const validateUserEmailRoute = authFactory.createApp()
+export const validateUserEmailRoute = authFactory
+    .createApp()
     .post(
         validateUserEmailRouteDefinition.path,
         bodyValidator(validateUserEmailRouteDefinition.schemas.body),
@@ -42,9 +42,7 @@ export const validateUserEmailRoute = authFactory.createApp()
                     emailTokenExpiresAt: null,
                     lastUpdatedAt: new Date().toISOString(),
                 },
-                where: (table) => (
-                    eq(table.emailToken, body.emailToken)
-                )
+                where: (table) => eq(table.emailToken, body.emailToken),
             })
 
             return response({
@@ -53,5 +51,5 @@ export const validateUserEmailRoute = authFactory.createApp()
                 schema: validateUserEmailRouteDefinition.schemas.return,
                 data: updatedUser,
             })
-        }
+        },
     )

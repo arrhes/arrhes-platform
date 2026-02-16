@@ -1,13 +1,12 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { useVirtualizer } from '@tanstack/react-virtual'
-import { ComponentProps, ReactElement, useRef } from "react"
+import { useVirtualizer } from "@tanstack/react-virtual"
+import { type ComponentProps, type ReactElement, useRef } from "react"
 
-
-export function Virtualizer<TData extends unknown>(props: {
+export function Virtualizer<TData>(props: {
     data: Array<TData>
     children: (data: TData, index: number) => ReactElement | Array<ReactElement> | null
     childSize?: number
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     const parentRef = useRef<HTMLDivElement | null>(null)
 
@@ -15,6 +14,7 @@ export function Virtualizer<TData extends unknown>(props: {
         count: props.data.length,
         getScrollElement: () => parentRef.current,
         estimateSize: () => props.childSize ?? 32,
+        overscan: 5,
     })
 
     return (
@@ -28,9 +28,9 @@ export function Virtualizer<TData extends unknown>(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    overflowY: "auto"
+                    overflowY: "auto",
                 }),
-                props.className
+                props.className,
             )}
         >
             <div
@@ -41,7 +41,7 @@ export function Virtualizer<TData extends unknown>(props: {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start"
+                    alignItems: "flex-start",
                 })}
                 style={{
                     height: `${rowVirtualizer.getTotalSize()}px`,
@@ -56,7 +56,7 @@ export function Virtualizer<TData extends unknown>(props: {
                             left: "0",
                             minH: "fit",
                             height: "fit",
-                            width: "100%"
+                            width: "100%",
                         })}
                         style={{
                             height: `${virtualItem.size}px`,

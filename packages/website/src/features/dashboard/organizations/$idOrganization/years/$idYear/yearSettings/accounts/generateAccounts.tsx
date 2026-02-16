@@ -1,9 +1,9 @@
 import { generateAccountsRouteDefinition, readAllAccountsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../components/forms/formField.tsx"
@@ -13,9 +13,8 @@ import { FormRoot } from "../../../../../../../../components/forms/formRoot.tsx"
 import { InputToggle } from "../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function GenerateAccounts(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -25,17 +24,10 @@ export function GenerateAccounts(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Générer les comptes"
-                />
+                <Drawer.Header title="Générer les comptes" />
                 <Drawer.Body>
                     <FormRoot
                         schema={generateAccountsRouteDefinition.schemas.body}
@@ -50,7 +42,7 @@ export function GenerateAccounts(props: {
                             text: "Générer les comptes",
                         }}
                         onSubmit={async (data) => {
-                            const response = await postAPI({
+                            const response = await getResponseBodyFromAPI({
                                 routeDefinition: generateAccountsRouteDefinition,
                                 body: data,
                             })
@@ -64,12 +56,11 @@ export function GenerateAccounts(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllAccountsRouteDefinition,
                                 body: {
                                     idOrganization: props.idOrganization,
-                                    idYear: props.idYear
+                                    idYear: props.idYear,
                                 },
                             })
 
@@ -120,7 +111,7 @@ export function GenerateAccounts(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { value: true, label: "Oui" },
-                                                        { value: false, label: "Non" }
+                                                        { value: false, label: "Non" },
                                                     ]}
                                                 />
                                             </FormControl>

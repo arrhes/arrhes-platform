@@ -1,12 +1,11 @@
 import { readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { schemas } from "@arrhes/application-metadata/schemas"
+import type { schemas } from "@arrhes/application-metadata/schemas"
 import { IconBook } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { ListTable } from "../../../../../../../../components/layouts/listTable/listTable.tsx"
 import { JournalListTableRow } from "./journalListTableRow.tsx"
-
 
 export function JournalsListTable(props: {
     idOrganization: v.InferOutput<typeof schemas.organization>["id"]
@@ -18,7 +17,7 @@ export function JournalsListTable(props: {
                 routeDefinition={readAllJournalsRouteDefinition}
                 body={{
                     idOrganization: props.idOrganization,
-                    idYear: props.idYear
+                    idYear: props.idYear,
                 }}
             >
                 {(journals) => {
@@ -33,14 +32,7 @@ export function JournalsListTable(props: {
                             />
                         )
                     }
-                    return (
-                        sortedJournals.map((journal) => (
-                            <JournalListTableRow
-                                key={journal.id}
-                                journal={journal}
-                            />
-                        ))
-                    )
+                    return sortedJournals.map((journal) => <JournalListTableRow key={journal.id} journal={journal} />)
                 }}
             </DataWrapper>
         </ListTable.Root>

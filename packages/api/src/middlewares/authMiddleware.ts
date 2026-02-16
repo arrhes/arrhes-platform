@@ -1,13 +1,12 @@
-import { AuthEnv } from "../factories/authFactory.js"
+import { models } from "@arrhes/application-metadata/models"
+import { eq } from "drizzle-orm"
+import { createMiddleware } from "hono/factory"
+import type { AuthEnv } from "../factories/authFactory.js"
 import { parseCookies } from "../utilities/cookies/parseCookies.js"
 import { unsignString } from "../utilities/cookies/unsignString.js"
 import { Exception } from "../utilities/exception.js"
 import { selectOne } from "../utilities/sql/selectOne.js"
 import { cookiePrefix } from "../utilities/variables.js"
-import { models } from "@arrhes/application-metadata/models"
-import { eq } from "drizzle-orm"
-import { createMiddleware } from "hono/factory"
-
 
 export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
     try {
@@ -27,32 +26,25 @@ export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
         const userSession = await selectOne({
             database: c.var.clients.sql,
             table: models.userSession,
-            where: (table) => (
-                eq(table.id, idUserSession)
-            )
+            where: (table) => eq(table.id, idUserSession),
         })
         if (userSession.isActive === false) {
             throw new Exception({
                 internalMessage: "Auth error",
-                cause: "userSession.isActive is false"
+                cause: "userSession.isActive is false",
             })
         }
         c.set("userSession", userSession)
 
-
         const user = await selectOne({
             database: c.var.clients.sql,
             table: models.user,
-            where: (table) => (
-                eq(table.id, userSession.idUser)
-            )
+            where: (table) => eq(table.id, userSession.idUser),
         })
         c.set("user", user)
 
         await next()
-    }
-    catch (error: unknown) {
-
+    } catch (error: unknown) {
         // const cookieSecurity = getCookieSecurityOptions(c.var.env.ENV)
         // c.res.headers.append(
         //     "Set-Cookie",

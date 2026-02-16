@@ -1,8 +1,10 @@
 import * as v from "valibot"
 import { routePath } from "../../../../../../../../../components/index.js"
-import { incomeStatementSchema, incomeStatementSchemaReturn } from "../../../../../../../../../schemas/incomeStatement.js"
+import {
+    incomeStatementSchema,
+    incomeStatementSchemaReturn,
+} from "../../../../../../../../../schemas/incomeStatement.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
-
 
 export const readOneIncomeStatementRouteDefinition = routeDefinition({
     protocol: "http",
@@ -13,6 +15,6 @@ export const readOneIncomeStatementRouteDefinition = routeDefinition({
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
-        return: incomeStatementSchemaReturn
+        return: incomeStatementSchemaReturn,
     },
 })

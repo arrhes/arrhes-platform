@@ -1,9 +1,8 @@
 import { readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 import { InputSelect } from "../../../../../components/inputs/inputSelect.tsx"
 import { useDataFromAPI } from "../../../../../utilities/useHTTPData.ts"
-
 
 export function YearSelect(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -13,7 +12,7 @@ export function YearSelect(props: {
     const yearsResponse = useDataFromAPI({
         routeDefinition: readAllYearsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization
+            idOrganization: props.idOrganization,
         },
     })
 
@@ -25,12 +24,12 @@ export function YearSelect(props: {
             allowEmpty={true}
             placeholder="Sélectionner un exercice"
             options={
-                (yearsResponse.data === undefined)
+                yearsResponse.data === undefined
                     ? []
                     : yearsResponse.data.map((year) => ({
-                        key: year.id,
-                        label: year.label
-                    }))
+                          key: year.id,
+                          label: year.label,
+                      }))
             }
         />
     )

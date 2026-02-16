@@ -1,9 +1,13 @@
-import { createOneComputationIncomeStatementRouteDefinition, readAllComputationIncomeStatementsRouteDefinition, readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    createOneComputationIncomeStatementRouteDefinition,
+    readAllComputationIncomeStatementsRouteDefinition,
+    readAllIncomeStatementsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../../../components/forms/formField.tsx"
@@ -14,9 +18,8 @@ import { InputDataCombobox } from "../../../../../../../../../../../components/i
 import { InputToggle } from "../../../../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../../../utilities/postAPI.ts"
-
 
 export function CreateOneComputationIncomeStatement(props: {
     computation: v.InferOutput<typeof returnedSchemas.computation>
@@ -25,17 +28,10 @@ export function CreateOneComputationIncomeStatement(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Ajouter un nouveau terme au calcul"
-                />
+                <Drawer.Header title="Ajouter un nouveau terme au calcul" />
                 <Drawer.Body>
                     <FormRoot
                         schema={createOneComputationIncomeStatementRouteDefinition.schemas.body}
@@ -49,7 +45,7 @@ export function CreateOneComputationIncomeStatement(props: {
                             text: "Ajouter le terme du calcul",
                         }}
                         onSubmit={async (data) => {
-                            const createComputationIncomeStatementResponse = await postAPI({
+                            const createComputationIncomeStatementResponse = await getResponseBodyFromAPI({
                                 routeDefinition: createOneComputationIncomeStatementRouteDefinition,
                                 body: data,
                             })
@@ -63,7 +59,6 @@ export function CreateOneComputationIncomeStatement(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
                                 body: {
@@ -99,7 +94,7 @@ export function CreateOneComputationIncomeStatement(props: {
                                                     placeholder="Sélectionner un poste du compte de résultat"
                                                     getOption={(incomeStatement) => ({
                                                         key: incomeStatement.id,
-                                                        label: `${incomeStatement.number} - ${incomeStatement.label}`
+                                                        label: `${incomeStatement.number} - ${incomeStatement.label}`,
                                                     })}
                                                 />
                                             </FormControl>
@@ -123,7 +118,7 @@ export function CreateOneComputationIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { label: "Addition", value: "plus" },
-                                                        { label: "Soustraction", value: "minus" }
+                                                        { label: "Soustraction", value: "minus" },
                                                     ]}
                                                 />
                                             </FormControl>

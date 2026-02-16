@@ -1,6 +1,4 @@
-
-import { createContext, JSX, useContext } from "react"
-
+import { createContext, type JSX, useContext } from "react"
 
 type DrawerContextType = {
     open: boolean
@@ -16,7 +14,6 @@ export function useDrawerContext() {
     }
     return context
 }
-
 
 export function DrawerRoot(props: {
     open: boolean

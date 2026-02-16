@@ -2,14 +2,11 @@ import { createRoute } from "@tanstack/react-router"
 import { BalanceSheetReportPage } from "../../../../../../../../features/dashboard/organizations/$idOrganization/years/$idYear/reports/balanceSheetReport/balanceSheetReportPage.js"
 import { reportsLayoutRoute } from "./reportsLayoutRoute.js"
 
-
 export const balanceSheetReportRoute = createRoute({
     getParentRoute: () => reportsLayoutRoute,
     path: "/bilan",
     beforeLoad: () => ({
-        title: "Bilan"
+        title: "Bilan",
     }),
-    component: () => (
-        <BalanceSheetReportPage />
-    )
+    component: () => <BalanceSheetReportPage />,
 })

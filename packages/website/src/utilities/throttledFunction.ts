@@ -1,8 +1,5 @@
-export function throttledFunction(parameters: {
-    function: () => (void | Promise<void>)
-    delay?: number
-}) {
-    let timeoutId: string | number | NodeJS.Timeout | undefined = undefined
+export function throttledFunction(parameters: { function: () => void | Promise<void>; delay?: number }) {
+    let timeoutId: string | number | NodeJS.Timeout | undefined
 
     return async () => {
         if (timeoutId === undefined) {
@@ -13,6 +10,3 @@ export function throttledFunction(parameters: {
         }
     }
 }
-
-
-

@@ -1,11 +1,8 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-export function DropdownItem(props:
-    ComponentPropsWithRef<typeof DropdownMenuItem>
-) {
+export function DropdownItem(props: ComponentPropsWithRef<typeof DropdownMenuItem>) {
     return (
         <DropdownMenuItem
             {...props}
@@ -14,7 +11,7 @@ export function DropdownItem(props:
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
-                outline: "none"
+                outline: "none",
             })}
         >
             {props.children}

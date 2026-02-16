@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { yearModel } from "../models/year.js"
-
+import type { yearModel } from "../models/year.js"
 
 export const yearSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -21,22 +20,18 @@ export const yearSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof yearModel.$inferSelect>
 
-
-export const yearSchemaReturn = v.pick(
-    yearSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYearPrevious",
-        // "isGenerated",
-        "isClosed",
-        "closedAt",
-        "label",
-        "startingAt",
-        "endingAt",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const yearSchemaReturn = v.pick(yearSchema, [
+    "id",
+    "idOrganization",
+    "idYearPrevious",
+    // "isGenerated",
+    "isClosed",
+    "closedAt",
+    "label",
+    "startingAt",
+    "endingAt",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

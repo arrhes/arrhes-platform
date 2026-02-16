@@ -3,8 +3,7 @@ import { accountType, balanceSheetFlow, booleanSchema, dateTimeSchema } from "..
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import { balanceSheetColumn } from "../components/values/balanceSheetColumn.js"
-import { accountModel } from "../models/account.js"
-
+import type { accountModel } from "../models/account.js"
 
 export const accountSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -36,36 +35,32 @@ export const accountSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof accountModel.$inferSelect>
 
+export const accountSchemaReturn = v.pick(accountSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "idAccountParent",
 
-export const accountSchemaReturn = v.pick(
-    accountSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "idAccountParent",
+    "idBalanceSheetAsset",
+    "balanceSheetAssetColumn",
+    "balanceSheetAssetFlow",
 
-        "idBalanceSheetAsset",
-        "balanceSheetAssetColumn",
-        "balanceSheetAssetFlow",
+    "idBalanceSheetLiability",
+    "balanceSheetLiabilityColumn",
+    "balanceSheetLiabilityFlow",
 
-        "idBalanceSheetLiability",
-        "balanceSheetLiabilityColumn",
-        "balanceSheetLiabilityFlow",
+    "idIncomeStatement",
 
-        "idIncomeStatement",
+    "isMandatory",
+    "isClass",
+    "isSelectable",
+    "isDefault",
+    "number",
+    "label",
+    "type",
 
-        "isMandatory",
-        "isClass",
-        "isSelectable",
-        "isDefault",
-        "number",
-        "label",
-        "type",
-
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

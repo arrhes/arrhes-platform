@@ -1,10 +1,9 @@
 import * as v from "valibot"
 import { validate } from "../utilities/validate.js"
 
-
 enum Env {
     development = "development",
-    production = "production"
+    production = "production",
 }
 
 const envSchema = v.object({
@@ -32,11 +31,10 @@ const envSchema = v.object({
     EMAIL_PASSWORD: v.string(),
 })
 
-
 export function getEnv() {
     const parsedEnv = validate({
         schema: envSchema,
-        // @ts-ignore
+        // @ts-expect-error
         data: process.env,
         message: "Missing environment variables",
     })

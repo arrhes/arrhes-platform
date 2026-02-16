@@ -4,4 +4,3 @@ export { updateUserRouteDefinition } from "./updateUser.js"
 export { updateUserEmailRouteDefinition } from "./updateUserEmail.js"
 export { updateUserPasswordRouteDefinition } from "./updateUserPassword.js"
 export { validateUserEmailRouteDefinition } from "./validateUserEmail.js"
-

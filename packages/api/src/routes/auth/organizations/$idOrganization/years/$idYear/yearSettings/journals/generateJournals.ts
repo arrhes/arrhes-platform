@@ -1,17 +1,17 @@
+import { defaultJournals } from "@arrhes/application-metadata/components"
+import { models } from "@arrhes/application-metadata/models"
+import { generateJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { defaultJournals } from "@arrhes/application-metadata/components"
-import { models } from "@arrhes/application-metadata/models"
-import { generateJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { and, eq } from "drizzle-orm"
 
-
-export const generateJournalsRoute = authFactory.createApp()
+export const generateJournalsRoute = authFactory
+    .createApp()
     .post(
         generateJournalsRouteDefinition.path,
         bodyValidator(generateJournalsRouteDefinition.schemas.body),
@@ -23,23 +23,18 @@ export const generateJournalsRoute = authFactory.createApp()
                     const deletedJournals = await deleteMany({
                         database: tx,
                         table: models.journal,
-                        where: (table) => (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear)
-                            )
-                        )
+                        where: (table) =>
+                            and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                }
-                catch (error: unknown) {
+                } catch (error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete journals",
                         externalMessage: "Échec de la suppression des journaux",
                     })
                 }
 
-                let newJournals = defaultJournals.map((defaultJournal) => {
-                    return ({
+                const newJournals = defaultJournals.map((defaultJournal) => {
+                    return {
                         id: generateId(),
                         idOrganization: body.idOrganization,
                         idYear: body.idYear,
@@ -49,7 +44,7 @@ export const generateJournalsRoute = authFactory.createApp()
                         lastUpdatedAt: null,
                         createdBy: null,
                         lastUpdatedBy: null,
-                    })
+                    }
                 })
 
                 const generatedJournals = await insertMany({
@@ -67,5 +62,5 @@ export const generateJournalsRoute = authFactory.createApp()
                 schema: generateJournalsRouteDefinition.schemas.return,
                 data: generatedJournals,
             })
-        }
+        },
     )

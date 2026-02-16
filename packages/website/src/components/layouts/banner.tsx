@@ -1,44 +1,40 @@
-import { colorVariant } from "@arrhes/application-metadata/components"
+import type { colorVariant } from "@arrhes/application-metadata/components"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconAlertHexagon, IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
-import { ComponentProps, ReactElement } from "react"
-
-
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function Banner(props: {
     text?: string | null
     variant?: (typeof colorVariant)[number]
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
     children?: ReactElement | string | null | Array<ReactElement | string | null>
 }) {
-
     const banners = {
-        "neutral": {
+        neutral: {
             icon: null,
             backgroundColor: css({ backgroundColor: "background" }),
-            text: css({ color: "neutral" })
+            text: css({ color: "neutral" }),
         },
-        "information": {
+        information: {
             icon: <IconInfoSquare size={20} className={css({ color: "information" })} />,
             backgroundColor: css({ backgroundColor: "information/5" }),
-            text: css({ color: "information" })
+            text: css({ color: "information" }),
         },
-        "error": {
+        error: {
             icon: <IconAlertTriangle size={20} className={css({ color: "error" })} />,
             backgroundColor: css({ backgroundColor: "error/5" }),
-            text: css({ color: "error" })
+            text: css({ color: "error" }),
         },
-        "warning": {
+        warning: {
             icon: <IconAlertHexagon size={20} className={css({ color: "warning" })} />,
             backgroundColor: css({ backgroundColor: "warning/5" }),
-            text: css({ color: "warning" })
+            text: css({ color: "warning" }),
         },
-        "success": {
+        success: {
             icon: <IconCircleCheck size={20} className={css({ color: "success" })} />,
             backgroundColor: css({ backgroundColor: "success/5" }),
-            text: css({ color: "success" })
-        }
+            text: css({ color: "success" }),
+        },
     }
 
     return (
@@ -51,19 +47,13 @@ export function Banner(props: {
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     gap: "2",
-                    borderRadius: "md"
+                    borderRadius: "md",
                 }),
                 banners[props?.variant ?? "neutral"].backgroundColor,
-                props.className
+                props.className,
             )}
         >
-            <p className={cx(
-                banners[props?.variant ?? "neutral"].text,
-                props.className
-            )}
-            >
-                {props.children}
-            </p>
+            <p className={cx(banners[props?.variant ?? "neutral"].text, props.className)}>{props.children}</p>
         </div>
     )
 }

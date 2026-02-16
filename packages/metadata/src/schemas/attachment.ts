@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { dateTimeSchema, integerSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { attachmentModel } from "../models/attachment.js"
-
+import type { attachmentModel } from "../models/attachment.js"
 
 export const attachmentSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -21,22 +20,18 @@ export const attachmentSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof attachmentModel.$inferSelect>
 
-
-export const attachmentSchemaReturn = v.pick(
-    attachmentSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "reference",
-        "label",
-        "date",
-        "storageKey",
-        "type",
-        "size",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const attachmentSchemaReturn = v.pick(attachmentSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "reference",
+    "label",
+    "date",
+    "storageKey",
+    "type",
+    "size",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

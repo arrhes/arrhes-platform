@@ -1,19 +1,16 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
 import { FormatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
 import { Table } from "../../../../../../../../components/layouts/table/table.tsx"
 
-
 export function BalanceReportTable(props: {
     recordRows: Array<v.InferOutput<typeof returnedSchemas.recordRow>>
     accounts: Array<v.InferOutput<typeof returnedSchemas.account>>
 }) {
-
-    const sortedAccounts = props.accounts
-        .sort((a, b) => a.number.localeCompare(b.number))
+    const sortedAccounts = props.accounts.sort((a, b) => a.number.localeCompare(b.number))
 
     let accountsTotalDebit = 0
     let accountsTotalCredit = 0
@@ -43,7 +40,6 @@ export function BalanceReportTable(props: {
         if (algebricBalance < 0) {
             accountsTotalBalanceCredit += Math.abs(algebricBalance)
         }
-
     })
 
     return (
@@ -54,20 +50,30 @@ export function BalanceReportTable(props: {
                         <span className={css({ color: "neutral/75", fontSize: "sm" })}>Compte</span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
-                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>Débit</span>
+                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
+                            Débit
+                        </span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
-                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>Crédit</span>
+                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
+                            Crédit
+                        </span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
-                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>Solde débiteur</span>
+                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
+                            Solde débiteur
+                        </span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
-                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>Solde créditeur</span>
+                        <span className={css({ color: "neutral/75", fontSize: "sm", whiteSpace: "nowrap" })}>
+                            Solde créditeur
+                        </span>
                     </Table.Header.Cell>
                 </Table.Header.Row>
             </Table.Header.Root>
-            <Table.Body.Root className={css({ borderY: "1px solid token(colors.neutral/10)", _last: { borderBottom: "0" } })}>
+            <Table.Body.Root
+                className={css({ borderY: "1px solid token(colors.neutral/10)", _last: { borderBottom: "0" } })}
+            >
                 <Table.Body.Row>
                     <Table.Body.Cell align="right">
                         <span className={css({ color: "neutral/50" })}>Total</span>
@@ -87,66 +93,78 @@ export function BalanceReportTable(props: {
                 </Table.Body.Row>
             </Table.Body.Root>
             <Table.Body.Root>
-                {
-                    (sortedAccounts.length === 0)
-                        ? (
-                            <Table.Body.Row>
+                {sortedAccounts.length === 0 ? (
+                    <Table.Body.Row>
+                        <Table.Body.Cell>
+                            <FormatNull />
+                        </Table.Body.Cell>
+                    </Table.Body.Row>
+                ) : (
+                    sortedAccounts.map((account) => {
+                        const filteredRecordRows = props.recordRows.filter(
+                            (recordRow) => recordRow.idAccount === account.id,
+                        )
+
+                        if (filteredRecordRows.length === 0) {
+                            return null
+                        }
+
+                        const accountTotalDebit = filteredRecordRows.reduce(
+                            (acc, recordRow) => acc + Number(recordRow.debit),
+                            0,
+                        )
+                        const accountTotalCredit = filteredRecordRows.reduce(
+                            (acc, recordRow) => acc + Number(recordRow.credit),
+                            0,
+                        )
+
+                        const algebricBalance = filteredRecordRows.reduce((acc, recordRow) => {
+                            return acc + Number(recordRow.debit) - Number(recordRow.credit)
+                        }, 0)
+
+                        const accountTotalBalanceDebit = algebricBalance > 0 ? algebricBalance : 0
+                        const accountTotalBalanceCredit = algebricBalance < 0 ? -algebricBalance : 0
+
+                        // accountsTotalDebit += accountTotalDebit
+                        // accountsTotalCredit += accountTotalCredit
+                        // accountsTotalBalanceDebit += accountTotalBalanceDebit
+                        // accountsTotalBalanceCredit += accountTotalBalanceCredit
+
+                        return (
+                            <Table.Body.Row key={account.id} className={css({ borderColor: "neutral/5" })}>
                                 <Table.Body.Cell>
-                                    <FormatNull />
+                                    <div
+                                        className={css({
+                                            display: "flex",
+                                            justifyContent: "start",
+                                            alignItems: "start",
+                                            gap: "2",
+                                        })}
+                                    >
+                                        <FormatText className={css({ overflow: "visible" })}>
+                                            {account.number}
+                                        </FormatText>
+                                        <FormatText wrap={true} className={css({ color: "neutral/50" })}>
+                                            {account.label}
+                                        </FormatText>
+                                    </div>
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
+                                    <FormatPrice price={accountTotalDebit} />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
+                                    <FormatPrice price={accountTotalCredit} />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
+                                    <FormatPrice price={accountTotalBalanceDebit} />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
+                                    <FormatPrice price={accountTotalBalanceCredit} />
                                 </Table.Body.Cell>
                             </Table.Body.Row>
                         )
-                        : sortedAccounts.map((account) => {
-                            const filteredRecordRows = props.recordRows
-                                .filter((recordRow) => recordRow.idAccount === account.id)
-
-                            if (filteredRecordRows.length === 0) {
-                                return (null)
-                            }
-
-                            const accountTotalDebit = filteredRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.debit), 0)
-                            const accountTotalCredit = filteredRecordRows.reduce((acc, recordRow) => acc + Number(recordRow.credit), 0)
-
-                            const algebricBalance = filteredRecordRows.reduce((acc, recordRow) => {
-                                return (acc + Number(recordRow.debit) - Number(recordRow.credit))
-                            }, 0)
-
-                            const accountTotalBalanceDebit = (algebricBalance > 0) ? algebricBalance : 0
-                            const accountTotalBalanceCredit = (algebricBalance < 0) ? -algebricBalance : 0
-
-                            // accountsTotalDebit += accountTotalDebit
-                            // accountsTotalCredit += accountTotalCredit
-                            // accountsTotalBalanceDebit += accountTotalBalanceDebit
-                            // accountsTotalBalanceCredit += accountTotalBalanceCredit
-
-                            return (
-                                <Table.Body.Row key={account.id} className={css({ borderColor: "neutral/5" })}>
-                                    <Table.Body.Cell>
-                                        <div className={css({ display: "flex", justifyContent: "start", alignItems: "start", gap: "2" })}>
-                                            <FormatText className={css({ overflow: "visible" })}>
-                                                {account.number}
-                                            </FormatText>
-                                            <FormatText wrap={true} className={css({ color: "neutral/50" })}>
-                                                {account.label}
-                                            </FormatText>
-                                        </div>
-                                    </Table.Body.Cell>
-                                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
-                                        <FormatPrice price={accountTotalDebit} />
-                                    </Table.Body.Cell>
-                                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
-                                        <FormatPrice price={accountTotalCredit} />
-                                    </Table.Body.Cell>
-                                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
-                                        <FormatPrice price={accountTotalBalanceDebit} />
-                                    </Table.Body.Cell>
-                                    <Table.Body.Cell className={css({ width: "[1%]" })} align="right">
-                                        <FormatPrice price={accountTotalBalanceCredit} />
-                                    </Table.Body.Cell>
-                                </Table.Body.Row>
-                            )
-                        })
-                }
+                    })
+                )}
             </Table.Body.Root>
         </Table.Root>
     )

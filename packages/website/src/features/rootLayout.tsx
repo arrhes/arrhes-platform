@@ -2,12 +2,11 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { Outlet } from "@tanstack/react-router"
 import { useDeviceDetect } from "../utilities/useDeviceDetect.js"
 
-
 export function RootLayout() {
     const { isMobile } = useDeviceDetect()
 
     if (isMobile === true) {
-        <div
+        ;<div
             className={css({
                 width: "100%",
                 height: "100%",
@@ -15,7 +14,7 @@ export function RootLayout() {
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "warning/5",
-                padding: "4"
+                padding: "4",
             })}
         >
             <span className={css({ color: "warning" })}>

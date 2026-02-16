@@ -1,27 +1,24 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps } from "react"
+import type { ComponentProps } from "react"
 import { FormatBase } from "./formatBase.js"
 
-
-
-export function FormatError(props: {
-    text: string
-    className?: ComponentProps<'div'>['className']
-}) {
+export function FormatError(props: { text: string; className?: ComponentProps<"div">["className"] }) {
     return (
         <FormatBase className={props.className}>
-            <span className={css({
-                display: "inline-flex",
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                fontSize: "sm",
-                fontWeight: "semibold",
-                color: "error/75",
-                whiteSpace: "nowrap",
-                overflow: "auto",
-                textOverflow: "ellipsis"
-            })}>
+            <span
+                className={css({
+                    display: "inline-flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    fontSize: "sm",
+                    fontWeight: "semibold",
+                    color: "error/75",
+                    whiteSpace: "nowrap",
+                    overflow: "auto",
+                    textOverflow: "ellipsis",
+                })}
+            >
                 {props.text}
             </span>
         </FormatBase>

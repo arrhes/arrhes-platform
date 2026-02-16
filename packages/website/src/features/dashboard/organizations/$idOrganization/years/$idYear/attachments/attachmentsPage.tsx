@@ -10,9 +10,7 @@ import { attachmentsLayoutRoute } from "../../../../../../../routes/root/dashboa
 import { AttachmentsGrid } from "./attachmentsGrid.js"
 import { AttachmentsTable } from "./attachmentsTable.js"
 
-
 type ViewMode = "grid" | "list"
-
 
 export function AttachmentsPage() {
     const params = useParams({ from: attachmentsLayoutRoute.id })
@@ -22,30 +20,20 @@ export function AttachmentsPage() {
         <Page.Root>
             <Page.Content>
                 {/* View toggle */}
-                <div className={css({
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    gap: "0.25rem",
-                })}>
-                    <Button
-                        onClick={() => setViewMode("grid")}
-                        title="Grille"
-                    >
-                        <ButtonContent
-                            leftIcon={<IconLayoutGrid />}
-                            isActive={viewMode === "grid"}
-                        />
+                <div
+                    className={css({
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        gap: "0.25rem",
+                    })}
+                >
+                    <Button onClick={() => setViewMode("grid")} title="Grille">
+                        <ButtonContent leftIcon={<IconLayoutGrid />} isActive={viewMode === "grid"} />
                     </Button>
-                    <Button
-                        onClick={() => setViewMode("list")}
-                        title="Liste"
-                    >
-                        <ButtonContent
-                            leftIcon={<IconLayoutList />}
-                            isActive={viewMode === "list"}
-                        />
+                    <Button onClick={() => setViewMode("list")} title="Liste">
+                        <ButtonContent leftIcon={<IconLayoutList />} isActive={viewMode === "list"} />
                     </Button>
                 </div>
 

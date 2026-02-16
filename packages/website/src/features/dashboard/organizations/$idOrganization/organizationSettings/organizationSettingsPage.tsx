@@ -10,7 +10,6 @@ import { organizationSettingsRoute } from "../../../../../routes/root/dashboard/
 import { DeleteOneOrganization } from "./deleteOneOrganization.tsx"
 import { UpdateOneOrganization } from "./updateOneOrganization.tsx"
 
-
 export function OrganizationSettingsPage() {
     const params = useParams({ from: organizationSettingsRoute.id })
 
@@ -28,17 +27,19 @@ export function OrganizationSettingsPage() {
                 <DataWrapper
                     routeDefinition={readOneOrganizationRouteDefinition}
                     body={{
-                        idOrganization: params.idOrganization
+                        idOrganization: params.idOrganization,
                     }}
                 >
                     {(organization) => {
                         return (
-                            <div className={css({
-                                width: "100%",
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "1rem"
-                            })}>
+                            <div
+                                className={css({
+                                    width: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "1rem",
+                                })}
+                            >
                                 <SettingsSection.Root>
                                     <SettingsSection.Header title="Informations générales" />
                                     <SettingsSection.Row

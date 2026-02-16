@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { booleanSchema, dateTimeSchema, emailSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { userModel } from "../models/user.js"
-
+import type { userModel } from "../models/user.js"
 
 export const userSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -20,21 +19,17 @@ export const userSchema = v.object({
     lastUpdatedAt: v.nullable(dateTimeSchema),
 }) satisfies v.GenericSchema<typeof userModel.$inferSelect>
 
-
-export const userSchemaReturn = v.pick(
-    userSchema,
-    [
-        "id",
-        "isActive",
-        "alias",
-        "email",
-        "isEmailValidated",
-        "emailToValidate",
-        "emailToken",
-        "emailTokenExpiresAt",
-        "passwordHash",
-        "passwordSalt",
-        "createdAt",
-        "lastUpdatedAt",
-    ]
-)
+export const userSchemaReturn = v.pick(userSchema, [
+    "id",
+    "isActive",
+    "alias",
+    "email",
+    "isEmailValidated",
+    "emailToValidate",
+    "emailToken",
+    "emailTokenExpiresAt",
+    "passwordHash",
+    "passwordSalt",
+    "createdAt",
+    "lastUpdatedAt",
+])

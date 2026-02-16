@@ -4,7 +4,6 @@ import { DrawerHeader } from "./drawerHeader.js"
 import { DrawerRoot } from "./drawerRoot.js"
 import { DrawerTrigger } from "./drawerTrigger.js"
 
-
 export const Drawer = {
     Root: DrawerRoot,
     Trigger: DrawerTrigger,

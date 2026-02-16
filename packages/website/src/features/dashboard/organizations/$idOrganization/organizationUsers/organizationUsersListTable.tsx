@@ -1,12 +1,11 @@
 import { readAllOrganizationUsersRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconUsers } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../components/layouts/emptyState.tsx"
 import { ListTable } from "../../../../../components/layouts/listTable/listTable.tsx"
 import { OrganizationUserListTableRow } from "./organizationUserListTableRow.tsx"
-
 
 export function OrganizationUsersListTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -16,7 +15,7 @@ export function OrganizationUsersListTable(props: {
             <DataWrapper
                 routeDefinition={readAllOrganizationUsersRouteDefinition}
                 body={{
-                    idOrganization: props.idOrganization
+                    idOrganization: props.idOrganization,
                 }}
             >
                 {(organizationUsers) => {
@@ -29,14 +28,9 @@ export function OrganizationUsersListTable(props: {
                             />
                         )
                     }
-                    return (
-                        organizationUsers.map((organizationUser) => (
-                            <OrganizationUserListTableRow
-                                key={organizationUser.id}
-                                organizationUser={organizationUser}
-                            />
-                        ))
-                    )
+                    return organizationUsers.map((organizationUser) => (
+                        <OrganizationUserListTableRow key={organizationUser.id} organizationUser={organizationUser} />
+                    ))
                 }}
             </DataWrapper>
         </ListTable.Root>

@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { balanceSheetSchema, balanceSheetSchemaReturn } from "../../../../../../../../schemas/balanceSheet.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneBalanceSheetRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-balance-sheet`,
@@ -17,6 +16,6 @@ export const createOneBalanceSheetRouteDefinition = routeDefinition({
             number: balanceSheetSchema.entries.number,
             label: balanceSheetSchema.entries.label,
         }),
-        return: balanceSheetSchemaReturn
+        return: balanceSheetSchemaReturn,
     },
 })

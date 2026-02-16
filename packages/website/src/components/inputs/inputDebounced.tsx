@@ -1,5 +1,4 @@
-import { ReactElement, cloneElement, useEffect, useState } from "react"
-
+import { cloneElement, type ReactElement, useEffect, useState } from "react"
 
 type InputDebounced<T> = {
     value: T
@@ -9,7 +8,6 @@ type InputDebounced<T> = {
     children: ReactElement<any>
 }
 
-
 export function InputDebounced<T>(props: InputDebounced<T>) {
     const [value, setValue] = useState<T>(props.initialValue || props.value)
 
@@ -18,9 +16,12 @@ export function InputDebounced<T>(props: InputDebounced<T>) {
     }, [props.initialValue, props.value])
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            props.onChange(value)
-        }, (!props.debounce) ? 300 : props.debounce)
+        const timeout = setTimeout(
+            () => {
+                props.onChange(value)
+            },
+            !props.debounce ? 300 : props.debounce,
+        )
 
         return () => clearTimeout(timeout)
 
@@ -29,6 +30,6 @@ export function InputDebounced<T>(props: InputDebounced<T>) {
 
     return cloneElement(props.children, {
         value: value,
-        onChange: (value: T) => setValue(value)
+        onChange: (value: T) => setValue(value),
     })
 }

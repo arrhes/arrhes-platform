@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function Box(props: {
     children: ReactElement | ReactElement[]
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     return (
         <div
@@ -22,9 +21,9 @@ export function Box(props: {
                     overflowX: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
-                    borderRadius: "lg"
+                    borderRadius: "lg",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

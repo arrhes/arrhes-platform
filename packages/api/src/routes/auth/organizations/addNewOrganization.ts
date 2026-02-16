@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { addNewOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../factories/authFactory.js"
 import { response } from "../../../utilities/response.js"
 import { insertOne } from "../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { addNewOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const addNewOrganizationRoute = authFactory.createApp()
+export const addNewOrganizationRoute = authFactory
+    .createApp()
     .post(
         addNewOrganizationRouteDefinition.path,
         bodyValidator(addNewOrganizationRouteDefinition.schemas.body),
@@ -15,7 +15,6 @@ export const addNewOrganizationRoute = authFactory.createApp()
             const body = c.req.valid("json")
 
             const createOneOrganization = await c.var.clients.sql.transaction(async (tx) => {
-
                 const createOneOrganization = await insertOne({
                     database: tx,
                     table: models.organization,
@@ -30,7 +29,7 @@ export const addNewOrganizationRoute = authFactory.createApp()
                         lastUpdatedAt: null,
                         createdBy: c.var.user.id,
                         lastUpdatedBy: null,
-                    }
+                    },
                 })
 
                 const createOneOrganizationUser = await insertOne({
@@ -46,12 +45,11 @@ export const addNewOrganizationRoute = authFactory.createApp()
                         lastUpdatedAt: null,
                         createdBy: c.var.user.id,
                         lastUpdatedBy: null,
-                    }
+                    },
                 })
 
                 return createOneOrganization
             })
-
 
             return response({
                 context: c,
@@ -59,5 +57,5 @@ export const addNewOrganizationRoute = authFactory.createApp()
                 schema: addNewOrganizationRouteDefinition.schemas.return,
                 data: createOneOrganization,
             })
-        }
+        },
     )

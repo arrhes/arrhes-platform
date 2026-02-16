@@ -5,7 +5,6 @@ import { Page } from "../../../components/layouts/page/page.tsx"
 import { AddNewOrganization } from "./addNewOrganization.tsx"
 import { OrganizationsListTable } from "./organizationsListTable.tsx"
 
-
 export function OrganizationsPage() {
     return (
         <Page.Root>
@@ -15,9 +14,7 @@ export function OrganizationsPage() {
                 </Page.Title>
             </Page.Header> */}
             <Page.Content>
-                <div
-                    className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}
-                >
+                <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
                     <AddNewOrganization>
                         <ButtonContent
                             variant="default"

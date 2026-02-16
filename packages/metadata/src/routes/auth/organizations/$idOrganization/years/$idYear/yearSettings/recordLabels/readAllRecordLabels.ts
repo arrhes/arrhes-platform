@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { recordLabelSchema, recordLabelSchemaReturn } from "../../../../../../../../schemas/recordLabel.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readAllRecordLabelsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-all-record-labels`,
@@ -12,6 +11,6 @@ export const readAllRecordLabelsRouteDefinition = routeDefinition({
             idOrganization: recordLabelSchema.entries.idOrganization,
             idYear: recordLabelSchema.entries.idYear,
         }),
-        return: v.array(recordLabelSchemaReturn)
+        return: v.array(recordLabelSchemaReturn),
     },
 })

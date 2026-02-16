@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function DataBlockContent(props: {
     children: null | ReactElement | (null | ReactElement)[]
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }) {
     return (
         <div
@@ -20,9 +19,9 @@ export function DataBlockContent(props: {
                     border: "1px solid",
                     borderColor: "neutral/10",
                     borderRadius: "md",
-                    overflow: "hidden"
+                    overflow: "hidden",
                 }),
-                props.className
+                props.className,
             )}
             children={props.children}
         />

@@ -6,7 +6,6 @@ import { PageRoot } from "./pageRoot.js"
 import { PageSeparator } from "./pageSeparator.js"
 import { PageTitle } from "./pageTitle.js"
 
-
 export const Page = {
     Root: PageRoot,
     Navigation: PageNavigation,
@@ -14,5 +13,5 @@ export const Page = {
     Title: PageTitle,
     Description: PageDescription,
     Separator: PageSeparator,
-    Content: PageContent
+    Content: PageContent,
 }

@@ -1,40 +1,36 @@
+import type { routeDefinition } from "@arrhes/application-metadata/utilities"
+import type * as v from "valibot"
 import { toast } from "../contexts/toasts/useToast.js"
-import { routeDefinition } from "@arrhes/application-metadata/utilities"
-import * as v from "valibot"
 import { ClientError } from "./clientError.js"
 import { validate } from "./validate.js"
 
-
-export async function postAPI<
+export async function getResponseBodyFromAPI<
     TSchemaBody extends v.ObjectSchema<v.ObjectEntries, undefined>,
-    TSchemaReturn extends v.ObjectSchema<v.ObjectEntries, undefined> | v.ArraySchema<v.ObjectSchema<v.ObjectEntries, undefined>, undefined>
->(
-    parameters: {
-        routeDefinition: ReturnType<typeof routeDefinition<
-            string,
-            TSchemaBody,
-            TSchemaReturn
-        >>
-        body: v.InferOutput<TSchemaBody>
-        hasToastMessage?: boolean,
-        signal?: AbortSignal
-    }
-) {
-    const abortController = new AbortController()
+    TSchemaReturn extends
+        | v.ObjectSchema<v.ObjectEntries, undefined>
+        | v.ArraySchema<v.ObjectSchema<v.ObjectEntries, undefined>, undefined>,
+>(parameters: {
+    routeDefinition: ReturnType<typeof routeDefinition<string, TSchemaBody, TSchemaReturn>>
+    body: v.InferOutput<TSchemaBody>
+    signal?: AbortSignal
+    hasToastMessage?: boolean
+}) {
+    const abortController = parameters.signal ? undefined : new AbortController()
+    const signal = parameters.signal ?? abortController!.signal
     try {
         const response = await fetch(
             new URL(`${import.meta.env.VITE_API_BASE_URL}${parameters.routeDefinition.path}`),
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                credentials: 'include',
+                credentials: "include",
                 body: JSON.stringify(parameters.body),
-                signal: parameters.signal ?? abortController.signal
-            }
+                signal,
+            },
         )
-        const jsonResponse = JSON.parse(await response.text() || "{}")
+        const jsonResponse = JSON.parse((await response.text()) || "{}")
         if (response.ok === false) {
             throw new ClientError({
                 message: "Error with the POST request response",
@@ -44,7 +40,7 @@ export async function postAPI<
 
         const parsedData = validate({
             schema: parameters.routeDefinition.schemas.return,
-            data: jsonResponse
+            data: jsonResponse,
         })
 
         if (parsedData.success === false) {
@@ -57,10 +53,10 @@ export async function postAPI<
         return <const>{
             ok: true,
             data: parsedData.data,
-            error: undefined
+            error: undefined,
         }
     } catch (error: unknown) {
-        abortController.abort()
+        abortController?.abort()
 
         if (parameters.hasToastMessage) {
             toast({ title: "Error with the API.", variant: "error" })

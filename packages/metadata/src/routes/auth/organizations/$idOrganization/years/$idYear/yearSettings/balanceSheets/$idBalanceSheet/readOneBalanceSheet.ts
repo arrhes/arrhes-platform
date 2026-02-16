@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { balanceSheetSchema, balanceSheetSchemaReturn } from "../../../../../../../../../schemas/balanceSheet.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneBalanceSheetRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-balance-sheet`,
@@ -13,6 +12,6 @@ export const readOneBalanceSheetRouteDefinition = routeDefinition({
             idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
         }),
-        return: balanceSheetSchemaReturn
+        return: balanceSheetSchemaReturn,
     },
 })

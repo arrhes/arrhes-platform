@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../../components/index.js"
 import { recordRowSchema, recordRowSchemaReturn } from "../../../../../../../../../../schemas/recordRow.js"
 import { routeDefinition } from "../../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneRecordRowRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-record-row`,
@@ -23,6 +22,6 @@ export const updateOneRecordRowRouteDefinition = routeDefinition({
             debit: v.optional(recordRowSchema.entries.debit),
             credit: v.optional(recordRowSchema.entries.credit),
         }),
-        return: recordRowSchemaReturn
+        return: recordRowSchemaReturn,
     },
 })

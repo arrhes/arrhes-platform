@@ -1,7 +1,6 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { InputHTMLAttributes } from 'react'
-import { FieldError } from 'react-hook-form'
-
+import type { InputHTMLAttributes } from "react"
+import type { FieldError } from "react-hook-form"
 
 type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
     error?: FieldError
@@ -32,10 +31,10 @@ export function InputText(props: InputText) {
                     gap: "2",
                     border: "1px solid",
                     borderRadius: "sm",
-                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
-                css((!props.error) ? { borderColor: "neutral/25" } : { borderColor: "error" }),
-                props.className
+                css(!props.error ? { borderColor: "neutral/25" } : { borderColor: "error" }),
+                props.className,
             )}
         >
             <input
@@ -49,7 +48,7 @@ export function InputText(props: InputText) {
                     _placeholder: { color: "neutral/25" },
                     backgroundColor: "transparent",
                     padding: "1rem",
-                    borderRadius: "md"
+                    borderRadius: "md",
                 })}
                 value={input(props.value)}
                 onChange={(e) => {

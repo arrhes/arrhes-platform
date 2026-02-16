@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function TableRoot(props: {
     children: ReactElement | ReactElement[]
-    className?: ComponentProps<'table'>['className']
+    className?: ComponentProps<"table">["className"]
 }) {
     return (
         <table
@@ -12,9 +11,9 @@ export function TableRoot(props: {
                 css({
                     width: "100%",
                     height: "fit",
-                    borderCollapse: "collapse"
+                    borderCollapse: "collapse",
                 }),
-                props.className
+                props.className,
             )}
             children={props.children}
         />

@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { incomeStatementSchema, incomeStatementSchemaReturn } from "../../../../../../../../schemas/incomeStatement.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const generateIncomeStatementsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/generate-income-statements`,
@@ -12,6 +11,6 @@ export const generateIncomeStatementsRouteDefinition = routeDefinition({
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
-        return: v.array(incomeStatementSchemaReturn)
+        return: v.array(incomeStatementSchemaReturn),
     },
 })

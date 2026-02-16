@@ -1,13 +1,8 @@
-
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-export function DropdownTrigger(props:
-    ComponentPropsWithRef<typeof DropdownMenuTrigger>
-) {
+export function DropdownTrigger(props: ComponentPropsWithRef<typeof DropdownMenuTrigger>) {
     return (
         <DropdownMenuTrigger
             {...props}
@@ -18,9 +13,9 @@ export function DropdownTrigger(props:
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    outline: "none"
+                    outline: "none",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

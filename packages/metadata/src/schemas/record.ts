@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { recordModel } from "../models/record.js"
-
+import type { recordModel } from "../models/record.js"
 
 export const recordSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -20,21 +19,17 @@ export const recordSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof recordModel.$inferSelect>
 
-
-export const recordSchemaReturn = v.pick(
-    recordSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "idJournal",
-        "idAttachment",
-        "idRecordLabel",
-        "label",
-        "date",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const recordSchemaReturn = v.pick(recordSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "idJournal",
+    "idAttachment",
+    "idRecordLabel",
+    "label",
+    "date",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

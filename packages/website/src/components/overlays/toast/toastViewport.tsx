@@ -1,7 +1,6 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 import { createPortal } from "react-dom"
-
 
 type ToastViewportProps = {
     children: ReactNode
@@ -26,6 +25,6 @@ export function ToastViewport(props: ToastViewportProps) {
         >
             {props.children}
         </div>,
-        document.body
+        document.body,
     )
 }

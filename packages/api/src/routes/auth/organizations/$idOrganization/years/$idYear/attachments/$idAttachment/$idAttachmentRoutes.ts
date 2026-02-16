@@ -4,7 +4,6 @@ import { generateAttachmentPutSignedUrlRoute } from "../../../../../../../../rou
 import { readOneAttachmentRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/readOneAttachment.js"
 import { updateOneAttachmentRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/attachments/$idAttachment/updateOneAttachment.js"
 
-
 export const $idAttachmentRoutes = [
     deleteOneAttachmentRoute,
     generateAttachmentGetSignedUrlRoute,

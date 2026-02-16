@@ -5,17 +5,16 @@ import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { FormatBoolean } from "../../../../../../../../../components/formats/formatBoolean.tsx"
-import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 
 import { accountRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/accounts/$idAccount/accountRoute.tsx"
 import { DeleteOneAccount } from "./deleteOneAccount.tsx"
 import { UpdateOneAccount } from "./updateOneAccount.tsx"
-
 
 export function AccountPage() {
     const params = useParams({ from: accountRoute.id })
@@ -34,7 +33,14 @@ export function AccountPage() {
                     return (
                         <Fragment>
                             <Section.Item className={css({ flexDirection: "row" })}>
-                                <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
                                     <LinkButton
                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/comptes"
                                         params={{
@@ -42,26 +48,22 @@ export function AccountPage() {
                                             idYear: account.idYear,
                                         }}
                                     >
-                                        <ButtonContent
-                                            variant="default"
-                                            leftIcon={<IconChevronLeft />}
-                                            text="Retour"
-                                        />
+                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
-                                <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                                    <UpdateOneAccount
-                                        account={account}
-                                    >
-                                        <ButtonContent
-                                            variant="primary"
-                                            leftIcon={<IconPencil />}
-                                            text="Modifier"
-                                        />
+                                <div
+                                    className={css({
+                                        ml: "auto",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
+                                    <UpdateOneAccount account={account}>
+                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneAccount>
-                                    <DeleteOneAccount
-                                        account={account}
-                                    >
+                                    <DeleteOneAccount account={account}>
                                         <ButtonContent
                                             variant="default"
                                             leftIcon={<IconTrash />}
@@ -76,14 +78,10 @@ export function AccountPage() {
                                     <DataBlock.Header title="Informations" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Numéro">
-                                            <FormatText>
-                                                {account.number.toString()}
-                                            </FormatText>
+                                            <FormatText>{account.number.toString()}</FormatText>
                                         </DataBlock.Item>
                                         <DataBlock.Item label="Libellé">
-                                            <FormatText>
-                                                {account.label}
-                                            </FormatText>
+                                            <FormatText>{account.label}</FormatText>
                                         </DataBlock.Item>
                                         {/* <DataBlock.Item label="Système">
                         <FormatBoolean boolean={account.data.isMandatory} text={account.data.isMandatory ? "Minimal" : "Facultatif"} />
@@ -123,9 +121,7 @@ export function AccountPage() {
                                                 {!account.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={account.data.lastUpdatedBy} />}
                                             </DataBlock.Item> */}
                                         <DataBlock.Item label="Id">
-                                            <FormatText>
-                                                {account.id}
-                                            </FormatText>
+                                            <FormatText>{account.id}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>

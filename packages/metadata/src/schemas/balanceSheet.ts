@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { balanceSheetSide, booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
-import { balanceSheetModel } from "../models/balanceSheet.js"
-
+import type { balanceSheetModel } from "../models/balanceSheet.js"
 
 export const balanceSheetSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -21,22 +20,18 @@ export const balanceSheetSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof balanceSheetModel.$inferSelect>
 
-
-export const balanceSheetSchemaReturn = v.pick(
-    balanceSheetSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "idBalanceSheetParent",
-        "isDefault",
-        "isComputed",
-        "side",
-        "number",
-        "label",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const balanceSheetSchemaReturn = v.pick(balanceSheetSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "idBalanceSheetParent",
+    "isDefault",
+    "isComputed",
+    "side",
+    "number",
+    "label",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

@@ -1,8 +1,7 @@
 import * as v from "valibot"
 import { dateTimeSchema, documentType, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
-import { documentModel } from "../models/document.js"
-
+import type { documentModel } from "../models/document.js"
 
 export const documentSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -17,19 +16,15 @@ export const documentSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof documentModel.$inferSelect>
 
-
-export const documentSchemaReturn = v.pick(
-    documentSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "label",
-        "type",
-        "storageKey",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const documentSchemaReturn = v.pick(documentSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "label",
+    "type",
+    "storageKey",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

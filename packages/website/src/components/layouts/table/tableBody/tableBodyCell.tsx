@@ -1,13 +1,12 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function TableBodyCell(props: {
     children?: ReactElement | null | ReactElement[]
-    className?: ComponentProps<'td'>['className']
-    style?: ComponentProps<'td'>['style']
-    align?: ComponentProps<'td'>['align']
-    colSpan?: ComponentProps<'td'>['colSpan']
+    className?: ComponentProps<"td">["className"]
+    style?: ComponentProps<"td">["style"]
+    align?: ComponentProps<"td">["align"]
+    colSpan?: ComponentProps<"td">["colSpan"]
 }) {
     return (
         <td
@@ -15,9 +14,9 @@ export function TableBodyCell(props: {
                 css({
                     width: "fit",
                     padding: "1rem",
-                    verticalAlign: "top"
+                    verticalAlign: "top",
                 }),
-                props.className
+                props.className,
             )}
             colSpan={props.colSpan}
             style={props.style}

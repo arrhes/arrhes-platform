@@ -1,31 +1,30 @@
 import { duplicateOneRecordRouteDefinition, readAllRecordsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconCopyCheck } from "@tabler/icons-react"
-import { ComponentPropsWithRef, ReactElement, useState } from "react"
-import * as v from "valibot"
+import { type ComponentPropsWithRef, type ReactElement, useState } from "react"
+import type * as v from "valibot"
 import { Dialog } from "../../../../../../../../components/overlays/dialog/dialog.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
 import { applicationRouter } from "../../../../../../../../routes/applicationRouter.tsx"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function DuplicateOneRecord(props: {
     record: v.InferOutput<typeof returnedSchemas.record>
-    children: ReactElement<ComponentPropsWithRef<'div'>>
+    children: ReactElement<ComponentPropsWithRef<"div">>
 }) {
     const [open, setOpen] = useState(false)
 
     async function onSubmit() {
-        const duplicateResponse = await postAPI({
+        const duplicateResponse = await getResponseBodyFromAPI({
             routeDefinition: duplicateOneRecordRouteDefinition,
             body: {
                 idRecord: props.record.id,
                 idOrganization: props.record.idOrganization,
                 idYear: props.record.idYear,
-            }
+            },
         })
 
         if (duplicateResponse.ok === false) {
@@ -60,10 +59,7 @@ export function DuplicateOneRecord(props: {
     }
 
     return (
-        <Dialog.Root
-            open={open}
-            onOpenChange={(value) => setOpen(value)}
-        >
+        <Dialog.Root open={open} onOpenChange={(value) => setOpen(value)}>
             <Dialog.Trigger
                 onClick={(event) => {
                     setOpen(true)
@@ -72,30 +68,35 @@ export function DuplicateOneRecord(props: {
             >
                 {props.children}
             </Dialog.Trigger>
-            {(open === false)
-                ? (null)
-                : (
-                    <Dialog.Content>
-                        <Dialog.Header />
-                        <div className={css({ padding: "4", paddingTop: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
-                            <Dialog.Title>
-                                Voulez-vous dupliquer cette écriture ?
-                            </Dialog.Title>
-                            <Dialog.Description>
-                                Cette action dupliquera l'écriture et toutes les données associées.
-                            </Dialog.Description>
-                        </div>
-                        <Dialog.Footer>
-                            <Button onClick={() => onCancel()}>
-                                <ButtonContent variant="invisible" text="Annuler" />
-                            </Button>
-                            <Button onClick={() => onSubmit()} hasLoader>
-                                <ButtonContent variant="primary" leftIcon={<IconCopyCheck />} text="Dupliquer l'écriture" />
-                            </Button>
-                        </Dialog.Footer>
-                    </Dialog.Content>
-                )
-            }
+            {open === false ? null : (
+                <Dialog.Content>
+                    <Dialog.Header />
+                    <div
+                        className={css({
+                            padding: "4",
+                            paddingTop: "0",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start",
+                            gap: "1",
+                        })}
+                    >
+                        <Dialog.Title>Voulez-vous dupliquer cette écriture ?</Dialog.Title>
+                        <Dialog.Description>
+                            Cette action dupliquera l'écriture et toutes les données associées.
+                        </Dialog.Description>
+                    </div>
+                    <Dialog.Footer>
+                        <Button onClick={() => onCancel()}>
+                            <ButtonContent variant="invisible" text="Annuler" />
+                        </Button>
+                        <Button onClick={() => onSubmit()} hasLoader>
+                            <ButtonContent variant="primary" leftIcon={<IconCopyCheck />} text="Dupliquer l'écriture" />
+                        </Button>
+                    </Dialog.Footer>
+                </Dialog.Content>
+            )}
         </Dialog.Root>
     )
 }

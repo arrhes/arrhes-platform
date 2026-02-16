@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { recordRowSchema } from "../../../../../../../../../schemas/recordRow.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateManyRecordRowsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-many-record-rows`,
@@ -20,6 +19,6 @@ export const updateManyRecordRowsRouteDefinition = routeDefinition({
             isComputedForIncomeStatementReport: v.optional(recordRowSchema.entries.isComputedForIncomeStatementReport),
             label: v.optional(recordRowSchema.entries.label),
         }),
-        return: v.array(recordRowSchema)
+        return: v.array(recordRowSchema),
     },
 })

@@ -1,13 +1,7 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
-
-export function FeatureItem(props: {
-    icon: ReactNode
-    text: string
-    highlighted?: boolean
-    isDev?: boolean
-}) {
+export function FeatureItem(props: { icon: ReactNode; text: string; highlighted?: boolean; isDev?: boolean }) {
     return (
         <div
             className={css({

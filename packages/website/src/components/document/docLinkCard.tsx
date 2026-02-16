@@ -3,7 +3,6 @@ import type { ReactNode } from "react"
 import type { ValidRoutes } from "../../routes/applicationRouter.js"
 import { LinkButton } from "../linkButton.js"
 
-
 export type DocLinkCardColor = "information" | "success" | "primary" | "warning"
 
 export function DocLinkCard(props: {
@@ -37,37 +36,43 @@ export function DocLinkCard(props: {
                 _hover: {
                     borderColor: "neutral/20",
                     boxShadow: "sm",
-                }
+                },
             })}
         >
-            <div className={css({
-                width: "2.5rem",
-                height: "2.5rem",
-                borderRadius: "md",
-                backgroundColor: style.bg,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: style.color,
-                "& svg": {
-                    width: "1.25rem",
-                    height: "1.25rem"
-                }
-            })}>
+            <div
+                className={css({
+                    width: "2.5rem",
+                    height: "2.5rem",
+                    borderRadius: "md",
+                    backgroundColor: style.bg,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: style.color,
+                    "& svg": {
+                        width: "1.25rem",
+                        height: "1.25rem",
+                    },
+                })}
+            >
                 {props.icon}
             </div>
-            <h3 className={css({
-                fontSize: "md",
-                fontWeight: "semibold",
-                color: "neutral",
-            })}>
+            <h3
+                className={css({
+                    fontSize: "md",
+                    fontWeight: "semibold",
+                    color: "neutral",
+                })}
+            >
                 {props.title}
             </h3>
-            <p className={css({
-                fontSize: "sm",
-                color: "neutral/60",
-                lineHeight: "relaxed",
-            })}>
+            <p
+                className={css({
+                    fontSize: "sm",
+                    color: "neutral/60",
+                    lineHeight: "relaxed",
+                })}
+            >
                 {props.description}
             </p>
         </LinkButton>

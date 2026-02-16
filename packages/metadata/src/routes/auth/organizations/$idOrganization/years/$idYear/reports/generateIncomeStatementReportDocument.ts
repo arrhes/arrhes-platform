@@ -4,7 +4,6 @@ import { documentSchemaReturn } from "../../../../../../../schemas/document.js"
 import { incomeStatementSchema } from "../../../../../../../schemas/incomeStatement.js"
 import { routeDefinition } from "../../../../../../../utilities/routeDefinition.js"
 
-
 export const generateIncomeStatementReportDocumentRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/generate-income-statement-report-document`,
@@ -13,6 +12,6 @@ export const generateIncomeStatementReportDocumentRouteDefinition = routeDefinit
             idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
-        return: documentSchemaReturn
+        return: documentSchemaReturn,
     },
 })

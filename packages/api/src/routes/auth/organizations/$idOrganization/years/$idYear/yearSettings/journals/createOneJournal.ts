@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 
-
-export const createOneJournalRoute = authFactory.createApp()
+export const createOneJournalRoute = authFactory
+    .createApp()
     .post(
         createOneJournalRouteDefinition.path,
         bodyValidator(createOneJournalRouteDefinition.schemas.body),
@@ -27,7 +27,7 @@ export const createOneJournalRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             return response({
@@ -36,5 +36,5 @@ export const createOneJournalRoute = authFactory.createApp()
                 schema: createOneJournalRouteDefinition.schemas.return,
                 data: createOneJournal,
             })
-        }
+        },
     )

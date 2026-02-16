@@ -1,12 +1,11 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
-
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 
 export function getBalanceSheetLevel(parameters: {
     balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>
     balanceSheets: Array<v.InferOutput<typeof returnedSchemas.balanceSheet>>
 }) {
-    const map = new Map(parameters.balanceSheets.map(i => [i.id, i]))
+    const map = new Map(parameters.balanceSheets.map((i) => [i.id, i]))
 
     let level = 0
     let current = parameters.balanceSheet
@@ -16,5 +15,4 @@ export function getBalanceSheetLevel(parameters: {
     }
 
     return level
-
 }

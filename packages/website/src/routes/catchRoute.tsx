@@ -1,23 +1,22 @@
 import { createRoute, redirect } from "@tanstack/react-router"
 import { rootLayoutRoute } from "./rootLayoutRoute.js"
 
-
 export const catchRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,
-    path: '$',
+    path: "$",
     beforeLoad: ({ context, location }) => {
         if (location.pathname.startsWith("/documentation")) {
             throw redirect({
-                to: "/documentation"
+                to: "/documentation",
             })
         }
         if (context.isAuthenticated === true) {
             throw redirect({
-                to: "/dashboard"
+                to: "/dashboard",
             })
         }
         throw redirect({
-            to: "/connexion"
+            to: "/connexion",
         })
-    }
+    },
 })

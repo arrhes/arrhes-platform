@@ -8,92 +8,79 @@ import { Popover } from "../../components/overlays/popover/popover.js"
 import { toast } from "../../contexts/toasts/useToast.js"
 import { applicationRouter } from "../../routes/applicationRouter.js"
 import { deleteCookies } from "../../utilities/cookies/deleteCookies.js"
-import { postAPI } from "../../utilities/postAPI.js"
+import { getResponseBodyFromAPI } from "../../utilities/getResponseBodyFromAPI.js"
 import { Breadcrumbs } from "../breadcrumbs.js"
-
 
 export function DashboardLayout() {
     return (
-        <div className={css({
-            width: "100%",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "stretch",
-            backgroundColor: "background"
-        })}>
-            {/* Header */}
-            <header className={css({
+        <div
+            className={css({
                 width: "100%",
+                minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "start",
-                alignItems: "center",
-                padding: "1rem",
-                borderBottom: "1px solid",
-                borderColor: "neutral/10",
-                backgroundColor: "white",
-            })}>
-                <div className={css({
+                alignItems: "stretch",
+                backgroundColor: "background",
+            })}
+        >
+            {/* Header */}
+            <header
+                className={css({
                     width: "100%",
-                    maxWidth: "xl",
                     display: "flex",
-                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    justifyContent: "start",
                     alignItems: "center",
-                    gap: "1rem",
-                })}>
-                    <div className={css({
+                    padding: "1rem",
+                    borderBottom: "1px solid",
+                    borderColor: "neutral/10",
+                    backgroundColor: "white",
+                })}
+            >
+                <div
+                    className={css({
+                        width: "100%",
+                        maxWidth: "xl",
                         display: "flex",
+                        justifyContent: "space-between",
                         alignItems: "center",
-                        gap: "0.5rem",
-                    })}>
+                        gap: "1rem",
+                    })}
+                >
+                    <div
+                        className={css({
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                        })}
+                    >
                         <LinkButton to="/dashboard">
                             <Logo />
                         </LinkButton>
                         <Breadcrumbs />
                     </div>
-                    <nav className={css({
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                    })}>
-                        <LinkButton
-                            to="/documentation"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="Documentation"
-                        >
-                            <ButtonContent
-                                variant="invisible"
-                                leftIcon={<IconBook2 />}
-                            />
+                    <nav
+                        className={css({
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                        })}
+                    >
+                        <LinkButton to="/documentation" target="_blank" rel="noopener noreferrer" title="Documentation">
+                            <ButtonContent variant="invisible" leftIcon={<IconBook2 />} />
                         </LinkButton>
-                        <LinkButton
-                            to="/dashboard/organisations"
-                            title="Organisations"
-                        >
-                            <ButtonContent
-                                variant="default"
-                                leftIcon={<IconBuildings />}
-                            />
+                        <LinkButton to="/dashboard/organisations" title="Organisations">
+                            <ButtonContent variant="default" leftIcon={<IconBuildings />} />
                         </LinkButton>
                         <Popover.Root>
                             <Popover.Trigger asChild>
-                                <Button
-                                    title="Utilisateur"
-                                >
-                                    <ButtonContent
-                                        variant="default"
-                                        leftIcon={<IconUser />}
-                                    />
+                                <Button title="Utilisateur">
+                                    <ButtonContent variant="default" leftIcon={<IconUser />} />
                                 </Button>
                             </Popover.Trigger>
                             <Popover.Content align="end">
-                                <LinkButton
-                                    to="/dashboard/support"
-                                    className={css({ width: "100%" })}
-                                >
+                                <LinkButton to="/dashboard/support" className={css({ width: "100%" })}>
                                     <ButtonContent
                                         variant="invisible"
                                         leftIcon={<IconLifebuoy />}
@@ -106,7 +93,7 @@ export function DashboardLayout() {
                                     className={css({ width: "100%" })}
                                     onClick={async () => {
                                         try {
-                                            await postAPI({
+                                            await getResponseBodyFromAPI({
                                                 routeDefinition: signOutRouteDefinition,
                                                 body: {},
                                             })
@@ -139,22 +126,26 @@ export function DashboardLayout() {
             </header>
 
             {/* Main content */}
-            <div className={css({
-                width: "100%",
-                flex: "1",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "start",
-                alignItems: "center",
-                backgroundColor: "white",
-            })}>
-                <div className={css({
+            <div
+                className={css({
                     width: "100%",
-                    // maxWidth: "xl",
                     flex: "1",
                     display: "flex",
                     flexDirection: "column",
-                })}>
+                    justifyContent: "start",
+                    alignItems: "center",
+                    backgroundColor: "white",
+                })}
+            >
+                <div
+                    className={css({
+                        width: "100%",
+                        // maxWidth: "xl",
+                        flex: "1",
+                        display: "flex",
+                        flexDirection: "column",
+                    })}
+                >
                     <Outlet />
                 </div>
             </div>

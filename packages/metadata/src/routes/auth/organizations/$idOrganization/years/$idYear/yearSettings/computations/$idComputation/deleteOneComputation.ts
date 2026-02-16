@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { computationSchema } from "../../../../../../../../../schemas/computation.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneComputationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-computation`,
@@ -13,6 +12,6 @@ export const deleteOneComputationRouteDefinition = routeDefinition({
             idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

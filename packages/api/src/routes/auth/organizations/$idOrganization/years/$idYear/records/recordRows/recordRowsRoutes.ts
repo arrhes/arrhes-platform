@@ -3,7 +3,6 @@ import { createOneRecordRowRoute } from "../../../../../../../../routes/auth/org
 import { readAllRecordRowsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/records/recordRows/readAllRecordRows.js"
 import { updateManyRecordRowsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/records/recordRows/updateManyRecordRows.js"
 
-
 export const recordRowsRoutes = [
     createOneRecordRowRoute,
     readAllRecordRowsRoute,

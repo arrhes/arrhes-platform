@@ -1,9 +1,8 @@
 import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconAlertTriangle, IconTrash } from "@tabler/icons-react"
-import { ComponentPropsWithRef, JSX, ReactElement, useState } from "react"
+import { type ComponentPropsWithRef, type JSX, type ReactElement, useState } from "react"
 import { Dialog } from "./dialog.js"
-
 
 export function DeleteConfirmation(props: {
     title: string
@@ -20,10 +19,7 @@ export function DeleteConfirmation(props: {
     }
 
     return (
-        <Dialog.Root
-            open={open}
-            onOpenChange={(value) => setOpen(value)}
-        >
+        <Dialog.Root open={open} onOpenChange={(value) => setOpen(value)}>
             <Dialog.Trigger
                 onClick={(event) => {
                     setOpen(true)
@@ -32,49 +28,39 @@ export function DeleteConfirmation(props: {
             >
                 {props.children}
             </Dialog.Trigger>
-            {(open === false)
-                ? (null)
-                : (
-                    <Dialog.Content>
-                        <Dialog.Header>
-                            <div
-                                className={css({
-                                    padding: "0.5rem",
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                    gap: "0.75rem",
-                                })}
-                            >
-                                <IconAlertTriangle
-                                    size={16}
-                                    className={css({ color: "error" })}
-                                />
-                            </div>
-                            <Dialog.Title>
-                                {props.title}
-                            </Dialog.Title>
-                        </Dialog.Header>
-                        <Dialog.Body>
-                            <Dialog.Description>
-                                {props.description}
-                            </Dialog.Description>
-                        </Dialog.Body>
-                        <Dialog.Footer>
-                            <Button onClick={() => setOpen(false)}>
-                                <ButtonContent variant="default" text="Annuler" />
-                            </Button>
-                            <Button onClick={handleSubmit} hasLoader>
-                                <ButtonContent
-                                    variant="primary"
-                                    leftIcon={<IconTrash />}
-                                    color="error"
-                                    text={props.submitText}
-                                />
-                            </Button>
-                        </Dialog.Footer>
-                    </Dialog.Content>
-                )
-            }
-        </Dialog.Root >
+            {open === false ? null : (
+                <Dialog.Content>
+                    <Dialog.Header>
+                        <div
+                            className={css({
+                                padding: "0.5rem",
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "0.75rem",
+                            })}
+                        >
+                            <IconAlertTriangle size={16} className={css({ color: "error" })} />
+                        </div>
+                        <Dialog.Title>{props.title}</Dialog.Title>
+                    </Dialog.Header>
+                    <Dialog.Body>
+                        <Dialog.Description>{props.description}</Dialog.Description>
+                    </Dialog.Body>
+                    <Dialog.Footer>
+                        <Button onClick={() => setOpen(false)}>
+                            <ButtonContent variant="default" text="Annuler" />
+                        </Button>
+                        <Button onClick={handleSubmit} hasLoader>
+                            <ButtonContent
+                                variant="primary"
+                                leftIcon={<IconTrash />}
+                                color="error"
+                                text={props.submitText}
+                            />
+                        </Button>
+                    </Dialog.Footer>
+                </Dialog.Content>
+            )}
+        </Dialog.Root>
     )
 }

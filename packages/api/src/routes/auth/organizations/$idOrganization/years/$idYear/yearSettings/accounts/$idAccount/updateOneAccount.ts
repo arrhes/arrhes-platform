@@ -1,18 +1,17 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const updateOneAccountRoute = authFactory.createApp()
+export const updateOneAccountRoute = authFactory
+    .createApp()
     .post(
         updateOneAccountRouteDefinition.path,
         bodyValidator(updateOneAccountRouteDefinition.schemas.body),
         async (c) => {
-
             const body = c.req.valid("json")
 
             const updateOneAccount = await updateOne({
@@ -39,13 +38,12 @@ export const updateOneAccountRoute = authFactory.createApp()
                     lastUpdatedAt: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id,
                 },
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idAccount),
-                    )
-                )
+                    ),
             })
 
             return response({
@@ -54,5 +52,5 @@ export const updateOneAccountRoute = authFactory.createApp()
                 schema: updateOneAccountRouteDefinition.schemas.return,
                 data: updateOneAccount,
             })
-        }
+        },
     )

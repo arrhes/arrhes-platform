@@ -1,14 +1,9 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { JSX, useCallback, useEffect, useRef, useState } from "react"
+import { type JSX, useCallback, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { useDrawerContext } from "./drawerRoot.js"
 
-
-export function DrawerContent(props: {
-    children: JSX.Element | JSX.Element[]
-    className?: string
-}) {
+export function DrawerContent(props: { children: JSX.Element | JSX.Element[]; className?: string }) {
     const { open, setOpen } = useDrawerContext()
     const [mounted, setMounted] = useState(false)
     const [visible, setVisible] = useState(false)
@@ -34,11 +29,14 @@ export function DrawerContent(props: {
     }, [open])
 
     // Handle Escape key
-    const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-            setOpen(false)
-        }
-    }, [setOpen])
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setOpen(false)
+            }
+        },
+        [setOpen],
+    )
 
     useEffect(() => {
         if (mounted) {
@@ -69,9 +67,7 @@ export function DrawerContent(props: {
                         backgroundColor: "neutral/10",
                         transition: "opacity 0.2s ease",
                     }),
-                    visible
-                        ? css({ opacity: 1 })
-                        : css({ opacity: 0 }),
+                    visible ? css({ opacity: 1 }) : css({ opacity: 0 }),
                 )}
                 onClick={() => setOpen(false)}
                 aria-hidden="true"
@@ -105,17 +101,17 @@ export function DrawerContent(props: {
                         md: {
                             minWidth: "md",
                             maxWidth: "md",
-                        }
+                        },
                     }),
                     visible
                         ? css({
-                            opacity: 1,
-                            transform: "scale(1)",
-                        })
+                              opacity: 1,
+                              transform: "scale(1)",
+                          })
                         : css({
-                            opacity: 0,
-                            transform: "scale(0.96)",
-                        }),
+                              opacity: 0,
+                              transform: "scale(0.96)",
+                          }),
                     props.className,
                 )}
             >

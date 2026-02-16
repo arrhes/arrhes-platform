@@ -1,13 +1,10 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
 
-
-export function DocSection(props: {
-    title: string
-    children: React.ReactNode
-}) {
-    const id = props.title.toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .replace(/\s+/g, '-')
+export function DocSection(props: { title: string; children: React.ReactNode }) {
+    const id = props.title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
 
     return (
         <section

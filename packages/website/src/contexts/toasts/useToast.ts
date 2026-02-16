@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState } from "react"
-
+import { type ReactNode, useEffect, useState } from "react"
 
 const TOAST_LIMIT = 8
 const TOAST_REMOVE_DELAY = 2000
@@ -34,21 +33,21 @@ type ActionType = typeof actionTypes
 
 type Action =
     | {
-        type: ActionType["ADD_TOAST"]
-        toast: ToasterToast
-    }
+          type: ActionType["ADD_TOAST"]
+          toast: ToasterToast
+      }
     | {
-        type: ActionType["UPDATE_TOAST"]
-        toast: Partial<ToasterToast>
-    }
+          type: ActionType["UPDATE_TOAST"]
+          toast: Partial<ToasterToast>
+      }
     | {
-        type: ActionType["DISMISS_TOAST"]
-        toastId?: ToasterToast["id"]
-    }
+          type: ActionType["DISMISS_TOAST"]
+          toastId?: ToasterToast["id"]
+      }
     | {
-        type: ActionType["REMOVE_TOAST"]
-        toastId?: ToasterToast["id"]
-    }
+          type: ActionType["REMOVE_TOAST"]
+          toastId?: ToasterToast["id"]
+      }
 
 type State = {
     toasts: ToasterToast[]
@@ -76,7 +75,7 @@ export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "ADD_TOAST": {
             const deduplicated = action.toast.itemID
-                ? state.toasts.filter(x => x.itemID !== action.toast.itemID)
+                ? state.toasts.filter((x) => x.itemID !== action.toast.itemID)
                 : state.toasts
             return {
                 ...state,
@@ -87,9 +86,7 @@ export const reducer = (state: State, action: Action): State => {
         case "UPDATE_TOAST":
             return {
                 ...state,
-                toasts: state.toasts.map((t) =>
-                    t.id === action.toast.id ? { ...t, ...action.toast } : t
-                ),
+                toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
             }
 
         case "DISMISS_TOAST": {
@@ -108,10 +105,10 @@ export const reducer = (state: State, action: Action): State => {
                 toasts: state.toasts.map((t) =>
                     t.id === toastId || toastId === undefined
                         ? {
-                            ...t,
-                            open: false,
-                        }
-                        : t
+                              ...t,
+                              open: false,
+                          }
+                        : t,
                 ),
             }
         }

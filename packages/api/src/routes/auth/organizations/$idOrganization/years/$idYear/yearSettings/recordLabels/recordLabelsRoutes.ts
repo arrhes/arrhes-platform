@@ -2,7 +2,6 @@ import { $idRecordLabelRoutes } from "../../../../../../../../routes/auth/organi
 import { createOneRecordLabelRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/createOneRecordLabel.js"
 import { readAllRecordLabelsRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/readAllRecordLabels.js"
 
-
 export const recordLabelsRoutes = [
     createOneRecordLabelRoute,
     readAllRecordLabelsRoute,

@@ -1,21 +1,23 @@
-import { readOneComputationIncomeStatementRouteDefinition, readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
+import {
+    readOneComputationIncomeStatementRouteDefinition,
+    readOneComputationRouteDefinition,
+} from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { FormatDateTime } from "../../../../../../../../../../../../components/formats/formatDateTime.tsx"
-import { LinkButton } from "../../../../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../../../../components/formats/formatText.tsx"
 import { Chip } from "../../../../../../../../../../../../components/layouts/chip.tsx"
 import { DataBlock } from "../../../../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../../../../components/layouts/section/section.tsx"
+import { LinkButton } from "../../../../../../../../../../../../components/linkButton.tsx"
 
 import { computationIncomeStatementLayoutRoute } from "../../../../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/$idComputationIncomeStatement/computationIncomeStatementLayoutRoute.tsx"
 import { DeleteOneComputationIncomeStatement } from "./deleteOneComputationIncomeStatement.tsx"
 import { UpdateOneComputationIncomeStatement } from "./updateOneComputationIncomeStatement.tsx"
-
 
 export function ComputationIncomeStatementPage() {
     const params = useParams({ from: computationIncomeStatementLayoutRoute.id })
@@ -34,7 +36,14 @@ export function ComputationIncomeStatementPage() {
                     return (
                         <Fragment>
                             <Section.Item className={css({ flexDirection: "row" })}>
-                                <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
                                     <LinkButton
                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/compte-de-résultat/calculs"
                                         params={{
@@ -42,31 +51,27 @@ export function ComputationIncomeStatementPage() {
                                             idYear: params.idYear,
                                         }}
                                     >
-                                        <ButtonContent
-                                            variant="default"
-                                            leftIcon={<IconChevronLeft />}
-                                            text="Retour"
-                                        />
+                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
-                                <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        ml: "auto",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
                                     <UpdateOneComputationIncomeStatement
                                         computationIncomeStatement={computationIncomeStatement}
                                     >
-                                        <ButtonContent
-                                            variant="primary"
-                                            leftIcon={<IconPencil />}
-                                            text="Modifier"
-                                        />
+                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneComputationIncomeStatement>
                                     <DeleteOneComputationIncomeStatement
                                         computationIncomeStatement={computationIncomeStatement}
                                     >
-                                        <ButtonContent
-                                            variant="default"
-                                            leftIcon={<IconTrash />}
-                                            color="error"
-                                        />
+                                        <ButtonContent variant="default" leftIcon={<IconTrash />} color="error" />
                                     </DeleteOneComputationIncomeStatement>
                                 </div>
                             </Section.Item>
@@ -80,7 +85,7 @@ export function ComputationIncomeStatementPage() {
                                                 body={{
                                                     idOrganization: computationIncomeStatement.idOrganization,
                                                     idYear: computationIncomeStatement.idYear,
-                                                    idComputation: computationIncomeStatement.idComputation
+                                                    idComputation: computationIncomeStatement.idComputation,
                                                 }}
                                             >
                                                 {(computation) => (
@@ -92,7 +97,11 @@ export function ComputationIncomeStatementPage() {
                                         </DataBlock.Item>
                                         <DataBlock.Item label="Opération">
                                             <Chip
-                                                text={(computationIncomeStatement.operation === "plus") ? "Addition" : "Soustraction"}
+                                                text={
+                                                    computationIncomeStatement.operation === "plus"
+                                                        ? "Addition"
+                                                        : "Soustraction"
+                                                }
                                             />
                                         </DataBlock.Item>
                                     </DataBlock.Content>
@@ -107,9 +116,7 @@ export function ComputationIncomeStatementPage() {
                                             <FormatDateTime date={computationIncomeStatement.lastUpdatedAt} />
                                         </DataBlock.Item>
                                         <DataBlock.Item label="Id">
-                                            <FormatText>
-                                                {computationIncomeStatement.id}
-                                            </FormatText>
+                                            <FormatText>{computationIncomeStatement.id}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>
@@ -117,7 +124,7 @@ export function ComputationIncomeStatementPage() {
                         </Fragment>
                     )
                 }}
-            </DataWrapper >
-        </Section.Root >
+            </DataWrapper>
+        </Section.Root>
     )
 }

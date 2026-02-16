@@ -2,8 +2,7 @@ import * as v from "valibot"
 import { booleanSchema, dateTimeSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { organizationUserStatus } from "../components/values/organizationUserStatus.js"
-import { organizationUserModel } from "../models/organizationUser.js"
-
+import type { organizationUserModel } from "../models/organizationUser.js"
 
 export const organizationUserSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -17,18 +16,14 @@ export const organizationUserSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof organizationUserModel.$inferSelect>
 
-
-export const organizationUserSchemaReturn = v.pick(
-    organizationUserSchema,
-    [
-        "id",
-        "idOrganization",
-        "idUser",
-        "isAdmin",
-        "status",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const organizationUserSchemaReturn = v.pick(organizationUserSchema, [
+    "id",
+    "idOrganization",
+    "idUser",
+    "isAdmin",
+    "status",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

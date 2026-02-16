@@ -1,12 +1,8 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { DropdownMenuContent, DropdownMenuPortal } from "@radix-ui/react-dropdown-menu"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 
-
-
-export function DropdownContent(props:
-    ComponentPropsWithRef<typeof DropdownMenuContent>
-) {
+export function DropdownContent(props: ComponentPropsWithRef<typeof DropdownMenuContent>) {
     return (
         <DropdownMenuPortal>
             <DropdownMenuContent
@@ -28,9 +24,9 @@ export function DropdownContent(props:
                         gap: "0.5rem",
                         border: "1px solid",
                         borderColor: "neutral/20",
-                        minWidth: "var(--radix-dropdown-menu-trigger-width)"
+                        minWidth: "var(--radix-dropdown-menu-trigger-width)",
                     }),
-                    props.className
+                    props.className,
                 )}
             >
                 {props.children}

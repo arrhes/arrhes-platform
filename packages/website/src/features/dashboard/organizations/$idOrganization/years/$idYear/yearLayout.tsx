@@ -4,7 +4,6 @@ import { Fragment } from "react/jsx-runtime"
 import { PageNavigation } from "../../../../../../components/layouts/page/pageNavigation.tsx"
 import { yearLayoutRoute } from "../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearLayoutRoute.tsx"
 
-
 export function YearLayout() {
     const params = useParams({ from: yearLayoutRoute.id })
 

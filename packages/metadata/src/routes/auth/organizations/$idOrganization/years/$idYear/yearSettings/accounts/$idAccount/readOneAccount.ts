@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { accountSchema, accountSchemaReturn } from "../../../../../../../../../schemas/account.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneAccountRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-account`,
@@ -13,6 +12,6 @@ export const readOneAccountRouteDefinition = routeDefinition({
             idOrganization: accountSchema.entries.idOrganization,
             idYear: accountSchema.entries.idYear,
         }),
-        return: accountSchemaReturn
+        return: accountSchemaReturn,
     },
 })

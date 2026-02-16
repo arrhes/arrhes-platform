@@ -1,15 +1,17 @@
-import { generateComputationsRouteDefinition, readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    generateComputationsRouteDefinition,
+    readAllComputationsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { Button, ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconRefresh } from "@tabler/icons-react"
-import { JSX, useState } from "react"
-import * as v from "valibot"
+import { type JSX, useState } from "react"
+import type * as v from "valibot"
 import { Dialog } from "../../../../../../../../../components/overlays/dialog/dialog.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
-
 
 export function GenerateComputations(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -19,10 +21,7 @@ export function GenerateComputations(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Dialog.Root
-            open={open}
-            onOpenChange={(value) => setOpen(value)}
-        >
+        <Dialog.Root open={open} onOpenChange={(value) => setOpen(value)}>
             <Dialog.Trigger
                 onClick={(event) => {
                     setOpen(true)
@@ -31,60 +30,73 @@ export function GenerateComputations(props: {
             >
                 {props.children}
             </Dialog.Trigger>
-            {(open === false)
-                ? (null)
-                : (
-                    <Dialog.Content>
-                        <Dialog.Header />
-                        <div className={css({ padding: "4", pt: "0", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "1" })}>
-                            <Dialog.Title>
-                                Voulez-vous générer les lignes de calcul par défaut ?
-                            </Dialog.Title>
-                            <Dialog.Description>
-                                Cette action supprimera les anciennes lignes de calcul pour générer celles par défaut.
-                                <br />
-                                Cette action est irréversible.
-                            </Dialog.Description>
-                        </div>
-                        <Dialog.Footer>
-                            <Button onClick={() => { setOpen(false) }}>
-                                <ButtonContent variant="invisible" text="Annuler" />
-                            </Button>
-                            <Button
-                                onClick={async () => {
-                                    const response = await postAPI({
-                                        routeDefinition: generateComputationsRouteDefinition,
-                                        body: {
-                                            idOrganization: props.idOrganization,
-                                            idYear: props.idYear,
-                                        },
-                                    })
-                                    if (!response.ok) {
-                                        toast({ title: "Impossible de générer les lignes de calcul", variant: "error" })
-                                        return false
-                                    }
+            {open === false ? null : (
+                <Dialog.Content>
+                    <Dialog.Header />
+                    <div
+                        className={css({
+                            padding: "4",
+                            pt: "0",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "flex-start",
+                            alignItems: "flex-start",
+                            gap: "1",
+                        })}
+                    >
+                        <Dialog.Title>Voulez-vous générer les lignes de calcul par défaut ?</Dialog.Title>
+                        <Dialog.Description>
+                            Cette action supprimera les anciennes lignes de calcul pour générer celles par défaut.
+                            <br />
+                            Cette action est irréversible.
+                        </Dialog.Description>
+                    </div>
+                    <Dialog.Footer>
+                        <Button
+                            onClick={() => {
+                                setOpen(false)
+                            }}
+                        >
+                            <ButtonContent variant="invisible" text="Annuler" />
+                        </Button>
+                        <Button
+                            onClick={async () => {
+                                const response = await getResponseBodyFromAPI({
+                                    routeDefinition: generateComputationsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.idOrganization,
+                                        idYear: props.idYear,
+                                    },
+                                })
+                                if (!response.ok) {
+                                    toast({ title: "Impossible de générer les lignes de calcul", variant: "error" })
+                                    return false
+                                }
 
-                                    toast({ title: "Lignes de calcul générées avec succès", variant: "success" })
+                                toast({ title: "Lignes de calcul générées avec succès", variant: "success" })
 
-                                    await invalidateData({
-                                        routeDefinition: readAllComputationsRouteDefinition,
-                                        body: {
-                                            idOrganization: props.idOrganization,
-                                            idYear: props.idYear
-                                        },
-                                    })
+                                await invalidateData({
+                                    routeDefinition: readAllComputationsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.idOrganization,
+                                        idYear: props.idYear,
+                                    },
+                                })
 
-                                    setOpen(false)
-                                    return true
-                                }}
-                                hasLoader
-                            >
-                                <ButtonContent variant="primary" leftIcon={<IconRefresh />} text="Générer les lignes de calcul" />
-                            </Button>
-                        </Dialog.Footer>
-                    </Dialog.Content>
-                )
-            }
+                                setOpen(false)
+                                return true
+                            }}
+                            hasLoader
+                        >
+                            <ButtonContent
+                                variant="primary"
+                                leftIcon={<IconRefresh />}
+                                text="Générer les lignes de calcul"
+                            />
+                        </Button>
+                    </Dialog.Footer>
+                </Dialog.Content>
+            )}
         </Dialog.Root>
     )
 }

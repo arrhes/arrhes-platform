@@ -3,7 +3,6 @@ import { deleteOneComputationRoute } from "../../../../../../../../../routes/aut
 import { readOneComputationRoute } from "../../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/computations/$idComputation/readOneComputation.js"
 import { updateOneComputationRoute } from "../../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/computations/$idComputation/updateOneComputation.js"
 
-
 export const $idComputationRoutes = [
     deleteOneComputationRoute,
     readOneComputationRoute,

@@ -3,7 +3,6 @@ import { useParams } from "@tanstack/react-router"
 import { SubPageLayout } from "../../../../../../../components/layouts/subPageLayout.tsx"
 import { yearSettingsLayoutRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsLayoutRoute.tsx"
 
-
 export function YearSettingsLayout() {
     const params = useParams({ from: yearSettingsLayoutRoute.id })
 
@@ -20,7 +19,7 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Plan des comptes",
@@ -28,7 +27,7 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Journaux",
@@ -36,7 +35,7 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Catégories",
@@ -44,9 +43,9 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
-                    ]
+                    ],
                 },
                 documents: {
                     title: "Documents comptables",
@@ -58,7 +57,7 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Compte de résultat",
@@ -66,9 +65,9 @@ export function YearSettingsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
-                    ]
+                    ],
                 },
             }}
         />

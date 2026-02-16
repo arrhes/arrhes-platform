@@ -1,9 +1,9 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconFile, IconFileTypePdf, IconPhoto, IconPlus } from "@tabler/icons-react"
 import { useState } from "react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
 import { FormatFileSize } from "../../../../../../../components/formats/formatFileSize.js"
 import { InputDebounced } from "../../../../../../../components/inputs/inputDebounced.js"
@@ -13,7 +13,6 @@ import { EmptyState } from "../../../../../../../components/layouts/emptyState.j
 import { applicationRouter } from "../../../../../../../routes/applicationRouter.js"
 import { CreateOneAttachment } from "./createOneAttachment.js"
 
-
 function getFileIcon(type: string | null) {
     if (!type) return <IconFile size={48} />
     if (type.startsWith("image/")) return <IconPhoto size={48} />
@@ -21,14 +20,12 @@ function getFileIcon(type: string | null) {
     return <IconFile size={48} />
 }
 
-
 function getFileIconColor(type: string | null) {
     if (!type) return "neutral/40"
     if (type.startsWith("image/")) return "blue.500"
     if (type === "application/pdf") return "red.500"
     return "neutral/40"
 }
-
 
 export function AttachmentsGrid(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -50,38 +47,29 @@ export function AttachmentsGrid(props: {
         .sort((a, b) => b.date.localeCompare(a.date))
 
     return (
-        <div className={css({
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "4"
-        })}>
-            {/* Header with search and add button */}
-            <div className={css({
+        <div
+            className={css({
                 width: "100%",
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: "4"
-            })}>
-                <InputDebounced
-                    value={filter}
-                    onChange={(value) => setFilter(value)}
-                >
-                    <InputText
-                        placeholder="Recherche"
-                        className={css({ maxWidth: "320px" })}
-                    />
+                flexDirection: "column",
+                gap: "4",
+            })}
+        >
+            {/* Header with search and add button */}
+            <div
+                className={css({
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "4",
+                })}
+            >
+                <InputDebounced value={filter} onChange={(value) => setFilter(value)}>
+                    <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
                 </InputDebounced>
-                <CreateOneAttachment
-                    idOrganization={props.idOrganization}
-                    idYear={props.idYear}
-                >
-                    <ButtonContent
-                        variant="primary"
-                        leftIcon={<IconPlus />}
-                        text="Ajouter un fichier"
-                    />
+                <CreateOneAttachment idOrganization={props.idOrganization} idYear={props.idYear}>
+                    <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un fichier" />
                 </CreateOneAttachment>
             </div>
 
@@ -94,12 +82,14 @@ export function AttachmentsGrid(props: {
                         subtitle={filter ? undefined : "Ajoutez un fichier pour commencer"}
                     />
                 ) : (
-                    <div className={css({
-                        width: "100%",
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                        gap: "4"
-                    })}>
+                    <div
+                        className={css({
+                            width: "100%",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+                            gap: "4",
+                        })}
+                    >
                         {filteredAttachments.map((attachment) => (
                             <div
                                 key={attachment.id}
@@ -109,8 +99,8 @@ export function AttachmentsGrid(props: {
                                         params: {
                                             idOrganization: props.idOrganization,
                                             idYear: props.idYear,
-                                            idAttachment: attachment.id
-                                        }
+                                            idAttachment: attachment.id,
+                                        },
                                     })
                                 }}
                                 className={cx(
@@ -130,65 +120,75 @@ export function AttachmentsGrid(props: {
                                             borderColor: "primary/30",
                                             backgroundColor: "primary/5",
                                             transform: "translateY(-2px)",
-                                            boxShadow: "sm"
-                                        }
-                                    })
+                                            boxShadow: "sm",
+                                        },
+                                    }),
                                 )}
                             >
                                 {/* File icon */}
-                                <div className={css({
-                                    width: "80px",
-                                    height: "80px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "lg",
-                                    backgroundColor: "neutral/5"
-                                })}>
+                                <div
+                                    className={css({
+                                        width: "80px",
+                                        height: "80px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "lg",
+                                        backgroundColor: "neutral/5",
+                                    })}
+                                >
                                     <div className={css({ color: getFileIconColor(attachment.type) })}>
                                         {getFileIcon(attachment.type)}
                                     </div>
                                 </div>
 
                                 {/* File info */}
-                                <div className={css({
-                                    width: "100%",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    gap: "1",
-                                    textAlign: "center"
-                                })}>
-                                    <span className={css({
+                                <div
+                                    className={css({
                                         width: "100%",
-                                        fontSize: "sm",
-                                        fontWeight: "medium",
-                                        color: "neutral",
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                        whiteSpace: "nowrap"
-                                    })}>
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        gap: "1",
+                                        textAlign: "center",
+                                    })}
+                                >
+                                    <span
+                                        className={css({
+                                            width: "100%",
+                                            fontSize: "sm",
+                                            fontWeight: "medium",
+                                            color: "neutral",
+                                            overflow: "hidden",
+                                            textOverflow: "ellipsis",
+                                            whiteSpace: "nowrap",
+                                        })}
+                                    >
                                         {attachment.reference}
                                     </span>
                                     {attachment.label && (
-                                        <span className={css({
-                                            width: "100%",
-                                            fontSize: "xs",
-                                            color: "neutral/60",
-                                            overflow: "hidden",
-                                            textOverflow: "ellipsis",
-                                            whiteSpace: "nowrap"
-                                        })}>
+                                        <span
+                                            className={css({
+                                                width: "100%",
+                                                fontSize: "xs",
+                                                color: "neutral/60",
+                                                overflow: "hidden",
+                                                textOverflow: "ellipsis",
+                                                whiteSpace: "nowrap",
+                                            })}
+                                        >
                                             {attachment.label}
                                         </span>
                                     )}
-                                    <div className={css({
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "2",
-                                        fontSize: "xs",
-                                        color: "neutral/40"
-                                    })}>
+                                    <div
+                                        className={css({
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: "2",
+                                            fontSize: "xs",
+                                            color: "neutral/40",
+                                        })}
+                                    >
                                         <FormatDate date={attachment.date} />
                                         {attachment.size && (
                                             <>

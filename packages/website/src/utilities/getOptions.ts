@@ -3,7 +3,7 @@ export function getOptions<T extends { [key: string]: string }>(object: T) {
     for (const key in object) {
         options.push({
             key: key,
-            label: object[key]
+            label: object[key],
         })
     }
     return options

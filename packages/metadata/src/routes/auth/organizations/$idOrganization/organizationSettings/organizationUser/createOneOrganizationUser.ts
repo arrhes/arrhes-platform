@@ -4,7 +4,6 @@ import { organizationUserSchema, organizationUserSchemaReturn } from "../../../.
 import { userSchema } from "../../../../../../schemas/user.js"
 import { routeDefinition } from "../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneOrganizationUserRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-organization-user`,
@@ -14,8 +13,8 @@ export const createOneOrganizationUserRouteDefinition = routeDefinition({
             isAdmin: organizationUserSchema.entries.isAdmin,
             user: v.object({
                 email: userSchema.entries.email,
-            })
+            }),
         }),
-        return: organizationUserSchemaReturn
+        return: organizationUserSchemaReturn,
     },
 })

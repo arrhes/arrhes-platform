@@ -3,10 +3,4 @@ import { duplicateOneRecordRoute } from "../../../../../../../../routes/auth/org
 import { readOneRecordRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/readOneRecord.js"
 import { updateOneRecordRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/records/$idRecord/updateOneRecord.js"
 
-
-export const $idRecordRoutes = [
-    deleteOneRecordRoute,
-    duplicateOneRecordRoute,
-    readOneRecordRoute,
-    updateOneRecordRoute,
-]
+export const $idRecordRoutes = [deleteOneRecordRoute, duplicateOneRecordRoute, readOneRecordRoute, updateOneRecordRoute]

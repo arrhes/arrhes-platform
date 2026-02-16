@@ -1,12 +1,11 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function TableHeaderCell(props: {
     children?: ReactElement | ReactElement[]
-    className?: ComponentProps<'th'>['className']
-    align?: ComponentProps<'th'>['align']
-    colSpan?: ComponentProps<'td'>['colSpan']
+    className?: ComponentProps<"th">["className"]
+    align?: ComponentProps<"th">["align"]
+    colSpan?: ComponentProps<"td">["colSpan"]
 }) {
     return (
         <th
@@ -14,9 +13,9 @@ export function TableHeaderCell(props: {
                 css({
                     width: "fit",
                     padding: "1rem",
-                    verticalAlign: "middle"
+                    verticalAlign: "middle",
                 }),
-                props.className
+                props.className,
             )}
             colSpan={props.colSpan}
             align={props.align ?? "left"}

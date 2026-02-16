@@ -1,16 +1,16 @@
+import { models } from "@arrhes/application-metadata/models"
+import { createOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateId } from "@arrhes/application-metadata/utilities"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../factories/authFactory.js"
 import { Exception } from "../../../../../../utilities/exception.js"
 import { response } from "../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 import { bodyValidator } from "../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { createOneOrganizationUserRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { and, eq } from "drizzle-orm"
 
-
-export const createOneOrganizationUserRoute = authFactory.createApp()
+export const createOneOrganizationUserRoute = authFactory
+    .createApp()
     .post(
         createOneOrganizationUserRouteDefinition.path,
         bodyValidator(createOneOrganizationUserRouteDefinition.schemas.body),
@@ -21,12 +21,7 @@ export const createOneOrganizationUserRoute = authFactory.createApp()
             const organizationUser = await selectOne({
                 database: c.var.clients.sql,
                 table: models.organizationUser,
-                where: (table) => (
-                    and(
-                        eq(table.idUser, c.var.user.id),
-                        eq(table.idOrganization, body.idOrganization),
-                    )
-                )
+                where: (table) => and(eq(table.idUser, c.var.user.id), eq(table.idOrganization, body.idOrganization)),
             })
             if (organizationUser.isAdmin === false) {
                 throw new Exception({
@@ -40,9 +35,7 @@ export const createOneOrganizationUserRoute = authFactory.createApp()
             const user = await selectOne({
                 database: c.var.clients.sql,
                 table: models.user,
-                where: (table) => (
-                    eq(table.email, body.user.email)
-                )
+                where: (table) => eq(table.email, body.user.email),
             })
             if (user === undefined) {
                 throw new Exception({
@@ -65,7 +58,7 @@ export const createOneOrganizationUserRoute = authFactory.createApp()
                     lastUpdatedAt: null,
                     createdBy: c.var.user.id,
                     lastUpdatedBy: null,
-                }
+                },
             })
 
             //  await sendEmail({
@@ -83,5 +76,5 @@ export const createOneOrganizationUserRoute = authFactory.createApp()
                 schema: createOneOrganizationUserRouteDefinition.schemas.return,
                 data: createOneOrganizationUser,
             })
-        }
+        },
     )

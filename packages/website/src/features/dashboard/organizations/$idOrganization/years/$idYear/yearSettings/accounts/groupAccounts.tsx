@@ -1,6 +1,5 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
-
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 
 export type GroupedAccount = {
     account: v.InferOutput<typeof returnedSchemas.account>
@@ -16,13 +15,16 @@ export function groupAccounts(parameters: {
         .filter((account) => account.number.toString().length === parameters.digits)
         .map((account) => {
             const subAccounts = groupAccounts({
-                accounts: parameters.accounts
-                    .filter((_account) => _account.number.toString().slice(0, parameters.digits) === account.number.toString().slice(0, parameters.digits)),
-                digits: parameters.digits + 1
+                accounts: parameters.accounts.filter(
+                    (_account) =>
+                        _account.number.toString().slice(0, parameters.digits) ===
+                        account.number.toString().slice(0, parameters.digits),
+                ),
+                digits: parameters.digits + 1,
             }) as GroupedAccount[]
-            return ({
+            return {
                 account: account,
-                subAccounts: subAccounts
-            })
+                subAccounts: subAccounts,
+            }
         }) as GroupedAccount[]
 }

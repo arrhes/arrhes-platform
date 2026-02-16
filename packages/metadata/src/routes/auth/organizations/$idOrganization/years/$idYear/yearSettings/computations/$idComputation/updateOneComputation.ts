@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { computationSchema, computationSchemaReturn } from "../../../../../../../../../schemas/computation.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneComputationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-computation`,
@@ -16,6 +15,6 @@ export const updateOneComputationRouteDefinition = routeDefinition({
             number: v.optional(computationSchema.entries.number),
             label: v.optional(computationSchema.entries.label),
         }),
-        return: computationSchemaReturn
+        return: computationSchemaReturn,
     },
 })

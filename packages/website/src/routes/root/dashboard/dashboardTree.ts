@@ -1,4 +1,4 @@
-import { AnyRoute } from "@tanstack/react-router"
+import type { AnyRoute } from "@tanstack/react-router"
 import { dashboardLayoutRoute } from "./dashboardLayoutRoute.tsx"
 import { dashboardRootRoute } from "./dashboardRootRoute.tsx"
 import { organizationLayoutRoute } from "./organizations/$idOrganization/organizationLayoutRoute.tsx"
@@ -65,7 +65,6 @@ import { settingsLayoutRoute } from "./settings/settingsLayoutRoute.tsx"
 import { settingsRoute } from "./settings/settingsRoute.tsx"
 import { supportRoute } from "./support/supportRoute.tsx"
 
-
 export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
     dashboardRootRoute,
     organizationsLayoutRoute.addChildren([
@@ -73,15 +72,9 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
         organizationPathRoute.addChildren([
             organizationLayoutRoute.addChildren([
                 organizationRoute,
-                yearsLayoutRoute.addChildren([
-                    yearsRoute
-                ]),
-                organizationUsersLayoutRoute.addChildren([
-                    organizationUsersRoute
-                ]),
-                organizationSettingsLayoutRoute.addChildren([
-                    organizationSettingsRoute,
-                ])
+                yearsLayoutRoute.addChildren([yearsRoute]),
+                organizationUsersLayoutRoute.addChildren([organizationUsersRoute]),
+                organizationSettingsLayoutRoute.addChildren([organizationSettingsRoute]),
             ]),
             yearsPathRoute.addChildren([
                 yearPathRoute.addChildren([
@@ -91,16 +84,12 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                             recordsRoute,
                             recordLayoutRoute.addChildren([
                                 recordRoute,
-                                recordRowLayoutRoute.addChildren([
-                                    recordRowRoute
-                                ])
-                            ])
+                                recordRowLayoutRoute.addChildren([recordRowRoute]),
+                            ]),
                         ]),
                         attachmentsLayoutRoute.addChildren([
                             attachmentsRoute,
-                            attachmentLayoutRoute.addChildren([
-                                attachmentRoute
-                            ])
+                            attachmentLayoutRoute.addChildren([attachmentRoute]),
                         ]),
                         reportsLayoutRoute.addChildren([
                             reportsRoute,
@@ -114,51 +103,39 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                             yearSettingsRoute,
                             accountsLayoutRoute.addChildren([
                                 accountsRoute,
-                                accountLayoutRoute.addChildren([
-                                    accountRoute
-                                ])
+                                accountLayoutRoute.addChildren([accountRoute]),
                             ]),
                             journalsLayoutRoute.addChildren([
                                 journalsRoute,
-                                journalLayoutRoute.addChildren([
-                                    journalRoute
-                                ])
+                                journalLayoutRoute.addChildren([journalRoute]),
                             ]),
                             recordLabelsLayoutRoute.addChildren([
                                 recordLabelsRoute,
-                                recordLabelLayoutRoute.addChildren([
-                                    recordLabelRoute
-                                ])
+                                recordLabelLayoutRoute.addChildren([recordLabelRoute]),
                             ]),
                             balanceSheetsLayoutRoute.addChildren([
                                 balanceSheetsRoute,
-                                balanceSheetLayoutRoute.addChildren([
-                                    balanceSheetRoute
-                                ])
+                                balanceSheetLayoutRoute.addChildren([balanceSheetRoute]),
                             ]),
                             incomeStatementsLayoutRoute.addChildren([
                                 incomeStatementsRoute,
-                                incomeStatementLayoutRoute.addChildren([
-                                    incomeStatementRoute,
-                                ]),
+                                incomeStatementLayoutRoute.addChildren([incomeStatementRoute]),
                                 computationsLayoutRoute.addChildren([
                                     computationsRoute,
                                     computationLayoutRoute.addChildren([
                                         computationRoute,
                                         computationIncomeStatementLayoutRoute.addChildren([
                                             computationIncomeStatementRoute,
-                                        ])
-                                    ])
+                                        ]),
+                                    ]),
                                 ]),
                             ]),
-                        ])
-                    ])
-                ])
+                        ]),
+                    ]),
+                ]),
             ]),
-        ])
+        ]),
     ]),
-    settingsLayoutRoute.addChildren([
-        settingsRoute,
-    ]),
+    settingsLayoutRoute.addChildren([settingsRoute]),
     supportRoute,
 ])

@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readAllComputationIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../../../utilities/sql/selectMany.js"
 import { bodyValidator } from "../../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readAllComputationIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readAllComputationIncomeStatementsRoute = authFactory.createApp()
+export const readAllComputationIncomeStatementsRoute = authFactory
+    .createApp()
     .post(
         readAllComputationIncomeStatementsRouteDefinition.path,
         bodyValidator(readAllComputationIncomeStatementsRouteDefinition.schemas.body),
@@ -19,30 +19,21 @@ export const readAllComputationIncomeStatementsRoute = authFactory.createApp()
                 table: models.computationIncomeStatement,
                 where: (table) => {
                     if (body.idComputation !== undefined) {
-                        return (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear),
-                                eq(table.idComputation, body.idComputation),
-                            )
+                        return and(
+                            eq(table.idOrganization, body.idOrganization),
+                            eq(table.idYear, body.idYear),
+                            eq(table.idComputation, body.idComputation),
                         )
                     }
                     if (body.idIncomeStatement !== undefined) {
-                        return (
-                            and(
-                                eq(table.idOrganization, body.idOrganization),
-                                eq(table.idYear, body.idYear),
-                                eq(table.idIncomeStatement, body.idIncomeStatement),
-                            )
-                        )
-                    }
-                    return (
-                        and(
+                        return and(
                             eq(table.idOrganization, body.idOrganization),
                             eq(table.idYear, body.idYear),
+                            eq(table.idIncomeStatement, body.idIncomeStatement),
                         )
-                    )
-                }
+                    }
+                    return and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear))
+                },
             })
 
             return response({
@@ -51,5 +42,5 @@ export const readAllComputationIncomeStatementsRoute = authFactory.createApp()
                 schema: readAllComputationIncomeStatementsRouteDefinition.schemas.return,
                 data: readAllComputationIncomeStatements,
             })
-        }
+        },
     )

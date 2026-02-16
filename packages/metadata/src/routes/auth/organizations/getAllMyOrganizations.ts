@@ -4,7 +4,6 @@ import { organizationSchemaReturn } from "../../../schemas/organization.js"
 import { organizationUserSchemaReturn } from "../../../schemas/organizationUser.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
 
-
 export const getAllMyOrganizationsRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/get-all-my-organization`,
@@ -14,7 +13,7 @@ export const getAllMyOrganizationsRouteDefinition = routeDefinition({
             v.object({
                 ...organizationUserSchemaReturn.entries,
                 organization: organizationSchemaReturn,
-            })
-        )
+            }),
+        ),
     },
 })

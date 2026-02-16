@@ -7,7 +7,6 @@ import { yearsRoute } from "../../../../../routes/root/dashboard/organizations/$
 import { CreateOneYear } from "./createOneYear.tsx"
 import { YearsListTable } from "./yearsListTable.tsx"
 
-
 export function YearsPage() {
     const params = useParams({ from: yearsRoute.id })
 
@@ -19,22 +18,12 @@ export function YearsPage() {
                 </Page.Title>
             </Page.Header> */}
             <Page.Content>
-                <div
-                    className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}
-                >
-                    <CreateOneYear
-                        idOrganization={params.idOrganization}
-                    >
-                        <ButtonContent
-                            variant="default"
-                            leftIcon={<IconCalendarPlus />}
-                            text="Ajouter un exercice"
-                        />
+                <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
+                    <CreateOneYear idOrganization={params.idOrganization}>
+                        <ButtonContent variant="default" leftIcon={<IconCalendarPlus />} text="Ajouter un exercice" />
                     </CreateOneYear>
                 </div>
-                <YearsListTable
-                    idOrganization={params.idOrganization}
-                />
+                <YearsListTable idOrganization={params.idOrganization} />
             </Page.Content>
         </Page.Root>
     )

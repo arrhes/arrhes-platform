@@ -1,7 +1,7 @@
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
 import { IconEye, IconPlus } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
 import { FormatDateTime } from "../../../../../../../components/formats/formatDateTime.js"
 import { FormatFileSize } from "../../../../../../../components/formats/formatFileSize.js"
@@ -11,14 +11,12 @@ import { DataTable } from "../../../../../../../components/layouts/dataTable.js"
 import { LinkButton } from "../../../../../../../components/linkButton.js"
 import { CreateOneAttachment } from "./createOneAttachment.js"
 
-
 export function AttachmentsTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
     attachments: Array<v.InferOutput<typeof returnedSchemas.attachment>>
 }) {
-    const attachmentsData = props.attachments
-        .sort((a, b) => b.date.localeCompare(a.date))
+    const attachmentsData = props.attachments.sort((a, b) => b.date.localeCompare(a.date))
 
     return (
         <DataTable
@@ -26,84 +24,70 @@ export function AttachmentsTable(props: {
             isLoading={false}
             columns={[
                 {
-                    accessorKey: 'actions',
-                    header: ' ',
+                    accessorKey: "actions",
+                    header: " ",
                     cell: ({ row }) => (
                         <LinkButton
                             to="/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idAttachment"
                             params={{
                                 idOrganization: props.idOrganization,
                                 idYear: props.idYear,
-                                idAttachment: row.original.id
+                                idAttachment: row.original.id,
                             }}
                         >
-                            <ButtonContent
-                                variant="invisible"
-                                leftIcon={<IconEye />}
-                                text={undefined}
-                            />
+                            <ButtonContent variant="invisible" leftIcon={<IconEye />} text={undefined} />
                         </LinkButton>
                     ),
                     enableSorting: false,
                     enableGlobalFilter: false,
                 },
                 {
-                    accessorKey: 'reference',
-                    header: 'Référence',
-                    cell: ({ row }) => (<FormatText>
-                        {row.original.reference}
-                    </FormatText>),
-                    filterFn: 'includesString'
+                    accessorKey: "reference",
+                    header: "Référence",
+                    cell: ({ row }) => <FormatText>{row.original.reference}</FormatText>,
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'label',
+                    accessorKey: "label",
                     header: "Libellé",
-                    cell: ({ row }) => (!row.original.label ? <FormatNull /> : <FormatText>
-                        {row.original.label}
-                    </FormatText>),
-                    filterFn: 'includesString'
+                    cell: ({ row }) =>
+                        !row.original.label ? <FormatNull /> : <FormatText>{row.original.label}</FormatText>,
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'date',
+                    accessorKey: "date",
                     header: "Date",
-                    cell: ({ row }) => (<FormatDate date={row.original.date} />),
-                    filterFn: 'includesString'
+                    cell: ({ row }) => <FormatDate date={row.original.date} />,
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'type',
+                    accessorKey: "type",
                     header: "Type",
-                    cell: ({ row }) => (row.original.type?.split("/").at(1)),
-                    filterFn: 'includesString'
+                    cell: ({ row }) => row.original.type?.split("/").at(1),
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'size',
+                    accessorKey: "size",
                     header: "Taille",
-                    cell: ({ row }) => (<FormatFileSize size={row.original.size} />),
-                    filterFn: 'includesString'
+                    cell: ({ row }) => <FormatFileSize size={row.original.size} />,
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'createdAt',
+                    accessorKey: "createdAt",
                     header: "Ajouté le",
-                    cell: ({ row }) => (<FormatDateTime date={row.original.createdAt} />),
-                    filterFn: 'includesString'
+                    cell: ({ row }) => <FormatDateTime date={row.original.createdAt} />,
+                    filterFn: "includesString",
                 },
                 {
-                    accessorKey: 'lastUpdatedAt',
+                    accessorKey: "lastUpdatedAt",
                     header: "Dernière mise à jour le",
-                    cell: ({ row }) => (<FormatDateTime date={row.original.lastUpdatedAt} />),
-                    filterFn: 'includesString'
-                }
+                    cell: ({ row }) => <FormatDateTime date={row.original.lastUpdatedAt} />,
+                    filterFn: "includesString",
+                },
             ]}
         >
-            <CreateOneAttachment
-                idOrganization={props.idOrganization}
-                idYear={props.idYear}
-            >
-                <ButtonContent
-                    variant="primary"
-                    leftIcon={<IconPlus />}
-                    text="Ajouter un fichier"
-                />
+            <CreateOneAttachment idOrganization={props.idOrganization} idYear={props.idYear}>
+                <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un fichier" />
             </CreateOneAttachment>
         </DataTable>
     )

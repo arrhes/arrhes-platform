@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../components/index.js"
 import { documentSchema, documentSchemaReturn } from "../../../../../../../../../schemas/document.js"
 import { routeDefinition } from "../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneDocumentRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-document`,
@@ -13,6 +12,6 @@ export const readOneDocumentRouteDefinition = routeDefinition({
             idOrganization: documentSchema.entries.idOrganization,
             idYear: documentSchema.entries.idYear,
         }),
-        return: documentSchemaReturn
+        return: documentSchemaReturn,
     },
 })

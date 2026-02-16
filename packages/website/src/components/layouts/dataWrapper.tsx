@@ -1,19 +1,16 @@
-import { routeDefinition } from "@arrhes/application-metadata/utilities"
+import type { routeDefinition } from "@arrhes/application-metadata/utilities"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement, Suspense } from "react"
-import * as v from "valibot"
+import { type ComponentProps, type ReactElement, Suspense } from "react"
+import type * as v from "valibot"
 import { useDataFromAPI } from "../../utilities/useHTTPData.js"
 import { FormatError } from "../formats/formatError.js"
 import { CircularLoader } from "./circularLoader.js"
 
-
-export function DataWrapper<
-    TRouteDefinition extends ReturnType<typeof routeDefinition>
->(props: {
+export function DataWrapper<TRouteDefinition extends ReturnType<typeof routeDefinition>>(props: {
     routeDefinition: TRouteDefinition
     body: v.InferInput<TRouteDefinition["schemas"]["body"]>
     children: (data: v.InferOutput<TRouteDefinition["schemas"]["return"]>) => ReactElement | Array<ReactElement> | null
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
     loaderProps?: ComponentProps<typeof CircularLoader>
     errorProps?: ComponentProps<typeof FormatError>
 }) {
@@ -28,10 +25,7 @@ export function DataWrapper<
                 <CircularLoader
                     {...props.loaderProps}
                     text={props.loaderProps?.text ?? "Chargement des données..."}
-                    className={cx(
-                        css({ padding: "1rem" }),
-                        props.loaderProps?.className,
-                    )}
+                    className={cx(css({ padding: "1rem" }), props.loaderProps?.className)}
                 />
             )
         }
@@ -44,9 +38,5 @@ export function DataWrapper<
         )
     }
 
-    return (
-        <Suspense fallback={<CircularLoader />}>
-            {props.children(response.data)}
-        </Suspense>
-    )
+    return <Suspense fallback={<CircularLoader />}>{props.children(response.data)}</Suspense>
 }

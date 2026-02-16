@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateOneAttachmentRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneAttachmentRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const updateOneAttachmentRoute = authFactory.createApp()
+export const updateOneAttachmentRoute = authFactory
+    .createApp()
     .post(
         updateOneAttachmentRouteDefinition.path,
         bodyValidator(updateOneAttachmentRouteDefinition.schemas.body),
@@ -24,13 +24,12 @@ export const updateOneAttachmentRoute = authFactory.createApp()
                     lastUpdatedAt: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id,
                 },
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
-                        eq(table.id, body.idAttachment)
-                    )
-                ),
+                        eq(table.id, body.idAttachment),
+                    ),
             })
 
             return response({
@@ -39,5 +38,5 @@ export const updateOneAttachmentRoute = authFactory.createApp()
                 schema: updateOneAttachmentRouteDefinition.schemas.return,
                 data: updateOneAttachment,
             })
-        }
+        },
     )

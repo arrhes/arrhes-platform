@@ -6,16 +6,9 @@
         "useIgnoreFile": true
     },
     "files": {
-        "ignore": [
-            "**/dist/**",
-            "**/build/**",
-            "**/styled-system/**",
-            "**/.workflows/**"
-        ]
+        "includes": ["**", "!**/dist", "!**/build", "!**/styled-system", "!**/.workflows"]
     },
-    "organizeImports": {
-        "enabled": true
-    },
+    "assist": { "actions": { "source": { "organizeImports": "on" } } },
     "formatter": {
         "enabled": true,
         "indentStyle": "space",

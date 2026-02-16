@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { updateOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const updateOneRecordRowRoute = authFactory.createApp()
+export const updateOneRecordRowRoute = authFactory
+    .createApp()
     .post(
         updateOneRecordRowRouteDefinition.path,
         bodyValidator(updateOneRecordRowRouteDefinition.schemas.body),
@@ -31,13 +31,12 @@ export const updateOneRecordRowRoute = authFactory.createApp()
                     lastUpdatedAt: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id,
                 },
-                where: (table) => (
+                where: (table) =>
                     and(
                         eq(table.idOrganization, body.idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idRecordRow),
-                    )
-                )
+                    ),
             })
 
             return response({
@@ -46,5 +45,5 @@ export const updateOneRecordRowRoute = authFactory.createApp()
                 schema: updateOneRecordRowRouteDefinition.schemas.return,
                 data: updatedRecordRow,
             })
-        }
+        },
     )

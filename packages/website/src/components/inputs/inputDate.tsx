@@ -1,37 +1,41 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { InputHTMLAttributes } from "react"
-import { FieldError } from "react-hook-form"
+import type { InputHTMLAttributes } from "react"
+import type { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from "react-imask"
 
-
-export function InputDate(props:
-    & Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange">
-    & {
+export function InputDate(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange"> & {
         error?: FieldError
         defaultValue?: string | undefined | null
         value?: string | undefined | null
         onChange: (value: string | undefined) => void
-    }
+    },
 ) {
-
     function input(value: string | undefined | null) {
         if (!value) return undefined
         if (String(new Date(value)) === "Invalid Date") return undefined
 
-        let date = new Date(value)
+        const date = new Date(value)
         let day = String(date.getDate())
         let month = String(date.getMonth() + 1)
-        let year = String(date.getFullYear())
+        const year = String(date.getFullYear())
 
         if (date.getDate() < 10) day = "0" + day
-        if ((date.getMonth() + 1) < 10) month = "0" + month
-        return [day, month, year].join(' / ')
+        if (date.getMonth() + 1 < 10) month = "0" + month
+        return [day, month, year].join(" / ")
     }
 
     function output(value: string | undefined) {
         if (!value) return undefined
-        const yearMonthDay = value.split(' / ')
-        return new Date(Number(yearMonthDay[2]), Number(yearMonthDay[1]) - 1, Number(yearMonthDay[0]), 12, 0, 0)?.toISOString()
+        const yearMonthDay = value.split(" / ")
+        return new Date(
+            Number(yearMonthDay[2]),
+            Number(yearMonthDay[1]) - 1,
+            Number(yearMonthDay[0]),
+            12,
+            0,
+            0,
+        )?.toISOString()
     }
 
     return (
@@ -47,10 +51,10 @@ export function InputDate(props:
                     border: "1px solid",
                     borderColor: "neutral/20",
                     borderRadius: "sm",
-                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" }
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
                 css(props.error ? { borderColor: "error" } : {}),
-                props.className
+                props.className,
             )}
         >
             <IMaskInput
@@ -62,22 +66,22 @@ export function InputDate(props:
                         from: 1,
                         to: 31,
                         maxLength: 2,
-                        placeholderChar: "J"
+                        placeholderChar: "J",
                     },
                     m: {
                         mask: IMask.MaskedRange,
                         from: 1,
                         to: 12,
                         maxLength: 2,
-                        placeholderChar: "M"
+                        placeholderChar: "M",
                     },
                     Y: {
                         mask: IMask.MaskedRange,
                         from: 1930,
                         to: 2100,
                         maxLength: 4,
-                        placeholderChar: "Y"
-                    }
+                        placeholderChar: "Y",
+                    },
                 }}
                 autofix={false}
                 lazy={false}
@@ -95,7 +99,7 @@ export function InputDate(props:
                     padding: "1rem",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
-                    textOverflow: "ellipsis"
+                    textOverflow: "ellipsis",
                 })}
                 inputMode="decimal"
             />

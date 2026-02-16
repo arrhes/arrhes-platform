@@ -1,8 +1,7 @@
 import * as v from "valibot"
 import { dateTimeSchema, integerSchema, operation } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
-import { computationIncomeStatementModel } from "../models/computationIncomeStatement.js"
-
+import type { computationIncomeStatementModel } from "../models/computationIncomeStatement.js"
 
 export const computationIncomeStatementSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -18,20 +17,16 @@ export const computationIncomeStatementSchema = v.object({
     lastUpdatedBy: v.nullable(idSchema),
 }) satisfies v.GenericSchema<typeof computationIncomeStatementModel.$inferSelect>
 
-
-export const computationIncomeStatementSchemaReturn = v.pick(
-    computationIncomeStatementSchema,
-    [
-        "id",
-        "idOrganization",
-        "idYear",
-        "idComputation",
-        "idIncomeStatement",
-        "index",
-        "operation",
-        "createdAt",
-        "lastUpdatedAt",
-        "createdBy",
-        "lastUpdatedBy",
-    ]
-)
+export const computationIncomeStatementSchemaReturn = v.pick(computationIncomeStatementSchema, [
+    "id",
+    "idOrganization",
+    "idYear",
+    "idComputation",
+    "idIncomeStatement",
+    "index",
+    "operation",
+    "createdAt",
+    "lastUpdatedAt",
+    "createdBy",
+    "lastUpdatedBy",
+])

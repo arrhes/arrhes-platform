@@ -3,7 +3,6 @@ import { useParams } from "@tanstack/react-router"
 import { SubPageLayout } from "../../../../../../../components/layouts/subPageLayout.js"
 import { reportsLayoutRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute.js"
 
-
 export function ReportsLayout() {
     const params = useParams({ from: reportsLayoutRoute.id })
 
@@ -20,7 +19,7 @@ export function ReportsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Grand livre",
@@ -28,9 +27,9 @@ export function ReportsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
-                    ]
+                    ],
                 },
                 summaries: {
                     title: "Synthèses",
@@ -42,7 +41,7 @@ export function ReportsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Bilan",
@@ -50,7 +49,7 @@ export function ReportsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
                         {
                             label: "Compte de résultat",
@@ -58,9 +57,9 @@ export function ReportsLayout() {
                             params: {
                                 idOrganization: params.idOrganization,
                                 idYear: params.idYear,
-                            }
+                            },
                         },
-                    ]
+                    ],
                 },
             }}
         />

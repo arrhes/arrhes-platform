@@ -1,6 +1,5 @@
 import { css, cx } from "../../utilities/cn.ts"
 
-
 export type LinkContentProps = {
     disabled?: boolean
     children?: string
@@ -19,7 +18,7 @@ export function LinkContent(props: LinkContentProps) {
                     _hover: { textDecoration: "none" },
                     _disabled: { opacity: 0.3, cursor: "not-allowed" },
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

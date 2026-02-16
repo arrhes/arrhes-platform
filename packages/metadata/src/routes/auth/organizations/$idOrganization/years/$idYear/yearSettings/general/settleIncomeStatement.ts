@@ -5,7 +5,6 @@ import { journalSchema } from "../../../../../../../../schemas/journal.js"
 import { yearSchema } from "../../../../../../../../schemas/year.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const settleIncomeStatementRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/settle-income-statement`,
@@ -15,8 +14,8 @@ export const settleIncomeStatementRouteDefinition = routeDefinition({
             idOrganization: yearSchema.entries.idOrganization,
             idJournalClosing: v.nonNullable(journalSchema.entries.id, "Le journal doit être renseigné"),
             idAccountProfit: v.nonNullable(accountSchema.entries.id, "Le compte doit être renseigné"),
-            idAccountLoss: v.nonNullable(accountSchema.entries.id, "Le compte doit être renseigné")
+            idAccountLoss: v.nonNullable(accountSchema.entries.id, "Le compte doit être renseigné"),
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

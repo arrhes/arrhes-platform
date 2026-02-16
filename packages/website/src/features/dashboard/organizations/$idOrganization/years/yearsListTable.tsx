@@ -1,22 +1,19 @@
 import { readAllYearsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { schemas } from "@arrhes/application-metadata/schemas"
+import type { schemas } from "@arrhes/application-metadata/schemas"
 import { IconCalendarPlus } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../components/layouts/emptyState.tsx"
 import { ListTable } from "../../../../../components/layouts/listTable/listTable.tsx"
 import { YearListTableRow } from "./yearListTableRow.tsx"
 
-
-export function YearsListTable(props: {
-    idOrganization: v.InferOutput<typeof schemas.organization>["id"]
-}) {
+export function YearsListTable(props: { idOrganization: v.InferOutput<typeof schemas.organization>["id"] }) {
     return (
         <ListTable.Root>
             <DataWrapper
                 routeDefinition={readAllYearsRouteDefinition}
                 body={{
-                    idOrganization: props.idOrganization
+                    idOrganization: props.idOrganization,
                 }}
             >
                 {(years) => {
@@ -29,14 +26,7 @@ export function YearsListTable(props: {
                             />
                         )
                     }
-                    return (
-                        years.map((year) => (
-                            <YearListTableRow
-                                key={year.id}
-                                year={year}
-                            />
-                        ))
-                    )
+                    return years.map((year) => <YearListTableRow key={year.id} year={year} />)
                 }}
             </DataWrapper>
         </ListTable.Root>

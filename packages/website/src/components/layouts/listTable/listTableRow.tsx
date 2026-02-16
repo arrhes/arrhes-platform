@@ -1,6 +1,5 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, JSX } from "react"
-
+import type { ComponentProps, JSX } from "react"
 
 export function ListTableRow(props: {
     children: JSX.Element | JSX.Element[]

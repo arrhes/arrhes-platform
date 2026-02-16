@@ -3,7 +3,6 @@ import { passwordSchema, routePath } from "../../../components/index.js"
 import { userSchema } from "../../../schemas/user.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
 
-
 export const signUpRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.public}/sign-up`,
@@ -13,7 +12,6 @@ export const signUpRouteDefinition = routeDefinition({
             password: passwordSchema,
             passwordCheck: passwordSchema,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })
-

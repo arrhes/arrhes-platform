@@ -1,12 +1,9 @@
 import { readOneYearRouteDefinition, updateOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPencil } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
-import { invalidateData } from "../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../utilities/postAPI.ts"
-import { YearSelect } from "../../yearSelect.tsx"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../components/forms/formField.tsx"
@@ -17,26 +14,18 @@ import { InputDate } from "../../../../../../../components/inputs/inputDate.tsx"
 import { InputText } from "../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../utilities/getResponseBodyFromAPI.ts"
+import { invalidateData } from "../../../../../../../utilities/invalidateData.ts"
+import { YearSelect } from "../../yearSelect.tsx"
 
-
-export function UpdateOneYear(props: {
-    year: v.InferOutput<typeof returnedSchemas.year>
-    children: JSX.Element
-}) {
+export function UpdateOneYear(props: { year: v.InferOutput<typeof returnedSchemas.year>; children: JSX.Element }) {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier les informations de l'exercice"
-                />
+                <Drawer.Header title="Modifier les informations de l'exercice" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneYearRouteDefinition.schemas.body}
@@ -46,7 +35,7 @@ export function UpdateOneYear(props: {
                             text: "Modifier l'exercice",
                         }}
                         onSubmit={async (data) => {
-                            const response = await postAPI({
+                            const response = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneYearRouteDefinition,
                                 body: data,
                             })
@@ -60,12 +49,11 @@ export function UpdateOneYear(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readOneYearRouteDefinition,
                                 body: {
                                     idOrganization: props.year.idOrganization,
-                                    idYear: props.year.id
+                                    idYear: props.year.id,
                                 },
                             })
 
@@ -86,10 +74,7 @@ export function UpdateOneYear(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputDate
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputDate value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -107,10 +92,7 @@ export function UpdateOneYear(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputDate
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputDate value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -150,10 +132,7 @@ export function UpdateOneYear(props: {
                                                 tooltip={undefined}
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>

@@ -1,10 +1,9 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactNode } from "react"
-
+import type { ComponentProps, ReactNode } from "react"
 
 type FormatBase = {
     children: ReactNode
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }
 
 export function FormatBase(props: FormatBase) {
@@ -17,9 +16,9 @@ export function FormatBase(props: FormatBase) {
                     overflow: "auto",
                     display: "flex",
                     justifyContent: "flex-start",
-                    alignItems: "center"
+                    alignItems: "center",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

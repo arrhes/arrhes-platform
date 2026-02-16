@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { recordSchema, recordSchemaReturn } from "../../../../../../../../schemas/record.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const readOneRecordRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-record`,
@@ -13,6 +12,6 @@ export const readOneRecordRouteDefinition = routeDefinition({
             idOrganization: recordSchema.entries.idOrganization,
             idYear: recordSchema.entries.idYear,
         }),
-        return: recordSchemaReturn
+        return: recordSchemaReturn,
     },
 })

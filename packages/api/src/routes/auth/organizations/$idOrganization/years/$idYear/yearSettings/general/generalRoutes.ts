@@ -5,7 +5,6 @@ import { settleBalanceSheetRoute } from "../../../../../../../../routes/auth/org
 import { settleIncomeStatementRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/general/settleIncomeStatement.js"
 import { updateOneYearRoute } from "../../../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/general/updateOneYear.js"
 
-
 export const generalRoutes = [
     closeYearRoute,
     deleteOneYearRoute,

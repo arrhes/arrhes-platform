@@ -1,9 +1,13 @@
-import { readAllAccountsRouteDefinition, readOneAccountRouteDefinition, updateOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllAccountsRouteDefinition,
+    readOneAccountRouteDefinition,
+    updateOneAccountRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPlus } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../../components/forms/formField.tsx"
@@ -14,11 +18,10 @@ import { InputText } from "../../../../../../../../../components/inputs/inputTex
 import { InputToggle } from "../../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../../utilities/postAPI.ts"
 import { BalanceSheetsSelect } from "../../balanceSheets/balanceSheetSelect.tsx"
 import { AccountSelect } from "../accountSelect.tsx"
-
 
 export function UpdateOneAccount(props: {
     account: v.InferOutput<typeof returnedSchemas.account>
@@ -27,17 +30,10 @@ export function UpdateOneAccount(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier le compte"
-                />
+                <Drawer.Header title="Modifier le compte" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateOneAccountRouteDefinition.schemas.body}
@@ -50,7 +46,7 @@ export function UpdateOneAccount(props: {
                             text: "Modifier le compte",
                         }}
                         onSubmit={async (data) => {
-                            const updateAccountResponse = await postAPI({
+                            const updateAccountResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateOneAccountRouteDefinition,
                                 body: data,
                             })
@@ -64,7 +60,6 @@ export function UpdateOneAccount(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllAccountsRouteDefinition,
                                 body: {
@@ -98,10 +93,7 @@ export function UpdateOneAccount(props: {
                                                 isRequired
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -118,11 +110,7 @@ export function UpdateOneAccount(props: {
                                                 isRequired
                                             />
                                             <FormControl>
-                                                <InputText
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    autoFocus
-                                                />
+                                                <InputText value={field.value} onChange={field.onChange} autoFocus />
                                             </FormControl>
                                             <FormError />
                                         </FormItem>
@@ -164,7 +152,7 @@ export function UpdateOneAccount(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { label: "Oui", value: true },
-                                                        { label: "Non", value: false }
+                                                        { label: "Non", value: false },
                                                     ]}
                                                 />
                                             </FormControl>
@@ -187,7 +175,7 @@ export function UpdateOneAccount(props: {
                                                     onChange={field.onChange}
                                                     options={[
                                                         { label: "Oui", value: true },
-                                                        { label: "Non", value: false }
+                                                        { label: "Non", value: false },
                                                     ]}
                                                 />
                                             </FormControl>
@@ -202,7 +190,7 @@ export function UpdateOneAccount(props: {
                                         <FormItem>
                                             <FormLabel
                                                 label="Type de compte"
-                                            // tooltip="Si le compte est de bilan, de gestion ou spécial."
+                                                // tooltip="Si le compte est de bilan, de gestion ou spécial."
                                             />
                                             <FormControl>
                                                 <InputToggle
@@ -211,7 +199,7 @@ export function UpdateOneAccount(props: {
                                                     options={[
                                                         { label: "Compte de bilan", value: "balance-sheet" },
                                                         { label: "Compte de gestion", value: "income-statement" },
-                                                        { label: "Compte spécial", value: "special" }
+                                                        { label: "Compte spécial", value: "special" },
                                                     ]}
                                                 />
                                             </FormControl>

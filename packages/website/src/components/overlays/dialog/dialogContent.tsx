@@ -1,14 +1,10 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithRef } from "react"
 import { DialogOverlay } from "./dialogOverlay.js"
 import { DialogPortal } from "./dialogPortal.js"
 
-
-export function DialogContent(props:
-    ComponentPropsWithRef<typeof DialogPrimitive.Content>
-) {
+export function DialogContent(props: ComponentPropsWithRef<typeof DialogPrimitive.Content>) {
     return (
         <DialogPortal>
             <DialogOverlay>
@@ -32,16 +28,16 @@ export function DialogContent(props:
                             borderColor: "neutral/10",
                             transitionDuration: "200ms",
                             "&[data-state=open]": {
-                                animation: "fadeIn 0.2s ease-out, zoomIn 0.2s ease-out"
+                                animation: "fadeIn 0.2s ease-out, zoomIn 0.2s ease-out",
                             },
                             "&[data-state=closed]": {
-                                animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in"
+                                animation: "fadeOut 0.2s ease-in, zoomOut 0.2s ease-in",
                             },
                             md: {
-                                minWidth: "md"
-                            }
+                                minWidth: "md",
+                            },
                         }),
-                        props.className
+                        props.className,
                     )}
                 >
                     {props.children}

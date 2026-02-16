@@ -1,10 +1,10 @@
+import { settleBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { settleBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
 
-
-export const settleBalanceSheetRoute = authFactory.createApp()
+export const settleBalanceSheetRoute = authFactory
+    .createApp()
     .post(
         settleBalanceSheetRouteDefinition.path,
         bodyValidator(settleBalanceSheetRouteDefinition.schemas.body),
@@ -103,5 +103,5 @@ export const settleBalanceSheetRoute = authFactory.createApp()
                 schema: settleBalanceSheetRouteDefinition.schemas.return,
                 data: {},
             })
-        }
+        },
     )

@@ -1,9 +1,8 @@
 import { readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import * as v from "valibot"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type * as v from "valibot"
 import { InputCombobox } from "../../../../../../../../components/inputs/inputCombobox.tsx"
 import { useDataFromAPI } from "../../../../../../../../utilities/useHTTPData.ts"
-
 
 export function JournalSelect(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -15,7 +14,7 @@ export function JournalSelect(props: {
         routeDefinition: readAllJournalsRouteDefinition,
         body: {
             idOrganization: props.idOrganization,
-            idYear: props.idYear
+            idYear: props.idYear,
         },
     })
 
@@ -27,12 +26,12 @@ export function JournalSelect(props: {
             allowEmpty={true}
             placeholder="Sélectionner un journal"
             options={
-                (journalsResponse.data === undefined)
+                journalsResponse.data === undefined
                     ? []
                     : journalsResponse.data?.map((journal) => ({
-                        key: journal.id,
-                        label: `${journal.code} ${journal.label}`
-                    }))
+                          key: journal.id,
+                          label: `${journal.code} ${journal.label}`,
+                      }))
             }
         />
     )

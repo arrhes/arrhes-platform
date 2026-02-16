@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { recordSchema, recordSchemaReturn } from "../../../../../../../../schemas/record.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const updateOneRecordRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-one-record`,
@@ -18,6 +17,6 @@ export const updateOneRecordRouteDefinition = routeDefinition({
             label: v.optional(recordSchema.entries.label),
             date: v.optional(recordSchema.entries.date),
         }),
-        return: recordSchemaReturn
+        return: recordSchemaReturn,
     },
 })

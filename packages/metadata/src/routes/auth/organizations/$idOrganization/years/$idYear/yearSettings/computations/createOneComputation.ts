@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../components/index.js"
 import { computationSchema, computationSchemaReturn } from "../../../../../../../../schemas/computation.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const createOneComputationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/create-one-computation`,
@@ -13,8 +12,8 @@ export const createOneComputationRouteDefinition = routeDefinition({
             idYear: computationSchema.entries.idYear,
             index: computationSchema.entries.index,
             number: computationSchema.entries.number,
-            label: computationSchema.entries.label
+            label: computationSchema.entries.label,
         }),
-        return: computationSchemaReturn
+        return: computationSchemaReturn,
     },
 })

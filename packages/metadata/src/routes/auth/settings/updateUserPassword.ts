@@ -5,7 +5,6 @@ import { stringSchema } from "../../../components/schemas/stringSchema.js"
 import { userSchemaReturn } from "../../../schemas/user.js"
 import { routeDefinition } from "../../../utilities/routeDefinition.js"
 
-
 export const updateUserPasswordRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/update-user-password`,
@@ -15,6 +14,6 @@ export const updateUserPasswordRouteDefinition = routeDefinition({
             newPassword: v.nonNullable(passwordSchema, "Le nouveau mot de passe doit être renseigné"),
             newPasswordCheck: v.nonNullable(passwordSchema, "Le nouveau mot de passe doit être renseigné"),
         }),
-        return: userSchemaReturn
+        return: userSchemaReturn,
     },
 })

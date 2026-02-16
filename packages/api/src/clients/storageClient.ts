@@ -1,7 +1,6 @@
-import { Exception } from "../utilities/exception.js"
-import { getEnv } from "../utilities/getEnv.js"
 import { S3 } from "@aws-sdk/client-s3"
-
+import { Exception } from "../utilities/exception.js"
+import type { getEnv } from "../utilities/getEnv.js"
 
 export function storageClient(env: ReturnType<typeof getEnv>) {
     try {
@@ -11,11 +10,10 @@ export function storageClient(env: ReturnType<typeof getEnv>) {
                 accessKeyId: env.STORAGE_ACCESS_KEY,
                 secretAccessKey: env.STORAGE_SECRET_KEY,
             },
-            region: "fr-par"
+            region: "fr-par",
         })
         return storageClient
-    }
-    catch (error) {
+    } catch (error) {
         throw new Exception({
             statusCode: 500,
             internalMessage: "Storage client not available",

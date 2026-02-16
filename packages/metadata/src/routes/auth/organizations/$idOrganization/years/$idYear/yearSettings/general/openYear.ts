@@ -4,7 +4,6 @@ import { journalSchema } from "../../../../../../../../schemas/journal.js"
 import { yearSchema } from "../../../../../../../../schemas/year.js"
 import { routeDefinition } from "../../../../../../../../utilities/routeDefinition.js"
 
-
 export const openYearRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/open-year`,
@@ -12,8 +11,8 @@ export const openYearRouteDefinition = routeDefinition({
         body: v.object({
             idYear: yearSchema.entries.id,
             idOrganization: yearSchema.entries.idOrganization,
-            idJournalOpening: v.nonNullable(journalSchema.entries.id, "Le journal doit être renseigné")
+            idJournalOpening: v.nonNullable(journalSchema.entries.id, "Le journal doit être renseigné"),
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

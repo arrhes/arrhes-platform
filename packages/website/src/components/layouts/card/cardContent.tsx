@@ -1,9 +1,8 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ComponentProps, ReactElement } from "react"
-
+import type { ComponentProps, ReactElement } from "react"
 
 export function CardContent(props: {
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
     children: ReactElement | ReactElement[]
 }) {
     return (
@@ -15,9 +14,9 @@ export function CardContent(props: {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start"
+                    alignItems: "flex-start",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

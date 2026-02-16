@@ -1,2 +1,1 @@
-export { sendSupportMessageRouteDefinition } from "./sendSupportMessage.js";
-
+export { sendSupportMessageRouteDefinition } from "./sendSupportMessage.js"

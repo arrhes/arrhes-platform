@@ -1,8 +1,7 @@
-import { getClients } from "../utilities/getClients.js"
-import { getEnv } from "../utilities/getEnv.js"
-import { Env } from "hono"
+import type { Env } from "hono"
 import { createFactory } from "hono/factory"
-
+import type { getClients } from "../utilities/getClients.js"
+import type { getEnv } from "../utilities/getEnv.js"
 
 export type ApiEnv = Env & {
     Variables: {

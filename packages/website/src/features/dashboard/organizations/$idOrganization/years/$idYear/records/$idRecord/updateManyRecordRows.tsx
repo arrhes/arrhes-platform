@@ -1,10 +1,13 @@
-import { readAllRecordRowsRouteDefinition, updateManyRecordRowsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import {
+    readAllRecordRowsRouteDefinition,
+    updateManyRecordRowsRouteDefinition,
+} from "@arrhes/application-metadata/routes"
+import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPencil } from "@tabler/icons-react"
-import { JSX, useState } from "react"
+import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../../components/forms/formControl.tsx"
 import { FormError } from "../../../../../../../../components/forms/formError.tsx"
 import { FormField } from "../../../../../../../../components/forms/formField.tsx"
@@ -15,9 +18,8 @@ import { InputText } from "../../../../../../../../components/inputs/inputText.t
 import { InputToggle } from "../../../../../../../../components/inputs/inputToggle.tsx"
 import { Drawer } from "../../../../../../../../components/overlays/drawer/drawer.tsx"
 import { toast } from "../../../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../../../utilities/getResponseBodyFromAPI.ts"
 import { invalidateData } from "../../../../../../../../utilities/invalidateData.ts"
-import { postAPI } from "../../../../../../../../utilities/postAPI.ts"
-
 
 export function UpdateManyRecordRows(props: {
     record: v.InferOutput<typeof returnedSchemas.record>
@@ -26,17 +28,10 @@ export function UpdateManyRecordRows(props: {
     const [open, setOpen] = useState(false)
 
     return (
-        <Drawer.Root
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <Drawer.Trigger>
-                {props.children}
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
+            <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
-                <Drawer.Header
-                    title="Modifier tous les mouvements"
-                />
+                <Drawer.Header title="Modifier tous les mouvements" />
                 <Drawer.Body>
                     <FormRoot
                         schema={updateManyRecordRowsRouteDefinition.schemas.body}
@@ -50,7 +45,7 @@ export function UpdateManyRecordRows(props: {
                             text: "Modifier les mouvements",
                         }}
                         onSubmit={async (data) => {
-                            const updateManyRecordRowsResponse = await postAPI({
+                            const updateManyRecordRowsResponse = await getResponseBodyFromAPI({
                                 routeDefinition: updateManyRecordRowsRouteDefinition,
                                 body: data,
                             })
@@ -64,7 +59,6 @@ export function UpdateManyRecordRows(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-
                             await invalidateData({
                                 routeDefinition: readAllRecordRowsRouteDefinition,
                                 body: {
@@ -84,10 +78,7 @@ export function UpdateManyRecordRows(props: {
                                     name="label"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel
-                                                label="Libellé"
-                                                isRequired={false}
-                                            />
+                                            <FormLabel label="Libellé" isRequired={false} />
                                             <FormControl>
                                                 <InputText
                                                     value={field.value}
@@ -99,28 +90,40 @@ export function UpdateManyRecordRows(props: {
                                         </FormItem>
                                     )}
                                 />
-                                <div className={css({ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "2" })}>
-                                    <FormLabel
-                                        label="Mouvement ajouté aux calculs ?"
-                                        isRequired={false}
-                                    />
-                                    <div className={css({ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start", flexWrap: "wrap", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        width: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "flex-start",
+                                        alignItems: "flex-start",
+                                        gap: "2",
+                                    })}
+                                >
+                                    <FormLabel label="Mouvement ajouté aux calculs ?" isRequired={false} />
+                                    <div
+                                        className={css({
+                                            width: "100%",
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            alignItems: "flex-start",
+                                            flexWrap: "wrap",
+                                            gap: "2",
+                                        })}
+                                    >
                                         <FormField
                                             control={form.control}
                                             name="isComputedForJournalReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Journal"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Journal" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -133,17 +136,14 @@ export function UpdateManyRecordRows(props: {
                                             name="isComputedForLedgerReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Grand-livre"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Grand-livre" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -156,17 +156,14 @@ export function UpdateManyRecordRows(props: {
                                             name="isComputedForBalanceReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Balance"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Balance" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -179,17 +176,14 @@ export function UpdateManyRecordRows(props: {
                                             name="isComputedForBalanceSheetReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Bilan"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Bilan" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>
@@ -202,17 +196,14 @@ export function UpdateManyRecordRows(props: {
                                             name="isComputedForIncomeStatementReport"
                                             render={({ field }) => (
                                                 <FormItem className={css({ width: "fit-content" })}>
-                                                    <FormLabel
-                                                        label="Compte de résultat"
-                                                        isRequired={true}
-                                                    />
+                                                    <FormLabel label="Compte de résultat" isRequired={true} />
                                                     <FormControl>
                                                         <InputToggle
                                                             value={field.value}
                                                             onChange={field.onChange}
                                                             options={[
                                                                 { value: true, label: "Oui" },
-                                                                { value: false, label: "Non" }
+                                                                { value: false, label: "Non" },
                                                             ]}
                                                         />
                                                     </FormControl>

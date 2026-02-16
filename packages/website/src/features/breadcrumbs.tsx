@@ -6,7 +6,6 @@ import { Fragment } from "react/jsx-runtime"
 import { LinkButton } from "../components/linkButton.js"
 import { useDataFromAPI } from "../utilities/useHTTPData.js"
 
-
 export function Breadcrumbs() {
     const routerState = useRouterState()
     const currentMatch = routerState.matches.at(-1)
@@ -48,16 +47,12 @@ export function Breadcrumbs() {
                 <ButtonContent
                     variant="invisible"
                     text={organizationName ?? ""}
-                // isActive={idYear === null}
+                    // isActive={idYear === null}
                 />
             </LinkButton>
             {idYear !== null && (
                 <Fragment>
-                    <span
-                        className={css({ color: "neutral/25", padding: "0.25rem", })}
-                    >
-                        /
-                    </span>
+                    <span className={css({ color: "neutral/25", padding: "0.25rem" })}>/</span>
                     {/* <IconSlash
                         size={16}
                         className={css({ stroke: "neutral/25" })}
@@ -72,7 +67,7 @@ export function Breadcrumbs() {
                         <ButtonContent
                             variant="invisible"
                             text={yearName ?? ""}
-                        // isActive={true}
+                            // isActive={true}
                         />
                     </LinkButton>
                 </Fragment>

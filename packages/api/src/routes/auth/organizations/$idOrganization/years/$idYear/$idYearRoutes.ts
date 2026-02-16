@@ -4,7 +4,6 @@ import { recordsRoutes } from "../../../../../../routes/auth/organizations/$idOr
 import { reportsRoutes } from "../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/reports/reportsRoutes.js"
 import { yearSettingsRoute } from "../../../../../../routes/auth/organizations/$idOrganization/years/$idYear/yearSettings/yearSettingsRoute.js"
 
-
 export const $idYearRoutes = [
     readOneYearRoute,
 

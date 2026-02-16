@@ -3,7 +3,6 @@ import { routePath } from "../../../../../../../../../../components/index.js"
 import { recordRowSchema } from "../../../../../../../../../../schemas/recordRow.js"
 import { routeDefinition } from "../../../../../../../../../../utilities/routeDefinition.js"
 
-
 export const deleteOneRecordRowRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/delete-one-record-row`,
@@ -13,6 +12,6 @@ export const deleteOneRecordRowRouteDefinition = routeDefinition({
             idOrganization: recordRowSchema.entries.idOrganization,
             idYear: recordRowSchema.entries.idYear,
         }),
-        return: v.object({})
+        return: v.object({}),
     },
 })

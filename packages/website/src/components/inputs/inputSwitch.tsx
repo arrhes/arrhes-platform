@@ -1,8 +1,6 @@
-
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
-import { ComponentProps } from "react"
-
+import type { ComponentProps } from "react"
 
 type InputSwitch = Omit<ComponentProps<typeof SwitchPrimitives.Root>, "value" | "onChange"> & {
     value: boolean
@@ -37,9 +35,9 @@ export function InputSwitch(props: InputSwitch) {
                     _disabled: { cursor: "not-allowed", opacity: "0.5" },
                     backgroundColor: "white",
                     _checked: { backgroundColor: "success/5", borderColor: "neutral" },
-                    _focus: { boxShadow: "inset" }
+                    _focus: { boxShadow: "inset" },
                 }),
-                props.className
+                props.className,
             )}
             checked={input(props.value)}
             onCheckedChange={(checked) => props.onChange(output(checked))}
@@ -56,7 +54,7 @@ export function InputSwitch(props: InputSwitch) {
                     backgroundColor: "neutral/10",
                     transform: "translateX(4px)",
                     boxShadow: "lg",
-                    transition: "transform"
+                    transition: "transform",
                 })}
             />
         </SwitchPrimitives.Root>

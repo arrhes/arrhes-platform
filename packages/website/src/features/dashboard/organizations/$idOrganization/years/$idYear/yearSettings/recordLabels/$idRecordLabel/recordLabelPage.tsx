@@ -4,16 +4,15 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { FormatDateTime } from "../../../../../../../../../components/formats/formatDateTime.tsx"
-import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 import { FormatText } from "../../../../../../../../../components/formats/formatText.tsx"
 import { DataBlock } from "../../../../../../../../../components/layouts/dataBlock/dataBlock.tsx"
 import { DataWrapper } from "../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { Section } from "../../../../../../../../../components/layouts/section/section.tsx"
+import { LinkButton } from "../../../../../../../../../components/linkButton.tsx"
 
 import { recordLabelRoute } from "../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/recordLabels/$idRecordLabel/recordLabelRoute.tsx"
 import { DeleteOneRecordLabel } from "./deleteOneRecordLabel.tsx"
 import { UpdateOneRecordLabel } from "./updateOneRecordLabel.tsx"
-
 
 export function RecordLabelPage() {
     const params = useParams({ from: recordLabelRoute.id })
@@ -25,14 +24,21 @@ export function RecordLabelPage() {
                 body={{
                     idOrganization: params.idOrganization,
                     idYear: params.idYear,
-                    idRecordLabel: params.idRecordLabel
+                    idRecordLabel: params.idRecordLabel,
                 }}
             >
                 {(recordLabel) => {
                     return (
                         <>
                             <Section.Item className={css({ flexDirection: "row" })}>
-                                <div className={css({ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "2" })}>
+                                <div
+                                    className={css({
+                                        display: "flex",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
                                     <LinkButton
                                         to="/dashboard/organisations/$idOrganization/exercices/$idYear/paramètres/catégories"
                                         params={{
@@ -40,26 +46,22 @@ export function RecordLabelPage() {
                                             idYear: recordLabel.idYear,
                                         }}
                                     >
-                                        <ButtonContent
-                                            variant="default"
-                                            leftIcon={<IconChevronLeft />}
-                                            text="Retour"
-                                        />
+                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
-                                <div className={css({ ml: "auto", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "2" })}>
-                                    <UpdateOneRecordLabel
-                                        recordLabel={recordLabel}
-                                    >
-                                        <ButtonContent
-                                            variant="primary"
-                                            leftIcon={<IconPencil />}
-                                            text="Modifier"
-                                        />
+                                <div
+                                    className={css({
+                                        ml: "auto",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        gap: "2",
+                                    })}
+                                >
+                                    <UpdateOneRecordLabel recordLabel={recordLabel}>
+                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneRecordLabel>
-                                    <DeleteOneRecordLabel
-                                        recordLabel={recordLabel}
-                                    >
+                                    <DeleteOneRecordLabel recordLabel={recordLabel}>
                                         <ButtonContent
                                             variant="default"
                                             leftIcon={<IconTrash />}
@@ -74,9 +76,7 @@ export function RecordLabelPage() {
                                     <DataBlock.Header title="Informations" />
                                     <DataBlock.Content>
                                         <DataBlock.Item label="Libellé">
-                                            <FormatText>
-                                                {recordLabel.label}
-                                            </FormatText>
+                                            <FormatText>{recordLabel.label}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>
@@ -98,9 +98,7 @@ export function RecordLabelPage() {
                                                         {!recordLabel.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={recordLabel.data.lastUpdatedBy} />}
                                                     </DataBlock.Item> */}
                                         <DataBlock.Item label="Id">
-                                            <FormatText>
-                                                {recordLabel.id}
-                                            </FormatText>
+                                            <FormatText>{recordLabel.id}</FormatText>
                                         </DataBlock.Item>
                                     </DataBlock.Content>
                                 </DataBlock.Root>

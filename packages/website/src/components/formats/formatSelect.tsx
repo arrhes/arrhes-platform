@@ -1,13 +1,11 @@
-import { ComponentProps } from "react"
-import { Chip, ChipColors } from "../layouts/chip.js"
+import type { ComponentProps } from "react"
+import { Chip, type ChipColors } from "../layouts/chip.js"
 import { FormatBase } from "./formatBase.js"
 import { FormatNull } from "./formatNull.js"
 
-
-export function formatSelect(key: string | null | undefined, options: { key: string, label: string }[]) {
-    return options.find(x => x.key === key)?.label ?? ""
+export function formatSelect(key: string | null | undefined, options: { key: string; label: string }[]) {
+    return options.find((x) => x.key === key)?.label ?? ""
 }
-
 
 type FormatSelect = {
     option?: string | null
@@ -16,7 +14,7 @@ type FormatSelect = {
         label: string
     }>
     color?: ChipColors
-    className?: ComponentProps<'div'>['className']
+    className?: ComponentProps<"div">["className"]
 }
 
 export function FormatSelect(props: FormatSelect) {

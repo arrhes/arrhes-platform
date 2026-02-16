@@ -1,13 +1,13 @@
+import { models } from "@arrhes/application-metadata/models"
+import { readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
-import { models } from "@arrhes/application-metadata/models"
-import { readAllComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { and, eq } from "drizzle-orm"
 
-
-export const readAllComputationsRoute = authFactory.createApp()
+export const readAllComputationsRoute = authFactory
+    .createApp()
     .post(
         readAllComputationsRouteDefinition.path,
         bodyValidator(readAllComputationsRouteDefinition.schemas.body),
@@ -17,12 +17,7 @@ export const readAllComputationsRoute = authFactory.createApp()
             const readAllComputations = await selectMany({
                 database: c.var.clients.sql,
                 table: models.computation,
-                where: (table) => (
-                    and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idYear, body.idYear),
-                    )
-                ),
+                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
             })
 
             return response({
@@ -31,5 +26,5 @@ export const readAllComputationsRoute = authFactory.createApp()
                 schema: readAllComputationsRouteDefinition.schemas.return,
                 data: readAllComputations,
             })
-        }
+        },
     )

@@ -1,8 +1,7 @@
 import * as v from "valibot"
 import { booleanSchema, dateTimeSchema, stringSchema } from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
-import { userSessionModel } from "../models/userSession.js"
-
+import type { userSessionModel } from "../models/userSession.js"
 
 export const userSessionSchema = v.object({
     id: v.nonNullable(idSchema),
@@ -14,16 +13,12 @@ export const userSessionSchema = v.object({
     lastUpdatedAt: v.nullable(dateTimeSchema),
 }) satisfies v.GenericSchema<typeof userSessionModel.$inferSelect>
 
-
-export const userSessionSchemaReturn = v.pick(
-    userSessionSchema,
-    [
-        "id",
-        "idUser",
-        "isActive",
-        "expiresAt",
-        "ip",
-        "lastUpdatedAt",
-        "createdAt",
-    ]
-)
+export const userSessionSchemaReturn = v.pick(userSessionSchema, [
+    "id",
+    "idUser",
+    "isActive",
+    "expiresAt",
+    "ip",
+    "lastUpdatedAt",
+    "createdAt",
+])
