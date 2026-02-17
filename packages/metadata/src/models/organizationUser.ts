@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm"
-import { type AnyPgColumn, boolean, pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
+import { type AnyPgColumn, boolean, index, pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
 import { idColumn } from "../components/models/idColumn.js"
 import { organizationUserStatus } from "../components/values/organizationUserStatus.js"
@@ -32,7 +32,7 @@ export const organizationUserModel = pgTable(
             onUpdate: "cascade",
         }),
     },
-    (t) => [unique().on(t.idOrganization, t.idUser)],
+    (t) => [unique().on(t.idOrganization, t.idUser), index().on(t.idUser)],
 )
 
 // Relations
