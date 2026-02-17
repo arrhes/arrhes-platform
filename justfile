@@ -1,17 +1,13 @@
 set shell := ["bash", "-cu"]
 COMPOSE_FILE := ".workflows/.dev/compose.yml"
 PROJECT := "application"
+DC := "docker compose --project-directory=.workflows/.dev --file=" + COMPOSE_FILE + " --project-name=" + PROJECT
 
 dev cmd:
     @just dev-{{cmd}}
 
 dev-up:
-    @# Stop and remove any existing arrhes-related containers
-    -docker ps -a --filter="name=application-" --filter="name=arrhes-" -q | xargs -r docker rm -f 2>/dev/null
-    -docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down --remove-orphans 2>/dev/null
-    @# Kill any containers using our required ports
-    -docker ps -q --filter="publish=5432" --filter="publish=1025" --filter="publish=8025" --filter="publish=9000" --filter="publish=9001" --filter="publish=3000" --filter="publish=5173" | xargs -r docker rm -f 2>/dev/null
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
+    {{DC}} up -d --build
     @echo ""
     @echo "=============================================="
     @echo "  Arrhes Development Environment Started"
@@ -34,16 +30,12 @@ dev-up:
     @echo "=============================================="
 
 dev-down:
-    -docker ps -a --filter="name={{PROJECT}}-" --filter="name=arrhes-" -q | xargs -r docker rm -f 2>/dev/null
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" down --remove-orphans
+    {{DC}} down --remove-orphans
 
 dev-reset:
     @echo "Resetting database (clearing and reseeding)..."
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "cd /workspace/packages/tools && pnpm run reset"
+    {{DC}} exec api sh -c "cd /workspace/packages/tools && pnpm run reset"
     @echo "Database reset complete."
-
-dev-logs:
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" logs -f
 
 # ==============================================================================
 # Build Pipeline
@@ -79,16 +71,16 @@ build:
 
 # Run all unit tests
 test-unit:
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test:unit"
+    {{DC}} exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test:unit"
 
 # Run all integration tests
 test-integration:
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --filter='@arrhes/application-api' run test:integration"
+    {{DC}} exec api sh -c "pnpm --filter='@arrhes/application-api' run test:integration"
 
 # Run all Playwright E2E tests
 test-e2e:
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm run test:e2e"
+    {{DC}} exec api sh -c "pnpm run test:e2e"
 
 # Run all tests: unit + integration + E2E
 test:
-    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test && pnpm run test:e2e"
+    {{DC}} exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test && pnpm run test:e2e"

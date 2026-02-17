@@ -54,7 +54,7 @@ export function InputCombobox<TValue extends string>(props: {
                         props.className,
                     )}
                     autoFocus={props.autoFocus}
-                    disabled={props.isDisabled}
+                    isDisabled={props.isDisabled}
                 >
                     <div
                         className={cx(

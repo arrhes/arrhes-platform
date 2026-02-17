@@ -5,6 +5,10 @@
 # - Dependencies installed at build time (node_modules inside image)
 # - Source code bind-mounted at runtime for live editing
 # - No entrypoint script needed - just run `docker compose up`
+#
+# Layer caching strategy:
+#   1. Package manifests (changes rarely)  → cached dependency install
+#   2. Source code (changes often)         → only invalidates prepare step
 # ==============================================================================
 
 ARG NODE_VERSION="25.2.1"
@@ -21,19 +25,24 @@ RUN npm install -g "pnpm@${PNPM_VERSION}" && \
 
 WORKDIR /workspace
 
-# Copy package manifests for dependency installation
+# --- Layer 1: Install dependencies (cached unless manifests/lockfile change) ---
+# Copy only package manifests and lockfile first for optimal caching.
+# This layer is only invalidated when dependencies actually change.
 COPY package.json pnpm-workspace.yaml ./
+COPY packages/metadata/package.json ./packages/metadata/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
+COPY packages/website/package.json ./packages/website/package.json
 
+RUN pnpm install --ignore-scripts
+
+# --- Layer 2: Build preparation (codegen, etc.) ---
+# Copy source needed for prepare scripts (panda codegen).
+# This layer is invalidated on source changes but dependency install is still cached.
 COPY packages/metadata ./packages/metadata
 COPY packages/ui ./packages/ui
 COPY packages/website ./packages/website
 
-# Install all dependencies (hoisted to workspace root)
-RUN pnpm install
-
-RUN pnpm --filter="@arrhes/application-website" run prepare
-
-# RUN pnpm --filter="@arrhes/ui" build
+RUN pnpm --filter="@arrhes/ui" run prepare
 
 # Copy environment file for Vite
 COPY .workflows/.dev/packages/website/.env ./packages/website/.env

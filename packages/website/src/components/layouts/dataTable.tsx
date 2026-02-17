@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react"
 import {
     type ColumnDef,
+    type ColumnFiltersState,
     flexRender,
     getCoreRowModel,
     getExpandedRowModel,
@@ -24,6 +25,8 @@ import { FormatNull } from "../formats/formatNull.js"
 import { InputDebounced } from "../inputs/inputDebounced.js"
 import { InputText } from "../inputs/inputText.js"
 import { CircularLoader } from "./circularLoader.js"
+import { TableFilterPopover } from "./table/tableFilterPopover.js"
+import { TableSortPopover } from "./table/tableSortPopover.js"
 
 export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     children?: ReactElement | null
@@ -37,6 +40,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     const memoizedData = useMemo(() => props.data, [props.data])
     const [globalFilter, setGlobalFilter] = useState("")
     const [sorting, setSorting] = useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
     const table = useReactTable<TData>({
         data: memoizedData,
@@ -52,6 +56,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
         getPaginationRowModel: getPaginationRowModel(),
         onGlobalFilterChange: setGlobalFilter,
         onSortingChange: setSorting,
+        onColumnFiltersChange: setColumnFilters,
         enableMultiSort: true,
         initialState: {
             pagination: {
@@ -61,6 +66,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
         state: {
             globalFilter,
             sorting,
+            columnFilters,
         },
     })
 
@@ -75,7 +81,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                gap: "3",
+                gap: "1rem",
             })}
         >
             <div
@@ -86,12 +92,25 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "flex-start",
-                    gap: "4",
+                    gap: "1rem",
                 })}
             >
-                <InputDebounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value)}>
-                    <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
-                </InputDebounced>
+                <div
+                    className={css({
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        flexWrap: "wrap",
+                    })}
+                >
+                    <InputDebounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value)}>
+                        <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
+                    </InputDebounced>
+                    <TableFilterPopover table={table} />
+                    <TableSortPopover table={table} />
+                </div>
                 <div
                     className={css({
                         display: "flex",
@@ -108,10 +127,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                     width: "100%",
                     maxWidth: "100%",
                     padding: "0",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "stretch",
+                    overflowX: "auto",
                     borderRadius: "md",
                     border: "1px solid",
                     borderColor: "neutral/10",
@@ -135,10 +151,26 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         })}
                     >
                         <tr className={css({ width: "100%" })}>
-                            {props.renderSubComponent && <th className={css({ width: "1%" })} />}
+                            {props.renderSubComponent && (
+                                <th
+                                    className={css({
+                                        width: "1%",
+                                        borderBottom: "1px solid",
+                                        borderBottomColor: "neutral/10",
+                                    })}
+                                />
+                            )}
                             {table.getFlatHeaders().map((header) => {
                                 return (
-                                    <th key={header.id} colSpan={header.colSpan} className={css({ width: "fit" })}>
+                                    <th
+                                        key={header.id}
+                                        colSpan={header.colSpan}
+                                        className={css({
+                                            width: "fit",
+                                            borderBottom: "1px solid",
+                                            borderBottomColor: "neutral/10",
+                                        })}
+                                    >
                                         <div
                                             className={css({
                                                 display: "flex",
@@ -146,10 +178,6 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                                 alignItems: "center",
                                                 gap: "2",
                                                 padding: "1rem",
-                                                borderBottom: "1px solid",
-                                                borderBottomColor: "neutral/10",
-                                                borderTop: "2px solid",
-                                                borderTopColor: "white",
                                             })}
                                         >
                                             <Button onClick={header.column.getToggleSortingHandler()}>
@@ -318,11 +346,12 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             gap: "2",
                         })}
                     >
-                        <Button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+                        <Button onClick={() => table.previousPage()} isDisabled={!table.getCanPreviousPage()}>
                             <ButtonContent
                                 variant="default"
                                 leftIcon={<IconChevronLeft size={16} />}
                                 text={undefined}
+                                isDisabled={!table.getCanPreviousPage()}
                             />
                         </Button>
                         <span
@@ -333,11 +362,12 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         >
                             Page {table.getState().pagination.pageIndex + 1} sur {table.getPageCount()}
                         </span>
-                        <Button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+                        <Button onClick={() => table.nextPage()} isDisabled={!table.getCanNextPage()}>
                             <ButtonContent
                                 variant="default"
                                 leftIcon={<IconChevronRight size={16} />}
                                 text={undefined}
+                                isDisabled={!table.getCanPreviousPage()}
                             />
                         </Button>
                     </div>

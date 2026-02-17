@@ -57,7 +57,17 @@ Docker-based development environment for the Arrhes application.
 just dev up
 
 # Or with Docker Compose directly
-docker compose -f .workflows/.dev/compose.yml up -d --build
+docker compose -f .workflows/.dev/compose.yml up -d
+```
+
+### Rebuild images (after dependency changes)
+```bash
+# Rebuild and restart all services
+just dev rebuild
+
+# Or rebuild a specific service
+docker compose -f .workflows/.dev/compose.yml build website
+docker compose -f .workflows/.dev/compose.yml up -d website
 ```
 
 ### View logs
@@ -84,11 +94,12 @@ just dev reset
 
 ### Rebuild after changes
 ```bash
+# Rebuild and restart all services (e.g. after dependency changes)
+just dev rebuild
+
 # Rebuild specific service
 docker compose -f .workflows/.dev/compose.yml build api
-
-# Rebuild and restart
-docker compose -f .workflows/.dev/compose.yml up -d --build api
+docker compose -f .workflows/.dev/compose.yml up -d api
 ```
 
 ### Access running containers

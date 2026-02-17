@@ -174,7 +174,9 @@ const variantStyles = {
             },
             danger: {
                 container: css({
-                    _hover: { bg: "error/8" },
+                    _hover: {
+                        backgroundColor: "error/8",
+                    },
                 }),
                 icon: css({ stroke: "error" }),
                 text: css({ color: "error" }),
@@ -206,7 +208,7 @@ export function ButtonContent(props: {
     leftIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
     rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
     isLoading?: boolean
-    disabled?: boolean
+    isDisabled?: boolean
     isActive?: boolean
     className?: string
 }) {
@@ -232,7 +234,13 @@ export function ButtonContent(props: {
         transition: "all",
         transitionDuration: "200ms",
         transitionTimingFunction: "ease-in-out",
-        _disabled: { opacity: 0.5, cursor: "not-allowed" },
+        _disabled: {
+            opacity: 0.5,
+            cursor: "not-allowed",
+            _hover: {
+                backgroundColor: "transparent",
+            },
+        },
     })
 
     const iconOnlyStyles =
@@ -254,7 +262,7 @@ export function ButtonContent(props: {
         <div
             title={props.title ?? props.text}
             aria-current={props.isActive || isLoading}
-            aria-disabled={props.disabled || isLoading}
+            aria-disabled={props.isDisabled || isLoading}
             className={cx(
                 baseContainerStyles,
                 iconOnlyStyles,
@@ -285,7 +293,7 @@ export function ButtonContent(props: {
             {props.leftIcon &&
                 !isLoading &&
                 cloneElement(props.leftIcon, {
-                    "aria-disabled": props.disabled,
+                    "aria-disabled": props.isDisabled,
                     size: 16,
                     className: cx(
                         css({
@@ -297,8 +305,8 @@ export function ButtonContent(props: {
                         }),
                         leftIconActiveStyles,
                         variant === "primary"
-                            ? css({ stroke: "white", _disabled: { color: "white/50" } })
-                            : styles.icon,
+                            ? css({ stroke: "white", _disabled: { stroke: "white/50" } })
+                            : cx(styles.icon, css({ _disabled: { stroke: "neutral/50" } })),
                     ),
                     strokeWidth: 1.75,
                 })}
@@ -306,7 +314,7 @@ export function ButtonContent(props: {
             {/* Text label */}
             {props.text && (
                 <span
-                    aria-disabled={props.disabled || isLoading}
+                    aria-disabled={props.isDisabled || isLoading}
                     className={cx(
                         css({
                             overflow: "hidden",
@@ -344,7 +352,7 @@ export function ButtonContent(props: {
                         />
                     ) : (
                         cloneElement(props.rightIcon, {
-                            "aria-disabled": props.disabled,
+                            "aria-disabled": props.isDisabled,
                             size: 16 - 4,
                             className: cx(
                                 css({

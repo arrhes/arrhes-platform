@@ -23,10 +23,11 @@ export function useButtonLoading() {
     return useContext(ButtonLoadingContext)
 }
 
-type ButtonProps = Omit<ComponentProps<"button">, "children"> & {
+type ButtonProps = Omit<ComponentProps<"button">, "children" | "disabled"> & {
     hasLoader?: boolean
     children: ReactNode
     title?: string
+    isDisabled?: boolean
 }
 
 /**
@@ -54,7 +55,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         setIsLoading(false)
     }
 
-    const { hasLoader, className, disabled, title, children, ...buttonProps } = props
+    const { hasLoader, className, isDisabled, title, children, ...buttonProps } = props
 
     return (
         <ButtonLoadingContext.Provider value={isLoading}>
@@ -80,7 +81,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
                 )}
                 onClick={handleClick}
                 type={props.type ?? "button"}
-                disabled={disabled || isLoading}
+                disabled={props.isDisabled || isLoading}
                 title={title}
             >
                 {children}

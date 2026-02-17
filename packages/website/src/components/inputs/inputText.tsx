@@ -2,13 +2,13 @@ import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import type { InputHTMLAttributes } from "react"
 import type { FieldError } from "react-hook-form"
 
-type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
-    error?: FieldError
-    value?: string | null | undefined
-    onChange?: (value?: string | null | undefined) => void
-}
-
-export function InputText(props: InputText) {
+export function InputText(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+        error?: FieldError
+        value?: string | null | undefined
+        onChange?: (value?: string | null | undefined) => void
+    },
+) {
     function input(value: string | undefined | null) {
         if (!value) return ""
         return value
@@ -30,7 +30,7 @@ export function InputText(props: InputText) {
                     alignItems: "center",
                     gap: "2",
                     border: "1px solid",
-                    borderRadius: "sm",
+                    borderRadius: "md",
                     _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
                 css(!props.error ? { borderColor: "neutral/25" } : { borderColor: "error" }),

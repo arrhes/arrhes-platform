@@ -45,7 +45,8 @@ export function RecordRowsTable(props: {
                             </LinkButton>
                         </div>
                     ),
-                    filterFn: "includesString",
+                    enableSorting: false,
+                    enableGlobalFilter: false,
                 },
                 {
                     accessorKey: "label",

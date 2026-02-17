@@ -82,6 +82,7 @@ services:
   # API - Backend service (Hono framework on Node.js)
   api:
     container_name: arrhes-api
+    image: arrhes-dev-api:latest
     build:
       context: ../..
       dockerfile: .workflows/.dev/packages/api/Dockerfile
@@ -117,6 +118,7 @@ services:
   # Website - Frontend interface (React + Vite)
   website:
     container_name: arrhes-website
+    image: arrhes-dev-website:latest
     build:
       context: ../..
       dockerfile: .workflows/.dev/packages/website/Dockerfile
