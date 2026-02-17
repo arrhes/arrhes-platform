@@ -4,7 +4,7 @@ import {
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
-import { IconEye, IconPlus } from "@tabler/icons-react"
+import { IconEye } from "@tabler/icons-react"
 import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatText } from "../../../../../../../../../../../components/formats/formatText.tsx"
@@ -12,7 +12,6 @@ import { Chip } from "../../../../../../../../../../../components/layouts/chip.t
 import { DataTable } from "../../../../../../../../../../../components/layouts/dataTable.tsx"
 import { DataWrapper } from "../../../../../../../../../../../components/layouts/dataWrapper.tsx"
 import { LinkButton } from "../../../../../../../../../../../components/linkButton.tsx"
-import { CreateOneComputationIncomeStatement } from "./createOneComputationIncomeStatement.tsx"
 
 export function ComputationIncomeStatementsTable(props: {
     computation: v.InferOutput<typeof returnedSchemas.computation>
@@ -87,11 +86,7 @@ export function ComputationIncomeStatementsTable(props: {
                                 filterFn: "includesString",
                             },
                         ]}
-                    >
-                        <CreateOneComputationIncomeStatement computation={props.computation}>
-                            <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter" />
-                        </CreateOneComputationIncomeStatement>
-                    </DataTable>
+                    />
                 )
             }}
         </DataWrapper>

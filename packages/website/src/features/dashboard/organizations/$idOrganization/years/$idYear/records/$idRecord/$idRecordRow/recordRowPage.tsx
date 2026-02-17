@@ -103,7 +103,7 @@ export function RecordRowPage() {
                                                         }}
                                                     >
                                                         {(account) => (
-                                                            <span>{`${account.number} - ${account.label}`}</span>
+                                                            <FormatText>{`${account.number} - ${account.label}`}</FormatText>
                                                         )}
                                                     </DataWrapper>
                                                 )}

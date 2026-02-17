@@ -3,19 +3,22 @@ import { IconInfoSquareRounded } from "@tabler/icons-react"
 import { Fragment, type ReactElement } from "react"
 import { Tooltip } from "../../overlays/tooltip/tooltip.js"
 
-export function DataBlockItem(props: { label: string; description?: string; children: string | ReactElement }) {
+export function DataBlockItem(props: { label: string; description?: string; children: ReactElement }) {
     return (
         <Fragment>
             <div
                 className={css({
                     display: "flex",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                    gap: "2",
-                    padding: "3",
-                    paddingLeft: "4",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.625rem",
+                    paddingLeft: "1rem",
                     borderBottom: "1px solid",
                     borderBottomColor: "neutral/5",
+                    _last: {
+                        borderBottom: "none",
+                    },
                 })}
             >
                 <span
@@ -63,15 +66,18 @@ export function DataBlockItem(props: { label: string; description?: string; chil
                 className={css({
                     display: "flex",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                    gap: "2",
-                    padding: "3",
-                    paddingRight: "4",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.625rem",
+                    paddingRight: "1rem",
                     borderBottom: "1px solid",
                     borderBottomColor: "neutral/5",
+                    _last: {
+                        borderBottom: "none",
+                    },
                 })}
             >
-                {typeof props.children !== "string" ? props.children : <span>{props.children}</span>}
+                {props.children}
             </div>
         </Fragment>
     )

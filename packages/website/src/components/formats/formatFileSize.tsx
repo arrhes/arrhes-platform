@@ -29,7 +29,7 @@ export function FormatFileSize(props: FormatFileSize) {
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",
-                    fontSize: "base",
+                    fontSize: "sm",
                     fontFamily: "mono",
                     wordBreak: "break-word",
                 })}

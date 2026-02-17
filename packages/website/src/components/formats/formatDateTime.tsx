@@ -3,7 +3,7 @@ import type { ComponentProps } from "react"
 import { FormatNull } from "./formatNull.js"
 
 export function formatDateTime(rawDate?: string | Date | undefined | null) {
-    if (!rawDate || String(new Date(rawDate)) === "Invalid Date") return "/"
+    if (!rawDate || String(new Date(rawDate)) === "Invalid Date") return undefined
 
     const date = new Date(rawDate)
     let day = String(date.getDate())
@@ -26,20 +26,10 @@ type FormatDateTime = {
 }
 
 export function FormatDateTime(props: FormatDateTime) {
-    if (!props.date) return <FormatNull />
-    if (String(new Date(props.date)) === "Invalid Date") return <FormatNull />
+    const formatted = formatDateTime(props.date)
+    if (!formatted) return <FormatNull />
 
-    const date = new Date(props.date)
-    let day = String(date.getDate())
-    let month = String(date.getMonth() + 1)
-    const year = String(date.getFullYear())
-    let hour = String(date.getHours())
-    let minute = String(date.getMinutes())
-
-    if (date.getDate() < 10) day = `0${day}`
-    if (date.getMonth() + 1 < 10) month = `0${month}`
-    if (date.getHours() < 10) hour = `0${hour}`
-    if (date.getMinutes() < 10) minute = `0${minute}`
+    const [datePart, timePart] = formatted.split(" ")
 
     return (
         <div
@@ -47,10 +37,10 @@ export function FormatDateTime(props: FormatDateTime) {
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
-                gap: "1",
+                gap: "0.25rem",
             })}
         >
-            <span className={css({ fontSize: "sm", fontFamily: "mono" })}>{`${[day, month, year].join("/")}`}</span>
+            <span className={css({ fontSize: "sm", fontFamily: "mono" })}>{datePart}</span>
             <span
                 className={css({
                     fontSize: "xs",
@@ -58,7 +48,9 @@ export function FormatDateTime(props: FormatDateTime) {
                     fontFamily: "mono",
                     color: "neutral/75",
                 })}
-            >{`${[hour, minute].join(":")}`}</span>
+            >
+                {timePart}
+            </span>
         </div>
     )
 }

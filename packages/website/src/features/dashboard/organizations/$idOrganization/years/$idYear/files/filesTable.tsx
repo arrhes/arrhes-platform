@@ -1,6 +1,6 @@
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
-import { IconEye, IconPlus } from "@tabler/icons-react"
+import { IconEye } from "@tabler/icons-react"
 import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../components/formats/formatDateTime.js"
 import { FormatFileSize } from "../../../../../../../components/formats/formatFileSize.js"
@@ -8,7 +8,6 @@ import { FormatNull } from "../../../../../../../components/formats/formatNull.j
 import { FormatText } from "../../../../../../../components/formats/formatText.js"
 import { DataTable } from "../../../../../../../components/layouts/dataTable.js"
 import { LinkButton } from "../../../../../../../components/linkButton.js"
-import { CreateOneFile } from "./createOneFile.js"
 
 export function FilesTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -78,10 +77,6 @@ export function FilesTable(props: {
                     filterFn: "includesString",
                 },
             ]}
-        >
-            <CreateOneFile idOrganization={props.idOrganization} idYear={props.idYear}>
-                <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un fichier" />
-            </CreateOneFile>
-        </DataTable>
+        />
     )
 }

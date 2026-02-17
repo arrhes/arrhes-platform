@@ -1,7 +1,7 @@
 import { readOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconChevronLeft, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { FormatDateTime } from "../../../../../../../../../../components/formats/formatDateTime.tsx"
@@ -13,6 +13,7 @@ import { LinkButton } from "../../../../../../../../../../components/linkButton.
 
 import { computationLayoutRoute } from "../../../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/incomeStatements/computations/$idComputation/computationLayoutRoute.tsx"
 import { ComputationIncomeStatementsTable } from "./computationIncomeStatements/computationIncomeStatementTable.tsx"
+import { CreateOneComputationIncomeStatement } from "./computationIncomeStatements/createOneComputationIncomeStatement.tsx"
 import { DeleteOneComputation } from "./deleteOneComputation.tsx"
 import { UpdateOneComputation } from "./updateOneComputation.tsx"
 
@@ -96,6 +97,19 @@ export function ComputationPage() {
                                 </DataBlock.Root>
                             </Section.Item>
                             <Section.Item>
+                                <div
+                                    className={css({
+                                        width: "100%",
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        alignItems: "center",
+                                        gap: "0.5rem",
+                                    })}
+                                >
+                                    <CreateOneComputationIncomeStatement computation={computation}>
+                                        <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter" />
+                                    </CreateOneComputationIncomeStatement>
+                                </div>
                                 <ComputationIncomeStatementsTable computation={computation} />
                             </Section.Item>
                         </Fragment>

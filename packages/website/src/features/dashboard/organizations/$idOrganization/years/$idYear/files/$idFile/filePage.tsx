@@ -82,7 +82,7 @@ export function FilePage() {
                                             <DataBlock.Item label="Type">
                                                 <FormatText>{file.type?.split("/").at(1)}</FormatText>
                                             </DataBlock.Item>
-                                            <DataBlock.Item label="Size">
+                                            <DataBlock.Item label="Taille">
                                                 <FormatFileSize size={file.size} />
                                             </DataBlock.Item>
                                         </DataBlock.Content>

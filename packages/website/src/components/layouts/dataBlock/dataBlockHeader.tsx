@@ -12,7 +12,7 @@ export function DataBlockHeader(props: { title: string; className?: ComponentPro
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
-                    gap: "2",
+                    gap: "0.5rem",
                 }),
                 props.className,
             )}
@@ -21,7 +21,9 @@ export function DataBlockHeader(props: { title: string; className?: ComponentPro
                 className={css({
                     textTransform: "uppercase",
                     color: "neutral/25",
-                    fontSize: "base",
+                    fontSize: "xs",
+                    fontWeight: "medium",
+                    letterSpacing: "wide",
                 })}
             >
                 {props.title}

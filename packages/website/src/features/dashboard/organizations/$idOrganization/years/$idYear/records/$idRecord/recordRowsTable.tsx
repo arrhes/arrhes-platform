@@ -2,7 +2,7 @@ import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/rout
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconEdit, IconEye, IconPencil, IconPlus } from "@tabler/icons-react"
+import { IconEye, IconPencil } from "@tabler/icons-react"
 import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
@@ -11,8 +11,6 @@ import { DataTable } from "../../../../../../../../components/layouts/dataTable.
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 import { UpdateOneRecordRow } from "./$idRecordRow/updateOneRecordRow.tsx"
-import { CreateOneRecordRow } from "./createOneRecordRow.tsx"
-import { UpdateManyRecordRows } from "./updateManyRecordRows.tsx"
 
 export function RecordRowsTable(props: {
     record: v.InferOutput<typeof returnedSchemas.record>
@@ -104,15 +102,6 @@ export function RecordRowsTable(props: {
                     filterFn: "includesString",
                 },
             ]}
-        >
-            <div className={css({ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "1" })}>
-                <CreateOneRecordRow record={props.record}>
-                    <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un mouvement" />
-                </CreateOneRecordRow>
-                <UpdateManyRecordRows record={props.record}>
-                    <ButtonContent variant="default" leftIcon={<IconEdit />} text="Modifier plusieurs mouvements" />
-                </UpdateManyRecordRows>
-            </div>
-        </DataTable>
+        />
     )
 }

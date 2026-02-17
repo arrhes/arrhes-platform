@@ -14,7 +14,7 @@ export function DataBlockContent(props: {
                     height: "fit",
                     display: "grid",
                     gridTemplateColumns: "max-content auto",
-                    columnGap: "6",
+                    columnGap: "1rem",
                     padding: "0",
                     border: "1px solid",
                     borderColor: "neutral/10",

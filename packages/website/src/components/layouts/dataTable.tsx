@@ -29,7 +29,6 @@ import { TableFilterPopover } from "./table/tableFilterPopover.js"
 import { TableSortPopover } from "./table/tableSortPopover.js"
 
 export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
-    children?: ReactElement | null
     data: Array<TData>
     isLoading?: boolean
     columns: Array<ColumnDef<TData>>
@@ -110,16 +109,6 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                     </InputDebounced>
                     <TableFilterPopover table={table} />
                     <TableSortPopover table={table} />
-                </div>
-                <div
-                    className={css({
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "center",
-                        gap: "2",
-                    })}
-                >
-                    {props.children ?? null}
                 </div>
             </div>
             <div

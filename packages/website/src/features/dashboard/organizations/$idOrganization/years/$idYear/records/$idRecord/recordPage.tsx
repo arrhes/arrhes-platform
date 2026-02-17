@@ -7,7 +7,7 @@ import {
 } from "@arrhes/application-metadata/routes"
 import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconChevronLeft, IconCopyCheck, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconChevronLeft, IconCopyCheck, IconEdit, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
@@ -22,9 +22,11 @@ import { Section } from "../../../../../../../../components/layouts/section/sect
 import { LinkButton } from "../../../../../../../../components/linkButton.js"
 import { recordRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/records/$idRecord/recordRoute.tsx"
 import { compareAmounts } from "../../../../../../../../utilities/compareAmounts.ts"
+import { CreateOneRecordRow } from "./createOneRecordRow.tsx"
 import { DeleteOneRecord } from "./deleteOneRecord.tsx"
 import { DuplicateOneRecord } from "./duplicateOneRecord.tsx"
 import { RecordRowsTable } from "./recordRowsTable.tsx"
+import { UpdateManyRecordRows } from "./updateManyRecordRows.tsx"
 import { UpdateOneRecord } from "./updateOneRecord.tsx"
 
 export function RecordPage() {
@@ -169,9 +171,9 @@ export function RecordPage() {
                                                                     }}
                                                                 >
                                                                     {(journal) => (
-                                                                        <span>
+                                                                        <FormatText>
                                                                             {`(${journal.code}) ${journal.label}`}
-                                                                        </span>
+                                                                        </FormatText>
                                                                     )}
                                                                 </DataWrapper>
                                                             )}
@@ -189,7 +191,7 @@ export function RecordPage() {
                                                                     }}
                                                                 >
                                                                     {(recordLabel) => (
-                                                                        <span>{`${recordLabel.label}`}</span>
+                                                                        <FormatText>{`${recordLabel.label}`}</FormatText>
                                                                     )}
                                                                 </DataWrapper>
                                                             )}
@@ -206,7 +208,9 @@ export function RecordPage() {
                                                                         idFile: record.idFile,
                                                                     }}
                                                                 >
-                                                                    {(file) => <span>{file.reference}</span>}
+                                                                    {(file) => (
+                                                                        <FormatText>{file.reference}</FormatText>
+                                                                    )}
                                                                 </DataWrapper>
                                                             )}
                                                         </DataBlock.Item>
@@ -248,6 +252,30 @@ export function RecordPage() {
                                                 </DataBlock.Root>
                                             </Section.Item>
                                             <Section.Item>
+                                                <div
+                                                    className={css({
+                                                        width: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "flex-end",
+                                                        alignItems: "center",
+                                                        gap: "0.5rem",
+                                                    })}
+                                                >
+                                                    <CreateOneRecordRow record={record}>
+                                                        <ButtonContent
+                                                            variant="primary"
+                                                            leftIcon={<IconPlus />}
+                                                            text="Ajouter un mouvement"
+                                                        />
+                                                    </CreateOneRecordRow>
+                                                    <UpdateManyRecordRows record={record}>
+                                                        <ButtonContent
+                                                            variant="default"
+                                                            leftIcon={<IconEdit />}
+                                                            text="Modifier plusieurs mouvements"
+                                                        />
+                                                    </UpdateManyRecordRows>
+                                                </div>
                                                 <RecordRowsTable record={record} recordRows={recordRows} />
                                             </Section.Item>
                                         </Section.Root>
