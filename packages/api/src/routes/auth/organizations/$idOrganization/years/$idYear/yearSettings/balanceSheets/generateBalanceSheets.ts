@@ -23,13 +23,13 @@ export const generateBalanceSheetsRoute = authFactory
 
             const generatedBalanceSheets = await c.var.clients.sql.transaction(async (tx) => {
                 try {
-                    const deletedBalanceSheets = await deleteMany({
+                    const _deletedBalanceSheets = await deleteMany({
                         database: tx,
                         table: models.balanceSheet,
                         where: (table) =>
                             and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                } catch (error: unknown) {
+                } catch (_error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete balanceSheets",
                         externalMessage: "Échec de la suppression des lignes de bilan",
@@ -59,7 +59,7 @@ export const generateBalanceSheetsRoute = authFactory
                         idBalanceSheetParent: balanceSheetParent?.id ?? null,
                         number: defaultBalanceSheet.number.toString(),
                         isDefault: true,
-                        isComputed: balanceSheetParent === undefined ? true : false,
+                        isComputed: balanceSheetParent === undefined,
                         label: defaultBalanceSheet.label,
                         side: defaultBalanceSheet.side,
                         createdAt: new Date().toISOString(),

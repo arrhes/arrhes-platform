@@ -11,7 +11,7 @@ export const rootLayoutRoute = createRootRouteWithContext<{
     userSession: Promise<v.InferOutput<typeof readUserSessionRouteDefinition.schemas.return> | undefined> | undefined
 }>()({
     pendingComponent: () => <CircularLoader text="Application loading..." />,
-    beforeLoad: ({}) => {},
+    beforeLoad: (_ctx) => {},
     component: () => {
         const matches = useRouterState({ select: (s) => s.matches })
 

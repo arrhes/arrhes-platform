@@ -12,7 +12,7 @@ export function IncomeStatementRow(props: {
     className?: ComponentProps<"div">["className"]
 }) {
     const prefix = `${(
-        new Array(props.level).fill("").map((_, index) => {
+        new Array(props.level).fill("").map((_, _index) => {
             return "&nbsp;&nbsp;"
         })
     ).join("")}`

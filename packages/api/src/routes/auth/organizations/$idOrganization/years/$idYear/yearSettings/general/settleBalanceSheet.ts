@@ -9,7 +9,7 @@ export const settleBalanceSheetRoute = authFactory
         settleBalanceSheetRouteDefinition.path,
         bodyValidator(settleBalanceSheetRouteDefinition.schemas.body),
         async (c) => {
-            const body = c.req.valid("json")
+            const _body = c.req.valid("json")
 
             //  await db.transaction(async (tx) => {
 

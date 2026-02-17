@@ -60,7 +60,7 @@ export const duplicateOneRecordRoute = authFactory
                     },
                 })
 
-                const duplicateRecordRows = await insertMany({
+                const _duplicateRecordRows = await insertMany({
                     database: tx,
                     table: models.recordRow,
                     data: originalRecordRows.map((recordRow) => ({

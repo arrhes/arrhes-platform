@@ -10,7 +10,7 @@ export function deleteCookies() {
                 d.join(".") +
                 " ;path="
             const p = location.pathname.split("/")
-            document.cookie = cookieBase + "/"
+            document.cookie = `${cookieBase}/`
             while (p.length > 0) {
                 document.cookie = cookieBase + p.join("/")
                 p.pop()

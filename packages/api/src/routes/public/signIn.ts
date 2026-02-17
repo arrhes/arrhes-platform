@@ -1,7 +1,7 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models } from "@arrhes/application-metadata/models"
 import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
 import { generateId } from "@arrhes/application-metadata/utilities"
-import { pbkdf2Sync } from "crypto"
 import { eq } from "drizzle-orm"
 import { publicFactory } from "../../factories/publicFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"

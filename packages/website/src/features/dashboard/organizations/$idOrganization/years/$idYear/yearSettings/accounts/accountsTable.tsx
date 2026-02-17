@@ -136,8 +136,6 @@ export function AccountsTable(props: { idOrganization: string; idYear: string })
                         subtitle={globalFilter ? undefined : "Ajoutez un compte pour commencer"}
                     />
                 ) : (
-                    // biome-ignore lint/a11y/useKeyWithClickEvents: event delegation for account links, keyboard navigation handled by native <a> elements
-                    // biome-ignore lint/a11y/noStaticElementInteractions: event delegation container, interactive elements are the <a> children
                     <div onClick={handleContainerClick} className={css({ width: "100%", height: "100%" })}>
                         <Virtualizer data={deferredAccounts} childSize={32}>
                             {renderAccount}

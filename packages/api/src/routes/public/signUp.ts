@@ -1,7 +1,7 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models } from "@arrhes/application-metadata/models"
 import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
 import { generateId } from "@arrhes/application-metadata/utilities"
-import { pbkdf2Sync } from "crypto"
 import { publicFactory } from "../../factories/publicFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
 import { signString } from "../../utilities/cookies/signString.js"
@@ -40,7 +40,7 @@ export const signUpRoute = publicFactory
                     email: body.email,
                     isEmailValidated: false,
                     emailToken: generateVerificationToken(),
-                    emailTokenExpiresAt: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
+                    emailTokenExpiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
                     passwordHash: passwordHash,
                     passwordSalt: passwordSalt,
                     createdAt: new Date().toISOString(),

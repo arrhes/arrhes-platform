@@ -20,8 +20,8 @@ export function InputDate(
         let month = String(date.getMonth() + 1)
         const year = String(date.getFullYear())
 
-        if (date.getDate() < 10) day = "0" + day
-        if (date.getMonth() + 1 < 10) month = "0" + month
+        if (date.getDate() < 10) day = `0${day}`
+        if (date.getMonth() + 1 < 10) month = `0${month}`
         return [day, month, year].join(" / ")
     }
 

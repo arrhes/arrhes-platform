@@ -42,7 +42,7 @@ export const connectAccountsToIncomeStatementsRoute = authFactory
                     ? defaultAssociationIncomeStatements
                     : defaultCompanyIncomeStatements
 
-            const connectAccountsToIncomeStatements = await c.var.clients.sql.transaction(async (tx) => {
+            const _connectAccountsToIncomeStatements = await c.var.clients.sql.transaction(async (tx) => {
                 for (const defaultIncomeStatement of defaultIncomeStatements) {
                     for (const defaultAccount of defaultIncomeStatement.accounts) {
                         const foundAccount = readAllAccounts.find((account) => {
@@ -62,7 +62,7 @@ export const connectAccountsToIncomeStatementsRoute = authFactory
                             continue
                         }
 
-                        const updateOneAccount = await updateOne({
+                        const _updateOneAccount = await updateOne({
                             database: tx,
                             table: models.account,
                             data: {

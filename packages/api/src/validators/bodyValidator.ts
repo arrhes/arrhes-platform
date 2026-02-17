@@ -4,7 +4,7 @@ import { Exception } from "../utilities/exception.js"
 import { validate } from "../utilities/validate.js"
 
 export const bodyValidator = <T extends v.ObjectSchema<v.ObjectEntries, undefined>>(schema: T) => {
-    return validator("json", async (value, c) => {
+    return validator("json", async (value, _c) => {
         try {
             const validatedBody = validate({
                 schema: schema,

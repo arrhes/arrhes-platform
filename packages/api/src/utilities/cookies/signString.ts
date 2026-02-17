@@ -1,4 +1,4 @@
-import { createHmac } from "crypto"
+import { createHmac } from "node:crypto"
 import { Exception } from "../../utilities/exception.js"
 
 export function signString(parameters: { value: string; secret: string }) {

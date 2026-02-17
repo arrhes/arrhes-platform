@@ -9,7 +9,7 @@ export const settleIncomeStatementRoute = authFactory
         settleIncomeStatementRouteDefinition.path,
         bodyValidator(settleIncomeStatementRouteDefinition.schemas.body),
         async (c) => {
-            const body = c.req.valid("json")
+            const _body = c.req.valid("json")
 
             // // Check if sheet is balanced
             // let totalAssets = 0

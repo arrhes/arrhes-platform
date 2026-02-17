@@ -1,6 +1,6 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models } from "@arrhes/application-metadata/models"
 import { updateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
-import { pbkdf2Sync } from "crypto"
 import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
 import { Exception } from "../../../utilities/exception.js"
@@ -38,7 +38,7 @@ export const updateUserEmailRoute = authFactory
                 data: {
                     emailToValidate: body.emailToValidate,
                     emailToken: generateVerificationToken(),
-                    emailTokenExpiresAt: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
+                    emailTokenExpiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
                     lastUpdatedAt: new Date().toISOString(),
                 },
                 where: (table) => eq(table.id, c.var.user.id),

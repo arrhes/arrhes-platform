@@ -21,13 +21,13 @@ export const generateComputationsRoute = authFactory
 
             const generatedComputations = await c.var.clients.sql.transaction(async (tx) => {
                 try {
-                    const deletedComputations = await deleteMany({
+                    const _deletedComputations = await deleteMany({
                         database: tx,
                         table: models.computation,
                         where: (table) =>
                             and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                } catch (error: unknown) {
+                } catch (_error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete computations",
                         externalMessage: "Échec de la suppression des journaux",
@@ -85,7 +85,7 @@ export const generateComputationsRoute = authFactory
                     data: newComputations,
                 })
 
-                const generatedComputationIncomeStatements = await insertMany({
+                const _generatedComputationIncomeStatements = await insertMany({
                     database: tx,
                     table: models.computationIncomeStatement,
                     data: newComputationIncomeStatements,

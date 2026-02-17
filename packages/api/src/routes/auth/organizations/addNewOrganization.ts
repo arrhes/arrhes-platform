@@ -32,7 +32,7 @@ export const addNewOrganizationRoute = authFactory
                     },
                 })
 
-                const createOneOrganizationUser = await insertOne({
+                const _createOneOrganizationUser = await insertOne({
                     database: tx,
                     table: models.organizationUser,
                     data: {

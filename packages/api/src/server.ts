@@ -1,4 +1,4 @@
-import { createServer } from "http"
+import { createServer } from "node:http"
 import { api } from "./api.js"
 import { getClients } from "./utilities/getClients.js"
 import { getEnv } from "./utilities/getEnv.js"

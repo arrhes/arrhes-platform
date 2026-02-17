@@ -20,7 +20,7 @@ export function useDeviceDetect() {
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [window.innerWidth, window.outerWidth])
+    }, [])
 
     return { isMobile }
 }

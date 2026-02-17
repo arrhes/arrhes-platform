@@ -34,4 +34,4 @@ export const documentModel = pgTable("table_document", {
 })
 
 // Relations
-export const documentRelations = relations(documentModel, ({}) => ({}))
+export const documentRelations = relations(documentModel, (_args) => ({}))

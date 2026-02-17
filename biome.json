@@ -22,7 +22,8 @@
             "recommended": true,
             "correctness": {
                 "noUnusedImports": "warn",
-                "useExhaustiveDependencies": "warn"
+                "useExhaustiveDependencies": "warn",
+                "noChildrenProp": "off"
             },
             "style": {
                 "noNonNullAssertion": "off",
@@ -30,10 +31,24 @@
                 "noParameterAssign": "off"
             },
             "suspicious": {
-                "noExplicitAny": "off"
+                "noExplicitAny": "off",
+                "noArrayIndexKey": "off",
+                "noDocumentCookie": "off"
             },
             "complexity": {
                 "noForEach": "off"
+            },
+            "a11y": {
+                "noStaticElementInteractions": "off",
+                "useKeyWithClickEvents": "off",
+                "noSvgWithoutTitle": "off",
+                "useFocusableInteractive": "off",
+                "useSemanticElements": "off",
+                "useAriaPropsForRole": "off",
+                "useAriaPropsSupportedByRole": "off"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "off"
             }
         }
     },

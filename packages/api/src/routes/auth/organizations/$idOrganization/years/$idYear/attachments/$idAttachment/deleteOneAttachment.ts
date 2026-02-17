@@ -28,7 +28,7 @@ export const deleteOneAttachmentRoute = authFactory
             })
 
             if (readOneAttachment.storageKey !== null) {
-                const deleteObjectResponse = await deleteObject({
+                const _deleteObjectResponse = await deleteObject({
                     var: c.var,
                     storageKey: readOneAttachment.storageKey,
                 })

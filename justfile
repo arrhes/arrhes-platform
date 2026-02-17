@@ -46,18 +46,19 @@ dev-logs:
     docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" logs -f
 
 # ==============================================================================
-# CI Build Pipeline (local)
+# Build Pipeline
 # ==============================================================================
-# Mirrors the GitHub Actions CI workflow inside Docker:
+# Mirrors the GitHub Actions CI workflow locally inside Docker:
 #   1. pnpm install
 #   2. pnpm check (Biome lint + format)
-#   3. pnpm build (TypeScript + Vite)
+#   3. pnpm test:unit (Unit tests)
+#   4. pnpm build (TypeScript + Vite)
 #
 # Usage: just build
 
 build:
     @echo "=============================================="
-    @echo "  Arrhes CI Build (local)"
+    @echo "  Arrhes Build (lint + test + build)"
     @echo "=============================================="
     @echo ""
     docker build \
@@ -73,22 +74,21 @@ build:
     @echo "=============================================="
 
 # ==============================================================================
-# Tests
+# Tests (requires dev environment running)
 # ==============================================================================
 
-# Run all unit tests (no Docker required)
+# Run all unit tests
 test-unit:
-    pnpm --recursive --if-present --filter='./packages/**' run test:unit
+    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test:unit"
 
-# Run all integration tests (requires dev environment running)
+# Run all integration tests
 test-integration:
-    pnpm --filter='@arrhes/application-api' run test:integration
+    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --filter='@arrhes/application-api' run test:integration"
 
-# Run all Playwright E2E tests (requires dev environment running)
+# Run all Playwright E2E tests
 test-e2e:
-    pnpm run test:e2e
+    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm run test:e2e"
 
-# Run all tests: unit + integration + E2E (requires dev environment running)
+# Run all tests: unit + integration + E2E
 test:
-    pnpm --recursive --if-present --filter='./packages/**' run test
-    pnpm run test:e2e
+    docker compose --project-directory=".workflows/.dev" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" exec api sh -c "pnpm --recursive --if-present --filter='./packages/**' run test && pnpm run test:e2e"

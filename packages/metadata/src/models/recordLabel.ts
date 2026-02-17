@@ -36,6 +36,6 @@ export const recordLabelModel = pgTable(
 )
 
 // Relations
-export const recordLabelRelations = relations(recordLabelModel, ({ one, many }) => ({
+export const recordLabelRelations = relations(recordLabelModel, ({ many }) => ({
     records: many(recordModel),
 }))

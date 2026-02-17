@@ -58,7 +58,6 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>((props,
                 ref={ref}
                 value={input(props.value)}
                 onChange={(e) => props.onChange(output(e.currentTarget.value))}
-                autoFocus={props.autoFocus}
             />
             <Button
                 onClick={handleClickShowPassword}

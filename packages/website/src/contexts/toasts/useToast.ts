@@ -172,7 +172,6 @@ function toast({ ...props }: Toast) {
 function useToast() {
     const [state, setState] = useState<State>(memoryState)
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: subscribe once on mount
     useEffect(() => {
         listeners.push(setState)
         return () => {

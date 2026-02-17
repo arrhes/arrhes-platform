@@ -26,7 +26,7 @@ export function InputDebounced<T>(props: InputDebounced<T>) {
         return () => clearTimeout(timeout)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value])
+    }, [value, props.debounce, props.onChange])
 
     return cloneElement(props.children, {
         value: value,

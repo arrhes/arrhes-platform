@@ -26,7 +26,7 @@ export const updateManyRecordRowsRoute = authFactory
                     ),
             })
 
-            const updatedRecordRows = await c.var.clients.sql.transaction(async (tx) => {
+            const updatedRecordRows = await c.var.clients.sql.transaction(async (_tx) => {
                 const recordRows = []
                 for (const recordRow of readAllRecordRows) {
                     const updatedRecordRow = await updateOne({

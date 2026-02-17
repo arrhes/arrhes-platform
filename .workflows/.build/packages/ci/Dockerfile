@@ -4,7 +4,8 @@
 # Mirrors the GitHub Actions CI pipeline locally:
 #   1. Install dependencies
 #   2. Biome check (lint + format)
-#   3. Build all packages
+#   3. Unit tests
+#   4. Build all packages
 #
 # Usage: just build
 # ==============================================================================
@@ -24,14 +25,18 @@ RUN npm install -g "pnpm@${PNPM_VERSION}" && \
 WORKDIR /workspace
 
 # Copy everything needed for install + build
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml biome.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml biome.json .gitignore ./
 COPY packages/ ./packages/
+COPY tests/ ./tests/
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Run Biome check (lint + format)
 RUN pnpm check
+
+# Run unit tests
+RUN pnpm --recursive --if-present --filter='./packages/**' run test:unit
 
 # Build all packages
 RUN pnpm run build

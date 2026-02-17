@@ -1,3 +1,4 @@
+import { pbkdf2Sync, randomBytes } from "node:crypto"
 import {
     type DefaultAccount,
     defaultCompanyAccounts,
@@ -9,7 +10,6 @@ import {
 import { models } from "@arrhes/application-metadata/models"
 import { generateId } from "@arrhes/application-metadata/utilities"
 import { randFirstName } from "@ngneat/falso"
-import { pbkdf2Sync, randomBytes } from "crypto"
 import { dbClient } from "../dbClient.js"
 
 // Helper: Flatten hierarchical accounts into a flat array
@@ -37,7 +37,7 @@ function findParentNumber(accountNumber: number, allAccounts: DefaultAccount[]):
 
     // For each possible parent length (from longest to shortest)
     for (let len = numberStr.length - 1; len >= 1; len--) {
-        const potentialParent = parseInt(numberStr.substring(0, len))
+        const potentialParent = parseInt(numberStr.substring(0, len), 10)
         if (allAccounts.some((a) => a.number === potentialParent)) {
             return potentialParent
         }
@@ -205,7 +205,7 @@ async function seed() {
                 .values(newBalanceSheets.map(({ originalNumber, numberParent, accounts, ...bs }) => bs))
 
             // Create lookup maps for balance sheets
-            const balanceSheetByNumberAndSide = new Map(
+            const _balanceSheetByNumberAndSide = new Map(
                 newBalanceSheets.map((bs) => [`${bs.side}-${bs.originalNumber}`, bs]),
             )
 

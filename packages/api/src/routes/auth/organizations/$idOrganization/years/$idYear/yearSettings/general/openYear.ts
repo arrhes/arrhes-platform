@@ -6,7 +6,7 @@ import { bodyValidator } from "../../../../../../../../validators/bodyValidator.
 export const openYearRoute = authFactory
     .createApp()
     .post(openYearRouteDefinition.path, bodyValidator(openYearRouteDefinition.schemas.body), async (c) => {
-        const body = c.req.valid("json")
+        const _body = c.req.valid("json")
 
         // const idPreviousYear = c.var.currentYear.idPreviousYear
         // if (!idPreviousYear) throw new HTTPException(400, { message: "Aucun exercice précédent n'est déclaré" })

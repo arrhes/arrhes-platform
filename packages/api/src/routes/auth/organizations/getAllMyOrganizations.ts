@@ -10,7 +10,7 @@ export const getAllMyOrganizationsRoute = authFactory
         getAllMyOrganizationsRouteDefinition.path,
         bodyValidator(getAllMyOrganizationsRouteDefinition.schemas.body),
         async (c) => {
-            const body = c.req.valid("json")
+            const _body = c.req.valid("json")
 
             const readAllOrganizationUsers = await c.var.clients.sql.query.organizationUserModel.findMany({
                 where: (table) => and(eq(table.idUser, c.var.user.id)),

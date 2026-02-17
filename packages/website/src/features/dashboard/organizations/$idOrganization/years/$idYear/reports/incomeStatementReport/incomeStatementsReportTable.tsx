@@ -67,7 +67,7 @@ export function IncomeStatementsReportTable(props: {
                 ) : (
                     props.computations.map((computation, index) => {
                         let computationAmount = 0
-                        const computationStatements = props.computationIncomeStatements
+                        const _computationStatements = props.computationIncomeStatements
                             .filter(
                                 (computationIncomeStatement) =>
                                     computationIncomeStatement.idComputation === computation.id,

@@ -9,7 +9,7 @@ export const readUserSessionRoute = authFactory
         readUserSessionRouteDefinition.path,
         bodyValidator(readUserSessionRouteDefinition.schemas.body),
         async (c) => {
-            const body = c.req.valid("json")
+            const _body = c.req.valid("json")
 
             return response({
                 context: c,

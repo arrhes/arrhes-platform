@@ -1,6 +1,6 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models } from "@arrhes/application-metadata/models"
 import { updateUserPasswordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { pbkdf2Sync } from "crypto"
 import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
 import { Exception } from "../../../utilities/exception.js"

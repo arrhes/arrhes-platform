@@ -26,13 +26,13 @@ export const generateIncomeStatementsRoute = authFactory
 
             const generatedIncomeStatements = await c.var.clients.sql.transaction(async (tx) => {
                 try {
-                    const deletedIncomeStatements = await deleteMany({
+                    const _deletedIncomeStatements = await deleteMany({
                         database: tx,
                         table: models.incomeStatement,
                         where: (table) =>
                             and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                } catch (error: unknown) {
+                } catch (_error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete incomeStatements",
                         externalMessage: "Échec de la suppression des lignes de compte de résultat",
@@ -62,7 +62,7 @@ export const generateIncomeStatementsRoute = authFactory
                         idIncomeStatementParent: incomeStatementParent?.id ?? null,
                         number: defaultIncomeStatement.number.toString(),
                         isDefault: true,
-                        isComputed: incomeStatementParent === undefined ? true : false,
+                        isComputed: incomeStatementParent === undefined,
                         label: defaultIncomeStatement.label,
                         createdAt: new Date().toISOString(),
                         lastUpdatedAt: null,

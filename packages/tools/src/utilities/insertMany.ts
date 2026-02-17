@@ -8,11 +8,7 @@ export async function insertMany<T extends PgTable<TableConfig>>(parameters: {
     table: T
     data: Array<PgInsertValue<T>>
 }) {
-    try {
-        const responseMany = await parameters.database.insert(parameters.table).values(parameters.data).returning()
+    const responseMany = await parameters.database.insert(parameters.table).values(parameters.data).returning()
 
-        return responseMany
-    } catch (error: unknown) {
-        throw error
-    }
+    return responseMany
 }

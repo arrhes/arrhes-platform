@@ -36,7 +36,7 @@ export function InputCombobox<TValue extends string>(props: {
                 setCurrentOptions(props.options.filter((x) => x.label.toLowerCase().includes(rawQuery.toLowerCase())))
             },
         })
-    }, [rawQuery])
+    }, [rawQuery, props.options.filter])
 
     return (
         <Popover.Root open={open} onOpenChange={setOpen} modal>

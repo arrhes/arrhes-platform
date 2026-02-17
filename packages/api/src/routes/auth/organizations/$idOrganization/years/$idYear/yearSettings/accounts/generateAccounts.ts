@@ -84,13 +84,13 @@ export const generateAccountsRoute = authFactory
 
             const generatedAccounts = await c.var.clients.sql.transaction(async (tx) => {
                 try {
-                    const deletedAccounts = await deleteMany({
+                    const _deletedAccounts = await deleteMany({
                         database: tx,
                         table: models.account,
                         where: (table) =>
                             and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                } catch (error: unknown) {
+                } catch (_error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete accounts",
                         externalMessage: "Échec de la suppression des comptes",

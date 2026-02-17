@@ -39,7 +39,7 @@ export const signOutRoute = publicFactory
                 },
                 where: (table) => eq(table.id, idUserSession),
             })
-        } catch (erro: unknown) {
+        } catch (_erro: unknown) {
             // do nothing
         }
 

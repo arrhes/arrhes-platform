@@ -37,7 +37,7 @@ export const connectAccountsToBalanceSheetsRoute = authFactory
             const defaultBalanceSheets =
                 organization.scope === "association" ? defaultAssociationBalanceSheets : defaultCompanyBalanceSheets
 
-            const connectAccountsToBalanceSheets = await c.var.clients.sql.transaction(async (tx) => {
+            const _connectAccountsToBalanceSheets = await c.var.clients.sql.transaction(async (tx) => {
                 for (const defaultBalanceSheet of defaultBalanceSheets) {
                     for (const defaultAccount of defaultBalanceSheet.accounts) {
                         const foundAccount = readAllAccounts.find((account) => {
@@ -57,7 +57,7 @@ export const connectAccountsToBalanceSheetsRoute = authFactory
                             continue
                         }
 
-                        const updateOneAccount = await updateOne({
+                        const _updateOneAccount = await updateOne({
                             database: tx,
                             table: models.account,
                             data: {
@@ -92,7 +92,7 @@ export const connectAccountsToBalanceSheetsRoute = authFactory
                 }
                 for (const account of readAllAccounts) {
                     const defaultBalanceSheet = defaultBalanceSheets.find((defaultBalanceSheet) => {
-                        const foundAccount = defaultBalanceSheet.accounts.find(
+                        const _foundAccount = defaultBalanceSheet.accounts.find(
                             (defaultAccount) => defaultAccount.number.toString() === account.number,
                         )
 

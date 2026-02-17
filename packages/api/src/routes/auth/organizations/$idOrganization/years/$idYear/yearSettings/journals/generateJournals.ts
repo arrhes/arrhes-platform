@@ -20,13 +20,13 @@ export const generateJournalsRoute = authFactory
 
             const generatedJournals = await c.var.clients.sql.transaction(async (tx) => {
                 try {
-                    const deletedJournals = await deleteMany({
+                    const _deletedJournals = await deleteMany({
                         database: tx,
                         table: models.journal,
                         where: (table) =>
                             and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
                     })
-                } catch (error: unknown) {
+                } catch (_error: unknown) {
                     throw new Exception({
                         internalMessage: "Failed to delete journals",
                         externalMessage: "Échec de la suppression des journaux",

@@ -13,10 +13,10 @@ export function formatDate(rawDate?: string | Date | undefined | null) {
     let hour = String(date.getHours())
     let minute = String(date.getMinutes())
 
-    if (date.getDate() < 10) day = "0" + day
-    if (date.getMonth() + 1 < 10) month = "0" + month
-    if (date.getHours() < 10) hour = "0" + hour
-    if (date.getMinutes() < 10) minute = "0" + minute
+    if (date.getDate() < 10) day = `0${day}`
+    if (date.getMonth() + 1 < 10) month = `0${month}`
+    if (date.getHours() < 10) hour = `0${hour}`
+    if (date.getMinutes() < 10) minute = `0${minute}`
 
     return `${[day, month, year].join("/")}`
 }

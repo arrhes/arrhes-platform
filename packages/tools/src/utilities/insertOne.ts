@@ -16,7 +16,7 @@ export async function insertOne<T extends PgTable<TableConfig>>(parameters: {
         }
 
         return responseOne
-    } catch (error: unknown) {
+    } catch (_error: unknown) {
         throw new Error("Object not inserted")
     }
 }

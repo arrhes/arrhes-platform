@@ -1,4 +1,4 @@
-import { timingSafeEqual } from "crypto"
+import { timingSafeEqual } from "node:crypto"
 import { signString } from "../../utilities/cookies/signString.js"
 import { Exception } from "../../utilities/exception.js"
 
