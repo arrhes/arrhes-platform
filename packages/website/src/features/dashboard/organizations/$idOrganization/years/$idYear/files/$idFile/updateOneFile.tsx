@@ -16,7 +16,6 @@ import { FormField } from "../../../../../../../../components/forms/formField.ts
 import { FormItem } from "../../../../../../../../components/forms/formItem.tsx"
 import { FormLabel } from "../../../../../../../../components/forms/formLabel.tsx"
 import { FormRoot } from "../../../../../../../../components/forms/formRoot.tsx"
-import { InputDate } from "../../../../../../../../components/inputs/inputDate.tsx"
 import { InputFile } from "../../../../../../../../components/inputs/inputFile.tsx"
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { Drawer } from "../../../../../../../../components/overlays/drawer/drawer.tsx"
@@ -54,8 +53,7 @@ export function UpdateOneFile(props: { file: v.InferOutput<typeof returnedSchema
                                     idOrganization: data.idOrganization,
                                     idYear: data.idYear,
                                     reference: data.reference,
-                                    label: data.label,
-                                    date: data.date,
+                                    name: data.name,
                                 },
                             })
                             if (updateFileResponse.ok === false) {
@@ -130,24 +128,6 @@ export function UpdateOneFile(props: { file: v.InferOutput<typeof returnedSchema
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="date"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Date"
-                                                isRequired={true}
-                                                description={undefined}
-                                                tooltip={undefined}
-                                            />
-                                            <FormControl>
-                                                <InputDate value={field.value} onChange={field.onChange} />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
                                     name="reference"
                                     render={({ field }) => (
                                         <FormItem>
@@ -165,11 +145,11 @@ export function UpdateOneFile(props: { file: v.InferOutput<typeof returnedSchema
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="label"
+                                    name="name"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel
-                                                label="Libellé du fichier"
+                                                label="Nom du fichier"
                                                 isRequired={false}
                                                 description={undefined}
                                                 tooltip={undefined}

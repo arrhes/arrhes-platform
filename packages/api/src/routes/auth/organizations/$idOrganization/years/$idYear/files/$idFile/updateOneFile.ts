@@ -17,8 +17,7 @@ export const updateOneFileRoute = authFactory.createApp().post(updateOneFileRout
         table: models.file,
         data: {
             reference: body.reference,
-            label: body.label,
-            date: body.date,
+            name: body.name,
             lastUpdatedAt: new Date().toISOString(),
             lastUpdatedBy: c.var.user.id,
         },

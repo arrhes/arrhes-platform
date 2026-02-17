@@ -16,9 +16,8 @@ export const fileModel = pgTable(
         idYear: idColumn("id_year")
             .references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" })
             .notNull(),
-        reference: varchar("reference", { length: 256 }).notNull(),
-        label: varchar("label", { length: 256 }),
-        date: dateTimeColumn("date").notNull(),
+        reference: varchar("reference", { length: 256 }),
+        name: varchar("name", { length: 256 }),
         storageKey: text("storage_key"),
         type: text("type"),
         size: integer("size"),
@@ -33,5 +32,5 @@ export const fileModel = pgTable(
             onUpdate: "cascade",
         }),
     },
-    (t) => [unique().on(t.idOrganization, t.idYear, t.reference)],
+    (t) => [unique().on(t.idOrganization, t.idYear)],
 )

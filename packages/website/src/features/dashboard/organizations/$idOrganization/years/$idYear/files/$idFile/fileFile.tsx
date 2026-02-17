@@ -25,7 +25,7 @@ export function FileFile(props: { file: v.InferOutput<typeof returnedSchemas.fil
 
     return (
         <embed
-            title={props.file.reference}
+            title={props.file.reference ?? undefined}
             className={css({
                 width: "100%",
                 minH: "fit",

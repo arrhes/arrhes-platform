@@ -2,7 +2,6 @@ import { ButtonContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
-import { FormatDate } from "../../../../../../../../components/formats/formatDate.tsx"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
 import { FormatFileSize } from "../../../../../../../../components/formats/formatFileSize.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
@@ -77,11 +76,8 @@ export function FilePage() {
                                             <DataBlock.Item label="Référence">
                                                 <FormatText>{file.reference}</FormatText>
                                             </DataBlock.Item>
-                                            <DataBlock.Item label="Libellé">
-                                                <FormatText>{file.label}</FormatText>
-                                            </DataBlock.Item>
-                                            <DataBlock.Item label="Date">
-                                                <FormatDate date={file.date} />
+                                            <DataBlock.Item label="Nom">
+                                                <FormatText>{file.name}</FormatText>
                                             </DataBlock.Item>
                                             <DataBlock.Item label="Type">
                                                 <FormatText>{file.type?.split("/").at(1)}</FormatText>

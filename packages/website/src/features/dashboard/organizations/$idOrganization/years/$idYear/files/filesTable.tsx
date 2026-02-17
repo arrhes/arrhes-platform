@@ -2,7 +2,6 @@ import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonContent } from "@arrhes/ui"
 import { IconEye, IconPlus } from "@tabler/icons-react"
 import type * as v from "valibot"
-import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
 import { FormatDateTime } from "../../../../../../../components/formats/formatDateTime.js"
 import { FormatFileSize } from "../../../../../../../components/formats/formatFileSize.js"
 import { FormatNull } from "../../../../../../../components/formats/formatNull.js"
@@ -16,7 +15,7 @@ export function FilesTable(props: {
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
     files: Array<v.InferOutput<typeof returnedSchemas.file>>
 }) {
-    const filesData = props.files.sort((a, b) => b.date.localeCompare(a.date))
+    const filesData = props.files.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 
     return (
         <DataTable
@@ -48,16 +47,10 @@ export function FilesTable(props: {
                     filterFn: "includesString",
                 },
                 {
-                    accessorKey: "label",
-                    header: "Libellé",
+                    accessorKey: "name",
+                    header: "Nom",
                     cell: ({ row }) =>
-                        !row.original.label ? <FormatNull /> : <FormatText>{row.original.label}</FormatText>,
-                    filterFn: "includesString",
-                },
-                {
-                    accessorKey: "date",
-                    header: "Date",
-                    cell: ({ row }) => <FormatDate date={row.original.date} />,
+                        !row.original.name ? <FormatNull /> : <FormatText>{row.original.name}</FormatText>,
                     filterFn: "includesString",
                 },
                 {

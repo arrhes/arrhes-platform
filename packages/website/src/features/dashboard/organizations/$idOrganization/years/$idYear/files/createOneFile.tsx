@@ -15,7 +15,6 @@ import { FormField } from "../../../../../../../components/forms/formField.js"
 import { FormItem } from "../../../../../../../components/forms/formItem.js"
 import { FormLabel } from "../../../../../../../components/forms/formLabel.js"
 import { FormRoot } from "../../../../../../../components/forms/formRoot.js"
-import { InputDate } from "../../../../../../../components/inputs/inputDate.js"
 import { InputFile } from "../../../../../../../components/inputs/inputFile.js"
 import { InputText } from "../../../../../../../components/inputs/inputText.js"
 import { Drawer } from "../../../../../../../components/overlays/drawer/drawer.js"
@@ -56,8 +55,7 @@ export function CreateOneFile(props: {
                                     idOrganization: data.idOrganization,
                                     idYear: data.idYear,
                                     reference: data.reference,
-                                    label: data.label,
-                                    date: data.date,
+                                    name: data.name,
                                 },
                             })
                             if (createFileResponse.ok === false) {
@@ -123,24 +121,6 @@ export function CreateOneFile(props: {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="date"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Date"
-                                                isRequired={true}
-                                                description={undefined}
-                                                tooltip={undefined}
-                                            />
-                                            <FormControl>
-                                                <InputDate value={field.value} onChange={field.onChange} />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
                                     name="reference"
                                     render={({ field }) => (
                                         <FormItem>
@@ -158,11 +138,11 @@ export function CreateOneFile(props: {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="label"
+                                    name="name"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel
-                                                label="Libellé du fichier"
+                                                label="Nom du fichier"
                                                 isRequired={false}
                                                 description={undefined}
                                                 tooltip={undefined}

@@ -30,7 +30,7 @@ export function FileSelect(props: {
                     ? []
                     : filesResponse.data.map((file) => ({
                           key: file.id,
-                          label: file.reference,
+                          label: file.reference ?? "",
                       }))
             }
         />

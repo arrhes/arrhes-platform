@@ -39,12 +39,12 @@ export function FilesGrid(props: {
             if (!filter) return true
             const searchLower = filter.toLowerCase()
             return (
-                file.reference.toLowerCase().includes(searchLower) ||
-                file.label?.toLowerCase().includes(searchLower) ||
+                file.reference?.toLowerCase().includes(searchLower) ||
+                file.name?.toLowerCase().includes(searchLower) ||
                 file.type?.toLowerCase().includes(searchLower)
             )
         })
-        .sort((a, b) => b.date.localeCompare(a.date))
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 
     return (
         <div
@@ -166,7 +166,7 @@ export function FilesGrid(props: {
                                     >
                                         {file.reference}
                                     </span>
-                                    {file.label && (
+                                    {file.name && (
                                         <span
                                             className={css({
                                                 width: "100%",
@@ -177,7 +177,7 @@ export function FilesGrid(props: {
                                                 whiteSpace: "nowrap",
                                             })}
                                         >
-                                            {file.label}
+                                            {file.name}
                                         </span>
                                     )}
                                     <div
@@ -189,7 +189,7 @@ export function FilesGrid(props: {
                                             color: "neutral/40",
                                         })}
                                     >
-                                        <FormatDate date={file.date} />
+                                        <FormatDate date={file.createdAt} />
                                         {file.size && (
                                             <>
                                                 <span>-</span>
