@@ -1,7 +1,32 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import type { InputHTMLAttributes } from "react"
+import { type InputHTMLAttributes, useRef, useState } from "react"
 import type { FieldError } from "react-hook-form"
 import { IMask, IMaskInput } from "react-imask"
+
+function isoToDisplay(value: string | undefined | null) {
+    if (!value) return ""
+    if (String(new Date(value)) === "Invalid Date") return ""
+
+    const date = new Date(value)
+    let day = String(date.getDate())
+    let month = String(date.getMonth() + 1)
+    const year = String(date.getFullYear())
+
+    if (date.getDate() < 10) day = `0${day}`
+    if (date.getMonth() + 1 < 10) month = `0${month}`
+    return [day, month, year].join(" / ")
+}
+
+function displayToIso(value: string | undefined) {
+    if (!value) return undefined
+    const parts = value.split(" / ")
+    if (parts.length !== 3) return undefined
+    const day = Number(parts[0])
+    const month = Number(parts[1])
+    const year = Number(parts[2])
+    if (!day || !month || !year || year < 1930) return undefined
+    return new Date(year, month - 1, day, 12, 0, 0).toISOString()
+}
 
 export function InputDate(
     props: Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange"> & {
@@ -11,31 +36,13 @@ export function InputDate(
         onChange: (value: string | undefined) => void
     },
 ) {
-    function input(value: string | undefined | null) {
-        if (!value) return undefined
-        if (String(new Date(value)) === "Invalid Date") return undefined
+    const lastEmittedIso = useRef<string | undefined>(undefined)
+    const [displayValue, setDisplayValue] = useState(() => isoToDisplay(props.value))
 
-        const date = new Date(value)
-        let day = String(date.getDate())
-        let month = String(date.getMonth() + 1)
-        const year = String(date.getFullYear())
-
-        if (date.getDate() < 10) day = `0${day}`
-        if (date.getMonth() + 1 < 10) month = `0${month}`
-        return [day, month, year].join(" / ")
-    }
-
-    function output(value: string | undefined) {
-        if (!value) return undefined
-        const yearMonthDay = value.split(" / ")
-        return new Date(
-            Number(yearMonthDay[2]),
-            Number(yearMonthDay[1]) - 1,
-            Number(yearMonthDay[0]),
-            12,
-            0,
-            0,
-        )?.toISOString()
+    const externalDisplay = isoToDisplay(props.value)
+    if (externalDisplay !== isoToDisplay(lastEmittedIso.current) && externalDisplay !== displayValue) {
+        setDisplayValue(externalDisplay)
+        lastEmittedIso.current = undefined
     }
 
     return (
@@ -89,8 +96,14 @@ export function InputDate(
                 eager="append"
                 unmask="typed"
                 placeholder={"JJ / MM / YYYY"}
-                onAccept={(value: unknown) => props.onChange(output(String(value)))}
-                value={input(props.value)}
+                onAccept={(value: unknown) => {
+                    const display = String(value)
+                    setDisplayValue(display)
+                    const iso = displayToIso(display)
+                    lastEmittedIso.current = iso
+                    props.onChange(iso)
+                }}
+                value={displayValue}
                 className={css({
                     borderRadius: "inherit",
                     width: "100%",
