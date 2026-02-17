@@ -2,55 +2,52 @@ import { models } from "@arrhes/application-metadata/models"
 import { updateOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
 import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
-import { bodyValidator } from "../../../../../../../../../validators/bodyValidator.js"
 
-export const updateOneAccountRoute = authFactory
-    .createApp()
-    .post(
-        updateOneAccountRouteDefinition.path,
-        bodyValidator(updateOneAccountRouteDefinition.schemas.body),
-        async (c) => {
-            const body = c.req.valid("json")
+export const updateOneAccountRoute = authFactory.createApp().post(updateOneAccountRouteDefinition.path, async (c) => {
+    const body = await validateBodyMiddleware({
+        context: c,
+        schema: updateOneAccountRouteDefinition.schemas.body,
+    })
 
-            const updateOneAccount = await updateOne({
-                database: c.var.clients.sql,
-                table: models.account,
-                data: {
-                    idAccountParent: body.idAccountParent,
+    const updateOneAccount = await updateOne({
+        database: c.var.clients.sql,
+        table: models.account,
+        data: {
+            idAccountParent: body.idAccountParent,
 
-                    idBalanceSheetAsset: body.idBalanceSheetAsset,
-                    balanceSheetAssetColumn: body.balanceSheetAssetColumn,
-                    balanceSheetAssetFlow: body.balanceSheetAssetFlow,
+            idBalanceSheetAsset: body.idBalanceSheetAsset,
+            balanceSheetAssetColumn: body.balanceSheetAssetColumn,
+            balanceSheetAssetFlow: body.balanceSheetAssetFlow,
 
-                    idBalanceSheetLiability: body.idBalanceSheetLiability,
-                    balanceSheetLiabilityColumn: body.balanceSheetLiabilityColumn,
-                    balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow,
+            idBalanceSheetLiability: body.idBalanceSheetLiability,
+            balanceSheetLiabilityColumn: body.balanceSheetLiabilityColumn,
+            balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow,
 
-                    idIncomeStatement: body.idIncomeStatement,
+            idIncomeStatement: body.idIncomeStatement,
 
-                    isClass: body.isClass,
-                    isSelectable: body.isSelectable,
-                    number: body.number,
-                    label: body.label,
-                    type: body.type,
-                    lastUpdatedAt: new Date().toISOString(),
-                    lastUpdatedBy: c.var.user.id,
-                },
-                where: (table) =>
-                    and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idYear, body.idYear),
-                        eq(table.id, body.idAccount),
-                    ),
-            })
-
-            return response({
-                context: c,
-                statusCode: 200,
-                schema: updateOneAccountRouteDefinition.schemas.return,
-                data: updateOneAccount,
-            })
+            isClass: body.isClass,
+            isSelectable: body.isSelectable,
+            number: body.number,
+            label: body.label,
+            type: body.type,
+            lastUpdatedAt: new Date().toISOString(),
+            lastUpdatedBy: c.var.user.id,
         },
-    )
+        where: (table) =>
+            and(
+                eq(table.idOrganization, body.idOrganization),
+                eq(table.idYear, body.idYear),
+                eq(table.id, body.idAccount),
+            ),
+    })
+
+    return response({
+        context: c,
+        statusCode: 200,
+        schema: updateOneAccountRouteDefinition.schemas.return,
+        data: updateOneAccount,
+    })
+})

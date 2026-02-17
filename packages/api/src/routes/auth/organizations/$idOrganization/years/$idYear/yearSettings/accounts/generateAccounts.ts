@@ -10,12 +10,12 @@ import { generateId } from "@arrhes/application-metadata/utilities"
 import { and, eq } from "drizzle-orm"
 import type * as v from "valibot"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
-import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
 
 function generateAccounts(parameters: {
     accounts: Array<DefaultAccount>
@@ -67,71 +67,67 @@ function generateAccounts(parameters: {
     return newAccounts
 }
 
-export const generateAccountsRoute = authFactory
-    .createApp()
-    .post(
-        generateAccountsRouteDefinition.path,
-        bodyValidator(generateAccountsRouteDefinition.schemas.body),
-        async (c) => {
-            const body = c.req.valid("json")
+export const generateAccountsRoute = authFactory.createApp().post(generateAccountsRouteDefinition.path, async (c) => {
+    const body = await validateBodyMiddleware({
+        context: c,
+        schema: generateAccountsRouteDefinition.schemas.body,
+    })
 
-            if (body.isReplicatingAccounts === true) {
-                throw new Exception({
-                    internalMessage: "Replicating accounts is not implemented yet",
-                    externalMessage: "Non implémenté",
-                })
+    if (body.isReplicatingAccounts === true) {
+        throw new Exception({
+            internalMessage: "Replicating accounts is not implemented yet",
+            externalMessage: "Non implémenté",
+        })
+    }
+
+    const generatedAccounts = await c.var.clients.sql.transaction(async (tx) => {
+        try {
+            const _deletedAccounts = await deleteMany({
+                database: tx,
+                table: models.account,
+                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            })
+        } catch (_error: unknown) {
+            throw new Exception({
+                internalMessage: "Failed to delete accounts",
+                externalMessage: "Échec de la suppression des comptes",
+            })
+        }
+
+        const organization = await selectOne({
+            database: tx,
+            table: models.organization,
+            where: (table) => eq(table.id, body.idOrganization),
+        })
+        const defaultAccounts = (
+            organization.scope === "association" ? defaultAssociationAccounts : defaultCompanyAccounts
+        ).filter((account) => {
+            if (account.isMandatory === false) {
+                if (body.isMinimalSystem === true) return false
             }
+            return true
+        })
 
-            const generatedAccounts = await c.var.clients.sql.transaction(async (tx) => {
-                try {
-                    const _deletedAccounts = await deleteMany({
-                        database: tx,
-                        table: models.account,
-                        where: (table) =>
-                            and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
-                    })
-                } catch (_error: unknown) {
-                    throw new Exception({
-                        internalMessage: "Failed to delete accounts",
-                        externalMessage: "Échec de la suppression des comptes",
-                    })
-                }
+        const newAccounts = generateAccounts({
+            idOrganization: body.idOrganization,
+            idYear: body.idYear,
+            accounts: defaultAccounts,
+            idAccountParent: null,
+        })
 
-                const organization = await selectOne({
-                    database: tx,
-                    table: models.organization,
-                    where: (table) => eq(table.id, body.idOrganization),
-                })
-                const defaultAccounts = (
-                    organization.scope === "association" ? defaultAssociationAccounts : defaultCompanyAccounts
-                ).filter((account) => {
-                    if (account.isMandatory === false) {
-                        if (body.isMinimalSystem === true) return false
-                    }
-                    return true
-                })
+        const generatedAccounts = await insertMany({
+            database: tx,
+            table: models.account,
+            data: newAccounts,
+        })
 
-                const newAccounts = generateAccounts({
-                    idOrganization: body.idOrganization,
-                    idYear: body.idYear,
-                    accounts: defaultAccounts,
-                    idAccountParent: null,
-                })
+        return generatedAccounts
+    })
 
-                const generatedAccounts = await insertMany({
-                    database: tx,
-                    table: models.account,
-                    data: newAccounts,
-                })
-
-                return generatedAccounts
-            })
-
-            return response({
-                context: c,
-                statusCode: 200,
-                schema: generateAccountsRouteDefinition.schemas.return,
-                data: generatedAccounts,
-            })
-        },
-    )
+    return response({
+        context: c,
+        statusCode: 200,
+        schema: generateAccountsRouteDefinition.schemas.return,
+        data: generatedAccounts,
+    })
+})

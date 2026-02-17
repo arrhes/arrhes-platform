@@ -3,74 +3,70 @@ import { createOneAccountRouteDefinition } from "@arrhes/application-metadata/ro
 import { generateId } from "@arrhes/application-metadata/utilities"
 import { and, eq } from "drizzle-orm"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
-import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
 
-export const createOneAccountRoute = authFactory
-    .createApp()
-    .post(
-        createOneAccountRouteDefinition.path,
-        bodyValidator(createOneAccountRouteDefinition.schemas.body),
-        async (c) => {
-            const body = c.req.valid("json")
+export const createOneAccountRoute = authFactory.createApp().post(createOneAccountRouteDefinition.path, async (c) => {
+    const body = await validateBodyMiddleware({
+        context: c,
+        schema: createOneAccountRouteDefinition.schemas.body,
+    })
 
-            const readOneAccount = await selectOne({
-                database: c.var.clients.sql,
-                table: models.account,
-                where: (table) => {
-                    if (body.idAccountParent === null) {
-                        return
-                    }
-                    return and(
-                        eq(table.idOrganization, body.idOrganization),
-                        eq(table.idYear, body.idYear),
-                        eq(table.id, body.idAccountParent),
-                    )
-                },
-            })
-
-            const createOneAccount = await insertOne({
-                database: c.var.clients.sql,
-                table: models.account,
-                data: {
-                    id: generateId(),
-                    idOrganization: body.idOrganization,
-                    idYear: body.idYear,
-                    idAccountParent: body.idAccountParent,
-
-                    idBalanceSheetAsset: body.idBalanceSheetAsset ?? readOneAccount?.idBalanceSheetAsset,
-                    balanceSheetAssetColumn: body.balanceSheetAssetColumn ?? readOneAccount?.balanceSheetAssetColumn,
-                    balanceSheetAssetFlow: body.balanceSheetAssetFlow ?? readOneAccount?.balanceSheetAssetFlow,
-
-                    idBalanceSheetLiability: body.idBalanceSheetLiability ?? readOneAccount?.idBalanceSheetLiability,
-                    balanceSheetLiabilityColumn:
-                        body.balanceSheetLiabilityColumn ?? readOneAccount?.balanceSheetLiabilityColumn,
-                    balanceSheetLiabilityFlow:
-                        body.balanceSheetLiabilityFlow ?? readOneAccount?.balanceSheetLiabilityFlow,
-
-                    idIncomeStatement: body.idIncomeStatement,
-
-                    isClass: body.isClass,
-                    isSelectable: body.isSelectable,
-                    isDefault: false,
-                    label: body.label,
-                    number: body.number,
-                    type: body.type,
-                    isMandatory: true,
-                    createdAt: new Date().toISOString(),
-                    lastUpdatedAt: null,
-                    createdBy: c.var.user.id,
-                    lastUpdatedBy: null,
-                },
-            })
-
-            return response({
-                context: c,
-                statusCode: 200,
-                schema: createOneAccountRouteDefinition.schemas.return,
-                data: createOneAccount,
-            })
+    const readOneAccount = await selectOne({
+        database: c.var.clients.sql,
+        table: models.account,
+        where: (table) => {
+            if (body.idAccountParent === null) {
+                return
+            }
+            return and(
+                eq(table.idOrganization, body.idOrganization),
+                eq(table.idYear, body.idYear),
+                eq(table.id, body.idAccountParent),
+            )
         },
-    )
+    })
+
+    const createOneAccount = await insertOne({
+        database: c.var.clients.sql,
+        table: models.account,
+        data: {
+            id: generateId(),
+            idOrganization: body.idOrganization,
+            idYear: body.idYear,
+            idAccountParent: body.idAccountParent,
+
+            idBalanceSheetAsset: body.idBalanceSheetAsset ?? readOneAccount?.idBalanceSheetAsset,
+            balanceSheetAssetColumn: body.balanceSheetAssetColumn ?? readOneAccount?.balanceSheetAssetColumn,
+            balanceSheetAssetFlow: body.balanceSheetAssetFlow ?? readOneAccount?.balanceSheetAssetFlow,
+
+            idBalanceSheetLiability: body.idBalanceSheetLiability ?? readOneAccount?.idBalanceSheetLiability,
+            balanceSheetLiabilityColumn:
+                body.balanceSheetLiabilityColumn ?? readOneAccount?.balanceSheetLiabilityColumn,
+            balanceSheetLiabilityFlow: body.balanceSheetLiabilityFlow ?? readOneAccount?.balanceSheetLiabilityFlow,
+
+            idIncomeStatement: body.idIncomeStatement,
+
+            isClass: body.isClass,
+            isSelectable: body.isSelectable,
+            isDefault: false,
+            label: body.label,
+            number: body.number,
+            type: body.type,
+            isMandatory: true,
+            createdAt: new Date().toISOString(),
+            lastUpdatedAt: null,
+            createdBy: c.var.user.id,
+            lastUpdatedBy: null,
+        },
+    })
+
+    return response({
+        context: c,
+        statusCode: 200,
+        schema: createOneAccountRouteDefinition.schemas.return,
+        data: createOneAccount,
+    })
+})

@@ -2,29 +2,30 @@ import { models } from "@arrhes/application-metadata/models"
 import { updateUserRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
 import { authFactory } from "../../../factories/authFactory.js"
+import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
-import { bodyValidator } from "../../../validators/bodyValidator.js"
 
-export const updateUserRoute = authFactory
-    .createApp()
-    .post(updateUserRouteDefinition.path, bodyValidator(updateUserRouteDefinition.schemas.body), async (c) => {
-        const body = c.req.valid("json")
-
-        const updateUser = await updateOne({
-            database: c.var.clients.sql,
-            table: models.user,
-            data: {
-                alias: body.alias,
-                lastUpdatedAt: new Date().toISOString(),
-            },
-            where: (table) => eq(table.id, c.var.user.id),
-        })
-
-        return response({
-            context: c,
-            statusCode: 200,
-            schema: updateUserRouteDefinition.schemas.return,
-            data: updateUser,
-        })
+export const updateUserRoute = authFactory.createApp().post(updateUserRouteDefinition.path, async (c) => {
+    const body = await validateBodyMiddleware({
+        context: c,
+        schema: updateUserRouteDefinition.schemas.body,
     })
+
+    const updateUser = await updateOne({
+        database: c.var.clients.sql,
+        table: models.user,
+        data: {
+            alias: body.alias,
+            lastUpdatedAt: new Date().toISOString(),
+        },
+        where: (table) => eq(table.id, c.var.user.id),
+    })
+
+    return response({
+        context: c,
+        statusCode: 200,
+        schema: updateUserRouteDefinition.schemas.return,
+        data: updateUser,
+    })
+})

@@ -2,40 +2,39 @@ import { models } from "@arrhes/application-metadata/models"
 import { createOneComputationRouteDefinition } from "@arrhes/application-metadata/routes"
 import { generateId } from "@arrhes/application-metadata/utilities"
 import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
-import { bodyValidator } from "../../../../../../../../validators/bodyValidator.js"
 
 export const createOneComputationRoute = authFactory
     .createApp()
-    .post(
-        createOneComputationRouteDefinition.path,
-        bodyValidator(createOneComputationRouteDefinition.schemas.body),
-        async (c) => {
-            const body = c.req.valid("json")
+    .post(createOneComputationRouteDefinition.path, async (c) => {
+        const body = await validateBodyMiddleware({
+            context: c,
+            schema: createOneComputationRouteDefinition.schemas.body,
+        })
 
-            const createOneComputation = await insertOne({
-                database: c.var.clients.sql,
-                table: models.computation,
-                data: {
-                    id: generateId(),
-                    idOrganization: body.idOrganization,
-                    idYear: body.idYear,
-                    index: body.index,
-                    number: body.number,
-                    label: body.label,
-                    createdAt: new Date().toISOString(),
-                    lastUpdatedAt: null,
-                    createdBy: c.var.user.id,
-                    lastUpdatedBy: null,
-                },
-            })
+        const createOneComputation = await insertOne({
+            database: c.var.clients.sql,
+            table: models.computation,
+            data: {
+                id: generateId(),
+                idOrganization: body.idOrganization,
+                idYear: body.idYear,
+                index: body.index,
+                number: body.number,
+                label: body.label,
+                createdAt: new Date().toISOString(),
+                lastUpdatedAt: null,
+                createdBy: c.var.user.id,
+                lastUpdatedBy: null,
+            },
+        })
 
-            return response({
-                context: c,
-                statusCode: 200,
-                schema: createOneComputationRouteDefinition.schemas.return,
-                data: createOneComputation,
-            })
-        },
-    )
+        return response({
+            context: c,
+            statusCode: 200,
+            schema: createOneComputationRouteDefinition.schemas.return,
+            data: createOneComputation,
+        })
+    })
