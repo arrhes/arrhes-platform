@@ -20,7 +20,7 @@ export const updateOneRecordRoute = authFactory
                     table: models.record,
                     data: {
                         idJournal: body.idJournal,
-                        idAttachment: body.idAttachment,
+                        idFile: body.idFile,
                         label: body.label,
                         date: body.date,
                         lastUpdatedAt: new Date().toISOString(),

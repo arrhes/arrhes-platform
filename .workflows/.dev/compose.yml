@@ -39,7 +39,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # RustFS - S3-compatible object storage for attachments/files
+  # RustFS - S3-compatible object storage for files
   rustfs:
     container_name: arrhes-rustfs
     image: rustfs/rustfs:latest

@@ -13,7 +13,6 @@ export {
     accountRelations,
     accountTypeEnum,
 } from "../../metadata/src/models/account.ts"
-export { attachmentModel, attachmentRelations } from "../../metadata/src/models/attachment.ts"
 export { balanceSheetModel, balanceSheetRelations } from "../../metadata/src/models/balanceSheet.ts"
 export { computationModel, computationRelations } from "../../metadata/src/models/computation.ts"
 export {
@@ -21,6 +20,7 @@ export {
     computationIncomeStatementRelations,
 } from "../../metadata/src/models/computationIncomeStatement.ts"
 export { documentModel, documentRelations, documentTypeEnum } from "../../metadata/src/models/document.ts"
+export { fileModel } from "../../metadata/src/models/file.ts"
 export { incomeStatementModel, incomeStatementRelations } from "../../metadata/src/models/incomeStatement.ts"
 export { journalModel, journalRelations } from "../../metadata/src/models/journal.ts"
 export { organizationModel, organizationRelations } from "../../metadata/src/models/organization.ts"

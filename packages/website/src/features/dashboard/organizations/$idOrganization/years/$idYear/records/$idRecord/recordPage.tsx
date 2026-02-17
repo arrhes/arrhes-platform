@@ -1,6 +1,6 @@
 import {
     readAllRecordRowsRouteDefinition,
-    readOneAttachmentRouteDefinition,
+    readOneFileRouteDefinition,
     readOneJournalRouteDefinition,
     readOneRecordLabelRouteDefinition,
     readOneRecordRouteDefinition,
@@ -132,7 +132,7 @@ export function RecordPage() {
                                                 </div>
                                             </Section.Item>
                                             <Section.Item className={css({ padding: "0" })}>
-                                                {record.idAttachment === null ? null : (
+                                                {record.idFile === null ? null : (
                                                     <Banner variant="error">Il manque une pièce justificative.</Banner>
                                                 )}
                                                 {compareAmounts({
@@ -195,20 +195,18 @@ export function RecordPage() {
                                                             )}
                                                         </DataBlock.Item>
                                                         <DataBlock.Item label="Pièce justificative">
-                                                            {record.idAttachment === null ? (
+                                                            {record.idFile === null ? (
                                                                 <FormatNull />
                                                             ) : (
                                                                 <DataWrapper
-                                                                    routeDefinition={readOneAttachmentRouteDefinition}
+                                                                    routeDefinition={readOneFileRouteDefinition}
                                                                     body={{
                                                                         idOrganization: params.idOrganization,
                                                                         idYear: params.idYear,
-                                                                        idAttachment: record.idAttachment,
+                                                                        idFile: record.idFile,
                                                                     }}
                                                                 >
-                                                                    {(attachment) => (
-                                                                        <span>{attachment.reference}</span>
-                                                                    )}
+                                                                    {(file) => <span>{file.reference}</span>}
                                                                 </DataWrapper>
                                                             )}
                                                         </DataBlock.Item>

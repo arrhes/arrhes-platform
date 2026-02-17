@@ -2,7 +2,7 @@ import {
     readAllRecordRowsRouteDefinition,
     readAllRecordsRouteDefinition,
     readOneAccountRouteDefinition,
-    readOneAttachmentRouteDefinition,
+    readOneFileRouteDefinition,
     readOneJournalRouteDefinition,
     readOneRecordLabelRouteDefinition,
 } from "@arrhes/application-metadata/routes"
@@ -140,23 +140,21 @@ export function RecordsPage() {
                                                 filterFn: "includesString",
                                             },
                                             {
-                                                accessorKey: "idAttachment",
+                                                accessorKey: "idFile",
                                                 header: "Pièce justificative",
                                                 cell: ({ row }) =>
-                                                    row.original.idAttachment === null ? (
+                                                    row.original.idFile === null ? (
                                                         <FormatNull />
                                                     ) : (
                                                         <DataWrapper
-                                                            routeDefinition={readOneAttachmentRouteDefinition}
+                                                            routeDefinition={readOneFileRouteDefinition}
                                                             body={{
                                                                 idOrganization: params.idOrganization,
                                                                 idYear: params.idYear,
-                                                                idAttachment: row.original.idAttachment,
+                                                                idFile: row.original.idFile,
                                                             }}
                                                         >
-                                                            {(attachment) => (
-                                                                <FormatText>{attachment.reference}</FormatText>
-                                                            )}
+                                                            {(file) => <FormatText>{file.reference}</FormatText>}
                                                         </DataWrapper>
                                                     ),
                                                 filterFn: "includesString",

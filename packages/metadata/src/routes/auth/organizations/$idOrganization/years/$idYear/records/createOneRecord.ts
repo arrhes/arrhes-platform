@@ -12,7 +12,7 @@ export const createOneRecordRouteDefinition = routeDefinition({
             idYear: recordSchema.entries.idYear,
             idJournal: v.optional(recordSchema.entries.idJournal),
             idRecordLabel: v.optional(recordSchema.entries.idRecordLabel),
-            idAttachment: v.optional(recordSchema.entries.idAttachment),
+            idFile: v.optional(recordSchema.entries.idFile),
             label: recordSchema.entries.label,
             date: recordSchema.entries.date,
         }),

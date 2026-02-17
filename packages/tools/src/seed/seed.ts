@@ -469,7 +469,7 @@ async function seed() {
                         idOrganization: populatedOrganization.id,
                         idYear: newYear.id,
                         idJournal: journal.id,
-                        idAttachment: null,
+                        idFile: null,
                         idRecordLabel: idRecordLabel,
                         label: label,
                         date: date.toISOString(),

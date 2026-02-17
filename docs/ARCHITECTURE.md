@@ -226,7 +226,7 @@ metadata/src/
 ├── models/             # Modeles Drizzle ORM
 │   ├── _index.ts       # Barrel export
 │   ├── account.ts
-│   ├── attachment.ts
+│   ├── file.ts
 │   ├── balanceSheet.ts
 │   ├── computation.ts
 │   ├── computationIncomeStatement.ts
@@ -466,7 +466,7 @@ Website                        API                      Database
        (pas de passage par l'API)
        
 3. Sauvegarde reference
-   └─> POST /api/auth/.../attachment
+   └─> POST /api/auth/.../file
        └─> Stocke storageKey en DB
 ```
 
@@ -546,7 +546,7 @@ Le schema PostgreSQL contient les tables suivantes (via Drizzle ORM) :
 - `recordRow` : Lignes d'ecriture (debit/credit)
 - `recordLabel` : Labels d'ecritures
 - `document` : Documents comptables
-- `attachment` : Pieces justificatives
+- `file` : Pieces justificatives
 
 **Etats financiers :**
 - `balanceSheet` : Configuration du bilan

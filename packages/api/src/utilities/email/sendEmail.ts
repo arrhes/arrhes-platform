@@ -11,7 +11,7 @@ export async function sendEmail(parameters: {
     from?: string
     to: string | string[]
     html: string
-    // attachments?: {
+    // files?: {
     //     content: Buffer | string | undefined
     //     filename: string
     // }[]

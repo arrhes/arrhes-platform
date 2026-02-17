@@ -8,10 +8,10 @@ import { organizationSettingsLayoutRoute } from "./organizations/$idOrganization
 import { organizationSettingsRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsRoute.tsx"
 import { organizationUsersLayoutRoute } from "./organizations/$idOrganization/organizationUsers/organizationUsersLayoutRoute.tsx"
 import { organizationUsersRoute } from "./organizations/$idOrganization/organizationUsers/organizationUsersRoute.tsx"
-import { attachmentLayoutRoute } from "./organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentLayoutRoute.tsx"
-import { attachmentRoute } from "./organizations/$idOrganization/years/$idYear/attachments/$idAttachment/attachmentRoute.tsx"
-import { attachmentsLayoutRoute } from "./organizations/$idOrganization/years/$idYear/attachments/attachmentsLayoutRoute.tsx"
-import { attachmentsRoute } from "./organizations/$idOrganization/years/$idYear/attachments/attachmentsRoute.tsx"
+import { fileLayoutRoute } from "./organizations/$idOrganization/years/$idYear/files/$idFile/fileLayoutRoute.tsx"
+import { fileRoute } from "./organizations/$idOrganization/years/$idYear/files/$idFile/fileRoute.tsx"
+import { filesLayoutRoute } from "./organizations/$idOrganization/years/$idYear/files/filesLayoutRoute.tsx"
+import { filesRoute } from "./organizations/$idOrganization/years/$idYear/files/filesRoute.tsx"
 import { recordRowLayoutRoute } from "./organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/recordRowLayoutRoute.tsx"
 import { recordRowRoute } from "./organizations/$idOrganization/years/$idYear/records/$idRecord/$idRecordRow/recordRowRoute.tsx"
 import { recordLayoutRoute } from "./organizations/$idOrganization/years/$idYear/records/$idRecord/recordLayoutRoute.tsx"
@@ -87,10 +87,7 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                                 recordRowLayoutRoute.addChildren([recordRowRoute]),
                             ]),
                         ]),
-                        attachmentsLayoutRoute.addChildren([
-                            attachmentsRoute,
-                            attachmentLayoutRoute.addChildren([attachmentRoute]),
-                        ]),
+                        filesLayoutRoute.addChildren([filesRoute, fileLayoutRoute.addChildren([fileRoute])]),
                         reportsLayoutRoute.addChildren([
                             reportsRoute,
                             journalReportRoute,

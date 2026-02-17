@@ -1,5 +1,5 @@
 import {
-    readAllAttachmentsRouteDefinition,
+    readAllFilesRouteDefinition,
     readAllJournalsRouteDefinition,
     readAllRecordLabelsRouteDefinition,
     readAllRecordsRouteDefinition,
@@ -168,7 +168,7 @@ export function UpdateOneRecord(props: {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="idAttachment"
+                                    name="idFile"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel label="Pièce justificative" isRequired={false} />
@@ -176,15 +176,15 @@ export function UpdateOneRecord(props: {
                                                 <InputDataCombobox
                                                     value={field.value}
                                                     onChange={field.onChange}
-                                                    routeDefinition={readAllAttachmentsRouteDefinition}
+                                                    routeDefinition={readAllFilesRouteDefinition}
                                                     body={{
                                                         idOrganization: props.record.idOrganization,
                                                         idYear: props.record.idYear,
                                                     }}
                                                     placeholder="Sélectionner une pièce justificative"
-                                                    getOption={(attachment) => ({
-                                                        key: attachment.id,
-                                                        label: attachment.reference,
+                                                    getOption={(file) => ({
+                                                        key: file.id,
+                                                        label: file.reference,
                                                     })}
                                                 />
                                             </FormControl>

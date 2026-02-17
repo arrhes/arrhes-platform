@@ -22,7 +22,7 @@ export const createOneRecordRoute = authFactory
                     idOrganization: body.idOrganization,
                     idYear: body.idYear,
                     idJournal: body.idJournal,
-                    idAttachment: body.idAttachment,
+                    idFile: body.idFile,
                     label: body.label,
                     date: body.date,
                     createdAt: new Date().toISOString(),

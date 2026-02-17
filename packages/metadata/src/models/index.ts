@@ -1,9 +1,9 @@
 import * as accountModel from "./account.js"
-import * as attachmentModel from "./attachment.js"
 import * as balanceSheetModel from "./balanceSheet.js"
 import * as computationModel from "./computation.js"
 import * as computationIncomeStatementModel from "./computationIncomeStatement.js"
 import * as documentModel from "./document.js"
+import * as fileModel from "./file.js"
 import * as incomeStatementModel from "./incomeStatement.js"
 import * as journalModel from "./journal.js"
 import * as organizationModel from "./organization.js"
@@ -17,7 +17,7 @@ import * as yearModel from "./year.js"
 
 export const models = {
     account: accountModel.accountModel,
-    attachment: attachmentModel.attachmentModel,
+    file: fileModel.fileModel,
     balanceSheet: balanceSheetModel.balanceSheetModel,
     computation: computationModel.computationModel,
     computationIncomeStatement: computationIncomeStatementModel.computationIncomeStatementModel,
@@ -36,7 +36,7 @@ export const models = {
 
 export const modelSchemas = {
     ...accountModel,
-    ...attachmentModel,
+    ...fileModel,
     ...balanceSheetModel,
     ...computationModel,
     ...computationIncomeStatementModel,

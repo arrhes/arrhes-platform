@@ -2,7 +2,7 @@ import { relations } from "drizzle-orm"
 import { type AnyPgColumn, pgTable, varchar } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
 import { idColumn } from "../components/models/idColumn.js"
-import { attachmentModel } from "./attachment.js"
+import { fileModel } from "./file.js"
 import { journalModel } from "./journal.js"
 import { organizationModel } from "./organization.js"
 import { recordLabelModel } from "./recordLabel.js"
@@ -20,7 +20,7 @@ export const recordModel = pgTable("table_record", {
         .references(() => yearModel.id, { onDelete: "cascade", onUpdate: "cascade" })
         .notNull(),
     idJournal: idColumn("id_journal").references(() => journalModel.id, { onDelete: "set null", onUpdate: "cascade" }),
-    idAttachment: idColumn("id_attachment").references(() => attachmentModel.id, {
+    idFile: idColumn("id_file").references(() => fileModel.id, {
         onDelete: "set null",
         onUpdate: "cascade",
     }),

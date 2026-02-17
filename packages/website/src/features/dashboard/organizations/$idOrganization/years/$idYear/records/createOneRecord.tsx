@@ -1,6 +1,6 @@
 import {
     createOneRecordRouteDefinition,
-    readAllAttachmentsRouteDefinition,
+    readAllFilesRouteDefinition,
     readAllJournalsRouteDefinition,
     readAllRecordLabelsRouteDefinition,
     readAllRecordsRouteDefinition,
@@ -43,7 +43,7 @@ export function CreateOneRecord(props: {
                         defaultValues={{
                             idOrganization: props.idOrganization,
                             idYear: props.idYear,
-                            idAttachment: null,
+                            idFile: null,
                             idJournal: null,
                         }}
                         submitButtonProps={{
@@ -170,7 +170,7 @@ export function CreateOneRecord(props: {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="idAttachment"
+                                    name="idFile"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel label="Pièce justificative" isRequired={false} />
@@ -178,15 +178,15 @@ export function CreateOneRecord(props: {
                                                 <InputDataCombobox
                                                     value={field.value}
                                                     onChange={field.onChange}
-                                                    routeDefinition={readAllAttachmentsRouteDefinition}
+                                                    routeDefinition={readAllFilesRouteDefinition}
                                                     body={{
                                                         idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Sélectionner une pièce justificative"
-                                                    getOption={(attachment) => ({
-                                                        key: attachment.id,
-                                                        label: attachment.reference,
+                                                    getOption={(file) => ({
+                                                        key: file.id,
+                                                        label: file.reference,
                                                     })}
                                                 />
                                             </FormControl>

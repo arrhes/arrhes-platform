@@ -6,8 +6,8 @@ import { introductionAccountingDocRoute } from "./accounting/introductionAccount
 import { recordsAccountingDocRoute } from "./accounting/recordsAccountingDocRoute.js"
 import { reportsAccountingDocRoute } from "./accounting/reportsAccountingDocRoute.js"
 import { rootAccountingDocRoute } from "./accounting/rootAccountingDocRoute.js"
-import { attachmentsDashboardDocRoute } from "./dashboard/attachmentsDashboardDocRoute.js"
 import { dashboardDocLayoutRoute } from "./dashboard/dashboardDocLayoutRoute.js"
+import { filesDashboardDocRoute } from "./dashboard/filesDashboardDocRoute.js"
 import { gettingStartedDashboardDocRoute } from "./dashboard/gettingStartedDashboardDocRoute.js"
 import { organizationsDashboardDocRoute } from "./dashboard/organizationsDashboardDocRoute.js"
 import { recordsDashboardDocRoute } from "./dashboard/recordsDashboardDocRoute.js"
@@ -55,7 +55,7 @@ export const docsTree: AnyRoute = docsLayoutRoute.addChildren([
         organizationsDashboardDocRoute,
         yearsDashboardDocRoute,
         recordsDashboardDocRoute,
-        attachmentsDashboardDocRoute,
+        filesDashboardDocRoute,
         reportsDashboardDocRoute,
     ]),
 ])
