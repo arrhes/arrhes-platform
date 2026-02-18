@@ -9,7 +9,7 @@ import type { ValidParams, ValidRoutes } from "../routes/applicationRouter.js"
  *
  * @example
  * <LinkButton to="/dashboard">
- *   <ButtonContent variant="primary" text="Go to Dashboard" leftIcon={<IconHome />} />
+ *   <ButtonPlainContent text="Go to Dashboard" leftIcon={<IconHome />} />
  * </LinkButton>
  */
 export function LinkButton(props: {

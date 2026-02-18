@@ -1,5 +1,5 @@
 import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent, Logo, Separator } from "@arrhes/ui"
+import { ButtonGhostContent, ButtonOutlineContent, Logo, Separator } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBook2, IconLogin2, IconUserPlus } from "@tabler/icons-react"
 import { Fragment } from "react/jsx-runtime"
@@ -69,8 +69,7 @@ export function SignUpPage() {
                             <Logo />
                         </LinkButton>
                         <LinkButton to="/documentation" title="Documentation">
-                            <ButtonContent
-                                variant="invisible"
+                            <ButtonGhostContent
                                 leftIcon={<IconBook2 />}
                                 className={css({ width: "100%", justifyContent: "center" })}
                             />
@@ -211,8 +210,7 @@ export function SignUpPage() {
                         })}
                     >
                         <LinkButton to="/connexion" className={css({ width: "100%" })}>
-                            <ButtonContent
-                                variant="default"
+                            <ButtonOutlineContent
                                 leftIcon={<IconLogin2 />}
                                 text="Se connecter"
                                 className={css({ width: "100%", justifyContent: "center" })}

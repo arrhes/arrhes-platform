@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconUserPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -20,7 +20,7 @@ export function OrganizationUsersPage() {
             <Page.Content>
                 <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
                     <CreateOneOrganizationUser idOrganization={params.idOrganization}>
-                        <ButtonContent variant="outline" leftIcon={<IconUserPlus />} text="Invitez un utilisateur" />
+                        <ButtonOutlineContent leftIcon={<IconUserPlus />} text="Invitez un utilisateur" />
                     </CreateOneOrganizationUser>
                 </div>
                 <OrganizationUsersListTable idOrganization={params.idOrganization} />

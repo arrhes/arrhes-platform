@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import type { Icon, IconProps } from "@tabler/icons-react"
 import type { ReactElement } from "react"
 import { LinkButton } from "../../components/linkButton.tsx"
@@ -21,12 +21,7 @@ export interface DocSection {
 export function SectionTab(props: { section: DocSection; isActive: boolean }) {
     return (
         <LinkButton to={props.section.path}>
-            <ButtonContent
-                variant="invisible"
-                leftIcon={props.section.icon}
-                text={props.section.label}
-                isActive={props.isActive}
-            />
+            <ButtonGhostContent leftIcon={props.section.icon} text={props.section.label} isActive={props.isActive} />
         </LinkButton>
     )
 }

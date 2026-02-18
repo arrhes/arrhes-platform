@@ -1,4 +1,4 @@
-import { ButtonContent, LinkContent } from "@arrhes/ui"
+import { ButtonOutlineContent, LinkContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import { DocLink } from "../../../components/document/docLink.tsx"
@@ -77,7 +77,7 @@ export function RootDashboardDocPage() {
                     })}
                 >
                     <LinkButton to="/documentation/dashboard/démarrage">
-                        <ButtonContent variant="outline" text="Démarrage" rightIcon={<IconChevronRight />} />
+                        <ButtonOutlineContent text="Démarrage" rightIcon={<IconChevronRight />} />
                     </LinkButton>
                 </div>
             </div>

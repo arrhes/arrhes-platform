@@ -1,5 +1,5 @@
 import { readOneAccountRouteDefinition, readOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -52,11 +52,7 @@ export function RecordRowPage() {
                                                 idRecord: recordRow.idRecord,
                                             }}
                                         >
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconChevronLeft />}
-                                                text="Retour"
-                                            />
+                                            <ButtonOutlineContent leftIcon={<IconChevronLeft />} text="Retour" />
                                         </LinkButton>
                                         <div
                                             className={css({
@@ -67,18 +63,10 @@ export function RecordRowPage() {
                                             })}
                                         >
                                             <UpdateOneRecordRow recordRow={recordRow}>
-                                                <ButtonContent
-                                                    variant="primary"
-                                                    leftIcon={<IconPencil />}
-                                                    text="Modifier"
-                                                />
+                                                <ButtonPlainContent leftIcon={<IconPencil />} text="Modifier" />
                                             </UpdateOneRecordRow>
                                             <DeleteOneRecordRow recordRow={recordRow}>
-                                                <ButtonContent
-                                                    variant="default"
-                                                    leftIcon={<IconTrash />}
-                                                    color="error"
-                                                />
+                                                <ButtonOutlineContent leftIcon={<IconTrash />} color="danger" />
                                             </DeleteOneRecordRow>
                                         </div>
                                     </div>

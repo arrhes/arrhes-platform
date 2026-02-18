@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -27,14 +27,10 @@ export function JournalsPage() {
                             })}
                         >
                             <CreateOneJournal idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un journal" />
+                                <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter un journal" />
                             </CreateOneJournal>
                             <GenerateJournals idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="default"
-                                    leftIcon={<IconPlus />}
-                                    text="Générer les journaux par défaut"
-                                />
+                                <ButtonOutlineContent leftIcon={<IconPlus />} text="Générer les journaux par défaut" />
                             </GenerateJournals>
                         </div>
                         <JournalsListTable idOrganization={params.idOrganization} idYear={params.idYear} />

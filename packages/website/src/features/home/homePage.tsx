@@ -1,4 +1,4 @@
-import { Badge, ButtonContent, Logo } from "@arrhes/ui"
+import { Badge, ButtonGhostContent, ButtonOutlineContent, ButtonPlainContent, Logo } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBook2, IconBrandGithub, IconGavel, IconUser } from "@tabler/icons-react"
 import { LinkButton } from "../../components/linkButton.js"
@@ -57,13 +57,13 @@ export function HomePage() {
                         })}
                     >
                         <a href="https://github.com/arrhes" target="_blank" rel="noopener noreferrer">
-                            <ButtonContent variant="invisible" leftIcon={<IconBrandGithub />} />
+                            <ButtonGhostContent leftIcon={<IconBrandGithub />} />
                         </a>
                         <LinkButton to="/documentation">
-                            <ButtonContent leftIcon={<IconBook2 />} text="Documentation" />
+                            <ButtonOutlineContent leftIcon={<IconBook2 />} text="Documentation" />
                         </LinkButton>
                         <LinkButton to="/dashboard">
-                            <ButtonContent variant="primary" text="Dashboard" />
+                            <ButtonPlainContent text="Dashboard" />
                         </LinkButton>
                     </nav>
                 </div>
@@ -152,10 +152,10 @@ export function HomePage() {
                             })}
                         >
                             <LinkButton to="/inscription">
-                                <ButtonContent variant="primary" leftIcon={<IconUser />} text="Créer un compte" />
+                                <ButtonPlainContent leftIcon={<IconUser />} text="Créer un compte" />
                             </LinkButton>
                             <LinkButton to="/documentation">
-                                <ButtonContent variant="default" leftIcon={<IconBook2 />} text="En savoir plus" />
+                                <ButtonOutlineContent leftIcon={<IconBook2 />} text="En savoir plus" />
                             </LinkButton>
                         </div>
                     </div>
@@ -271,7 +271,7 @@ export function HomePage() {
                         Apprenez les concepts essentiels : partie double, plan comptable, écritures, journaux...
                     </p>
                     <LinkButton to="/documentation/comptabilité">
-                        <ButtonContent variant="default" leftIcon={<IconBook2 />} text="Découvrir le cours" />
+                        <ButtonOutlineContent leftIcon={<IconBook2 />} text="Découvrir le cours" />
                     </LinkButton>
                 </div>
             </section>
@@ -312,7 +312,7 @@ export function HomePage() {
                         <Logo withText />
                     </Button> */}
                     <LinkButton to="/documentation/mentions-légales">
-                        <ButtonContent variant="invisible" leftIcon={<IconGavel />} text="Mentions légales" />
+                        <ButtonGhostContent leftIcon={<IconGavel />} text="Mentions légales" />
                     </LinkButton>
                 </div>
             </footer>

@@ -1,5 +1,5 @@
 import { readAllFilesRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconLayoutGrid, IconLayoutList, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -31,13 +31,13 @@ export function FilesPage() {
                     })}
                 >
                     <Button onClick={() => setViewMode("grid")} title="Grille">
-                        <ButtonContent leftIcon={<IconLayoutGrid />} isActive={viewMode === "grid"} />
+                        <ButtonOutlineContent leftIcon={<IconLayoutGrid />} isActive={viewMode === "grid"} />
                     </Button>
                     <Button onClick={() => setViewMode("list")} title="Liste">
-                        <ButtonContent leftIcon={<IconLayoutList />} isActive={viewMode === "list"} />
+                        <ButtonOutlineContent leftIcon={<IconLayoutList />} isActive={viewMode === "list"} />
                     </Button>
                     <CreateOneFile idOrganization={params.idOrganization} idYear={params.idYear}>
-                        <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un fichier" />
+                        <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter un fichier" />
                     </CreateOneFile>
                 </div>
 

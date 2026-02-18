@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import type { ReactNode } from "react"
 import { LinkButton } from "../../components/linkButton.tsx"
@@ -49,8 +49,7 @@ export function SidebarNavigation(props: { navigation: Record<string, Navigation
                     >
                         {section.items.map((item) => (
                             <LinkButton key={item.path} to={item.path} className={css({ width: "100%" })}>
-                                <ButtonContent
-                                    variant="invisible"
+                                <ButtonGhostContent
                                     text={item.label}
                                     isActive={props.pathname === item.path}
                                     className={css({ width: "100%", justifyContent: "start" })}

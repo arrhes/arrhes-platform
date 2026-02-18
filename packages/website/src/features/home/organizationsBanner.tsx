@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBuilding } from "@tabler/icons-react"
 import { Box } from "../../components/layouts/box.js"
@@ -19,7 +19,7 @@ export function OrganizationsBanner() {
                 <p className={css({ color: "neutral/50" })}>Que vous avez créées ou auxquelles vous avez été invité</p>
             </div>
             <LinkButton to="/dashboard/organisations" className={css({ width: "fit-content" })}>
-                <ButtonContent variant="primary" leftIcon={<IconBuilding />} text="Voir mes organisations" />
+                <ButtonPlainContent leftIcon={<IconBuilding />} text="Voir mes organisations" />
             </LinkButton>
         </Box>
     )

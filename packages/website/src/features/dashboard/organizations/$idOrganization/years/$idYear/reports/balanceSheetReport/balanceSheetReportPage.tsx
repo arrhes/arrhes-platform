@@ -3,7 +3,7 @@ import {
     readAllBalanceSheetsRouteDefinition,
     readAllRecordRowsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconDownload } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -66,10 +66,9 @@ export function BalanceSheetReportPage() {
                                                                     idOrganization={params.idOrganization}
                                                                     idYear={params.idYear}
                                                                 >
-                                                                    <ButtonContent
+                                                                    <ButtonOutlineContent
                                                                         leftIcon={<IconDownload />}
                                                                         text="Télécharger en pdf"
-                                                                        variant="default"
                                                                     />
                                                                 </DownloadBalanceSheetReport>
                                                             </div>

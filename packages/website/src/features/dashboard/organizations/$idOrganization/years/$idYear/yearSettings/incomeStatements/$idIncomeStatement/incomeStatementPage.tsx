@@ -1,5 +1,5 @@
 import { readOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -46,7 +46,7 @@ export function IncomeStatementPage() {
                                             idYear: incomeStatement.idYear,
                                         }}
                                     >
-                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
+                                        <ButtonOutlineContent leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
                                 <div
@@ -59,10 +59,10 @@ export function IncomeStatementPage() {
                                     })}
                                 >
                                     <UpdateOneIncomeStatement incomeStatement={incomeStatement}>
-                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
+                                        <ButtonPlainContent leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneIncomeStatement>
                                     <DeleteOneIncomeStatement incomeStatement={incomeStatement}>
-                                        <ButtonContent variant="default" leftIcon={<IconTrash />} color="error" />
+                                        <ButtonOutlineContent leftIcon={<IconTrash />} color="danger" />
                                     </DeleteOneIncomeStatement>
                                 </div>
                             </Section.Item>

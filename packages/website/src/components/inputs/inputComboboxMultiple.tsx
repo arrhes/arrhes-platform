@@ -1,10 +1,9 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, CircularLoader } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconCheck, IconSelector, IconX } from "@tabler/icons-react"
 import { CommandEmpty, CommandLoading } from "cmdk"
 import { Fragment, useState } from "react"
 import { FormatNull } from "../formats/formatNull.js"
-import { CircularLoader } from "../layouts/circularLoader.js"
 import { Command, CommandInput, CommandItem, CommandList } from "../layouts/command.js"
 import { Popover } from "../overlays/popover/popover.js"
 
@@ -59,11 +58,11 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                     width: "100%",
                     borderRadius: "md",
                     border: "1px solid",
-                    borderColor: "neutral/25",
+                    borderColor: "neutral/20",
                     _disabled: { cursor: "not-allowed", opacity: "50" },
-                    maxH: "[256px]",
+                    maxH: "256px",
                     overflowY: "auto",
-                    minH: "[40px]",
+                    minH: "40px",
                 })}
             >
                 {props.selectedOptions.length === 0 ? (
@@ -90,9 +89,9 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                     borderRadius: "md",
                                 })}
                             >
-                                <span className={css({ padding: "1rem" })}>{option.label}</span>
+                                <span className={css({ padding: "1rem", fontSize: "sm" })}>{option.label}</span>
                                 <Button onClick={() => handleUnselect(index)}>
-                                    <ButtonContent variant="invisible" leftIcon={<IconX />} />
+                                    <ButtonGhostContent leftIcon={<IconX />} />
                                 </Button>
                             </div>
                         </Fragment>
@@ -115,24 +114,17 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                             className={cx(
                                 css({
                                     width: "100%",
+                                    height: "32px",
                                     display: "grid",
                                     gridTemplateColumns: "auto min-content",
                                     alignItems: "center",
                                     gap: "2",
                                     padding: "1rem",
                                     border: "1px solid",
-                                    borderColor: "neutral/25",
+                                    borderColor: "neutral/20",
                                     borderRadius: "md",
-                                    _groupFocus: {
-                                        borderColor: "neutral/50",
-                                        boxShadow: "outer",
-                                        backgroundColor: "neutral/5",
-                                    },
-                                    "&[data-open=true]": {
-                                        borderColor: "neutral/50",
-                                        backgroundColor: "neutral/5",
-                                        boxShadow: "outer",
-                                    },
+                                    _hover: { borderColor: "neutral/30" },
+                                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                                 }),
                             )}
                         >
@@ -171,7 +163,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                             ) : null}
                             <CommandList
                                 className={css({
-                                    maxH: "[256px]",
+                                    maxH: "256px",
                                     overflowY: "auto",
                                     display: "flex",
                                     flexDirection: "column",
@@ -183,14 +175,14 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                     <div
                                         className={css({
                                             position: "relative",
-                                            height: "[40px]",
+                                            height: "40px",
                                             padding: "3",
                                             display: "flex",
                                             justifyContent: "flex-start",
                                             alignItems: "center",
                                             cursor: "default",
                                             userSelect: "none",
-                                            borderRadius: "sm",
+                                            borderRadius: "md",
                                             outline: "none",
                                             _disabled: { pointerEvents: "none", opacity: "50" },
                                         })}
@@ -200,6 +192,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                                 color: "neutral/10",
                                                 textAlign: "left",
                                                 fontStyle: "italic",
+                                                fontSize: "sm",
                                             })}
                                         >
                                             No result
@@ -224,7 +217,7 @@ export function InputComboboxMultiple<TValue extends string>(props: InputCombobo
                                             className={cx(
                                                 css({
                                                     padding: "3",
-                                                    height: "[40px]",
+                                                    height: "40px",
                                                     display: "flex",
                                                     justifyContent: "space-between",
                                                     alignItems: "center",

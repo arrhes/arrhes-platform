@@ -1,4 +1,4 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import type * as SwitchPrimitives from "@radix-ui/react-switch"
 import type { ComponentProps, JSX } from "react"
@@ -48,8 +48,7 @@ export function InputToggle<TValue extends string | boolean>(
                             _last: { borderRight: "none" },
                         })}
                     >
-                        <ButtonContent
-                            variant="invisible"
+                        <ButtonGhostContent
                             className={cx(
                                 css({
                                     transition: "all 200ms ease-in-out",

@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { useMatches, useRouterState } from "@tanstack/react-router"
 import type { JSX } from "react"
@@ -7,13 +7,13 @@ import { LinkButton } from "../../linkButton.js"
 
 export function PageNavigation(props: {
     tabs:
-        | Array<{
-              label: string
-              icon: JSX.Element
-              to: ValidRoutes
-              params: ValidParams
-          }>
-        | undefined
+    | Array<{
+        label: string
+        icon: JSX.Element
+        to: ValidRoutes
+        params: ValidParams
+    }>
+    | undefined
 }) {
     const routeMatches = useMatches()
     const currentPath = useRouterState({
@@ -55,13 +55,7 @@ export function PageNavigation(props: {
 
                         return (
                             <LinkButton key={tab.to} to={tab.to} params={tab.params}>
-                                <ButtonContent
-                                    variant="invisible"
-                                    leftIcon={tab.icon}
-                                    text={tab.label}
-                                    color="neutral"
-                                    isActive={isActive}
-                                />
+                                <ButtonGhostContent leftIcon={tab.icon} text={tab.label} color="neutral" isActive={isActive} />
                             </LinkButton>
                         )
                     })}

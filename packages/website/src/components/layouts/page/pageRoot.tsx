@@ -16,7 +16,6 @@ export function PageRoot(props: {
                     flexDirection: "column",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    overflowY: "auto",
                     gap: "2rem",
                     backgroundColor: "white",
                     padding: "1rem",

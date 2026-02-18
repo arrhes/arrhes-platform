@@ -1,15 +1,13 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { forwardRef } from "react"
 import { useFormField } from "./useFormField.js"
 
-export const FormError = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>((props, ref) => {
+export function FormError(props: React.HTMLAttributes<HTMLParagraphElement>) {
     const { error, formMessageId } = useFormField()
     const body = error ? String(error?.message) : props.children
 
     if (!body) return null
     return (
         <p
-            ref={ref}
             id={formMessageId}
             className={cx(
                 css({
@@ -24,4 +22,4 @@ export const FormError = forwardRef<HTMLParagraphElement, React.HTMLAttributes<H
             {body}
         </p>
     )
-})
+}

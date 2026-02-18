@@ -1,5 +1,5 @@
 import { signOutRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonContent, Logo, Separator } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, Logo, Separator } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBook2, IconBuildings, IconLifebuoy, IconLogout, IconUser } from "@tabler/icons-react"
 import { Outlet } from "@tanstack/react-router"
@@ -68,21 +68,20 @@ export function DashboardLayout() {
                         })}
                     >
                         <LinkButton to="/documentation" target="_blank" rel="noopener noreferrer" title="Documentation">
-                            <ButtonContent variant="invisible" leftIcon={<IconBook2 />} />
+                            <ButtonGhostContent leftIcon={<IconBook2 />} />
                         </LinkButton>
                         <LinkButton to="/dashboard/organisations" title="Organisations">
-                            <ButtonContent variant="default" leftIcon={<IconBuildings />} />
+                            <ButtonOutlineContent leftIcon={<IconBuildings />} />
                         </LinkButton>
                         <Popover.Root>
                             <Popover.Trigger asChild>
                                 <Button title="Utilisateur">
-                                    <ButtonContent variant="default" leftIcon={<IconUser />} />
+                                    <ButtonOutlineContent leftIcon={<IconUser />} />
                                 </Button>
                             </Popover.Trigger>
                             <Popover.Content align="end">
                                 <LinkButton to="/dashboard/support" className={css({ width: "100%" })}>
-                                    <ButtonContent
-                                        variant="invisible"
+                                    <ButtonGhostContent
                                         leftIcon={<IconLifebuoy />}
                                         text="Support"
                                         className={css({ width: "100%", justifyContent: "start" })}
@@ -111,11 +110,10 @@ export function DashboardLayout() {
                                         })
                                     }}
                                 >
-                                    <ButtonContent
-                                        variant="invisible"
+                                    <ButtonGhostContent
                                         leftIcon={<IconLogout />}
                                         text="Se déconnecter"
-                                        color="error"
+                                        color="danger"
                                         className={css({ width: "100%", justifyContent: "start" })}
                                     />
                                 </Button>

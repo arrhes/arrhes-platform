@@ -3,7 +3,7 @@ import {
     readOneIncomeStatementRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { IconEye } from "@tabler/icons-react"
 import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../../../../components/formats/formatDateTime.tsx"
@@ -44,7 +44,7 @@ export function ComputationIncomeStatementsTable(props: {
                                             idComputationIncomeStatement: row.original.id,
                                         }}
                                     >
-                                        <ButtonContent variant="invisible" leftIcon={<IconEye />} text={undefined} />
+                                        <ButtonGhostContent leftIcon={<IconEye />} text={undefined} />
                                     </LinkButton>
                                 ),
                                 enableSorting: false,

@@ -1,5 +1,5 @@
 import { readAllRecordRowsRouteDefinition, readAllRecordsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconDownload, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -63,21 +63,23 @@ export function RecordsPage() {
                                                 records={records}
                                                 recordRows={recordRows}
                                             >
-                                                <ButtonContent
-                                                    variant="invisible"
-                                                    leftIcon={<IconDownload />}
-                                                    // text="Exporter"
-                                                />
+                                                <Button>
+                                                    <ButtonGhostContent
+                                                        leftIcon={<IconDownload />}
+                                                        // text="Exporter"
+                                                    />
+                                                </Button>
                                             </ExportRecordRows>
                                             <CreateOneRecord
                                                 idOrganization={params.idOrganization}
                                                 idYear={params.idYear}
                                             >
-                                                <ButtonContent
-                                                    variant="primary"
-                                                    leftIcon={<IconPlus />}
-                                                    text="Ajouter une écriture"
-                                                />
+                                                <Button>
+                                                    <ButtonPlainContent
+                                                        leftIcon={<IconPlus />}
+                                                        text="Ajouter une écriture"
+                                                    />
+                                                </Button>
                                             </CreateOneRecord>
                                         </div>
                                         <RecordsTable

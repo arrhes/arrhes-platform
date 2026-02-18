@@ -1,4 +1,4 @@
-import { Button, ButtonContent, Separator } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, ButtonPlainContent, Separator } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconArrowsSort, IconSortAscendingLetters, IconSortDescendingLetters, IconX } from "@tabler/icons-react"
 import { Popover } from "../../overlays/popover/popover.js"
@@ -23,11 +23,14 @@ export function ListTableSortPopover<TItem>(props: {
         <Popover.Root>
             <Popover.Trigger asChild>
                 <Button>
-                    <ButtonContent
-                        variant={props.activeSortCount > 0 ? "primary" : "default"}
-                        leftIcon={<IconArrowsSort size={16} />}
-                        text={props.activeSortCount > 0 ? `Trier (${props.activeSortCount})` : "Trier"}
-                    />
+                    {props.activeSortCount > 0 ? (
+                        <ButtonPlainContent
+                            leftIcon={<IconArrowsSort size={16} />}
+                            text={`Trier (${props.activeSortCount})`}
+                        />
+                    ) : (
+                        <ButtonOutlineContent leftIcon={<IconArrowsSort size={16} />} text="Trier" />
+                    )}
                 </Button>
             </Popover.Trigger>
             <Popover.Content
@@ -47,9 +50,8 @@ export function ListTableSortPopover<TItem>(props: {
                     className={css({ width: "100%" })}
                     isDisabled={props.activeSortCount === 0}
                 >
-                    <ButtonContent
-                        variant="invisible"
-                        color="error"
+                    <ButtonGhostContent
+                        color="danger"
                         leftIcon={<IconX size={16} />}
                         text="Effacer le tri"
                         className={css({ width: "100%", justifyContent: "start" })}
@@ -81,8 +83,7 @@ export function ListTableSortPopover<TItem>(props: {
                                     onClick={() => props.onToggleSort(column.id)}
                                     className={css({ width: "100%" })}
                                 >
-                                    <ButtonContent
-                                        variant="invisible"
+                                    <ButtonGhostContent
                                         leftIcon={getSortIcon(direction)}
                                         text={column.header}
                                         className={css({ width: "100%", justifyContent: "start" })}

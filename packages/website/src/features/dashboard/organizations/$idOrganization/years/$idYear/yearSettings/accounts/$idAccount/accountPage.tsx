@@ -1,5 +1,5 @@
 import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -48,7 +48,7 @@ export function AccountPage() {
                                             idYear: account.idYear,
                                         }}
                                     >
-                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
+                                        <ButtonOutlineContent leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
                                 <div
@@ -61,14 +61,13 @@ export function AccountPage() {
                                     })}
                                 >
                                     <UpdateOneAccount account={account}>
-                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
+                                        <ButtonPlainContent leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneAccount>
                                     <DeleteOneAccount account={account}>
-                                        <ButtonContent
-                                            variant="default"
+                                        <ButtonOutlineContent
                                             leftIcon={<IconTrash />}
                                             title="Supprimer"
-                                            color="error"
+                                            color="danger"
                                         />
                                     </DeleteOneAccount>
                                 </div>

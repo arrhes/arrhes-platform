@@ -28,6 +28,7 @@ export { readAllRecordRowsRouteDefinition } from "./years/$idYear/records/$idRec
 export { updateManyRecordRowsRouteDefinition } from "./years/$idYear/records/$idRecord/recordRows/updateManyRecordRows.js"
 export { updateOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/updateOneRecord.js"
 export { createOneRecordRouteDefinition } from "./years/$idYear/records/createOneRecord.js"
+export { createOneRecordFromTemplateRouteDefinition } from "./years/$idYear/records/createOneRecordFromTemplate.js"
 export { readAllRecordsRouteDefinition } from "./years/$idYear/records/readAllRecords.js"
 export { generateDocumentGetSignedUrlRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/generateDocumentGetSignedUrl.js"
 export { readOneDocumentRouteDefinition } from "./years/$idYear/reports/documents/$idDocument/readOneDocument.js"

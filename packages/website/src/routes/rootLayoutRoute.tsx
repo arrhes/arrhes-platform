@@ -2,8 +2,8 @@ import type { readUserSessionRouteDefinition } from "@arrhes/application-metadat
 import { createRootRouteWithContext, useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import type * as v from "valibot"
-import { CircularLoader } from "../components/layouts/circularLoader.js"
 import { RootLayout } from "../features/rootLayout.js"
+import { CircularLoader } from "@arrhes/ui"
 
 export const rootLayoutRoute = createRootRouteWithContext<{
     title: string | undefined
@@ -11,7 +11,7 @@ export const rootLayoutRoute = createRootRouteWithContext<{
     userSession: Promise<v.InferOutput<typeof readUserSessionRouteDefinition.schemas.return> | undefined> | undefined
 }>()({
     pendingComponent: () => <CircularLoader text="Application loading..." />,
-    beforeLoad: (_ctx) => {},
+    beforeLoad: (_ctx) => { },
     component: () => {
         const matches = useRouterState({ select: (s) => s.matches })
 

@@ -1,4 +1,4 @@
-import { Button, ButtonContent, Separator } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, ButtonPlainContent, Separator } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconArrowsSort, IconSortAscendingLetters, IconSortDescendingLetters, IconX } from "@tabler/icons-react"
 import type { SortDirection, Table } from "@tanstack/react-table"
@@ -41,11 +41,14 @@ export function TableSortPopover<TData>(props: { table: Table<TData> }) {
         <Popover.Root>
             <Popover.Trigger asChild>
                 <Button>
-                    <ButtonContent
-                        variant={activeSortCount > 0 ? "primary" : "default"}
-                        leftIcon={<IconArrowsSort size={16} />}
-                        text={activeSortCount > 0 ? `Trier (${activeSortCount})` : "Trier"}
-                    />
+                    {activeSortCount > 0 ? (
+                        <ButtonPlainContent
+                            leftIcon={<IconArrowsSort size={16} />}
+                            text={`Trier (${activeSortCount})`}
+                        />
+                    ) : (
+                        <ButtonOutlineContent leftIcon={<IconArrowsSort size={16} />} text="Trier" />
+                    )}
                 </Button>
             </Popover.Trigger>
             <Popover.Content
@@ -65,9 +68,8 @@ export function TableSortPopover<TData>(props: { table: Table<TData> }) {
                     className={css({ width: "100%" })}
                     isDisabled={activeSortCount === 0}
                 >
-                    <ButtonContent
-                        variant="invisible"
-                        color="error"
+                    <ButtonGhostContent
+                        color="danger"
                         leftIcon={<IconX size={16} />}
                         text="Effacer le tri"
                         className={css({ width: "100%", justifyContent: "start" })}
@@ -96,8 +98,7 @@ export function TableSortPopover<TData>(props: { table: Table<TData> }) {
                                 })}
                             >
                                 <Button onClick={() => toggleColumnSort(column.id)} className={css({ width: "100%" })}>
-                                    <ButtonContent
-                                        variant="invisible"
+                                    <ButtonGhostContent
                                         leftIcon={getSortIcon(direction)}
                                         text={column.columnDef.header?.toString()}
                                         className={css({ width: "100%", justifyContent: "start" })}

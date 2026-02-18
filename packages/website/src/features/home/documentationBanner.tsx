@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconExternalLink } from "@tabler/icons-react"
 import { Box } from "../../components/layouts/box.js"
@@ -24,7 +24,7 @@ export function DocumentationBanner() {
                 className={css({ width: "fit-content" })}
                 aria-label="Adresse de la documentation"
             >
-                <ButtonContent variant="primary" leftIcon={<IconExternalLink />} text="Consulter la documentation" />
+                <ButtonPlainContent leftIcon={<IconExternalLink />} text="Consulter la documentation" />
             </a>
         </Box>
     )

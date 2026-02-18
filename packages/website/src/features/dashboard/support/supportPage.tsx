@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBrandGithub, IconBrandLinkedin, IconMail } from "@tabler/icons-react"
 import { Box } from "../../../components/layouts/box.tsx"
@@ -24,13 +24,13 @@ export function SupportPage() {
                         })}
                     >
                         <a href="mailto:contact@arrhes.com">
-                            <ButtonContent variant="default" leftIcon={<IconMail />} text="Email" />
+                            <ButtonOutlineContent leftIcon={<IconMail />} text="Email" />
                         </a>
                         <a href="https://github.com/arrhes">
-                            <ButtonContent variant="default" leftIcon={<IconBrandGithub />} text="Github" />
+                            <ButtonOutlineContent leftIcon={<IconBrandGithub />} text="Github" />
                         </a>
                         <a href="https://linkedin.com/arrhes">
-                            <ButtonContent variant="default" leftIcon={<IconBrandLinkedin />} text="LinkedIn" />
+                            <ButtonOutlineContent leftIcon={<IconBrandLinkedin />} text="LinkedIn" />
                         </a>
                     </div>
                 </Box>

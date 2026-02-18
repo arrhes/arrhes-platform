@@ -1,4 +1,4 @@
-import { Button, ButtonContent, Separator } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, ButtonPlainContent, Separator } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconFilter, IconX } from "@tabler/icons-react"
 import { InputDebounced } from "../../inputs/inputDebounced.js"
@@ -18,11 +18,14 @@ export function ListTableFilterPopover<TItem>(props: {
         <Popover.Root>
             <Popover.Trigger asChild>
                 <Button>
-                    <ButtonContent
-                        variant={activeFilterCount > 0 ? "primary" : "default"}
-                        leftIcon={<IconFilter size={16} />}
-                        text={activeFilterCount > 0 ? `Filtrer (${activeFilterCount})` : "Filtrer"}
-                    />
+                    {activeFilterCount > 0 ? (
+                        <ButtonPlainContent
+                            leftIcon={<IconFilter size={16} />}
+                            text={`Filtrer (${activeFilterCount})`}
+                        />
+                    ) : (
+                        <ButtonOutlineContent leftIcon={<IconFilter size={16} />} text="Filtrer" />
+                    )}
                 </Button>
             </Popover.Trigger>
             <Popover.Content
@@ -42,9 +45,8 @@ export function ListTableFilterPopover<TItem>(props: {
                     className={css({ width: "100%" })}
                     isDisabled={activeFilterCount === 0}
                 >
-                    <ButtonContent
-                        variant="invisible"
-                        color="error"
+                    <ButtonGhostContent
+                        color="danger"
                         leftIcon={<IconX size={16} />}
                         text="Effacer les filtres"
                         className={css({ width: "100%", justifyContent: "start" })}

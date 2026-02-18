@@ -1,7 +1,7 @@
 import { createRoute, redirect } from "@tanstack/react-router"
-import { CircularLoader } from "../../../components/layouts/circularLoader.js"
 import { DashboardLayout } from "../../../features/dashboard/dashboardLayout.js"
 import { rootLayoutRoute } from "../../rootLayoutRoute.js"
+import { CircularLoader } from "@arrhes/ui"
 
 export const dashboardLayoutRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,

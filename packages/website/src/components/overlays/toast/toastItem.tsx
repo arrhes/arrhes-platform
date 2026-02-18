@@ -1,4 +1,4 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import {
     type Icon,
@@ -83,7 +83,7 @@ export function ToastItem(props: { toast: ToasterToast; onDismiss: (id: string) 
                 )}
             </div>
             <Button title="Fermer" onClick={() => props.onDismiss(props.toast.id)}>
-                <ButtonContent variant="invisible" leftIcon={<IconX />} />
+                <ButtonGhostContent leftIcon={<IconX />} />
             </Button>
         </div>
     )

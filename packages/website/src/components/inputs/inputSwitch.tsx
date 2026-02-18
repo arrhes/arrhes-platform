@@ -19,7 +19,6 @@ export function InputSwitch(props: InputSwitch) {
 
     return (
         <SwitchPrimitives.Root
-            // {...props}
             ref={props.ref}
             className={cx(
                 css({
@@ -31,7 +30,7 @@ export function InputSwitch(props: InputSwitch) {
                     alignItems: "center",
                     borderRadius: "100%",
                     border: "1px solid",
-                    borderColor: "neutral/25",
+                    borderColor: "neutral/20",
                     _disabled: { cursor: "not-allowed", opacity: "0.5" },
                     backgroundColor: "white",
                     _checked: { backgroundColor: "success/5", borderColor: "neutral" },

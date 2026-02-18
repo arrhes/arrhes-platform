@@ -5,7 +5,7 @@ import {
     readOneRecordLabelRouteDefinition,
     readOneRecordRouteDefinition,
 } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconCopyCheck, IconEdit, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -81,8 +81,7 @@ export function RecordPage() {
                                                             idYear: params.idYear,
                                                         }}
                                                     >
-                                                        <ButtonContent
-                                                            variant="default"
+                                                        <ButtonOutlineContent
                                                             leftIcon={<IconChevronLeft />}
                                                             text="Retour"
                                                         />
@@ -96,36 +95,33 @@ export function RecordPage() {
                                                         })}
                                                     >
                                                         <UpdateOneRecord record={record}>
-                                                            <ButtonContent
-                                                                variant="primary"
+                                                            <ButtonPlainContent
                                                                 leftIcon={<IconPencil />}
                                                                 text="Modifier"
                                                             />
                                                         </UpdateOneRecord>
                                                         <DuplicateOneRecord record={record}>
-                                                            <ButtonContent
-                                                                variant="default"
+                                                            <ButtonOutlineContent
                                                                 leftIcon={<IconCopyCheck />}
                                                                 text="Dupliquer"
                                                             />
                                                         </DuplicateOneRecord>
                                                         <DeleteOneRecord record={record}>
-                                                            <ButtonContent
-                                                                variant="default"
+                                                            <ButtonOutlineContent
                                                                 leftIcon={<IconTrash />}
                                                                 title="Supprimer"
-                                                                color="error"
+                                                                color="danger"
                                                             />
                                                         </DeleteOneRecord>
                                                         {/* <ComputeRecord record={record.data}>
-                                <ButtonOutline
+                                <ButtonOutlineContent
                                     text={!record.data.isComputed ? "Simuler" : "Ne plus simuler"}
                                     icon={<IconCalculator />}
                                     color="information"
                                 />
                             </ComputeRecord> */}
                                                         {/* <DuplicateRecord record={record.data}>
-                                <ButtonOutline
+                                <ButtonOutlineContent
                                     text="Dupliquer"
                                     icon={<IconCopy />}
                                 />
@@ -262,15 +258,13 @@ export function RecordPage() {
                                                     })}
                                                 >
                                                     <CreateOneRecordRow record={record}>
-                                                        <ButtonContent
-                                                            variant="primary"
+                                                        <ButtonPlainContent
                                                             leftIcon={<IconPlus />}
                                                             text="Ajouter un mouvement"
                                                         />
                                                     </CreateOneRecordRow>
                                                     <UpdateManyRecordRows record={record}>
-                                                        <ButtonContent
-                                                            variant="default"
+                                                        <ButtonOutlineContent
                                                             leftIcon={<IconEdit />}
                                                             text="Modifier plusieurs mouvements"
                                                         />

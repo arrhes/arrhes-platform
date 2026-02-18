@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconCalendarPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -20,7 +20,7 @@ export function YearsPage() {
             <Page.Content>
                 <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
                     <CreateOneYear idOrganization={params.idOrganization}>
-                        <ButtonContent variant="default" leftIcon={<IconCalendarPlus />} text="Ajouter un exercice" />
+                        <ButtonOutlineContent leftIcon={<IconCalendarPlus />} text="Ajouter un exercice" />
                     </CreateOneYear>
                 </div>
                 <YearsListTable idOrganization={params.idOrganization} />

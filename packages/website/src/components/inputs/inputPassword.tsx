@@ -1,17 +1,19 @@
 import { Button } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconEye, IconEyeClosed } from "@tabler/icons-react"
-import { forwardRef, type InputHTMLAttributes, useState } from "react"
+import type { InputHTMLAttributes } from "react"
+import { useState } from "react"
 import type { FieldError } from "react-hook-form"
 
-type InputPassword = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
-    error?: FieldError
-    value?: string | null
-    onChange: (value?: string | null | undefined) => void
-    autoFocus?: boolean
-}
-
-export const InputPassword = forwardRef<HTMLInputElement, InputPassword>((props, ref) => {
+export function InputPassword(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+        error?: FieldError
+        value?: string | null
+        onChange: (value?: string | null | undefined) => void
+        autoFocus?: boolean
+        ref?: React.Ref<HTMLInputElement>
+    },
+) {
     const [showPassword, setShowPassword] = useState(false)
     const handleClickShowPassword = () => setShowPassword((show) => !show)
 
@@ -35,10 +37,11 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>((props,
                     justifyContent: "space-between",
                     alignItems: "center",
                     border: "1px solid",
-                    borderRadius: "sm",
+                    borderRadius: "md",
+                    _hover: { borderColor: "neutral/30" },
                     _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
-                css(!props.error ? { borderColor: "neutral/25" } : { borderColor: "error" }),
+                css(!props.error ? { borderColor: "neutral/20" } : { borderColor: "error" }),
                 props.className,
             )}
         >
@@ -47,15 +50,15 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>((props,
                 type={showPassword ? "text" : "password"}
                 className={css({
                     width: "100%",
-                    height: "32px",
+                    height: "100%",
                     fontSize: "sm",
                     lineHeight: "none",
-                    _placeholder: { color: "neutral/50" },
+                    _placeholder: { color: "neutral/25" },
                     backgroundColor: "transparent",
                     padding: "1rem",
                     borderRadius: "md",
                 })}
-                ref={ref}
+                ref={props.ref}
                 value={input(props.value)}
                 onChange={(e) => props.onChange(output(e.currentTarget.value))}
             />
@@ -72,4 +75,4 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>((props,
             </Button>
         </div>
     )
-})
+}

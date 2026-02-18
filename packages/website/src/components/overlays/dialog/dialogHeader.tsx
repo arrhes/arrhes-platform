@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IconX } from "@tabler/icons-react"
@@ -33,7 +33,7 @@ export function DialogHeader(props: HTMLAttributes<HTMLDivElement>) {
             </div>
             <DialogPrimitive.Close asChild>
                 <button type="button" aria-label="Fermer" className={css({ display: "flex", alignItems: "center" })}>
-                    <ButtonContent variant="invisible" leftIcon={<IconX />} />
+                    <ButtonGhostContent leftIcon={<IconX />} />
                 </button>
             </DialogPrimitive.Close>
         </div>

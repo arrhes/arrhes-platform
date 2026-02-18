@@ -1,10 +1,9 @@
-import { Button } from "@arrhes/ui"
+import { Button, CircularLoader } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconCheck, IconChevronDown } from "@tabler/icons-react"
 import { type InputHTMLAttributes, useState } from "react"
 import type { FieldError } from "react-hook-form"
 import { FormatNull } from "../formats/formatNull.js"
-import { CircularLoader } from "../layouts/circularLoader.js"
 import { Popover } from "../overlays/popover/popover.js"
 
 export function InputSelect<TValue extends string>(
@@ -63,13 +62,13 @@ export function InputSelect<TValue extends string>(
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 gap: "2",
-                                borderRadius: "sm",
+                                borderRadius: "md",
                                 padding: "1rem",
                                 border: "1px solid",
-                                _hover: { boxShadow: "inset" },
+                                _hover: { borderColor: "neutral/30" },
                                 _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                             }),
-                            css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
+                            css(props.error ? { borderColor: "error" } : { borderColor: "neutral/20" }),
                             props.className,
                         )}
                     >
@@ -83,7 +82,7 @@ export function InputSelect<TValue extends string>(
                                     lineHeight: "none",
                                     whiteSpace: "nowrap",
                                     textOverflow: "ellipsis",
-                                    borderRadius: "sm",
+                                    borderRadius: "md",
                                     textAlign: "left",
                                 }),
                                 css(currentOption === undefined ? { color: "neutral/50" } : { color: "neutral" }),
@@ -150,7 +149,7 @@ export function InputSelect<TValue extends string>(
                                         alignItems: "center",
                                         gap: "2",
                                         padding: "1rem",
-                                        borderRadius: "sm",
+                                        borderRadius: "md",
                                         border: "1px solid transparent",
                                         cursor: "pointer",
                                     }),

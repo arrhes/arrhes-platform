@@ -1,5 +1,5 @@
 import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -47,11 +47,7 @@ export function OrganizationSettingsPage() {
                                         description="Changez le nom, l'email ou encore le numéro de SIREN."
                                     >
                                         <UpdateOneOrganization organization={organization}>
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconPencil />}
-                                                text="Modifier"
-                                            />
+                                            <ButtonOutlineContent leftIcon={<IconPencil />} text="Modifier" />
                                         </UpdateOneOrganization>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>
@@ -63,12 +59,7 @@ export function OrganizationSettingsPage() {
                                         variant="danger"
                                     >
                                         <DeleteOneOrganization idOrganization={organization.id}>
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconTrash />}
-                                                text="Supprimer"
-                                                color="error"
-                                            />
+                                            <ButtonOutlineContent leftIcon={<IconTrash />} text="Supprimer" color="danger" />
                                         </DeleteOneOrganization>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>

@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
 import type { ReactNode } from "react"
@@ -115,8 +115,7 @@ export function SubPageLayout(props: {
                                                 params={item.params}
                                                 className={css({ width: "100%" })}
                                             >
-                                                <ButtonContent
-                                                    variant="invisible"
+                                                <ButtonGhostContent
                                                     text={item.label}
                                                     isActive={isActive}
                                                     className={css({

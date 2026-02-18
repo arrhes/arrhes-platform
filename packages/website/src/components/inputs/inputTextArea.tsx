@@ -35,9 +35,10 @@ export function InputTextArea(
                     gap: "2",
                     padding: "1rem",
                     border: "1px solid",
-                    borderRadius: "sm",
+                    borderRadius: "md",
                     fontSize: "sm",
-                    _placeholder: { color: "neutral/50" },
+                    _placeholder: { color: "neutral/25" },
+                    _hover: { borderColor: "neutral/30" },
                     _focus: { borderColor: "neutral/50", boxShadow: "inset" },
                     outline: "none",
                     flexShrink: "0",
@@ -45,7 +46,7 @@ export function InputTextArea(
                     height: "fit",
                     overflowY: "auto",
                 }),
-                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/25" }),
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/20" }),
                 props.className,
             )}
             value={input(props.value)}

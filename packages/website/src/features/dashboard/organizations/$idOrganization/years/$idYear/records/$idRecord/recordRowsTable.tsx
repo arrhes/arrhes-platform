@@ -1,6 +1,6 @@
 import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEye, IconPencil } from "@tabler/icons-react"
 import type * as v from "valibot"
@@ -28,7 +28,7 @@ export function RecordRowsTable(props: {
                     cell: ({ row }) => (
                         <div className={css({ display: "flex", justifyContent: "center", alignItems: "center" })}>
                             <UpdateOneRecordRow recordRow={row.original}>
-                                <ButtonContent variant="invisible" leftIcon={<IconPencil />} text={undefined} />
+                                <ButtonGhostContent leftIcon={<IconPencil />} text={undefined} />
                             </UpdateOneRecordRow>
                             <LinkButton
                                 to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord/$idRecordRow"
@@ -39,7 +39,7 @@ export function RecordRowsTable(props: {
                                     idRecordRow: row.original.id,
                                 }}
                             >
-                                <ButtonContent variant="invisible" leftIcon={<IconEye />} text={undefined} />
+                                <ButtonGhostContent leftIcon={<IconEye />} text={undefined} />
                             </LinkButton>
                         </div>
                     ),

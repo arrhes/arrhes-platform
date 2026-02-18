@@ -49,23 +49,21 @@ export function InputDate(
         <div
             className={cx(
                 css({
-                    height: "32px",
                     width: "100%",
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "stretch",
-                    gap: "2",
+                    gap: "0.5rem",
                     border: "1px solid",
-                    borderColor: "neutral/20",
-                    borderRadius: "sm",
+                    borderRadius: "md",
+                    _hover: { borderColor: "neutral/50" },
                     _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
-                css(props.error ? { borderColor: "error" } : {}),
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/20" }),
                 props.className,
             )}
         >
             <IMaskInput
-                // inputRef={ref}
                 mask="d{ / }`m{ / }`Y"
                 blocks={{
                     d: {
@@ -107,12 +105,15 @@ export function InputDate(
                 className={css({
                     borderRadius: "inherit",
                     width: "100%",
-                    fontSize: "sm",
+                    fontSize: "0.875rem",
+                    lineHeight: "1rem",
+                    fontWeight: "400",
                     _placeholder: { color: "neutral/25" },
-                    padding: "1rem",
+                    padding: "0.5rem",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",
+                    _focusWithin: { borderColor: "neutral/50", outline: "none", },
                 })}
                 inputMode="decimal"
             />

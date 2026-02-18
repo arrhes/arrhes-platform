@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import { Page } from "../../../components/layouts/page/page.js"
@@ -123,7 +123,7 @@ export function SettingsPage() {
                                                 {item.helper}
                                             </span>
                                         </div>
-                                        <ButtonContent variant="invisible" leftIcon={<IconChevronRight />} />
+                                        <ButtonGhostContent leftIcon={<IconChevronRight />} />
                                     </button>
                                 ))}
                             </div>

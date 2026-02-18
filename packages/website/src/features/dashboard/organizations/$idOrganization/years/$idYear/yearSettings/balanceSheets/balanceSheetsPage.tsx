@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconLine, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -31,15 +31,10 @@ export function BalanceSheetsPage() {
                             })}
                         >
                             <CreateOneBalanceSheet idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="primary"
-                                    leftIcon={<IconPlus />}
-                                    text="Ajouter une ligne de bilan"
-                                />
+                                <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter une ligne de bilan" />
                             </CreateOneBalanceSheet>
                             <GenerateBalanceSheets idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="default"
+                                <ButtonOutlineContent
                                     leftIcon={<IconPlus />}
                                     text="Générer les lignes de bilan par défaut"
                                 />
@@ -48,8 +43,7 @@ export function BalanceSheetsPage() {
                                 idOrganization={params.idOrganization}
                                 idYear={params.idYear}
                             >
-                                <ButtonContent
-                                    variant="default"
+                                <ButtonOutlineContent
                                     leftIcon={<IconLine />}
                                     text="Connecter les comptes aux lignes de bilan par défaut"
                                 />

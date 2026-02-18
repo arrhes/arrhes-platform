@@ -7,7 +7,7 @@ import {
     readOneRecordLabelRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEye } from "@tabler/icons-react"
 import type * as v from "valibot"
@@ -55,7 +55,7 @@ export function RecordsTable(props: {
                                 idRecord: row.original.id,
                             }}
                         >
-                            <ButtonContent variant="invisible" leftIcon={<IconEye />} text={undefined} />
+                            <ButtonGhostContent leftIcon={<IconEye />} text={undefined} />
                         </LinkButton>
                     ),
                     enableSorting: false,

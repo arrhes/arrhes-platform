@@ -1,12 +1,4 @@
-import {
-    type ComponentProps,
-    createContext,
-    forwardRef,
-    type MouseEvent,
-    type ReactNode,
-    useContext,
-    useState,
-} from "react"
+import { type ComponentProps, createContext, type MouseEvent, type ReactNode, useContext, useState } from "react"
 import { css, cx } from "../../utilities/cn.ts"
 import { sleep } from "../../utilities/sleep.ts"
 
@@ -23,13 +15,6 @@ export function useButtonLoading() {
     return useContext(ButtonLoadingContext)
 }
 
-type ButtonProps = Omit<ComponentProps<"button">, "children" | "disabled"> & {
-    hasLoader?: boolean
-    children: ReactNode
-    title?: string
-    isDisabled?: boolean
-}
-
 /**
  * Button component - a neutral container for clickable elements
  * Handles click events, loading state, and disabled state
@@ -37,10 +22,17 @@ type ButtonProps = Omit<ComponentProps<"button">, "children" | "disabled"> & {
  *
  * @example
  * <Button onClick={handleClick} hasLoader>
- *   <ButtonContent variant="primary" text="Submit" />
+ *   <ButtonPlain text="Submit" />
  * </Button>
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props, ref) {
+export function Button(
+    props: Omit<ComponentProps<"button">, "children" | "disabled"> & {
+        hasLoader?: boolean
+        children: ReactNode
+        title?: string
+        isDisabled?: boolean
+    },
+) {
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleClick(e: MouseEvent<HTMLButtonElement>) {
@@ -61,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         <ButtonLoadingContext.Provider value={isLoading}>
             <button
                 {...buttonProps}
-                ref={ref}
+                ref={props.ref}
                 className={cx(
                     css({
                         display: "flex",
@@ -88,4 +80,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
             </button>
         </ButtonLoadingContext.Provider>
     )
-})
+}

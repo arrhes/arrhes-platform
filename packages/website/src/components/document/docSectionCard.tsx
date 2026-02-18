@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import type { ReactNode } from "react"
@@ -123,7 +123,7 @@ export function DocSectionCard(props: {
 
             {/* CTA */}
             <LinkButton to={props.ctaTo}>
-                <ButtonContent variant="default" text={props.ctaLabel} rightIcon={<IconChevronRight />} />
+                <ButtonOutlineContent text={props.ctaLabel} rightIcon={<IconChevronRight />} />
             </LinkButton>
         </div>
     )

@@ -1,5 +1,5 @@
 import type { readAllOrganizationUsersRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconUserEdit, IconUserX } from "@tabler/icons-react"
 import type * as v from "valibot"
@@ -73,15 +73,10 @@ export function OrganizationUserListTableRow(props: {
                     })}
                 >
                     <UpdateOneOrganizationUser organizationUser={props.organizationUser}>
-                        <ButtonContent variant="default" leftIcon={<IconUserEdit />} title="Changer les droits" />
+                        <ButtonOutlineContent leftIcon={<IconUserEdit />} title="Changer les droits" />
                     </UpdateOneOrganizationUser>
                     <DeleteOneOrganizationUser organizationUser={props.organizationUser}>
-                        <ButtonContent
-                            variant="default"
-                            leftIcon={<IconUserX />}
-                            title="Retirer l'utilisateur"
-                            color="error"
-                        />
+                        <ButtonOutlineContent leftIcon={<IconUserX />} title="Retirer l'utilisateur" color="danger" />
                     </DeleteOneOrganizationUser>
                 </div>
             </div>

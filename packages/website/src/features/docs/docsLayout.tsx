@@ -1,4 +1,4 @@
-import { ButtonContent, Logo } from "@arrhes/ui"
+import { ButtonGhostContent, ButtonPlainContent, Logo } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconBook2, IconBrandGithub } from "@tabler/icons-react"
 import { Outlet, useRouterState } from "@tanstack/react-router"
@@ -97,7 +97,7 @@ export function DocsLayout() {
                                     _hover: { color: "neutral" },
                                 })}
                             >
-                                <ButtonContent variant="invisible" leftIcon={<IconBook2 />} text="Documentation" />
+                                <ButtonGhostContent leftIcon={<IconBook2 />} text="Documentation" />
                             </LinkButton>
                         </div>
 
@@ -109,7 +109,7 @@ export function DocsLayout() {
                             })}
                         >
                             <a href="https://github.com/arrhes" target="_blank" rel="noopener noreferrer">
-                                <ButtonContent variant="invisible" leftIcon={<IconBrandGithub />} />
+                                <ButtonGhostContent leftIcon={<IconBrandGithub />} />
                             </a>
                             {/* <LinkButton to="/">
                                 <ButtonContent
@@ -117,7 +117,7 @@ export function DocsLayout() {
                                 />
                             </LinkButton> */}
                             <LinkButton to="/dashboard">
-                                <ButtonContent variant="primary" text="Dashboard" />
+                                <ButtonPlainContent text="Dashboard" />
                             </LinkButton>
                         </nav>
                     </div>

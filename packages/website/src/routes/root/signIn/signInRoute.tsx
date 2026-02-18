@@ -1,7 +1,7 @@
 import { createRoute, redirect } from "@tanstack/react-router"
-import { CircularLoader } from "../../../components/layouts/circularLoader.js"
 import { SignInPage } from "../../../features/signIn/signInPage.js"
 import { rootLayoutRoute } from "../../rootLayoutRoute.js"
+import { CircularLoader } from "@arrhes/ui"
 
 export const signInRoute = createRoute({
     getParentRoute: () => rootLayoutRoute,

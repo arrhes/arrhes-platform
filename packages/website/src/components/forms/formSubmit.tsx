@@ -1,4 +1,4 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 
 export type FormSubmit<T> = {
@@ -44,11 +44,11 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
             >
                 {props.previousCallback === undefined ? null : (
                     <Button onClick={handlePrevious}>
-                        <ButtonContent variant="invisible" text={props.previousLabel} />
+                        <ButtonGhostContent text={props.previousLabel} />
                     </Button>
                 )}
                 <Button onClick={handleNext} hasLoader>
-                    <ButtonContent variant="primary" text={props.nextLabel} />
+                    <ButtonPlainContent text={props.nextLabel} />
                 </Button>
             </div>
             {!props.stepCount && !props.stepName ? null : (

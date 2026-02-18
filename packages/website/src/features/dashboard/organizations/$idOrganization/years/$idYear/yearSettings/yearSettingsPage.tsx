@@ -1,5 +1,5 @@
 import { readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.tsx"
@@ -33,11 +33,7 @@ export function YearSettingsPage() {
                                         description="Mettez à jour les informations principales."
                                     >
                                         <UpdateOneYear year={year}>
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconPencil />}
-                                                text="Modifier"
-                                            />
+                                            <ButtonOutlineContent leftIcon={<IconPencil />} text="Modifier" />
                                         </UpdateOneYear>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>
@@ -49,12 +45,7 @@ export function YearSettingsPage() {
                                         variant="danger"
                                     >
                                         <DeleteOneYear year={year}>
-                                            <ButtonContent
-                                                variant="default"
-                                                leftIcon={<IconTrash />}
-                                                text="Supprimer"
-                                                color="error"
-                                            />
+                                            <ButtonOutlineContent leftIcon={<IconTrash />} text="Supprimer" color="danger" />
                                         </DeleteOneYear>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>

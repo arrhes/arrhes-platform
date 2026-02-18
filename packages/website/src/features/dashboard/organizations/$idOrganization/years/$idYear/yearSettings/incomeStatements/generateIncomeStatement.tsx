@@ -3,7 +3,7 @@ import {
     readAllIncomeStatementsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconRefresh } from "@tabler/icons-react"
 import { type JSX, useState } from "react"
@@ -58,7 +58,7 @@ export function GenerateIncomeStatements(props: {
                                 setOpen(false)
                             }}
                         >
-                            <ButtonContent variant="invisible" text="Annuler" />
+                            <ButtonGhostContent text="Annuler" />
                         </Button>
                         <Button
                             onClick={async () => {
@@ -95,8 +95,7 @@ export function GenerateIncomeStatements(props: {
                             }}
                             hasLoader
                         >
-                            <ButtonContent
-                                variant="primary"
+                            <ButtonPlainContent
                                 leftIcon={<IconRefresh />}
                                 text="Générer les lignes de compte de résultat"
                             />

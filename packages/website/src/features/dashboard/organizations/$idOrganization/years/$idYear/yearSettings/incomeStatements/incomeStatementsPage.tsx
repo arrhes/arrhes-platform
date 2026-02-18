@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconLine, IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -33,15 +33,13 @@ export function IncomeStatementsPage() {
                             })}
                         >
                             <CreateOneIncomeStatement idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="primary"
+                                <ButtonPlainContent
                                     leftIcon={<IconPlus />}
                                     text="Ajouter une ligne de compte de résultat"
                                 />
                             </CreateOneIncomeStatement>
                             <GenerateIncomeStatements idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="default"
+                                <ButtonOutlineContent
                                     leftIcon={<IconPlus />}
                                     text="Générer les lignes de compte de résultat par défaut"
                                 />
@@ -50,8 +48,7 @@ export function IncomeStatementsPage() {
                                 idOrganization={params.idOrganization}
                                 idYear={params.idYear}
                             >
-                                <ButtonContent
-                                    variant="default"
+                                <ButtonOutlineContent
                                     leftIcon={<IconLine />}
                                     text="Connecter les comptes aux lignes de compte de résultat par défaut"
                                 />
@@ -72,18 +69,10 @@ export function IncomeStatementsPage() {
                             })}
                         >
                             <CreateOneComputation idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="primary"
-                                    leftIcon={<IconPlus />}
-                                    text="Ajouter une ligne de calcul"
-                                />
+                                <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter une ligne de calcul" />
                             </CreateOneComputation>
                             <GenerateComputations idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="default"
-                                    leftIcon={<IconPlus />}
-                                    text="Générer les calculs par défaut"
-                                />
+                                <ButtonOutlineContent leftIcon={<IconPlus />} text="Générer les calculs par défaut" />
                             </GenerateComputations>
                         </div>
                         <Box className={css({ maxH: "[640px]" })}>

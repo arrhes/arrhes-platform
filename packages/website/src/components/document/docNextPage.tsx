@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import type { ValidRoutes } from "../../routes/applicationRouter.js"
@@ -27,7 +27,7 @@ export function DocNextPage(props: { to: ValidRoutes; label: string }) {
                 Page suivante
             </span>
             <LinkButton to={props.to}>
-                <ButtonContent text={props.label} rightIcon={<IconChevronRight />} />
+                <ButtonOutlineContent text={props.label} rightIcon={<IconChevronRight />} />
             </LinkButton>
         </div>
     )

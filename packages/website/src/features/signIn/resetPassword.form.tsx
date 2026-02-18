@@ -1,4 +1,4 @@
-// import { ButtonPlain } from "@coulba/design/buttons"
+// import { ButtonPlainContent } from "@coulba/design/buttons"
 // import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
 // import { InputText } from "@coulba/design/inputs"
 // import { toast } from "@coulba/design/overlays"
@@ -58,7 +58,7 @@
 //                     />
 //                 </div>
 //                 <div className="flex flex-row justify-end items-center gap-1.5">
-//                     <ButtonPlain
+//                     <ButtonPlainContent
 //                         onClick={async () => await onSubmit()}
 //                         loader
 //                         text="Envoyer l'email de récupération"

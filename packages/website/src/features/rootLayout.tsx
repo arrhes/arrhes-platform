@@ -6,7 +6,7 @@ export function RootLayout() {
     const { isMobile } = useDeviceDetect()
 
     if (isMobile === true) {
-        ;<div
+        ; <div
             className={css({
                 width: "100%",
                 height: "100%",
@@ -36,6 +36,7 @@ export function RootLayout() {
                 justifyContent: "start",
                 alignItems: "start",
                 overflowX: "hidden",
+                overflowY: "auto",
             })}
         >
             <Outlet />

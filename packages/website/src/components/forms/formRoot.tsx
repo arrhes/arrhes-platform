@@ -1,8 +1,6 @@
-import type { ButtonColor, ButtonVariant } from "@arrhes/ui"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, type ButtonContentProps, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import type { Icon, IconProps } from "@tabler/icons-react"
 import { type ReactElement, useEffect, useRef } from "react"
 import { type DefaultValues, FormProvider, type UseFormReturn, useForm } from "react-hook-form"
 import type * as v from "valibot"
@@ -15,15 +13,7 @@ export function FormRoot<T extends Record<string, unknown>, U extends v.GenericS
     onSuccess: ((data: v.InferOutput<U>) => void) | (() => Promise<void>) | undefined
     resetOnSubmit?: boolean
     submitOnPressEnterKey?: boolean
-    submitButtonProps: {
-        text?: string
-        title?: string
-        color?: ButtonColor
-        variant?: ButtonVariant
-        className?: string
-        leftIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
-        rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
-    }
+    submitButtonProps: ButtonContentProps
     children: (form: UseFormReturn<v.InferOutput<U>, any, v.InferOutput<U>>) => ReactElement
 }) {
     const form = useForm<T>({
@@ -87,6 +77,7 @@ export function FormRoot<T extends Record<string, unknown>, U extends v.GenericS
                         className={props.submitButtonProps.className}
                         type="button"
                         hasLoader={true}
+                        isDisabled={props.submitButtonProps.isDisabled}
                         title={props.submitButtonProps.title ?? props.submitButtonProps.text}
                         onClick={async (event) => {
                             event.preventDefault()
@@ -107,12 +98,12 @@ export function FormRoot<T extends Record<string, unknown>, U extends v.GenericS
                             }
                         }}
                     >
-                        <ButtonContent
-                            variant={props.submitButtonProps.variant ?? "primary"}
+                        <ButtonPlainContent
                             text={props.submitButtonProps.text}
                             color={props.submitButtonProps.color}
                             leftIcon={props.submitButtonProps.leftIcon}
                             rightIcon={props.submitButtonProps.rightIcon}
+                            isDisabled={props.submitButtonProps.isDisabled}
                         />
                     </Button>
                 </div>

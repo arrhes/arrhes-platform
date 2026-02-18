@@ -1,6 +1,6 @@
 import { generateJournalsRouteDefinition, readAllJournalsRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconRefresh } from "@tabler/icons-react"
 import { type JSX, useState } from "react"
@@ -54,7 +54,7 @@ export function GenerateJournals(props: {
                                 setOpen(false)
                             }}
                         >
-                            <ButtonContent variant="invisible" text="Annuler" />
+                            <ButtonGhostContent text="Annuler" />
                         </Button>
                         <Button
                             onClick={async () => {
@@ -85,7 +85,7 @@ export function GenerateJournals(props: {
                             }}
                             hasLoader
                         >
-                            <ButtonContent variant="primary" leftIcon={<IconRefresh />} text="Générer les journaux" />
+                            <ButtonPlainContent leftIcon={<IconRefresh />} text="Générer les journaux" />
                         </Button>
                     </Dialog.Footer>
                 </Dialog.Content>

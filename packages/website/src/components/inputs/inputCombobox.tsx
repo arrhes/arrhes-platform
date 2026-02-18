@@ -1,13 +1,13 @@
-import { Button } from "@arrhes/ui"
+import { Button, CircularLoader } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconCheck, IconChevronDown } from "@tabler/icons-react"
 import { type ComponentProps, useEffect, useState } from "react"
 import type { FieldError } from "react-hook-form"
 import { debounce } from "../../utilities/debounce.js"
 import { FormatNull } from "../formats/formatNull.js"
-import { CircularLoader } from "../layouts/circularLoader.js"
 import { Virtualizer } from "../layouts/virtualizer.js"
 import { Popover } from "../overlays/popover/popover.js"
+import { InputText } from "./inputText.js"
 
 export function InputCombobox<TValue extends string>(props: {
     error?: FieldError
@@ -26,14 +26,18 @@ export function InputCombobox<TValue extends string>(props: {
     allowEmpty?: boolean
 }) {
     const [open, setOpen] = useState(false)
-    const [rawQuery, setRawQuery] = useState<string>("")
+    const [rawQuery, setRawQuery] = useState<string | null | undefined>(undefined)
     const [currentOptions, setCurrentOptions] = useState(props.options)
     const currentOption = props.options?.find((x) => x.key === (props.value ?? props.defaultValue))
 
     useEffect(() => {
         debounce({
             function: () => {
-                setCurrentOptions(props.options.filter((x) => x.label.toLowerCase().includes(rawQuery.toLowerCase())))
+                setCurrentOptions(props.options.filter((x) => {
+                    rawQuery !== null
+                        && rawQuery !== undefined
+                        && x.label.toLowerCase().includes(rawQuery.toLowerCase())
+                }))
             },
         })
     }, [rawQuery, props.options.filter])
@@ -60,19 +64,19 @@ export function InputCombobox<TValue extends string>(props: {
                         className={cx(
                             css({
                                 width: "100%",
-                                height: "[32px]",
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignItems: "center",
-                                gap: "2",
-                                borderRadius: "sm",
-                                padding: "1rem",
+                                gap: "0.5rem",
+                                borderRadius: "md",
+                                padding: "0.5rem",
                                 border: "1px solid",
-                                _hover: { boxShadow: "inner" },
-                                _focusWithin: { borderColor: "neutral/50", boxShadow: "inner" },
+                                boxSizing: "border-box",
+                                _hover: { borderColor: "neutral/50" },
+                                _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                             }),
                             props.error === undefined
-                                ? css({ borderColor: "neutral/25" })
+                                ? css({ borderColor: "neutral/20" })
                                 : css({ borderColor: "error" }),
                             props.className,
                         )}
@@ -80,14 +84,11 @@ export function InputCombobox<TValue extends string>(props: {
                         <span
                             className={cx(
                                 css({
-                                    width: "100%",
-                                    height: "100%",
-                                    fontSize: "sm",
-                                    fontWeight: "medium",
-                                    lineHeight: "none",
+                                    fontSize: "0.875rem",
+                                    lineHeight: "1rem",
+                                    fontWeight: "400",
                                     whiteSpace: "nowrap",
                                     textOverflow: "ellipsis",
-                                    borderRadius: "sm",
                                     textAlign: "left",
                                 }),
                                 currentOption === undefined ? css({ color: "neutral/50" }) : css({ color: "neutral" }),
@@ -100,109 +101,94 @@ export function InputCombobox<TValue extends string>(props: {
                         <IconChevronDown
                             size={16}
                             className={css({
-                                stroke: "neutral",
-                                minWidth: "[16px]",
-                                width: "[16px]",
-                                minH: "[16px]",
-                                height: "[16px]",
+                                flexShrink: 0,
+                                stroke: "neutral/50",
+                                minWidth: "1rem",
+                                width: "1rem",
+                                minHeight: "1rem",
+                                height: "1rem",
                             })}
-                            strokeWidth={2}
+                            strokeWidth={1.75}
                         />
                     </div>
                 </Button>
             </Popover.Trigger>
-            {open === false ? null : (
-                <Popover.Content align="start">
-                    <div
-                        className={css({
-                            width: "100%",
-                            height: "[32px]",
-                            display: "flex",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            padding: "1rem",
-                            borderBottom: "1px solid",
-                            borderColor: "neutral/10",
-                        })}
-                    >
-                        <input
-                            type="text"
-                            className={css({
-                                width: "100%",
-                                fontSize: "sm",
-                                lineHeight: "none",
-                                _placeholder: { color: "neutral/25" },
-                            })}
+            {open === false
+                ? null
+                : (
+                    <Popover.Content align="start">
+                        <InputText
                             value={rawQuery}
-                            onChange={(e) => setRawQuery(e.currentTarget.value)}
+                            onChange={(value) => setRawQuery(value)}
                         />
-                    </div>
-                    <div
-                        className={css({
-                            height: "fit-content",
-                            maxH: "[256px]",
-                            width: "100%",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "flex-start",
-                        })}
-                    >
-                        {props.isLoading === false ? null : <CircularLoader />}
-                        {props.options.length > 0 ? null : (
-                            <FormatNull text="Pas de résultat" className={css({ padding: "1rem" })} />
-                        )}
-                        <Virtualizer data={currentOptions}>
-                            {(option) => {
-                                return (
-                                    <div
-                                        key={option.key}
-                                        onClick={() => {
-                                            if (props.isDisabled) return
-                                            if (props.allowEmpty === true && option.key === props.value) {
-                                                props.onChange(undefined)
+                        <div
+                            className={css({
+                                height: "fit-content",
+                                maxHeight: "256px",
+                                width: "100%",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "start",
+                                alignItems: "start",
+                            })}
+                        >
+                            {props.isLoading === false ? null : <CircularLoader />}
+                            {props.options.length > 0 ? null : (
+                                <FormatNull text="Pas de résultat" className={css({ padding: "1rem" })} />
+                            )}
+                            <Virtualizer data={currentOptions}>
+                                {(option) => {
+                                    return (
+                                        <div
+                                            key={option.key}
+                                            onClick={() => {
+                                                if (props.isDisabled) return
+                                                if (props.allowEmpty === true && option.key === props.value) {
+                                                    props.onChange(undefined)
+                                                    setOpen(false)
+                                                    return
+                                                }
+                                                props.onChange(option.key)
                                                 setOpen(false)
-                                                return
-                                            }
-                                            props.onChange(option.key)
-                                            setOpen(false)
-                                        }}
-                                        className={cx(
-                                            css({
-                                                width: "100%",
-                                                height: "fit-content",
-                                                display: "flex",
-                                                justifyContent: "space-between",
-                                                alignItems: "center",
-                                                gap: "2",
-                                                padding: "1rem",
-                                                cursor: "pointer",
-                                            }),
-                                            currentOption?.key === option.key
-                                                ? css({ backgroundColor: "neutral/5" })
-                                                : css({
-                                                      backgroundColor: "none",
-                                                      _hover: { backgroundColor: "neutral/5" },
-                                                  }),
-                                        )}
-                                    >
-                                        <span className={css({ color: "neutral" })}>{option.label}</span>
-                                        <IconCheck
-                                            size={16}
+                                            }}
                                             className={cx(
-                                                css({ stroke: "neutral" }),
+                                                css({
+                                                    width: "100%",
+                                                    height: "fit-content",
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                    alignItems: "center",
+                                                    gap: "2",
+                                                    padding: "1rem",
+                                                    cursor: "pointer",
+                                                }),
                                                 currentOption?.key === option.key
-                                                    ? css({ opacity: "100" })
-                                                    : css({ opacity: "0" }),
+                                                    ? css({ backgroundColor: "background" })
+                                                    : css({
+                                                        backgroundColor: "none",
+                                                        _hover: { backgroundColor: "neutral/5" },
+                                                    }),
                                             )}
-                                        />
-                                    </div>
-                                )
-                            }}
-                        </Virtualizer>
-                    </div>
-                </Popover.Content>
-            )}
+                                        >
+                                            <span className={css({ color: "neutral", fontSize: "sm" })}>
+                                                {option.label}
+                                            </span>
+                                            <IconCheck
+                                                size={16}
+                                                className={cx(
+                                                    css({ stroke: "neutral" }),
+                                                    currentOption?.key === option.key
+                                                        ? css({ opacity: "100" })
+                                                        : css({ opacity: "0" }),
+                                                )}
+                                            />
+                                        </div>
+                                    )
+                                }}
+                            </Virtualizer>
+                        </div>
+                    </Popover.Content>
+                )}
         </Popover.Root>
     )
 }

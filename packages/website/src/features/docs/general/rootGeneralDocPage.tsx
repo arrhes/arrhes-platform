@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import { DocRoot } from "../../../components/document/docRoot.js"
@@ -76,11 +76,7 @@ export function RootGeneralDocPage() {
                     })}
                 >
                     <LinkButton to="/documentation/fonctionnalités">
-                        <ButtonContent
-                            variant="default"
-                            text="Voir les fonctionnalités"
-                            rightIcon={<IconChevronRight />}
-                        />
+                        <ButtonOutlineContent text="Voir les fonctionnalités" rightIcon={<IconChevronRight />} />
                     </LinkButton>
                 </div>
             </div>

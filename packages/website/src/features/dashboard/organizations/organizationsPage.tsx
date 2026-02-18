@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconBuildingPlus } from "@tabler/icons-react"
 import { Page } from "../../../components/layouts/page/page.tsx"
@@ -16,11 +16,7 @@ export function OrganizationsPage() {
             <Page.Content>
                 <div className={css({ width: "100%", display: "flex", justifyContent: "end", alignItems: "center" })}>
                     <AddNewOrganization>
-                        <ButtonContent
-                            variant="default"
-                            leftIcon={<IconBuildingPlus />}
-                            text="Créer une organisation"
-                        />
+                        <ButtonOutlineContent leftIcon={<IconBuildingPlus />} text="Créer une organisation" />
                     </AddNewOrganization>
                 </div>
                 <OrganizationsListTable />

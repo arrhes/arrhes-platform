@@ -1,4 +1,4 @@
-import { Badge, ButtonContent } from "@arrhes/ui"
+import { Badge, ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import {
     IconAppWindow,
@@ -98,8 +98,7 @@ export function Pricing() {
                 </div>
 
                 <LinkButton to="/inscription">
-                    <ButtonContent
-                        variant="default"
+                    <ButtonOutlineContent
                         leftIcon={<IconUserPlus />}
                         text="Créer un compte"
                         className={css({ width: "100%" })}

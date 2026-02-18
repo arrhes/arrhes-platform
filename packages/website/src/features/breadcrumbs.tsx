@@ -1,5 +1,5 @@
 import { readOneOrganizationRouteDefinition, readOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { useRouterState } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
@@ -44,8 +44,7 @@ export function Breadcrumbs() {
                     idOrganization: idOrganization,
                 }}
             >
-                <ButtonContent
-                    variant="invisible"
+                <ButtonGhostContent
                     text={organizationName ?? ""}
                     // isActive={idYear === null}
                 />
@@ -64,8 +63,7 @@ export function Breadcrumbs() {
                             idYear: idYear,
                         }}
                     >
-                        <ButtonContent
-                            variant="invisible"
+                        <ButtonGhostContent
                             text={yearName ?? ""}
                             // isActive={true}
                         />

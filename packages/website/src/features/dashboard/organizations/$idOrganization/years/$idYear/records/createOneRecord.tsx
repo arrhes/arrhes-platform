@@ -1,11 +1,12 @@
 import {
-    createOneRecordRouteDefinition,
+    createOneRecordFromTemplateRouteDefinition,
     readAllFilesRouteDefinition,
     readAllJournalsRouteDefinition,
     readAllRecordLabelsRouteDefinition,
     readAllRecordsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
 import { type JSX, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
@@ -13,17 +14,20 @@ import type * as v from "valibot"
 import { FormControl } from "../../../../../../../components/forms/formControl.js"
 import { FormError } from "../../../../../../../components/forms/formError.js"
 import { FormField } from "../../../../../../../components/forms/formField.js"
+import { FormGroup } from "../../../../../../../components/forms/formGroup.js"
 import { FormItem } from "../../../../../../../components/forms/formItem.js"
 import { FormLabel } from "../../../../../../../components/forms/formLabel.js"
 import { FormRoot } from "../../../../../../../components/forms/formRoot.js"
 import { InputDataCombobox } from "../../../../../../../components/inputs/inputDataCombobox.js"
 import { InputDate } from "../../../../../../../components/inputs/inputDate.js"
+import { InputSelect } from "../../../../../../../components/inputs/inputSelect.js"
 import { InputText } from "../../../../../../../components/inputs/inputText.js"
 import { Drawer } from "../../../../../../../components/overlays/drawer/drawer.js"
 import { toast } from "../../../../../../../contexts/toasts/useToast.js"
 import { applicationRouter } from "../../../../../../../routes/applicationRouter.js"
 import { getResponseBodyFromAPI } from "../../../../../../../utilities/getResponseBodyFromAPI.js"
 import { invalidateData } from "../../../../../../../utilities/invalidateData.js"
+import { type RecordTemplateKey, recordTemplates } from "./recordTemplates/recordTemplates.js"
 
 export function CreateOneRecord(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
@@ -31,28 +35,45 @@ export function CreateOneRecord(props: {
     children: JSX.Element
 }) {
     const [open, setOpen] = useState(false)
+    const [selectedTemplate, setSelectedTemplate] = useState<RecordTemplateKey | "empty">("empty")
+    const [isTemplateReady, setIsTemplateReady] = useState(false)
+
+    const activeTemplate = recordTemplates.find((t) => t.key === selectedTemplate)
+    const isSubmitDisabled = activeTemplate?.hasActionButton === true && isTemplateReady === false
 
     return (
-        <Drawer.Root open={open} onOpenChange={setOpen}>
+        <Drawer.Root
+            open={open}
+            onOpenChange={(value) => {
+                setOpen(value)
+                if (value === false) {
+                    setSelectedTemplate("empty")
+                    setIsTemplateReady(false)
+                }
+            }}
+        >
             <Drawer.Trigger>{props.children}</Drawer.Trigger>
             <Drawer.Content>
                 <Drawer.Header title="Ajouter une nouvelle écriture" />
                 <Drawer.Body>
                     <FormRoot
-                        schema={createOneRecordRouteDefinition.schemas.body}
+                        schema={createOneRecordFromTemplateRouteDefinition.schemas.body}
                         defaultValues={{
                             idOrganization: props.idOrganization,
                             idYear: props.idYear,
+                            date: new Date().toISOString(),
                             idFile: null,
                             idJournal: null,
+                            rows: [],
                         }}
                         submitButtonProps={{
                             leftIcon: <IconPlus />,
                             text: "Ajouter l'écriture",
+                            isDisabled: isSubmitDisabled,
                         }}
                         onSubmit={async (data) => {
                             const createRecordResponse = await getResponseBodyFromAPI({
-                                routeDefinition: createOneRecordRouteDefinition,
+                                routeDefinition: createOneRecordFromTemplateRouteDefinition,
                                 body: data,
                             })
                             if (createRecordResponse.ok === false) {
@@ -194,6 +215,46 @@ export function CreateOneRecord(props: {
                                         </FormItem>
                                     )}
                                 />
+                                <FormGroup title="Modèle d'écriture">
+                                    <FormItem>
+                                        <span className={css({ fontSize: "xs", color: "neutral/50" })}>
+                                            Choisir un modèle
+                                        </span>
+                                        <InputSelect
+                                            value={selectedTemplate}
+                                            onChange={(value) => {
+                                                const newValue = value ?? "empty"
+                                                setSelectedTemplate(newValue)
+                                                setIsTemplateReady(false)
+                                                form.setValue("rows", [])
+                                            }}
+                                            options={recordTemplates.map((template) => ({
+                                                key: template.key,
+                                                label: template.label,
+                                            }))}
+                                            placeholder="Sélectionner un modèle"
+                                        />
+                                    </FormItem>
+                                    {activeTemplate === undefined || activeTemplate.key === "empty" ? null : (
+                                        <div
+                                            className={css({
+                                                paddingLeft: "2rem",
+                                                // backgroundColor: "background",
+                                                width: "100%",
+                                                // borderRadius: "lg",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                            })}
+                                        >
+                                            {activeTemplate?.formComponent({
+                                                form,
+                                                idOrganization: props.idOrganization,
+                                                idYear: props.idYear,
+                                                onTemplateReadyChange: setIsTemplateReady,
+                                            })}
+                                        </div>
+                                    )}
+                                </FormGroup>
                             </Fragment>
                         )}
                     </FormRoot>

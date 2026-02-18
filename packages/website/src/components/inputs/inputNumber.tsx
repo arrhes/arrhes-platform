@@ -31,20 +31,19 @@ export function InputPrice(
                     justifyContent: "flex-start",
                     alignItems: "stretch",
                     border: "1px solid",
-                    borderColor: "neutral/20",
-                    borderRadius: "sm",
+                    borderRadius: "md",
+                    _hover: { borderColor: "neutral/30" },
+                    _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
-                css(props.error ? { borderColor: "error" } : {}),
+                css(props.error ? { borderColor: "error" } : { borderColor: "neutral/20" }),
                 props.className,
             )}
         >
             <IMaskInput
-                // inputRef={props.ref}
                 mask="n"
                 blocks={{
                     n: {
                         mask: IMask.MaskedNumber,
-                        // from: 0,
                         scale: 2,
                     },
                 }}
@@ -53,17 +52,14 @@ export function InputPrice(
                 overwrite={false}
                 eager="append"
                 unmask={"typed"}
-                // onClick={(event) => { event.currentTarget.select() }}
-                // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
                 onAccept={(value: unknown) => props.onChange(output(String(value)))}
                 value={input(props.value)}
                 className={css({
                     borderRadius: "inherit",
                     width: "100%",
-                    fontSize: "base",
+                    fontSize: "sm",
                     _placeholder: { color: "neutral/25" },
                     padding: "1rem",
-                    _focus: { boxShadow: "inset", backgroundColor: "neutral/5" },
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",

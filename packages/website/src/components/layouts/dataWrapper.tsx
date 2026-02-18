@@ -4,7 +4,7 @@ import { type ComponentProps, type ReactElement, Suspense } from "react"
 import type * as v from "valibot"
 import { useDataFromAPI } from "../../utilities/useHTTPData.js"
 import { FormatError } from "../formats/formatError.js"
-import { CircularLoader } from "./circularLoader.js"
+import { CircularLoader } from "@arrhes/ui"
 
 export function DataWrapper<TRouteDefinition extends ReturnType<typeof routeDefinition>>(props: {
     routeDefinition: TRouteDefinition

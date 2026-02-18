@@ -1,4 +1,4 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconAlertTriangle, IconTrash } from "@tabler/icons-react"
 import { type ComponentPropsWithRef, type JSX, type ReactElement, useState } from "react"
@@ -48,15 +48,10 @@ export function DeleteConfirmation(props: {
                     </Dialog.Body>
                     <Dialog.Footer>
                         <Button onClick={() => setOpen(false)}>
-                            <ButtonContent variant="default" text="Annuler" />
+                            <ButtonOutlineContent text="Annuler" />
                         </Button>
                         <Button onClick={handleSubmit} hasLoader>
-                            <ButtonContent
-                                variant="primary"
-                                leftIcon={<IconTrash />}
-                                color="error"
-                                text={props.submitText}
-                            />
+                            <ButtonPlainContent leftIcon={<IconTrash />} color="danger" text={props.submitText} />
                         </Button>
                     </Dialog.Footer>
                 </Dialog.Content>

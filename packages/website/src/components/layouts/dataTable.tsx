@@ -1,4 +1,4 @@
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, CircularLoader } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import {
     IconChevronDown,
@@ -24,7 +24,6 @@ import { Fragment, type ReactElement, useMemo, useState } from "react"
 import { FormatNull } from "../formats/formatNull.js"
 import { InputDebounced } from "../inputs/inputDebounced.js"
 import { InputText } from "../inputs/inputText.js"
-import { CircularLoader } from "./circularLoader.js"
 import { TableFilterPopover } from "./table/tableFilterPopover.js"
 import { TableSortPopover } from "./table/tableSortPopover.js"
 
@@ -170,8 +169,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                             })}
                                         >
                                             <Button onClick={header.column.getToggleSortingHandler()}>
-                                                <ButtonContent
-                                                    variant="invisible"
+                                                <ButtonGhostContent
                                                     leftIcon={
                                                         {
                                                             asc: <IconSortAscending size={16} />,
@@ -245,8 +243,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                                             row.toggleExpanded()
                                                         }}
                                                     >
-                                                        <ButtonContent
-                                                            variant="invisible"
+                                                        <ButtonGhostContent
                                                             leftIcon={
                                                                 row.getIsExpanded() ? (
                                                                     <IconChevronDown size={16} />
@@ -336,8 +333,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                         })}
                     >
                         <Button onClick={() => table.previousPage()} isDisabled={!table.getCanPreviousPage()}>
-                            <ButtonContent
-                                variant="default"
+                            <ButtonOutlineContent
                                 leftIcon={<IconChevronLeft size={16} />}
                                 text={undefined}
                                 isDisabled={!table.getCanPreviousPage()}
@@ -352,8 +348,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             Page {table.getState().pagination.pageIndex + 1} sur {table.getPageCount()}
                         </span>
                         <Button onClick={() => table.nextPage()} isDisabled={!table.getCanNextPage()}>
-                            <ButtonContent
-                                variant="default"
+                            <ButtonOutlineContent
                                 leftIcon={<IconChevronRight size={16} />}
                                 text={undefined}
                                 isDisabled={!table.getCanPreviousPage()}

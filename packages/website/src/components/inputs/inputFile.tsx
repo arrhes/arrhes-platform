@@ -13,8 +13,6 @@ export function InputFile(
 ) {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
-    // useImperativeHandle(props.ref, () => inputRef.current as HTMLInputElement)
-
     return (
         <div
             className={css({
@@ -22,8 +20,8 @@ export function InputFile(
                 border: "1px solid",
                 borderColor: "neutral/20",
                 borderStyle: "dashed",
-                _hover: { backgroundColor: "neutral/5" },
-                borderRadius: "sm",
+                borderRadius: "md",
+                _hover: { backgroundColor: "neutral/5", borderColor: "neutral/30" },
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -64,7 +62,7 @@ export function InputFile(
                     alignItems: "center",
                 })}
             >
-                <span className={css({ color: "neutral/75" })}>
+                <span className={css({ color: "neutral/75", fontSize: "sm" })}>
                     {props.value?.name ?? props.placeholder ?? "Glissez-déposez ou cliquez pour ajouter un fichier"}
                 </span>
             </Button>

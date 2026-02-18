@@ -1,5 +1,5 @@
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonPlainContent } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconFile, IconFileTypePdf, IconPhoto, IconPlus } from "@tabler/icons-react"
 import { useState } from "react"
@@ -69,7 +69,7 @@ export function FilesGrid(props: {
                     <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
                 </InputDebounced>
                 <CreateOneFile idOrganization={props.idOrganization} idYear={props.idYear}>
-                    <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un fichier" />
+                    <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter un fichier" />
                 </CreateOneFile>
             </div>
 

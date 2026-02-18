@@ -1,15 +1,16 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconStarFilled } from "@tabler/icons-react"
-import { forwardRef, type InputHTMLAttributes } from "react"
+import type { InputHTMLAttributes } from "react"
 import type { FieldError } from "react-hook-form"
 
-type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
-    error?: FieldError
-    value?: number | null
-    onChange?: (value?: number | null | undefined) => void
-}
-
-export const InputRating = forwardRef<HTMLInputElement, InputText>((props, ref) => {
+export function InputRating(
+    props: Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> & {
+        error?: FieldError
+        value?: number | null
+        onChange?: (value?: number | null | undefined) => void
+        ref?: React.Ref<HTMLInputElement>
+    },
+) {
     function input(value: number | undefined | null) {
         if (!value) return 0
         return value
@@ -22,7 +23,7 @@ export const InputRating = forwardRef<HTMLInputElement, InputText>((props, ref) 
 
     return (
         <div className={css({ display: "flex" })}>
-            <input className={css({ display: "none" })} ref={ref} />
+            <input className={css({ display: "none" })} ref={props.ref} />
             {Array(5)
                 .fill(0)
                 .map((_, i) => (
@@ -49,4 +50,4 @@ export const InputRating = forwardRef<HTMLInputElement, InputText>((props, ref) 
                 ))}
         </div>
     )
-})
+}

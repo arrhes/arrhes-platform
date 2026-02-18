@@ -2,7 +2,7 @@ import {
     readOneComputationIncomeStatementRouteDefinition,
     readOneComputationRouteDefinition,
 } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -51,7 +51,7 @@ export function ComputationIncomeStatementPage() {
                                             idYear: params.idYear,
                                         }}
                                     >
-                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
+                                        <ButtonOutlineContent leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
                                 <div
@@ -66,12 +66,12 @@ export function ComputationIncomeStatementPage() {
                                     <UpdateOneComputationIncomeStatement
                                         computationIncomeStatement={computationIncomeStatement}
                                     >
-                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
+                                        <ButtonPlainContent leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneComputationIncomeStatement>
                                     <DeleteOneComputationIncomeStatement
                                         computationIncomeStatement={computationIncomeStatement}
                                     >
-                                        <ButtonContent variant="default" leftIcon={<IconTrash />} color="error" />
+                                        <ButtonOutlineContent leftIcon={<IconTrash />} color="danger" />
                                     </DeleteOneComputationIncomeStatement>
                                 </div>
                             </Section.Item>

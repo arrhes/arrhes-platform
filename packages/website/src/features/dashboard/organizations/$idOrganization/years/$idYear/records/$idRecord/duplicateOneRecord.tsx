@@ -1,6 +1,6 @@
 import { duplicateOneRecordRouteDefinition, readAllRecordsRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { Button, ButtonContent } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconCopyCheck } from "@tabler/icons-react"
 import { type ComponentPropsWithRef, type ReactElement, useState } from "react"
@@ -89,10 +89,10 @@ export function DuplicateOneRecord(props: {
                     </div>
                     <Dialog.Footer>
                         <Button onClick={() => onCancel()}>
-                            <ButtonContent variant="invisible" text="Annuler" />
+                            <ButtonGhostContent text="Annuler" />
                         </Button>
                         <Button onClick={() => onSubmit()} hasLoader>
-                            <ButtonContent variant="primary" leftIcon={<IconCopyCheck />} text="Dupliquer l'écriture" />
+                            <ButtonPlainContent leftIcon={<IconCopyCheck />} text="Dupliquer l'écriture" />
                         </Button>
                     </Dialog.Footer>
                 </Dialog.Content>

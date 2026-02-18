@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronRight } from "@tabler/icons-react"
 import { DocRoot } from "../../../components/document/docRoot.tsx"
@@ -36,7 +36,7 @@ export function RootAccountingDocPage() {
             </div>
 
             <LinkButton to="/documentation/comptabilité/comptes">
-                <ButtonContent variant="outline" text="Commencer directement" rightIcon={<IconChevronRight />} />
+                <ButtonOutlineContent text="Commencer directement" rightIcon={<IconChevronRight />} />
             </LinkButton>
         </DocRoot>
     )

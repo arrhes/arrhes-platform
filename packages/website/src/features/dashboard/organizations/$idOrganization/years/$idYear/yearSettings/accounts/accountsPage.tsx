@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -28,14 +28,10 @@ export function AccountsPage() {
                             })}
                         >
                             <CreateOneAccount idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter un compte" />
+                                <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter un compte" />
                             </CreateOneAccount>
                             <GenerateAccounts idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent
-                                    variant="default"
-                                    leftIcon={<IconPlus />}
-                                    text="Générer les comptes par défaut"
-                                />
+                                <ButtonOutlineContent leftIcon={<IconPlus />} text="Générer les comptes par défaut" />
                             </GenerateAccounts>
                         </div>
                         <Box className={css({ maxH: "640px" })}>

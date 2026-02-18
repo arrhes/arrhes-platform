@@ -1,4 +1,4 @@
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconPlus } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -26,7 +26,7 @@ export function RecordLabelsPage() {
                             })}
                         >
                             <CreateOneRecordLabel idOrganization={params.idOrganization} idYear={params.idYear}>
-                                <ButtonContent variant="primary" leftIcon={<IconPlus />} text="Ajouter une catégorie" />
+                                <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter une catégorie" />
                             </CreateOneRecordLabel>
                         </div>
                         <RecordLabelsListTable idOrganization={params.idOrganization} idYear={params.idYear} />

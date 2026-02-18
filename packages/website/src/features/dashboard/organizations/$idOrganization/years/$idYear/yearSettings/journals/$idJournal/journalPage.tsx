@@ -1,5 +1,5 @@
 import { readOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
-import { ButtonContent } from "@arrhes/ui"
+import { ButtonOutlineContent, ButtonPlainContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
@@ -46,7 +46,7 @@ export function JournalPage() {
                                             idYear: journal.idYear,
                                         }}
                                     >
-                                        <ButtonContent variant="default" leftIcon={<IconChevronLeft />} text="Retour" />
+                                        <ButtonOutlineContent leftIcon={<IconChevronLeft />} text="Retour" />
                                     </LinkButton>
                                 </div>
                                 <div
@@ -59,14 +59,13 @@ export function JournalPage() {
                                     })}
                                 >
                                     <UpdateOneJournal journal={journal}>
-                                        <ButtonContent variant="primary" leftIcon={<IconPencil />} text="Modifier" />
+                                        <ButtonPlainContent leftIcon={<IconPencil />} text="Modifier" />
                                     </UpdateOneJournal>
                                     <DeleteOneJournal journal={journal}>
-                                        <ButtonContent
-                                            variant="default"
+                                        <ButtonOutlineContent
                                             leftIcon={<IconTrash />}
                                             title="Supprimer"
-                                            color="error"
+                                            color="danger"
                                         />
                                     </DeleteOneJournal>
                                 </div>

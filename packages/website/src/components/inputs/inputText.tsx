@@ -24,16 +24,16 @@ export function InputText(
             className={cx(
                 css({
                     width: "100%",
-                    height: "32px",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    gap: "2",
+                    gap: "0.5rem",
                     border: "1px solid",
                     borderRadius: "md",
+                    _hover: { borderColor: "neutral/50" },
                     _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                 }),
-                css(!props.error ? { borderColor: "neutral/25" } : { borderColor: "error" }),
+                css(!props.error ? { borderColor: "neutral/20" } : { borderColor: "error" }),
                 props.className,
             )}
         >
@@ -42,13 +42,13 @@ export function InputText(
                 type="text"
                 className={css({
                     width: "100%",
-                    height: "100%",
-                    fontSize: "sm",
-                    lineHeight: "none",
+                    fontSize: "0.875rem",
+                    lineHeight: "1rem",
+                    fontWeight: "400",
                     _placeholder: { color: "neutral/25" },
                     backgroundColor: "transparent",
-                    padding: "1rem",
-                    borderRadius: "md",
+                    padding: "0.5rem",
+                    _focusWithin: { borderColor: "neutral/50", outline: "none", },
                 })}
                 value={input(props.value)}
                 onChange={(e) => {

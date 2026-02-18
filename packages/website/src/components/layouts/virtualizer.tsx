@@ -13,7 +13,8 @@ export function Virtualizer<TData>(props: {
     const rowVirtualizer = useVirtualizer({
         count: props.data.length,
         getScrollElement: () => parentRef.current,
-        estimateSize: () => props.childSize ?? 32,
+        estimateSize: () => props.childSize ?? 45,
+        measureElement: (element) => element.getBoundingClientRect().height,
         overscan: 5,
     })
 
@@ -34,38 +35,32 @@ export function Virtualizer<TData>(props: {
             )}
         >
             <div
-                className={css({
+                style={{
                     position: "relative",
                     width: "100%",
-                    height: "fit",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                })}
-                style={{
                     height: `${rowVirtualizer.getTotalSize()}px`,
                 }}
             >
-                {rowVirtualizer.getVirtualItems().map((virtualItem) => (
-                    <div
-                        key={virtualItem.key}
-                        className={css({
-                            position: "absolute",
-                            top: "0",
-                            left: "0",
-                            minH: "fit",
-                            height: "fit",
-                            width: "100%",
-                        })}
-                        style={{
-                            height: `${virtualItem.size}px`,
-                            transform: `translateY(${virtualItem.start}px)`,
-                        }}
-                    >
-                        {props.children(props.data[virtualItem.index], virtualItem.index)}
-                    </div>
-                ))}
+                <div
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        transform: `translateY(${rowVirtualizer.getVirtualItems()[0]?.start ?? 0}px)`,
+                    }}
+                >
+                    {rowVirtualizer.getVirtualItems().map((virtualItem) => (
+                        <div
+                            key={virtualItem.key}
+                            data-index={virtualItem.index}
+                            ref={rowVirtualizer.measureElement}
+                            className={css({ width: "100%" })}
+                        >
+                            {props.children(props.data[virtualItem.index], virtualItem.index)}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
