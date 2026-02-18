@@ -92,7 +92,7 @@ export function InputDate(
                 }}
                 autofix={false}
                 lazy={false}
-                overwrite={true}
+                overwrite="shift"
                 eager="append"
                 unmask="typed"
                 placeholder={"JJ / MM / YYYY"}
