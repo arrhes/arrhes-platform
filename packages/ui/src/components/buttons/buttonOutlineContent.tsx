@@ -1,4 +1,4 @@
-import { sva } from "../../../styled-system/css/sva"
+import { sva } from "@arrhes/ui/css"
 import { type ButtonContentProps, renderButtonContent } from "./buttonContent"
 
 const outlineRecipe = sva({

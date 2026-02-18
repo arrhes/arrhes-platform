@@ -33,28 +33,28 @@ export function renderButtonContent(
             })
             : ""
 
-    const activeContainerStyles = props.isActive ? css({ backgroundColor: "neutral/5" }) : ""
-    const activeLeftIconStyles = props.isActive ? css({ color: "primary" }) : ""
-    const activeTextStyles = props.isActive ? css({ color: "primary" }) : ""
+    // const activeContainerStyles = props.isActive ? css({ backgroundColor: "neutral/5" }) : ""
+    // const activeLeftIconStyles = props.isActive ? css({ color: "primary" }) : ""
+    // const activeTextStyles = props.isActive ? css({ color: "primary" }) : ""
 
     return (
         <div
             title={props.title ?? props.text}
             aria-current={props.isActive || isLoading}
             aria-disabled={props.isDisabled || isLoading}
-            className={cx(classes.container, iconOnlyStyles, activeContainerStyles, props.className)}
+            className={cx(classes.container, iconOnlyStyles, props.className)}
         >
             {props.leftIcon &&
                 !isLoading &&
                 cloneElement(props.leftIcon, {
                     "aria-disabled": props.isDisabled,
                     size: 16,
-                    className: cx(classes.leftIcon, activeLeftIconStyles),
+                    className: cx(classes.leftIcon),
                     strokeWidth: 1.75,
                 })}
 
             {props.text && (
-                <span aria-disabled={props.isDisabled || isLoading} className={cx(classes.text, activeTextStyles)}>
+                <span aria-disabled={props.isDisabled || isLoading} className={cx(classes.text)}>
                     {props.text}
                 </span>
             )}

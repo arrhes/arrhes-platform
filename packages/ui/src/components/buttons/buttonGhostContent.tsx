@@ -1,4 +1,4 @@
-import { sva } from "../../../styled-system/css/sva"
+import { sva } from "@arrhes/ui/css"
 import { type ButtonContentProps, renderButtonContent } from "./buttonContent"
 
 const ghostRecipe = sva({
@@ -20,11 +20,9 @@ const ghostRecipe = sva({
             borderWidth: "1px",
             borderStyle: "solid",
             borderColor: "transparent",
-            backgroundColor: {
-                base: "transparent",
-                _hover: "neutral/5",
-                _active: "background",
-            },
+            backgroundColor: "transparent",
+            _hover: { backgroundColor: "neutral/5" },
+            _active: { backgroundColor: "neutral/10" },
             _disabled: {
                 opacity: 0.5,
                 cursor: "not-allowed",
@@ -64,13 +62,10 @@ const ghostRecipe = sva({
             },
             danger: {
                 container: {
-                    backgroundColor: {
-                        base: "transparent",
-                        _hover: {
-                            base: "error/5",
-                            _disabled: "transparent",
-                        },
-                    }
+                    _hover: {
+                        backgroundColor: "error/5",
+                        _disabled: { backgroundColor: "transparent" },
+                    },
                 },
                 leftIcon: { stroke: "error", _disabled: { stroke: "neutral/50" } },
                 text: { color: "error", _disabled: { color: "neutral/50" } },
