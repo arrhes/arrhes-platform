@@ -1,19 +1,18 @@
-import { defaultComputations } from "@arrhes/application-metadata/components"
-import { models } from "@arrhes/application-metadata/models"
-import { generateComputationsRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
+import { defaultComputations, generateComputationsRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 
-export const generateComputationsRoute = authFactory
+export const generateComputationsRoute = apiFactory
     .createApp()
     .post(generateComputationsRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateComputationsRouteDefinition.schemas.body,

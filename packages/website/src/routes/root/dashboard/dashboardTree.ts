@@ -6,6 +6,7 @@ import { organizationPathRoute } from "./organizations/$idOrganization/organizat
 import { organizationRoute } from "./organizations/$idOrganization/organizationRoute.tsx"
 import { organizationSettingsLayoutRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute.tsx"
 import { organizationSettingsRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsRoute.tsx"
+import { organizationSubscriptionHistoryRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionHistoryRoute.tsx"
 import { organizationSubscriptionLayoutRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionLayoutRoute.tsx"
 import { organizationSubscriptionRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionRoute.tsx"
 import { organizationUsersLayoutRoute } from "./organizations/$idOrganization/organizationUsers/organizationUsersLayoutRoute.tsx"
@@ -78,7 +79,10 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                 organizationUsersLayoutRoute.addChildren([organizationUsersRoute]),
                 organizationSettingsLayoutRoute.addChildren([
                     organizationSettingsRoute,
-                    organizationSubscriptionLayoutRoute.addChildren([organizationSubscriptionRoute]),
+                    organizationSubscriptionLayoutRoute.addChildren([
+                        organizationSubscriptionRoute,
+                        organizationSubscriptionHistoryRoute,
+                    ]),
                 ]),
             ]),
             yearsPathRoute.addChildren([

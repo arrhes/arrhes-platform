@@ -1,16 +1,17 @@
-import { models } from "@arrhes/application-metadata/models"
-import { generateFilePutSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateFilePutSignedUrlRouteDefinition, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 import { generatePutSignedUrl } from "../../../../../../../../utilities/storage/generatePutSignedUrl.js"
 
-export const generateFilePutSignedUrlRoute = authFactory
+export const generateFilePutSignedUrlRoute = apiFactory
     .createApp()
     .post(generateFilePutSignedUrlRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateFilePutSignedUrlRouteDefinition.schemas.body,
@@ -50,7 +51,7 @@ export const generateFilePutSignedUrlRoute = authFactory
             metadata: {
                 idOrganization: body.idOrganization,
                 idYear: body.idYear,
-                idUser: c.var.user.id,
+                idUser: user.id,
             },
         })
 

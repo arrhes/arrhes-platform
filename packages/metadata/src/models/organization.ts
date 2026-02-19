@@ -19,7 +19,7 @@ export const organizationModel = pgTable("table_organization", {
     email: text("email"),
     mollieCustomerId: text("mollie_customer_id"),
     mollieSubscriptionId: text("mollie_subscription_id"),
-    premiumAt: dateTimeColumn("premium_at"),
+    subcriptionEndingAt: dateTimeColumn("subscription_ending_at"),
     storageCurrentUsage: integer("storage_current_usage").notNull().default(0),
     createdAt: dateTimeColumn("created_at").notNull(),
     lastUpdatedAt: dateTimeColumn("last_updated_at"),

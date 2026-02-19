@@ -1,4 +1,4 @@
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import type * as v from "valibot"
 import { numberToRomanString } from "../../../numberToRomanString.js"

@@ -1,21 +1,21 @@
+import { generateId, generateIncomeStatementReportDocumentRouteDefinition, models } from "@arrhes/application-metadata"
+import { and, eq } from "drizzle-orm"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { models } from "@arrhes/application-metadata/models"
-import { generateIncomeStatementReportDocumentRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { and, eq } from "drizzle-orm"
 import { launch } from "puppeteer"
-import { authFactory } from "../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../utilities/apiFactory.js"
 import { incomeStatementReportTemplate } from "../../../../../../../utilities/email/templates/incomeStatementReport/incomeStatementReport.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 import { selectMany } from "../../../../../../../utilities/sql/selectMany.js"
 import { putObject } from "../../../../../../../utilities/storage/putObject.js"
 
-export const generateIncomeStatementReportDocumentRoute = authFactory
+export const generateIncomeStatementReportDocumentRoute = apiFactory
     .createApp()
     .post(generateIncomeStatementReportDocumentRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateIncomeStatementReportDocumentRouteDefinition.schemas.body,
@@ -127,7 +127,7 @@ export const generateIncomeStatementReportDocumentRoute = authFactory
             metadata: {
                 idOrganization: body.idOrganization,
                 idYear: body.idYear,
-                idUser: c.var.user.id,
+                idUser: user.id,
             },
         })
 
@@ -143,7 +143,7 @@ export const generateIncomeStatementReportDocumentRoute = authFactory
                 storageKey: storageKey,
                 createdAt: new Date().toISOString(),
                 lastUpdatedAt: null,
-                createdBy: c.var.user.id,
+                createdBy: user.id,
                 lastUpdatedBy: null,
             },
         })

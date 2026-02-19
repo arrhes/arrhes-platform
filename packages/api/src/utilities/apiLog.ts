@@ -1,5 +1,5 @@
-import type { getClients } from "../utilities/getClients.js"
-import type { getEnv } from "../utilities/getEnv.js"
+import type { getClients } from "./getClients.js"
+import type { getEnv } from "./getEnv.js"
 
 type ApiLog = {
     var: {

@@ -1,16 +1,16 @@
-import { models } from "@arrhes/application-metadata/models"
-import { readOrganizationSubscriptionRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, readOrganizationSubscriptionRouteDefinition } from "@arrhes/application-metadata"
 import { and, desc, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../middlewares/validateBody.middleware.js"
-import { Exception } from "../../../../../../utilities/exception.js"
+import { apiFactory } from "../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../utilities/sql/selectMany.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 
-export const readOrganizationSubscriptionRoute = authFactory
+export const readOrganizationSubscriptionRoute = apiFactory
     .createApp()
     .post(readOrganizationSubscriptionRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOrganizationSubscriptionRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const readOrganizationSubscriptionRoute = authFactory
         await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idUser, c.var.user.id), eq(table.idOrganization, body.idOrganization)),
+            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
         })
 
         // Get organization
@@ -45,8 +45,8 @@ export const readOrganizationSubscriptionRoute = authFactory
             statusCode: 200,
             schema: readOrganizationSubscriptionRouteDefinition.schemas.return,
             data: {
-                isPremium: organization.premiumAt !== null,
-                premiumAt: organization.premiumAt,
+                isPremium: organization.subcriptionEndingAt !== null,
+                subcriptionEndingAt: organization.subcriptionEndingAt,
                 mollieSubscriptionId: organization.mollieSubscriptionId,
                 status: latestPayment?.status ?? null,
             },

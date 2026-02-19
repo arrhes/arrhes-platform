@@ -1,24 +1,26 @@
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import {
     defaultAssociationIncomeStatements,
     defaultCompanyIncomeStatements,
-} from "@arrhes/application-metadata/components"
-import { models } from "@arrhes/application-metadata/models"
-import { generateIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { generateId } from "@arrhes/application-metadata/utilities"
+    generateId,
+    generateIncomeStatementsRouteDefinition,
+    models,
+} from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
 import type * as v from "valibot"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 
-export const generateIncomeStatementsRoute = authFactory
+export const generateIncomeStatementsRoute = apiFactory
     .createApp()
     .post(generateIncomeStatementsRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateIncomeStatementsRouteDefinition.schemas.body,

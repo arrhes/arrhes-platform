@@ -1,9 +1,11 @@
-import { openYearRouteDefinition } from "@arrhes/application-metadata/routes"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { openYearRouteDefinition } from "@arrhes/application-metadata"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 
-export const openYearRoute = authFactory.createApp().post(openYearRouteDefinition.path, async (c) => {
+export const openYearRoute = apiFactory.createApp().post(openYearRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const _body = await validateBodyMiddleware({
         context: c,
         schema: openYearRouteDefinition.schemas.body,
@@ -18,7 +20,7 @@ export const openYearRoute = authFactory.createApp().post(openYearRouteDefinitio
     //     await tx
     //         .delete(records)
     //         .where(and(
-    //             eq(records.idOrganization, c.var.user.idOrganization),
+    //             eq(records.idOrganization, user.idOrganization),
     //             eq(records.idYear, c.var.currentYear.id),
     //             eq(records.idAutomatic, "OPEN_SHEET")
     //         ))
@@ -36,15 +38,15 @@ export const openYearRoute = authFactory.createApp().post(openYearRouteDefinitio
     //             isComputed: true,
     //             label: "Report du bilan de l'exercice précédent",
     //             date: c.var.currentYear.startingOn,
-    //             lastUpdatedBy: c.var.user.id,
-    //             createdBy: c.var.user.id
+    //             lastUpdatedBy: user.id,
+    //             createdBy: user.id
     //         })
     //         .returning()
 
     //     // We read the current accounts
     //     const readRecord = await tx.query.records.findFirst({
     //         where: and(
-    //             eq(records.idOrganization, c.var.user.idOrganization),
+    //             eq(records.idOrganization, user.idOrganization),
     //             eq(records.idYear, idPreviousYear),
     //             eq(records.idAutomatic, "SETTLE_SHEET")
     //         ),
@@ -60,7 +62,7 @@ export const openYearRoute = authFactory.createApp().post(openYearRouteDefinitio
 
     //     const readAccounts = await tx.query.accounts.findMany({
     //         where: and(
-    //             eq(records.idOrganization, c.var.user.idOrganization),
+    //             eq(records.idOrganization, user.idOrganization),
     //             eq(records.idYear, c.var.currentYear.id)
     //         )
     //     })
@@ -79,8 +81,8 @@ export const openYearRoute = authFactory.createApp().post(openYearRouteDefinitio
     //             debit: row.credit.toString(),
     //             credit: row.debit.toString(),
     //             label: "Report du compte",
-    //             lastUpdatedBy: c.var.user.id,
-    //             createdBy: c.var.user.id
+    //             lastUpdatedBy: user.id,
+    //             createdBy: user.id
     //         })
     //     })
     //     await tx

@@ -1,14 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, updateOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 
-export const updateOneBalanceSheetRoute = authFactory
+export const updateOneBalanceSheetRoute = apiFactory
     .createApp()
     .post(updateOneBalanceSheetRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: updateOneBalanceSheetRouteDefinition.schemas.body,
@@ -23,7 +24,7 @@ export const updateOneBalanceSheetRoute = authFactory
                 number: body.number,
                 label: body.label,
                 lastUpdatedAt: new Date().toISOString(),
-                lastUpdatedBy: c.var.user.id,
+                lastUpdatedBy: user.id,
             },
             where: (table) =>
                 and(

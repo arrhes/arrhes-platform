@@ -12,7 +12,7 @@ export const readOrganizationSubscriptionRouteDefinition = routeDefinition({
         }),
         return: v.object({
             isPremium: v.boolean(),
-            premiumAt: v.nullable(dateTimeSchema),
+            subcriptionEndingAt: v.nullable(dateTimeSchema),
             mollieSubscriptionId: v.nullable(v.string()),
             status: v.nullable(v.picklist(organizationPaymentStatus)),
         }),

@@ -1,14 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, readAllIncomeStatementsRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 
-export const readAllIncomeStatementsRoute = authFactory
+export const readAllIncomeStatementsRoute = apiFactory
     .createApp()
     .post(readAllIncomeStatementsRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readAllIncomeStatementsRouteDefinition.schemas.body,

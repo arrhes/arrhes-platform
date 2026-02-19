@@ -1,14 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, readOneBalanceSheetRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 
-export const readOneBalanceSheetRoute = authFactory
+export const readOneBalanceSheetRoute = apiFactory
     .createApp()
     .post(readOneBalanceSheetRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOneBalanceSheetRouteDefinition.schemas.body,

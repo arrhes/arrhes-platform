@@ -1,14 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { deleteOneRecordRowRouteDefinition } from "@arrhes/application-metadata/routes"
+import { deleteOneRecordRowRouteDefinition, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../../utilities/sql/deleteOne.js"
 
-export const deleteOneRecordRowRoute = authFactory
+export const deleteOneRecordRowRoute = apiFactory
     .createApp()
     .post(deleteOneRecordRowRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: deleteOneRecordRowRouteDefinition.schemas.body,

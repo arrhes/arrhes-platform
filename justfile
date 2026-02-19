@@ -1,13 +1,15 @@
 set shell := ["bash", "-cu"]
 COMPOSE_FILE := ".workflows/.dev/compose.yml"
+TUNNEL_FILE := ".workflows/.dev/compose.tunnel.yml"
 PROJECT := "application"
 DC := "docker compose --project-directory=.workflows/.dev --file=" + COMPOSE_FILE + " --project-name=" + PROJECT
+DC_TUNNEL := DC + " --file=" + TUNNEL_FILE
 
 dev cmd:
     @just dev-{{cmd}}
 
 dev-up:
-    {{DC}} up -d --build
+    {{DC}} up -d --build --force-recreate
     @echo ""
     @echo "=============================================="
     @echo "  Arrhes Development Environment Started"
@@ -29,8 +31,22 @@ dev-up:
     @echo "  Logs: docker compose -f {{COMPOSE_FILE}} logs -f"
     @echo "=============================================="
 
+# Start dev environment with a Cloudflare tunnel for Mollie webhook testing.
+# The tunnel exposes the API on a public *.trycloudflare.com URL and
+# automatically sets API_BASE_URL inside the API container.
+#
+# How it works:
+#   1. Start only the tunnel service (no dependencies, connects when API is up)
+#   2. Wait for cloudflared to print the *.trycloudflare.com URL
+#   3. Start all remaining services with the tunnel URL as API_BASE_URL
+dev-tunnel:
+    @bash .workflows/.dev/tunnel.sh '{{DC_TUNNEL}}' '{{COMPOSE_FILE}}'
+
 dev-down:
     {{DC}} down --remove-orphans
+
+dev-tunnel-down:
+    {{DC_TUNNEL}} down --remove-orphans
 
 dev-reset:
     @echo "Resetting database (clearing and reseeding)..."

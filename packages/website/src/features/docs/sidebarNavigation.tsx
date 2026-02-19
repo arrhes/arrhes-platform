@@ -51,7 +51,7 @@ export function SidebarNavigation(props: { navigation: Record<string, Navigation
                             <LinkButton key={item.path} to={item.path} className={css({ width: "100%" })}>
                                 <ButtonGhostContent
                                     text={item.label}
-                                    isActive={props.pathname === item.path}
+                                    isCurrent={props.pathname === item.path}
                                     className={css({ width: "100%", justifyContent: "start" })}
                                 />
                             </LinkButton>

@@ -1,19 +1,21 @@
-import { getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { getAllMyOrganizationsRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../utilities/apiFactory.js"
 import { response } from "../../../utilities/response.js"
 
-export const getAllMyOrganizationsRoute = authFactory
+export const getAllMyOrganizationsRoute = apiFactory
     .createApp()
     .post(getAllMyOrganizationsRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const _body = await validateBodyMiddleware({
             context: c,
             schema: getAllMyOrganizationsRouteDefinition.schemas.body,
         })
 
         const readAllOrganizationUsers = await c.var.clients.sql.query.organizationUserModel.findMany({
-            where: (table) => and(eq(table.idUser, c.var.user.id)),
+            where: (table) => and(eq(table.idUser, user.id)),
             with: {
                 organization: true,
             },

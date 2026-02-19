@@ -1,19 +1,20 @@
-import { models } from "@arrhes/application-metadata/models"
-import { validateUserEmailRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, validateUserEmailRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { authFactory } from "../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../utilities/apiFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 
-export const validateUserEmailRoute = authFactory.createApp().post(validateUserEmailRouteDefinition.path, async (c) => {
+export const validateUserEmailRoute = apiFactory.createApp().post(validateUserEmailRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: validateUserEmailRouteDefinition.schemas.body,
     })
 
-    if (body.emailToken !== c.var.user.emailToken) {
+    if (body.emailToken !== user.emailToken) {
         throw new Exception({
             internalMessage: "Wrong token",
             statusCode: 403,
@@ -21,7 +22,7 @@ export const validateUserEmailRoute = authFactory.createApp().post(validateUserE
         })
     }
 
-    const newEmail = c.var.user.emailToValidate
+    const newEmail = user.emailToValidate
     if (newEmail === null) {
         throw new Exception({
             internalMessage: "No email to validate",

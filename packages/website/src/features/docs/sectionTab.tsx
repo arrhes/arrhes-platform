@@ -21,7 +21,7 @@ export interface DocSection {
 export function SectionTab(props: { section: DocSection; isActive: boolean }) {
     return (
         <LinkButton to={props.section.path}>
-            <ButtonGhostContent leftIcon={props.section.icon} text={props.section.label} isActive={props.isActive} />
+            <ButtonGhostContent leftIcon={props.section.icon} text={props.section.label} isCurrent={props.isActive} />
         </LinkButton>
     )
 }

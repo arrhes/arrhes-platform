@@ -1,25 +1,24 @@
 import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
+import { Icon, IconProps } from "@tabler/icons-react"
 import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
-import type { ReactNode } from "react"
+import { cloneElement, ReactElement } from "react"
 import type { ValidParams, ValidRoutes } from "../../routes/applicationRouter.js"
 import { LinkButton } from "../linkButton.js"
 
 export function SubPageLayout(props: {
-    sections:
-        | Record<
-              string,
-              {
-                  title: string
-                  icon: ReactNode
-                  items: Array<{
-                      label: string
-                      to: ValidRoutes
-                      params: ValidParams
-                  }>
-              }
-          >
-        | undefined
+    sections: Record<
+        string,
+        {
+            title: string
+            icon: ReactElement<IconProps & React.RefAttributes<Icon>>
+            items: Array<{
+                label: string
+                to: ValidRoutes
+                params: ValidParams
+            }>
+        }
+    >
 }) {
     const routeMatches = useMatches()
     const currentPath = useRouterState({
@@ -49,7 +48,7 @@ export function SubPageLayout(props: {
                     height: "fit",
                     display: "flex",
                     justifyContent: "flex-start",
-                    alignItems: "flex-start",
+                    alignItems: "stretch",
                 })}
             >
                 {props.sections === undefined ? null : (
@@ -67,7 +66,6 @@ export function SubPageLayout(props: {
                             backgroundColor: "white",
                             position: "sticky",
                             top: "0",
-                            height: "fit-content",
                             maxHeight: "100vh",
                             overflowY: "auto",
                             padding: "1rem",
@@ -79,18 +77,33 @@ export function SubPageLayout(props: {
                                 <div
                                     className={css({
                                         display: "flex",
+                                        justifyContent: "start",
                                         alignItems: "center",
                                         gap: "0.5rem",
                                         padding: "0.5rem",
-                                        fontSize: "xs",
-                                        fontWeight: "semibold",
-                                        color: "neutral/40",
-                                        textTransform: "uppercase",
-                                        letterSpacing: "wider",
                                     })}
                                 >
-                                    {section.icon}
-                                    {section.title}
+                                    {cloneElement(
+                                        section.icon,
+                                        {
+                                            size: 14,
+                                            className: css({
+                                                stroke: "neutral/40"
+                                            })
+                                        }
+                                    )}
+                                    <span
+                                        className={css({
+                                            fontSize: "xs",
+                                            lineHeight: "none",
+                                            fontWeight: "300",
+                                            color: "neutral/50",
+                                            textTransform: "uppercase",
+                                            letterSpacing: "wider",
+                                        })}
+                                    >
+                                        {section.title}
+                                    </span>
                                 </div>
                                 <div
                                     className={css({
@@ -117,7 +130,7 @@ export function SubPageLayout(props: {
                                             >
                                                 <ButtonGhostContent
                                                     text={item.label}
-                                                    isActive={isActive}
+                                                    isCurrent={isActive}
                                                     className={css({
                                                         width: "100%",
                                                         justifyContent: "start",

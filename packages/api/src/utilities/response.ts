@@ -1,13 +1,11 @@
-import type { routeDefinition } from "@arrhes/application-metadata/utilities"
 import type { Context } from "hono"
 import type { ContentfulStatusCode } from "hono/utils/http-status"
 import type * as v from "valibot"
-import type { ApiEnv } from "../factories/apiFactory.js"
-import type { AuthEnv } from "../factories/authFactory.js"
-import type { PublicEnv } from "../factories/publicFactory.js"
+import type { ApiEnv } from "../utilities/apiFactory.js"
 import { validate } from "../utilities/validate.js"
+import { routeDefinition } from "@arrhes/application-metadata"
 
-type GContext = Context<ApiEnv> | Context<AuthEnv> | Context<PublicEnv>
+type GContext = Context<ApiEnv>
 
 export function response<
     TContext extends GContext,

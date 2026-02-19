@@ -1,11 +1,13 @@
-import { settleBalanceSheetRouteDefinition } from "@arrhes/application-metadata/routes"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { settleBalanceSheetRouteDefinition } from "@arrhes/application-metadata"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 
-export const settleBalanceSheetRoute = authFactory
+export const settleBalanceSheetRoute = apiFactory
     .createApp()
     .post(settleBalanceSheetRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const _body = await validateBodyMiddleware({
             context: c,
             schema: settleBalanceSheetRouteDefinition.schemas.body,
@@ -17,7 +19,7 @@ export const settleBalanceSheetRoute = authFactory
         //     await tx
         //         .delete(records)
         //         .where(and(
-        //             eq(records.idOrganization, c.var.user.idOrganization),
+        //             eq(records.idOrganization, user.idOrganization),
         //             eq(records.idYear, c.var.currentYear.id),
         //             eq(records.idAutomatic, "SETTLE_SHEET")
         //         ))
@@ -36,15 +38,15 @@ export const settleBalanceSheetRoute = authFactory
         //             label: "Solde des comptes de bilan",
         //             date: c.var.currentYear.endingOn,
         //             validatedOn: c.var.currentYear.endingOn,
-        //             lastUpdatedBy: c.var.user.id,
-        //             createdBy: c.var.user.id
+        //             lastUpdatedBy: user.id,
+        //             createdBy: user.id
         //         })
         //         .returning()
 
         //     // We read the current accounts
         //     const readAccounts = await tx.query.accounts.findMany({
         //         where: and(
-        //             eq(accounts.idOrganization, c.var.user.idOrganization),
+        //             eq(accounts.idOrganization, user.idOrganization),
         //             eq(accounts.idYear, c.var.currentYear.id),
         //             eq(accounts.type, "sheet")
         //         ),
@@ -87,8 +89,8 @@ export const settleBalanceSheetRoute = authFactory
         //             debit: balance.credit.toString(),
         //             credit: balance.debit.toString(),
         //             label: "Solde du compte",
-        //             lastUpdatedBy: c.var.user.id,
-        //             createdBy: c.var.user.id
+        //             lastUpdatedBy: user.id,
+        //             createdBy: user.id
         //         })
         //     })
         //     if (sheetRows.length === 0) throw new HTTPException(400, { message: "Aucune écriture ne peut être passée" })

@@ -14,7 +14,7 @@ export type ButtonContentProps = {
     rightIcon?: ReactElement<IconProps & React.RefAttributes<Icon>>
     isLoading?: boolean
     isDisabled?: boolean
-    isActive?: boolean
+    isCurrent?: boolean
     className?: string
 }
 
@@ -28,9 +28,9 @@ export function renderButtonContent(
     const iconOnlyStyles =
         props.text === undefined
             ? css({
-                  width: "auto",
-                  justifyContent: "center",
-              })
+                width: "auto",
+                justifyContent: "center",
+            })
             : ""
 
     // const activeContainerStyles = props.isActive ? css({ backgroundColor: "neutral/5" }) : ""
@@ -40,21 +40,26 @@ export function renderButtonContent(
     return (
         <div
             title={props.title ?? props.text}
-            aria-current={props.isActive || isLoading}
-            aria-disabled={props.isDisabled || isLoading}
+            aria-current={props.isCurrent}
+            aria-disabled={props.isDisabled}
             className={cx(classes.container, iconOnlyStyles, props.className)}
         >
             {props.leftIcon &&
                 !isLoading &&
                 cloneElement(props.leftIcon, {
                     "aria-disabled": props.isDisabled,
+                    "aria-current": props.isCurrent,
                     size: 16,
                     className: cx(classes.leftIcon),
                     strokeWidth: 1.75,
                 })}
 
             {props.text && (
-                <span aria-disabled={props.isDisabled || isLoading} className={cx(classes.text)}>
+                <span
+                    aria-disabled={props.isDisabled}
+                    aria-current={props.isCurrent}
+                    className={cx(classes.text)}
+                >
                     {props.text}
                 </span>
             )}

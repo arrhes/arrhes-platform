@@ -1,12 +1,13 @@
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneJournalRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, updateOneJournalRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 
-export const updateOneJournalRoute = authFactory.createApp().post(updateOneJournalRouteDefinition.path, async (c) => {
+export const updateOneJournalRoute = apiFactory.createApp().post(updateOneJournalRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateOneJournalRouteDefinition.schemas.body,
@@ -19,7 +20,7 @@ export const updateOneJournalRoute = authFactory.createApp().post(updateOneJourn
             code: body.code,
             label: body.label,
             lastUpdatedAt: new Date().toISOString(),
-            lastUpdatedBy: c.var.user.id,
+            lastUpdatedBy: user.id,
         },
         where: (table) =>
             and(

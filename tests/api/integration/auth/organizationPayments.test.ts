@@ -23,7 +23,7 @@ describe("POST /auth/read-organization-subscription", () => {
 
         const data = response.data as any
         expect(data).toHaveProperty("isPremium")
-        expect(data).toHaveProperty("premiumAt")
+        expect(data).toHaveProperty("subcriptionEndingAt")
         expect(data).toHaveProperty("mollieSubscriptionId")
         expect(data).toHaveProperty("status")
         expect(typeof data.isPremium).toBe("boolean")

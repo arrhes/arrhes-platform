@@ -1,16 +1,17 @@
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import {
     type DefaultAccount,
     defaultAssociationAccounts,
     defaultCompanyAccounts,
-} from "@arrhes/application-metadata/components"
-import { models } from "@arrhes/application-metadata/models"
-import { generateAccountsRouteDefinition } from "@arrhes/application-metadata/routes"
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { generateId } from "@arrhes/application-metadata/utilities"
+    generateAccountsRouteDefinition,
+    generateId,
+    models,
+} from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
 import type * as v from "valibot"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
@@ -67,7 +68,8 @@ function generateAccounts(parameters: {
     return newAccounts
 }
 
-export const generateAccountsRoute = authFactory.createApp().post(generateAccountsRouteDefinition.path, async (c) => {
+export const generateAccountsRoute = apiFactory.createApp().post(generateAccountsRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: generateAccountsRouteDefinition.schemas.body,

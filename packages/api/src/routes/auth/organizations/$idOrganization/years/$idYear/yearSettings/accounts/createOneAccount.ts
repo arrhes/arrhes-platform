@@ -1,14 +1,14 @@
-import { models } from "@arrhes/application-metadata/models"
-import { createOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
+import { createOneAccountRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 
-export const createOneAccountRoute = authFactory.createApp().post(createOneAccountRouteDefinition.path, async (c) => {
+export const createOneAccountRoute = apiFactory.createApp().post(createOneAccountRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneAccountRouteDefinition.schemas.body,
@@ -58,7 +58,7 @@ export const createOneAccountRoute = authFactory.createApp().post(createOneAccou
             isMandatory: true,
             createdAt: new Date().toISOString(),
             lastUpdatedAt: null,
-            createdBy: c.var.user.id,
+            createdBy: user.id,
             lastUpdatedBy: null,
         },
     })

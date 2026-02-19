@@ -22,7 +22,7 @@ const ghostRecipe = sva({
             borderColor: "transparent",
             backgroundColor: "transparent",
             _hover: { backgroundColor: "neutral/5" },
-            _active: { backgroundColor: "neutral/10" },
+            _current: { backgroundColor: "primary/5" },
             _disabled: {
                 opacity: 0.5,
                 cursor: "not-allowed",
@@ -36,6 +36,7 @@ const ghostRecipe = sva({
             flexShrink: 0,
             stroke: "neutral/70",
             _disabled: { stroke: "neutral/50" },
+            _current: { stroke: "primary", }
         },
         text: {
             overflow: "hidden",
@@ -46,6 +47,7 @@ const ghostRecipe = sva({
             fontWeight: "400",
             color: "neutral",
             _disabled: { color: "neutral/50" },
+            _current: { color: "primary", }
         },
         rightIcon: {
             minWidth: "1rem",

@@ -1,8 +1,6 @@
-import { models } from "@arrhes/application-metadata/models"
-import { signOutRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
-import { publicFactory } from "../../factories/publicFactory.js"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { parseCookies } from "../../utilities/cookies/parseCookies.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
 import { unsignString } from "../../utilities/cookies/unsignString.js"
@@ -10,8 +8,9 @@ import { Exception } from "../../utilities/exception.js"
 import { response } from "../../utilities/response.js"
 import { updateOne } from "../../utilities/sql/updateOne.js"
 import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { signOutRouteDefinition, models } from "@arrhes/application-metadata"
 
-export const signOutRoute = publicFactory.createApp().post(signOutRouteDefinition.path, async (c) => {
+export const signOutRoute = apiFactory.createApp().post(signOutRouteDefinition.path, async (c) => {
     const _body = await validateBodyMiddleware({
         context: c,
         schema: signOutRouteDefinition.schemas.body,

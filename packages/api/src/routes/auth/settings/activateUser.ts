@@ -1,19 +1,20 @@
-import { models } from "@arrhes/application-metadata/models"
-import { activateUserRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
-import { authFactory } from "../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../utilities/apiFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
+import { activateUserRouteDefinition, models } from "@arrhes/application-metadata"
 
-export const activateUserRoute = authFactory.createApp().post(activateUserRouteDefinition.path, async (c) => {
+export const activateUserRoute = apiFactory.createApp().post(activateUserRouteDefinition.path, async (c) => {
+    const { user, userSession } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: activateUserRouteDefinition.schemas.body,
     })
 
-    if (body.emailToken !== c.var.user.emailToken) {
+    if (body.emailToken !== user.emailToken) {
         throw new Exception({
             internalMessage: "Wrong token",
             statusCode: 403,
@@ -31,7 +32,7 @@ export const activateUserRoute = authFactory.createApp().post(activateUserRouteD
             emailTokenExpiresAt: null,
             lastUpdatedAt: new Date().toISOString(),
         },
-        where: (table) => eq(table.id, c.var.user.id),
+        where: (table) => eq(table.id, user.id),
     })
 
     return response({

@@ -1,12 +1,13 @@
-import { models } from "@arrhes/application-metadata/models"
-import { updateOneYearRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, updateOneYearRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 
-export const updateOneYearRoute = authFactory.createApp().post(updateOneYearRouteDefinition.path, async (c) => {
+export const updateOneYearRoute = apiFactory.createApp().post(updateOneYearRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateOneYearRouteDefinition.schemas.body,
@@ -21,7 +22,7 @@ export const updateOneYearRoute = authFactory.createApp().post(updateOneYearRout
             startingAt: body.startingAt,
             endingAt: body.endingAt,
             lastUpdatedAt: new Date().toISOString(),
-            lastUpdatedBy: c.var.user.id,
+            lastUpdatedBy: user.id,
         },
         where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.id, body.idYear)),
     })

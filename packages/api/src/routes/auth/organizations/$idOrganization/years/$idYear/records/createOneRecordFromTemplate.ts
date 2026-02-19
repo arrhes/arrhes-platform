@@ -1,15 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { createOneRecordFromTemplateRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { authFactory } from "../../../../../../../factories/authFactory.js"
+import { createOneRecordFromTemplateRouteDefinition, generateId, models } from "@arrhes/application-metadata"
+import { checkUserSessionMiddleware } from "../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertMany } from "../../../../../../../utilities/sql/insertMany.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 
-export const createOneRecordFromTemplateRoute = authFactory
+export const createOneRecordFromTemplateRoute = apiFactory
     .createApp()
     .post(createOneRecordFromTemplateRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneRecordFromTemplateRouteDefinition.schemas.body,
@@ -30,7 +30,7 @@ export const createOneRecordFromTemplateRoute = authFactory
                     date: body.date,
                     createdAt: new Date().toISOString(),
                     lastUpdatedAt: null,
-                    createdBy: c.var.user.id,
+                    createdBy: user.id,
                     lastUpdatedBy: null,
                 },
             })
@@ -55,7 +55,7 @@ export const createOneRecordFromTemplateRoute = authFactory
                         credit: row.credit ?? "0.00",
                         createdAt: new Date().toISOString(),
                         lastUpdatedAt: null,
-                        createdBy: c.var.user.id,
+                        createdBy: user.id,
                         lastUpdatedBy: null,
                     })),
                 })

@@ -13,11 +13,11 @@ export function InputSelect<TValue extends string>(
         defaultValue?: TValue | null
         onChange?: (value?: TValue | null | undefined) => void
         options:
-            | Array<{
-                  key: TValue
-                  label: string
-              }>
-            | undefined
+        | Array<{
+            key: TValue
+            label: string
+        }>
+        | undefined
         autoFocus?: boolean
         allowEmpty?: boolean
         isDisabled?: boolean
@@ -115,7 +115,7 @@ export function InputSelect<TValue extends string>(
                                             css({ width: "100%", justifyContent: "space-between" }),
                                             isSelected ? css({ backgroundColor: "background" }) : "",
                                         )}
-                                        isActive={isSelected}
+                                        isCurrent={isSelected}
                                     />
                                 </Button>
                             )

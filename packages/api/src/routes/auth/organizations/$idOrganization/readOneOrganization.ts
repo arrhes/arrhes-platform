@@ -1,14 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
-import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, readOneOrganizationRouteDefinition } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../utilities/apiFactory.js"
 import { response } from "../../../../utilities/response.js"
 import { selectOne } from "../../../../utilities/sql/selectOne.js"
 
-export const readOneOrganizationRoute = authFactory
+export const readOneOrganizationRoute = apiFactory
     .createApp()
     .post(readOneOrganizationRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOneOrganizationRouteDefinition.schemas.body,
@@ -17,7 +18,7 @@ export const readOneOrganizationRoute = authFactory
         const organizationUser = await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idUser, c.var.user.id)),
+            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idUser, user.id)),
         })
 
         const readOneOrganization = await selectOne({

@@ -1,10 +1,7 @@
-import { pbkdf2Sync } from "node:crypto"
-import { models } from "@arrhes/application-metadata/models"
-import { signInRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 import { eq } from "drizzle-orm"
-import { publicFactory } from "../../factories/publicFactory.js"
+import { pbkdf2Sync } from "node:crypto"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
 import { signString } from "../../utilities/cookies/signString.js"
 import { Exception } from "../../utilities/exception.js"
@@ -13,8 +10,9 @@ import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { selectOne } from "../../utilities/sql/selectOne.js"
 import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { signInRouteDefinition, models, generateId } from "@arrhes/application-metadata"
 
-export const signInRoute = publicFactory.createApp().post(signInRouteDefinition.path, async (c) => {
+export const signInRoute = apiFactory.createApp().post(signInRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
         context: c,
         schema: signInRouteDefinition.schemas.body,

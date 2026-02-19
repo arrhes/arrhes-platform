@@ -1,12 +1,15 @@
-import { models } from "@arrhes/application-metadata/models"
 import { and, eq } from "drizzle-orm"
-import { createMiddleware } from "hono/factory"
-import type { AuthEnv } from "../factories/authFactory.js"
+import { Context } from "hono"
 import { Exception } from "../utilities/exception.js"
+import { models } from "@arrhes/application-metadata"
 
-export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
+
+export async function checkOrganizationSubscriptionSessionMiddleware(parameters: {
+    context: Context<any>,
+
+}) {
     try {
-        const body = await c.req.json()
+        const body = await parameters.context.req.json()
         const idOrganization: string | undefined = body.idOrganization
 
         if (idOrganization === undefined) {
@@ -16,13 +19,13 @@ export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) 
             })
         }
 
-        const organizationUsers = await c.var.clients.sql
+        const organizationUsers = await parameters.context.var.clients.sql
             .select()
             .from(models.organizationUser)
             .where(
                 and(
                     eq(models.organizationUser.idOrganization, idOrganization),
-                    eq(models.organizationUser.idUser, c.var.user.id),
+                    eq(models.organizationUser.idUser, parameters.context.var.user.id),
                 ),
             )
             .limit(1)
@@ -35,7 +38,7 @@ export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) 
             })
         }
 
-        const organizations = await c.var.clients.sql
+        const organizations = await parameters.context.var.clients.sql
             .select()
             .from(models.organization)
             .where(eq(models.organization.id, idOrganization))
@@ -49,7 +52,7 @@ export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) 
             })
         }
 
-        if (organization.premiumAt === null) {
+        if (organization.subcriptionEndingAt === null) {
             throw new Exception({
                 statusCode: 403,
                 internalMessage: "Subscription check failed",
@@ -58,8 +61,18 @@ export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) 
             })
         }
 
-        await next()
-    } catch (error: unknown) {
+        if (new Date(organization.subcriptionEndingAt) < new Date()) {
+            throw new Exception({
+                statusCode: 403,
+                internalMessage: "Subscription check failed",
+                externalMessage: "This feature requires a premium subscription",
+                cause: "Organization does not have a premium subscription",
+            })
+        }
+
+        return organization
+    }
+    catch (error: unknown) {
         if (error instanceof Exception) {
             throw error
         }
@@ -71,4 +84,4 @@ export const subscriptionMiddleware = createMiddleware<AuthEnv>(async (c, next) 
             rawError: error,
         })
     }
-})
+}

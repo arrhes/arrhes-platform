@@ -1,14 +1,14 @@
-import { models } from "@arrhes/application-metadata/models"
-import { createOneIncomeStatementRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { createOneIncomeStatementRouteDefinition, generateId, models } from "@arrhes/application-metadata"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 
-export const createOneIncomeStatementRoute = authFactory
+export const createOneIncomeStatementRoute = apiFactory
     .createApp()
     .post(createOneIncomeStatementRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneIncomeStatementRouteDefinition.schemas.body,
@@ -28,7 +28,7 @@ export const createOneIncomeStatementRoute = authFactory
                 label: body.label,
                 createdAt: new Date().toISOString(),
                 lastUpdatedAt: null,
-                createdBy: c.var.user.id,
+                createdBy: user.id,
                 lastUpdatedBy: null,
             },
         })

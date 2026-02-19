@@ -1,4 +1,4 @@
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import { css, Style } from "hono/css"
 import type * as v from "valibot"
 import { IncomeStatementsReportTable } from "./incomeStatementsReportTable.js"

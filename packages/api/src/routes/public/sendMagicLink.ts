@@ -1,12 +1,11 @@
-import { models } from "@arrhes/application-metadata/models"
-import { sendMagicLinkRouteDefinition } from "@arrhes/application-metadata/routes"
 import { eq } from "drizzle-orm"
-import { publicFactory } from "../../factories/publicFactory.js"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { response } from "../../utilities/response.js"
 import { selectOne } from "../../utilities/sql/selectOne.js"
+import { sendMagicLinkRouteDefinition, models } from "@arrhes/application-metadata"
 
-export const sendMagicLinkRoute = publicFactory.createApp().post(sendMagicLinkRouteDefinition.path, async (c) => {
+export const sendMagicLinkRoute = apiFactory.createApp().post(sendMagicLinkRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
         context: c,
         schema: sendMagicLinkRouteDefinition.schemas.body,

@@ -1,16 +1,17 @@
-import { pbkdf2Sync } from "node:crypto"
-import { models } from "@arrhes/application-metadata/models"
-import { updateUserPasswordRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, updateUserPasswordRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { authFactory } from "../../../factories/authFactory.js"
+import { pbkdf2Sync } from "node:crypto"
+import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../utilities/apiFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 
-export const updateUserPasswordRoute = authFactory
+export const updateUserPasswordRoute = apiFactory
     .createApp()
     .post(updateUserPasswordRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: updateUserPasswordRouteDefinition.schemas.body,
@@ -26,12 +27,12 @@ export const updateUserPasswordRoute = authFactory
 
         const givenPasswordHash = pbkdf2Sync(
             body.currentPassword,
-            c.var.user.passwordSalt,
+            user.passwordSalt,
             128000,
             64,
             `sha512`,
         ).toString(`hex`)
-        if (givenPasswordHash !== c.var.user.passwordHash) {
+        if (givenPasswordHash !== user.passwordHash) {
             throw new Exception({
                 statusCode: 400,
                 internalMessage: "Invalid password",
@@ -39,7 +40,7 @@ export const updateUserPasswordRoute = authFactory
             })
         }
 
-        const newPasswordHash = pbkdf2Sync(body.newPassword, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(
+        const newPasswordHash = pbkdf2Sync(body.newPassword, user.passwordSalt, 128000, 64, `sha512`).toString(
             `hex`,
         )
 
@@ -50,7 +51,7 @@ export const updateUserPasswordRoute = authFactory
                 passwordHash: newPasswordHash,
                 lastUpdatedAt: new Date().toISOString(),
             },
-            where: (table) => eq(table.id, c.var.user.id),
+            where: (table) => eq(table.id, user.id),
         })
 
         return response({

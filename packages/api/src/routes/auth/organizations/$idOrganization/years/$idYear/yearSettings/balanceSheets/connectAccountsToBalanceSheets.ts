@@ -1,17 +1,17 @@
-import { defaultAssociationBalanceSheets, defaultCompanyBalanceSheets } from "@arrhes/application-metadata/components"
-import { models } from "@arrhes/application-metadata/models"
-import { connectAccountsToBalanceSheetsRouteDefinition } from "@arrhes/application-metadata/routes"
+import { connectAccountsToBalanceSheetsRouteDefinition, defaultAssociationBalanceSheets, defaultCompanyBalanceSheets, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 
-export const connectAccountsToBalanceSheetsRoute = authFactory
+export const connectAccountsToBalanceSheetsRoute = apiFactory
     .createApp()
     .post(connectAccountsToBalanceSheetsRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: connectAccountsToBalanceSheetsRouteDefinition.schemas.body,
@@ -78,7 +78,7 @@ export const connectAccountsToBalanceSheetsRoute = authFactory
                                 defaultBalanceSheet.side === "liability" ? defaultAccount.flow : undefined,
 
                             lastUpdatedAt: new Date().toISOString(),
-                            lastUpdatedBy: c.var.user.id,
+                            lastUpdatedBy: user.id,
                         },
                         where: (table) =>
                             and(

@@ -1,4 +1,4 @@
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import { css } from "hono/css"
 import type * as v from "valibot"
 import { numberToRomanString } from "../../../numberToRomanString.js"

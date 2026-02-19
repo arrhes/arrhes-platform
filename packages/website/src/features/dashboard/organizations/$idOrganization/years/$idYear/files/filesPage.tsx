@@ -31,10 +31,10 @@ export function FilesPage() {
                     })}
                 >
                     <Button onClick={() => setViewMode("grid")} title="Grille">
-                        <ButtonOutlineContent leftIcon={<IconLayoutGrid />} isActive={viewMode === "grid"} />
+                        <ButtonOutlineContent leftIcon={<IconLayoutGrid />} isCurrent={viewMode === "grid"} />
                     </Button>
                     <Button onClick={() => setViewMode("list")} title="Liste">
-                        <ButtonOutlineContent leftIcon={<IconLayoutList />} isActive={viewMode === "list"} />
+                        <ButtonOutlineContent leftIcon={<IconLayoutList />} isCurrent={viewMode === "list"} />
                     </Button>
                     <CreateOneFile idOrganization={params.idOrganization} idYear={params.idYear}>
                         <ButtonPlainContent leftIcon={<IconPlus />} text="Ajouter un fichier" />

@@ -1,16 +1,17 @@
-import { models } from "@arrhes/application-metadata/models"
-import { generateFileGetSignedUrlRouteDefinition } from "@arrhes/application-metadata/routes"
+import { generateFileGetSignedUrlRouteDefinition, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { generateGetSignedUrl } from "../../../../../../../../utilities/storage/generateGetSignedUrl.js"
 
-export const generateFileGetSignedUrlRoute = authFactory
+export const generateFileGetSignedUrlRoute = apiFactory
     .createApp()
     .post(generateFileGetSignedUrlRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateFileGetSignedUrlRouteDefinition.schemas.body,

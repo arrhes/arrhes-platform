@@ -123,7 +123,7 @@ export function InputCombobox<TValue extends string>(props: {
                                                 css({ width: "100%", justifyContent: "space-between" }),
                                                 isSelected ? css({ backgroundColor: "background" }) : "",
                                             )}
-                                            isActive={isSelected}
+                                            isCurrent={isSelected}
                                         />
                                     </Button>
                                 )

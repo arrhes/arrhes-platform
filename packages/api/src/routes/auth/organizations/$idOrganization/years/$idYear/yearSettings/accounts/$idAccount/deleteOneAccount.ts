@@ -1,12 +1,13 @@
-import { models } from "@arrhes/application-metadata/models"
-import { deleteOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
+import { deleteOneAccountRouteDefinition, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../../utilities/sql/deleteOne.js"
 
-export const deleteOneAccountRoute = authFactory.createApp().post(deleteOneAccountRouteDefinition.path, async (c) => {
+export const deleteOneAccountRoute = apiFactory.createApp().post(deleteOneAccountRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: deleteOneAccountRouteDefinition.schemas.body,

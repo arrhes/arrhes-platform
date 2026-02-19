@@ -1,12 +1,13 @@
-import { models } from "@arrhes/application-metadata/models"
-import { updateUserRouteDefinition } from "@arrhes/application-metadata/routes"
+import { models, updateUserRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { authFactory } from "../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../utilities/apiFactory.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 
-export const updateUserRoute = authFactory.createApp().post(updateUserRouteDefinition.path, async (c) => {
+export const updateUserRoute = apiFactory.createApp().post(updateUserRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateUserRouteDefinition.schemas.body,
@@ -19,7 +20,7 @@ export const updateUserRoute = authFactory.createApp().post(updateUserRouteDefin
             alias: body.alias,
             lastUpdatedAt: new Date().toISOString(),
         },
-        where: (table) => eq(table.id, c.var.user.id),
+        where: (table) => eq(table.id, user.id),
     })
 
     return response({

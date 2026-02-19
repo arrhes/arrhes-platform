@@ -1,12 +1,12 @@
-import { models } from "@arrhes/application-metadata/models"
-import { createOneFileRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { authFactory } from "../../../../../../../factories/authFactory.js"
+import { createOneFileRouteDefinition, generateId, models } from "@arrhes/application-metadata"
+import { checkUserSessionMiddleware } from "../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 
-export const createOneFileRoute = authFactory.createApp().post(createOneFileRouteDefinition.path, async (c) => {
+export const createOneFileRoute = apiFactory.createApp().post(createOneFileRouteDefinition.path, async (c) => {
+    const { user } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneFileRouteDefinition.schemas.body,
@@ -26,7 +26,7 @@ export const createOneFileRoute = authFactory.createApp().post(createOneFileRout
             size: null,
             createdAt: new Date().toISOString(),
             lastUpdatedAt: null,
-            createdBy: c.var.user.id,
+            createdBy: user.id,
             lastUpdatedBy: null,
         },
     })

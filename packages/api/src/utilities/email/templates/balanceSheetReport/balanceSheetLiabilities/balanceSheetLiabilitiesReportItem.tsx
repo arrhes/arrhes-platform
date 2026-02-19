@@ -1,4 +1,4 @@
-import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import type { returnedSchemas } from "@arrhes/application-metadata"
 import { Style } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import type * as v from "valibot"

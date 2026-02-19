@@ -1,18 +1,18 @@
-import { models } from "@arrhes/application-metadata/models"
-import { duplicateOneRecordRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
+import { duplicateOneRecordRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
-import { authFactory } from "../../../../../../../../factories/authFactory.js"
+import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 
-export const duplicateOneRecordRoute = authFactory
+export const duplicateOneRecordRoute = apiFactory
     .createApp()
     .post(duplicateOneRecordRouteDefinition.path, async (c) => {
+        const { user } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: duplicateOneRecordRouteDefinition.schemas.body,
@@ -55,7 +55,7 @@ export const duplicateOneRecordRoute = authFactory
                     date: originalRecord.date,
                     createdAt: new Date().toISOString(),
                     lastUpdatedAt: null,
-                    createdBy: c.var.user.id,
+                    createdBy: user.id,
                     lastUpdatedBy: null,
                 },
             })
@@ -80,7 +80,7 @@ export const duplicateOneRecordRoute = authFactory
                     credit: recordRow.credit,
                     createdAt: new Date().toISOString(),
                     lastUpdatedAt: null,
-                    createdBy: c.var.user.id,
+                    createdBy: user.id,
                     lastUpdatedBy: null,
                 })),
             })

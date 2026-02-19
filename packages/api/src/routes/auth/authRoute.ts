@@ -1,11 +1,9 @@
-import { routePath } from "@arrhes/application-metadata/components"
-import { authFactory } from "../../factories/authFactory.js"
-import { authMiddleware } from "../../middlewares/authMiddleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { organizationsRoutes } from "../../routes/auth/organizations/organizationsRoutes.js"
 import { settingsRoutes } from "../../routes/auth/settings/settingsRoutes.js"
 import { supportRoutes } from "../../routes/auth/support/supportRoutes.js"
 
-export const authRoute = authFactory.createApp().use(`${routePath.auth}/*`, authMiddleware)
+export const authRoute = apiFactory.createApp()
 
 export const authRoutes = [...organizationsRoutes, ...settingsRoutes, ...supportRoutes]
 

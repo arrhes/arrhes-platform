@@ -1,9 +1,6 @@
 import { pbkdf2Sync } from "node:crypto"
-import { models } from "@arrhes/application-metadata/models"
-import { signUpRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
-import { publicFactory } from "../../factories/publicFactory.js"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
 import { signString } from "../../utilities/cookies/signString.js"
 import { Exception } from "../../utilities/exception.js"
@@ -12,8 +9,9 @@ import { getRemoteAddress } from "../../utilities/getRemoteAddress.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
+import { signUpRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 
-export const signUpRoute = publicFactory.createApp().post(signUpRouteDefinition.path, async (c) => {
+export const signUpRoute = apiFactory.createApp().post(signUpRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
         context: c,
         schema: signUpRouteDefinition.schemas.body,

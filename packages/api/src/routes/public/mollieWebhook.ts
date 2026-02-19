@@ -1,15 +1,13 @@
-import { models } from "@arrhes/application-metadata/models"
-import { mollieWebhookRouteDefinition } from "@arrhes/application-metadata/routes"
-import { generateId } from "@arrhes/application-metadata/utilities"
 import { eq } from "drizzle-orm"
-import { publicFactory } from "../../factories/publicFactory.js"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
+import { apiFactory } from "../../utilities/apiFactory.js"
 import { apiLog } from "../../utilities/apiLog.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { updateOne } from "../../utilities/sql/updateOne.js"
+import { models, generateId, mollieWebhookRouteDefinition } from "@arrhes/application-metadata"
 
-export const mollieWebhookRoute = publicFactory.createApp().post(mollieWebhookRouteDefinition.path, async (c) => {
+export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
         context: c,
         schema: mollieWebhookRouteDefinition.schemas.body,
@@ -90,7 +88,7 @@ export const mollieWebhookRoute = publicFactory.createApp().post(mollieWebhookRo
                         table: models.organization,
                         data: {
                             mollieSubscriptionId: subscription.id,
-                            premiumAt: new Date().toISOString(),
+                            subcriptionEndingAt: new Date().toISOString(),
                             lastUpdatedAt: new Date().toISOString(),
                         },
                         where: (table) => eq(table.id, organization.id),
@@ -142,7 +140,7 @@ export const mollieWebhookRoute = publicFactory.createApp().post(mollieWebhookRo
                             database: c.var.clients.sql,
                             table: models.organization,
                             data: {
-                                premiumAt: organization.premiumAt ?? new Date().toISOString(),
+                                subcriptionEndingAt: organization.subcriptionEndingAt ?? new Date().toISOString(),
                                 lastUpdatedAt: new Date().toISOString(),
                             },
                             where: (table) => eq(table.id, organization.id),
