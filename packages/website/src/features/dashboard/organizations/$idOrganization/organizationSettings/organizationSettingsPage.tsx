@@ -59,7 +59,11 @@ export function OrganizationSettingsPage() {
                                         variant="danger"
                                     >
                                         <DeleteOneOrganization idOrganization={organization.id}>
-                                            <ButtonOutlineContent leftIcon={<IconTrash />} text="Supprimer" color="danger" />
+                                            <ButtonOutlineContent
+                                                leftIcon={<IconTrash />}
+                                                text="Supprimer"
+                                                color="danger"
+                                            />
                                         </DeleteOneOrganization>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>

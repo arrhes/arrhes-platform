@@ -7,13 +7,13 @@ import { LinkButton } from "../../linkButton.js"
 
 export function PageNavigation(props: {
     tabs:
-    | Array<{
-        label: string
-        icon: JSX.Element
-        to: ValidRoutes
-        params: ValidParams
-    }>
-    | undefined
+        | Array<{
+              label: string
+              icon: JSX.Element
+              to: ValidRoutes
+              params: ValidParams
+          }>
+        | undefined
 }) {
     const routeMatches = useMatches()
     const currentPath = useRouterState({
@@ -55,7 +55,12 @@ export function PageNavigation(props: {
 
                         return (
                             <LinkButton key={tab.to} to={tab.to} params={tab.params}>
-                                <ButtonGhostContent leftIcon={tab.icon} text={tab.label} color="neutral" isActive={isActive} />
+                                <ButtonGhostContent
+                                    leftIcon={tab.icon}
+                                    text={tab.label}
+                                    color="neutral"
+                                    isActive={isActive}
+                                />
                             </LinkButton>
                         )
                     })}

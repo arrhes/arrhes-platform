@@ -18,9 +18,7 @@ export const userSessionModel = pgTable(
         createdAt: dateTimeColumn("created_at").notNull(),
         lastUpdatedAt: dateTimeColumn("last_updated_at"),
     },
-    (t) => ([
-        index().on(t.idUser),
-    ])
+    (t) => [index().on(t.idUser)],
 )
 
 // Relations

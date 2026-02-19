@@ -48,7 +48,7 @@ export function InputText(
                     _placeholder: { color: "neutral/25" },
                     backgroundColor: "transparent",
                     padding: "0.5rem",
-                    _focusWithin: { borderColor: "neutral/50", outline: "none", },
+                    _focusWithin: { borderColor: "neutral/50", outline: "none" },
                 })}
                 value={input(props.value)}
                 onChange={(e) => {

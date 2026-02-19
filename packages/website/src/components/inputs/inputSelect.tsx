@@ -1,4 +1,4 @@
-import { Button, CircularLoader } from "@arrhes/ui"
+import { Button, ButtonGhostContent, ButtonOutlineContent, CircularLoader } from "@arrhes/ui"
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import { IconCheck, IconChevronDown } from "@tabler/icons-react"
 import { type InputHTMLAttributes, useState } from "react"
@@ -53,72 +53,36 @@ export function InputSelect<TValue extends string>(
                     )}
                     data-open={open}
                 >
-                    <div
+                    <ButtonOutlineContent
+                        text={
+                            currentOption === undefined
+                                ? (props.placeholder ?? "Veuiller choisir une option")
+                                : currentOption.label
+                        }
+                        rightIcon={<IconChevronDown />}
                         className={cx(
                             css({
                                 width: "100%",
-                                height: "32px",
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                gap: "2",
-                                borderRadius: "md",
-                                padding: "1rem",
-                                border: "1px solid",
-                                _hover: { borderColor: "neutral/30" },
+                                justifyContent: "space-between",
+                                _hover: { borderColor: "neutral/50" },
                                 _focusWithin: { borderColor: "neutral/50", boxShadow: "inset" },
                             }),
-                            css(props.error ? { borderColor: "error" } : { borderColor: "neutral/20" }),
-                            props.className,
+                            props.error !== undefined ? css({ borderColor: "error" }) : "",
+                            currentOption === undefined ? css({ "& span": { color: "neutral/50" } }) : "",
                         )}
-                    >
-                        <span
-                            className={cx(
-                                css({
-                                    width: "100%",
-                                    height: "100%",
-                                    fontSize: "sm",
-                                    fontWeight: "medium",
-                                    lineHeight: "none",
-                                    whiteSpace: "nowrap",
-                                    textOverflow: "ellipsis",
-                                    borderRadius: "md",
-                                    textAlign: "left",
-                                }),
-                                css(currentOption === undefined ? { color: "neutral/50" } : { color: "neutral" }),
-                            )}
-                        >
-                            {currentOption === undefined
-                                ? (props.placeholder ?? "Veuiller choisir une option")
-                                : currentOption.label}
-                        </span>
-                        <IconChevronDown
-                            size={16}
-                            className={css({
-                                stroke: "neutral",
-                                minWidth: "16px",
-                                width: "16px",
-                                minH: "16px",
-                                height: "16px",
-                            })}
-                            strokeWidth={2}
-                        />
-                    </div>
+                    />
                 </Button>
             </Popover.Trigger>
             <Popover.Content align="start">
                 <div
                     className={css({
-                        minH: "32px",
-                        maxH: "256px",
-                        overflowY: "auto",
+                        height: "fit-content",
+                        maxHeight: "256px",
                         width: "100%",
-                        padding: "1rem",
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent: "flex-start",
-                        alignItems: "flex-start",
-                        gap: "1",
+                        justifyContent: "start",
+                        alignItems: "start",
                     })}
                 >
                     {props.isLoading === true ? (
@@ -126,73 +90,36 @@ export function InputSelect<TValue extends string>(
                     ) : props.options === undefined || props.options.length === 0 ? (
                         <FormatNull text="Pas d'options" />
                     ) : (
-                        props.options.map((option) => (
-                            <div
-                                key={option.key}
-                                onClick={() => {
-                                    if (props.isDisabled === true) return
-                                    if (props.onChange === undefined) return
-                                    if (props.allowEmpty === true && option.key === props.value) {
-                                        props.onChange(undefined)
+                        props.options.map((option) => {
+                            const isSelected = currentOption?.key === option.key
+                            return (
+                                <Button
+                                    key={option.key}
+                                    onClick={() => {
+                                        if (props.isDisabled === true) return
+                                        if (props.onChange === undefined) return
+                                        if (props.allowEmpty === true && option.key === props.value) {
+                                            props.onChange(undefined)
+                                            setOpen(false)
+                                            return
+                                        }
+                                        props.onChange(output(option.key))
                                         setOpen(false)
-                                        return
-                                    }
-                                    props.onChange(output(option.key))
-                                    setOpen(false)
-                                }}
-                                className={cx(
-                                    css({
-                                        position: "relative",
-                                        width: "100%",
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        gap: "2",
-                                        padding: "1rem",
-                                        borderRadius: "md",
-                                        border: "1px solid transparent",
-                                        cursor: "pointer",
-                                    }),
-                                    css(
-                                        option.key === props.value
-                                            ? { backgroundColor: "neutral/5", borderColor: "neutral/5" }
-                                            : {
-                                                  backgroundColor: "none",
-                                                  _hover: { backgroundColor: "neutral/5", borderColor: "neutral/5" },
-                                              },
-                                    ),
-                                )}
-                            >
-                                <span
-                                    className={cx(
-                                        css({
-                                            fontSize: "sm",
-                                            lineHeight: "none",
-                                            fontWeight: "medium",
-                                        }),
-                                        css(option.key === props.value ? { color: "neutral" } : {}),
-                                    )}
+                                    }}
+                                    className={css({ width: "100%" })}
                                 >
-                                    {option.label}
-                                </span>
-                                <IconCheck
-                                    className={cx(
-                                        css({
-                                            minWidth: "16px",
-                                            width: "16px",
-                                            minH: "16px",
-                                            height: "16px",
-                                            color: "neutral",
-                                        }),
-                                        css(
-                                            option.key === props.value
-                                                ? { opacity: "1", strokeWidth: "2" }
-                                                : { opacity: "0" },
-                                        ),
-                                    )}
-                                />
-                            </div>
-                        ))
+                                    <ButtonGhostContent
+                                        text={option.label}
+                                        rightIcon={isSelected ? <IconCheck /> : undefined}
+                                        className={cx(
+                                            css({ width: "100%", justifyContent: "space-between" }),
+                                            isSelected ? css({ backgroundColor: "background" }) : "",
+                                        )}
+                                        isActive={isSelected}
+                                    />
+                                </Button>
+                            )
+                        })
                     )}
                 </div>
             </Popover.Content>

@@ -3,11 +3,7 @@ import { css, cx } from "@arrhes/ui/utilities/cn.js"
 import type { JSX } from "react"
 import { useDrawerContext } from "./drawerRoot.js"
 
-
-export function DrawerTrigger(props: {
-    children: JSX.Element
-    className?: string
-}) {
+export function DrawerTrigger(props: { children: JSX.Element; className?: string }) {
     const { setOpen } = useDrawerContext()
 
     return (
@@ -26,7 +22,7 @@ export function DrawerTrigger(props: {
                     border: "none",
                     padding: "0",
                 }),
-                props.className
+                props.className,
             )}
         >
             {props.children}

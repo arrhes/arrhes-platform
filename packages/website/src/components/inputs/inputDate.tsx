@@ -113,7 +113,7 @@ export function InputDate(
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",
-                    _focusWithin: { borderColor: "neutral/50", outline: "none", },
+                    _focusWithin: { borderColor: "neutral/50", outline: "none" },
                 })}
                 inputMode="decimal"
             />

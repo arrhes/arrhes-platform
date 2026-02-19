@@ -32,7 +32,7 @@ export function RecordsPage() {
                             }}
                         >
                             {(recordRows) => {
-                                const recordsData = [...records].sort(
+                                const _recordsData = [...records].sort(
                                     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
                                 )
 

@@ -45,7 +45,11 @@ export function YearSettingsPage() {
                                         variant="danger"
                                     >
                                         <DeleteOneYear year={year}>
-                                            <ButtonOutlineContent leftIcon={<IconTrash />} text="Supprimer" color="danger" />
+                                            <ButtonOutlineContent
+                                                leftIcon={<IconTrash />}
+                                                text="Supprimer"
+                                                color="danger"
+                                            />
                                         </DeleteOneYear>
                                     </SettingsSection.Row>
                                 </SettingsSection.Root>
