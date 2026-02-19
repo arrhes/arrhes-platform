@@ -39,6 +39,7 @@ export const addNewOrganizationRoute = authFactory
                     id: generateId(),
                     idOrganization: createOneOrganization.id,
                     idUser: c.var.user.id,
+                    isOwner: true,
                     isAdmin: true,
                     status: "active",
                     createdAt: new Date().toISOString(),

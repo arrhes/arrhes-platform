@@ -52,6 +52,7 @@ export const createOneOrganizationUserRoute = authFactory
                 id: generateId(),
                 idOrganization: organizationUser.idOrganization,
                 idUser: user.id,
+                isOwner: false,
                 isAdmin: body.isAdmin,
                 status: "invited",
                 createdAt: new Date().toISOString(),

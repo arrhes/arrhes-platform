@@ -25,9 +25,13 @@ export { incomeStatementModel, incomeStatementRelations } from "../../metadata/s
 export { journalModel, journalRelations } from "../../metadata/src/models/journal.ts"
 export { organizationModel, organizationRelations } from "../../metadata/src/models/organization.ts"
 export {
+    organizationPaymentModel,
+    organizationPaymentRelations,
+    organizationPaymentStatusEnum,
+} from "../../metadata/src/models/organizationPayment.ts"
+export {
     organizationUserModel,
     organizationUserRelations,
-    organizationUserScopeEnum,
     organizationUserStatusEnum,
 } from "../../metadata/src/models/organizationUser.ts"
 export { recordModel, recordRelations } from "../../metadata/src/models/record.ts"

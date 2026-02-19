@@ -7,6 +7,7 @@ import * as fileModel from "./file.js"
 import * as incomeStatementModel from "./incomeStatement.js"
 import * as journalModel from "./journal.js"
 import * as organizationModel from "./organization.js"
+import * as organizationPaymentModel from "./organizationPayment.js"
 import * as organizationUserModel from "./organizationUser.js"
 import * as recordModel from "./record.js"
 import * as recordLabelModel from "./recordLabel.js"
@@ -25,6 +26,7 @@ export const models = {
     incomeStatement: incomeStatementModel.incomeStatementModel,
     journal: journalModel.journalModel,
     organization: organizationModel.organizationModel,
+    organizationPayment: organizationPaymentModel.organizationPaymentModel,
     organizationUser: organizationUserModel.organizationUserModel,
     record: recordModel.recordModel,
     recordLabel: recordLabelModel.recordLabelModel,
@@ -44,6 +46,7 @@ export const modelSchemas = {
     ...incomeStatementModel,
     ...journalModel,
     ...organizationModel,
+    ...organizationPaymentModel,
     ...organizationUserModel,
     ...recordModel,
     ...recordLabelModel,

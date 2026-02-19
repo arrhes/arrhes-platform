@@ -29,6 +29,8 @@ const envSchema = v.object({
     EMAIL_ENDPOINT: v.string(),
     EMAIL_USER: v.string(),
     EMAIL_PASSWORD: v.string(),
+
+    MOLLIE_API_KEY: v.string(),
 })
 
 export function getEnv() {

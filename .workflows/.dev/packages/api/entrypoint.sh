@@ -9,9 +9,9 @@ set -e
 
 SCRIPT_DIR="/workspace/.workflows/.dev/packages/api"
 
-# Fix permissions for bind-mounted workspace
+# Fix permissions for bind-mounted workspace (ignore read-only mounts)
 echo "🔧 Fixing workspace permissions..."
-chown -R node:node /workspace
+chown -R node:node /workspace 2>/dev/null || true
 
 # Run all setup tasks as node user
 su node -c "$SCRIPT_DIR/install.sh"

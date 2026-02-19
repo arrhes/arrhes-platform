@@ -19,6 +19,7 @@ export const organizationUserModel = pgTable(
         idUser: idColumn("id_user")
             .references(() => userModel.id, { onDelete: "cascade", onUpdate: "cascade" })
             .notNull(),
+        isOwner: boolean("is_owner").notNull(),
         isAdmin: boolean("is_admin").notNull(),
         status: organizationUserStatusEnum("status").notNull(),
         createdAt: dateTimeColumn("created_at").notNull(),

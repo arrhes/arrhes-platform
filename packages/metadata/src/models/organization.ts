@@ -1,8 +1,9 @@
 import { relations } from "drizzle-orm"
-import { type AnyPgColumn, boolean, pgEnum, pgTable, text, varchar } from "drizzle-orm/pg-core"
+import { type AnyPgColumn, boolean, integer, pgEnum, pgTable, text, varchar } from "drizzle-orm/pg-core"
 import { organizationScope } from "../components/index.js"
 import { dateTimeColumn } from "../components/models/dateTimeColumn.js"
 import { idColumn } from "../components/models/idColumn.js"
+import { organizationPaymentModel } from "./organizationPayment.js"
 import { organizationUserModel } from "./organizationUser.js"
 import { userModel } from "./user.js"
 
@@ -16,6 +17,10 @@ export const organizationModel = pgTable("table_organization", {
     name: varchar("name", { length: 256 }).notNull(),
     siren: text("siren"),
     email: text("email"),
+    mollieCustomerId: text("mollie_customer_id"),
+    mollieSubscriptionId: text("mollie_subscription_id"),
+    premiumAt: dateTimeColumn("premium_at"),
+    storageCurrentUsage: integer("storage_current_usage").notNull().default(0),
     createdAt: dateTimeColumn("created_at").notNull(),
     lastUpdatedAt: dateTimeColumn("last_updated_at"),
     createdBy: idColumn("created_by").references((): AnyPgColumn => userModel.id, {
@@ -31,4 +36,5 @@ export const organizationModel = pgTable("table_organization", {
 // Relations
 export const organizationRelations = relations(organizationModel, ({ many }) => ({
     organizationUsers: many(organizationUserModel),
+    organizationPayments: many(organizationPaymentModel),
 }))

@@ -1,5 +1,12 @@
 import * as v from "valibot"
-import { booleanSchema, dateTimeSchema, emailSchema, organizationScope, sirenSchema } from "../components/index.js"
+import {
+    booleanSchema,
+    dateTimeSchema,
+    emailSchema,
+    integerSchema,
+    organizationScope,
+    sirenSchema,
+} from "../components/index.js"
 import { idSchema } from "../components/schemas/idSchema.js"
 import { varcharSchema } from "../components/schemas/varcharSchema.js"
 import type { organizationModel } from "../models/organization.js"
@@ -11,6 +18,10 @@ export const organizationSchema = v.object({
     name: v.nonNullable(varcharSchema({ maxLength: 256 })),
     siren: v.nullable(sirenSchema),
     email: v.nullable(emailSchema),
+    mollieCustomerId: v.nullable(v.string()),
+    mollieSubscriptionId: v.nullable(v.string()),
+    premiumAt: v.nullable(dateTimeSchema),
+    storageCurrentUsage: v.nonNullable(integerSchema),
     createdAt: v.nonNullable(dateTimeSchema),
     lastUpdatedAt: v.nullable(dateTimeSchema),
     createdBy: v.nullable(idSchema),
@@ -23,6 +34,8 @@ export const organizationSchemaReturn = v.pick(organizationSchema, [
     "name",
     "siren",
     "email",
+    "premiumAt",
+    "storageCurrentUsage",
     "createdAt",
     "lastUpdatedAt",
     "createdBy",

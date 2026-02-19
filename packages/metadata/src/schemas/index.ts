@@ -9,6 +9,7 @@ import { fileSchema, fileSchemaReturn } from "./file.js"
 import { incomeStatementSchema, incomeStatementSchemaReturn } from "./incomeStatement.js"
 import { journalSchema, journalSchemaReturn } from "./journal.js"
 import { organizationSchema, organizationSchemaReturn } from "./organization.js"
+import { organizationPaymentSchema, organizationPaymentSchemaReturn } from "./organizationPayment.js"
 import { organizationUserSchema, organizationUserSchemaReturn } from "./organizationUser.js"
 import { recordSchema, recordSchemaReturn } from "./record.js"
 import { recordLabelSchema, recordLabelSchemaReturn } from "./recordLabel.js"
@@ -26,6 +27,7 @@ export const schemas = {
     incomeStatement: incomeStatementSchema,
     journal: journalSchema,
     organization: organizationSchema,
+    organizationPayment: organizationPaymentSchema,
     organizationUser: organizationUserSchema,
     record: recordSchema,
     recordLabel: recordLabelSchema,
@@ -44,6 +46,7 @@ export const returnedSchemas = {
     incomeStatement: incomeStatementSchemaReturn,
     journal: journalSchemaReturn,
     organization: organizationSchemaReturn,
+    organizationPayment: organizationPaymentSchemaReturn,
     organizationUser: organizationUserSchemaReturn,
     record: recordSchemaReturn,
     recordLabel: recordLabelSchemaReturn,

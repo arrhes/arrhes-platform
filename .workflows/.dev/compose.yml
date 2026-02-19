@@ -96,8 +96,9 @@ services:
       - ../../packages:/workspace/packages:cached
       - ../../package.json:/workspace/package.json:cached
       - ../../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
-      # NOTE: pnpm-lock.yaml is NOT mounted - single-file bind mounts cause EBUSY
-      # errors when pnpm tries atomic renames. Install uses --no-frozen-lockfile.
+      # NOTE: pnpm-lock.yaml is mounted read-only to a staging path to avoid EBUSY
+      # errors from atomic renames. The install script copies it into /workspace/.
+      - ../../pnpm-lock.yaml:/workspace/.pnpm-lock-host.yaml:ro
       - ../../.workflows/.dev:/workspace/.workflows/.dev:cached
       
       # Environment files - use .dev versions
