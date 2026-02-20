@@ -16,6 +16,7 @@ export async function validateBodyMiddleware<TSchema extends v.GenericSchema<unk
         return validatedBody
     } catch (error: unknown) {
         throw new Exception({
+            statusCode: 400,
             internalMessage: "The body object can not be parsed",
             externalMessage: "Invalid request",
             rawError: error,

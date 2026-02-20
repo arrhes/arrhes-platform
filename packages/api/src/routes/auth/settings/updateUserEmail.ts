@@ -1,6 +1,6 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models, updateUserEmailRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { pbkdf2Sync } from "node:crypto"
 import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../../utilities/apiFactory.js"
@@ -16,9 +16,7 @@ export const updateUserEmailRoute = apiFactory.createApp().post(updateUserEmailR
         schema: updateUserEmailRouteDefinition.schemas.body,
     })
 
-    const givenPasswordHash = pbkdf2Sync(body.currentPassword, user.passwordSalt, 128000, 64, `sha512`).toString(
-        `hex`,
-    )
+    const givenPasswordHash = pbkdf2Sync(body.currentPassword, user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
     if (givenPasswordHash !== user.passwordHash) {
         throw new Exception({
             statusCode: 400,

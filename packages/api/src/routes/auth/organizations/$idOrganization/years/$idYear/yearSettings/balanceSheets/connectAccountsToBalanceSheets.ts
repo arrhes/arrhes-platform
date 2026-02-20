@@ -1,4 +1,9 @@
-import { connectAccountsToBalanceSheetsRouteDefinition, defaultAssociationBalanceSheets, defaultCompanyBalanceSheets, models } from "@arrhes/application-metadata"
+import {
+    connectAccountsToBalanceSheetsRouteDefinition,
+    defaultAssociationBalanceSheets,
+    defaultCompanyBalanceSheets,
+    models,
+} from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
 import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"

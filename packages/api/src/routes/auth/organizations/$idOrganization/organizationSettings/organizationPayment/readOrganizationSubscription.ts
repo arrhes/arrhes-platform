@@ -40,15 +40,39 @@ export const readOrganizationSubscriptionRoute = apiFactory
 
         const latestPayment = payments.at(0)
 
+        // isPremium = subcriptionEndingAt is set AND is in the future
+        const isPremium =
+            organization.subcriptionEndingAt !== null && new Date(organization.subcriptionEndingAt) > new Date()
+
+        // Derive subscription status:
+        // - "active": has an active Mollie subscription and valid premium access
+        // - "cancelled": subscription was cancelled but paid period hasn't expired yet
+        // - "expired": had a subscription but the paid period has passed
+        // - "none": never subscribed
+        let subscriptionStatus: "active" | "cancelled" | "expired" | "none"
+        if (organization.mollieSubscriptionId !== null && isPremium) {
+            subscriptionStatus = "active"
+        } else if (organization.mollieSubscriptionId === null && isPremium) {
+            subscriptionStatus = "cancelled"
+        } else if (
+            organization.subcriptionEndingAt !== null &&
+            new Date(organization.subcriptionEndingAt) <= new Date()
+        ) {
+            subscriptionStatus = "expired"
+        } else {
+            subscriptionStatus = "none"
+        }
+
         return response({
             context: c,
             statusCode: 200,
             schema: readOrganizationSubscriptionRouteDefinition.schemas.return,
             data: {
-                isPremium: organization.subcriptionEndingAt !== null,
+                isPremium,
                 subcriptionEndingAt: organization.subcriptionEndingAt,
                 mollieSubscriptionId: organization.mollieSubscriptionId,
                 status: latestPayment?.status ?? null,
+                subscriptionStatus,
             },
         })
     })

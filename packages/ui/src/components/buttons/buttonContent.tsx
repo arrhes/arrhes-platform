@@ -28,9 +28,9 @@ export function renderButtonContent(
     const iconOnlyStyles =
         props.text === undefined
             ? css({
-                width: "auto",
-                justifyContent: "center",
-            })
+                  width: "auto",
+                  justifyContent: "center",
+              })
             : ""
 
     // const activeContainerStyles = props.isActive ? css({ backgroundColor: "neutral/5" }) : ""
@@ -55,11 +55,7 @@ export function renderButtonContent(
                 })}
 
             {props.text && (
-                <span
-                    aria-disabled={props.isDisabled}
-                    aria-current={props.isCurrent}
-                    className={cx(classes.text)}
-                >
+                <span aria-disabled={props.isDisabled} aria-current={props.isCurrent} className={cx(classes.text)}>
                     {props.text}
                 </span>
             )}

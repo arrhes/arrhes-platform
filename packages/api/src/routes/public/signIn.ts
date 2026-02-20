@@ -1,5 +1,6 @@
-import { eq } from "drizzle-orm"
 import { pbkdf2Sync } from "node:crypto"
+import { generateId, models, signInRouteDefinition } from "@arrhes/application-metadata"
+import { eq } from "drizzle-orm"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
@@ -9,8 +10,7 @@ import { getRemoteAddress } from "../../utilities/getRemoteAddress.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { selectOne } from "../../utilities/sql/selectOne.js"
-import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
-import { signInRouteDefinition, models, generateId } from "@arrhes/application-metadata"
+import { getCookieSecurityOptions, productName, userSessionCookieMaxAge } from "../../utilities/variables.js"
 
 export const signInRoute = apiFactory.createApp().post(signInRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
@@ -53,7 +53,7 @@ export const signInRoute = apiFactory.createApp().post(signInRouteDefinition.pat
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"id_user_session"}`,
+            name: `${productName}_${"id_user_session"}`,
             value: signString({
                 value: createUserSession.id,
                 secret: c.var.env.COOKIES_KEY,
@@ -70,7 +70,7 @@ export const signInRoute = apiFactory.createApp().post(signInRouteDefinition.pat
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"is_auth"}`,
+            name: `${productName}_${"is_auth"}`,
             value: String(true),
             options: {
                 maxAge: userSessionCookieMaxAge,

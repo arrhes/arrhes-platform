@@ -15,6 +15,7 @@ export const readOrganizationSubscriptionRouteDefinition = routeDefinition({
             subcriptionEndingAt: v.nullable(dateTimeSchema),
             mollieSubscriptionId: v.nullable(v.string()),
             status: v.nullable(v.picklist(organizationPaymentStatus)),
+            subscriptionStatus: v.picklist(["active", "cancelled", "expired", "none"]),
         }),
     },
 })

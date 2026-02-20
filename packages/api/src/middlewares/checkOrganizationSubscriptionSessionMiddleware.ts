@@ -1,13 +1,9 @@
-import { and, eq } from "drizzle-orm"
-import { Context } from "hono"
-import { Exception } from "../utilities/exception.js"
 import { models } from "@arrhes/application-metadata"
+import { and, eq } from "drizzle-orm"
+import type { Context } from "hono"
+import { Exception } from "../utilities/exception.js"
 
-
-export async function checkOrganizationSubscriptionSessionMiddleware(parameters: {
-    context: Context<any>,
-
-}) {
+export async function checkOrganizationSubscriptionSessionMiddleware(parameters: { context: Context<any> }) {
     try {
         const body = await parameters.context.req.json()
         const idOrganization: string | undefined = body.idOrganization
@@ -71,8 +67,7 @@ export async function checkOrganizationSubscriptionSessionMiddleware(parameters:
         }
 
         return organization
-    }
-    catch (error: unknown) {
+    } catch (error: unknown) {
         if (error instanceof Exception) {
             throw error
         }

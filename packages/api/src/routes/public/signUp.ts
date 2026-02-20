@@ -1,4 +1,5 @@
 import { pbkdf2Sync } from "node:crypto"
+import { generateId, models, signUpRouteDefinition } from "@arrhes/application-metadata"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
 import { serializeCookie } from "../../utilities/cookies/serializeCookie.js"
@@ -8,8 +9,7 @@ import { generateVerificationToken } from "../../utilities/generateVerificationT
 import { getRemoteAddress } from "../../utilities/getRemoteAddress.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
-import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
-import { signUpRouteDefinition, generateId, models } from "@arrhes/application-metadata"
+import { getCookieSecurityOptions, productName, userSessionCookieMaxAge } from "../../utilities/variables.js"
 
 export const signUpRoute = apiFactory.createApp().post(signUpRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
@@ -70,7 +70,7 @@ export const signUpRoute = apiFactory.createApp().post(signUpRouteDefinition.pat
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"id_user_session"}`,
+            name: `${productName}_${"id_user_session"}`,
             value: signString({
                 value: createUserSession.id,
                 secret: c.var.env.COOKIES_KEY,
@@ -87,7 +87,7 @@ export const signUpRoute = apiFactory.createApp().post(signUpRouteDefinition.pat
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"is_auth"}`,
+            name: `${productName}_${"is_auth"}`,
             value: String(true),
             options: {
                 maxAge: userSessionCookieMaxAge,

@@ -1,3 +1,4 @@
+import { activateUserRouteDefinition, models } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
 import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
@@ -5,7 +6,6 @@ import { apiFactory } from "../../../utilities/apiFactory.js"
 import { Exception } from "../../../utilities/exception.js"
 import { response } from "../../../utilities/response.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
-import { activateUserRouteDefinition, models } from "@arrhes/application-metadata"
 
 export const activateUserRoute = apiFactory.createApp().post(activateUserRouteDefinition.path, async (c) => {
     const { user, userSession } = await checkUserSessionMiddleware({ context: c })

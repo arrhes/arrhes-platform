@@ -1,3 +1,4 @@
+import { generateId, models, mollieWebhookRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
@@ -5,7 +6,22 @@ import { apiLog } from "../../utilities/apiLog.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { updateOne } from "../../utilities/sql/updateOne.js"
-import { models, generateId, mollieWebhookRouteDefinition } from "@arrhes/application-metadata"
+
+const MONTHLY_PRICE = "30.00"
+
+/**
+ * Get the last day of a given month (e.g. 2026-02-01 -> 2026-02-28T23:59:59.999Z).
+ */
+function getLastDayOfMonth(from: Date): Date {
+    return new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth() + 1, 0, 23, 59, 59, 999))
+}
+
+/**
+ * Get the first day of the next month from a given date.
+ */
+function getFirstOfNextMonth(from: Date): Date {
+    return new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth() + 1, 1))
+}
 
 export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({
@@ -23,14 +39,13 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
             message: `Mollie webhook received for payment ${body.id}, status: ${molliePayment.status}`,
         })
 
-        // Find the matching payment in our database
-        const existingPayments = await c.var.clients.sql
+        // Find the matching payment in our database (may not exist for recurring payments)
+        const organizationPayment = await c.var.clients.sql
             .select()
             .from(models.organizationPayment)
             .where(eq(models.organizationPayment.molliePaymentId, body.id))
             .limit(1)
-
-        const existingPayment = existingPayments.at(0)
+            .then((rows) => rows.at(0))
 
         // Map Mollie status to our status
         const statusMap: Record<string, "pending" | "paid" | "failed" | "refunded"> = {
@@ -44,25 +59,25 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
         }
         const mappedStatus = statusMap[molliePayment.status] ?? "pending"
 
-        if (existingPayment !== undefined) {
+        if (organizationPayment !== undefined) {
             // Update existing payment
             await updateOne({
                 database: c.var.clients.sql,
                 table: models.organizationPayment,
                 data: {
                     status: mappedStatus,
-                    paidAt: mappedStatus === "paid" ? new Date().toISOString() : existingPayment.paidAt,
+                    paidAt: mappedStatus === "paid" ? new Date().toISOString() : organizationPayment.paidAt,
                     lastUpdatedAt: new Date().toISOString(),
                 },
-                where: (table) => eq(table.id, existingPayment.id),
+                where: (table) => eq(table.id, organizationPayment.id),
             })
 
             // If first payment is paid, create a Mollie subscription
-            if (mappedStatus === "paid" && existingPayment.sequenceType === "first") {
+            if (mappedStatus === "paid" && organizationPayment.sequenceType === "first") {
                 const organization = await c.var.clients.sql
                     .select()
                     .from(models.organization)
-                    .where(eq(models.organization.id, existingPayment.idOrganization))
+                    .where(eq(models.organization.id, organizationPayment.idOrganization))
                     .limit(1)
                     .then((rows) => rows.at(0))
 
@@ -71,16 +86,31 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
                     organization.mollieCustomerId !== null &&
                     organization.mollieSubscriptionId === null
                 ) {
+                    const now = new Date()
+
+                    // The first payment covers the pro-rata period up to periodEnd (last day of current month)
+                    // The recurring subscription starts on the 1st of the next month
+                    const firstOfNextMonth =
+                        organizationPayment.periodEnd !== null
+                            ? getFirstOfNextMonth(new Date(organizationPayment.periodEnd))
+                            : getFirstOfNextMonth(now)
+
+                    const startDate = `${firstOfNextMonth.getUTCFullYear()}-${String(firstOfNextMonth.getUTCMonth() + 1).padStart(2, "0")}-${String(firstOfNextMonth.getUTCDate()).padStart(2, "0")}`
+
                     const subscription = await c.var.clients.mollie.customerSubscriptions.create({
                         customerId: organization.mollieCustomerId,
                         amount: {
                             currency: "EUR",
-                            value: "9.99",
+                            value: MONTHLY_PRICE,
                         },
                         interval: "1 month",
+                        startDate: startDate,
                         description: "Arrhes - Abonnement mensuel",
                         webhookUrl: `${c.var.env.API_BASE_URL}/public/mollie-webhook`,
                     })
+
+                    // Set subcriptionEndingAt to the last day of the first full billing month
+                    const subscriptionEndingAt = getLastDayOfMonth(firstOfNextMonth)
 
                     // Update organization with subscription info and premium status
                     await updateOne({
@@ -88,8 +118,8 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
                         table: models.organization,
                         data: {
                             mollieSubscriptionId: subscription.id,
-                            subcriptionEndingAt: new Date().toISOString(),
-                            lastUpdatedAt: new Date().toISOString(),
+                            subcriptionEndingAt: subscriptionEndingAt.toISOString(),
+                            lastUpdatedAt: now.toISOString(),
                         },
                         where: (table) => eq(table.id, organization.id),
                     })
@@ -101,15 +131,21 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
             const mollieCustomerId = molliePayment.customerId
 
             if (mollieCustomerId !== null && mollieCustomerId !== undefined) {
-                const organizations = await c.var.clients.sql
+                const organization = await c.var.clients.sql
                     .select()
                     .from(models.organization)
                     .where(eq(models.organization.mollieCustomerId, mollieCustomerId))
                     .limit(1)
-
-                const organization = organizations.at(0)
+                    .then((rows) => rows.at(0))
 
                 if (organization !== undefined) {
+                    const now = new Date()
+
+                    // Recurring payments are charged on the 1st of each month
+                    // Period = 1st to last day of the month being paid for
+                    const periodStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1))
+                    const periodEnd = getLastDayOfMonth(now)
+
                     // Create a new payment record for this subscription payment
                     await insertOne({
                         database: c.var.clients.sql,
@@ -124,24 +160,24 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
                             amountInCents: Math.round(Number.parseFloat(molliePayment.amount.value) * 100),
                             currency: molliePayment.amount.currency,
                             description: molliePayment.description,
-                            periodStart: null,
-                            periodEnd: null,
-                            paidAt: mappedStatus === "paid" ? new Date().toISOString() : null,
-                            createdAt: new Date().toISOString(),
+                            periodStart: periodStart.toISOString(),
+                            periodEnd: periodEnd.toISOString(),
+                            paidAt: mappedStatus === "paid" ? now.toISOString() : null,
+                            createdAt: now.toISOString(),
                             lastUpdatedAt: null,
                             createdBy: null,
                             lastUpdatedBy: null,
                         },
                     })
 
-                    // If payment is paid, ensure premium is active
+                    // If payment is paid, extend premium to the end of this billing period
                     if (mappedStatus === "paid") {
                         await updateOne({
                             database: c.var.clients.sql,
                             table: models.organization,
                             data: {
-                                subcriptionEndingAt: organization.subcriptionEndingAt ?? new Date().toISOString(),
-                                lastUpdatedAt: new Date().toISOString(),
+                                subcriptionEndingAt: periodEnd.toISOString(),
+                                lastUpdatedAt: now.toISOString(),
                             },
                             where: (table) => eq(table.id, organization.id),
                         })

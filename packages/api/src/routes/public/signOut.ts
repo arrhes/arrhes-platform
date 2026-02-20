@@ -1,3 +1,4 @@
+import { models, signOutRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
@@ -7,8 +8,7 @@ import { unsignString } from "../../utilities/cookies/unsignString.js"
 import { Exception } from "../../utilities/exception.js"
 import { response } from "../../utilities/response.js"
 import { updateOne } from "../../utilities/sql/updateOne.js"
-import { cookiePrefix, getCookieSecurityOptions, userSessionCookieMaxAge } from "../../utilities/variables.js"
-import { signOutRouteDefinition, models } from "@arrhes/application-metadata"
+import { getCookieSecurityOptions, productName, userSessionCookieMaxAge } from "../../utilities/variables.js"
 
 export const signOutRoute = apiFactory.createApp().post(signOutRouteDefinition.path, async (c) => {
     const _body = await validateBodyMiddleware({
@@ -18,7 +18,7 @@ export const signOutRoute = apiFactory.createApp().post(signOutRouteDefinition.p
 
     try {
         const idUserSession = unsignString({
-            signedValue: parseCookies({ value: c.req.header("cookie") })[`${cookiePrefix}_${"id_user_session"}`],
+            signedValue: parseCookies({ value: c.req.header("cookie") })[`${productName}_${"id_user_session"}`],
             secret: c.var.env.COOKIES_KEY,
         })
 
@@ -47,7 +47,7 @@ export const signOutRoute = apiFactory.createApp().post(signOutRouteDefinition.p
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"id_user_session"}`,
+            name: `${productName}_${"id_user_session"}`,
             value: "",
             options: {
                 maxAge: userSessionCookieMaxAge,
@@ -61,7 +61,7 @@ export const signOutRoute = apiFactory.createApp().post(signOutRouteDefinition.p
     c.res.headers.append(
         "Set-Cookie",
         serializeCookie({
-            name: `${cookiePrefix}_${"is_auth"}`,
+            name: `${productName}_${"is_auth"}`,
             value: String(false),
             options: {
                 maxAge: userSessionCookieMaxAge,

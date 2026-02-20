@@ -1,8 +1,8 @@
 import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Icon, IconProps } from "@tabler/icons-react"
+import type { Icon, IconProps } from "@tabler/icons-react"
 import { Outlet, useMatches, useRouterState } from "@tanstack/react-router"
-import { cloneElement, ReactElement } from "react"
+import { cloneElement, type ReactElement } from "react"
 import type { ValidParams, ValidRoutes } from "../../routes/applicationRouter.js"
 import { LinkButton } from "../linkButton.js"
 
@@ -83,15 +83,12 @@ export function SubPageLayout(props: {
                                         padding: "0.5rem",
                                     })}
                                 >
-                                    {cloneElement(
-                                        section.icon,
-                                        {
-                                            size: 14,
-                                            className: css({
-                                                stroke: "neutral/40"
-                                            })
-                                        }
-                                    )}
+                                    {cloneElement(section.icon, {
+                                        size: 14,
+                                        className: css({
+                                            stroke: "neutral/40",
+                                        }),
+                                    })}
                                     <span
                                         className={css({
                                             fontSize: "xs",

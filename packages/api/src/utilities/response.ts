@@ -1,9 +1,9 @@
+import type { routeDefinition } from "@arrhes/application-metadata"
 import type { Context } from "hono"
 import type { ContentfulStatusCode } from "hono/utils/http-status"
 import type * as v from "valibot"
 import type { ApiEnv } from "../utilities/apiFactory.js"
 import { validate } from "../utilities/validate.js"
-import { routeDefinition } from "@arrhes/application-metadata"
 
 type GContext = Context<ApiEnv>
 

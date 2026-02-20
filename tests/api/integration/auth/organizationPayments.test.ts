@@ -26,7 +26,13 @@ describe("POST /auth/read-organization-subscription", () => {
         expect(data).toHaveProperty("subcriptionEndingAt")
         expect(data).toHaveProperty("mollieSubscriptionId")
         expect(data).toHaveProperty("status")
+        expect(data).toHaveProperty("subscriptionStatus")
         expect(typeof data.isPremium).toBe("boolean")
+        expect(["active", "cancelled", "expired", "none"]).toContain(data.subscriptionStatus)
+
+        // Demo org has no subscription, so it should be "none" with isPremium = false
+        expect(data.isPremium).toBe(false)
+        expect(data.subscriptionStatus).toBe("none")
     })
 
     it("rejects unauthenticated requests", async () => {

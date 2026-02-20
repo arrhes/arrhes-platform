@@ -1,18 +1,20 @@
+import { models } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { Context } from "hono"
+import type { Context } from "hono"
 import { parseCookies } from "../utilities/cookies/parseCookies.js"
 import { unsignString } from "../utilities/cookies/unsignString.js"
 import { Exception } from "../utilities/exception.js"
-import { cookiePrefix } from "../utilities/variables.js"
-import { models } from "@arrhes/application-metadata"
+import { productName } from "../utilities/variables.js"
 
 export async function checkUserSessionMiddleware(parameters: { context: Context<any> }) {
     try {
         // Get session ID from signed cookie
-        const cookieMap = parseCookies({ value: parameters.context.req.header("Cookie") })
+        const cookieMap = parseCookies({
+            value: parameters.context.req.header("Cookie"),
+        })
 
         const idUserSession = unsignString({
-            signedValue: cookieMap[`${cookiePrefix}_id_user_session`],
+            signedValue: cookieMap[`${productName}_id_user_session`],
             secret: parameters.context.var.env.COOKIES_KEY,
         })
 

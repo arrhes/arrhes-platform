@@ -1,6 +1,6 @@
+import { pbkdf2Sync } from "node:crypto"
 import { models, updateUserPasswordRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { pbkdf2Sync } from "node:crypto"
 import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../../utilities/apiFactory.js"
@@ -25,13 +25,9 @@ export const updateUserPasswordRoute = apiFactory
             })
         }
 
-        const givenPasswordHash = pbkdf2Sync(
-            body.currentPassword,
-            user.passwordSalt,
-            128000,
-            64,
-            `sha512`,
-        ).toString(`hex`)
+        const givenPasswordHash = pbkdf2Sync(body.currentPassword, user.passwordSalt, 128000, 64, `sha512`).toString(
+            `hex`,
+        )
         if (givenPasswordHash !== user.passwordHash) {
             throw new Exception({
                 statusCode: 400,
@@ -40,9 +36,7 @@ export const updateUserPasswordRoute = apiFactory
             })
         }
 
-        const newPasswordHash = pbkdf2Sync(body.newPassword, user.passwordSalt, 128000, 64, `sha512`).toString(
-            `hex`,
-        )
+        const newPasswordHash = pbkdf2Sync(body.newPassword, user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
 
         const updatePassword = await updateOne({
             database: c.var.clients.sql,

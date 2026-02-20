@@ -1,9 +1,9 @@
+import { models, sendMagicLinkRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
 import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
 import { response } from "../../utilities/response.js"
 import { selectOne } from "../../utilities/sql/selectOne.js"
-import { sendMagicLinkRouteDefinition, models } from "@arrhes/application-metadata"
 
 export const sendMagicLinkRoute = apiFactory.createApp().post(sendMagicLinkRouteDefinition.path, async (c) => {
     const body = await validateBodyMiddleware({

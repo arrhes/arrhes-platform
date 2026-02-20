@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
-    cookiePrefix,
     getCookieSecurityOptions,
+    productName,
     storageFileExpiresIn,
     userSessionCookieMaxAge,
     verificationTokenLifetime,
@@ -21,8 +21,8 @@ describe("variables", () => {
             expect(storageFileExpiresIn).toBe(3600)
         })
 
-        it("cookiePrefix is 'arrhes'", () => {
-            expect(cookiePrefix).toBe("arrhes")
+        it("productName is 'arrhes'", () => {
+            expect(productName).toBe("arrhes")
         })
     })
 

@@ -60,7 +60,7 @@ Fichier : `packages/api/.env`
 |----------|------|-------------|---------|
 | `API_BASE_URL` | `string` | URL de base de l'API | `http://localhost:3000` |
 | `APPLICATION_BASE_URL` | `string` | URL du frontend (dashboard) | `http://localhost:5173` |
-| `WEBSITE_BASE_URL` | `string` | URL du site vitrine | `http://localhost:5174` |
+| `WEBSITE_BASE_URL` | `string` | URL du site vitrine | `http://localhost:5173` |
 
 ### Base de donnees
 
@@ -375,7 +375,7 @@ COOKIES_KEY=development-secret-key-change-in-production-min-32-chars
 # URLs
 API_BASE_URL=http://localhost:3000
 APPLICATION_BASE_URL=http://localhost:5173
-WEBSITE_BASE_URL=http://localhost:5174
+WEBSITE_BASE_URL=http://localhost:5173
 
 # Base de donnees (Docker Compose)
 SQL_DATABASE_URL=postgres://postgres:admin@localhost:5432/default

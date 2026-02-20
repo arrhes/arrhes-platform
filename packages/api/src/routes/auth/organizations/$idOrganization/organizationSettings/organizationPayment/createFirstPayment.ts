@@ -9,6 +9,43 @@ import { response } from "../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 import { updateOne } from "../../../../../../utilities/sql/updateOne.js"
+import { productName } from "../../../../../../utilities/variables.js"
+
+const MONTHLY_PRICE_CENTS = 3000
+
+/**
+ * Calculate the number of days in the month for a given date.
+ */
+function getDaysInMonth(date: Date): number {
+    return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0)).getUTCDate()
+}
+
+/**
+ * Get the last day of the current month (e.g. 2026-02-20 -> 2026-02-28T23:59:59.999Z).
+ */
+function getLastDayOfMonth(from: Date): Date {
+    return new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth() + 1, 0, 23, 59, 59, 999))
+}
+
+/**
+ * Calculate pro-rata amount in cents for the remaining days in the current month (including today).
+ * Example: if today is the 20th of a 30-day month, remaining = 11 days (20th to 30th inclusive),
+ * amount = 11/30 * 3000 = 1100 cents.
+ * If today is the last day (30th of 30), remaining = 1 day, amount = 1/30 * 3000 = 100 cents.
+ */
+function calculateProRataAmountCents(from: Date): number {
+    const daysInMonth = getDaysInMonth(from)
+    const remainingDays = daysInMonth - from.getUTCDate() + 1 // +1 to include today
+
+    return Math.round((remainingDays / daysInMonth) * MONTHLY_PRICE_CENTS)
+}
+
+/**
+ * Format cents as a Mollie-compatible amount string (e.g. 1050 -> "10.50").
+ */
+function formatAmountFromCents(cents: number): string {
+    return (cents / 100).toFixed(2)
+}
 
 export const createFirstPaymentRoute = apiFactory
     .createApp()
@@ -43,9 +80,18 @@ export const createFirstPaymentRoute = apiFactory
         let mollieCustomerId = organization.mollieCustomerId
 
         if (mollieCustomerId === null) {
+            if (organization.email === null) {
+                throw new Exception({
+                    statusCode: 400,
+                    internalMessage: "Missing organization information",
+                })
+            }
             const customer = await c.var.clients.mollie.customers.create({
                 name: organization.name,
-                email: organization.email ?? user.email,
+                email: organization.email,
+                metadata: {
+                    product: productName,
+                },
             })
             mollieCustomerId = customer.id
 
@@ -61,11 +107,16 @@ export const createFirstPaymentRoute = apiFactory
             })
         }
 
-        // Create the first payment with Mollie
+        // Calculate pro-rata amount for the remaining days of the current month (including today)
+        const now = new Date()
+        const proRataCents = calculateProRataAmountCents(now)
+        const lastDayOfMonth = getLastDayOfMonth(now)
+
+        // Create the first payment with the pro-rata amount
         const molliePayment = await c.var.clients.mollie.payments.create({
             amount: {
                 currency: "EUR",
-                value: "0.01",
+                value: formatAmountFromCents(proRataCents),
             },
             customerId: mollieCustomerId,
             sequenceType: SequenceType.first,
@@ -74,8 +125,6 @@ export const createFirstPaymentRoute = apiFactory
             webhookUrl: `${c.var.env.API_BASE_URL}/public/mollie-webhook`,
         })
 
-        const periodStartingAt = new Date()
-        const periodEndingAt = new Date(periodStartingAt.getTime() + 1000 * 60 * 60 * 24 * 30)
         // Store the payment in our database
         await insertOne({
             database: c.var.clients.sql,
@@ -86,13 +135,13 @@ export const createFirstPaymentRoute = apiFactory
                 status: "pending",
                 molliePaymentId: molliePayment.id,
                 sequenceType: "first",
-                amountInCents: 1,
+                amountInCents: proRataCents,
                 currency: "EUR",
                 description: "Activation de l'abonnement",
-                periodStart: periodStartingAt.toISOString(),
-                periodEnd: periodEndingAt.toISOString(),
+                periodStart: now.toISOString(),
+                periodEnd: lastDayOfMonth.toISOString(),
                 paidAt: null,
-                createdAt: new Date().toISOString(),
+                createdAt: now.toISOString(),
                 lastUpdatedAt: null,
                 createdBy: user.id,
                 lastUpdatedBy: null,

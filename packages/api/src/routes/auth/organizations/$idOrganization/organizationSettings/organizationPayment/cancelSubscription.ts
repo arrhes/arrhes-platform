@@ -45,18 +45,20 @@ export const cancelSubscriptionRoute = apiFactory
             })
         }
 
-        // Cancel the subscription on Mollie
+        // Cancel the subscription on Mollie (stops future charges)
         await c.var.clients.mollie.customerSubscriptions.cancel(organization.mollieSubscriptionId, {
             customerId: organization.mollieCustomerId,
         })
 
-        // Update the organization
+        // Remove the Mollie subscription ID but keep subcriptionEndingAt intact.
+        // The user retains premium access until the end of their current paid period.
+        // The checkOrganizationSubscriptionSessionMiddleware already checks that
+        // subcriptionEndingAt is in the future, so access will expire naturally.
         await updateOne({
             database: c.var.clients.sql,
             table: models.organization,
             data: {
                 mollieSubscriptionId: null,
-                subcriptionEndingAt: null,
                 lastUpdatedAt: new Date().toISOString(),
                 lastUpdatedBy: user.id,
             },

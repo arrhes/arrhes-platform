@@ -36,7 +36,7 @@ const ghostRecipe = sva({
             flexShrink: 0,
             stroke: "neutral/70",
             _disabled: { stroke: "neutral/50" },
-            _current: { stroke: "primary", }
+            _current: { stroke: "primary" },
         },
         text: {
             overflow: "hidden",
@@ -47,7 +47,7 @@ const ghostRecipe = sva({
             fontWeight: "400",
             color: "neutral",
             _disabled: { color: "neutral/50" },
-            _current: { color: "primary", }
+            _current: { color: "primary" },
         },
         rightIcon: {
             minWidth: "1rem",
