@@ -1,7 +1,8 @@
 # Agent Guidelines
 
 ## Commands
-- Build all: `pnpm build` — Dev all: `pnpm dev` — Docker: `just dev up` / `just dev down` / `just dev reset`
+- Build all: `pnpm build` — Dev all: `pnpm dev`
+- Docker: `docker compose --project-directory=".development" --file=".development/compose.yml" --project-name="arrhes-application" up -d --build` (or `just dev-up` / `just dev-down` / `just dev-reset`)
 - Lint dashboard: `pnpm --filter @arrhes/application-dashboard run lint`
 - Typecheck dashboard: `packages/dashboard/node_modules/.bin/tsc --noEmit --project packages/dashboard/tsconfig.json`
 - No test framework exists in this repository.

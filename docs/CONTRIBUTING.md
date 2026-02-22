@@ -30,22 +30,22 @@ Les comportements inacceptables incluent le harcèlement, les insultes, et tout 
 
 Il existe plusieurs façons de contribuer à Arrhes :
 
-### 🐛 Signaler des bugs
+### Signaler des bugs
 Ouvrez une issue sur GitHub avec le label `bug`
 
-### 💡 Proposer des fonctionnalités
+### Proposer des fonctionnalités
 Ouvrez une issue sur GitHub avec le label `enhancement`
 
-### 📝 Améliorer la documentation
+### Améliorer la documentation
 La documentation est aussi importante que le code !
 
-### 💻 Contribuer du code
-Suivez le process décrit dans ce document
+### Contribuer du code
+Suivez le processus décrit dans ce document
 
-### 🌍 Traductions
+### Traductions
 Aidez à traduire l'application dans d'autres langues
 
-### 🎨 Design et UX
+### Design et UX
 Proposez des améliorations d'interface
 
 ## Configuration de l'environnement
@@ -61,8 +61,8 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
 
 2. **Cloner votre fork**
    ```bash
-   git clone https://github.com/votre-username/arrhes.git
-   cd arrhes
+   git clone https://github.com/votre-username/arrhes-platform.git
+   cd arrhes-platform
    ```
 
 3. **Ajouter le repository principal comme remote**
@@ -72,39 +72,34 @@ Avant de commencer à contribuer, configurez votre environnement de développeme
 
 4. **Choisir votre méthode de développement**
 
-   **Option A : Dev Container (Recommandé pour les nouveaux contributeurs) 🚀**
-   
-   C'est la méthode la plus simple pour démarrer rapidement :
-   
+   **Option A : Docker (recommandé)**
+
    ```bash
-   # Ouvrir dans VS Code/Cursor
-   code .  # ou cursor .
-   
-   # Cliquer sur "Reopen in Container" quand demandé
-   # Tout sera configuré automatiquement !
+   docker compose --project-directory=".development" \
+     --file=".development/compose.yml" \
+     --project-name="arrhes-application" \
+     up -d --build
    ```
-   
-   **Option B : Docker Compose**
-   
+
+   C'est tout ! Tous les services sont démarrés automatiquement.
+
+   **Option B : Développement natif**
+
    ```bash
    # Installer les dépendances
    pnpm install
-   
-   # Lancer les services
-   docker-compose up -d
-   
+
+   # Construire metadata
+   pnpm --filter @arrhes/application-metadata run build
+
+   # Lancer l'infrastructure
+   docker compose -f .development/compose.yml up -d postgres rustfs mailpit
+
    # Configurer l'environnement
    # Suivez les instructions dans DEVELOPMENT.md
-   ```
-   
-   **Option C : Installation native**
-   
-   ```bash
-   # Installer les dépendances
-   pnpm install
-   
-   # Configurer l'environnement
-   # Suivez les instructions complètes dans DEVELOPMENT.md
+
+   # Lancer l'application
+   pnpm run dev
    ```
 
 5. **Créer une branche pour votre contribution**
@@ -142,7 +137,7 @@ function createUser(data: { email: string, alias: string }): User {
 
 **Mauvais exemple :**
 ```typescript
-function createUser(data: any) {  // ❌ any
+function createUser(data: any) {  // any
   return {
     id: generateId(),
     ...data,
@@ -156,7 +151,7 @@ function createUser(data: any) {  // ❌ any
 - **Types et interfaces** : `PascalCase`
 - **Constantes** : `UPPER_SNAKE_CASE` (si vraiment constante)
 - **Fichiers** : `camelCase.ts`
-- **Composants React** : `PascalCase.tsx`
+- **Composants React** : `PascalCase` (fonction exportée), fichier en `camelCase.tsx`
 
 ```typescript
 // Variables et fonctions
@@ -172,7 +167,7 @@ const MAX_RETRY_COUNT = 3
 
 // Fichiers
 // api/routes/auth/userProfile.ts
-// platform/components/buttons/PrimaryButton.tsx
+// dashboard/components/buttons/primaryButton.tsx
 ```
 
 ### Structure du code
@@ -216,17 +211,17 @@ Le projet utilise ESLint pour maintenir la qualité du code.
 
 **Vérifier le linting :**
 ```bash
-pnpm --filter platform run lint
+pnpm --filter @arrhes/application-dashboard run lint
 ```
 
 **Fix automatique :**
 ```bash
-pnpm --filter platform run lint --fix
+pnpm --filter @arrhes/application-dashboard run lint --fix
 ```
 
 **Configuration :**
 - ESLint est configuré pour TypeScript et React
-- Les règles sont définies dans `packages/platform/eslint.config.js`
+- Les règles sont définies dans `packages/dashboard/eslint.config.js`
 
 ### Formatage
 
@@ -263,10 +258,10 @@ export function MyComponent() {
   // Hooks en premier
   const [state, setState] = useState()
   const query = useQuery()
-  
+
   // Puis logique
   const handleClick = () => { }
-  
+
   // Puis render
   return <div>...</div>
 }
@@ -281,10 +276,10 @@ export function MyComponent({ title, description, onClose }: MyComponentProps) {
 
 **Éviter les inline styles** (utiliser Panda CSS)
 ```typescript
-// ✅ Bon
-<div className="flex items-center gap-2">
+// Bon
+<div className={css({ display: 'flex', alignItems: 'center', gap: '2' })}>
 
-// ❌ Éviter
+// Éviter
 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 ```
 
@@ -316,16 +311,17 @@ Nous utilisons une convention de commits inspirée de [Conventional Commits](htt
 ### Scopes (optionnel)
 
 - `api` : Backend
-- `platform` : Frontend
+- `dashboard` : Frontend
 - `metadata` : Package metadata
 - `tools` : Outils de base de données
+- `ui` : Composants UI partagés
 - `docs` : Documentation
 
 ### Exemples
 
 ```bash
 # Nouvelle fonctionnalité
-git commit -m "feat(platform): add dark mode toggle"
+git commit -m "feat(dashboard): add dark mode toggle"
 
 # Correction de bug
 git commit -m "fix(api): correct balance calculation in income statement"
@@ -371,8 +367,8 @@ Users can now export balance sheets and income statements.
 # Vérifier que tout compile
 pnpm run build
 
-# Vérifier le linting (pour platform)
-pnpm --filter platform run lint
+# Vérifier le linting (pour dashboard)
+pnpm --filter @arrhes/application-dashboard run lint
 
 # Tester manuellement les changements
 pnpm run dev
@@ -414,7 +410,7 @@ Brève description des changements
 - [ ] J'ai commenté les parties complexes
 - [ ] J'ai mis à jour la documentation si nécessaire
 - [ ] Mes changements ne génèrent pas de nouveaux warnings
-- [ ] J'ai testé localement
+- [ ] J'ai teste localement
 
 ## Screenshots (si applicable)
 ```
@@ -481,7 +477,7 @@ Résumé clair et concis du problème
 - **Environnement** :
   - OS : [ex: Ubuntu 22.04]
   - Navigateur : [ex: Chrome 120]
-  - Version Node.js : [ex: 24.5.0]
+  - Version Node.js : [ex: 25.2.1]
   - Version : [ex: commit SHA ou release]
 
 ### Exemple
@@ -553,4 +549,4 @@ Si vous avez des questions sur la contribution, n'hésitez pas à :
 - Contacter les mainteneurs
 - Consulter les issues et PR existantes
 
-Merci de contribuer à Arrhes ! 🎉
+Merci de contribuer à Arrhes !

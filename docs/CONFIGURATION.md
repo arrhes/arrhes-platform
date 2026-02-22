@@ -7,6 +7,7 @@ Ce document décrit toutes les variables d'environnement et les configurations n
 - [Vue d'ensemble](#vue-densemble)
 - [Variables d'environnement - API](#variables-denvironnement---api)
 - [Variables d'environnement - Tools](#variables-denvironnement---tools)
+- [Variables d'environnement - Dashboard](#variables-denvironnement---dashboard)
 - [Configuration PostgreSQL](#configuration-postgresql)
 - [Configuration S3 (Stockage)](#configuration-s3-stockage)
 - [Configuration SMTP (Email)](#configuration-smtp-email)
@@ -15,18 +16,19 @@ Ce document décrit toutes les variables d'environnement et les configurations n
 
 ## Vue d'ensemble
 
-Arrhes nécessite deux fichiers de configuration `.env` :
+Arrhes nécessite des fichiers de configuration `.env` pour chaque package :
 
 1. **`packages/api/.env`** : Configuration du backend API
 2. **`packages/tools/.env`** : Configuration des outils de base de données
+3. **`packages/dashboard/.env`** : Configuration du dashboard frontend
 
 Ces fichiers ne sont **pas versionnés** (`.gitignore`) pour des raisons de sécurité.
 
 ### Approches de configuration
 
-**Option 1 : Avec Docker Compose (Recommandé) 🐳**
+**Option 1 : Avec Docker (recommandé)**
 
-Le fichier `docker-compose.yml` à la racine du projet lance automatiquement PostgreSQL, RustFS et MailHog avec des valeurs par défaut prêtes à l'emploi. Cette option simplifie la configuration.
+Le fichier `.development/compose.yml` lance automatiquement PostgreSQL, RustFS et Mailpit avec des valeurs par défaut prêtes à l'emploi. Les fichiers `.env` sont déjà configurés dans `.development/packages/` et montés automatiquement dans les containers. **Aucune configuration manuelle nécessaire.**
 
 **Option 2 : Installation native**
 
@@ -59,14 +61,14 @@ Fichier : `packages/api/.env`
 | Variable | Type | Description | Exemple |
 |----------|------|-------------|---------|
 | `API_BASE_URL` | `string` | URL de base de l'API | `http://localhost:3000` |
-| `PLATFORM_BASE_URL` | `string` | URL de la plateforme frontend | `http://localhost:5173` |
+| `PLATFORM_BASE_URL` | `string` | URL du dashboard frontend | `http://localhost:5173` |
 | `WEBSITE_BASE_URL` | `string` | URL du site vitrine | `http://localhost:5174` |
 
 ### Base de données
 
 | Variable | Type | Description | Exemple |
 |----------|------|-------------|---------|
-| `SQL_DATABASE_URL` | `string` | URL de connexion PostgreSQL | `postgres://user:password@localhost:5432/arrhes` |
+| `SQL_DATABASE_URL` | `string` | URL de connexion PostgreSQL | `postgres://postgres:admin@localhost:5432/default` |
 
 ### Stockage S3
 
@@ -74,8 +76,8 @@ Fichier : `packages/api/.env`
 |----------|------|-------------|---------|
 | `STORAGE_ENDPOINT` | `string` | Endpoint S3 (ou compatible) | `http://localhost:9000` (RustFS) |
 | `STORAGE_BUCKET_NAME` | `string` | Nom du bucket S3 | `arrhes-files` |
-| `STORAGE_ACCESS_KEY` | `string` | Clé d'accès S3 | `arrhes_rustfs` |
-| `STORAGE_SECRET_KEY` | `string` | Clé secrète S3 | `arrhes_rustfs_secret` |
+| `STORAGE_ACCESS_KEY` | `string` | Clé d'accès S3 | `rustfsadmin` |
+| `STORAGE_SECRET_KEY` | `string` | Clé secrète S3 | `rustfsadmin` |
 
 ### Email SMTP
 
@@ -91,44 +93,56 @@ Fichier : `packages/tools/.env`
 
 | Variable | Type | Description | Exemple |
 |----------|------|-------------|---------|
-| `DATABASE_URL` | `string` | URL de connexion PostgreSQL | `postgres://user:password@localhost:5432/arrhes` |
+| `NODE_ENV` | `string` | Mode d'environnement | `development` |
+| `SQL_DATABASE_URL` | `string` | URL de connexion PostgreSQL | `postgres://postgres:admin@localhost:5432/default` |
 
-**Note :** Cette variable doit être identique à `SQL_DATABASE_URL` de l'API.
+**Note :** `SQL_DATABASE_URL` doit être identique à celle de l'API.
+
+## Variables d'environnement - Dashboard
+
+Fichier : `packages/dashboard/.env`
+
+| Variable | Type | Description | Exemple |
+|----------|------|-------------|---------|
+| `VITE_ENV` | `string` | Environnement | `development` |
+| `VITE_API_BASE_URL` | `string` | URL de l'API | `http://localhost:3000` |
+| `VITE_DASHBOARD_BASE_URL` | `string` | URL du dashboard | `http://localhost:5173` |
+| `VITE_WEBSITE_BASE_URL` | `string` | URL du site vitrine | `http://localhost:5174` |
 
 ## Configuration PostgreSQL
 
-### Option 1 : Avec Docker Compose (Recommandé) 🐳
+### Option 1 : Avec Docker (recommandé)
 
-Aucune installation manuelle requise ! Le fichier `docker-compose.yml` configure automatiquement PostgreSQL.
+Aucune installation manuelle requise ! Le fichier `.development/compose.yml` configure automatiquement PostgreSQL.
 
 **Lancer PostgreSQL :**
 ```bash
-docker-compose up -d postgres
+docker compose -f .development/compose.yml up -d postgres
 ```
 
 **Configuration par défaut :**
 - **Host** : `localhost`
 - **Port** : `5432`
-- **Database** : `arrhes`
-- **User** : `arrhes_user`
-- **Password** : `arrhes_password`
-- **URL** : `postgres://arrhes_user:arrhes_password@localhost:5432/arrhes`
+- **Database** : `default`
+- **User** : `postgres`
+- **Password** : `admin`
+- **URL** : `postgres://postgres:admin@localhost:5432/default`
 
 **Vérification de la connexion :**
 ```bash
-psql postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
+psql postgres://postgres:admin@localhost:5432/default
 ```
 
 **Commandes utiles :**
 ```bash
 # Voir les logs
-docker-compose logs postgres
+docker compose -f .development/compose.yml logs postgres
 
 # Redémarrer
-docker-compose restart postgres
+docker compose -f .development/compose.yml restart postgres
 
 # Arrêter
-docker-compose stop postgres
+docker compose -f .development/compose.yml stop postgres
 ```
 
 ### Option 2 : Installation native
@@ -154,16 +168,8 @@ Télécharger l'installeur depuis [postgresql.org](https://www.postgresql.org/do
 # Se connecter à PostgreSQL
 sudo -u postgres psql
 
-# Créer un utilisateur
-CREATE USER arrhes_user WITH PASSWORD 'your-secure-password';
-
 # Créer la base de données
-CREATE DATABASE arrhes OWNER arrhes_user;
-
-# Donner tous les privilèges
-GRANT ALL PRIVILEGES ON DATABASE arrhes TO arrhes_user;
-
-# Quitter
+CREATE DATABASE arrhes_dev;
 \q
 ```
 
@@ -171,59 +177,59 @@ GRANT ALL PRIVILEGES ON DATABASE arrhes TO arrhes_user;
 
 Format : `postgres://[user]:[password]@[host]:[port]/[database]`
 
-Exemple : `postgres://arrhes_user:your-secure-password@localhost:5432/arrhes`
+Exemple : `postgres://postgres:your-secure-password@localhost:5432/arrhes_dev`
 
 **Vérification de la connexion :**
 ```bash
-psql postgres://arrhes_user:your-secure-password@localhost:5432/arrhes
+psql postgres://postgres:your-secure-password@localhost:5432/arrhes_dev
 ```
 
 ## Configuration S3 (Stockage)
 
 Le système de stockage utilise l'API AWS S3 mais fonctionne avec n'importe quel service compatible S3.
 
-### Option 1 : Avec Docker Compose (Recommandé) 🐳
+### Option 1 : Avec Docker (recommandé)
 
-Le fichier `docker-compose.yml` lance automatiquement RustFS.
+Le fichier `.development/compose.yml` lance automatiquement RustFS.
 
 **Lancer RustFS :**
 ```bash
-docker-compose up -d rustfs
+docker compose -f .development/compose.yml up -d rustfs
 ```
 
 **Configuration par défaut :**
 - **Endpoint** : `http://localhost:9000`
 - **Web UI** : http://localhost:9001
-- **Access Key** : `arrhes_rustfs`
-- **Secret Key** : `arrhes_rustfs_secret`
+- **Access Key** : `rustfsadmin`
+- **Secret Key** : `rustfsadmin`
 - **Bucket** : `arrhes-files` (à créer)
 
 **Variables d'environnement :**
 ```env
 STORAGE_ENDPOINT=http://localhost:9000
 STORAGE_BUCKET_NAME=arrhes-files
-STORAGE_ACCESS_KEY=arrhes_rustfs
-STORAGE_SECRET_KEY=arrhes_rustfs_secret
+STORAGE_ACCESS_KEY=rustfsadmin
+STORAGE_SECRET_KEY=rustfsadmin
 ```
 
 **Création du bucket :**
 
 Via l'interface web :
 1. Accéder à http://localhost:9001
-2. Se connecter avec `arrhes_rustfs` / `arrhes_rustfs_secret`
+2. Se connecter avec `rustfsadmin` / `rustfsadmin`
 3. Cliquer sur "Buckets" > "Create Bucket"
 4. Nommer le bucket `arrhes-files`
 
 **Commandes utiles :**
 ```bash
 # Voir les logs
-docker-compose logs rustfs
+docker compose -f .development/compose.yml logs rustfs
 
 # Redémarrer
-docker-compose restart rustfs
+docker compose -f .development/compose.yml restart rustfs
 ```
 
-### Option 2 : MinIO standalone (sans Docker Compose)
+### Option 2 : RustFS standalone (sans Docker Compose)
 
 **Installation avec Docker :**
 ```bash
@@ -231,11 +237,12 @@ docker run -d \
   -p 9000:9000 \
   -p 9001:9001 \
   --name rustfs \
-
-  -e "RUSTFS_ROOT_USER=arrhes_rustfs" \
-  -e "RUSTFS_ROOT_PASSWORD=arrhes_rustfs_secret" \
-  -v ~/rustfs/data:/data \
-  rustfs/rustfs:latest server /data --web-ui-address ":9001"
+  -e "RUSTFS_CONSOLE_ENABLE=true" \
+  -e "RUSTFS_ACCESS_KEY=rustfsadmin" \
+  -e "RUSTFS_SECRET_KEY=rustfsadmin" \
+  -e "RUSTFS_VOLUMES=/data" \
+  -v rustfs_data:/data \
+  rustfs/rustfs:latest
 ```
 
 Suivez ensuite les mêmes étapes de création de bucket que ci-dessus.
@@ -255,7 +262,7 @@ STORAGE_SECRET_KEY=YOUR_AWS_SECRET_KEY
 - Créer un utilisateur IAM avec les permissions S3 appropriées
 - Générer des clés d'accès pour cet utilisateur
 
-### Option 3 : Autre service compatible S3
+### Option 4 : Autre service compatible S3
 
 Cloudflare R2, DigitalOcean Spaces, Scaleway Object Storage, etc. sont également compatibles.
 
@@ -266,13 +273,13 @@ L'application envoie des emails pour :
 - Notifications importantes
 - Invitations d'utilisateurs
 
-### Option 1 : Avec Docker Compose (Recommandé pour le développement) 🐳
+### Option 1 : Avec Docker (recommandé pour le développement)
 
-Le fichier `docker-compose.yml` lance automatiquement MailHog, un serveur SMTP de test.
+Le fichier `.development/compose.yml` lance automatiquement Mailpit, un serveur SMTP de test.
 
-**Lancer MailHog :**
+**Lancer Mailpit :**
 ```bash
-docker-compose up -d mailhog
+docker compose -f .development/compose.yml up -d mailpit
 ```
 
 **Configuration par défaut :**
@@ -297,16 +304,16 @@ Accédez à http://localhost:8025 pour voir tous les emails envoyés par l'appli
 **Commandes utiles :**
 ```bash
 # Voir les logs
-docker-compose logs mailhog
+docker compose -f .development/compose.yml logs mailpit
 
 # Redémarrer
-docker-compose restart mailhog
+docker compose -f .development/compose.yml restart mailpit
 ```
 
-### Option 2 : MailHog standalone (sans Docker Compose)
+### Option 2 : Mailpit standalone (sans Docker Compose)
 
 ```bash
-docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+docker run -d -p 1025:1025 -p 8025:8025 --name mailpit axllent/mailpit:latest
 ```
 
 Utilisez la même configuration que ci-dessus.
@@ -350,43 +357,86 @@ EMAIL_PASSWORD=your-smtp-password
 
 ## Exemples de configuration
 
-### Configuration avec Docker Compose 🐳 (Recommandé)
+### Configuration avec Docker (recommandé)
 
-Cette configuration utilise tous les services lancés par `docker-compose.yml`.
+Cette configuration utilise tous les services lancés par `.development/compose.yml`. Les fichiers `.env` sont déjà configurés dans `.development/packages/` et montés automatiquement.
 
-**Étape 1 : Lancer les services**
+**Démarrer tous les services :**
 ```bash
-docker-compose up -d
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  up -d --build
 ```
 
-**Étape 2 : `packages/api/.env`**
+**Fichiers `.env` pré-configurés :**
+
+`.development/packages/api/.env` :
 ```env
-# Environnement
+ENV="development"
+VERBOSE="true"
+PORT="3000"
+
+CORS_ORIGIN="http://localhost:5173"
+COOKIES_DOMAIN="localhost"
+COOKIES_KEY="development-secret-key-change-in-production-min-32-chars"
+
+API_BASE_URL="http://localhost:3000"
+PLATFORM_BASE_URL="http://localhost:5173"
+WEBSITE_BASE_URL="http://localhost:5174"
+
+SQL_DATABASE_URL="postgres://postgres:admin@postgres:5432/default"
+
+STORAGE_ENDPOINT="http://rustfs:9000"
+STORAGE_BUCKET_NAME="arrhes-files"
+STORAGE_ACCESS_KEY="rustfsadmin"
+STORAGE_SECRET_KEY="rustfsadmin"
+
+EMAIL_ENDPOINT="mailpit:1025"
+EMAIL_USER="test"
+EMAIL_PASSWORD="test"
+```
+
+`.development/packages/dashboard/.env` :
+```env
+VITE_ENV="development"
+VITE_API_BASE_URL=http://localhost:3000
+VITE_DASHBOARD_BASE_URL=http://localhost:5173
+VITE_WEBSITE_BASE_URL=http://localhost:5174
+```
+
+`.development/packages/tools/.env` :
+```env
+NODE_ENV="development"
+SQL_DATABASE_URL="postgres://postgres:admin@postgres:5432/default"
+```
+
+> **Note :** Dans les `.env` Docker, les noms d'hôte utilisent les noms de service Docker (`postgres`, `rustfs`, `mailpit`) au lieu de `localhost`. Les URLs accessibles depuis le navigateur utilisent `localhost`.
+
+### Configuration native (pour développement sur l'hôte)
+
+**`packages/api/.env` :**
+```env
 ENV=development
 VERBOSE=true
 PORT=3000
 
-# CORS et Cookies
 CORS_ORIGIN=http://localhost:5173
 COOKIES_DOMAIN=localhost
 COOKIES_KEY=development-secret-key-change-in-production-min-32-chars
 
-# URLs
 API_BASE_URL=http://localhost:3000
 PLATFORM_BASE_URL=http://localhost:5173
 WEBSITE_BASE_URL=http://localhost:5174
 
-# Base de données (Docker Compose)
-SQL_DATABASE_URL=postgres://arrhes_user:arrhes_password@localhost:5432/arrhes
+# Adapter selon votre configuration PostgreSQL locale
+SQL_DATABASE_URL=postgres://postgres:votre_mot_de_passe@localhost:5432/arrhes_dev
 
-# Stockage MinIO (Docker Compose)
 STORAGE_ENDPOINT=http://localhost:9000
 STORAGE_BUCKET_NAME=arrhes-files
-STORAGE_ACCESS_KEY=arrhes_rustfs
-STORAGE_SECRET_KEY=arrhes_rustfs_secret
+STORAGE_ACCESS_KEY=rustfsadmin
+STORAGE_SECRET_KEY=rustfsadmin
 
-
-# Email (MailHog Docker standalone)
 EMAIL_ENDPOINT=localhost:1025
 EMAIL_USER=test
 EMAIL_PASSWORD=test
@@ -394,38 +444,33 @@ EMAIL_PASSWORD=test
 
 **`packages/tools/.env` :**
 ```env
-DATABASE_URL=postgres://arrhes_user:your-password@localhost:5432/arrhes
+NODE_ENV=development
+SQL_DATABASE_URL=postgres://postgres:votre_mot_de_passe@localhost:5432/arrhes_dev
 ```
 
 ### Configuration avec services externes (Production)
 
 **`packages/api/.env` :**
 ```env
-# Environnement
-ENV=development
-VERBOSE=true
+ENV=production
+VERBOSE=false
 PORT=3000
 
-# CORS et Cookies
-CORS_ORIGIN=http://localhost:5173
-COOKIES_DOMAIN=localhost
+CORS_ORIGIN=https://your-domain.com
+COOKIES_DOMAIN=your-domain.com
 COOKIES_KEY=generate-a-strong-random-key-here-minimum-32-characters
 
-# URLs
-API_BASE_URL=http://localhost:3000
-PLATFORM_BASE_URL=http://localhost:5173
-WEBSITE_BASE_URL=http://localhost:5174
+API_BASE_URL=https://api.your-domain.com
+PLATFORM_BASE_URL=https://app.your-domain.com
+WEBSITE_BASE_URL=https://your-domain.com
 
-# Base de données (PostgreSQL hébergé)
-SQL_DATABASE_URL=postgres://user:pass@db.provider.com:5432/arrhes
+SQL_DATABASE_URL=postgres://user:pass@db.provider.com:5432/arrhes?sslmode=require
 
-# Stockage AWS S3
 STORAGE_ENDPOINT=https://s3.eu-west-3.amazonaws.com
 STORAGE_BUCKET_NAME=my-arrhes-bucket
 STORAGE_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
 STORAGE_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
-# Email (Gmail)
 EMAIL_ENDPOINT=smtp.gmail.com
 EMAIL_USER=myemail@gmail.com
 EMAIL_PASSWORD=abcd efgh ijkl mnop

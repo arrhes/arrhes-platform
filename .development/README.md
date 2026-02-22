@@ -6,24 +6,24 @@ Docker-based development environment for the Arrhes platform.
 
 ```
 .development/
-├── compose.yml              # Main Docker Compose configuration
-├── .dockerignore            # Build context exclusions
-├── .gitignore               # Git tracking rules
-└── packages/
-    ├── api/
-    │   ├── Dockerfile       # API service image
-    │   ├── entrypoint.sh    # API startup script
-    │   └── .env             # API environment variables
-    ├── dashboard/
-    │   ├── Dockerfile       # Dashboard service image
-    │   ├── entrypoint.sh    # Dashboard startup script
-    │   └── .env             # Dashboard environment variables
-    ├── tools/
-    │   └── .env             # Tools environment variables
-    └── website/
-        ├── Dockerfile       # Website service image
-        ├── entrypoint.sh    # Website startup script
-        └── .env             # Website environment variables
++-- compose.yml              # Main Docker Compose configuration
++-- .dockerignore            # Build context exclusions
++-- .gitignore               # Git tracking rules
++-- packages/
+    +-- api/
+    |   +-- Dockerfile       # API service image
+    |   +-- entrypoint.sh    # API startup orchestrator
+    |   +-- install.sh       # Dependency installation
+    |   +-- build.sh         # Metadata build
+    |   +-- migrate.sh       # DB schema push
+    |   +-- seed.sh          # Demo data seeding
+    |   +-- start.sh         # Dev server start
+    |   +-- .env             # API environment variables
+    +-- dashboard/
+    |   +-- Dockerfile       # Dashboard service image
+    |   +-- .env             # Dashboard environment variables
+    +-- tools/
+        +-- .env             # Tools environment variables
 ```
 
 ## Key Concepts
@@ -48,18 +48,20 @@ Docker-based development environment for the Arrhes platform.
 **Applications:**
 - API (port 3000) - Hono backend
 - Dashboard (port 5173) - React admin interface
-- Website (port 5174) - React public site
 
 ## Usage
 
 ### Start all services
 ```bash
-# Create required volumes first
-docker volume create arrhes_postgres_data
-docker volume create arrhes_rustfs_data
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  up -d --build
+```
 
-# Start services
-docker compose -f .development/compose.yml up -d
+Or with [just](https://github.com/casey/just):
+```bash
+just dev-up
 ```
 
 ### View logs
@@ -73,7 +75,10 @@ docker compose -f .development/compose.yml logs -f api
 
 ### Stop services
 ```bash
-docker compose -f .development/compose.yml down
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  down
 ```
 
 ### Rebuild after changes
@@ -95,8 +100,7 @@ docker compose -f .development/compose.yml exec api bash
 Each service has its own `.env` file in `.development/packages/{service}/.env`:
 
 - **api/.env** - API configuration (database, storage, email)
-- **dashboard/.env** - Dashboard configuration (API URL)
-- **website/.env** - Website configuration (API URL)
+- **dashboard/.env** - Dashboard configuration (API URL, Vite variables)
 - **tools/.env** - Database tools configuration
 
 These files are bind-mounted into containers at runtime.
@@ -111,7 +115,7 @@ These files are bind-mounted into containers at runtime.
 2. **Runtime Phase:**
    - Source code bind-mounted from `../packages` to `/workspace/packages`
    - node_modules stored in named volumes (isolated per service)
-   - Entrypoint scripts install dependencies and start dev servers
+   - API entrypoint script runs: install -> build metadata -> migrate -> seed -> start
 
 3. **Development:**
    - Edit code on host with your IDE
@@ -132,22 +136,33 @@ lsof -i :3000
 ### Dependencies not updating
 ```bash
 # Remove volume and rebuild
-docker volume rm .dev_api_node_modules
+docker volume rm arrhes-application_api_node_modules
 docker compose -f .development/compose.yml up -d --build api
 ```
 
 ### Database reset
 ```bash
 # Remove database volume (WARNING: deletes all data)
-docker compose -f .development/compose.yml down
-docker volume rm arrhes_postgres_data
-docker volume create arrhes_postgres_data
-docker compose -f .development/compose.yml up -d
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  down
+docker volume rm arrhes-application_postgres_data
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  up -d --build
 ```
 
 ### Clean slate
 ```bash
-# Remove all containers, volumes (except external), and rebuild
-docker compose -f .development/compose.yml down -v
-docker compose -f .development/compose.yml up -d --build
+# Remove all containers, volumes, and rebuild
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  down -v
+docker compose --project-directory=".development" \
+  --file=".development/compose.yml" \
+  --project-name="arrhes-application" \
+  up -d --build
 ```
