@@ -1,4 +1,4 @@
-import { pbkdf2Sync, randomBytes } from "node:crypto"
+import { createHash, pbkdf2Sync, randomBytes } from "node:crypto"
 import {
     type DefaultAccount,
     defaultCompanyAccounts,
@@ -103,6 +103,20 @@ async function seed() {
             }
             await tx.insert(models.organizationUser).values(emptyOrganizationUser)
 
+            // Default API key for empty organization
+            const emptyOrgRawKey = randomBytes(32).toString("base64url")
+            const emptyOrgKeyHash = createHash("sha256").update(emptyOrgRawKey).digest("hex")
+            await tx.insert(models.apiKey).values({
+                id: generateId(),
+                idOrganization: emptyOrganization.id,
+                idUser: newUser.id,
+                keyHash: emptyOrgKeyHash,
+                name: "Clé par défaut",
+                isDefault: true,
+                isActive: true,
+                createdAt: createdAt,
+            })
+
             // ==========================================
             // ORGANIZATION 2: Fully populated organization
             // ==========================================
@@ -129,6 +143,20 @@ async function seed() {
                 createdAt: createdAt,
             }
             await tx.insert(models.organizationUser).values(populatedOrganizationUser)
+
+            // Default API key for populated organization
+            const populatedOrgRawKey = randomBytes(32).toString("base64url")
+            const populatedOrgKeyHash = createHash("sha256").update(populatedOrgRawKey).digest("hex")
+            await tx.insert(models.apiKey).values({
+                id: generateId(),
+                idOrganization: populatedOrganization.id,
+                idUser: newUser.id,
+                keyHash: populatedOrgKeyHash,
+                name: "Clé par défaut",
+                isDefault: true,
+                isActive: true,
+                createdAt: createdAt,
+            })
 
             // ==========================================
             // YEAR (for populated organization)
@@ -1212,6 +1240,7 @@ async function seed() {
             console.log("Seed completed successfully!")
             console.log(`- 1 user created`)
             console.log(`- 2 organizations created (1 empty, 1 populated)`)
+            console.log(`- 2 default API keys created`)
             console.log(`- 1 year created`)
             console.log(`- ${newJournals.length} journals created`)
             console.log(`- ${newBalanceSheets.length} balance sheets created`)

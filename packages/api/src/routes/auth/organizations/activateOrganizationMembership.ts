@@ -1,9 +1,11 @@
-import { activateOrganizationMembershipRouteDefinition, models } from "@arrhes/application-metadata"
+import { createHash, randomBytes } from "node:crypto"
+import { activateOrganizationMembershipRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 import { and, eq } from "drizzle-orm"
 import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../../utilities/apiFactory.js"
 import { response } from "../../../utilities/response.js"
+import { insertOne } from "../../../utilities/sql/insertOne.js"
 import { updateOne } from "../../../utilities/sql/updateOne.js"
 
 export const activateOrganizationMembershipRoute = apiFactory
@@ -24,6 +26,25 @@ export const activateOrganizationMembershipRoute = apiFactory
                 lastUpdatedBy: user.id,
             },
             where: (table) => and(eq(table.id, body.idOrganizationUser), eq(table.idUser, user.id)),
+        })
+
+        // Auto-create default API key for this user+org
+        const rawKey = randomBytes(32).toString("base64url")
+        const keyHash = createHash("sha256").update(rawKey).digest("hex")
+        const _createDefaultApiKey = await insertOne({
+            database: c.var.clients.sql,
+            table: models.apiKey,
+            data: {
+                id: generateId(),
+                idOrganization: activateOrganizationUser.idOrganization,
+                idUser: user.id,
+                keyHash: keyHash,
+                name: "Clé par défaut",
+                isDefault: true,
+                isActive: true,
+                createdAt: new Date().toISOString(),
+                lastUpdatedAt: null,
+            },
         })
 
         return response({

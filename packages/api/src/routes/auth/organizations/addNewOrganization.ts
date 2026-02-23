@@ -1,3 +1,4 @@
+import { createHash, randomBytes } from "node:crypto"
 import { addNewOrganizationRouteDefinition, generateId, models } from "@arrhes/application-metadata"
 import { checkUserSessionMiddleware } from "../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../middlewares/validateBody.middleware.js"
@@ -46,6 +47,25 @@ export const addNewOrganizationRoute = apiFactory
                     lastUpdatedAt: null,
                     createdBy: user.id,
                     lastUpdatedBy: null,
+                },
+            })
+
+            // Auto-create default API key
+            const rawKey = randomBytes(32).toString("base64url")
+            const keyHash = createHash("sha256").update(rawKey).digest("hex")
+            const _createDefaultApiKey = await insertOne({
+                database: tx,
+                table: models.apiKey,
+                data: {
+                    id: generateId(),
+                    idOrganization: createOneOrganization.id,
+                    idUser: user.id,
+                    keyHash: keyHash,
+                    name: "Clé par défaut",
+                    isDefault: true,
+                    isActive: true,
+                    createdAt: new Date().toISOString(),
+                    lastUpdatedAt: null,
                 },
             })
 

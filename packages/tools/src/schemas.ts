@@ -13,6 +13,7 @@ export {
     accountRelations,
     accountTypeEnum,
 } from "../../metadata/src/models/account.ts"
+export { apiKeyModel, apiKeyRelations } from "../../metadata/src/models/apiKey.ts"
 export { balanceSheetModel, balanceSheetRelations } from "../../metadata/src/models/balanceSheet.ts"
 export { computationModel, computationRelations } from "../../metadata/src/models/computation.ts"
 export {
