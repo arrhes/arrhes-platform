@@ -98,6 +98,12 @@ docker compose --project-directory=".development" --file=".development/compose.y
 
 > **Note :** `up -d --build` reconstruit les images Docker et réinstalle les dépendances (~1-2 min). `up -d` sans `--build` redémarre les containers existants sans réinstaller (~10s). Utilisez `--build` uniquement après avoir modifié un Dockerfile ou pour un premier lancement.
 
+> **Erreur `node_modules` au build :** Si vous avez exécuté `pnpm install` localement, les symlinks pnpm dans `node_modules` empêchent Docker de construire le contexte. Supprimez-les avant le build :
+> ```
+> rm -rf packages/*/node_modules
+> ```
+> `just dev-up` fait ce nettoyage automatiquement.
+
 ### Option 2 : Développement natif
 
 Prérequis : **Node.js** 25+, **pnpm** 10+, **PostgreSQL** 16+

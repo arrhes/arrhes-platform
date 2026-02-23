@@ -1,0 +1,30 @@
+# Dependencies (pnpm symlinks break Docker context on Windows)
+# ** prefix required: .dockerignore only matches root without it
+**/node_modules
+
+# Build outputs
+**/build
+**/styled-system
+
+# Git
+.git
+
+# Development environment (not needed in build context for dashboard)
+.development/packages/api
+.development/compose.yml
+.development/README.md
+
+# IDE and local config
+.vscode
+.cache
+.continue
+.old
+.env
+
+# Documentation
+docs
+*.md
+!packages/*/README.md
+
+# Production setup (not needed for dev builds)
+.production

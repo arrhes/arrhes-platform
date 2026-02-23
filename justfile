@@ -6,6 +6,8 @@ dev cmd:
     @just dev-{{cmd}}
 
 dev-up:
+    @# Remove local node_modules if present — pnpm symlinks break Docker context on Windows
+    rm -rf packages/*/node_modules 2>/dev/null || true
     docker compose --project-directory=".development" --file="{{COMPOSE_FILE}}" --project-name="{{PROJECT}}" up -d --build
     @echo ""
     @echo "=============================================="
