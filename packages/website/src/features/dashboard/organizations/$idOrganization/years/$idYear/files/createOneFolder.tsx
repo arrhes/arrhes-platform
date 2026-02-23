@@ -26,8 +26,9 @@ export function CreateOneFolder(props: {
     return (
         <Drawer.Root open={open} onOpenChange={setOpen}>
             <Button onClick={() => setOpen(true)}>
-                <ButtonOutlineContent leftIcon={<IconFolderPlus />}
-                //  text="Ajouter un dossier"
+                <ButtonOutlineContent
+                    leftIcon={<IconFolderPlus />}
+                    //  text="Ajouter un dossier"
                 />
             </Button>
             <Drawer.Content>

@@ -1,5 +1,5 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { ContextMenuContent as RadixContextMenuContent, ContextMenuPortal } from "@radix-ui/react-context-menu"
+import { ContextMenuPortal, ContextMenuContent as RadixContextMenuContent } from "@radix-ui/react-context-menu"
 import type { ComponentPropsWithRef } from "react"
 
 export function ContextMenuContent(props: ComponentPropsWithRef<typeof RadixContextMenuContent>) {

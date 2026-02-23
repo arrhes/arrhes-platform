@@ -1,7 +1,7 @@
 import { readAllFoldersRouteDefinition, updateOneFolderRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconPencil } from "@tabler/icons-react"
-import * as v from "valibot"
+import type * as v from "valibot"
 import { FormControl } from "../../../../../../../components/forms/formControl.js"
 import { FormError } from "../../../../../../../components/forms/formError.js"
 import { FormField } from "../../../../../../../components/forms/formField.js"

@@ -2,11 +2,7 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { InputDebounced } from "../inputs/inputDebounced.js"
 import { InputText } from "../inputs/inputText.js"
 
-export function SearchBar(props: {
-    value: string
-    onChange: (value: string) => void
-    placeholder?: string
-}) {
+export function SearchBar(props: { value: string; onChange: (value: string) => void; placeholder?: string }) {
     return (
         <div
             className={css({

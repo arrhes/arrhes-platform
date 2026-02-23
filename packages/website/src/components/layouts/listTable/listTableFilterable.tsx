@@ -3,7 +3,7 @@ import { type ReactElement, useMemo, useState } from "react"
 import { InputDebounced } from "../../inputs/inputDebounced.js"
 import { InputText } from "../../inputs/inputText.js"
 import { FilterPopover } from "../filterPopover.js"
-import { SortPopover, type SortDirection } from "../sortPopover.js"
+import { type SortDirection, SortPopover } from "../sortPopover.js"
 
 export type ListTableColumn<TItem> = {
     id: string

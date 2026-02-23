@@ -1,5 +1,5 @@
-import { CreateBucketCommand, HeadBucketCommand } from "@aws-sdk/client-s3"
 import type { S3 } from "@aws-sdk/client-s3"
+import { CreateBucketCommand, HeadBucketCommand } from "@aws-sdk/client-s3"
 
 /**
  * Ensures the storage bucket exists, creating it if necessary.
