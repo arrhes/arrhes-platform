@@ -17,7 +17,7 @@ export async function generatePutSignedUrl(parameters: {
 }) {
     try {
         const signedUrl = await getSignedUrl(
-            parameters.var.clients.storage,
+            parameters.var.clients.storagePublic,
             new PutObjectCommand({
                 ACL: "private",
                 Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
@@ -30,6 +30,7 @@ export async function generatePutSignedUrl(parameters: {
                 expiresIn: parameters.expiresIn ?? 60,
             },
         )
+
         return signedUrl
     } catch (error: unknown) {
         throw new Exception({

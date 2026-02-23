@@ -6,6 +6,7 @@ import {
     computationIncomeStatementSchemaReturn,
 } from "./computationIncomeStatement.js"
 import { fileSchema, fileSchemaReturn } from "./file.js"
+import { folderSchema, folderSchemaReturn } from "./folder.js"
 import { incomeStatementSchema, incomeStatementSchemaReturn } from "./incomeStatement.js"
 import { journalSchema, journalSchemaReturn } from "./journal.js"
 import { organizationSchema, organizationSchemaReturn } from "./organization.js"
@@ -21,6 +22,7 @@ import { yearSchema, yearSchemaReturn } from "./year.js"
 export const schemas = {
     account: accountSchema,
     file: fileSchema,
+    folder: folderSchema,
     balanceSheet: balanceSheetSchema,
     computation: computationSchema,
     computationIncomeStatement: computationIncomeStatementSchema,
@@ -40,6 +42,7 @@ export const schemas = {
 export const returnedSchemas = {
     account: accountSchemaReturn,
     file: fileSchemaReturn,
+    folder: folderSchemaReturn,
     balanceSheet: balanceSheetSchemaReturn,
     computation: computationSchemaReturn,
     computationIncomeStatement: computationIncomeStatementSchemaReturn,

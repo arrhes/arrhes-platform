@@ -2,6 +2,7 @@ import { createServer } from "node:http"
 import { api } from "./api.js"
 import { getClients } from "./utilities/getClients.js"
 import { getEnv } from "./utilities/getEnv.js"
+import { ensureStorageBucket } from "./utilities/storage/ensureStorageBucket.js"
 
 async function startServer() {
     process.on("uncaughtException", (error) => {
@@ -19,6 +20,9 @@ async function startServer() {
             // Get variables and clients
             const env = getEnv()
             const clients = await getClients(env)
+
+            // Ensure the storage bucket exists (creates it on first run)
+            await ensureStorageBucket(clients.storage, env.STORAGE_BUCKET_NAME)
 
             const app = await api({
                 env: env,

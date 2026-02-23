@@ -1,164 +1,150 @@
-import { fileSchema } from "@arrhes/application-metadata/components"
 import {
     createOneFileRouteDefinition,
     generateFilePutSignedUrlRouteDefinition,
     readAllFilesRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { IconPlus } from "@tabler/icons-react"
-import { type JSX, useState } from "react"
-import { Fragment } from "react/jsx-runtime"
+import { Button } from "@arrhes/ui"
+import { useRef } from "react"
+import type { JSX } from "react"
 import * as v from "valibot"
-import { FormControl } from "../../../../../../../components/forms/formControl.js"
-import { FormError } from "../../../../../../../components/forms/formError.js"
-import { FormField } from "../../../../../../../components/forms/formField.js"
-import { FormItem } from "../../../../../../../components/forms/formItem.js"
-import { FormLabel } from "../../../../../../../components/forms/formLabel.js"
-import { FormRoot } from "../../../../../../../components/forms/formRoot.js"
-import { InputFile } from "../../../../../../../components/inputs/inputFile.js"
-import { InputText } from "../../../../../../../components/inputs/inputText.js"
-import { Drawer } from "../../../../../../../components/overlays/drawer/drawer.js"
 import { toast } from "../../../../../../../contexts/toasts/useToast.js"
 import { getResponseBodyFromAPI } from "../../../../../../../utilities/getResponseBodyFromAPI.js"
 import { invalidateData } from "../../../../../../../utilities/invalidateData.js"
 
+const MAX_FILE_SIZE = 1024 * 1024 * 10 // 10 MB
+
+/**
+ * Derive a human-readable reference from a file name by stripping the extension.
+ */
+function referenceFromFileName(name: string): string {
+    const dotIndex = name.lastIndexOf(".")
+    return dotIndex > 0 ? name.slice(0, dotIndex) : name
+}
+
+async function uploadOneFile(params: {
+    idOrganization: string
+    idYear: string
+    idFolder?: string | null
+    file: File
+}): Promise<boolean> {
+    const { file, idOrganization, idYear, idFolder } = params
+
+    if (file.size > MAX_FILE_SIZE) {
+        toast({ title: `"${file.name}" dépasse la taille maximale de 10 Mo`, variant: "error" })
+        return false
+    }
+
+    // Step 1 — create the database record
+    const createResponse = await getResponseBodyFromAPI({
+        routeDefinition: createOneFileRouteDefinition,
+        body: {
+            idOrganization,
+            idYear,
+            idFolder: idFolder ?? undefined,
+            reference: referenceFromFileName(file.name),
+            name: file.name,
+        },
+    })
+    if (createResponse.ok === false) {
+        toast({ title: `Impossible de créer "${file.name}"`, variant: "error" })
+        return false
+    }
+
+    // Step 2 — obtain a pre-signed PUT URL and update storage metadata
+    const signedUrlResponse = await getResponseBodyFromAPI({
+        routeDefinition: generateFilePutSignedUrlRouteDefinition,
+        body: {
+            idOrganization,
+            idYear,
+            idFile: createResponse.data.id,
+            type: file.type,
+            size: file.size,
+        },
+    })
+    if (signedUrlResponse.ok === false) {
+        toast({ title: `Impossible de télécharger "${file.name}"`, variant: "error" })
+        return false
+    }
+
+    // Step 3 — upload the binary directly to object storage
+    const uploadResponse = await fetch(signedUrlResponse.data.url, {
+        method: "PUT",
+        body: file,
+    })
+    if (uploadResponse.ok === false) {
+        toast({ title: `Échec du téléchargement de "${file.name}"`, variant: "error" })
+        return false
+    }
+
+    return true
+}
+
 export function CreateOneFile(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
+    idFolder?: string | null
     children: JSX.Element
 }) {
-    const [open, setOpen] = useState(false)
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    async function handleFiles(files: FileList) {
+        const fileArray = Array.from(files)
+        if (fileArray.length === 0) return
+
+        const results = await Promise.all(
+            fileArray.map((file) =>
+                uploadOneFile({
+                    idOrganization: props.idOrganization,
+                    idYear: props.idYear,
+                    idFolder: props.idFolder,
+                    file,
+                }),
+            ),
+        )
+
+        const succeeded = results.filter(Boolean).length
+        const failed = results.length - succeeded
+
+        if (succeeded > 0) {
+            await invalidateData({
+                routeDefinition: readAllFilesRouteDefinition,
+                body: {
+                    idOrganization: props.idOrganization,
+                    idYear: props.idYear,
+                },
+            })
+        }
+
+        if (failed === 0) {
+            toast({
+                title: succeeded === 1 ? "Fichier ajouté avec succès" : `${succeeded} fichiers ajoutés avec succès`,
+                variant: "success",
+            })
+        } else {
+            toast({
+                title: `${succeeded} fichier(s) ajouté(s), ${failed} en erreur`,
+                variant: "error",
+            })
+        }
+    }
 
     return (
-        <Drawer.Root open={open} onOpenChange={setOpen}>
-            <Drawer.Trigger>{props.children}</Drawer.Trigger>
-            <Drawer.Content>
-                <Drawer.Header title="Ajouter un nouveau fichier" />
-                <Drawer.Body>
-                    <FormRoot
-                        schema={v.intersect([
-                            createOneFileRouteDefinition.schemas.body,
-                            v.object({ file: v.optional(fileSchema) }),
-                        ])}
-                        defaultValues={{
-                            idOrganization: props.idOrganization,
-                            idYear: props.idYear,
-                        }}
-                        submitButtonProps={{
-                            leftIcon: <IconPlus />,
-                            text: "Ajouter le fichier",
-                        }}
-                        onSubmit={async (data) => {
-                            const createFileResponse = await getResponseBodyFromAPI({
-                                routeDefinition: createOneFileRouteDefinition,
-                                body: {
-                                    idOrganization: data.idOrganization,
-                                    idYear: data.idYear,
-                                    reference: data.reference,
-                                    name: data.name,
-                                },
-                            })
-                            if (createFileResponse.ok === false) {
-                                toast({ title: "Impossible d'ajouter le fichier", variant: "error" })
-                                return false
-                            }
-
-                            if (data.file !== undefined) {
-                                const signedUrlResponse = await getResponseBodyFromAPI({
-                                    routeDefinition: generateFilePutSignedUrlRouteDefinition,
-                                    body: {
-                                        idOrganization: props.idOrganization,
-                                        idYear: props.idYear,
-                                        idFile: createFileResponse.data.id,
-                                        type: data.file.type,
-                                        size: data.file.size,
-                                    },
-                                })
-                                if (signedUrlResponse.ok === false) {
-                                    toast({ title: "Impossible de télécharger le fichier", variant: "error" })
-                                    return false
-                                }
-                                const uploadFileResponse = await fetch(signedUrlResponse.data.url, {
-                                    method: "PUT",
-                                    body: data.file,
-                                })
-                                if (uploadFileResponse.ok === false) {
-                                    toast({ title: "Le fichier ne peut pas être téléchargé", variant: "error" })
-                                    return false
-                                }
-                            }
-
-                            toast({ title: "Fichier ajouté avec succès", variant: "success" })
-                            return true
-                        }}
-                        onCancel={undefined}
-                        onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllFilesRouteDefinition,
-                                body: {
-                                    idOrganization: props.idOrganization,
-                                    idYear: props.idYear,
-                                },
-                            })
-
-                            setOpen(false)
-                        }}
-                    >
-                        {(form) => (
-                            <Fragment>
-                                <FormField
-                                    control={form.control}
-                                    name="file"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel label="Fichier" isRequired />
-                                            <FormControl>
-                                                <InputFile value={field.value} onChange={field.onChange} />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="reference"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Référence"
-                                                // tooltip="La référence associée au fichier."
-                                                isRequired
-                                            />
-                                            <FormControl>
-                                                <InputText value={field.value} onChange={field.onChange} autoFocus />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="name"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel
-                                                label="Nom du fichier"
-                                                isRequired={false}
-                                                description={undefined}
-                                                tooltip={undefined}
-                                            />
-                                            <FormControl>
-                                                <InputText value={field.value} onChange={field.onChange} />
-                                            </FormControl>
-                                            <FormError />
-                                        </FormItem>
-                                    )}
-                                />
-                            </Fragment>
-                        )}
-                    </FormRoot>
-                </Drawer.Body>
-            </Drawer.Content>
-        </Drawer.Root>
+        <>
+            <input
+                ref={inputRef}
+                type="file"
+                multiple
+                style={{ display: "none" }}
+                onChange={(event) => {
+                    if (event.target.files && event.target.files.length > 0) {
+                        handleFiles(event.target.files)
+                    }
+                    // Reset so selecting the same file(s) again still triggers onChange
+                    event.target.value = ""
+                }}
+            />
+            <Button onClick={() => inputRef.current?.click()}>{props.children}</Button>
+        </>
     )
 }

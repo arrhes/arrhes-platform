@@ -15,7 +15,7 @@ export async function generateGetSignedUrl(parameters: {
 }) {
     try {
         const signedUrl = await getSignedUrl(
-            parameters.var.clients.storage,
+            parameters.var.clients.storagePublic,
             new GetObjectCommand({
                 Bucket: parameters.var.env.STORAGE_BUCKET_NAME,
                 Key: parameters.storageKey,
@@ -26,6 +26,7 @@ export async function generateGetSignedUrl(parameters: {
                 signingDate: new Date(),
             },
         )
+
         return signedUrl
     } catch (error: unknown) {
         throw new Exception({

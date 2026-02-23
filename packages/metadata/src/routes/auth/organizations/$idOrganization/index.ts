@@ -18,6 +18,12 @@ export { readOneFileRouteDefinition } from "./years/$idYear/files/$idFile/readOn
 export { updateOneFileRouteDefinition } from "./years/$idYear/files/$idFile/updateOneFile.js"
 export { createOneFileRouteDefinition } from "./years/$idYear/files/createOneFile.js"
 export { readAllFilesRouteDefinition } from "./years/$idYear/files/readAllFiles.js"
+// folders
+export { deleteOneFolderRouteDefinition } from "./years/$idYear/folders/$idFolder/deleteOneFolder.js"
+export { readOneFolderRouteDefinition } from "./years/$idYear/folders/$idFolder/readOneFolder.js"
+export { updateOneFolderRouteDefinition } from "./years/$idYear/folders/$idFolder/updateOneFolder.js"
+export { createOneFolderRouteDefinition } from "./years/$idYear/folders/createOneFolder.js"
+export { readAllFoldersRouteDefinition } from "./years/$idYear/folders/readAllFolders.js"
 // year
 export { readOneYearRouteDefinition } from "./years/$idYear/readOneYear.js"
 export { computeOneRecordRouteDefinition } from "./years/$idYear/records/$idRecord/computeOneRecord.js"

@@ -13,6 +13,7 @@ export const updateOneFileRouteDefinition = routeDefinition({
             idYear: fileSchema.entries.idYear,
             reference: v.optional(fileSchema.entries.reference),
             name: v.optional(fileSchema.entries.name),
+            idFolder: v.optional(fileSchema.entries.idFolder),
         }),
         return: fileSchemaReturn,
     },

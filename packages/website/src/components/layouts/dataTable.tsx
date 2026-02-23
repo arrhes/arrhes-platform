@@ -22,10 +22,9 @@ import {
 } from "@tanstack/react-table"
 import { Fragment, type ReactElement, useMemo, useState } from "react"
 import { FormatNull } from "../formats/formatNull.js"
-import { InputDebounced } from "../inputs/inputDebounced.js"
-import { InputText } from "../inputs/inputText.js"
-import { TableFilterPopover } from "./table/tableFilterPopover.js"
-import { TableSortPopover } from "./table/tableSortPopover.js"
+import { type FilterColumn, FilterPopover } from "./filterPopover.js"
+import { SearchBar } from "./searchBar.js"
+import { type SortDirection, SortPopover } from "./sortPopover.js"
 
 export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     data: Array<TData>
@@ -34,6 +33,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
     pageSize?: number
     onRowClick?: (context: Row<TData>) => void
     renderSubComponent?: (context: { row: Row<TData> }) => ReactElement | null
+    hideSearchBar?: boolean
 }) {
     const memoizedData = useMemo(() => props.data, [props.data])
     const [globalFilter, setGlobalFilter] = useState("")
@@ -82,34 +82,89 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 gap: "1rem",
             })}
         >
-            <div
-                className={css({
-                    flexShrink: "0",
-                    width: "100%",
-                    height: "fit",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    gap: "1rem",
-                })}
-            >
+            {!props.hideSearchBar && (
                 <div
                     className={css({
                         width: "100%",
                         display: "flex",
                         justifyContent: "start",
                         alignItems: "center",
-                        gap: "0.5rem",
-                        flexWrap: "wrap",
+                        gap: "0.25rem",
+                        fontSize: "sm",
+                        color: "neutral/60",
                     })}
                 >
-                    <InputDebounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value)}>
-                        <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
-                    </InputDebounced>
-                    <TableFilterPopover table={table} />
-                    <TableSortPopover table={table} />
+                    <SearchBar value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value)} />
+                    {(() => {
+                        const filterableColumns: Array<FilterColumn> = table
+                            .getAllColumns()
+                            .filter((col) => col.getCanFilter() && col.columnDef.header && col.columnDef.header !== " ")
+                            .map((col) => ({ id: col.id, header: col.columnDef.header?.toString() ?? "" }))
+
+                        if (filterableColumns.length === 0) return null
+
+                        const filterRecord: Record<string, string> = {}
+                        for (const col of table.getAllColumns()) {
+                            const val = col.getFilterValue()
+                            if (val !== undefined) filterRecord[col.id] = String(val)
+                        }
+
+                        return (
+                            <FilterPopover
+                                columns={filterableColumns}
+                                columnFilters={filterRecord}
+                                onFilterChange={(columnId, value) => {
+                                    table.getColumn(columnId)?.setFilterValue(value)
+                                }}
+                                onClearAll={() => {
+                                    for (const col of table.getAllColumns()) {
+                                        col.setFilterValue(undefined)
+                                    }
+                                }}
+                            />
+                        )
+                    })()}
+                    {(() => {
+                        const sortableColumns = table
+                            .getAllColumns()
+                            .filter((col) => col.getCanSort() && col.columnDef.header && col.columnDef.header !== " ")
+                            .map((col) => ({ id: col.id, header: col.columnDef.header?.toString() ?? "" }))
+
+                        if (sortableColumns.length === 0) return null
+
+                        const currentSorting = table.getState().sorting
+
+                        function getSortDirection(columnId: string): SortDirection {
+                            const existing = currentSorting.find((s) => s.id === columnId)
+                            if (!existing) return false
+                            return existing.desc ? "desc" : "asc"
+                        }
+
+                        function toggleSort(columnId: string) {
+                            const existing = currentSorting.find((s) => s.id === columnId)
+                            if (!existing) {
+                                table.setSorting([...currentSorting, { id: columnId, desc: false }])
+                            } else if (!existing.desc) {
+                                table.setSorting(
+                                    currentSorting.map((s) => (s.id === columnId ? { ...s, desc: true } : s)),
+                                )
+                            } else {
+                                table.setSorting(currentSorting.filter((s) => s.id !== columnId))
+                            }
+                        }
+
+                        return (
+                            <SortPopover
+                                columns={sortableColumns}
+                                getSortDirection={getSortDirection}
+                                onToggleSort={toggleSort}
+                                onClearAll={() => table.setSorting([])}
+                                activeSortCount={currentSorting.length}
+                            />
+                        )
+                    })()}
                 </div>
-            </div>
+            )}
             <div
                 className={css({
                     width: "100%",
@@ -217,13 +272,13 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                             !props.onRowClick
                                                 ? undefined
                                                 : css({
-                                                      cursor: "pointer",
-                                                      _hover: { backgroundColor: "neutral/5" },
-                                                  }),
+                                                    cursor: "pointer",
+                                                    _hover: { backgroundColor: "neutral/5" },
+                                                }),
                                             row.getIsExpanded()
                                                 ? css({
-                                                      borderBottomColor: "neutral/10",
-                                                  })
+                                                    borderBottomColor: "neutral/10",
+                                                })
                                                 : undefined,
                                         )}
                                     >

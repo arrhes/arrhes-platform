@@ -22,6 +22,7 @@ const envSchema = v.object({
     SQL_DATABASE_URL: v.string(),
 
     STORAGE_ENDPOINT: v.string(),
+    STORAGE_PUBLIC_ENDPOINT: v.string(),
     STORAGE_BUCKET_NAME: v.string(),
     STORAGE_ACCESS_KEY: v.string(),
     STORAGE_SECRET_KEY: v.string(),

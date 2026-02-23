@@ -19,6 +19,7 @@ export const updateOneFileRoute = apiFactory.createApp().post(updateOneFileRoute
         data: {
             reference: body.reference,
             name: body.name,
+            idFolder: body.idFolder,
             lastUpdatedAt: new Date().toISOString(),
             lastUpdatedBy: user.id,
         },

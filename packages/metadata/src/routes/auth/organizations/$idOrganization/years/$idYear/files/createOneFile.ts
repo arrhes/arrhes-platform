@@ -10,6 +10,7 @@ export const createOneFileRouteDefinition = routeDefinition({
         body: v.object({
             idOrganization: fileSchema.entries.idOrganization,
             idYear: fileSchema.entries.idYear,
+            idFolder: v.optional(fileSchema.entries.idFolder),
             reference: fileSchema.entries.reference,
             name: v.optional(fileSchema.entries.name),
         }),

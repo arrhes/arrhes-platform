@@ -12,7 +12,7 @@ export async function invalidateData<
     body: v.InferOutput<TSchemaBody>
     exact?: boolean
 }) {
-    dataClient.invalidateQueries({
+    await dataClient.invalidateQueries({
         queryKey: [parameters.routeDefinition.path, parameters.body],
         exact: parameters.exact ?? true,
     })

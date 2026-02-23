@@ -21,6 +21,7 @@
 - **Imports**: all use relative paths with `.ts`/`.tsx` extensions (website) or `.js` extensions (api, metadata). Cross-package via `@arrhes/*`. No path aliases are used in practice. Order: workspace packages → external deps → relative internal.
 - **Files**: all `camelCase.ts[x]` (including components). Barrel files are `_index.ts`.
 - **Exports**: components `PascalCase` functions, models/schemas/utilities `camelCase`. Models use `Model` suffix (`accountModel`), schemas have no suffix.
+- **Components**: one exported React component per file. Private helper functions are fine in the same file, but not other components.
 - **Validation**: `import * as v from "valibot"` — use `v.object()`, `v.string()`, `v.InferOutput<>`.
 - **Styling**: Panda CSS via `css()` and `cx()` from `@arrhes/ui/utilities/cn.js`.
 - **IDs**: nanoid with custom alphabet, 16 chars.

@@ -2,8 +2,8 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { type ReactElement, useMemo, useState } from "react"
 import { InputDebounced } from "../../inputs/inputDebounced.js"
 import { InputText } from "../../inputs/inputText.js"
-import { ListTableFilterPopover } from "./listTableFilterPopover.js"
-import { ListTableSortPopover, type SortDirection } from "./listTableSortPopover.js"
+import { FilterPopover } from "../filterPopover.js"
+import { SortPopover, type SortDirection } from "../sortPopover.js"
 
 export type ListTableColumn<TItem> = {
     id: string
@@ -120,13 +120,13 @@ export function ListTableFilterable<TItem>(props: {
                 <InputDebounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value)}>
                     <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
                 </InputDebounced>
-                <ListTableFilterPopover
+                <FilterPopover
                     columns={props.columns}
                     columnFilters={columnFilters}
                     onFilterChange={setColumnFilter}
                     onClearAll={clearAllFilters}
                 />
-                <ListTableSortPopover
+                <SortPopover
                     columns={props.columns}
                     getSortDirection={getSortDirection}
                     onToggleSort={toggleSort}

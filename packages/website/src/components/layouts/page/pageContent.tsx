@@ -1,10 +1,7 @@
 import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import type { ComponentProps, ReactElement } from "react"
+import type { ComponentProps, ReactNode } from "react"
 
-export function PageContent(props: {
-    className?: ComponentProps<"div">["className"]
-    children: ReactElement | ReactElement[]
-}) {
+export function PageContent(props: { className?: ComponentProps<"div">["className"]; children: ReactNode }) {
     return (
         <div
             className={cx(

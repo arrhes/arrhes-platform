@@ -1,11 +1,10 @@
 import {
-    cancelSubscriptionRouteDefinition,
     createFirstPaymentRouteDefinition,
     readOrganizationSubscriptionRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import { Button, ButtonOutlineContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconCreditCard, IconX } from "@tabler/icons-react"
+import { IconCreditCard } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { useState } from "react"
 import { FormatDateTime } from "../../../../../components/formats/formatDateTime.tsx"
@@ -14,11 +13,10 @@ import { Chip } from "../../../../../components/layouts/chip.tsx"
 import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
 import { Page } from "../../../../../components/layouts/page/page.tsx"
 import { SettingsSection } from "../../../../../components/layouts/settingsSection/settingsSection.tsx"
-import { DeleteConfirmation } from "../../../../../components/overlays/dialog/deleteConfirmation.tsx"
 import { toast } from "../../../../../contexts/toasts/useToast.ts"
 import { organizationSubscriptionRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSubscription/organizationSubscriptionRoute.tsx"
 import { getResponseBodyFromAPI } from "../../../../../utilities/getResponseBodyFromAPI.ts"
-import { invalidateData } from "../../../../../utilities/invalidateData.ts"
+import { CancelSubscription } from "./cancelSubscription.js"
 
 const MONTHLY_PRICE_CENTS = 3000
 
@@ -146,50 +144,5 @@ export function OrganizationSubscriptionPage() {
                 </DataWrapper>
             </Page.Content>
         </Page.Root>
-    )
-}
-
-function CancelSubscription(props: { idOrganization: string }) {
-    return (
-        <DeleteConfirmation
-            title="Voulez-vous annuler votre abonnement ?"
-            description={
-                <>
-                    Votre accès Premium sera maintenu jusqu'à la fin de la période en cours.
-                    <br />
-                    Aucun nouveau paiement ne sera prélevé.
-                    <br />
-                    Vous pourrez vous réabonner à tout moment.
-                </>
-            }
-            submitText="Annuler l'abonnement"
-            onSubmit={async () => {
-                const response = await getResponseBodyFromAPI({
-                    routeDefinition: cancelSubscriptionRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
-                })
-
-                if (response.ok === false) {
-                    toast({
-                        title: "Erreur lors de l'annulation de l'abonnement",
-                        variant: "error",
-                    })
-                    return
-                }
-
-                await invalidateData({
-                    routeDefinition: readOrganizationSubscriptionRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
-                })
-
-                toast({ title: "Abonnement annulé", variant: "success" })
-            }}
-        >
-            <ButtonOutlineContent leftIcon={<IconX />} text="Annuler l'abonnement" color="danger" />
-        </DeleteConfirmation>
     )
 }

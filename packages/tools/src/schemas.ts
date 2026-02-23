@@ -21,6 +21,7 @@ export {
 } from "../../metadata/src/models/computationIncomeStatement.ts"
 export { documentModel, documentRelations, documentTypeEnum } from "../../metadata/src/models/document.ts"
 export { fileModel } from "../../metadata/src/models/file.ts"
+export { folderModel } from "../../metadata/src/models/folder.ts"
 export { incomeStatementModel, incomeStatementRelations } from "../../metadata/src/models/incomeStatement.ts"
 export { journalModel, journalRelations } from "../../metadata/src/models/journal.ts"
 export { organizationModel, organizationRelations } from "../../metadata/src/models/organization.ts"

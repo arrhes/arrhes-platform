@@ -9,9 +9,14 @@ export function DeleteConfirmation(props: {
     description: string | JSX.Element
     submitText: string
     onSubmit: () => Promise<void>
-    children: ReactElement<ComponentPropsWithRef<"div">>
+    children?: ReactElement<ComponentPropsWithRef<"div">>
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 }) {
-    const [open, setOpen] = useState(false)
+    const [internalOpen, setInternalOpen] = useState(false)
+    const isControlled = props.open !== undefined
+    const open = isControlled ? props.open : internalOpen
+    const setOpen = isControlled ? (props.onOpenChange ?? (() => {})) : setInternalOpen
 
     async function handleSubmit() {
         await props.onSubmit()
@@ -20,14 +25,16 @@ export function DeleteConfirmation(props: {
 
     return (
         <Dialog.Root open={open} onOpenChange={(value) => setOpen(value)}>
-            <Dialog.Trigger
-                onClick={(event) => {
-                    setOpen(true)
-                    event.preventDefault()
-                }}
-            >
-                {props.children}
-            </Dialog.Trigger>
+            {props.children && (
+                <Dialog.Trigger
+                    onClick={(event) => {
+                        setOpen(true)
+                        event.preventDefault()
+                    }}
+                >
+                    {props.children}
+                </Dialog.Trigger>
+            )}
             {open === false ? null : (
                 <Dialog.Content>
                     <Dialog.Header>
