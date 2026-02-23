@@ -9,7 +9,7 @@ import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 
 export const generateJournalsRoute = apiFactory.createApp().post(generateJournalsRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: generateJournalsRouteDefinition.schemas.body,

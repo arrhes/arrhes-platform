@@ -10,8 +10,8 @@ export function SubPageLayout(props: {
     sections: Record<
         string,
         {
-            title: string
-            icon: ReactElement<IconProps & React.RefAttributes<Icon>>
+            title?: string
+            icon?: ReactElement<IconProps & React.RefAttributes<Icon>>
             items: Array<{
                 label: string
                 to: ValidRoutes
@@ -74,34 +74,39 @@ export function SubPageLayout(props: {
                     >
                         {Object.entries(props.sections).map(([key, section]) => (
                             <div key={key} className={css({ marginBottom: "0.5rem" })}>
-                                <div
-                                    className={css({
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        alignItems: "center",
-                                        gap: "0.5rem",
-                                        padding: "0.5rem",
-                                    })}
-                                >
-                                    {cloneElement(section.icon, {
-                                        size: 14,
-                                        className: css({
-                                            stroke: "neutral/40",
-                                        }),
-                                    })}
-                                    <span
+                                {(section.title || section.icon) && (
+                                    <div
                                         className={css({
-                                            fontSize: "xs",
-                                            lineHeight: "none",
-                                            fontWeight: "300",
-                                            color: "neutral/50",
-                                            textTransform: "uppercase",
-                                            letterSpacing: "wider",
+                                            display: "flex",
+                                            justifyContent: "start",
+                                            alignItems: "center",
+                                            gap: "0.5rem",
+                                            padding: "0.5rem",
                                         })}
                                     >
-                                        {section.title}
-                                    </span>
-                                </div>
+                                        {section.icon &&
+                                            cloneElement(section.icon, {
+                                                size: 14,
+                                                className: css({
+                                                    stroke: "neutral/40",
+                                                }),
+                                            })}
+                                        {section.title && (
+                                            <span
+                                                className={css({
+                                                    fontSize: "xs",
+                                                    lineHeight: "none",
+                                                    fontWeight: "300",
+                                                    color: "neutral/50",
+                                                    textTransform: "uppercase",
+                                                    letterSpacing: "wider",
+                                                })}
+                                            >
+                                                {section.title}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                                 <div
                                     className={css({
                                         marginTop: "0.25rem",

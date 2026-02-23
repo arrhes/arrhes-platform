@@ -17,7 +17,7 @@ import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 export const generateComputationsRoute = apiFactory
     .createApp()
     .post(generateComputationsRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateComputationsRouteDefinition.schemas.body,

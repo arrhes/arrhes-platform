@@ -9,7 +9,7 @@ import { deleteOne } from "../../../../../../../../../utilities/sql/deleteOne.js
 export const deleteOneComputationRoute = apiFactory
     .createApp()
     .post(deleteOneComputationRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: deleteOneComputationRouteDefinition.schemas.body,

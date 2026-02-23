@@ -9,7 +9,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { deleteObject } from "../../../../../../../../utilities/storage/deleteObject.js"
 
 export const deleteOneFileRoute = apiFactory.createApp().post(deleteOneFileRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: deleteOneFileRouteDefinition.schemas.body,

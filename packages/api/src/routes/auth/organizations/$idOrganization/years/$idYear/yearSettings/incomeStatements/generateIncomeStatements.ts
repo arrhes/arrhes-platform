@@ -20,7 +20,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 export const generateIncomeStatementsRoute = apiFactory
     .createApp()
     .post(generateIncomeStatementsRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateIncomeStatementsRouteDefinition.schemas.body,

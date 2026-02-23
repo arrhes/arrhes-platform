@@ -9,7 +9,7 @@ import { selectMany } from "../../../../../../../../../../utilities/sql/selectMa
 export const readAllComputationIncomeStatementsRoute = apiFactory
     .createApp()
     .post(readAllComputationIncomeStatementsRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readAllComputationIncomeStatementsRouteDefinition.schemas.body,

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 
 export const readOneDocumentRoute = apiFactory.createApp().post(readOneDocumentRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readOneDocumentRouteDefinition.schemas.body,

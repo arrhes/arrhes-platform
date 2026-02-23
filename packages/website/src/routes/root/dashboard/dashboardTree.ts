@@ -4,11 +4,12 @@ import { dashboardRootRoute } from "./dashboardRootRoute.tsx"
 import { organizationLayoutRoute } from "./organizations/$idOrganization/organizationLayoutRoute.tsx"
 import { organizationPathRoute } from "./organizations/$idOrganization/organizationPathRoute.tsx"
 import { organizationRoute } from "./organizations/$idOrganization/organizationRoute.tsx"
+import { organizationSecurityRoute } from "./organizations/$idOrganization/organizationSettings/organizationSecurityRoute.tsx"
 import { organizationSettingsLayoutRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute.tsx"
 import { organizationSettingsRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsRoute.tsx"
-import { organizationSubscriptionHistoryRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionHistoryRoute.tsx"
-import { organizationSubscriptionLayoutRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionLayoutRoute.tsx"
-import { organizationSubscriptionRoute } from "./organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionRoute.tsx"
+import { organizationSubscriptionHistoryRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionHistoryRoute.tsx"
+import { organizationSubscriptionLayoutRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionLayoutRoute.tsx"
+import { organizationSubscriptionRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionRoute.tsx"
 import { organizationUsersLayoutRoute } from "./organizations/$idOrganization/organizationUsers/organizationUsersLayoutRoute.tsx"
 import { organizationUsersRoute } from "./organizations/$idOrganization/organizationUsers/organizationUsersRoute.tsx"
 import { fileLayoutRoute } from "./organizations/$idOrganization/years/$idYear/files/$idFile/fileLayoutRoute.tsx"
@@ -77,13 +78,11 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                 organizationRoute,
                 yearsLayoutRoute.addChildren([yearsRoute]),
                 organizationUsersLayoutRoute.addChildren([organizationUsersRoute]),
-                organizationSettingsLayoutRoute.addChildren([
-                    organizationSettingsRoute,
-                    organizationSubscriptionLayoutRoute.addChildren([
-                        organizationSubscriptionRoute,
-                        organizationSubscriptionHistoryRoute,
-                    ]),
+                organizationSubscriptionLayoutRoute.addChildren([
+                    organizationSubscriptionRoute,
+                    organizationSubscriptionHistoryRoute,
                 ]),
+                organizationSettingsLayoutRoute.addChildren([organizationSettingsRoute, organizationSecurityRoute]),
             ]),
             yearsPathRoute.addChildren([
                 yearPathRoute.addChildren([

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 export const settleIncomeStatementRoute = apiFactory
     .createApp()
     .post(settleIncomeStatementRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const _body = await validateBodyMiddleware({
             context: c,
             schema: settleIncomeStatementRouteDefinition.schemas.body,

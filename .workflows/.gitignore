@@ -9,9 +9,8 @@
 !*
 
 # Track only these specific patterns:
-# - .env files (development environment variables)
 # - Dockerfiles (service image definitions)
-# - entrypoint.sh scripts (container startup scripts)
+# - Shell scripts (container startup/setup scripts)
 # - compose.yml (docker compose configuration)
 # - .dockerignore (build context exclusions)
 # - .gitignore (this file)

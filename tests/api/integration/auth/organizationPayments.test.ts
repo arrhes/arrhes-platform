@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from "vitest"
 import { type AuthSession, authenticatedRequest, getDemoOrganizationId, signInAsDemo } from "../../helpers/auth.js"
 import { verifyApiIsRunning } from "../../helpers/setup.js"
-import { apiRequest } from "../../helpers/testClient.js"
+import { apiRequest, mollieWebhookRequest } from "../../helpers/testClient.js"
 
 let session: AuthSession
 let idOrganization: string
@@ -134,11 +134,8 @@ describe("POST /auth/cancel-subscription", () => {
 
 describe("POST /public/mollie-webhook", () => {
     it("returns 200 even for an unknown payment id", async () => {
-        // Mollie webhooks always get a 200 response
-        const response = await apiRequest({
-            path: "/public/mollie-webhook",
-            body: { id: "tr_unknown_test" },
-        })
+        // Mollie sends webhooks as application/x-www-form-urlencoded
+        const response = await mollieWebhookRequest("tr_unknown_test")
         expect(response.status).toBe(200)
     })
 
@@ -147,6 +144,6 @@ describe("POST /public/mollie-webhook", () => {
             path: "/public/mollie-webhook",
             body: {},
         })
-        expect(response.status).toBe(400)
+        expect(response.status).toBe(200)
     })
 })

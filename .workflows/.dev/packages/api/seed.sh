@@ -6,7 +6,7 @@
 # ==============================================================================
 set -e
 
-echo "🌱 Seeding demo data..."
+echo "Seeding demo data..."
 cd /workspace/packages/tools
 pnpm run seed || echo "Seeding skipped (data may already exist)"
-echo "✓ Seeding complete"
+echo "Seeding complete."

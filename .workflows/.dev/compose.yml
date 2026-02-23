@@ -4,10 +4,10 @@
 # Docker Compose configuration for local development
 #
 # Architecture:
-# - Source code: bind-mounted from host (live editing on both host and container)
-# - Runtime files: isolated in Docker volumes (node_modules, build outputs)
+# - Full workspace: bind-mounted from host (including node_modules)
+# - Dependencies must be installed on the host (`pnpm install`)
 # - Infrastructure: PostgreSQL, RustFS (S3), Mailpit (SMTP)
-# - Services: API, Dashboard, Website
+# - Services: API, Website
 #
 # Usage:
 #   docker compose -f .workflows/.dev/compose.yml up -d     # Start all services
@@ -90,24 +90,31 @@ services:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"
     ports:
-      - "3000:3000"  # API server
+      - "3000:3000"
     volumes:
-      # Source code - bind-mounted for live editing (synced between host and container)
-      - ../../packages:/workspace/packages:cached
-      - ../../package.json:/workspace/package.json:cached
-      - ../../pnpm-workspace.yaml:/workspace/pnpm-workspace.yaml:cached
-      # NOTE: pnpm-lock.yaml is mounted read-only to a staging path to avoid EBUSY
-      # errors from atomic renames. The install script copies it into /workspace/.
-      - ../../pnpm-lock.yaml:/workspace/.pnpm-lock-host.yaml:ro
-      - ../../.workflows/.dev:/workspace/.workflows/.dev:cached
-      
-      # Environment files - use .dev versions
-      - ./packages/api/.env:/workspace/packages/api/.env:cached
-      - ./packages/tools/.env:/workspace/packages/tools/.env:cached
-      
-      # Runtime files - isolated in Docker volumes (NOT on host)
-      - api_node_modules:/workspace/node_modules
-      - pnpm_store:/root/.local/share/pnpm/store
+      - ../..:/workspace:cached
+    environment:
+      # API environment (packages/api)
+      ENV: development
+      VERBOSE: "true"
+      PORT: "3000"
+      CORS_ORIGIN: http://localhost:5173
+      COOKIES_DOMAIN: localhost
+      COOKIES_KEY: development-secret-key-change-in-production-min-32-chars
+      API_BASE_URL: http://localhost:3000
+      APPLICATION_BASE_URL: http://localhost:5173
+      WEBSITE_BASE_URL: http://localhost:5173
+      SQL_DATABASE_URL: postgres://postgres:admin@postgres:5432/default
+      STORAGE_ENDPOINT: http://rustfs:9000
+      STORAGE_BUCKET_NAME: arrhes-files
+      STORAGE_ACCESS_KEY: rustfsadmin
+      STORAGE_SECRET_KEY: rustfsadmin
+      EMAIL_ENDPOINT: mailpit:1025
+      EMAIL_USER: test
+      EMAIL_PASSWORD: test
+      MOLLIE_API_KEY: test_z8gjjnezmRNx7dretKbEr5vcCfADh9
+      # Tools environment (packages/tools) - used by migrate/seed
+      NODE_ENV: development
     depends_on:
       postgres:
         condition: service_healthy
@@ -127,32 +134,20 @@ services:
         NODE_VERSION: "25.2.1"
         PNPM_VERSION: "10.26.1"
     ports:
-      - "5173:5173"  # Vite dev server
+      - "5173:5173"
     volumes:
-      # Source code only - bind-mounted for live editing
-      # node_modules stay inside the image (installed at build time)
-      - ../../packages/website/src:/workspace/packages/website/src:cached
-      - ../../packages/website/public:/workspace/packages/website/public:cached
-      - ../../packages/website/vite.config.ts:/workspace/packages/website/vite.config.ts:cached
-      - ../../packages/website/tsconfig.json:/workspace/packages/website/tsconfig.json:cached
-      - ../../packages/website/panda.config.ts:/workspace/packages/website/panda.config.ts:cached
-      # Shared UI package for live editing
-      - ../../packages/ui/src:/workspace/packages/ui/src:cached
-      - ../../packages/ui/tsconfig.json:/workspace/packages/ui/tsconfig.json:cached
-      - ../../packages/ui/panda.config.ts:/workspace/packages/ui/panda.config.ts:cached
-      # Shared metadata package for live editing
-      - ../../packages/metadata/src:/workspace/packages/metadata/src:cached
+      - ../..:/workspace:cached
+    environment:
+      # Vite reads VITE_* from .env files, not process.env.
+      # The entrypoint writes these to packages/website/.env at startup.
+      VITE_ENV: development
+      VITE_API_BASE_URL: http://localhost:3000
+      VITE_DASHBOARD_BASE_URL: http://localhost:5173
+      VITE_WEBSITE_BASE_URL: http://localhost:5173
 
 # ==============================================================================
-# Named Volumes (Runtime data isolated from host)
+# Named Volumes (Persistent infrastructure data)
 # ==============================================================================
 volumes:
-  # Application runtime dependencies - isolated per service
-  api_node_modules:
-  
-  # PNPM global store cache - shared across all Node services for efficiency
-  pnpm_store:
-  
-  # Persistent infrastructure data - survives container restarts
   postgres_data:
   rustfs_data:

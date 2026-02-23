@@ -5,7 +5,7 @@ import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { response } from "../../../../../../../../utilities/response.js"
 
 export const openYearRoute = apiFactory.createApp().post(openYearRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    await checkUserSessionMiddleware({ context: c })
     const _body = await validateBodyMiddleware({
         context: c,
         schema: openYearRouteDefinition.schemas.body,

@@ -3,8 +3,8 @@ import { Exception } from "../utilities/exception.js"
 
 export function validate<T extends v.GenericSchema<unknown, unknown>>(parameters: {
     schema: T
-    data: v.InferOutput<T>
-}) {
+    data: unknown
+}): v.InferOutput<T> {
     const parsed = v.safeParse(parameters.schema, parameters.data, {
         abortEarly: true,
         abortPipeEarly: true,

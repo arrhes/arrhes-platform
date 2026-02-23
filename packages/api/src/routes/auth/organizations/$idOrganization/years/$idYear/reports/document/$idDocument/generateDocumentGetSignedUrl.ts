@@ -10,7 +10,7 @@ import { generateGetSignedUrl } from "../../../../../../../../../utilities/stora
 export const generateDocumentGetSignedUrlRoute = apiFactory
     .createApp()
     .post(generateDocumentGetSignedUrlRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateDocumentGetSignedUrlRouteDefinition.schemas.body,

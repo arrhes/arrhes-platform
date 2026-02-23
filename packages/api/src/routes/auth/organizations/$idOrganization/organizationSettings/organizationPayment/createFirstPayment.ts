@@ -121,7 +121,7 @@ export const createFirstPaymentRoute = apiFactory
             customerId: mollieCustomerId,
             sequenceType: SequenceType.first,
             description: "Arrhes - Activation de l'abonnement",
-            redirectUrl: `${c.var.env.WEBSITE_BASE_URL}/dashboard/organisations/${organization.id}/paramètres/abonnement`,
+            redirectUrl: `${c.var.env.WEBSITE_BASE_URL}/dashboard/organisations/${organization.id}/abonnement`,
             webhookUrl: `${c.var.env.API_BASE_URL}/public/mollie-webhook`,
         })
 

@@ -6,7 +6,7 @@
 # ==============================================================================
 set -e
 
-echo "🗄️ Running database migrations..."
+echo "Running database migrations..."
 cd /workspace/packages/tools
 pnpm run push
-echo "✓ Database migrations complete"
+echo "Database migrations complete."

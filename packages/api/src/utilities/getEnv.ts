@@ -36,9 +36,7 @@ const envSchema = v.object({
 export function getEnv() {
     const parsedEnv = validate({
         schema: envSchema,
-        // @ts-expect-error
         data: process.env,
-        message: "Missing environment variables",
     })
 
     return parsedEnv

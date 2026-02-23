@@ -8,17 +8,17 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconCreditCard, IconX } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { useState } from "react"
-import { FormatDateTime } from "../../../../../../components/formats/formatDateTime.tsx"
-import type { ChipColors } from "../../../../../../components/layouts/chip.tsx"
-import { Chip } from "../../../../../../components/layouts/chip.tsx"
-import { DataWrapper } from "../../../../../../components/layouts/dataWrapper.tsx"
-import { Page } from "../../../../../../components/layouts/page/page.tsx"
-import { SettingsSection } from "../../../../../../components/layouts/settingsSection/settingsSection.tsx"
-import { DeleteConfirmation } from "../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
-import { toast } from "../../../../../../contexts/toasts/useToast.ts"
-import { organizationSubscriptionRoute } from "../../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSettings/organizationSubscription/organizationSubscriptionRoute.tsx"
-import { getResponseBodyFromAPI } from "../../../../../../utilities/getResponseBodyFromAPI.ts"
-import { invalidateData } from "../../../../../../utilities/invalidateData.ts"
+import { FormatDateTime } from "../../../../../components/formats/formatDateTime.tsx"
+import type { ChipColors } from "../../../../../components/layouts/chip.tsx"
+import { Chip } from "../../../../../components/layouts/chip.tsx"
+import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
+import { Page } from "../../../../../components/layouts/page/page.tsx"
+import { SettingsSection } from "../../../../../components/layouts/settingsSection/settingsSection.tsx"
+import { DeleteConfirmation } from "../../../../../components/overlays/dialog/deleteConfirmation.tsx"
+import { toast } from "../../../../../contexts/toasts/useToast.ts"
+import { organizationSubscriptionRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSubscription/organizationSubscriptionRoute.tsx"
+import { getResponseBodyFromAPI } from "../../../../../utilities/getResponseBodyFromAPI.ts"
+import { invalidateData } from "../../../../../utilities/invalidateData.ts"
 
 const MONTHLY_PRICE_CENTS = 3000
 
@@ -32,20 +32,6 @@ function getProRataAmount(): string {
     const remainingDays = daysInMonth - now.getUTCDate() + 1
     const cents = Math.round((remainingDays / daysInMonth) * MONTHLY_PRICE_CENTS)
     return (cents / 100).toFixed(2).replace(".", ",")
-}
-
-const statusLabel: Record<string, string> = {
-    pending: "En attente",
-    paid: "Payé",
-    failed: "Échoué",
-    refunded: "Remboursé",
-}
-
-const statusColor: Record<string, ChipColors> = {
-    pending: "warning",
-    paid: "success",
-    failed: "error",
-    refunded: "neutral",
 }
 
 export function OrganizationSubscriptionPage() {
@@ -139,26 +125,15 @@ export function OrganizationSubscriptionPage() {
                                     {subscription.isPremium && subscription.subcriptionEndingAt && (
                                         <SettingsSection.Row
                                             title="Accès jusqu'au"
-                                            description="Date de fin de la période Premium en cours."
+                                            description="Date de fin de la période en cours."
                                         >
                                             <FormatDateTime date={subscription.subcriptionEndingAt} />
-                                        </SettingsSection.Row>
-                                    )}
-                                    {subscription.status && (
-                                        <SettingsSection.Row
-                                            title="Dernier paiement"
-                                            description="Statut du dernier paiement enregistré."
-                                        >
-                                            <Chip
-                                                text={statusLabel[subscription.status] ?? subscription.status}
-                                                color={statusColor[subscription.status] ?? "neutral"}
-                                            />
                                         </SettingsSection.Row>
                                     )}
                                     {subscription.subscriptionStatus === "active" && (
                                         <SettingsSection.Row
                                             title="Annuler l'abonnement"
-                                            description="Vous conserverez l'accès Premium jusqu'à la fin de la période en cours."
+                                            description="Vous conserverez l'accès jusqu'à la fin de la période en cours."
                                             variant="danger"
                                         >
                                             <CancelSubscription idOrganization={params.idOrganization} />

@@ -1,11 +1,11 @@
 import { generateId, models, mollieWebhookRouteDefinition } from "@arrhes/application-metadata"
 import { eq } from "drizzle-orm"
-import { validateBodyMiddleware } from "../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../utilities/apiFactory.js"
 import { apiLog } from "../../utilities/apiLog.js"
 import { response } from "../../utilities/response.js"
 import { insertOne } from "../../utilities/sql/insertOne.js"
 import { updateOne } from "../../utilities/sql/updateOne.js"
+import { validate } from "../../utilities/validate.js"
 
 const MONTHLY_PRICE = "30.00"
 
@@ -24,12 +24,13 @@ function getFirstOfNextMonth(from: Date): Date {
 }
 
 export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRouteDefinition.path, async (c) => {
-    const body = await validateBodyMiddleware({
-        context: c,
-        schema: mollieWebhookRouteDefinition.schemas.body,
-    })
-
     try {
+        // Mollie sends webhooks as application/x-www-form-urlencoded (body: id=tr_xxx)
+        const rawBody = await c.req.parseBody()
+        const body = validate({
+            schema: mollieWebhookRouteDefinition.schemas.body,
+            data: rawBody,
+        })
         // Fetch the payment from Mollie to verify its status
         const molliePayment = await c.var.clients.mollie.payments.get(body.id)
 
@@ -56,6 +57,7 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
             failed: "failed",
             canceled: "failed",
             expired: "failed",
+            refunded: "refunded",
         }
         const mappedStatus = statusMap[molliePayment.status] ?? "pending"
 
@@ -109,8 +111,13 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
                         webhookUrl: `${c.var.env.API_BASE_URL}/public/mollie-webhook`,
                     })
 
-                    // Set subcriptionEndingAt to the last day of the first full billing month
-                    const subscriptionEndingAt = getLastDayOfMonth(firstOfNextMonth)
+                    // Set subcriptionEndingAt to the end of the current first-payment period.
+                    // The first payment covers from now until periodEnd (end of current month).
+                    // The recurring subscription will extend this when each subsequent payment is confirmed.
+                    const subscriptionEndingAt =
+                        organizationPayment.periodEnd !== null
+                            ? new Date(organizationPayment.periodEnd)
+                            : getLastDayOfMonth(now)
 
                     // Update organization with subscription info and premium status
                     await updateOne({
@@ -189,7 +196,7 @@ export const mollieWebhookRoute = apiFactory.createApp().post(mollieWebhookRoute
         apiLog({
             var: c.var,
             type: "error",
-            internalMessage: `Mollie webhook error for payment ${body.id}`,
+            internalMessage: "Mollie webhook error",
             cause: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
         })

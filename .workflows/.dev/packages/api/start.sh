@@ -6,6 +6,6 @@
 # ==============================================================================
 set -e
 
-echo "🚀 Starting API dev server..."
+echo "Starting API dev server..."
 cd /workspace/packages/api
 exec pnpm --filter="@arrhes/application-api" dev

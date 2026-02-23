@@ -69,7 +69,7 @@ function generateAccounts(parameters: {
 }
 
 export const generateAccountsRoute = apiFactory.createApp().post(generateAccountsRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: generateAccountsRouteDefinition.schemas.body,

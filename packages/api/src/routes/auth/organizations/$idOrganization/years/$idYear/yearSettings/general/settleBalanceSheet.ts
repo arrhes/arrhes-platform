@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 export const settleBalanceSheetRoute = apiFactory
     .createApp()
     .post(settleBalanceSheetRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        await checkUserSessionMiddleware({ context: c })
         const _body = await validateBodyMiddleware({
             context: c,
             schema: settleBalanceSheetRouteDefinition.schemas.body,
