@@ -20,6 +20,7 @@ export const organizationModel = pgTable("table_organization", {
     mollieCustomerId: text("mollie_customer_id"),
     mollieSubscriptionId: text("mollie_subscription_id"),
     subcriptionEndingAt: dateTimeColumn("subscription_ending_at"),
+    storageLimit: integer("storage_limit").notNull().default(1_073_741_824),
     storageCurrentUsage: integer("storage_current_usage").notNull().default(0),
     createdAt: dateTimeColumn("created_at").notNull(),
     lastUpdatedAt: dateTimeColumn("last_updated_at"),

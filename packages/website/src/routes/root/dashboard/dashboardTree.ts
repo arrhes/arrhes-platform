@@ -1,12 +1,16 @@
 import type { AnyRoute } from "@tanstack/react-router"
 import { dashboardLayoutRoute } from "./dashboardLayoutRoute.tsx"
 import { dashboardRootRoute } from "./dashboardRootRoute.tsx"
+import { organizationApiKeysKeysRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysKeysRoute.tsx"
+import { organizationApiKeysLayoutRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysLayoutRoute.tsx"
+import { organizationApiKeysRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysRoute.tsx"
 import { organizationLayoutRoute } from "./organizations/$idOrganization/organizationLayoutRoute.tsx"
 import { organizationPathRoute } from "./organizations/$idOrganization/organizationPathRoute.tsx"
 import { organizationRoute } from "./organizations/$idOrganization/organizationRoute.tsx"
 import { organizationSecurityRoute } from "./organizations/$idOrganization/organizationSettings/organizationSecurityRoute.tsx"
 import { organizationSettingsLayoutRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsLayoutRoute.tsx"
 import { organizationSettingsRoute } from "./organizations/$idOrganization/organizationSettings/organizationSettingsRoute.tsx"
+import { organizationStorageRoute } from "./organizations/$idOrganization/organizationSettings/organizationStorageRoute.tsx"
 import { organizationSubscriptionHistoryRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionHistoryRoute.tsx"
 import { organizationSubscriptionLayoutRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionLayoutRoute.tsx"
 import { organizationSubscriptionRoute } from "./organizations/$idOrganization/organizationSubscription/organizationSubscriptionRoute.tsx"
@@ -78,11 +82,16 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                 organizationRoute,
                 yearsLayoutRoute.addChildren([yearsRoute]),
                 organizationUsersLayoutRoute.addChildren([organizationUsersRoute]),
+                organizationApiKeysLayoutRoute.addChildren([organizationApiKeysRoute, organizationApiKeysKeysRoute]),
                 organizationSubscriptionLayoutRoute.addChildren([
                     organizationSubscriptionRoute,
                     organizationSubscriptionHistoryRoute,
                 ]),
-                organizationSettingsLayoutRoute.addChildren([organizationSettingsRoute, organizationSecurityRoute]),
+                organizationSettingsLayoutRoute.addChildren([
+                    organizationSettingsRoute,
+                    organizationSecurityRoute,
+                    organizationStorageRoute,
+                ]),
             ]),
             yearsPathRoute.addChildren([
                 yearPathRoute.addChildren([

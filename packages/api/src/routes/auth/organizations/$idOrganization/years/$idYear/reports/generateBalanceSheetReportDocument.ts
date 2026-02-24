@@ -1,15 +1,18 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { generateBalanceSheetReportDocumentRouteDefinition, generateId, models } from "@arrhes/application-metadata"
-import { and, eq } from "drizzle-orm"
+import { and, eq, sql } from "drizzle-orm"
 import { launch } from "puppeteer"
 import { checkUserSessionMiddleware } from "../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../../../../../../utilities/apiFactory.js"
 import { balanceSheetReportTemplate } from "../../../../../../../utilities/email/templates/balanceSheetReport/balanceSheetReport.js"
+import { Exception } from "../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 import { selectMany } from "../../../../../../../utilities/sql/selectMany.js"
+import { selectOne } from "../../../../../../../utilities/sql/selectOne.js"
+import { updateOne } from "../../../../../../../utilities/sql/updateOne.js"
 import { putObject } from "../../../../../../../utilities/storage/putObject.js"
 
 export const generateBalanceSheetReportDocumentRoute = apiFactory
@@ -113,6 +116,20 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
 
         await browser.close()
 
+        const organization = await selectOne({
+            database: c.var.clients.sql,
+            table: models.organization,
+            where: (table) => eq(table.id, body.idOrganization),
+        })
+
+        if (organization.storageCurrentUsage + pdfBody.length > organization.storageLimit) {
+            throw new Exception({
+                internalMessage: "Storage limit exceeded",
+                statusCode: 400,
+                externalMessage: "Limite de stockage atteinte",
+            })
+        }
+
         const idDocument = generateId()
         const storageKey = `organizations/${body.idOrganization}/${body.idYear}/reports/${idDocument}`
         await putObject({
@@ -126,6 +143,15 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
                 idYear: body.idYear,
                 idUser: user.id,
             },
+        })
+
+        await updateOne({
+            database: c.var.clients.sql,
+            table: models.organization,
+            data: {
+                storageCurrentUsage: sql`${models.organization.storageCurrentUsage} + ${pdfBody.length}`,
+            },
+            where: (table) => eq(table.id, body.idOrganization),
         })
 
         const createOneDocument = await insertOne({

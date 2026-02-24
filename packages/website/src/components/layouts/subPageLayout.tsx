@@ -14,6 +14,7 @@ export function SubPageLayout(props: {
             icon?: ReactElement<IconProps & React.RefAttributes<Icon>>
             items: Array<{
                 label: string
+                icon?: ReactElement<IconProps & React.RefAttributes<Icon>>
                 to: ValidRoutes
                 params: ValidParams
             }>
@@ -131,6 +132,7 @@ export function SubPageLayout(props: {
                                                 className={css({ width: "100%" })}
                                             >
                                                 <ButtonGhostContent
+                                                    leftIcon={item.icon}
                                                     text={item.label}
                                                     isCurrent={isActive}
                                                     className={css({

@@ -1,10 +1,11 @@
 import { generateFilePutSignedUrlRouteDefinition, models } from "@arrhes/application-metadata"
-import { and, eq } from "drizzle-orm"
+import { and, eq, sql } from "drizzle-orm"
 import { checkUserSessionMiddleware } from "../../../../../../../../middlewares/checkUserSessionMiddleware.js"
 import { validateBodyMiddleware } from "../../../../../../../../middlewares/validateBody.middleware.js"
 import { apiFactory } from "../../../../../../../../utilities/apiFactory.js"
 import { Exception } from "../../../../../../../../utilities/exception.js"
 import { response } from "../../../../../../../../utilities/response.js"
+import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 import { generatePutSignedUrl } from "../../../../../../../../utilities/storage/generatePutSignedUrl.js"
 
@@ -24,6 +25,21 @@ export const generateFilePutSignedUrlRoute = apiFactory
                 externalMessage: "Fichier trop volumineux",
             })
         }
+
+        const organization = await selectOne({
+            database: c.var.clients.sql,
+            table: models.organization,
+            where: (table) => eq(table.id, body.idOrganization),
+        })
+
+        if (organization.storageCurrentUsage + body.size > organization.storageLimit) {
+            throw new Exception({
+                internalMessage: "Storage limit exceeded",
+                statusCode: 400,
+                externalMessage: "Limite de stockage atteinte",
+            })
+        }
+
         const storageKey = `organizations/${body.idOrganization}/${body.idYear}/files/${body.idFile}`
 
         const updateOneFile = await updateOne({
@@ -41,6 +57,15 @@ export const generateFilePutSignedUrlRoute = apiFactory
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idFile),
                 ),
+        })
+
+        await updateOne({
+            database: c.var.clients.sql,
+            table: models.organization,
+            data: {
+                storageCurrentUsage: sql`${models.organization.storageCurrentUsage} + ${body.size}`,
+            },
+            where: (table) => eq(table.id, body.idOrganization),
         })
 
         const url = await generatePutSignedUrl({

@@ -1,4 +1,4 @@
-import { IconBook, IconChartBar } from "@tabler/icons-react"
+import { IconBook, IconBook2, IconChartBar, IconReport, IconReportMoney, IconScale } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { SubPageLayout } from "../../../../../../../components/layouts/subPageLayout.js"
 import { reportsLayoutRoute } from "../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/reports/reportsLayoutRoute.js"
@@ -15,6 +15,7 @@ export function ReportsLayout() {
                     items: [
                         {
                             label: "Livre-journal",
+                            icon: <IconBook />,
                             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/livre-journal",
                             params: {
                                 idOrganization: params.idOrganization,
@@ -23,6 +24,7 @@ export function ReportsLayout() {
                         },
                         {
                             label: "Grand livre",
+                            icon: <IconBook2 />,
                             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/grand-livre",
                             params: {
                                 idOrganization: params.idOrganization,
@@ -37,6 +39,7 @@ export function ReportsLayout() {
                     items: [
                         {
                             label: "Balance",
+                            icon: <IconScale />,
                             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/balance",
                             params: {
                                 idOrganization: params.idOrganization,
@@ -45,6 +48,7 @@ export function ReportsLayout() {
                         },
                         {
                             label: "Bilan",
+                            icon: <IconReport />,
                             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/bilan",
                             params: {
                                 idOrganization: params.idOrganization,
@@ -53,6 +57,7 @@ export function ReportsLayout() {
                         },
                         {
                             label: "Compte de résultat",
+                            icon: <IconReportMoney />,
                             to: "/dashboard/organisations/$idOrganization/exercices/$idYear/documents/compte-de-résultat",
                             params: {
                                 idOrganization: params.idOrganization,

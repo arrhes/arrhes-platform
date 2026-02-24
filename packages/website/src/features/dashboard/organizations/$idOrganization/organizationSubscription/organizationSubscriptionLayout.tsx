@@ -1,3 +1,4 @@
+import { IconReceipt, IconRosetteDiscountCheck } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { SubPageLayout } from "../../../../../components/layouts/subPageLayout.tsx"
 import { organizationSubscriptionLayoutRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSubscription/organizationSubscriptionLayoutRoute.tsx"
@@ -9,11 +10,10 @@ export function OrganizationSubscriptionLayout() {
         <SubPageLayout
             sections={{
                 subscription: {
-                    // title: "Abonnement",
-                    // icon: <IconRosetteDiscountCheck />,
                     items: [
                         {
                             label: "Abonnement",
+                            icon: <IconRosetteDiscountCheck />,
                             to: "/dashboard/organisations/$idOrganization/abonnement",
                             params: {
                                 idOrganization: params.idOrganization,
@@ -21,6 +21,7 @@ export function OrganizationSubscriptionLayout() {
                         },
                         {
                             label: "Historique",
+                            icon: <IconReceipt />,
                             to: "/dashboard/organisations/$idOrganization/abonnement/historique",
                             params: {
                                 idOrganization: params.idOrganization,
