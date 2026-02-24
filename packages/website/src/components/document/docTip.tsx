@@ -1,119 +1,123 @@
-import { css } from "@arrhes/ui/utilities/cn.js"
+import { sva } from "@arrhes/ui/css"
 import { IconAlertTriangle, IconBulb, IconCircleCheck, IconInfoCircle } from "@tabler/icons-react"
+import type { ReactNode } from "react"
 
-const variantConfig: Record<
-    "tip" | "warning" | "info" | "success",
-    {
-        icon: React.ReactNode
-        label: string
-        backgroundColor: string
-        borderColor: string
-        accentColor: string
-        iconColor: string
-        labelColor: string
-    }
-> = {
-    tip: {
-        icon: <IconBulb />,
-        label: "Conseil",
-        backgroundColor: "warning/5",
-        borderColor: "warning/10",
-        accentColor: "warning",
-        iconColor: "warning",
-        labelColor: "warning",
+const docTipRecipe = sva({
+    slots: ["container", "header", "iconWrapper", "icon", "label", "content"],
+    base: {
+        container: {
+            padding: "1.25rem",
+            borderRadius: "lg",
+            border: "1px solid",
+            borderLeft: "3px solid",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+        },
+        header: {
+            display: "flex",
+            alignItems: "center",
+            gap: "0.375rem",
+        },
+        iconWrapper: {
+            width: "0.875rem",
+            height: "0.875rem",
+            flexShrink: 0,
+        },
+        icon: {
+            width: "100%",
+            height: "100%",
+        },
+        label: {
+            fontSize: "xs",
+            fontWeight: "medium",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+        },
+        content: {
+            fontSize: "sm",
+            color: "neutral/70",
+            lineHeight: "1.6",
+        },
     },
-    warning: {
-        icon: <IconAlertTriangle />,
-        label: "Attention",
-        backgroundColor: "error/5",
-        borderColor: "error/10",
-        accentColor: "error",
-        iconColor: "error",
-        labelColor: "error",
+    variants: {
+        variant: {
+            tip: {
+                container: {
+                    backgroundColor: "warning/5",
+                    borderColor: "warning/10",
+                    borderLeftColor: "warning",
+                },
+                icon: { stroke: "warning" },
+                label: { color: "warning" },
+            },
+            warning: {
+                container: {
+                    backgroundColor: "error/5",
+                    borderColor: "error/10",
+                    borderLeftColor: "error",
+                },
+                icon: { stroke: "error" },
+                label: { color: "error" },
+            },
+            info: {
+                container: {
+                    backgroundColor: "information/5",
+                    borderColor: "information/10",
+                    borderLeftColor: "information",
+                },
+                icon: { stroke: "information" },
+                label: { color: "information" },
+            },
+            success: {
+                container: {
+                    backgroundColor: "success/5",
+                    borderColor: "success/10",
+                    borderLeftColor: "success",
+                },
+                icon: { stroke: "success" },
+                label: { color: "success" },
+            },
+        },
     },
-    info: {
-        icon: <IconInfoCircle />,
-        label: "Information",
-        backgroundColor: "information/5",
-        borderColor: "information/10",
-        accentColor: "information",
-        iconColor: "information",
-        labelColor: "information",
+    defaultVariants: {
+        variant: "tip",
     },
-    success: {
-        icon: <IconCircleCheck />,
-        label: "Félicitations",
-        backgroundColor: "success/5",
-        borderColor: "success/10",
-        accentColor: "success",
-        iconColor: "success",
-        labelColor: "success",
-    },
-}
+})
 
-export function DocTip(props: { variant?: keyof typeof variantConfig; label?: string; children: React.ReactNode }) {
+const variantIcons = {
+    tip: IconBulb,
+    warning: IconAlertTriangle,
+    info: IconInfoCircle,
+    success: IconCircleCheck,
+} as const
+
+const variantLabels = {
+    tip: "Conseil",
+    warning: "Attention",
+    info: "Information",
+    success: "Félicitations",
+} as const
+
+export function DocTip(props: {
+    variant?: "tip" | "warning" | "info" | "success"
+    label?: string
+    children: ReactNode
+}) {
     const variant = props.variant ?? "tip"
-    const config = variantConfig[variant]
-    const label = props.label ?? config.label
+    const classes = docTipRecipe({ variant })
+    const Icon = variantIcons[variant]
+    const label = props.label ?? variantLabels[variant]
 
     return (
-        <div
-            className={css({
-                padding: "1.25rem",
-                borderRadius: "lg",
-                backgroundColor: config.backgroundColor,
-                border: "1px solid",
-                borderColor: config.borderColor,
-                borderLeft: "3px solid",
-                borderLeftColor: config.accentColor,
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-            })}
-        >
-            <div
-                className={css({
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.375rem",
-                })}
-            >
-                <div
-                    className={css({
-                        width: "0.875rem",
-                        height: "0.875rem",
-                        flexShrink: 0,
-                        color: config.iconColor,
-                        "& svg": {
-                            width: "100%",
-                            height: "100%",
-                            stroke: config.iconColor,
-                        },
-                    })}
-                >
-                    {config.icon}
+        <div className={classes.container}>
+            <div className={classes.header}>
+                <div className={classes.iconWrapper}>
+                    <Icon className={classes.icon} />
                 </div>
-                <span
-                    className={css({
-                        fontSize: "xs",
-                        fontWeight: "medium",
-                        color: config.labelColor,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.05em",
-                    })}
-                >
-                    {label}
-                </span>
+                <span className={classes.label}>{label}</span>
             </div>
-            <span
-                className={css({
-                    fontSize: "sm",
-                    color: "neutral/70",
-                    lineHeight: "1.6",
-                })}
-            >
-                {props.children}
-            </span>
+            <span className={classes.content}>{props.children}</span>
         </div>
     )
 }

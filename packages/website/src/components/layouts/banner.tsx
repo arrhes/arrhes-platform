@@ -1,94 +1,138 @@
-import type { colorVariant } from "@arrhes/application-metadata/components"
-import { css, cx } from "@arrhes/ui/utilities/cn.js"
+import { sva } from "@arrhes/ui/css"
+import { cx } from "@arrhes/ui/utilities/cn.js"
 import { IconAlertHexagon, IconAlertTriangle, IconCircleCheck, IconInfoSquare } from "@tabler/icons-react"
 import type { ComponentProps, ReactElement } from "react"
 
+const bannerRecipe = sva({
+    slots: ["container", "header", "icon", "title", "text"],
+    base: {
+        container: {
+            width: "100%",
+            padding: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "start",
+            alignItems: "start",
+            gap: "0.5rem",
+            borderRadius: "md",
+            border: "1px solid",
+        },
+        header: {
+            display: "flex",
+            alignItems: "center",
+            gap: "0.375rem",
+        },
+        icon: {
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+        },
+        title: {
+            fontSize: "sm",
+            fontWeight: "semibold",
+            lineHeight: "1.5",
+        },
+        text: {
+            fontSize: "sm",
+            lineHeight: "1.5",
+        },
+    },
+    variants: {
+        variant: {
+            neutral: {
+                container: {
+                    backgroundColor: "background",
+                    borderColor: "neutral/15",
+                },
+                icon: { stroke: "neutral" },
+                title: { color: "neutral" },
+                text: { color: "neutral" },
+            },
+            information: {
+                container: {
+                    backgroundColor: "information/5",
+                    borderColor: "information/15",
+                },
+                icon: { stroke: "information" },
+                title: { color: "information" },
+                text: { color: "information" },
+            },
+            error: {
+                container: {
+                    backgroundColor: "error/5",
+                    borderColor: "error/15",
+                },
+                icon: { stroke: "error" },
+                title: { color: "error" },
+                text: { color: "error" },
+            },
+            warning: {
+                container: {
+                    backgroundColor: "warning/5",
+                    borderColor: "warning/15",
+                },
+                icon: { stroke: "warning" },
+                title: { color: "warning" },
+                text: { color: "warning" },
+            },
+            success: {
+                container: {
+                    backgroundColor: "success/5",
+                    borderColor: "success/15",
+                },
+                icon: { stroke: "success" },
+                title: { color: "success" },
+                text: { color: "success" },
+            },
+        },
+    },
+    defaultVariants: {
+        variant: "neutral",
+    },
+})
+
+const variantIcons = {
+    neutral: null,
+    information: IconInfoSquare,
+    error: IconAlertTriangle,
+    warning: IconAlertHexagon,
+    success: IconCircleCheck,
+} as const
+
+const variantTitles = {
+    neutral: null,
+    information: "Information",
+    error: "Erreur",
+    warning: "Attention",
+    success: "Succès",
+} as const
+
+type BannerVariant = "neutral" | "information" | "error" | "warning" | "success"
+
 export function Banner(props: {
-    text?: string | null
-    variant?: (typeof colorVariant)[number]
+    title?: string | null
+    variant?: BannerVariant
     className?: ComponentProps<"div">["className"]
     children?: ReactElement | string | null | Array<ReactElement | string | null>
 }) {
-    const banners = {
-        neutral: {
-            icon: null,
-            backgroundColor: css({ backgroundColor: "background" }),
-            borderColor: css({ borderColor: "neutral/15" }),
-            text: css({ color: "neutral" }),
-        },
-        information: {
-            icon: <IconInfoSquare size={18} />,
-            backgroundColor: css({ backgroundColor: "information/5" }),
-            borderColor: css({ borderColor: "information/15" }),
-            text: css({ color: "information" }),
-        },
-        error: {
-            icon: <IconAlertTriangle size={18} />,
-            backgroundColor: css({ backgroundColor: "error/5" }),
-            borderColor: css({ borderColor: "error/15" }),
-            text: css({ color: "error" }),
-        },
-        warning: {
-            icon: <IconAlertHexagon size={18} />,
-            backgroundColor: css({ backgroundColor: "warning/5" }),
-            borderColor: css({ borderColor: "warning/15" }),
-            text: css({ color: "warning" }),
-        },
-        success: {
-            icon: <IconCircleCheck size={18} />,
-            backgroundColor: css({ backgroundColor: "success/5" }),
-            borderColor: css({ borderColor: "success/15" }),
-            text: css({ color: "success" }),
-        },
-    }
-
-    const variant = props?.variant ?? "neutral"
-    const banner = banners[variant]
+    const variant = props.variant ?? "neutral"
+    const classes = bannerRecipe({ variant })
+    const Icon = variantIcons[variant]
+    const title = props.title === undefined ? variantTitles[variant] : props.title
 
     return (
-        <div
-            className={cx(
-                css({
-                    width: "100%",
-                    padding: "0.75rem 1rem",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                    gap: "0.5rem",
-                    borderRadius: "md",
-                    border: "1px solid",
-                }),
-                banner.backgroundColor,
-                banner.borderColor,
-                props.className,
-            )}
-        >
-            {banner.icon && (
-                <span
-                    className={cx(
-                        css({
-                            flexShrink: 0,
-                            display: "flex",
-                            alignItems: "center",
-                            marginTop: "1px",
-                        }),
-                        banner.text,
+        <div className={cx(classes.container, props.className)}>
+            {(Icon || title) && (
+                <div className={classes.header}>
+                    {Icon && (
+                        <span className={classes.icon}>
+                            <Icon size={16} />
+                        </span>
                     )}
-                >
-                    {banner.icon}
-                </span>
+                    {title && <span className={classes.title}>{title}</span>}
+                </div>
             )}
-            <p
-                className={cx(
-                    css({
-                        fontSize: "sm",
-                        lineHeight: "1.5",
-                    }),
-                    banner.text,
-                )}
-            >
-                {props.children}
-            </p>
+            <p className={classes.text}>{props.children}</p>
         </div>
     )
 }
