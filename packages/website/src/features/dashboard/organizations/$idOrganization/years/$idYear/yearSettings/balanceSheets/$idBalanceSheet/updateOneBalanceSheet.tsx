@@ -59,22 +59,23 @@ export function UpdateOneBalanceSheet(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllBalanceSheetsRouteDefinition,
-                                body: {
-                                    idOrganization: props.balanceSheet.idOrganization,
-                                    idYear: props.balanceSheet.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneBalanceSheetRouteDefinition,
-                                body: {
-                                    idBalanceSheet: props.balanceSheet.id,
-                                    idOrganization: props.balanceSheet.idOrganization,
-                                    idYear: props.balanceSheet.idYear,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllBalanceSheetsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.balanceSheet.idOrganization,
+                                        idYear: props.balanceSheet.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneBalanceSheetRouteDefinition,
+                                    body: {
+                                        idBalanceSheet: props.balanceSheet.id,
+                                        idOrganization: props.balanceSheet.idOrganization,
+                                        idYear: props.balanceSheet.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

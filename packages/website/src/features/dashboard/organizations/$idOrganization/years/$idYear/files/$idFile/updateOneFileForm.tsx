@@ -82,22 +82,23 @@ export function UpdateOneFileForm(props: { file: v.InferOutput<typeof returnedSc
             }}
             onCancel={undefined}
             onSuccess={async () => {
-                await invalidateData({
-                    routeDefinition: readAllFilesRouteDefinition,
-                    body: {
-                        idOrganization: props.file.idOrganization,
-                        idYear: props.file.idYear,
-                    },
-                })
-
-                await invalidateData({
-                    routeDefinition: readOneFileRouteDefinition,
-                    body: {
-                        idFile: props.file.id,
-                        idOrganization: props.file.idOrganization,
-                        idYear: props.file.idYear,
-                    },
-                })
+                await Promise.all([
+                    invalidateData({
+                        routeDefinition: readAllFilesRouteDefinition,
+                        body: {
+                            idOrganization: props.file.idOrganization,
+                            idYear: props.file.idYear,
+                        },
+                    }),
+                    invalidateData({
+                        routeDefinition: readOneFileRouteDefinition,
+                        body: {
+                            idFile: props.file.id,
+                            idOrganization: props.file.idOrganization,
+                            idYear: props.file.idYear,
+                        },
+                    }),
+                ])
 
                 props.onSuccess?.()
             }}

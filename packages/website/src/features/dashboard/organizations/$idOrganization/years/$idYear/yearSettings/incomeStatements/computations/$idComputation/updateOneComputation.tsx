@@ -57,22 +57,23 @@ export function UpdateOneComputation(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllComputationsRouteDefinition,
-                                body: {
-                                    idOrganization: props.computation.idOrganization,
-                                    idYear: props.computation.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneComputationRouteDefinition,
-                                body: {
-                                    idComputation: props.computation.id,
-                                    idOrganization: props.computation.idOrganization,
-                                    idYear: props.computation.idYear,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllComputationsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.computation.idOrganization,
+                                        idYear: props.computation.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneComputationRouteDefinition,
+                                    body: {
+                                        idComputation: props.computation.id,
+                                        idOrganization: props.computation.idOrganization,
+                                        idYear: props.computation.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

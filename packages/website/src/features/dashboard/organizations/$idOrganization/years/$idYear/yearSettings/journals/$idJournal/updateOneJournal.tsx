@@ -57,22 +57,23 @@ export function UpdateOneJournal(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllJournalsRouteDefinition,
-                                body: {
-                                    idOrganization: props.journal.idOrganization,
-                                    idYear: props.journal.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneJournalRouteDefinition,
-                                body: {
-                                    idJournal: props.journal.id,
-                                    idOrganization: props.journal.idOrganization,
-                                    idYear: props.journal.idYear,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllJournalsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.journal.idOrganization,
+                                        idYear: props.journal.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneJournalRouteDefinition,
+                                    body: {
+                                        idJournal: props.journal.id,
+                                        idOrganization: props.journal.idOrganization,
+                                        idYear: props.journal.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

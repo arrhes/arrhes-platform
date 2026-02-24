@@ -62,23 +62,24 @@ export function UpdateOneRecordRow(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllRecordRowsRouteDefinition,
-                                body: {
-                                    idOrganization: props.recordRow.idOrganization,
-                                    idYear: props.recordRow.idYear,
-                                    idRecord: props.recordRow.idRecord,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneRecordRowRouteDefinition,
-                                body: {
-                                    idOrganization: props.recordRow.idOrganization,
-                                    idYear: props.recordRow.idYear,
-                                    idRecordRow: props.recordRow.id,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllRecordRowsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.recordRow.idOrganization,
+                                        idYear: props.recordRow.idYear,
+                                        idRecord: props.recordRow.idRecord,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneRecordRowRouteDefinition,
+                                    body: {
+                                        idOrganization: props.recordRow.idOrganization,
+                                        idYear: props.recordRow.idYear,
+                                        idRecordRow: props.recordRow.id,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

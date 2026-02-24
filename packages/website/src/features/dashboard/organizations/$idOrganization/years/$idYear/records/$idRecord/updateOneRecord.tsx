@@ -62,22 +62,23 @@ export function UpdateOneRecord(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllRecordsRouteDefinition,
-                                body: {
-                                    idOrganization: props.record.idOrganization,
-                                    idYear: props.record.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneRecordRouteDefinition,
-                                body: {
-                                    idOrganization: props.record.idOrganization,
-                                    idYear: props.record.idYear,
-                                    idRecord: props.record.id,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllRecordsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.record.idOrganization,
+                                        idYear: props.record.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneRecordRouteDefinition,
+                                    body: {
+                                        idOrganization: props.record.idOrganization,
+                                        idYear: props.record.idYear,
+                                        idRecord: props.record.id,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

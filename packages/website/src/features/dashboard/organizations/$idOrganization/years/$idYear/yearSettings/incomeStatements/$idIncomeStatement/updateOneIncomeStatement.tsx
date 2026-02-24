@@ -61,22 +61,23 @@ export function UpdateOneIncomeStatement(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllIncomeStatementsRouteDefinition,
-                                body: {
-                                    idOrganization: props.incomeStatement.idOrganization,
-                                    idYear: props.incomeStatement.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneIncomeStatementRouteDefinition,
-                                body: {
-                                    idIncomeStatement: props.incomeStatement.id,
-                                    idOrganization: props.incomeStatement.idOrganization,
-                                    idYear: props.incomeStatement.idYear,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllIncomeStatementsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.incomeStatement.idOrganization,
+                                        idYear: props.incomeStatement.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneIncomeStatementRouteDefinition,
+                                    body: {
+                                        idIncomeStatement: props.incomeStatement.id,
+                                        idOrganization: props.incomeStatement.idOrganization,
+                                        idYear: props.incomeStatement.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

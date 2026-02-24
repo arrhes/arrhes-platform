@@ -59,22 +59,23 @@ export function UpdateOneComputationIncomeStatement(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
-                                body: {
-                                    idOrganization: props.computationIncomeStatement.idOrganization,
-                                    idYear: props.computationIncomeStatement.idYear,
-                                },
-                            })
-
-                            await invalidateData({
-                                routeDefinition: readOneComputationIncomeStatementRouteDefinition,
-                                body: {
-                                    idComputationIncomeStatement: props.computationIncomeStatement.id,
-                                    idOrganization: props.computationIncomeStatement.idOrganization,
-                                    idYear: props.computationIncomeStatement.idYear,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.computationIncomeStatement.idOrganization,
+                                        idYear: props.computationIncomeStatement.idYear,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readOneComputationIncomeStatementRouteDefinition,
+                                    body: {
+                                        idComputationIncomeStatement: props.computationIncomeStatement.id,
+                                        idOrganization: props.computationIncomeStatement.idOrganization,
+                                        idYear: props.computationIncomeStatement.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}
