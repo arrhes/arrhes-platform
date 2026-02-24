@@ -1,11 +1,12 @@
 import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import type { ReactNode } from "react"
+import type { Icon, IconProps } from "@tabler/icons-react"
+import { cloneElement, type ReactElement } from "react"
 import { LinkButton } from "../../components/linkButton.tsx"
 
 export interface NavigationSection {
     title: string
-    icon: ReactNode
+    icon: ReactElement<IconProps & React.RefAttributes<Icon>>
     items: { path: string; label: string }[]
 }
 
@@ -36,7 +37,12 @@ export function SidebarNavigation(props: { navigation: Record<string, Navigation
                             letterSpacing: "wider",
                         })}
                     >
-                        {section.icon}
+                        {cloneElement(section.icon, {
+                            size: 12,
+                            className: css({
+                                stroke: "neutral/50",
+                            }),
+                        })}
                         {section.title}
                     </div>
                     <div

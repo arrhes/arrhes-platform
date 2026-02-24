@@ -9,7 +9,6 @@ export function PageContent(props: { className?: ComponentProps<"div">["classNam
                     width: "100%",
                     maxWidth: "xl",
                     height: "fit",
-                    paddingY: "2rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",

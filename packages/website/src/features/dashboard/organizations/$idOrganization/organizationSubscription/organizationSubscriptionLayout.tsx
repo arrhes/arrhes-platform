@@ -12,7 +12,7 @@ export function OrganizationSubscriptionLayout() {
                 subscription: {
                     items: [
                         {
-                            label: "Abonnement",
+                            label: "Statut",
                             icon: <IconRosetteDiscountCheck />,
                             to: "/dashboard/organisations/$idOrganization/abonnement",
                             params: {

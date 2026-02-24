@@ -2,10 +2,10 @@ import { css } from "@arrhes/ui/utilities/cn.js"
 import type { ReactNode } from "react"
 
 export function SettingsSectionRow(props: {
-    title: string
-    description: string
+    title?: string
+    description?: string
     variant?: "default" | "danger"
-    children: ReactNode
+    children?: ReactNode
 }) {
     const isDanger = props.variant === "danger"
 

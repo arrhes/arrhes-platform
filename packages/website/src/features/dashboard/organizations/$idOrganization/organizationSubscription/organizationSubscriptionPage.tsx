@@ -77,7 +77,7 @@ export function OrganizationSubscriptionPage() {
                                 })}
                             >
                                 <SettingsSection.Root>
-                                    <SettingsSection.Header title="Abonnement" />
+                                    <SettingsSection.Header title="Statut de l'abonnement" />
                                     <SettingsSection.Row
                                         title="Statut"
                                         description={

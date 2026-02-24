@@ -171,7 +171,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                     maxWidth: "100%",
                     padding: "0",
                     overflowX: "auto",
-                    borderRadius: "md",
+                    borderRadius: "lg",
                     border: "1px solid",
                     borderColor: "neutral/10",
                 })}

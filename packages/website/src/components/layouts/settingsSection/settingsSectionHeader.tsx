@@ -1,6 +1,6 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
 
-export function SettingsSectionHeader(props: { title: string; variant?: "default" | "danger" }) {
+export function SettingsSectionHeader(props: { title: string; description?: string; variant?: "default" | "danger" }) {
     const isDanger = props.variant === "danger"
 
     return (
@@ -25,6 +25,9 @@ export function SettingsSectionHeader(props: { title: string; variant?: "default
             >
                 {props.title}
             </span>
+            {props.description !== undefined ? (
+                <span className={css({ fontSize: "sm", color: "neutral/50" })}>{props.description}</span>
+            ) : null}
         </div>
     )
 }
