@@ -1,7 +1,5 @@
 import { readAllFilesRouteDefinition, type readAllFoldersRouteDefinition } from "@arrhes/application-metadata/routes"
-import { Button, ButtonOutlineContent } from "@arrhes/ui"
-import { css, cx } from "@arrhes/ui/utilities/cn.js"
-import { IconChevronRight, IconHome, IconLayoutGrid, IconLayoutList } from "@tabler/icons-react"
+import { css } from "@arrhes/ui/utilities/cn.js"
 import { type DragEvent, useMemo, useState } from "react"
 import type * as v from "valibot"
 import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.js"
@@ -74,7 +72,7 @@ export function FilesPageContent(props: {
         handleBreadcrumbDrop,
         params,
     } = props
-    const [viewMode, setViewMode] = useState<ViewMode>("grid")
+    const [viewMode, setViewMode] = useState<ViewMode>("list")
 
     const folderPath = useMemo(() => buildFolderPath(folders, idFolder), [folders, idFolder])
 
@@ -157,89 +155,6 @@ export function FilesPageContent(props: {
 
     return (
         <>
-            {/* Breadcrumb */}
-            {folderPath.length > 0 ? (
-                <div
-                    className={css({
-                        width: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.25rem",
-                        fontSize: "sm",
-                        color: "neutral/60",
-                    })}
-                >
-                    <button
-                        type="button"
-                        onClick={() => navigateToFolder(null)}
-                        onDragOver={(e) => handleBreadcrumbDragOver(e, "__root__")}
-                        onDragLeave={handleBreadcrumbDragLeave}
-                        onDrop={(e) => handleBreadcrumbDrop(e, null)}
-                        className={cx(
-                            css({
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "0.25rem",
-                                cursor: "pointer",
-                                color: "primary",
-                                background: "none",
-                                border: "none",
-                                padding: "0.25rem",
-                                borderRadius: "sm",
-                                _hover: { backgroundColor: "primary/5" },
-                            }),
-                            breadcrumbDragOver === "__root__" &&
-                                css({
-                                    backgroundColor: "primary/10",
-                                    outline: "2px solid",
-                                    outlineColor: "primary",
-                                }),
-                        )}
-                    >
-                        <IconHome size={14} />
-                        Fichiers
-                    </button>
-                    {folderPath.map((folder, index) => (
-                        <span
-                            key={folder.id}
-                            className={css({ display: "flex", alignItems: "center", gap: "0.25rem" })}
-                        >
-                            <IconChevronRight size={14} />
-                            {index === folderPath.length - 1 ? (
-                                <span className={css({ fontWeight: "medium", color: "neutral" })}>{folder.name}</span>
-                            ) : (
-                                <button
-                                    type="button"
-                                    onClick={() => navigateToFolder(folder.id)}
-                                    onDragOver={(e) => handleBreadcrumbDragOver(e, folder.id)}
-                                    onDragLeave={handleBreadcrumbDragLeave}
-                                    onDrop={(e) => handleBreadcrumbDrop(e, folder.id)}
-                                    className={cx(
-                                        css({
-                                            cursor: "pointer",
-                                            color: "primary",
-                                            background: "none",
-                                            border: "none",
-                                            padding: "0.25rem",
-                                            borderRadius: "sm",
-                                            _hover: { backgroundColor: "primary/5" },
-                                        }),
-                                        breadcrumbDragOver === folder.id &&
-                                            css({
-                                                backgroundColor: "primary/10",
-                                                outline: "2px solid",
-                                                outlineColor: "primary",
-                                            }),
-                                    )}
-                                >
-                                    {folder.name}
-                                </button>
-                            )}
-                        </span>
-                    ))}
-                </div>
-            ) : null}
-
             {/* Shared search / filter / sort bar */}
             <div
                 className={css({
@@ -247,9 +162,7 @@ export function FilesPageContent(props: {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    gap: "0.25rem",
-                    fontSize: "sm",
-                    color: "neutral/60",
+                    gap: "0.5rem",
                 })}
             >
                 <SearchBar value={globalFilter} onChange={(value) => setGlobalFilter(value)} />
@@ -267,7 +180,7 @@ export function FilesPageContent(props: {
                     activeSortCount={sorting.length}
                 />
 
-                <Button
+                {/* <Button
                     onClick={() => {
                         if (viewMode === "grid") {
                             setViewMode("list")
@@ -279,58 +192,82 @@ export function FilesPageContent(props: {
                     title={viewMode === "grid" ? "Liste" : "Grille"}
                 >
                     <ButtonOutlineContent leftIcon={viewMode === "grid" ? <IconLayoutList /> : <IconLayoutGrid />} />
-                </Button>
+                </Button> */}
             </div>
 
-            <DataWrapper
-                routeDefinition={readAllFilesRouteDefinition}
-                body={{
-                    idOrganization: params.idOrganization,
-                    idYear: params.idYear,
-                }}
+            <div
+                className={css({
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    gap: "0.5rem",
+                })}
             >
-                {(files) => {
-                    const currentFiles = files.filter((f) => (f.idFolder ?? null) === currentFolderId)
+                <DataWrapper
+                    routeDefinition={readAllFilesRouteDefinition}
+                    body={{
+                        idOrganization: params.idOrganization,
+                        idYear: params.idYear,
+                    }}
+                >
+                    {(files) => {
+                        const currentFiles = files.filter((f) => (f.idFolder ?? null) === currentFolderId)
 
-                    // Apply shared filters and sorting to files
-                    let filteredFiles = currentFiles.filter((file) => {
-                        if (globalFilter) {
-                            const lower = globalFilter.toLowerCase()
-                            const matchesGlobal =
-                                file.name?.toLowerCase().includes(lower) || file.createdAt.toLowerCase().includes(lower)
-                            if (!matchesGlobal) return false
-                        }
-
-                        for (const [columnId, filterValue] of Object.entries(columnFilters)) {
-                            if (!filterValue) continue
-                            const lower = filterValue.toLowerCase()
-                            if (columnId === "name" && !file.name?.toLowerCase().includes(lower)) return false
-                            if (columnId === "createdAt" && !file.createdAt.toLowerCase().includes(lower)) return false
-                        }
-
-                        return true
-                    })
-
-                    if (sorting.length > 0) {
-                        filteredFiles = [...filteredFiles].sort((a, b) => {
-                            for (const sort of sorting) {
-                                let comparison = 0
-                                if (sort.id === "name") {
-                                    comparison = (a.name ?? "").localeCompare(b.name ?? "")
-                                } else if (sort.id === "createdAt") {
-                                    comparison = a.createdAt.localeCompare(b.createdAt)
-                                }
-                                if (comparison !== 0) return sort.desc ? -comparison : comparison
+                        // Apply shared filters and sorting to files
+                        let filteredFiles = currentFiles.filter((file) => {
+                            if (globalFilter) {
+                                const lower = globalFilter.toLowerCase()
+                                const matchesGlobal =
+                                    file.name?.toLowerCase().includes(lower) ||
+                                    file.createdAt.toLowerCase().includes(lower)
+                                if (!matchesGlobal) return false
                             }
-                            return 0
-                        })
-                    } else {
-                        filteredFiles = [...filteredFiles].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-                    }
 
-                    if (viewMode === "grid") {
+                            for (const [columnId, filterValue] of Object.entries(columnFilters)) {
+                                if (!filterValue) continue
+                                const lower = filterValue.toLowerCase()
+                                if (columnId === "name" && !file.name?.toLowerCase().includes(lower)) return false
+                                if (columnId === "createdAt" && !file.createdAt.toLowerCase().includes(lower))
+                                    return false
+                            }
+
+                            return true
+                        })
+
+                        if (sorting.length > 0) {
+                            filteredFiles = [...filteredFiles].sort((a, b) => {
+                                for (const sort of sorting) {
+                                    let comparison = 0
+                                    if (sort.id === "name") {
+                                        comparison = (a.name ?? "").localeCompare(b.name ?? "")
+                                    } else if (sort.id === "createdAt") {
+                                        comparison = a.createdAt.localeCompare(b.createdAt)
+                                    }
+                                    if (comparison !== 0) return sort.desc ? -comparison : comparison
+                                }
+                                return 0
+                            })
+                        } else {
+                            filteredFiles = [...filteredFiles].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+                        }
+
+                        if (viewMode === "grid") {
+                            return (
+                                <FilesGrid
+                                    idOrganization={params.idOrganization}
+                                    idYear={params.idYear}
+                                    files={filteredFiles}
+                                    folders={filteredFolders}
+                                    currentFolderId={currentFolderId}
+                                    parentFolderId={parentFolderId}
+                                    onFolderOpen={navigateToFolder}
+                                    hasActiveFilters={hasActiveFilters}
+                                />
+                            )
+                        }
                         return (
-                            <FilesGrid
+                            <FilesTable
                                 idOrganization={params.idOrganization}
                                 idYear={params.idYear}
                                 files={filteredFiles}
@@ -341,21 +278,9 @@ export function FilesPageContent(props: {
                                 hasActiveFilters={hasActiveFilters}
                             />
                         )
-                    }
-                    return (
-                        <FilesTable
-                            idOrganization={params.idOrganization}
-                            idYear={params.idYear}
-                            files={filteredFiles}
-                            folders={filteredFolders}
-                            currentFolderId={currentFolderId}
-                            parentFolderId={parentFolderId}
-                            onFolderOpen={navigateToFolder}
-                            hasActiveFilters={hasActiveFilters}
-                        />
-                    )
-                }}
-            </DataWrapper>
+                    }}
+                </DataWrapper>
+            </div>
         </>
     )
 }

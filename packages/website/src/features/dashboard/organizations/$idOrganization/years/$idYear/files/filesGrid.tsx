@@ -142,8 +142,8 @@ export function FilesGrid(props: {
             <div
                 className={css({
                     width: "100%",
-                    padding: "3rem 1rem",
-                    borderRadius: "xl",
+                    padding: "1rem",
+                    borderRadius: "lg",
                     border: "1px dashed",
                     borderColor: "neutral/15",
                     backgroundColor: "neutral/2",
@@ -162,107 +162,43 @@ export function FilesGrid(props: {
         <div
             className={css({
                 width: "100%",
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                gap: "3",
+                padding: "1rem",
+                borderRadius: "lg",
+                border: "1px dashed",
+                borderColor: "neutral/15",
+                backgroundColor: "neutral/2",
             })}
         >
-            {/* Back folder ("..") when inside a folder */}
-            {props.currentFolderId !== null && (
-                <div
-                    onClick={() => props.onFolderOpen(props.parentFolderId)}
-                    className={css({
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: "0",
-                        borderRadius: "xl",
-                        border: "2px dashed",
-                        borderColor: "neutral/12",
-                        backgroundColor: "neutral/2",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        overflow: "hidden",
-                        _hover: {
-                            borderColor: "primary/25",
-                            backgroundColor: "primary/3",
-                        },
-                    })}
-                >
+            <div
+                className={css({
+                    width: "100%",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                    gap: "0.5rem",
+                })}
+            >
+                {/* Back folder ("..") when inside a folder */}
+                {props.currentFolderId !== null && (
                     <div
+                        onClick={() => props.onFolderOpen(props.parentFolderId)}
                         className={css({
-                            width: "100%",
-                            height: "100px",
                             display: "flex",
-                            justifyContent: "center",
+                            flexDirection: "column",
                             alignItems: "center",
+                            gap: "0",
+                            borderRadius: "lg",
+                            border: "2px dashed",
+                            borderColor: "neutral/12",
+                            backgroundColor: "neutral/2",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease",
+                            overflow: "hidden",
+                            _hover: {
+                                borderColor: "primary/25",
+                                backgroundColor: "primary/3",
+                            },
                         })}
                     >
-                        <div className={css({ color: "neutral/30" })}>
-                            <IconArrowUp size={32} />
-                        </div>
-                    </div>
-                    <div
-                        className={css({
-                            width: "100%",
-                            padding: "0.5rem 0.75rem 0.75rem",
-                            textAlign: "center",
-                        })}
-                    >
-                        <span
-                            className={css({
-                                fontSize: "sm",
-                                fontWeight: "medium",
-                                color: "neutral/50",
-                            })}
-                        >
-                            ..
-                        </span>
-                    </div>
-                </div>
-            )}
-
-            {/* Folders */}
-            {props.folders.map((folder) => (
-                <FolderContextMenu
-                    key={folder.id}
-                    folder={folder}
-                    idOrganization={props.idOrganization}
-                    idYear={props.idYear}
-                >
-                    <div
-                        onClick={() => props.onFolderOpen(folder.id)}
-                        onDragOver={(e) => handleDragOver(e, folder.id)}
-                        onDragLeave={handleDragLeave}
-                        onDrop={(e) => handleDrop(e, folder.id)}
-                        className={cx(
-                            css({
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap: "0",
-                                borderRadius: "xl",
-                                border: "1px solid",
-                                borderColor: "amber.200",
-                                backgroundColor: "white",
-                                cursor: "pointer",
-                                transition: "all 0.2s ease",
-                                overflow: "hidden",
-                                _hover: {
-                                    borderColor: "amber.300",
-                                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.06)",
-                                    transform: "translateY(-2px)",
-                                },
-                            }),
-                            dragOverFolderId === folder.id &&
-                                css({
-                                    borderColor: "primary",
-                                    backgroundColor: "primary/5",
-                                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
-                                }),
-                        )}
-                    >
-                        {/* Folder icon area */}
                         <div
                             className={css({
                                 width: "100%",
@@ -270,80 +206,73 @@ export function FilesGrid(props: {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                backgroundColor: "amber.50",
                             })}
                         >
-                            <div className={css({ color: "amber.500" })}>
-                                <IconFolder size={40} />
+                            <div className={css({ color: "neutral/30" })}>
+                                <IconArrowUp size={32} />
                             </div>
                         </div>
-
-                        {/* Folder info */}
                         <div
                             className={css({
                                 width: "100%",
-                                padding: "0.625rem 0.75rem 0.75rem",
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "0.125rem",
-                                borderTop: "1px solid",
-                                borderColor: "amber.100",
+                                padding: "0.5rem 0.75rem 0.75rem",
+                                textAlign: "center",
                             })}
                         >
                             <span
                                 className={css({
-                                    width: "100%",
                                     fontSize: "sm",
-                                    fontWeight: "semibold",
-                                    color: "neutral",
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis",
-                                    whiteSpace: "nowrap",
+                                    fontWeight: "medium",
+                                    color: "neutral/50",
                                 })}
                             >
-                                {folder.name}
-                            </span>
-                            <span
-                                className={css({
-                                    fontSize: "xs",
-                                    color: "neutral/40",
-                                })}
-                            >
-                                <FormatDate date={folder.createdAt} />
+                                ..
                             </span>
                         </div>
                     </div>
-                </FolderContextMenu>
-            ))}
+                )}
 
-            {/* Files */}
-            {props.files.map((file) => {
-                const typeLabel = getFileTypeLabel(file.type)
-                const badgeColor = getFileTypeBadgeColor(file.type)
-
-                return (
-                    <FileContextMenu
-                        key={file.id}
-                        file={file}
+                {/* Folders */}
+                {props.folders.map((folder) => (
+                    <FolderContextMenu
+                        key={folder.id}
+                        folder={folder}
                         idOrganization={props.idOrganization}
                         idYear={props.idYear}
                     >
                         <div
-                            draggable
-                            onDragStart={(e) => handleDragStart(e, file.id)}
-                            onClick={() => {
-                                applicationRouter.navigate({
-                                    to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idFile",
-                                    params: {
-                                        idOrganization: props.idOrganization,
-                                        idYear: props.idYear,
-                                        idFile: file.id,
+                            onClick={() => props.onFolderOpen(folder.id)}
+                            onDragOver={(e) => handleDragOver(e, folder.id)}
+                            onDragLeave={handleDragLeave}
+                            onDrop={(e) => handleDrop(e, folder.id)}
+                            className={cx(
+                                css({
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    gap: "0",
+                                    borderRadius: "xl",
+                                    border: "1px solid",
+                                    borderColor: "amber.200",
+                                    backgroundColor: "white",
+                                    cursor: "pointer",
+                                    transition: "all 0.2s ease",
+                                    overflow: "hidden",
+                                    _hover: {
+                                        borderColor: "amber.300",
+                                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.06)",
+                                        transform: "translateY(-2px)",
                                     },
-                                })
-                            }}
-                            className={cardStyle}
+                                }),
+                                dragOverFolderId === folder.id &&
+                                    css({
+                                        borderColor: "primary",
+                                        backgroundColor: "primary/5",
+                                        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
+                                    }),
+                            )}
                         >
-                            {/* File icon area */}
+                            {/* Folder icon area */}
                             <div
                                 className={css({
                                     width: "100%",
@@ -351,35 +280,15 @@ export function FilesGrid(props: {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    backgroundColor: getFileIconBg(file.type),
-                                    position: "relative",
+                                    backgroundColor: "amber.50",
                                 })}
                             >
-                                <div className={css({ color: getFileIconColor(file.type) })}>
-                                    {getFileIcon(file.type)}
+                                <div className={css({ color: "amber.500" })}>
+                                    <IconFolder size={40} />
                                 </div>
-                                {/* File type badge */}
-                                {typeLabel && (
-                                    <span
-                                        className={css({
-                                            position: "absolute",
-                                            top: "0.5rem",
-                                            right: "0.5rem",
-                                            fontSize: "2xs",
-                                            fontWeight: "semibold",
-                                            letterSpacing: "0.025em",
-                                            padding: "0.125rem 0.375rem",
-                                            borderRadius: "md",
-                                            backgroundColor: badgeColor.bg,
-                                            color: badgeColor.text,
-                                        })}
-                                    >
-                                        {typeLabel}
-                                    </span>
-                                )}
                             </div>
 
-                            {/* File info */}
+                            {/* Folder info */}
                             <div
                                 className={css({
                                     width: "100%",
@@ -388,7 +297,7 @@ export function FilesGrid(props: {
                                     flexDirection: "column",
                                     gap: "0.125rem",
                                     borderTop: "1px solid",
-                                    borderColor: "neutral/8",
+                                    borderColor: "amber.100",
                                 })}
                             >
                                 <span
@@ -402,45 +311,147 @@ export function FilesGrid(props: {
                                         whiteSpace: "nowrap",
                                     })}
                                 >
-                                    {file.name ?? file.reference}
+                                    {folder.name}
                                 </span>
-                                {file.name && file.reference && (
+                                <span
+                                    className={css({
+                                        fontSize: "xs",
+                                        color: "neutral/40",
+                                    })}
+                                >
+                                    <FormatDate date={folder.createdAt} />
+                                </span>
+                            </div>
+                        </div>
+                    </FolderContextMenu>
+                ))}
+
+                {/* Files */}
+                {props.files.map((file) => {
+                    const typeLabel = getFileTypeLabel(file.type)
+                    const badgeColor = getFileTypeBadgeColor(file.type)
+
+                    return (
+                        <FileContextMenu
+                            key={file.id}
+                            file={file}
+                            idOrganization={props.idOrganization}
+                            idYear={props.idYear}
+                        >
+                            <div
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, file.id)}
+                                onClick={() => {
+                                    applicationRouter.navigate({
+                                        to: "/dashboard/organisations/$idOrganization/exercices/$idYear/fichiers/$idFile",
+                                        params: {
+                                            idOrganization: props.idOrganization,
+                                            idYear: props.idYear,
+                                            idFile: file.id,
+                                        },
+                                    })
+                                }}
+                                className={cardStyle}
+                            >
+                                {/* File icon area */}
+                                <div
+                                    className={css({
+                                        width: "100%",
+                                        height: "100px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        backgroundColor: getFileIconBg(file.type),
+                                        position: "relative",
+                                    })}
+                                >
+                                    <div className={css({ color: getFileIconColor(file.type) })}>
+                                        {getFileIcon(file.type)}
+                                    </div>
+                                    {/* File type badge */}
+                                    {typeLabel && (
+                                        <span
+                                            className={css({
+                                                position: "absolute",
+                                                top: "0.5rem",
+                                                right: "0.5rem",
+                                                fontSize: "2xs",
+                                                fontWeight: "semibold",
+                                                letterSpacing: "0.025em",
+                                                padding: "0.125rem 0.375rem",
+                                                borderRadius: "md",
+                                                backgroundColor: badgeColor.bg,
+                                                color: badgeColor.text,
+                                            })}
+                                        >
+                                            {typeLabel}
+                                        </span>
+                                    )}
+                                </div>
+
+                                {/* File info */}
+                                <div
+                                    className={css({
+                                        width: "100%",
+                                        padding: "0.625rem 0.75rem 0.75rem",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "0.125rem",
+                                        borderTop: "1px solid",
+                                        borderColor: "neutral/8",
+                                    })}
+                                >
                                     <span
                                         className={css({
                                             width: "100%",
-                                            fontSize: "xs",
-                                            color: "neutral/50",
+                                            fontSize: "sm",
+                                            fontWeight: "semibold",
+                                            color: "neutral",
                                             overflow: "hidden",
                                             textOverflow: "ellipsis",
                                             whiteSpace: "nowrap",
                                         })}
                                     >
-                                        {file.reference}
+                                        {file.name ?? file.reference}
                                     </span>
-                                )}
-                                <div
-                                    className={css({
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "1",
-                                        fontSize: "xs",
-                                        color: "neutral/40",
-                                        marginTop: "0.125rem",
-                                    })}
-                                >
-                                    <FormatDate date={file.createdAt} />
-                                    {file.size && (
-                                        <>
-                                            <span className={css({ color: "neutral/20" })}>·</span>
-                                            <FormatFileSize size={file.size} />
-                                        </>
+                                    {file.name && file.reference && (
+                                        <span
+                                            className={css({
+                                                width: "100%",
+                                                fontSize: "xs",
+                                                color: "neutral/50",
+                                                overflow: "hidden",
+                                                textOverflow: "ellipsis",
+                                                whiteSpace: "nowrap",
+                                            })}
+                                        >
+                                            {file.reference}
+                                        </span>
                                     )}
+                                    <div
+                                        className={css({
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: "1",
+                                            fontSize: "xs",
+                                            color: "neutral/40",
+                                            marginTop: "0.125rem",
+                                        })}
+                                    >
+                                        <FormatDate date={file.createdAt} />
+                                        {file.size && (
+                                            <>
+                                                <span className={css({ color: "neutral/20" })}>·</span>
+                                                <FormatFileSize size={file.size} />
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </FileContextMenu>
-                )
-            })}
+                        </FileContextMenu>
+                    )
+                })}
+            </div>
         </div>
     )
 }

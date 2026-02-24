@@ -1,15 +1,16 @@
-import {
-    type readAllRecordRowsRouteDefinition,
-    type readAllRecordsRouteDefinition,
-    readOneAccountRouteDefinition,
-    readOneFileRouteDefinition,
-    readOneJournalRouteDefinition,
-    readOneRecordLabelRouteDefinition,
+import type {
+    readAllAccountsRouteDefinition,
+    readAllFilesRouteDefinition,
+    readAllJournalsRouteDefinition,
+    readAllRecordLabelsRouteDefinition,
+    readAllRecordRowsRouteDefinition,
+    readAllRecordsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEye } from "@tabler/icons-react"
+import { useMemo } from "react"
 import type * as v from "valibot"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
 import { FormatDateTime } from "../../../../../../../components/formats/formatDateTime.js"
@@ -17,7 +18,6 @@ import { FormatNull } from "../../../../../../../components/formats/formatNull.j
 import { FormatPrice } from "../../../../../../../components/formats/formatPrice.js"
 import { FormatText } from "../../../../../../../components/formats/formatText.js"
 import { DataTable } from "../../../../../../../components/layouts/dataTable.js"
-import { DataWrapper } from "../../../../../../../components/layouts/dataWrapper.js"
 import { LinkButton } from "../../../../../../../components/linkButton.js"
 
 export function RecordsTable(props: {
@@ -25,18 +25,60 @@ export function RecordsTable(props: {
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
     records: v.InferOutput<typeof readAllRecordsRouteDefinition.schemas.return>
     recordRows: v.InferOutput<typeof readAllRecordRowsRouteDefinition.schemas.return>
+    journals: v.InferOutput<typeof readAllJournalsRouteDefinition.schemas.return>
+    recordLabels: v.InferOutput<typeof readAllRecordLabelsRouteDefinition.schemas.return>
+    files: v.InferOutput<typeof readAllFilesRouteDefinition.schemas.return>
+    accounts: v.InferOutput<typeof readAllAccountsRouteDefinition.schemas.return>
 }) {
-    const recordsData = [...props.records].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    const recordsData = useMemo(
+        () => [...props.records].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+        [props.records],
+    )
 
-    const rowsByRecord = new Map<string, typeof props.recordRows>()
-    for (const row of props.recordRows) {
-        const existing = rowsByRecord.get(row.idRecord)
-        if (existing) {
-            existing.push(row)
-        } else {
-            rowsByRecord.set(row.idRecord, [row])
+    const rowsByRecord = useMemo(() => {
+        const map = new Map<string, typeof props.recordRows>()
+        for (const row of props.recordRows) {
+            const existing = map.get(row.idRecord)
+            if (existing) {
+                existing.push(row)
+            } else {
+                map.set(row.idRecord, [row])
+            }
         }
-    }
+        return map
+    }, [props.recordRows])
+
+    const journalsMap = useMemo(() => {
+        const map = new Map<string, (typeof props.journals)[number]>()
+        for (const journal of props.journals) {
+            map.set(journal.id, journal)
+        }
+        return map
+    }, [props.journals])
+
+    const recordLabelsMap = useMemo(() => {
+        const map = new Map<string, (typeof props.recordLabels)[number]>()
+        for (const recordLabel of props.recordLabels) {
+            map.set(recordLabel.id, recordLabel)
+        }
+        return map
+    }, [props.recordLabels])
+
+    const filesMap = useMemo(() => {
+        const map = new Map<string, (typeof props.files)[number]>()
+        for (const file of props.files) {
+            map.set(file.id, file)
+        }
+        return map
+    }, [props.files])
+
+    const accountsMap = useMemo(() => {
+        const map = new Map<string, (typeof props.accounts)[number]>()
+        for (const account of props.accounts) {
+            map.set(account.id, account)
+        }
+        return map
+    }, [props.accounts])
 
     return (
         <DataTable
@@ -76,61 +118,34 @@ export function RecordsTable(props: {
                 {
                     accessorKey: "idJournal",
                     header: "Journal",
-                    cell: ({ row }) =>
-                        row.original.idJournal === null ? (
-                            <FormatNull />
-                        ) : (
-                            <DataWrapper
-                                routeDefinition={readOneJournalRouteDefinition}
-                                body={{
-                                    idOrganization: props.idOrganization,
-                                    idYear: props.idYear,
-                                    idJournal: row.original.idJournal,
-                                }}
-                            >
-                                {(journal) => <FormatText>{journal.code}</FormatText>}
-                            </DataWrapper>
-                        ),
+                    cell: ({ row }) => {
+                        if (row.original.idJournal === null) return <FormatNull />
+                        const journal = journalsMap.get(row.original.idJournal)
+                        if (!journal) return <FormatNull />
+                        return <FormatText>{journal.code}</FormatText>
+                    },
                     filterFn: "includesString",
                 },
                 {
                     accessorKey: "idRecordLabel",
                     header: "Catégorie",
-                    cell: ({ row }) =>
-                        row.original.idRecordLabel === null ? (
-                            <FormatNull />
-                        ) : (
-                            <DataWrapper
-                                routeDefinition={readOneRecordLabelRouteDefinition}
-                                body={{
-                                    idOrganization: props.idOrganization,
-                                    idYear: props.idYear,
-                                    idRecordLabel: row.original.idRecordLabel,
-                                }}
-                            >
-                                {(recordLabel) => <FormatText>{recordLabel.label}</FormatText>}
-                            </DataWrapper>
-                        ),
+                    cell: ({ row }) => {
+                        if (row.original.idRecordLabel === null) return <FormatNull />
+                        const recordLabel = recordLabelsMap.get(row.original.idRecordLabel)
+                        if (!recordLabel) return <FormatNull />
+                        return <FormatText>{recordLabel.label}</FormatText>
+                    },
                     filterFn: "includesString",
                 },
                 {
                     accessorKey: "idFile",
                     header: "Pièce justificative",
-                    cell: ({ row }) =>
-                        row.original.idFile === null ? (
-                            <FormatNull />
-                        ) : (
-                            <DataWrapper
-                                routeDefinition={readOneFileRouteDefinition}
-                                body={{
-                                    idOrganization: props.idOrganization,
-                                    idYear: props.idYear,
-                                    idFile: row.original.idFile,
-                                }}
-                            >
-                                {(file) => <FormatText>{file.reference}</FormatText>}
-                            </DataWrapper>
-                        ),
+                    cell: ({ row }) => {
+                        if (row.original.idFile === null) return <FormatNull />
+                        const file = filesMap.get(row.original.idFile)
+                        if (!file) return <FormatNull />
+                        return <FormatText>{file.reference}</FormatText>
+                    },
                     filterFn: "includesString",
                 },
                 {
@@ -207,28 +222,22 @@ export function RecordsTable(props: {
                             </tr>
                         </thead>
                         <tbody>
-                            {rows.map((recordRow) => (
-                                <tr
-                                    key={recordRow.id}
-                                    className={css({
-                                        borderTop: "1px solid",
-                                        borderTopColor: "neutral/5",
-                                    })}
-                                >
-                                    <td
+                            {rows.map((recordRow) => {
+                                const account = accountsMap.get(recordRow.idAccount)
+                                return (
+                                    <tr
+                                        key={recordRow.id}
                                         className={css({
-                                            padding: "0.5rem 1rem",
+                                            borderTop: "1px solid",
+                                            borderTopColor: "neutral/5",
                                         })}
                                     >
-                                        <DataWrapper
-                                            routeDefinition={readOneAccountRouteDefinition}
-                                            body={{
-                                                idOrganization: props.idOrganization,
-                                                idYear: props.idYear,
-                                                idAccount: recordRow.idAccount,
-                                            }}
+                                        <td
+                                            className={css({
+                                                padding: "0.5rem 1rem",
+                                            })}
                                         >
-                                            {(account) => (
+                                            {account ? (
                                                 <div
                                                     className={css({
                                                         display: "flex",
@@ -253,34 +262,36 @@ export function RecordsTable(props: {
                                                         {account.label}
                                                     </FormatText>
                                                 </div>
+                                            ) : (
+                                                <FormatNull />
                                             )}
-                                        </DataWrapper>
-                                    </td>
-                                    <td
-                                        className={css({
-                                            padding: "0.5rem 1rem",
-                                        })}
-                                    >
-                                        <FormatText>{recordRow.label}</FormatText>
-                                    </td>
-                                    <td
-                                        className={css({
-                                            padding: "0.5rem 1rem",
-                                            textAlign: "right",
-                                        })}
-                                    >
-                                        <FormatPrice price={recordRow.debit} />
-                                    </td>
-                                    <td
-                                        className={css({
-                                            padding: "0.5rem 1rem",
-                                            textAlign: "right",
-                                        })}
-                                    >
-                                        <FormatPrice price={recordRow.credit} />
-                                    </td>
-                                </tr>
-                            ))}
+                                        </td>
+                                        <td
+                                            className={css({
+                                                padding: "0.5rem 1rem",
+                                            })}
+                                        >
+                                            <FormatText>{recordRow.label}</FormatText>
+                                        </td>
+                                        <td
+                                            className={css({
+                                                padding: "0.5rem 1rem",
+                                                textAlign: "right",
+                                            })}
+                                        >
+                                            <FormatPrice price={recordRow.debit} />
+                                        </td>
+                                        <td
+                                            className={css({
+                                                padding: "0.5rem 1rem",
+                                                textAlign: "right",
+                                            })}
+                                        >
+                                            <FormatPrice price={recordRow.credit} />
+                                        </td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 )

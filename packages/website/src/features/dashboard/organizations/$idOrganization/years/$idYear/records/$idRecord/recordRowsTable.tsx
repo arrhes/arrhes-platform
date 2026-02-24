@@ -1,20 +1,21 @@
-import { readOneAccountRouteDefinition } from "@arrhes/application-metadata/routes"
+import type { readAllAccountsRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconEye, IconPencil } from "@tabler/icons-react"
 import type * as v from "valibot"
 import { FormatDateTime } from "../../../../../../../../components/formats/formatDateTime.tsx"
+import { FormatNull } from "../../../../../../../../components/formats/formatNull.tsx"
 import { FormatPrice } from "../../../../../../../../components/formats/formatPrice.tsx"
 import { FormatText } from "../../../../../../../../components/formats/formatText.tsx"
 import { DataTable } from "../../../../../../../../components/layouts/dataTable.tsx"
-import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { LinkButton } from "../../../../../../../../components/linkButton.tsx"
 import { UpdateOneRecordRow } from "./$idRecordRow/updateOneRecordRow.tsx"
 
 export function RecordRowsTable(props: {
     record: v.InferOutput<typeof returnedSchemas.record>
     recordRows: Array<v.InferOutput<typeof returnedSchemas.recordRow>>
+    accounts: Map<string, v.InferOutput<typeof readAllAccountsRouteDefinition.schemas.return>[number]>
     isLoading?: boolean
 }) {
     return (
@@ -55,32 +56,25 @@ export function RecordRowsTable(props: {
                 {
                     accessorKey: "idAccount",
                     header: "Compte",
-                    cell: ({ row }) => (
-                        <DataWrapper
-                            routeDefinition={readOneAccountRouteDefinition}
-                            body={{
-                                idOrganization: props.record.idOrganization,
-                                idYear: props.record.idYear,
-                                idAccount: row.original.idAccount,
-                            }}
-                        >
-                            {(account) => (
-                                <div
-                                    className={css({
-                                        display: "flex",
-                                        justifyContent: "flex-start",
-                                        alignItems: "flex-start",
-                                        gap: "2",
-                                    })}
-                                >
-                                    <FormatText className={css({ overflow: "visible" })}>{account.number}</FormatText>
-                                    <FormatText wrap={true} className={css({ color: "neutral/50" })}>
-                                        {account.label}
-                                    </FormatText>
-                                </div>
-                            )}
-                        </DataWrapper>
-                    ),
+                    cell: ({ row }) => {
+                        const account = props.accounts.get(row.original.idAccount)
+                        if (!account) return <FormatNull />
+                        return (
+                            <div
+                                className={css({
+                                    display: "flex",
+                                    justifyContent: "flex-start",
+                                    alignItems: "flex-start",
+                                    gap: "2",
+                                })}
+                            >
+                                <FormatText className={css({ overflow: "visible" })}>{account.number}</FormatText>
+                                <FormatText wrap={true} className={css({ color: "neutral/50" })}>
+                                    {account.label}
+                                </FormatText>
+                            </div>
+                        )
+                    },
                     filterFn: "includesString",
                 },
                 {
