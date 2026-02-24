@@ -1,9 +1,9 @@
 import type { AnyRoute } from "@tanstack/react-router"
 import { dashboardLayoutRoute } from "./dashboardLayoutRoute.tsx"
 import { dashboardRootRoute } from "./dashboardRootRoute.tsx"
-import { organizationApiKeysKeysRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysKeysRoute.tsx"
-import { organizationApiKeysLayoutRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysLayoutRoute.tsx"
-import { organizationApiKeysRoute } from "./organizations/$idOrganization/organizationApiKeys/organizationApiKeysRoute.tsx"
+import { organizationApiKeysRoute } from "./organizations/$idOrganization/organizationApi/organizationApiKeysRoute.tsx"
+import { organizationApiLayoutRoute } from "./organizations/$idOrganization/organizationApi/organizationApiLayoutRoute.tsx"
+import { organizationApiRoute } from "./organizations/$idOrganization/organizationApi/organizationApiRoute.tsx"
 import { organizationLayoutRoute } from "./organizations/$idOrganization/organizationLayoutRoute.tsx"
 import { organizationPathRoute } from "./organizations/$idOrganization/organizationPathRoute.tsx"
 import { organizationRoute } from "./organizations/$idOrganization/organizationRoute.tsx"
@@ -82,7 +82,7 @@ export const dashboardTree: AnyRoute = dashboardLayoutRoute.addChildren([
                 organizationRoute,
                 yearsLayoutRoute.addChildren([yearsRoute]),
                 organizationUsersLayoutRoute.addChildren([organizationUsersRoute]),
-                organizationApiKeysLayoutRoute.addChildren([organizationApiKeysRoute, organizationApiKeysKeysRoute]),
+                organizationApiLayoutRoute.addChildren([organizationApiRoute, organizationApiKeysRoute]),
                 organizationSubscriptionLayoutRoute.addChildren([
                     organizationSubscriptionRoute,
                     organizationSubscriptionHistoryRoute,

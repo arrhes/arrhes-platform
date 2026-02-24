@@ -20,17 +20,17 @@ export function OrganizationSettingsLayout() {
                             },
                         },
                         {
-                            label: "Sécurité",
-                            icon: <IconLock />,
-                            to: "/dashboard/organisations/$idOrganization/paramètres/sécurité",
+                            label: "Stockage",
+                            icon: <IconDatabase />,
+                            to: "/dashboard/organisations/$idOrganization/paramètres/stockage",
                             params: {
                                 idOrganization: params.idOrganization,
                             },
                         },
                         {
-                            label: "Stockage",
-                            icon: <IconDatabase />,
-                            to: "/dashboard/organisations/$idOrganization/paramètres/stockage",
+                            label: "Sécurité",
+                            icon: <IconLock />,
+                            to: "/dashboard/organisations/$idOrganization/paramètres/sécurité",
                             params: {
                                 idOrganization: params.idOrganization,
                             },

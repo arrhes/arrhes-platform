@@ -2,10 +2,10 @@ import type { readAllApiKeysRouteDefinition as ReadAllApiKeysRouteDefinition } f
 import { deleteOneApiKeyRouteDefinition, readAllApiKeysRouteDefinition } from "@arrhes/application-metadata/routes"
 import type { ComponentPropsWithRef, ReactElement } from "react"
 import type * as v from "valibot"
-import { DeleteConfirmation } from "../../../../../components/overlays/dialog/deleteConfirmation.tsx"
-import { toast } from "../../../../../contexts/toasts/useToast.ts"
-import { getResponseBodyFromAPI } from "../../../../../utilities/getResponseBodyFromAPI.ts"
-import { invalidateData } from "../../../../../utilities/invalidateData.ts"
+import { DeleteConfirmation } from "../../../../../../components/overlays/dialog/deleteConfirmation.tsx"
+import { toast } from "../../../../../../contexts/toasts/useToast.ts"
+import { getResponseBodyFromAPI } from "../../../../../../utilities/getResponseBodyFromAPI.ts"
+import { invalidateData } from "../../../../../../utilities/invalidateData.ts"
 
 export function DeleteOneApiKey(props: {
     apiKey: v.InferOutput<typeof ReadAllApiKeysRouteDefinition.schemas.return>[number]

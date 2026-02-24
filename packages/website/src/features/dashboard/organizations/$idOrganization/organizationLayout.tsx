@@ -1,4 +1,4 @@
-import { IconCalendarEvent, IconKey, IconRosetteDiscountCheck, IconSettings, IconUsers } from "@tabler/icons-react"
+import { IconCalendarEvent, IconPlug, IconRosetteDiscountCheck, IconSettings, IconUsers } from "@tabler/icons-react"
 import { Outlet, useParams } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { PageNavigation } from "../../../../components/layouts/page/pageNavigation.tsx"
@@ -36,9 +36,9 @@ export function OrganizationLayout() {
                         },
                     },
                     {
-                        label: "Clés API",
-                        icon: <IconKey />,
-                        to: "/dashboard/organisations/$idOrganization/clés-api",
+                        label: "API",
+                        icon: <IconPlug />,
+                        to: "/dashboard/organisations/$idOrganization/api",
                         params: {
                             idOrganization: params.idOrganization,
                         },

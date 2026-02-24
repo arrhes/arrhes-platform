@@ -2,9 +2,9 @@ import { readAllApiKeysRouteDefinition } from "@arrhes/application-metadata/rout
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
 import { IconKey } from "@tabler/icons-react"
 import type * as v from "valibot"
-import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
-import { EmptyState } from "../../../../../components/layouts/emptyState.tsx"
-import { ListTable } from "../../../../../components/layouts/listTable/listTable.tsx"
+import { DataWrapper } from "../../../../../../components/layouts/dataWrapper.tsx"
+import { EmptyState } from "../../../../../../components/layouts/emptyState.tsx"
+import { ListTable } from "../../../../../../components/layouts/listTable/listTable.tsx"
 import { ApiKeyListTableRow } from "./apiKeyListTableRow.tsx"
 
 export function ApiKeysListTable(props: { idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"] }) {

@@ -1,10 +1,10 @@
 import { IconHome, IconKey } from "@tabler/icons-react"
 import { useParams } from "@tanstack/react-router"
 import { SubPageLayout } from "../../../../../components/layouts/subPageLayout.tsx"
-import { organizationApiKeysLayoutRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationApiKeys/organizationApiKeysLayoutRoute.tsx"
+import { organizationApiLayoutRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationApi/organizationApiLayoutRoute.tsx"
 
-export function OrganizationApiKeysLayout() {
-    const params = useParams({ from: organizationApiKeysLayoutRoute.id })
+export function OrganizationApiLayout() {
+    const params = useParams({ from: organizationApiLayoutRoute.id })
 
     return (
         <SubPageLayout
@@ -14,7 +14,7 @@ export function OrganizationApiKeysLayout() {
                         {
                             label: "Général",
                             icon: <IconHome />,
-                            to: "/dashboard/organisations/$idOrganization/clés-api",
+                            to: "/dashboard/organisations/$idOrganization/api",
                             params: {
                                 idOrganization: params.idOrganization,
                             },
@@ -22,7 +22,7 @@ export function OrganizationApiKeysLayout() {
                         {
                             label: "Clés",
                             icon: <IconKey />,
-                            to: "/dashboard/organisations/$idOrganization/clés-api/clés",
+                            to: "/dashboard/organisations/$idOrganization/api/clés",
                             params: {
                                 idOrganization: params.idOrganization,
                             },
