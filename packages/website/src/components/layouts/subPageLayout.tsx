@@ -37,7 +37,6 @@ export function SubPageLayout(props: {
                 justifyContent: "flex-start",
                 alignItems: "center",
                 overflowY: "auto",
-                paddingX: "1rem",
             })}
         >
             <div
@@ -70,7 +69,6 @@ export function SubPageLayout(props: {
                             maxHeight: "100vh",
                             overflowY: "auto",
                             padding: "1rem",
-                            paddingLeft: 0,
                         })}
                     >
                         {Object.entries(props.sections).map(([key, section]) => (

@@ -7,9 +7,7 @@ import type {
     readAllRecordsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
-import { ButtonGhostContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconEye } from "@tabler/icons-react"
 import { useMemo } from "react"
 import type * as v from "valibot"
 import { FormatDate } from "../../../../../../../components/formats/formatDate.js"
@@ -86,8 +84,8 @@ export function RecordsTable(props: {
             isLoading={false}
             columns={[
                 {
-                    accessorKey: "actions",
-                    header: " ",
+                    accessorKey: "label",
+                    header: "Libellé",
                     cell: ({ row }) => (
                         <LinkButton
                             to="/dashboard/organisations/$idOrganization/exercices/$idYear/écritures/$idRecord"
@@ -97,16 +95,9 @@ export function RecordsTable(props: {
                                 idRecord: row.original.id,
                             }}
                         >
-                            <ButtonGhostContent leftIcon={<IconEye />} text={undefined} />
+                            <FormatText>{row.original.label}</FormatText>
                         </LinkButton>
                     ),
-                    enableSorting: false,
-                    enableGlobalFilter: false,
-                },
-                {
-                    accessorKey: "label",
-                    header: "Libellé",
-                    cell: ({ row }) => <FormatText>{row.original.label}</FormatText>,
                     filterFn: "includesString",
                 },
                 {

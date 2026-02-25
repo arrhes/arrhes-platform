@@ -19,6 +19,7 @@ export function Box(props: {
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     overflowX: "auto",
+                    overflowY: "auto",
                     border: "1px solid",
                     borderColor: "neutral/10",
                     borderRadius: "lg",

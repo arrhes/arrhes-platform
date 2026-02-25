@@ -75,6 +75,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 flexShrink: "0",
                 width: "100%",
                 height: "fit",
+                maxHeight: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
@@ -169,8 +170,10 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 className={css({
                     width: "100%",
                     maxWidth: "100%",
+                    maxHeight: "[70vh]",
                     padding: "0",
                     overflowX: "auto",
+                    overflowY: "auto",
                     borderRadius: "lg",
                     border: "1px solid",
                     borderColor: "neutral/10",
@@ -190,6 +193,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             width: "100%",
                             position: "sticky",
                             top: "0",
+                            zIndex: "1",
                             backgroundColor: "white",
                         })}
                     >

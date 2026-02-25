@@ -46,64 +46,72 @@ export function BalanceSheetLiabilitiesReportTable(props: {
     })
 
     return (
-        <Table.Root>
-            <Table.Header.Root>
-                <Table.Header.Row>
-                    <Table.Header.Cell />
-                    <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
-                        <span className={css({ color: "neutral/75", fontSize: "sm" })}>Net</span>
-                    </Table.Header.Cell>
-                </Table.Header.Row>
-            </Table.Header.Root>
-            <Table.Body.Root>
-                {props.balanceSheets.length === 0 ? (
-                    <Table.Body.Root
-                        className={css({
-                            borderBottom: "1px solid",
-                            borderColor: "neutral/10",
-                            _last: { borderBottom: "0" },
-                        })}
-                    >
-                        <Table.Body.Row>
-                            <Table.Body.Cell>
-                                <FormatNull />
-                            </Table.Body.Cell>
-                        </Table.Body.Row>
-                    </Table.Body.Root>
-                ) : (
-                    <Fragment>
-                        {props.balanceSheets
-                            .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
-                            .sort((a, b) => Number(a.number) - Number(b.number))
-                            .map((balanceSheet) => {
-                                const balanceSheetChildren = getBalanceSheetChildren({
-                                    balanceSheet: balanceSheet,
-                                    balanceSheets: props.balanceSheets,
-                                })
-
-                                return (
-                                    <BalanceSheetLiabilitiesReportItem
-                                        key={balanceSheet.id}
-                                        idOrganization={balanceSheet.idOrganization}
-                                        idYear={balanceSheet.idYear}
-                                        accounts={props.accounts}
-                                        recordRows={props.recordRows}
-                                        balanceSheet={balanceSheet}
-                                        balanceSheetChildren={balanceSheetChildren}
-                                        level={0}
-                                    />
-                                )
+        <div
+            className={css({
+                width: "100%",
+                maxHeight: "[70vh]",
+                overflowY: "auto",
+            })}
+        >
+            <Table.Root>
+                <Table.Header.Root>
+                    <Table.Header.Row>
+                        <Table.Header.Cell />
+                        <Table.Header.Cell className={css({ width: "[1%]" })} align="right">
+                            <span className={css({ color: "neutral/75", fontSize: "sm" })}>Net</span>
+                        </Table.Header.Cell>
+                    </Table.Header.Row>
+                </Table.Header.Root>
+                <Table.Body.Root>
+                    {props.balanceSheets.length === 0 ? (
+                        <Table.Body.Root
+                            className={css({
+                                borderBottom: "1px solid",
+                                borderColor: "neutral/10",
+                                _last: { borderBottom: "0" },
                             })}
-                        <BalanceSheetLiabilitiesReportRow
-                            level={0}
-                            number={" "}
-                            label={"Total"}
-                            netAmount={netTotalAmount}
-                            isAmountDisplayed={true}
-                        />
-                    </Fragment>
-                )}
-            </Table.Body.Root>
-        </Table.Root>
+                        >
+                            <Table.Body.Row>
+                                <Table.Body.Cell>
+                                    <FormatNull />
+                                </Table.Body.Cell>
+                            </Table.Body.Row>
+                        </Table.Body.Root>
+                    ) : (
+                        <Fragment>
+                            {props.balanceSheets
+                                .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
+                                .sort((a, b) => Number(a.number) - Number(b.number))
+                                .map((balanceSheet) => {
+                                    const balanceSheetChildren = getBalanceSheetChildren({
+                                        balanceSheet: balanceSheet,
+                                        balanceSheets: props.balanceSheets,
+                                    })
+
+                                    return (
+                                        <BalanceSheetLiabilitiesReportItem
+                                            key={balanceSheet.id}
+                                            idOrganization={balanceSheet.idOrganization}
+                                            idYear={balanceSheet.idYear}
+                                            accounts={props.accounts}
+                                            recordRows={props.recordRows}
+                                            balanceSheet={balanceSheet}
+                                            balanceSheetChildren={balanceSheetChildren}
+                                            level={0}
+                                        />
+                                    )
+                                })}
+                            <BalanceSheetLiabilitiesReportRow
+                                level={0}
+                                number={" "}
+                                label={"Total"}
+                                netAmount={netTotalAmount}
+                                isAmountDisplayed={true}
+                            />
+                        </Fragment>
+                    )}
+                </Table.Body.Root>
+            </Table.Root>
+        </div>
     )
 }

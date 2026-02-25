@@ -102,7 +102,7 @@ export function JournalReportTable(props: {
                         {paddingTop > 0 && (
                             <tbody>
                                 <tr>
-                                    <td style={{ height: `${paddingTop}px`, padding: 0, border: 0 }} />
+                                    <td colSpan={5} style={{ height: `${paddingTop}px`, padding: 0, border: 0 }} />
                                 </tr>
                             </tbody>
                         )}
@@ -227,7 +227,7 @@ export function JournalReportTable(props: {
                         {paddingBottom > 0 && (
                             <tbody>
                                 <tr>
-                                    <td style={{ height: `${paddingBottom}px`, padding: 0, border: 0 }} />
+                                    <td colSpan={5} style={{ height: `${paddingBottom}px`, padding: 0, border: 0 }} />
                                 </tr>
                             </tbody>
                         )}
