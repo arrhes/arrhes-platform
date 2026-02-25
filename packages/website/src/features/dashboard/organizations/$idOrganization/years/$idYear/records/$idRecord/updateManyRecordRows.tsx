@@ -59,14 +59,23 @@ export function UpdateManyRecordRows(props: {
                         }}
                         onCancel={undefined}
                         onSuccess={async () => {
-                            await invalidateData({
-                                routeDefinition: readAllRecordRowsRouteDefinition,
-                                body: {
-                                    idOrganization: props.record.idOrganization,
-                                    idYear: props.record.idYear,
-                                    idRecord: props.record.id,
-                                },
-                            })
+                            await Promise.all([
+                                invalidateData({
+                                    routeDefinition: readAllRecordRowsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.record.idOrganization,
+                                        idYear: props.record.idYear,
+                                        idRecord: props.record.id,
+                                    },
+                                }),
+                                invalidateData({
+                                    routeDefinition: readAllRecordRowsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.record.idOrganization,
+                                        idYear: props.record.idYear,
+                                    },
+                                }),
+                            ])
 
                             setOpen(false)
                         }}

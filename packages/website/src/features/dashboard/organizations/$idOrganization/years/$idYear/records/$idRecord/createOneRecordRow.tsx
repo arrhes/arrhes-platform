@@ -85,6 +85,13 @@ export function CreateOneRecordRow(props: {
                                         idRecord: props.record.id,
                                     },
                                 }),
+                                invalidateData({
+                                    routeDefinition: readAllRecordRowsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.record.idOrganization,
+                                        idYear: props.record.idYear,
+                                    },
+                                }),
                             ])
 
                             setOpen(false)

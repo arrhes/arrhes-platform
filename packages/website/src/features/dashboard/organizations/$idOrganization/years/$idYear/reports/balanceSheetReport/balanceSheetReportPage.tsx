@@ -37,14 +37,7 @@ export function BalanceSheetReportPage() {
 
     const recordRowsQuery = useDataFromAPI({
         routeDefinition: readAllRecordRowsRouteDefinition,
-        body: useMemo(
-            () => ({
-                idOrganization: params.idOrganization,
-                idYear: params.idYear,
-                idRecord: undefined,
-            }),
-            [params.idOrganization, params.idYear],
-        ),
+        body,
     })
 
     const balanceSheetsQuery = useDataFromAPI({

@@ -72,6 +72,13 @@ export function UpdateOneRecordRow(props: {
                                     },
                                 }),
                                 invalidateData({
+                                    routeDefinition: readAllRecordRowsRouteDefinition,
+                                    body: {
+                                        idOrganization: props.recordRow.idOrganization,
+                                        idYear: props.recordRow.idYear,
+                                    },
+                                }),
+                                invalidateData({
                                     routeDefinition: readOneRecordRowRouteDefinition,
                                     body: {
                                         idOrganization: props.recordRow.idOrganization,
