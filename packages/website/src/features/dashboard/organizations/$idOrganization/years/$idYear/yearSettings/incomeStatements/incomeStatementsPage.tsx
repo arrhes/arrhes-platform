@@ -54,7 +54,7 @@ export function IncomeStatementsPage() {
                                 />
                             </ConnectAccountsToIncomeStatements>
                         </div>
-                        <Box className={css({ maxH: "[640px]" })}>
+                        <Box className={css({ maxH: "[640px]", overflowY: "auto" })}>
                             <IncomeStatementsTable idOrganization={params.idOrganization} idYear={params.idYear} />
                         </Box>
                     </Section.Item>
@@ -75,7 +75,7 @@ export function IncomeStatementsPage() {
                                 <ButtonOutlineContent leftIcon={<IconPlus />} text="Générer les calculs par défaut" />
                             </GenerateComputations>
                         </div>
-                        <Box className={css({ maxH: "[640px]" })}>
+                        <Box className={css({ maxH: "[640px]", overflowY: "auto" })}>
                             <ComputationsTable idOrganization={params.idOrganization} idYear={params.idYear} />
                         </Box>
                     </Section.Item>

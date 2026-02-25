@@ -48,7 +48,7 @@ export function BalanceSheetsPage() {
                                 />
                             </ConnectAccountsToBalanceSheets>
                         </div>
-                        <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
+                        <Box className={css({ padding: "4", gap: "4", maxH: "[640px]", overflowY: "auto" })}>
                             <BalanceSheetTable idOrganization={params.idOrganization} idYear={params.idYear} />
                         </Box>
                     </Section.Item>
