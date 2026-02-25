@@ -3,19 +3,15 @@ import { CircularLoader } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { IconListNumbers } from "@tabler/icons-react"
 import { useNavigate } from "@tanstack/react-router"
-import { type MouseEvent, useCallback, useDeferredValue, useMemo, useState, useTransition } from "react"
+import { type MouseEvent, useCallback, useDeferredValue, useMemo } from "react"
 import { FormatError } from "../../../../../../../../components/formats/formatError.tsx"
-import { InputDebounced } from "../../../../../../../../components/inputs/inputDebounced.tsx"
-import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
 import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { Virtualizer } from "../../../../../../../../components/layouts/virtualizer.tsx"
 import { useDataFromAPI } from "../../../../../../../../utilities/useHTTPData.ts"
 import { AccountItem } from "./accountItem.tsx"
 import { sortAccounts } from "./sortAccounts.tsx"
 
-export function AccountsTable(props: { idOrganization: string; idYear: string }) {
-    const [globalFilter, setGlobalFilter] = useState("")
-    const [, startTransition] = useTransition()
+export function AccountsTable(props: { idOrganization: string; idYear: string; globalFilter: string }) {
     const navigate = useNavigate()
 
     const response = useDataFromAPI({
@@ -26,7 +22,7 @@ export function AccountsTable(props: { idOrganization: string; idYear: string })
         },
     })
 
-    const deferredFilter = useDeferredValue(globalFilter)
+    const deferredFilter = useDeferredValue(props.globalFilter)
 
     const structuredAccounts = useMemo(() => {
         if (!response.data) return []
@@ -75,12 +71,6 @@ export function AccountsTable(props: { idOrganization: string; idYear: string })
         [navigate, props.idOrganization, props.idYear],
     )
 
-    const handleFilterChange = useCallback((value: string | undefined) => {
-        startTransition(() => {
-            setGlobalFilter(value ?? "")
-        })
-    }, [])
-
     const renderAccount = useCallback(
         (sortedAccount: (typeof deferredAccounts)[number]) => (
             <AccountItem
@@ -102,47 +92,32 @@ export function AccountsTable(props: { idOrganization: string; idYear: string })
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
                 padding: "4",
-                gap: "4",
             })}
         >
-            <InputDebounced value={globalFilter ?? ""} onChange={handleFilterChange}>
-                <InputText placeholder="Recherche" className={css({ maxWidth: "320px" })} />
-            </InputDebounced>
-            <div
-                className={css({
-                    height: "100%",
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                })}
-            >
-                {response.data === undefined ? (
-                    response.isPending ? (
-                        <div className={css({ padding: "1rem" })}>
-                            <CircularLoader text="Chargement des données..." />
-                        </div>
-                    ) : (
-                        <FormatError
-                            text="Erreur lors de la récupération des données."
-                            className={css({ padding: "1rem" })}
-                        />
-                    )
-                ) : structuredAccounts.length === 0 ? (
-                    <EmptyState
-                        icon={<IconListNumbers size={48} />}
-                        title={globalFilter ? "Aucun compte trouvé" : "Aucun compte"}
-                        subtitle={globalFilter ? undefined : "Ajoutez un compte pour commencer"}
-                    />
-                ) : (
-                    <div onClick={handleContainerClick} className={css({ width: "100%", height: "100%" })}>
-                        <Virtualizer data={deferredAccounts} childSize={32}>
-                            {renderAccount}
-                        </Virtualizer>
+            {response.data === undefined ? (
+                response.isPending ? (
+                    <div className={css({ padding: "1rem" })}>
+                        <CircularLoader text="Chargement des données..." />
                     </div>
-                )}
-            </div>
+                ) : (
+                    <FormatError
+                        text="Erreur lors de la récupération des données."
+                        className={css({ padding: "1rem" })}
+                    />
+                )
+            ) : structuredAccounts.length === 0 ? (
+                <EmptyState
+                    icon={<IconListNumbers size={48} />}
+                    title={props.globalFilter ? "Aucun compte trouvé" : "Aucun compte"}
+                    subtitle={props.globalFilter ? undefined : "Ajoutez un compte pour commencer"}
+                />
+            ) : (
+                <div onClick={handleContainerClick} className={css({ width: "100%", height: "100%" })}>
+                    <Virtualizer data={deferredAccounts} childSize={32}>
+                        {renderAccount}
+                    </Virtualizer>
+                </div>
+            )}
         </div>
     )
 }
