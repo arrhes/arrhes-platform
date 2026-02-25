@@ -5,7 +5,6 @@ import { useParams } from "@tanstack/react-router"
 import { Box } from "../../../../../../../../components/layouts/box.tsx"
 import { Page } from "../../../../../../../../components/layouts/page/page.tsx"
 import { Section } from "../../../../../../../../components/layouts/section/section.tsx"
-import { TitleComponent } from "../../../../../../../../components/layouts/title.tsx"
 import { balanceSheetsRoute } from "../../../../../../../../routes/root/dashboard/organizations/$idOrganization/years/$idYear/yearSettings/balanceSheets/balanceSheetsRoute.tsx"
 import { BalanceSheetTable } from "./balanceSheetTable.tsx"
 import { ConnectAccountsToBalanceSheets } from "./connectAccountsToBalanceSheets.tsx"
@@ -49,34 +48,9 @@ export function BalanceSheetsPage() {
                                 />
                             </ConnectAccountsToBalanceSheets>
                         </div>
-                        <div
-                            className={css({
-                                width: "100%",
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "flex-start",
-                                gap: "2",
-                                flexWrap: "wrap",
-                            })}
-                        >
-                            <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
-                                <TitleComponent>Actif</TitleComponent>
-                                <BalanceSheetTable
-                                    idOrganization={params.idOrganization}
-                                    idYear={params.idYear}
-                                    filter={(balanceSheet) => balanceSheet.side === "asset"}
-                                />
-                            </Box>
-                            <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
-                                <TitleComponent>Passif</TitleComponent>
-                                <BalanceSheetTable
-                                    idOrganization={params.idOrganization}
-                                    idYear={params.idYear}
-                                    filter={(balanceSheet) => balanceSheet.side === "liability"}
-                                />
-                            </Box>
-                        </div>
+                        <Box className={css({ padding: "4", gap: "4", maxH: "[640px]" })}>
+                            <BalanceSheetTable idOrganization={params.idOrganization} idYear={params.idYear} />
+                        </Box>
                     </Section.Item>
                 </Section.Root>
             </Page.Content>

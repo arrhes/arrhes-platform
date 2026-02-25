@@ -6,6 +6,7 @@ import { useState } from "react"
 import type * as v from "valibot"
 import { InputDebounced } from "../../../../../../../../components/inputs/inputDebounced.tsx"
 import { InputText } from "../../../../../../../../components/inputs/inputText.tsx"
+import { InputToggle } from "../../../../../../../../components/inputs/inputToggle.tsx"
 import { DataWrapper } from "../../../../../../../../components/layouts/dataWrapper.tsx"
 import { EmptyState } from "../../../../../../../../components/layouts/emptyState.tsx"
 import { BalanceSheetItem } from "./balanceSheetItem.tsx"
@@ -14,9 +15,9 @@ import { getBalanceSheetChildren } from "./getBalanceSheetChildren.tsx"
 export function BalanceSheetTable(props: {
     idOrganization: v.InferOutput<typeof returnedSchemas.organization>["id"]
     idYear: v.InferOutput<typeof returnedSchemas.year>["id"]
-    filter: (balanceSheet: v.InferOutput<typeof returnedSchemas.balanceSheet>) => boolean
 }) {
     const [globalFilter, setGlobalFilter] = useState("")
+    const [side, setSide] = useState<"asset" | "liability" | null | undefined>("asset")
 
     return (
         <DataWrapper
@@ -27,7 +28,9 @@ export function BalanceSheetTable(props: {
             }}
         >
             {(balanceSheets) => {
-                const sidedBalanceSheets = balanceSheets.filter(props.filter)
+                const sidedBalanceSheets = balanceSheets.filter(
+                    (balanceSheet) => side === null || side === undefined || balanceSheet.side === side,
+                )
 
                 const filteredBalanceSheets = sidedBalanceSheets
                     .filter((balanceSheet) => balanceSheet.idBalanceSheetParent === null)
@@ -45,9 +48,30 @@ export function BalanceSheetTable(props: {
                             gap: "4",
                         })}
                     >
-                        <InputDebounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(value ?? "")}>
-                            <InputText placeholder="Recherche" className={css({ maxWidth: "[320px]" })} />
-                        </InputDebounced>
+                        <div
+                            className={css({
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                gap: "2",
+                            })}
+                        >
+                            <InputDebounced
+                                value={globalFilter ?? ""}
+                                onChange={(value) => setGlobalFilter(value ?? "")}
+                            >
+                                <InputText placeholder="Recherche" className={css({ maxWidth: "[320px]" })} />
+                            </InputDebounced>
+                            <InputToggle
+                                value={side}
+                                onChange={setSide}
+                                options={[
+                                    { label: "Actif", value: "asset" },
+                                    { label: "Passif", value: "liability" },
+                                ]}
+                            />
+                        </div>
                         <div
                             className={css({
                                 height: "fit-content",
