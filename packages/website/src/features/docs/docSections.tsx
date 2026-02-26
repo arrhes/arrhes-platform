@@ -1,5 +1,5 @@
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { IconBook, IconGavel, IconHome, IconInfoCircle, IconLayout } from "@tabler/icons-react"
+import { IconBook, IconCode, IconGavel, IconHome, IconInfoCircle, IconLayout } from "@tabler/icons-react"
 import type { DocSection } from "./sectionTab.tsx"
 
 export // Documentation sections configuration
@@ -73,21 +73,26 @@ const docSections: Record<string, DocSection> = {
             },
         },
     },
-    // api: {
-    //     id: "api",
-    //     label: "API",
-    //     path: "/documentation/api",
-    //     icon: <IconCode />,
-    //     navigation: {
-    //         api: {
-    //             title: "API REST",
-    //             icon: <IconCode className={css({ width: "1rem", height: "1rem" })} />,
-    //             items: [
-    //                 { path: "/documentation/api", label: "Présentation" },
-    //             ]
-    //         }
-    //     }
-    // },
+    api: {
+        id: "api",
+        label: "API",
+        path: "/documentation/api",
+        icon: <IconCode />,
+        navigation: {
+            api: {
+                title: "API REST",
+                icon: <IconCode className={css({ width: "1rem", height: "1rem" })} />,
+                items: [
+                    { path: "/documentation/api", label: "Présentation" },
+                    { path: "/documentation/api/introduction", label: "Introduction" },
+                    { path: "/documentation/api/authentification", label: "Authentification" },
+                    { path: "/documentation/api/organisations", label: "Organisations" },
+                    { path: "/documentation/api/comptabilité", label: "Comptabilité" },
+                    { path: "/documentation/api/fichiers", label: "Fichiers et documents" },
+                ],
+            },
+        },
+    },
     // ai: {
     //     id: "ai",
     //     label: "Assistant IA",

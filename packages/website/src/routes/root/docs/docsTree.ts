@@ -6,6 +6,13 @@ import { introductionAccountingDocRoute } from "./accounting/introductionAccount
 import { recordsAccountingDocRoute } from "./accounting/recordsAccountingDocRoute.js"
 import { reportsAccountingDocRoute } from "./accounting/reportsAccountingDocRoute.js"
 import { rootAccountingDocRoute } from "./accounting/rootAccountingDocRoute.js"
+import { accountingApiDocRoute } from "./api/accountingApiDocRoute.js"
+import { apiDocLayoutRoute } from "./api/apiDocLayoutRoute.js"
+import { authenticationApiDocRoute } from "./api/authenticationApiDocRoute.js"
+import { filesApiDocRoute } from "./api/filesApiDocRoute.js"
+import { introductionApiDocRoute } from "./api/introductionApiDocRoute.js"
+import { organizationsApiDocRoute } from "./api/organizationsApiDocRoute.js"
+import { rootApiDocRoute } from "./api/rootApiDocRoute.js"
 import { dashboardDocLayoutRoute } from "./dashboard/dashboardDocLayoutRoute.js"
 import { filesDashboardDocRoute } from "./dashboard/filesDashboardDocRoute.js"
 import { gettingStartedDashboardDocRoute } from "./dashboard/gettingStartedDashboardDocRoute.js"
@@ -57,5 +64,15 @@ export const docsTree: AnyRoute = docsLayoutRoute.addChildren([
         recordsDashboardDocRoute,
         filesDashboardDocRoute,
         reportsDashboardDocRoute,
+    ]),
+
+    // API section (documentation technique)
+    apiDocLayoutRoute.addChildren([
+        rootApiDocRoute,
+        introductionApiDocRoute,
+        authenticationApiDocRoute,
+        organizationsApiDocRoute,
+        accountingApiDocRoute,
+        filesApiDocRoute,
     ]),
 ])
