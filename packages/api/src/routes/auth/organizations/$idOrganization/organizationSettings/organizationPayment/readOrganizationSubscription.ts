@@ -10,7 +10,7 @@ import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 export const readOrganizationSubscriptionRoute = apiFactory
     .createApp()
     .post(readOrganizationSubscriptionRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOrganizationSubscriptionRouteDefinition.schemas.body,
@@ -20,21 +20,21 @@ export const readOrganizationSubscriptionRoute = apiFactory
         await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
+            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, idOrganization)),
         })
 
         // Get organization
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         // Get latest payment status
         const payments = await selectMany({
             database: c.var.clients.sql,
             table: models.organizationPayment,
-            where: (table) => eq(table.idOrganization, body.idOrganization),
+            where: (table) => eq(table.idOrganization, idOrganization),
             orderBy: (table) => desc(table.createdAt),
         })
 

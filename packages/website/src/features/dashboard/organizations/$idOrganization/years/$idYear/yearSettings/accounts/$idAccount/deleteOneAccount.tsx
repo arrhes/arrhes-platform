@@ -17,7 +17,6 @@ export function DeleteOneAccount(props: {
             routeDefinition: deleteOneAccountRouteDefinition,
             body: {
                 idAccount: props.account.id,
-                idOrganization: props.account.idOrganization,
                 idYear: props.account.idYear,
             },
         })
@@ -30,7 +29,6 @@ export function DeleteOneAccount(props: {
         await invalidateData({
             routeDefinition: readAllAccountsRouteDefinition,
             body: {
-                idOrganization: props.account.idOrganization,
                 idYear: props.account.idYear,
             },
         })

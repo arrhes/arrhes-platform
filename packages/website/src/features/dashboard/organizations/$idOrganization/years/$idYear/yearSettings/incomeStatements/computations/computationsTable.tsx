@@ -15,7 +15,6 @@ export function ComputationsTable(props: {
         <DataWrapper
             routeDefinition={readAllComputationsRouteDefinition}
             body={{
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             }}
         >

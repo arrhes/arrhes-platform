@@ -9,7 +9,7 @@ import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 export const createOneRecordFromTemplateRoute = apiFactory
     .createApp()
     .post(createOneRecordFromTemplateRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneRecordFromTemplateRouteDefinition.schemas.body,
@@ -21,7 +21,7 @@ export const createOneRecordFromTemplateRoute = apiFactory
                 table: models.record,
                 data: {
                     id: generateId(),
-                    idOrganization: body.idOrganization,
+                    idOrganization: idOrganization,
                     idYear: body.idYear,
                     idJournal: body.idJournal,
                     idRecordLabel: body.idRecordLabel,
@@ -41,7 +41,7 @@ export const createOneRecordFromTemplateRoute = apiFactory
                     table: models.recordRow,
                     data: body.rows.map((row) => ({
                         id: generateId(),
-                        idOrganization: body.idOrganization,
+                        idOrganization: idOrganization,
                         idYear: body.idYear,
                         idRecord: record.id,
                         idAccount: row.idAccount,

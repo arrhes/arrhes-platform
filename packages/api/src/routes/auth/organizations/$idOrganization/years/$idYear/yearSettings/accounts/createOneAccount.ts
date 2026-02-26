@@ -8,7 +8,7 @@ import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 
 export const createOneAccountRoute = apiFactory.createApp().post(createOneAccountRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneAccountRouteDefinition.schemas.body,
@@ -22,7 +22,7 @@ export const createOneAccountRoute = apiFactory.createApp().post(createOneAccoun
                 return
             }
             return and(
-                eq(table.idOrganization, body.idOrganization),
+                eq(table.idOrganization, idOrganization),
                 eq(table.idYear, body.idYear),
                 eq(table.id, body.idAccountParent),
             )
@@ -34,7 +34,7 @@ export const createOneAccountRoute = apiFactory.createApp().post(createOneAccoun
         table: models.account,
         data: {
             id: generateId(),
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idYear: body.idYear,
             idAccountParent: body.idAccountParent,
 

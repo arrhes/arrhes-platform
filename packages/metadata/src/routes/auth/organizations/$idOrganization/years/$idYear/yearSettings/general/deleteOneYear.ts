@@ -9,7 +9,6 @@ export const deleteOneYearRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idYear: yearSchema.entries.id,
-            idOrganization: yearSchema.entries.idOrganization,
         }),
         return: v.object({}),
     },

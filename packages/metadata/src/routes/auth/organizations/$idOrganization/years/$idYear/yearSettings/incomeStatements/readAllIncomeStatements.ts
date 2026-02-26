@@ -8,7 +8,6 @@ export const readAllIncomeStatementsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-income-statements`,
     schemas: {
         body: v.object({
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
         return: v.array(incomeStatementSchemaReturn),

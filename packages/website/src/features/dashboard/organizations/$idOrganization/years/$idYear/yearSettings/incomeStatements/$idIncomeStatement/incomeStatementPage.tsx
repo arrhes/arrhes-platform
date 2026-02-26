@@ -22,7 +22,6 @@ export function IncomeStatementPage() {
             <DataWrapper
                 routeDefinition={readOneIncomeStatementRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idIncomeStatement: params.idIncomeStatement,
                 }}

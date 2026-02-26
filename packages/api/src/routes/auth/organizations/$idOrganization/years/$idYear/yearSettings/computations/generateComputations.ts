@@ -17,7 +17,7 @@ import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 export const generateComputationsRoute = apiFactory
     .createApp()
     .post(generateComputationsRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateComputationsRouteDefinition.schemas.body,
@@ -28,7 +28,7 @@ export const generateComputationsRoute = apiFactory
                 const _deletedComputations = await deleteMany({
                     database: tx,
                     table: models.computation,
-                    where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                    where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
                 })
             } catch (_error: unknown) {
                 throw new Exception({
@@ -40,14 +40,14 @@ export const generateComputationsRoute = apiFactory
             const incomeStatements = await selectMany({
                 database: tx,
                 table: models.incomeStatement,
-                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
             })
 
             const newComputationIncomeStatements: Array<typeof models.computationIncomeStatement.$inferInsert> = []
             const newComputations = defaultComputations.map((defaultComputation, defaultComputationIndex) => {
                 const newComputation = {
                     id: generateId(),
-                    idOrganization: body.idOrganization,
+                    idOrganization: idOrganization,
                     idYear: body.idYear,
                     index: defaultComputationIndex,
                     number: defaultComputation.number.toString(),
@@ -69,7 +69,7 @@ export const generateComputationsRoute = apiFactory
 
                     newComputationIncomeStatements.push({
                         id: generateId(),
-                        idOrganization: body.idOrganization,
+                        idOrganization: idOrganization,
                         idYear: body.idYear,
                         idComputation: newComputation.id,
                         idIncomeStatement: incomeStatement.id,

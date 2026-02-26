@@ -8,7 +8,6 @@ export const createOneBalanceSheetRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-balance-sheet`,
     schemas: {
         body: v.object({
-            idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
             idBalanceSheetParent: balanceSheetSchema.entries.idBalanceSheetParent,
             isComputed: balanceSheetSchema.entries.isComputed,

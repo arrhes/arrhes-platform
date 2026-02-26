@@ -10,7 +10,7 @@ import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 export const updateManyRecordRowsRoute = apiFactory
     .createApp()
     .post(updateManyRecordRowsRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: updateManyRecordRowsRouteDefinition.schemas.body,
@@ -21,7 +21,7 @@ export const updateManyRecordRowsRoute = apiFactory
             table: models.recordRow,
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.idRecord, body.idRecord),
                 ),
@@ -45,7 +45,7 @@ export const updateManyRecordRowsRoute = apiFactory
                     },
                     where: (table) =>
                         and(
-                            eq(table.idOrganization, body.idOrganization),
+                            eq(table.idOrganization, idOrganization),
                             eq(table.idYear, body.idYear),
                             eq(table.id, recordRow.id),
                         ),

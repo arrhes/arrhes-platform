@@ -66,14 +66,12 @@ export function UpdateOneRecord(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordsRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                     },
                                 }),
                                 invalidateData({
                                     routeDefinition: readOneRecordRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                         idRecord: props.record.id,
                                     },
@@ -127,7 +125,6 @@ export function UpdateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllJournalsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.record.idOrganization,
                                                         idYear: props.record.idYear,
                                                     }}
                                                     placeholder="Sélectionner un journal"
@@ -153,7 +150,6 @@ export function UpdateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllRecordLabelsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.record.idOrganization,
                                                         idYear: props.record.idYear,
                                                     }}
                                                     placeholder="Sélectionner une catégorie"
@@ -179,7 +175,6 @@ export function UpdateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllFilesRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.record.idOrganization,
                                                         idYear: props.record.idYear,
                                                     }}
                                                     placeholder="Sélectionner une pièce justificative"

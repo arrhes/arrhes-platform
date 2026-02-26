@@ -61,7 +61,6 @@ export function GenerateJournals(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: generateJournalsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -75,7 +74,6 @@ export function GenerateJournals(props: {
                                 await invalidateData({
                                     routeDefinition: readAllJournalsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

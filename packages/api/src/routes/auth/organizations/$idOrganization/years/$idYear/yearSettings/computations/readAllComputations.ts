@@ -9,7 +9,7 @@ import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 export const readAllComputationsRoute = apiFactory
     .createApp()
     .post(readAllComputationsRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readAllComputationsRouteDefinition.schemas.body,
@@ -18,7 +18,7 @@ export const readAllComputationsRoute = apiFactory
         const readAllComputations = await selectMany({
             database: c.var.clients.sql,
             table: models.computation,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         return response({

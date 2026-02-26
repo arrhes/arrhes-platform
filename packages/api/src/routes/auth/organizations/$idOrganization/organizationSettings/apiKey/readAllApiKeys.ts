@@ -8,7 +8,7 @@ import { response } from "../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 
 export const readAllApiKeysRoute = apiFactory.createApp().post(readAllApiKeysRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readAllApiKeysRouteDefinition.schemas.body,
@@ -18,7 +18,7 @@ export const readAllApiKeysRoute = apiFactory.createApp().post(readAllApiKeysRou
     const organizationUser = await selectOne({
         database: c.var.clients.sql,
         table: models.organizationUser,
-        where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
+        where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, idOrganization)),
     })
     if (organizationUser.isAdmin === false) {
         throw new Exception({
@@ -29,7 +29,7 @@ export const readAllApiKeysRoute = apiFactory.createApp().post(readAllApiKeysRou
     }
 
     const readAllApiKeys = await c.var.clients.sql.query.apiKeyModel.findMany({
-        where: (table) => and(eq(table.idOrganization, body.idOrganization)),
+        where: (table) => and(eq(table.idOrganization, idOrganization)),
     })
 
     return response({

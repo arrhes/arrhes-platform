@@ -27,7 +27,6 @@ export function ComputationIncomeStatementPage() {
             <DataWrapper
                 routeDefinition={readOneComputationIncomeStatementRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idComputationIncomeStatement: params.idComputationIncomeStatement,
                 }}
@@ -83,7 +82,6 @@ export function ComputationIncomeStatementPage() {
                                             <DataWrapper
                                                 routeDefinition={readOneComputationRouteDefinition}
                                                 body={{
-                                                    idOrganization: computationIncomeStatement.idOrganization,
                                                     idYear: computationIncomeStatement.idYear,
                                                     idComputation: computationIncomeStatement.idComputation,
                                                 }}

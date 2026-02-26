@@ -16,7 +16,6 @@ export function DeleteOneYear(props: {
         const deleteResponse = await getResponseBodyFromAPI({
             routeDefinition: deleteOneYearRouteDefinition,
             body: {
-                idOrganization: props.year.idOrganization,
                 idYear: props.year.id,
             },
         })
@@ -28,9 +27,7 @@ export function DeleteOneYear(props: {
 
         await invalidateData({
             routeDefinition: readAllYearsRouteDefinition,
-            body: {
-                idOrganization: props.year.idOrganization,
-            },
+            body: {},
         })
 
         toast({ title: "Exercice supprimé", variant: "success" })

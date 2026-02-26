@@ -3,24 +3,17 @@ import { and, eq } from "drizzle-orm"
 import type { Context } from "hono"
 import { Exception } from "../utilities/exception.js"
 
-export async function checkOrganizationSubscriptionSessionMiddleware(parameters: { context: Context<any> }) {
+export async function checkOrganizationSubscriptionSessionMiddleware(parameters: {
+    context: Context<any>
+    idOrganization: string
+}) {
     try {
-        const body = await parameters.context.req.json()
-        const idOrganization: string | undefined = body.idOrganization
-
-        if (idOrganization === undefined) {
-            throw new Exception({
-                internalMessage: "Subscription check failed",
-                cause: "idOrganization not found in request body",
-            })
-        }
-
         const organizationUsers = await parameters.context.var.clients.sql
             .select()
             .from(models.organizationUser)
             .where(
                 and(
-                    eq(models.organizationUser.idOrganization, idOrganization),
+                    eq(models.organizationUser.idOrganization, parameters.idOrganization),
                     eq(models.organizationUser.idUser, parameters.context.var.user.id),
                 ),
             )
@@ -37,7 +30,7 @@ export async function checkOrganizationSubscriptionSessionMiddleware(parameters:
         const organizations = await parameters.context.var.clients.sql
             .select()
             .from(models.organization)
-            .where(eq(models.organization.id, idOrganization))
+            .where(eq(models.organization.id, parameters.idOrganization))
             .limit(1)
 
         const organization = organizations.at(0)

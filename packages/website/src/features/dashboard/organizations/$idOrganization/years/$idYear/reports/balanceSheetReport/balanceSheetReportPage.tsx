@@ -24,10 +24,9 @@ export function BalanceSheetReportPage() {
 
     const body = useMemo(
         () => ({
-            idOrganization: params.idOrganization,
             idYear: params.idYear,
         }),
-        [params.idOrganization, params.idYear],
+        [params.idYear],
     )
 
     const accountsQuery = useDataFromAPI({

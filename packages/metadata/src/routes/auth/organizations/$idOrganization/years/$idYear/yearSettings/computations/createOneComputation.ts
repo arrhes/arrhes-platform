@@ -8,7 +8,6 @@ export const createOneComputationRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-computation`,
     schemas: {
         body: v.object({
-            idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
             index: computationSchema.entries.index,
             number: computationSchema.entries.number,

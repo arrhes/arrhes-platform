@@ -16,7 +16,7 @@ import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 export const connectAccountsToIncomeStatementsRoute = apiFactory
     .createApp()
     .post(connectAccountsToIncomeStatementsRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: connectAccountsToIncomeStatementsRouteDefinition.schemas.body,
@@ -25,19 +25,19 @@ export const connectAccountsToIncomeStatementsRoute = apiFactory
         const readAllAccounts = await selectMany({
             database: c.var.clients.sql,
             table: models.account,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllIncomeStatements = await selectMany({
             database: c.var.clients.sql,
             table: models.incomeStatement,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
         const defaultIncomeStatements =
             organization.scope === "association" ? defaultAssociationIncomeStatements : defaultCompanyIncomeStatements
@@ -72,7 +72,7 @@ export const connectAccountsToIncomeStatementsRoute = apiFactory
                         },
                         where: (table) =>
                             and(
-                                eq(table.idOrganization, body.idOrganization),
+                                eq(table.idOrganization, idOrganization),
                                 eq(table.idYear, body.idYear),
                                 eq(table.id, foundAccount.id),
                             ),

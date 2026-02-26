@@ -22,7 +22,6 @@ export function UpdateOneFolderForm(props: {
             schema={updateOneFolderRouteDefinition.schemas.body}
             defaultValues={{
                 idFolder: props.folder.id,
-                idOrganization: props.folder.idOrganization,
                 idYear: props.folder.idYear,
                 name: props.folder.name,
             }}
@@ -35,7 +34,6 @@ export function UpdateOneFolderForm(props: {
                     routeDefinition: updateOneFolderRouteDefinition,
                     body: {
                         idFolder: props.folder.id,
-                        idOrganization: data.idOrganization,
                         idYear: data.idYear,
                         name: data.name,
                     },
@@ -52,7 +50,6 @@ export function UpdateOneFolderForm(props: {
                 await invalidateData({
                     routeDefinition: readAllFoldersRouteDefinition,
                     body: {
-                        idOrganization: props.folder.idOrganization,
                         idYear: props.folder.idYear,
                     },
                 })

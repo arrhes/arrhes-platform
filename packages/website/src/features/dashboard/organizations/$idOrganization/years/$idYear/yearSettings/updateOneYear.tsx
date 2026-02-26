@@ -52,7 +52,6 @@ export function UpdateOneYear(props: { year: v.InferOutput<typeof returnedSchema
                             await invalidateData({
                                 routeDefinition: readOneYearRouteDefinition,
                                 body: {
-                                    idOrganization: props.year.idOrganization,
                                     idYear: props.year.id,
                                 },
                             })

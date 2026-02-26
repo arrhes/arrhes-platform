@@ -20,7 +20,6 @@ export function DeleteOneIncomeStatement(props: {
             routeDefinition: deleteOneIncomeStatementRouteDefinition,
             body: {
                 idIncomeStatement: props.incomeStatement.id,
-                idOrganization: props.incomeStatement.idOrganization,
                 idYear: props.incomeStatement.idYear,
             },
         })
@@ -33,7 +32,6 @@ export function DeleteOneIncomeStatement(props: {
         await invalidateData({
             routeDefinition: readAllIncomeStatementsRouteDefinition,
             body: {
-                idOrganization: props.incomeStatement.idOrganization,
                 idYear: props.incomeStatement.idYear,
             },
         })

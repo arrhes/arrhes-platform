@@ -9,7 +9,6 @@ export const generateIncomeStatementReportDocumentRouteDefinition = routeDefinit
     path: `${routePath.auth}/generate-income-statement-report-document`,
     schemas: {
         body: v.object({
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
         return: documentSchemaReturn,

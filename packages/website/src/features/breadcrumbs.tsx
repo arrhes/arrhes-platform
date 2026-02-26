@@ -16,14 +16,13 @@ export function Breadcrumbs() {
 
     const organizationQuery = useDataFromAPI({
         routeDefinition: readOneOrganizationRouteDefinition,
-        body: { idOrganization: idOrganization ?? "" },
+        body: {},
         enabled: idOrganization !== null,
     })
 
     const yearQuery = useDataFromAPI({
         routeDefinition: readOneYearRouteDefinition,
         body: {
-            idOrganization: idOrganization ?? "",
             idYear: idYear ?? "",
         },
         enabled: idOrganization !== null && idYear !== null,

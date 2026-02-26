@@ -40,7 +40,6 @@ export function CreateOneRecordRow(props: {
                     <FormRoot
                         schema={createOneRecordRowRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.record.idOrganization,
                             idYear: props.record.idYear,
                             idRecord: props.record.id,
                             isComputedForJournalReport: true,
@@ -72,7 +71,6 @@ export function CreateOneRecordRow(props: {
                                 invalidateData({
                                     routeDefinition: readOneRecordRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                         idRecord: props.record.id,
                                     },
@@ -80,7 +78,6 @@ export function CreateOneRecordRow(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                         idRecord: props.record.id,
                                     },
@@ -88,7 +85,6 @@ export function CreateOneRecordRow(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                     },
                                 }),
@@ -128,7 +124,6 @@ export function CreateOneRecordRow(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllAccountsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.record.idOrganization,
                                                         idYear: props.record.idYear,
                                                     }}
                                                     placeholder="Sélectionner un compte"

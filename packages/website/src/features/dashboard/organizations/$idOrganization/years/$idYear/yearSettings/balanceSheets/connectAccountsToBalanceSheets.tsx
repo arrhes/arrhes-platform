@@ -60,7 +60,6 @@ export function ConnectAccountsToBalanceSheets(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: connectAccountsToBalanceSheetsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -80,7 +79,6 @@ export function ConnectAccountsToBalanceSheets(props: {
                                 await invalidateData({
                                     routeDefinition: readAllBalanceSheetsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

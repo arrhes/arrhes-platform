@@ -58,7 +58,6 @@ export function FilesPage() {
             routeDefinition: updateOneFileRouteDefinition,
             body: {
                 idFile: fileId,
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idFolder: targetFolderId,
             },
@@ -72,7 +71,6 @@ export function FilesPage() {
         await invalidateData({
             routeDefinition: readAllFilesRouteDefinition,
             body: {
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
             },
         })
@@ -110,7 +108,6 @@ export function FilesPage() {
                 <DataWrapper
                     routeDefinition={readAllFoldersRouteDefinition}
                     body={{
-                        idOrganization: params.idOrganization,
                         idYear: params.idYear,
                     }}
                 >

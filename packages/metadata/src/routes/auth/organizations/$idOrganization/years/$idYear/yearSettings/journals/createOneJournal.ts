@@ -8,7 +8,6 @@ export const createOneJournalRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-journal`,
     schemas: {
         body: v.object({
-            idOrganization: journalSchema.entries.idOrganization,
             idYear: journalSchema.entries.idYear,
             code: journalSchema.entries.code,
             label: journalSchema.entries.label,

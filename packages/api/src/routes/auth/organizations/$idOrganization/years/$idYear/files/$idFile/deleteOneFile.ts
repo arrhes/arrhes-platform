@@ -10,7 +10,7 @@ import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 import { deleteObject } from "../../../../../../../../utilities/storage/deleteObject.js"
 
 export const deleteOneFileRoute = apiFactory.createApp().post(deleteOneFileRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: deleteOneFileRouteDefinition.schemas.body,
@@ -20,11 +20,7 @@ export const deleteOneFileRoute = apiFactory.createApp().post(deleteOneFileRoute
         database: c.var.clients.sql,
         table: models.file,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idFile),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFile)),
     })
 
     if (readOneFile.storageKey !== null) {
@@ -41,7 +37,7 @@ export const deleteOneFileRoute = apiFactory.createApp().post(deleteOneFileRoute
             data: {
                 storageCurrentUsage: sql`GREATEST(${models.organization.storageCurrentUsage} - ${readOneFile.size}, 0)`,
             },
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
     }
 
@@ -49,11 +45,7 @@ export const deleteOneFileRoute = apiFactory.createApp().post(deleteOneFileRoute
         database: c.var.clients.sql,
         table: models.file,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idFile),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFile)),
     })
 
     return response({

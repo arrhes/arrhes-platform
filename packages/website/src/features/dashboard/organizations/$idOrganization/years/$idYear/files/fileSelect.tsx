@@ -13,7 +13,6 @@ export function FileSelect(props: {
     const filesResponse = useDataFromAPI({
         routeDefinition: readAllFilesRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

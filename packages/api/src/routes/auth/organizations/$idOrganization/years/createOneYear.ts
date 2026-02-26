@@ -6,7 +6,7 @@ import { response } from "../../../../../utilities/response.js"
 import { insertOne } from "../../../../../utilities/sql/insertOne.js"
 
 export const createOneYearRoute = apiFactory.createApp().post(createOneYearRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneYearRouteDefinition.schemas.body,
@@ -17,7 +17,7 @@ export const createOneYearRoute = apiFactory.createApp().post(createOneYearRoute
         table: models.year,
         data: {
             id: generateId(),
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idYearPrevious: body.idYearPrevious,
             isClosed: false,
             closedAt: null,

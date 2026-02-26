@@ -8,7 +8,6 @@ export const yearLayoutRoute = createRoute({
     id: "yearLayout",
     beforeLoad: ({ params }) => {
         prefetchYearData({
-            idOrganization: params.idOrganization,
             idYear: params.idYear,
         })
 

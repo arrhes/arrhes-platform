@@ -17,7 +17,6 @@ export function DeleteOneFile(props: {
             routeDefinition: deleteOneFileRouteDefinition,
             body: {
                 idFile: props.file.id,
-                idOrganization: props.file.idOrganization,
                 idYear: props.file.idYear,
             },
         })
@@ -30,7 +29,6 @@ export function DeleteOneFile(props: {
         await invalidateData({
             routeDefinition: readAllFilesRouteDefinition,
             body: {
-                idOrganization: props.file.idOrganization,
                 idYear: props.file.idYear,
             },
         })

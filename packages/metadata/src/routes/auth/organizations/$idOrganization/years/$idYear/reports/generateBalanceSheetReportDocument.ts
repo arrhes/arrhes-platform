@@ -9,7 +9,6 @@ export const generateBalanceSheetReportDocumentRouteDefinition = routeDefinition
     path: `${routePath.auth}/generate-balance-sheet-report-document`,
     schemas: {
         body: v.object({
-            idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
         }),
         return: documentSchemaReturn,

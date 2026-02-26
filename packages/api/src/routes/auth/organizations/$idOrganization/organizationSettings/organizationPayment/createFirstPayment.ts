@@ -50,7 +50,7 @@ function formatAmountFromCents(cents: number): string {
 export const createFirstPaymentRoute = apiFactory
     .createApp()
     .post(createFirstPaymentRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createFirstPaymentRouteDefinition.schemas.body,
@@ -60,7 +60,7 @@ export const createFirstPaymentRoute = apiFactory
         const organizationUser = await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
+            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, idOrganization)),
         })
         if (organizationUser.isAdmin === false) {
             throw new Exception({
@@ -74,7 +74,7 @@ export const createFirstPaymentRoute = apiFactory
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         // Create or retrieve Mollie customer

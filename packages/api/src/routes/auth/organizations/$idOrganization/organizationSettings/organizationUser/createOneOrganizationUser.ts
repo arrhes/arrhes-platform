@@ -11,7 +11,7 @@ import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 export const createOneOrganizationUserRoute = apiFactory
     .createApp()
     .post(createOneOrganizationUserRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneOrganizationUserRouteDefinition.schemas.body,
@@ -21,7 +21,7 @@ export const createOneOrganizationUserRoute = apiFactory
         const organizationUser = await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
+            where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, idOrganization)),
         })
         if (organizationUser.isAdmin === false) {
             throw new Exception({

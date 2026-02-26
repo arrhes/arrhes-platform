@@ -9,7 +9,6 @@ export const deleteOneRecordLabelRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idRecordLabel: recordLabelSchema.entries.id,
-            idOrganization: recordLabelSchema.entries.idOrganization,
             idYear: recordLabelSchema.entries.idYear,
         }),
         return: v.object({}),

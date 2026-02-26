@@ -20,7 +20,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 export const generateBalanceSheetsRoute = apiFactory
     .createApp()
     .post(generateBalanceSheetsRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateBalanceSheetsRouteDefinition.schemas.body,
@@ -31,7 +31,7 @@ export const generateBalanceSheetsRoute = apiFactory
                 const _deletedBalanceSheets = await deleteMany({
                     database: tx,
                     table: models.balanceSheet,
-                    where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                    where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
                 })
             } catch (_error: unknown) {
                 throw new Exception({
@@ -43,7 +43,7 @@ export const generateBalanceSheetsRoute = apiFactory
             const organization = await selectOne({
                 database: tx,
                 table: models.organization,
-                where: (table) => eq(table.id, body.idOrganization),
+                where: (table) => eq(table.id, idOrganization),
             })
             const defaultBalanceSheets =
                 organization.scope === "association" ? defaultAssociationBalanceSheets : defaultCompanyBalanceSheets
@@ -58,7 +58,7 @@ export const generateBalanceSheetsRoute = apiFactory
                 })
                 newBalanceSheets.push({
                     id: generateId(),
-                    idOrganization: body.idOrganization,
+                    idOrganization: idOrganization,
                     idYear: body.idYear,
                     idBalanceSheetParent: balanceSheetParent?.id ?? null,
                     number: defaultBalanceSheet.number.toString(),

@@ -9,7 +9,6 @@ export const computeOneRecordRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idRecord: recordSchema.entries.id,
-            idOrganization: recordSchema.entries.idOrganization,
             idYear: recordSchema.entries.idYear,
         }),
         return: recordSchemaReturn,

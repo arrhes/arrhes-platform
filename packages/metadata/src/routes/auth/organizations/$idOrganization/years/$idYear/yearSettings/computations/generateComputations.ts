@@ -8,7 +8,6 @@ export const generateComputationsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/generate-computations`,
     schemas: {
         body: v.object({
-            idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
         }),
         return: v.array(computationSchemaReturn),

@@ -18,7 +18,6 @@ export function DownloadBalanceSheetReport(props: {
             const generateBalanceSheetReportDocumentResponse = await getResponseBodyFromAPI({
                 routeDefinition: generateBalanceSheetReportDocumentRouteDefinition,
                 body: {
-                    idOrganization: props.idOrganization,
                     idYear: props.idYear,
                 },
             })
@@ -30,7 +29,6 @@ export function DownloadBalanceSheetReport(props: {
             const downloadBalanceSheetReportDocumentResponse = await getResponseBodyFromAPI({
                 routeDefinition: generateDocumentGetSignedUrlRouteDefinition,
                 body: {
-                    idOrganization: props.idOrganization,
                     idYear: props.idYear,
                     idDocument: generateBalanceSheetReportDocumentResponse.data.id,
                 },

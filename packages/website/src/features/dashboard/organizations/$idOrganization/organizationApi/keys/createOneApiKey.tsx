@@ -44,9 +44,7 @@ export function CreateOneApiKey(props: {
                         ) : (
                             <FormRoot
                                 schema={createOneApiKeyRouteDefinition.schemas.body}
-                                defaultValues={{
-                                    idOrganization: props.idOrganization,
-                                }}
+                                defaultValues={{}}
                                 submitButtonProps={{
                                     leftIcon: <IconPlus />,
                                     text: "Créer la clé API",
@@ -69,9 +67,7 @@ export function CreateOneApiKey(props: {
                                 onSuccess={async () => {
                                     await invalidateData({
                                         routeDefinition: readAllApiKeysRouteDefinition,
-                                        body: {
-                                            idOrganization: props.idOrganization,
-                                        },
+                                        body: {},
                                     })
                                 }}
                             >

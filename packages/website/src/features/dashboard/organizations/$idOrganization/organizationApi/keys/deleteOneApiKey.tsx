@@ -16,7 +16,6 @@ export function DeleteOneApiKey(props: {
             routeDefinition: deleteOneApiKeyRouteDefinition,
             body: {
                 idApiKey: props.apiKey.id,
-                idOrganization: props.apiKey.idOrganization,
             },
         })
 
@@ -27,9 +26,7 @@ export function DeleteOneApiKey(props: {
 
         await invalidateData({
             routeDefinition: readAllApiKeysRouteDefinition,
-            body: {
-                idOrganization: props.apiKey.idOrganization,
-            },
+            body: {},
         })
         toast({ title: "Clé API supprimée avec succès", variant: "success" })
     }

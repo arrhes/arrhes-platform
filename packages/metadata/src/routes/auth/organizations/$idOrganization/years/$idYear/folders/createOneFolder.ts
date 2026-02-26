@@ -8,7 +8,6 @@ export const createOneFolderRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-folder`,
     schemas: {
         body: v.object({
-            idOrganization: folderSchema.entries.idOrganization,
             idYear: folderSchema.entries.idYear,
             idFolderParent: v.optional(folderSchema.entries.idFolderParent),
             name: folderSchema.entries.name,

@@ -18,7 +18,7 @@ import { putObject } from "../../../../../../../utilities/storage/putObject.js"
 export const generateBalanceSheetReportDocumentRoute = apiFactory
     .createApp()
     .post(generateBalanceSheetReportDocumentRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateBalanceSheetReportDocumentRouteDefinition.schemas.body,
@@ -27,19 +27,19 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
         const readAllRecordRows = await selectMany({
             database: c.var.clients.sql,
             table: models.recordRow,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllAccounts = await selectMany({
             database: c.var.clients.sql,
             table: models.account,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllBalanceSheets = await selectMany({
             database: c.var.clients.sql,
             table: models.balanceSheet,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const browser = await launch({
@@ -119,7 +119,7 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         if (organization.storageCurrentUsage + pdfBody.length > organization.storageLimit) {
@@ -131,7 +131,7 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
         }
 
         const idDocument = generateId()
-        const storageKey = `organizations/${body.idOrganization}/${body.idYear}/reports/${idDocument}`
+        const storageKey = `organizations/${idOrganization}/${body.idYear}/reports/${idDocument}`
         await putObject({
             var: c.var,
             body: pdfBody,
@@ -139,7 +139,7 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
             contentType: "application/pdf",
             contentLength: pdfBody.length,
             metadata: {
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 idUser: user.id,
             },
@@ -151,7 +151,7 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
             data: {
                 storageCurrentUsage: sql`${models.organization.storageCurrentUsage} + ${pdfBody.length}`,
             },
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         const createOneDocument = await insertOne({
@@ -159,9 +159,9 @@ export const generateBalanceSheetReportDocumentRoute = apiFactory
             table: models.document,
             data: {
                 id: idDocument,
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
-                label: `bilan-${body.idOrganization}-${body.idYear}`,
+                label: `bilan-${idOrganization}-${body.idYear}`,
                 type: "bilan",
                 storageKey: storageKey,
                 createdAt: new Date().toISOString(),

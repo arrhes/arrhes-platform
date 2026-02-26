@@ -8,7 +8,6 @@ export const readAllFoldersRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-folders`,
     schemas: {
         body: v.object({
-            idOrganization: folderSchema.entries.idOrganization,
             idYear: folderSchema.entries.idYear,
         }),
         return: v.array(folderSchemaReturn),

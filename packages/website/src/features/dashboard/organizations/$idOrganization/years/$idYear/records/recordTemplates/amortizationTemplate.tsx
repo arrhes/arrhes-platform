@@ -77,7 +77,6 @@ export function AmortizationTemplateForm(props: RecordTemplateFormProps) {
     const accountsResponse = useDataFromAPI({
         routeDefinition: readAllAccountsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })
@@ -258,7 +257,6 @@ export function AmortizationTemplateForm(props: RecordTemplateFormProps) {
                                     }}
                                     routeDefinition={readAllAccountsRouteDefinition}
                                     body={{
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     }}
                                     placeholder="Ex : 68112"
@@ -287,7 +285,6 @@ export function AmortizationTemplateForm(props: RecordTemplateFormProps) {
                                     }}
                                     routeDefinition={readAllAccountsRouteDefinition}
                                     body={{
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     }}
                                     placeholder="Ex : 2818"

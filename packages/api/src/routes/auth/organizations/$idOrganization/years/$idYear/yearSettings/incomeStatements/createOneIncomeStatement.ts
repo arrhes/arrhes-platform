@@ -8,7 +8,7 @@ import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 export const createOneIncomeStatementRoute = apiFactory
     .createApp()
     .post(createOneIncomeStatementRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneIncomeStatementRouteDefinition.schemas.body,
@@ -19,7 +19,7 @@ export const createOneIncomeStatementRoute = apiFactory
             table: models.incomeStatement,
             data: {
                 id: generateId(),
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 idIncomeStatementParent: body.idIncomeStatementParent,
                 isDefault: false,

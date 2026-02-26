@@ -22,7 +22,6 @@ export function DuplicateOneRecord(props: {
             routeDefinition: duplicateOneRecordRouteDefinition,
             body: {
                 idRecord: props.record.id,
-                idOrganization: props.record.idOrganization,
                 idYear: props.record.idYear,
             },
         })
@@ -35,7 +34,6 @@ export function DuplicateOneRecord(props: {
         await invalidateData({
             routeDefinition: readAllRecordsRouteDefinition,
             body: {
-                idOrganization: props.record.idOrganization,
                 idYear: props.record.idYear,
             },
         })

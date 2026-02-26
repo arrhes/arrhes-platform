@@ -8,7 +8,6 @@ export const readAllFilesRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-files`,
     schemas: {
         body: v.object({
-            idOrganization: fileSchema.entries.idOrganization,
             idYear: fileSchema.entries.idYear,
         }),
         return: v.array(fileSchemaReturn),

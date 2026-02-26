@@ -36,7 +36,6 @@ export function CreateOneIncomeStatement(props: {
                     <FormRoot
                         schema={createOneIncomeStatementRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             idIncomeStatementParent: null,
                         }}
@@ -65,7 +64,6 @@ export function CreateOneIncomeStatement(props: {
                             await invalidateData({
                                 routeDefinition: readAllIncomeStatementsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })
@@ -124,7 +122,6 @@ export function CreateOneIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllIncomeStatementsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Sélectionner une ligne de compte de résultat"

@@ -9,7 +9,6 @@ export const readOneDocumentRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idDocument: documentSchema.entries.id,
-            idOrganization: documentSchema.entries.idOrganization,
             idYear: documentSchema.entries.idYear,
         }),
         return: documentSchemaReturn,

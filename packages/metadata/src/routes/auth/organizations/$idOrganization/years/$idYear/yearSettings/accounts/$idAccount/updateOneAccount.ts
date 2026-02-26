@@ -9,7 +9,6 @@ export const updateOneAccountRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idAccount: accountSchema.entries.id,
-            idOrganization: accountSchema.entries.idOrganization,
             idYear: accountSchema.entries.idYear,
             idAccountParent: v.optional(accountSchema.entries.idAccountParent),
 

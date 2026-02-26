@@ -33,7 +33,6 @@ export function CreateOneYear(props: {
                     <FormRoot
                         schema={createOneYearRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             label: undefined,
                         }}
                         submitButtonProps={{
@@ -57,9 +56,7 @@ export function CreateOneYear(props: {
                         onSuccess={async () => {
                             await invalidateData({
                                 routeDefinition: readAllYearsRouteDefinition,
-                                body: {
-                                    idOrganization: props.idOrganization,
-                                },
+                                body: {},
                             })
 
                             setOpen(false)

@@ -24,7 +24,6 @@ export function AccountPage() {
             <DataWrapper
                 routeDefinition={readOneAccountRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idAccount: params.idAccount,
                 }}

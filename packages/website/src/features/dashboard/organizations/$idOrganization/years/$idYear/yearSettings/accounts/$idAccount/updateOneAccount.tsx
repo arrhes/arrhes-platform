@@ -64,7 +64,6 @@ export function UpdateOneAccount(props: {
                                 invalidateData({
                                     routeDefinition: readAllAccountsRouteDefinition,
                                     body: {
-                                        idOrganization: props.account.idOrganization,
                                         idYear: props.account.idYear,
                                     },
                                 }),
@@ -72,7 +71,6 @@ export function UpdateOneAccount(props: {
                                     routeDefinition: readOneAccountRouteDefinition,
                                     body: {
                                         idAccount: props.account.id,
-                                        idOrganization: props.account.idOrganization,
                                         idYear: props.account.idYear,
                                     },
                                 }),

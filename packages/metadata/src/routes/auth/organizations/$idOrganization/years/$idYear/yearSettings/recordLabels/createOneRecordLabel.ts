@@ -8,7 +8,6 @@ export const createOneRecordLabelRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-record-label`,
     schemas: {
         body: v.object({
-            idOrganization: recordLabelSchema.entries.idOrganization,
             idYear: recordLabelSchema.entries.idYear,
 
             label: recordLabelSchema.entries.label,

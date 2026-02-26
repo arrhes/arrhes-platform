@@ -8,7 +8,6 @@ export const createOneFileRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-file`,
     schemas: {
         body: v.object({
-            idOrganization: fileSchema.entries.idOrganization,
             idYear: fileSchema.entries.idYear,
             idFolder: v.optional(fileSchema.entries.idFolder),
             reference: fileSchema.entries.reference,

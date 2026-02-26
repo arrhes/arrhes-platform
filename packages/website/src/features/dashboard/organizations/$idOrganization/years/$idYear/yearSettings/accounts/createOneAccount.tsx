@@ -35,7 +35,6 @@ export function CreateOneAccount(props: {
                     <FormRoot
                         schema={createOneAccountRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             isClass: false,
                             isSelectable: true,
@@ -63,7 +62,6 @@ export function CreateOneAccount(props: {
                             await invalidateData({
                                 routeDefinition: readAllAccountsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

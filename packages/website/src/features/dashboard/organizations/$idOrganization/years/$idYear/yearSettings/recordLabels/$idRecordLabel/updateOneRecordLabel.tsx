@@ -61,7 +61,6 @@ export function UpdateOneRecordLabel(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordLabelsRouteDefinition,
                                     body: {
-                                        idOrganization: props.recordLabel.idOrganization,
                                         idYear: props.recordLabel.idYear,
                                     },
                                 }),
@@ -69,7 +68,6 @@ export function UpdateOneRecordLabel(props: {
                                     routeDefinition: readOneRecordLabelRouteDefinition,
                                     body: {
                                         idRecordLabel: props.recordLabel.id,
-                                        idOrganization: props.recordLabel.idOrganization,
                                         idYear: props.recordLabel.idYear,
                                     },
                                 }),

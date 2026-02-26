@@ -26,9 +26,7 @@ export function CancelSubscription(props: { idOrganization: string }) {
             onSubmit={async () => {
                 const response = await getResponseBodyFromAPI({
                     routeDefinition: cancelSubscriptionRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
+                    body: {},
                 })
 
                 if (response.ok === false) {
@@ -41,9 +39,7 @@ export function CancelSubscription(props: { idOrganization: string }) {
 
                 await invalidateData({
                     routeDefinition: readOrganizationSubscriptionRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
+                    body: {},
                 })
 
                 toast({ title: "Abonnement annulé", variant: "success" })

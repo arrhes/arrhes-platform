@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 
 export const readOneDocumentRoute = apiFactory.createApp().post(readOneDocumentRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readOneDocumentRouteDefinition.schemas.body,
@@ -17,11 +17,7 @@ export const readOneDocumentRoute = apiFactory.createApp().post(readOneDocumentR
         database: c.var.clients.sql,
         table: models.document,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idDocument),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idDocument)),
     })
 
     return response({

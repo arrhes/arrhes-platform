@@ -25,7 +25,6 @@ export function ComputationPage() {
             <DataWrapper
                 routeDefinition={readOneComputationRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idComputation: params.idComputation,
                 }}

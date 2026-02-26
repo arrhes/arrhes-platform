@@ -22,7 +22,6 @@ export function JournalPage() {
             <DataWrapper
                 routeDefinition={readOneJournalRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idJournal: params.idJournal,
                 }}

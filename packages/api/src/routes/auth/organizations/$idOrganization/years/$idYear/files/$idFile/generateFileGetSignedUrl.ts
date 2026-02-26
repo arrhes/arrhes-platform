@@ -11,7 +11,7 @@ import { generateGetSignedUrl } from "../../../../../../../../utilities/storage/
 export const generateFileGetSignedUrlRoute = apiFactory
     .createApp()
     .post(generateFileGetSignedUrlRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateFileGetSignedUrlRouteDefinition.schemas.body,
@@ -21,11 +21,7 @@ export const generateFileGetSignedUrlRoute = apiFactory
             database: c.var.clients.sql,
             table: models.file,
             where: (table) =>
-                and(
-                    eq(table.idOrganization, body.idOrganization),
-                    eq(table.idYear, body.idYear),
-                    eq(table.id, body.idFile),
-                ),
+                and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFile)),
         })
 
         if (readOneFile.storageKey === null) {

@@ -12,7 +12,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 export const duplicateOneRecordRoute = apiFactory
     .createApp()
     .post(duplicateOneRecordRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: duplicateOneRecordRouteDefinition.schemas.body,
@@ -24,7 +24,7 @@ export const duplicateOneRecordRoute = apiFactory
                 table: models.record,
                 where: (table) =>
                     and(
-                        eq(table.idOrganization, body.idOrganization),
+                        eq(table.idOrganization, idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.id, body.idRecord),
                     ),
@@ -35,7 +35,7 @@ export const duplicateOneRecordRoute = apiFactory
                 table: models.recordRow,
                 where: (table) =>
                     and(
-                        eq(table.idOrganization, body.idOrganization),
+                        eq(table.idOrganization, idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.idRecord, originalRecord.id),
                     ),

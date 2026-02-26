@@ -14,7 +14,6 @@ export function BalanceSheetsSelect(props: {
     const balanceSheetsResponse = useDataFromAPI({
         routeDefinition: readAllBalanceSheetsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../utilities/sql/deleteOne.js"
 
 export const deleteOneFolderRoute = apiFactory.createApp().post(deleteOneFolderRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: deleteOneFolderRouteDefinition.schemas.body,
@@ -17,11 +17,7 @@ export const deleteOneFolderRoute = apiFactory.createApp().post(deleteOneFolderR
         database: c.var.clients.sql,
         table: models.folder,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idFolder),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFolder)),
     })
 
     return response({

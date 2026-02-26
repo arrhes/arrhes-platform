@@ -74,12 +74,7 @@ export function OrganizationSubscriptionHistoryPage() {
             <Page.Content>
                 <SettingsSection.Root>
                     <SettingsSection.Header title="Historique des paiements" />
-                    <DataWrapper
-                        routeDefinition={readAllOrganizationPaymentsRouteDefinition}
-                        body={{
-                            idOrganization: params.idOrganization,
-                        }}
-                    >
+                    <DataWrapper routeDefinition={readAllOrganizationPaymentsRouteDefinition} body={{}}>
                         {(payments) => {
                             if (payments.length === 0) {
                                 return (

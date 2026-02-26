@@ -9,7 +9,7 @@ import { selectOne } from "../../../../utilities/sql/selectOne.js"
 export const readOneOrganizationRoute = apiFactory
     .createApp()
     .post(readOneOrganizationRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOneOrganizationRouteDefinition.schemas.body,
@@ -18,7 +18,7 @@ export const readOneOrganizationRoute = apiFactory
         const organizationUser = await selectOne({
             database: c.var.clients.sql,
             table: models.organizationUser,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idUser, user.id)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idUser, user.id)),
         })
 
         const readOneOrganization = await selectOne({

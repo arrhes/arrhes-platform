@@ -61,7 +61,6 @@ export function UpdateOneJournal(props: {
                                 invalidateData({
                                     routeDefinition: readAllJournalsRouteDefinition,
                                     body: {
-                                        idOrganization: props.journal.idOrganization,
                                         idYear: props.journal.idYear,
                                     },
                                 }),
@@ -69,7 +68,6 @@ export function UpdateOneJournal(props: {
                                     routeDefinition: readOneJournalRouteDefinition,
                                     body: {
                                         idJournal: props.journal.id,
-                                        idOrganization: props.journal.idOrganization,
                                         idYear: props.journal.idYear,
                                     },
                                 }),

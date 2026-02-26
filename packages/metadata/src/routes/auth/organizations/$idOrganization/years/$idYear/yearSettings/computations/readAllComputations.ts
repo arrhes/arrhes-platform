@@ -8,7 +8,6 @@ export const readAllComputationsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-computations`,
     schemas: {
         body: v.object({
-            idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
         }),
         return: v.array(computationSchemaReturn),

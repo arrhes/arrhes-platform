@@ -9,7 +9,7 @@ import { updateOne } from "../../../../../../../../../../../utilities/sql/update
 export const updateOneComputationIncomeStatementRoute = apiFactory
     .createApp()
     .post(updateOneComputationIncomeStatementRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: updateOneComputationIncomeStatementRouteDefinition.schemas.body,
@@ -27,7 +27,7 @@ export const updateOneComputationIncomeStatementRoute = apiFactory
             },
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idComputationIncomeStatement),
                 ),

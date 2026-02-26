@@ -7,7 +7,7 @@ import { response } from "../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 
 export const readOneYearRoute = apiFactory.createApp().post(readOneYearRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readOneYearRouteDefinition.schemas.body,
@@ -16,7 +16,7 @@ export const readOneYearRoute = apiFactory.createApp().post(readOneYearRouteDefi
     const readOneYear = await selectOne({
         database: c.var.clients.sql,
         table: models.year,
-        where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.id, body.idYear)),
+        where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.id, body.idYear)),
     })
 
     return response({

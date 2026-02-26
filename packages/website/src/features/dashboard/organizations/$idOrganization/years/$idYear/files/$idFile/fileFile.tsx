@@ -11,7 +11,6 @@ export function FileFile(props: { file: v.InferOutput<typeof returnedSchemas.fil
         routeDefinition: generateFileGetSignedUrlRouteDefinition,
         body: {
             idFile: props.file.id,
-            idOrganization: props.file.idOrganization,
             idYear: props.file.idYear,
         },
     })

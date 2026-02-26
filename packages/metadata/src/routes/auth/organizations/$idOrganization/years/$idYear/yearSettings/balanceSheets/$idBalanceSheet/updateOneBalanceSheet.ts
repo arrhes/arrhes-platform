@@ -9,7 +9,6 @@ export const updateOneBalanceSheetRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idBalanceSheet: balanceSheetSchema.entries.id,
-            idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
             idBalanceSheetParent: v.optional(balanceSheetSchema.entries.idBalanceSheetParent),
             isComputed: v.optional(balanceSheetSchema.entries.isComputed),

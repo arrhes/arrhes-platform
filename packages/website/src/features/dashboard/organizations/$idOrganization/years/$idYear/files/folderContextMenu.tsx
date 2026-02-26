@@ -25,7 +25,6 @@ export function FolderContextMenu(props: {
             routeDefinition: deleteOneFolderRouteDefinition,
             body: {
                 idFolder: props.folder.id,
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             },
         })
@@ -38,7 +37,6 @@ export function FolderContextMenu(props: {
         await invalidateData({
             routeDefinition: readAllFoldersRouteDefinition,
             body: {
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             },
         })

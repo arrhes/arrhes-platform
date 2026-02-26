@@ -32,7 +32,6 @@ export function GenerateAccounts(props: {
                     <FormRoot
                         schema={generateAccountsRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             isMinimalSystem: true,
                             isReplicatingAccounts: false,
@@ -59,7 +58,6 @@ export function GenerateAccounts(props: {
                             await invalidateData({
                                 routeDefinition: readAllAccountsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

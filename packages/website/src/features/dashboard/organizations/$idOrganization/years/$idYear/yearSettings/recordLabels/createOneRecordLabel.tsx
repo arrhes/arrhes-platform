@@ -35,7 +35,6 @@ export function CreateOneRecordLabel(props: {
                     <FormRoot
                         schema={createOneRecordLabelRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
@@ -60,7 +59,6 @@ export function CreateOneRecordLabel(props: {
                             await invalidateData({
                                 routeDefinition: readAllRecordLabelsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

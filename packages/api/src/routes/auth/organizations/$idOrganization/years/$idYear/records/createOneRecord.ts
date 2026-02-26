@@ -6,7 +6,7 @@ import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 
 export const createOneRecordRoute = apiFactory.createApp().post(createOneRecordRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneRecordRouteDefinition.schemas.body,
@@ -17,7 +17,7 @@ export const createOneRecordRoute = apiFactory.createApp().post(createOneRecordR
         table: models.record,
         data: {
             id: generateId(),
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idYear: body.idYear,
             idJournal: body.idJournal,
             idFile: body.idFile,

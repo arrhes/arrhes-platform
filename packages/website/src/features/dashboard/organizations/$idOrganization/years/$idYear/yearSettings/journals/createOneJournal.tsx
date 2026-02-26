@@ -32,7 +32,6 @@ export function CreateOneJournal(props: {
                     <FormRoot
                         schema={createOneJournalRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
@@ -57,7 +56,6 @@ export function CreateOneJournal(props: {
                             await invalidateData({
                                 routeDefinition: readAllJournalsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

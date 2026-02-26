@@ -9,7 +9,6 @@ export const createOneOrganizationUserRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-organization-user`,
     schemas: {
         body: v.object({
-            idOrganization: organizationUserSchema.entries.idOrganization,
             isAdmin: organizationUserSchema.entries.isAdmin,
             user: v.object({
                 email: userSchema.entries.email,

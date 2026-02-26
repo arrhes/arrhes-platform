@@ -35,7 +35,6 @@ export function CreateOneOrganizationUser(props: {
                     <FormRoot
                         schema={createOneOrganizationUserRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             isAdmin: false,
                         }}
                         submitButtonProps={{
@@ -59,9 +58,7 @@ export function CreateOneOrganizationUser(props: {
                         onSuccess={async () => {
                             await invalidateData({
                                 routeDefinition: readAllOrganizationUsersRouteDefinition,
-                                body: {
-                                    idOrganization: props.idOrganization,
-                                },
+                                body: {},
                             })
 
                             setOpen(false)

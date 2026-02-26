@@ -9,7 +9,6 @@ export const updateOneJournalRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idJournal: journalSchema.entries.id,
-            idOrganization: journalSchema.entries.idOrganization,
             idYear: journalSchema.entries.idYear,
             code: v.optional(journalSchema.entries.code),
             label: v.optional(journalSchema.entries.label),

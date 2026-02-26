@@ -66,7 +66,6 @@ export function UpdateOneRecordRow(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.recordRow.idOrganization,
                                         idYear: props.recordRow.idYear,
                                         idRecord: props.recordRow.idRecord,
                                     },
@@ -74,14 +73,12 @@ export function UpdateOneRecordRow(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.recordRow.idOrganization,
                                         idYear: props.recordRow.idYear,
                                     },
                                 }),
                                 invalidateData({
                                     routeDefinition: readOneRecordRowRouteDefinition,
                                     body: {
-                                        idOrganization: props.recordRow.idOrganization,
                                         idYear: props.recordRow.idYear,
                                         idRecordRow: props.recordRow.id,
                                     },
@@ -122,7 +119,6 @@ export function UpdateOneRecordRow(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllAccountsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.recordRow.idOrganization,
                                                         idYear: props.recordRow.idYear,
                                                     }}
                                                     placeholder="Sélectionner un compte"

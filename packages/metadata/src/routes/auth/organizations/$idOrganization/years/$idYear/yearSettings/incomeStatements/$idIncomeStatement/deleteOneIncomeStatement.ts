@@ -12,7 +12,6 @@ export const deleteOneIncomeStatementRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idIncomeStatement: incomeStatementSchema.entries.id,
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
         return: incomeStatementSchemaReturn,

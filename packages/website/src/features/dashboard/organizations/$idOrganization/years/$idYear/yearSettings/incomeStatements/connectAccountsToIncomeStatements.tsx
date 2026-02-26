@@ -62,7 +62,6 @@ export function ConnectAccountsToIncomeStatements(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: connectAccountsToIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -82,7 +81,6 @@ export function ConnectAccountsToIncomeStatements(props: {
                                 await invalidateData({
                                     routeDefinition: readAllIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

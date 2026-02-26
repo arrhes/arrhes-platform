@@ -11,9 +11,7 @@ export function YearSelect(props: {
 }) {
     const yearsResponse = useDataFromAPI({
         routeDefinition: readAllYearsRouteDefinition,
-        body: {
-            idOrganization: props.idOrganization,
-        },
+        body: {},
     })
 
     return (

@@ -9,7 +9,6 @@ export const updateOneOrganizationUserRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idOrganizationUser: organizationUserSchema.entries.id,
-            idOrganization: organizationUserSchema.entries.idOrganization,
             isAdmin: v.optional(organizationUserSchema.entries.isAdmin),
         }),
         return: organizationUserSchemaReturn,

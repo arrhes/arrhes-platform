@@ -11,7 +11,6 @@ export const readAllComputationIncomeStatementsRouteDefinition = routeDefinition
     path: `${routePath.auth}/read-all-computation-income-statements`,
     schemas: {
         body: v.object({
-            idOrganization: computationIncomeStatementSchema.entries.idOrganization,
             idYear: computationIncomeStatementSchema.entries.idYear,
             idComputation: v.optional(computationIncomeStatementSchema.entries.idComputation),
             idIncomeStatement: v.optional(computationIncomeStatementSchema.entries.idIncomeStatement),

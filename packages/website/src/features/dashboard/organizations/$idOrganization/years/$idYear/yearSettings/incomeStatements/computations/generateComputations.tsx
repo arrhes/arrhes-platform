@@ -64,7 +64,6 @@ export function GenerateComputations(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: generateComputationsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -78,7 +77,6 @@ export function GenerateComputations(props: {
                                 await invalidateData({
                                     routeDefinition: readAllComputationsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

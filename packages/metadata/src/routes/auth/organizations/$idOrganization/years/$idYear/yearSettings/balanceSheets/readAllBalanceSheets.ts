@@ -8,7 +8,6 @@ export const readAllBalanceSheetsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-balance-sheets`,
     schemas: {
         body: v.object({
-            idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
         }),
         return: v.array(balanceSheetSchemaReturn),

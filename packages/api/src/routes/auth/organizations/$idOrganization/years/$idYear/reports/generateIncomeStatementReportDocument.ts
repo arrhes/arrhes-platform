@@ -18,7 +18,7 @@ import { putObject } from "../../../../../../../utilities/storage/putObject.js"
 export const generateIncomeStatementReportDocumentRoute = apiFactory
     .createApp()
     .post(generateIncomeStatementReportDocumentRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateIncomeStatementReportDocumentRouteDefinition.schemas.body,
@@ -27,31 +27,31 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
         const readAllRecordRows = await selectMany({
             database: c.var.clients.sql,
             table: models.recordRow,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllAccounts = await selectMany({
             database: c.var.clients.sql,
             table: models.account,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllIncomeStatements = await selectMany({
             database: c.var.clients.sql,
             table: models.incomeStatement,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllComputations = await selectMany({
             database: c.var.clients.sql,
             table: models.computation,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const readAllComputationIncomeStatements = await selectMany({
             database: c.var.clients.sql,
             table: models.computationIncomeStatement,
-            where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+            where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
         })
 
         const browser = await launch({
@@ -122,7 +122,7 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         if (organization.storageCurrentUsage + pdfBody.length > organization.storageLimit) {
@@ -134,7 +134,7 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
         }
 
         const idDocument = generateId()
-        const storageKey = `organizations/${body.idOrganization}/${body.idYear}/reports/${idDocument}`
+        const storageKey = `organizations/${idOrganization}/${body.idYear}/reports/${idDocument}`
         await putObject({
             var: c.var,
             body: pdfBody,
@@ -142,7 +142,7 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
             contentType: "application/pdf",
             contentLength: pdfBody.length,
             metadata: {
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 idUser: user.id,
             },
@@ -154,7 +154,7 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
             data: {
                 storageCurrentUsage: sql`${models.organization.storageCurrentUsage} + ${pdfBody.length}`,
             },
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         const createOneDocument = await insertOne({
@@ -162,9 +162,9 @@ export const generateIncomeStatementReportDocumentRoute = apiFactory
             table: models.document,
             data: {
                 id: idDocument,
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
-                label: `compte_de_résultat-${body.idOrganization}-${body.idYear}`,
+                label: `compte_de_résultat-${idOrganization}-${body.idYear}`,
                 type: "compte_de_résultat",
                 storageKey: storageKey,
                 createdAt: new Date().toISOString(),

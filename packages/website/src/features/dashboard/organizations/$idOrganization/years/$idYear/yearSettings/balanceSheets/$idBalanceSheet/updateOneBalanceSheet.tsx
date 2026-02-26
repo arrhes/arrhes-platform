@@ -63,7 +63,6 @@ export function UpdateOneBalanceSheet(props: {
                                 invalidateData({
                                     routeDefinition: readAllBalanceSheetsRouteDefinition,
                                     body: {
-                                        idOrganization: props.balanceSheet.idOrganization,
                                         idYear: props.balanceSheet.idYear,
                                     },
                                 }),
@@ -71,7 +70,6 @@ export function UpdateOneBalanceSheet(props: {
                                     routeDefinition: readOneBalanceSheetRouteDefinition,
                                     body: {
                                         idBalanceSheet: props.balanceSheet.id,
-                                        idOrganization: props.balanceSheet.idOrganization,
                                         idYear: props.balanceSheet.idYear,
                                     },
                                 }),

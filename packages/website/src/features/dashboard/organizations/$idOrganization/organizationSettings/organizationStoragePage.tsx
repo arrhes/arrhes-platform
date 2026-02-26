@@ -26,12 +26,7 @@ export function OrganizationStoragePage() {
     return (
         <Page.Root>
             <Page.Content>
-                <DataWrapper
-                    routeDefinition={readOneOrganizationRouteDefinition}
-                    body={{
-                        idOrganization: params.idOrganization,
-                    }}
-                >
+                <DataWrapper routeDefinition={readOneOrganizationRouteDefinition} body={{}}>
                     {(organization) => {
                         const usagePercent =
                             organization.storageLimit > 0

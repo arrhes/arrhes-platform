@@ -20,7 +20,6 @@ export function DeleteOneComputation(props: {
             routeDefinition: deleteOneComputationRouteDefinition,
             body: {
                 idComputation: props.computation.id,
-                idOrganization: props.computation.idOrganization,
                 idYear: props.computation.idYear,
             },
         })
@@ -33,7 +32,6 @@ export function DeleteOneComputation(props: {
         await invalidateData({
             routeDefinition: readAllComputationsRouteDefinition,
             body: {
-                idOrganization: props.computation.idOrganization,
                 idYear: props.computation.idYear,
             },
         })

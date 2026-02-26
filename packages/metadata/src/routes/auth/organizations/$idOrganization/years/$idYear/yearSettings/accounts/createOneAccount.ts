@@ -8,7 +8,6 @@ export const createOneAccountRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-account`,
     schemas: {
         body: v.object({
-            idOrganization: accountSchema.entries.idOrganization,
             idYear: accountSchema.entries.idYear,
             idAccountParent: accountSchema.entries.idAccountParent,
 

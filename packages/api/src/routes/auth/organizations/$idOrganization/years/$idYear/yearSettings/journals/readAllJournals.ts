@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 
 export const readAllJournalsRoute = apiFactory.createApp().post(readAllJournalsRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readAllJournalsRouteDefinition.schemas.body,
@@ -16,7 +16,7 @@ export const readAllJournalsRoute = apiFactory.createApp().post(readAllJournalsR
     const readAllJournals = await selectMany({
         database: c.var.clients.sql,
         table: models.journal,
-        where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+        where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
     })
 
     return response({

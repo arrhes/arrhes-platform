@@ -22,7 +22,6 @@ export function RecordLabelPage() {
             <DataWrapper
                 routeDefinition={readOneRecordLabelRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idRecordLabel: params.idRecordLabel,
                 }}

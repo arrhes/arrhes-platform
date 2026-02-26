@@ -12,7 +12,6 @@ export const readOneComputationIncomeStatementRouteDefinition = routeDefinition(
     schemas: {
         body: v.object({
             idComputationIncomeStatement: computationIncomeStatementSchema.entries.id,
-            idOrganization: computationIncomeStatementSchema.entries.idOrganization,
             idYear: computationIncomeStatementSchema.entries.idYear,
         }),
         return: computationIncomeStatementSchemaReturn,

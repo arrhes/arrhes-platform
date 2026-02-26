@@ -9,7 +9,7 @@ import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js
 export const readOneRecordLabelRoute = apiFactory
     .createApp()
     .post(readOneRecordLabelRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOneRecordLabelRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const readOneRecordLabelRoute = apiFactory
             table: models.recordLabel,
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idRecordLabel),
                 ),

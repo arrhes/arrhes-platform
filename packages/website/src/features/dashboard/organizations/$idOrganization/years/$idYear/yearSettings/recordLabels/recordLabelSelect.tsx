@@ -13,7 +13,6 @@ export function RecordLabelSelect(props: {
     const recordLabelsResponse = useDataFromAPI({
         routeDefinition: readAllRecordLabelsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

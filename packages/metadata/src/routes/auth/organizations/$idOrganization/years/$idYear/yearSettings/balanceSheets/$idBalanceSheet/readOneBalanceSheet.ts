@@ -9,7 +9,6 @@ export const readOneBalanceSheetRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idBalanceSheet: balanceSheetSchema.entries.id,
-            idOrganization: balanceSheetSchema.entries.idOrganization,
             idYear: balanceSheetSchema.entries.idYear,
         }),
         return: balanceSheetSchemaReturn,

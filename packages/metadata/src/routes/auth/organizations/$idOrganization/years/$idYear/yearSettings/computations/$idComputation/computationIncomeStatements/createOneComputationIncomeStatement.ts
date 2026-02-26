@@ -11,7 +11,6 @@ export const createOneComputationIncomeStatementRouteDefinition = routeDefinitio
     path: `${routePath.auth}/create-one-computation-income-statement`,
     schemas: {
         body: v.object({
-            idOrganization: computationIncomeStatementSchema.entries.idOrganization,
             idYear: computationIncomeStatementSchema.entries.idYear,
             idComputation: computationIncomeStatementSchema.entries.idComputation,
             idIncomeStatement: computationIncomeStatementSchema.entries.idIncomeStatement,

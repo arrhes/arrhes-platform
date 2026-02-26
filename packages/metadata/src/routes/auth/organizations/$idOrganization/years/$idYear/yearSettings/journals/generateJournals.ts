@@ -8,7 +8,6 @@ export const generateJournalsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/generate-journals`,
     schemas: {
         body: v.object({
-            idOrganization: journalSchema.entries.idOrganization,
             idYear: journalSchema.entries.idYear,
         }),
         return: v.array(journalSchemaReturn),

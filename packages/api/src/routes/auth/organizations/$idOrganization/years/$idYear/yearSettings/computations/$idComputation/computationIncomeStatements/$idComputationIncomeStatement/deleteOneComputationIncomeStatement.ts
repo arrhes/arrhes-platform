@@ -9,7 +9,7 @@ import { deleteOne } from "../../../../../../../../../../../utilities/sql/delete
 export const deleteOneComputationIncomeStatementRoute = apiFactory
     .createApp()
     .post(deleteOneComputationIncomeStatementRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: deleteOneComputationIncomeStatementRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const deleteOneComputationIncomeStatementRoute = apiFactory
             table: models.computationIncomeStatement,
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idComputationIncomeStatement),
                 ),

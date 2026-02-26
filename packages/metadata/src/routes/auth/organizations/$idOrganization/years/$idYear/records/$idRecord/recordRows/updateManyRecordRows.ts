@@ -9,7 +9,6 @@ export const updateManyRecordRowsRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idRecord: recordRowSchema.entries.idRecord,
-            idOrganization: recordRowSchema.entries.idOrganization,
             idYear: recordRowSchema.entries.idYear,
 
             isComputedForJournalReport: v.optional(recordRowSchema.entries.isComputedForJournalReport),

@@ -15,7 +15,7 @@ import type * as v from "valibot"
 import { dataClient } from "../contexts/data/queryClient.js"
 import { getResponseBodyFromAPI } from "./getResponseBodyFromAPI.js"
 
-type YearScopedBody = { idOrganization: string; idYear: string }
+type YearScopedBody = { idYear: string }
 
 type YearScopedRouteDefinition = {
     path: string
@@ -51,7 +51,6 @@ const yearScopedRouteDefinitions: YearScopedRouteDefinition[] = [
  */
 export function prefetchYearData(params: YearScopedBody) {
     const body: YearScopedBody = {
-        idOrganization: params.idOrganization,
         idYear: params.idYear,
     }
 

@@ -61,7 +61,6 @@ export function UpdateOneComputation(props: {
                                 invalidateData({
                                     routeDefinition: readAllComputationsRouteDefinition,
                                     body: {
-                                        idOrganization: props.computation.idOrganization,
                                         idYear: props.computation.idYear,
                                     },
                                 }),
@@ -69,7 +68,6 @@ export function UpdateOneComputation(props: {
                                     routeDefinition: readOneComputationRouteDefinition,
                                     body: {
                                         idComputation: props.computation.id,
-                                        idOrganization: props.computation.idOrganization,
                                         idYear: props.computation.idYear,
                                     },
                                 }),

@@ -9,7 +9,6 @@ export const readOneFileRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idFile: fileSchema.entries.id,
-            idOrganization: fileSchema.entries.idOrganization,
             idYear: fileSchema.entries.idYear,
         }),
         return: fileSchemaReturn,

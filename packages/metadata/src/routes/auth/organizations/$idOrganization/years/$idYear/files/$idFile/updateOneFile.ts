@@ -9,7 +9,6 @@ export const updateOneFileRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idFile: fileSchema.entries.id,
-            idOrganization: fileSchema.entries.idOrganization,
             idYear: fileSchema.entries.idYear,
             reference: v.optional(fileSchema.entries.reference),
             name: v.optional(fileSchema.entries.name),

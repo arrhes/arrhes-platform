@@ -20,7 +20,6 @@ export function DeleteOneRecordLabel(props: {
             routeDefinition: deleteOneRecordLabelRouteDefinition,
             body: {
                 idRecordLabel: props.recordLabel.id,
-                idOrganization: props.recordLabel.idOrganization,
                 idYear: props.recordLabel.idYear,
             },
         })
@@ -33,7 +32,6 @@ export function DeleteOneRecordLabel(props: {
         await invalidateData({
             routeDefinition: readAllRecordLabelsRouteDefinition,
             body: {
-                idOrganization: props.recordLabel.idOrganization,
                 idYear: props.recordLabel.idYear,
             },
         })

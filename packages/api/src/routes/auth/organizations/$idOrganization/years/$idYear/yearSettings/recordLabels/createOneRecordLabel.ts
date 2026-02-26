@@ -8,7 +8,7 @@ import { insertOne } from "../../../../../../../../utilities/sql/insertOne.js"
 export const createOneRecordLabelRoute = apiFactory
     .createApp()
     .post(createOneRecordLabelRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneRecordLabelRouteDefinition.schemas.body,
@@ -19,7 +19,7 @@ export const createOneRecordLabelRoute = apiFactory
             table: models.recordLabel,
             data: {
                 id: generateId(),
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
 
                 label: body.label,

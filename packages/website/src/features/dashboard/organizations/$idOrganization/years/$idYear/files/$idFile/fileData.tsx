@@ -18,7 +18,6 @@ export function FileData(props: {
         routeDefinition: readOneFileRouteDefinition,
         body: {
             idFile: props.idFile,
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

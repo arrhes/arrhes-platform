@@ -9,7 +9,6 @@ export const updateOneRecordLabelRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idRecordLabel: recordLabelSchema.entries.id,
-            idOrganization: recordLabelSchema.entries.idOrganization,
             idYear: recordLabelSchema.entries.idYear,
 
             label: v.optional(recordLabelSchema.entries.label),

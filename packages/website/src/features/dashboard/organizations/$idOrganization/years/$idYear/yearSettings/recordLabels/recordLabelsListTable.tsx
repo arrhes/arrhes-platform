@@ -16,7 +16,6 @@ export function RecordLabelsListTable(props: {
             <DataWrapper
                 routeDefinition={readAllRecordLabelsRouteDefinition}
                 body={{
-                    idOrganization: props.idOrganization,
                     idYear: props.idYear,
                 }}
             >

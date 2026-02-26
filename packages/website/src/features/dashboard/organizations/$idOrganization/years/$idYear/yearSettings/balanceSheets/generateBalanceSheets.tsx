@@ -64,7 +64,6 @@ export function GenerateBalanceSheets(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: generateBalanceSheetsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -78,7 +77,6 @@ export function GenerateBalanceSheets(props: {
                                 await invalidateData({
                                     routeDefinition: readAllBalanceSheetsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

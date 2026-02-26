@@ -9,7 +9,7 @@ import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js
 export const readOneIncomeStatementRoute = apiFactory
     .createApp()
     .post(readOneIncomeStatementRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readOneIncomeStatementRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const readOneIncomeStatementRoute = apiFactory
             table: models.incomeStatement,
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idIncomeStatement),
                 ),

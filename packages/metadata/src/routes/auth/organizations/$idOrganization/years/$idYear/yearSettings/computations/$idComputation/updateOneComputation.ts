@@ -9,7 +9,6 @@ export const updateOneComputationRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idComputation: computationSchema.entries.id,
-            idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
             index: v.optional(computationSchema.entries.index),
             number: v.optional(computationSchema.entries.number),

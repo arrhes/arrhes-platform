@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../../utilities/sql/updateOne.js"
 
 export const updateOneJournalRoute = apiFactory.createApp().post(updateOneJournalRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateOneJournalRouteDefinition.schemas.body,
@@ -23,11 +23,7 @@ export const updateOneJournalRoute = apiFactory.createApp().post(updateOneJourna
             lastUpdatedBy: user.id,
         },
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idJournal),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idJournal)),
     })
 
     return response({

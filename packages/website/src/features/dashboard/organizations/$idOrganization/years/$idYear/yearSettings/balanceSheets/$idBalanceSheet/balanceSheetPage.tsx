@@ -22,7 +22,6 @@ export function BalanceSheetPage() {
             <DataWrapper
                 routeDefinition={readOneBalanceSheetRouteDefinition}
                 body={{
-                    idOrganization: params.idOrganization,
                     idYear: params.idYear,
                     idBalanceSheet: params.idBalanceSheet,
                 }}

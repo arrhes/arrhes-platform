@@ -36,7 +36,6 @@ export function CreateOneComputationIncomeStatement(props: {
                     <FormRoot
                         schema={createOneComputationIncomeStatementRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.computation.idOrganization,
                             idYear: props.computation.idYear,
                             operation: "plus",
                         }}
@@ -62,7 +61,6 @@ export function CreateOneComputationIncomeStatement(props: {
                             await invalidateData({
                                 routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
                                 body: {
-                                    idOrganization: props.computation.idOrganization,
                                     idYear: props.computation.idYear,
                                 },
                             })
@@ -88,7 +86,6 @@ export function CreateOneComputationIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllIncomeStatementsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.computation.idOrganization,
                                                         idYear: props.computation.idYear,
                                                     }}
                                                     placeholder="Sélectionner un poste du compte de résultat"

@@ -65,7 +65,6 @@ export function GenerateIncomeStatements(props: {
                                 const response = await getResponseBodyFromAPI({
                                     routeDefinition: generateIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })
@@ -85,7 +84,6 @@ export function GenerateIncomeStatements(props: {
                                 await invalidateData({
                                     routeDefinition: readAllIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.idOrganization,
                                         idYear: props.idYear,
                                     },
                                 })

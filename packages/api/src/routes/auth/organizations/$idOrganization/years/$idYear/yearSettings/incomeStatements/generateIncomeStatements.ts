@@ -20,7 +20,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 export const generateIncomeStatementsRoute = apiFactory
     .createApp()
     .post(generateIncomeStatementsRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateIncomeStatementsRouteDefinition.schemas.body,
@@ -31,7 +31,7 @@ export const generateIncomeStatementsRoute = apiFactory
                 const _deletedIncomeStatements = await deleteMany({
                     database: tx,
                     table: models.incomeStatement,
-                    where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                    where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
                 })
             } catch (_error: unknown) {
                 throw new Exception({
@@ -43,7 +43,7 @@ export const generateIncomeStatementsRoute = apiFactory
             const organization = await selectOne({
                 database: tx,
                 table: models.organization,
-                where: (table) => eq(table.id, body.idOrganization),
+                where: (table) => eq(table.id, idOrganization),
             })
             const defaultIncomeStatements =
                 organization.scope === "association"
@@ -58,7 +58,7 @@ export const generateIncomeStatementsRoute = apiFactory
                 })
                 newIncomeStatements.push({
                     id: generateId(),
-                    idOrganization: body.idOrganization,
+                    idOrganization: idOrganization,
                     idYear: body.idYear,
                     idIncomeStatementParent: incomeStatementParent?.id ?? null,
                     number: defaultIncomeStatement.number.toString(),

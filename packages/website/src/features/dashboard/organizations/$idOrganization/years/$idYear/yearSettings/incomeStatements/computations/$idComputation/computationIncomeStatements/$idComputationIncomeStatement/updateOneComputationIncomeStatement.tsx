@@ -63,7 +63,6 @@ export function UpdateOneComputationIncomeStatement(props: {
                                 invalidateData({
                                     routeDefinition: readAllComputationIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.computationIncomeStatement.idOrganization,
                                         idYear: props.computationIncomeStatement.idYear,
                                     },
                                 }),
@@ -71,7 +70,6 @@ export function UpdateOneComputationIncomeStatement(props: {
                                     routeDefinition: readOneComputationIncomeStatementRouteDefinition,
                                     body: {
                                         idComputationIncomeStatement: props.computationIncomeStatement.id,
-                                        idOrganization: props.computationIncomeStatement.idOrganization,
                                         idYear: props.computationIncomeStatement.idYear,
                                     },
                                 }),
@@ -98,7 +96,6 @@ export function UpdateOneComputationIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllIncomeStatementsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.computationIncomeStatement.idOrganization,
                                                         idYear: props.computationIncomeStatement.idYear,
                                                     }}
                                                     placeholder="Sélectionner un poste du compte de résultat"

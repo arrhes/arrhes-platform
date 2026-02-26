@@ -17,7 +17,6 @@ export function DeleteOneJournal(props: {
             routeDefinition: deleteOneJournalRouteDefinition,
             body: {
                 idJournal: props.journal.id,
-                idOrganization: props.journal.idOrganization,
                 idYear: props.journal.idYear,
             },
         })
@@ -30,7 +29,6 @@ export function DeleteOneJournal(props: {
         await invalidateData({
             routeDefinition: readAllJournalsRouteDefinition,
             body: {
-                idOrganization: props.journal.idOrganization,
                 idYear: props.journal.idYear,
             },
         })

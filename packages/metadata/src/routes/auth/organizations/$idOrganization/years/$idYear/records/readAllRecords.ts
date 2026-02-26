@@ -8,7 +8,6 @@ export const readAllRecordsRouteDefinition = routeDefinition({
     path: `${routePath.auth}/read-all-records`,
     schemas: {
         body: v.object({
-            idOrganization: recordSchema.entries.idOrganization,
             idYear: recordSchema.entries.idYear,
         }),
         return: v.array(recordSchemaReturn),

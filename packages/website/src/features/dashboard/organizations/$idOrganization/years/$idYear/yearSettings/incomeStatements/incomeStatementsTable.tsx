@@ -21,7 +21,6 @@ export function IncomeStatementsTable(props: {
         <DataWrapper
             routeDefinition={readAllIncomeStatementsRouteDefinition}
             body={{
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             }}
         >

@@ -9,7 +9,7 @@ import { deleteMany } from "../../../../../../../../utilities/sql/deleteMany.js"
 import { insertMany } from "../../../../../../../../utilities/sql/insertMany.js"
 
 export const generateJournalsRoute = apiFactory.createApp().post(generateJournalsRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: generateJournalsRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const generateJournalsRoute = apiFactory.createApp().post(generateJournal
             const _deletedJournals = await deleteMany({
                 database: tx,
                 table: models.journal,
-                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
             })
         } catch (_error: unknown) {
             throw new Exception({
@@ -32,7 +32,7 @@ export const generateJournalsRoute = apiFactory.createApp().post(generateJournal
         const newJournals = defaultJournals.map((defaultJournal) => {
             return {
                 id: generateId(),
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 code: defaultJournal.code,
                 label: defaultJournal.label,

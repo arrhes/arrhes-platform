@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { selectMany } from "../../../../../../../../utilities/sql/selectMany.js"
 
 export const readAllRecordRowsRoute = apiFactory.createApp().post(readAllRecordRowsRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readAllRecordRowsRouteDefinition.schemas.body,
@@ -19,12 +19,12 @@ export const readAllRecordRowsRoute = apiFactory.createApp().post(readAllRecordR
         where: (table) => {
             if (body.idRecord !== null && body.idRecord !== undefined) {
                 return and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.idRecord, body.idRecord),
                 )
             }
-            return and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear))
+            return and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear))
         },
     })
 

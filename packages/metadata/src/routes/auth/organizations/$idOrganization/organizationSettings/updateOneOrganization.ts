@@ -8,7 +8,6 @@ export const updateOneOrganizationRouteDefinition = routeDefinition({
     path: `${routePath.auth}/update-one-organization`,
     schemas: {
         body: v.object({
-            idOrganization: organizationSchema.entries.id,
             siren: v.optional(organizationSchema.entries.siren),
             name: v.optional(organizationSchema.entries.name),
             email: v.optional(organizationSchema.entries.email),

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 
 export const updateOneRecordRoute = apiFactory.createApp().post(updateOneRecordRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateOneRecordRouteDefinition.schemas.body,
@@ -27,7 +27,7 @@ export const updateOneRecordRoute = apiFactory.createApp().post(updateOneRecordR
             },
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idRecord),
                 ),

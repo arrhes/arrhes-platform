@@ -12,7 +12,6 @@ export const updateOneIncomeStatementRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idIncomeStatement: incomeStatementSchema.entries.id,
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
             idIncomeStatementParent: v.optional(incomeStatementSchema.entries.idIncomeStatementParent),
             isComputed: v.optional(incomeStatementSchema.entries.isComputed),

@@ -6,7 +6,7 @@ import { response } from "../../../../../../../utilities/response.js"
 import { insertOne } from "../../../../../../../utilities/sql/insertOne.js"
 
 export const createOneFolderRoute = apiFactory.createApp().post(createOneFolderRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneFolderRouteDefinition.schemas.body,
@@ -17,7 +17,7 @@ export const createOneFolderRoute = apiFactory.createApp().post(createOneFolderR
         table: models.folder,
         data: {
             id: generateId(),
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idYear: body.idYear,
             idFolderParent: body.idFolderParent ?? null,
             name: body.name,

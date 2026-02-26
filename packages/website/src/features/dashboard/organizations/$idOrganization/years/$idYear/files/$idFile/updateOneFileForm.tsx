@@ -41,7 +41,6 @@ export function UpdateOneFileForm(props: { file: v.InferOutput<typeof returnedSc
                     routeDefinition: updateOneFileRouteDefinition,
                     body: {
                         idFile: props.file.id,
-                        idOrganization: data.idOrganization,
                         idYear: data.idYear,
                         reference: data.reference,
                         name: data.name,
@@ -56,7 +55,6 @@ export function UpdateOneFileForm(props: { file: v.InferOutput<typeof returnedSc
                     const signedUrlResponse = await getResponseBodyFromAPI({
                         routeDefinition: generateFilePutSignedUrlRouteDefinition,
                         body: {
-                            idOrganization: props.file.idOrganization,
                             idYear: props.file.idYear,
                             idFile: updateFileResponse.data.id,
                             type: data.file.type,
@@ -86,7 +84,6 @@ export function UpdateOneFileForm(props: { file: v.InferOutput<typeof returnedSc
                     invalidateData({
                         routeDefinition: readAllFilesRouteDefinition,
                         body: {
-                            idOrganization: props.file.idOrganization,
                             idYear: props.file.idYear,
                         },
                     }),
@@ -94,7 +91,6 @@ export function UpdateOneFileForm(props: { file: v.InferOutput<typeof returnedSc
                         routeDefinition: readOneFileRouteDefinition,
                         body: {
                             idFile: props.file.id,
-                            idOrganization: props.file.idOrganization,
                             idYear: props.file.idYear,
                         },
                     }),

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { updateOne } from "../../../../../../../../utilities/sql/updateOne.js"
 
 export const updateOneFileRoute = apiFactory.createApp().post(updateOneFileRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: updateOneFileRouteDefinition.schemas.body,
@@ -24,11 +24,7 @@ export const updateOneFileRoute = apiFactory.createApp().post(updateOneFileRoute
             lastUpdatedBy: user.id,
         },
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idFile),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFile)),
     })
 
     return response({

@@ -7,9 +7,7 @@ export const readOneOrganizationRouteDefinition = routeDefinition({
     protocol: "http",
     path: `${routePath.auth}/read-one-organization`,
     schemas: {
-        body: v.object({
-            idOrganization: organizationSchema.entries.id,
-        }),
+        body: v.object({}),
         return: organizationSchemaReturn,
     },
 })

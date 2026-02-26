@@ -29,9 +29,7 @@ export function DeleteOneOrganization(props: {
             onSubmit={async () => {
                 const deleteResponse = await getResponseBodyFromAPI({
                     routeDefinition: deleteOneOrganizationRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
+                    body: {},
                 })
 
                 if (deleteResponse.ok === false) {
@@ -41,9 +39,7 @@ export function DeleteOneOrganization(props: {
 
                 await invalidateData({
                     routeDefinition: getAllMyOrganizationsRouteDefinition,
-                    body: {
-                        idOrganization: props.idOrganization,
-                    },
+                    body: {},
                 })
 
                 toast({ title: "Organisation supprimée", variant: "success" })

@@ -12,7 +12,7 @@ import { generatePutSignedUrl } from "../../../../../../../../utilities/storage/
 export const generateFilePutSignedUrlRoute = apiFactory
     .createApp()
     .post(generateFilePutSignedUrlRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: generateFilePutSignedUrlRouteDefinition.schemas.body,
@@ -29,7 +29,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
         const organization = await selectOne({
             database: c.var.clients.sql,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         if (organization.storageCurrentUsage + body.size > organization.storageLimit) {
@@ -40,7 +40,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
             })
         }
 
-        const storageKey = `organizations/${body.idOrganization}/${body.idYear}/files/${body.idFile}`
+        const storageKey = `organizations/${idOrganization}/${body.idYear}/files/${body.idFile}`
 
         const updateOneFile = await updateOne({
             database: c.var.clients.sql,
@@ -52,11 +52,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
                 lastUpdatedAt: new Date().toISOString(),
             },
             where: (table) =>
-                and(
-                    eq(table.idOrganization, body.idOrganization),
-                    eq(table.idYear, body.idYear),
-                    eq(table.id, body.idFile),
-                ),
+                and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFile)),
         })
 
         await updateOne({
@@ -65,7 +61,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
             data: {
                 storageCurrentUsage: sql`${models.organization.storageCurrentUsage} + ${body.size}`,
             },
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
 
         const url = await generatePutSignedUrl({
@@ -74,7 +70,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
             contentLength: body.size,
             contentType: body.type,
             metadata: {
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 idUser: user.id,
             },

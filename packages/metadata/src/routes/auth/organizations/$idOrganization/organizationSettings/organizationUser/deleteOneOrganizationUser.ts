@@ -9,7 +9,6 @@ export const deleteOneOrganizationUserRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idOrganizationUser: organizationUserSchema.entries.id,
-            idOrganization: organizationUserSchema.entries.idOrganization,
         }),
         return: v.object({}),
     },

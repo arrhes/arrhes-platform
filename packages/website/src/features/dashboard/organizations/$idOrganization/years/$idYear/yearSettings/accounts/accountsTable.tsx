@@ -17,7 +17,6 @@ export function AccountsTable(props: { idOrganization: string; idYear: string; g
     const response = useDataFromAPI({
         routeDefinition: readAllAccountsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

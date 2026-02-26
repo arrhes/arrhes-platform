@@ -10,7 +10,6 @@ export const readOneOrganizationUserRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idOrganizationUser: organizationUserSchema.entries.id,
-            idOrganization: organizationUserSchema.entries.idOrganization,
         }),
         return: v.object({
             ...organizationUserSchemaReturn.entries,

@@ -9,7 +9,6 @@ export const createOneRecordFromTemplateRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-record-from-template`,
     schemas: {
         body: v.object({
-            idOrganization: recordSchema.entries.idOrganization,
             idYear: recordSchema.entries.idYear,
             idJournal: v.optional(recordSchema.entries.idJournal),
             idRecordLabel: v.optional(recordSchema.entries.idRecordLabel),

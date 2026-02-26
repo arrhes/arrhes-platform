@@ -13,7 +13,6 @@ export function AccountSelect(props: {
     const accountsResponse = useDataFromAPI({
         routeDefinition: readAllAccountsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

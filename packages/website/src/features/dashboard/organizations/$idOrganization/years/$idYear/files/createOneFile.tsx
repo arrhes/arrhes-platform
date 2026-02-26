@@ -39,7 +39,6 @@ async function uploadOneFile(params: {
     const createResponse = await getResponseBodyFromAPI({
         routeDefinition: createOneFileRouteDefinition,
         body: {
-            idOrganization,
             idYear,
             idFolder: idFolder ?? undefined,
             reference: referenceFromFileName(file.name),
@@ -55,7 +54,6 @@ async function uploadOneFile(params: {
     const signedUrlResponse = await getResponseBodyFromAPI({
         routeDefinition: generateFilePutSignedUrlRouteDefinition,
         body: {
-            idOrganization,
             idYear,
             idFile: createResponse.data.id,
             type: file.type,
@@ -110,7 +108,6 @@ export function CreateOneFile(props: {
             await invalidateData({
                 routeDefinition: readAllFilesRouteDefinition,
                 body: {
-                    idOrganization: props.idOrganization,
                     idYear: props.idYear,
                 },
             })

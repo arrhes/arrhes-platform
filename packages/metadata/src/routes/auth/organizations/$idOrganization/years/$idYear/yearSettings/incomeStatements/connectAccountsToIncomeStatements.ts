@@ -8,7 +8,6 @@ export const connectAccountsToIncomeStatementsRouteDefinition = routeDefinition(
     path: `${routePath.auth}/connect-accounts-to-income-statements`,
     schemas: {
         body: v.object({
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
         }),
         return: v.object({}),

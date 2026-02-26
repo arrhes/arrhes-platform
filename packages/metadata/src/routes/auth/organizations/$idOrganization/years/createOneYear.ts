@@ -8,7 +8,6 @@ export const createOneYearRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-year`,
     schemas: {
         body: v.object({
-            idOrganization: yearSchema.entries.idOrganization,
             idYearPrevious: v.optional(yearSchema.entries.idYearPrevious),
             label: v.optional(yearSchema.entries.label),
             startingAt: yearSchema.entries.startingAt,

@@ -26,7 +26,6 @@ export function FolderActions(props: {
             routeDefinition: deleteOneFolderRouteDefinition,
             body: {
                 idFolder: props.folder.id,
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             },
         })
@@ -39,7 +38,6 @@ export function FolderActions(props: {
         await invalidateData({
             routeDefinition: readAllFoldersRouteDefinition,
             body: {
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             },
         })

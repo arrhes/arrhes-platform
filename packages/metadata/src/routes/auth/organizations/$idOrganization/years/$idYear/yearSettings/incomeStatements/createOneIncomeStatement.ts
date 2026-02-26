@@ -8,7 +8,6 @@ export const createOneIncomeStatementRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-income-statement`,
     schemas: {
         body: v.object({
-            idOrganization: incomeStatementSchema.entries.idOrganization,
             idYear: incomeStatementSchema.entries.idYear,
             idIncomeStatementParent: incomeStatementSchema.entries.idIncomeStatementParent,
             isComputed: incomeStatementSchema.entries.isComputed,

@@ -9,7 +9,6 @@ export const readOneJournalRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idJournal: journalSchema.entries.id,
-            idOrganization: journalSchema.entries.idOrganization,
             idYear: journalSchema.entries.idYear,
         }),
         return: journalSchemaReturn,

@@ -65,7 +65,6 @@ export function UpdateOneIncomeStatement(props: {
                                 invalidateData({
                                     routeDefinition: readAllIncomeStatementsRouteDefinition,
                                     body: {
-                                        idOrganization: props.incomeStatement.idOrganization,
                                         idYear: props.incomeStatement.idYear,
                                     },
                                 }),
@@ -73,7 +72,6 @@ export function UpdateOneIncomeStatement(props: {
                                     routeDefinition: readOneIncomeStatementRouteDefinition,
                                     body: {
                                         idIncomeStatement: props.incomeStatement.id,
-                                        idOrganization: props.incomeStatement.idOrganization,
                                         idYear: props.incomeStatement.idYear,
                                     },
                                 }),
@@ -133,7 +131,6 @@ export function UpdateOneIncomeStatement(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllIncomeStatementsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.incomeStatement.idOrganization,
                                                         idYear: props.incomeStatement.idYear,
                                                     }}
                                                     placeholder="Sélectionner une ligne de compte de résultat"

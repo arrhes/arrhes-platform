@@ -9,7 +9,6 @@ export const deleteOneApiKeyRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idApiKey: apiKeySchema.entries.id,
-            idOrganization: apiKeySchema.entries.idOrganization,
         }),
         return: v.object({}),
     },

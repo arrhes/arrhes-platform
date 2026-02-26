@@ -19,7 +19,6 @@ export function DeleteOneOrganizationUser(props: {
             routeDefinition: deleteOneOrganizationUserRouteDefinition,
             body: {
                 idOrganizationUser: props.organizationUser.id,
-                idOrganization: props.organizationUser.idOrganization,
             },
         })
 
@@ -30,9 +29,7 @@ export function DeleteOneOrganizationUser(props: {
 
         await invalidateData({
             routeDefinition: readOneOrganizationRouteDefinition,
-            body: {
-                idOrganization: props.organizationUser.idOrganization,
-            },
+            body: {},
         })
         toast({ title: "Utilisateur supprimé de l'organisation", variant: "success" })
     }

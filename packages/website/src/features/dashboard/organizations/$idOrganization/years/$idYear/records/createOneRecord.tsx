@@ -59,7 +59,6 @@ export function CreateOneRecord(props: {
                     <FormRoot
                         schema={createOneRecordFromTemplateRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             date: new Date().toISOString(),
                             idFile: null,
@@ -97,7 +96,6 @@ export function CreateOneRecord(props: {
                             await invalidateData({
                                 routeDefinition: readAllRecordsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })
@@ -149,7 +147,6 @@ export function CreateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllJournalsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Sélectionner un journal"
@@ -175,7 +172,6 @@ export function CreateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllRecordLabelsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Sélectionner une catégorie"
@@ -201,7 +197,6 @@ export function CreateOneRecord(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllFilesRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Sélectionner une pièce justificative"

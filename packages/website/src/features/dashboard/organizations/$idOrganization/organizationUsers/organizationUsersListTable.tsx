@@ -12,12 +12,7 @@ export function OrganizationUsersListTable(props: {
 }) {
     return (
         <ListTable.Root>
-            <DataWrapper
-                routeDefinition={readAllOrganizationUsersRouteDefinition}
-                body={{
-                    idOrganization: props.idOrganization,
-                }}
-            >
+            <DataWrapper routeDefinition={readAllOrganizationUsersRouteDefinition} body={{}}>
                 {(organizationUsers) => {
                     if (organizationUsers.length === 0) {
                         return (

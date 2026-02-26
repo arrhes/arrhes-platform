@@ -23,7 +23,6 @@ export function BalanceSheetTable(props: {
         <DataWrapper
             routeDefinition={readAllBalanceSheetsRouteDefinition}
             body={{
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             }}
         >

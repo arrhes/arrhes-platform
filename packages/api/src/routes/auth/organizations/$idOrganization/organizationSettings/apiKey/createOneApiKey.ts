@@ -10,7 +10,7 @@ import { insertOne } from "../../../../../../utilities/sql/insertOne.js"
 import { selectOne } from "../../../../../../utilities/sql/selectOne.js"
 
 export const createOneApiKeyRoute = apiFactory.createApp().post(createOneApiKeyRouteDefinition.path, async (c) => {
-    const { user } = await checkUserSessionMiddleware({ context: c })
+    const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: createOneApiKeyRouteDefinition.schemas.body,
@@ -20,7 +20,7 @@ export const createOneApiKeyRoute = apiFactory.createApp().post(createOneApiKeyR
     const organizationUser = await selectOne({
         database: c.var.clients.sql,
         table: models.organizationUser,
-        where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, body.idOrganization)),
+        where: (table) => and(eq(table.idUser, user.id), eq(table.idOrganization, idOrganization)),
     })
     if (organizationUser.isAdmin === false) {
         throw new Exception({
@@ -38,7 +38,7 @@ export const createOneApiKeyRoute = apiFactory.createApp().post(createOneApiKeyR
         table: models.apiKey,
         data: {
             id: generateId(),
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idUser: user.id,
             keyHash: keyHash,
             name: body.name,

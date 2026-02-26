@@ -35,7 +35,6 @@ export function CreateOneComputation(props: {
                     <FormRoot
                         schema={createOneComputationRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                         }}
                         submitButtonProps={{
@@ -60,7 +59,6 @@ export function CreateOneComputation(props: {
                             await invalidateData({
                                 routeDefinition: readAllComputationsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

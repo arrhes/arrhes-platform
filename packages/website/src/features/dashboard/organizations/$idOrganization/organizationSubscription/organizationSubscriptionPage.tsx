@@ -40,9 +40,7 @@ export function OrganizationSubscriptionPage() {
         setIsSubscribing(true)
         const response = await getResponseBodyFromAPI({
             routeDefinition: createFirstPaymentRouteDefinition,
-            body: {
-                idOrganization: params.idOrganization,
-            },
+            body: {},
         })
 
         if (response.ok === false) {
@@ -60,12 +58,7 @@ export function OrganizationSubscriptionPage() {
     return (
         <Page.Root>
             <Page.Content>
-                <DataWrapper
-                    routeDefinition={readOrganizationSubscriptionRouteDefinition}
-                    body={{
-                        idOrganization: params.idOrganization,
-                    }}
-                >
+                <DataWrapper routeDefinition={readOrganizationSubscriptionRouteDefinition} body={{}}>
                     {(subscription) => {
                         return (
                             <div

@@ -8,7 +8,6 @@ export const createOneRecordRowRouteDefinition = routeDefinition({
     path: `${routePath.auth}/create-one-record-row`,
     schemas: {
         body: v.object({
-            idOrganization: recordRowSchema.entries.idOrganization,
             idYear: recordRowSchema.entries.idYear,
             idRecord: recordRowSchema.entries.idRecord,
             idAccount: recordRowSchema.entries.idAccount,

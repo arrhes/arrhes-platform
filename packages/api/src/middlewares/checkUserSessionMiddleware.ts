@@ -6,6 +6,7 @@ import { parseCookies } from "../utilities/cookies/parseCookies.js"
 import { unsignString } from "../utilities/cookies/unsignString.js"
 import { Exception } from "../utilities/exception.js"
 import { productName } from "../utilities/variables.js"
+import { resolveOrganizationMiddleware } from "./resolveOrganizationMiddleware.js"
 
 export async function checkUserSessionMiddleware(parameters: { context: Context<any> }) {
     try {
@@ -74,9 +75,19 @@ async function tryAuthWithCookie(context: Context<any>) {
 
         context.set("user", user)
 
+        // Resolve idOrganization from header/cookie/body for cookie-based auth
+        let idOrganization: string | undefined
+        try {
+            idOrganization = await resolveOrganizationMiddleware({ context })
+        } catch {
+            // idOrganization is optional — some routes don't need it
+            idOrganization = undefined
+        }
+
         return {
             userSession: userSession,
             user: user,
+            idOrganization: idOrganization,
         }
     } catch {
         return null
@@ -114,8 +125,10 @@ async function tryAuthWithBearer(context: Context<any>) {
 
     context.set("user", user)
 
+    // For Bearer auth, idOrganization comes from the API key record
     return {
         userSession: null,
         user: user,
+        idOrganization: apiKey.idOrganization,
     }
 }

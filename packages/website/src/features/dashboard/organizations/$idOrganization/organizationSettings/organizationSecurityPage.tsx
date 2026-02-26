@@ -14,12 +14,7 @@ export function OrganizationSecurityPage() {
     return (
         <Page.Root>
             <Page.Content>
-                <DataWrapper
-                    routeDefinition={readOneOrganizationRouteDefinition}
-                    body={{
-                        idOrganization: params.idOrganization,
-                    }}
-                >
+                <DataWrapper routeDefinition={readOneOrganizationRouteDefinition} body={{}}>
                     {(organization) => {
                         return (
                             <SettingsSection.Root variant="danger">

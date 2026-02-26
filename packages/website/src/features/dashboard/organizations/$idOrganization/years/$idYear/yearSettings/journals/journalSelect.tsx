@@ -13,7 +13,6 @@ export function JournalSelect(props: {
     const journalsResponse = useDataFromAPI({
         routeDefinition: readAllJournalsRouteDefinition,
         body: {
-            idOrganization: props.idOrganization,
             idYear: props.idYear,
         },
     })

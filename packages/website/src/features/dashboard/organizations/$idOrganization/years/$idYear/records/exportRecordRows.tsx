@@ -86,11 +86,11 @@ export function ExportRecordRows(props: {
 
                             const accountsResponse = await getResponseBodyFromAPI({
                                 routeDefinition: readAllAccountsRouteDefinition,
-                                body: { idOrganization: props.idOrganization, idYear: props.idYear },
+                                body: { idYear: props.idYear },
                             })
                             const journalsResponse = await getResponseBodyFromAPI({
                                 routeDefinition: readAllJournalsRouteDefinition,
-                                body: { idOrganization: props.idOrganization, idYear: props.idYear },
+                                body: { idYear: props.idYear },
                             })
 
                             if (!accountsResponse.ok || !journalsResponse.ok) {
@@ -180,7 +180,6 @@ export function ExportRecordRows(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllJournalsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Tous les journaux"
@@ -211,7 +210,6 @@ export function ExportRecordRows(props: {
                                                     onChange={field.onChange}
                                                     routeDefinition={readAllAccountsRouteDefinition}
                                                     body={{
-                                                        idOrganization: props.idOrganization,
                                                         idYear: props.idYear,
                                                     }}
                                                     placeholder="Tous les comptes"

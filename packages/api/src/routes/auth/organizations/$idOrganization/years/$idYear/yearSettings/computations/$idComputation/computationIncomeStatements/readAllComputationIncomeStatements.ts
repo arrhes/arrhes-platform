@@ -9,7 +9,7 @@ import { selectMany } from "../../../../../../../../../../utilities/sql/selectMa
 export const readAllComputationIncomeStatementsRoute = apiFactory
     .createApp()
     .post(readAllComputationIncomeStatementsRouteDefinition.path, async (c) => {
-        await checkUserSessionMiddleware({ context: c })
+        const { idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: readAllComputationIncomeStatementsRouteDefinition.schemas.body,
@@ -21,19 +21,19 @@ export const readAllComputationIncomeStatementsRoute = apiFactory
             where: (table) => {
                 if (body.idComputation !== undefined) {
                     return and(
-                        eq(table.idOrganization, body.idOrganization),
+                        eq(table.idOrganization, idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.idComputation, body.idComputation),
                     )
                 }
                 if (body.idIncomeStatement !== undefined) {
                     return and(
-                        eq(table.idOrganization, body.idOrganization),
+                        eq(table.idOrganization, idOrganization),
                         eq(table.idYear, body.idYear),
                         eq(table.idIncomeStatement, body.idIncomeStatement),
                     )
                 }
-                return and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear))
+                return and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear))
             },
         })
 

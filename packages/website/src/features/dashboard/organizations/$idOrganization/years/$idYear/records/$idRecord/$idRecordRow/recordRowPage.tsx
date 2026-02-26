@@ -26,7 +26,6 @@ export function RecordRowPage() {
                 <DataWrapper
                     routeDefinition={readOneRecordRowRouteDefinition}
                     body={{
-                        idOrganization: params.idOrganization,
                         idYear: params.idYear,
                         idRecordRow: params.idRecordRow,
                     }}
@@ -85,7 +84,6 @@ export function RecordRowPage() {
                                                     <DataWrapper
                                                         routeDefinition={readOneAccountRouteDefinition}
                                                         body={{
-                                                            idOrganization: params.idOrganization,
                                                             idYear: params.idYear,
                                                             idAccount: recordRow.idAccount,
                                                         }}

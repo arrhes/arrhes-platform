@@ -10,7 +10,6 @@ export const settleBalanceSheetRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idYear: yearSchema.entries.id,
-            idOrganization: yearSchema.entries.idOrganization,
             idJournalClosing: v.nonNullable(journalSchema.entries.id, "Le journal doit être renseigné"),
         }),
         return: v.object({}),

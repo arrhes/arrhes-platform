@@ -10,7 +10,7 @@ import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 export const createOneRecordRowRoute = apiFactory
     .createApp()
     .post(createOneRecordRowRouteDefinition.path, async (c) => {
-        const { user } = await checkUserSessionMiddleware({ context: c })
+        const { user, idOrganization } = await checkUserSessionMiddleware({ context: c })
         const body = await validateBodyMiddleware({
             context: c,
             schema: createOneRecordRowRouteDefinition.schemas.body,
@@ -21,7 +21,7 @@ export const createOneRecordRowRoute = apiFactory
             table: models.record,
             where: (table) =>
                 and(
-                    eq(table.idOrganization, body.idOrganization),
+                    eq(table.idOrganization, idOrganization),
                     eq(table.idYear, body.idYear),
                     eq(table.id, body.idRecord),
                 ),
@@ -32,7 +32,7 @@ export const createOneRecordRowRoute = apiFactory
             table: models.recordRow,
             data: {
                 id: generateId(),
-                idOrganization: body.idOrganization,
+                idOrganization: idOrganization,
                 idYear: body.idYear,
                 idRecord: body.idRecord,
                 idAccount: body.idAccount,

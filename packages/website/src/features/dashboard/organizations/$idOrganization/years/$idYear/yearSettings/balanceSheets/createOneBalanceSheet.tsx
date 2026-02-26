@@ -37,7 +37,6 @@ export function CreateOneBalanceSheet(props: {
                     <FormRoot
                         schema={createOneBalanceSheetRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             idBalanceSheetParent: null,
                             side: "asset",
@@ -64,7 +63,6 @@ export function CreateOneBalanceSheet(props: {
                             await invalidateData({
                                 routeDefinition: readAllBalanceSheetsRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

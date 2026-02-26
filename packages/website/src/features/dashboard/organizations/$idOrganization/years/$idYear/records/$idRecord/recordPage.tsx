@@ -39,11 +39,10 @@ export function RecordPage() {
         routeDefinition: readOneRecordRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idRecord: params.idRecord,
             }),
-            [params.idOrganization, params.idYear, params.idRecord],
+            [params.idYear, params.idRecord],
         ),
     })
 
@@ -51,11 +50,10 @@ export function RecordPage() {
         routeDefinition: readAllRecordRowsRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idRecord: params.idRecord,
             }),
-            [params.idOrganization, params.idYear, params.idRecord],
+            [params.idYear, params.idRecord],
         ),
     })
 
@@ -63,10 +61,9 @@ export function RecordPage() {
         routeDefinition: readAllAccountsRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
             }),
-            [params.idOrganization, params.idYear],
+            [params.idYear],
         ),
     })
 
@@ -74,11 +71,10 @@ export function RecordPage() {
         routeDefinition: readOneJournalRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idJournal: recordQuery.data?.idJournal ?? "",
             }),
-            [params.idOrganization, params.idYear, recordQuery.data?.idJournal],
+            [params.idYear, recordQuery.data?.idJournal],
         ),
         enabled: recordQuery.data?.idJournal != null,
     })
@@ -87,11 +83,10 @@ export function RecordPage() {
         routeDefinition: readOneRecordLabelRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idRecordLabel: recordQuery.data?.idRecordLabel ?? "",
             }),
-            [params.idOrganization, params.idYear, recordQuery.data?.idRecordLabel],
+            [params.idYear, recordQuery.data?.idRecordLabel],
         ),
         enabled: recordQuery.data?.idRecordLabel != null,
     })
@@ -100,11 +95,10 @@ export function RecordPage() {
         routeDefinition: readOneFileRouteDefinition,
         body: useMemo(
             () => ({
-                idOrganization: params.idOrganization,
                 idYear: params.idYear,
                 idFile: recordQuery.data?.idFile ?? "",
             }),
-            [params.idOrganization, params.idYear, recordQuery.data?.idFile],
+            [params.idYear, recordQuery.data?.idFile],
         ),
         enabled: recordQuery.data?.idFile != null,
     })

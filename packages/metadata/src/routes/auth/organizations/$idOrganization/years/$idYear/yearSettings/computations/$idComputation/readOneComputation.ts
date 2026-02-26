@@ -9,7 +9,6 @@ export const readOneComputationRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idComputation: computationSchema.entries.id,
-            idOrganization: computationSchema.entries.idOrganization,
             idYear: computationSchema.entries.idYear,
         }),
         return: computationSchemaReturn,

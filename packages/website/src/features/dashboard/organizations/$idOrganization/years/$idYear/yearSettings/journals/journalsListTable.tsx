@@ -16,7 +16,6 @@ export function JournalsListTable(props: {
             <DataWrapper
                 routeDefinition={readAllJournalsRouteDefinition}
                 body={{
-                    idOrganization: props.idOrganization,
                     idYear: props.idYear,
                 }}
             >

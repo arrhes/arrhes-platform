@@ -20,7 +20,6 @@ export function DeleteOneRecordRow(props: {
             routeDefinition: deleteOneRecordRowRouteDefinition,
             body: {
                 idRecordRow: props.recordRow.id,
-                idOrganization: props.recordRow.idOrganization,
                 idYear: props.recordRow.idYear,
             },
         })
@@ -34,7 +33,6 @@ export function DeleteOneRecordRow(props: {
             invalidateData({
                 routeDefinition: readAllRecordRowsRouteDefinition,
                 body: {
-                    idOrganization: props.recordRow.idOrganization,
                     idYear: props.recordRow.idYear,
                     idRecord: props.recordRow.idRecord,
                 },
@@ -42,7 +40,6 @@ export function DeleteOneRecordRow(props: {
             invalidateData({
                 routeDefinition: readAllRecordRowsRouteDefinition,
                 body: {
-                    idOrganization: props.recordRow.idOrganization,
                     idYear: props.recordRow.idYear,
                 },
             }),

@@ -37,7 +37,6 @@ export function CreateOneFolder(props: {
                     <FormRoot
                         schema={createOneFolderRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.idOrganization,
                             idYear: props.idYear,
                             idFolderParent: props.idFolderParent ?? null,
                             name: "",
@@ -50,7 +49,6 @@ export function CreateOneFolder(props: {
                             const createResponse = await getResponseBodyFromAPI({
                                 routeDefinition: createOneFolderRouteDefinition,
                                 body: {
-                                    idOrganization: data.idOrganization,
                                     idYear: data.idYear,
                                     idFolderParent: data.idFolderParent,
                                     name: data.name,
@@ -68,7 +66,6 @@ export function CreateOneFolder(props: {
                             await invalidateData({
                                 routeDefinition: readAllFoldersRouteDefinition,
                                 body: {
-                                    idOrganization: props.idOrganization,
                                     idYear: props.idYear,
                                 },
                             })

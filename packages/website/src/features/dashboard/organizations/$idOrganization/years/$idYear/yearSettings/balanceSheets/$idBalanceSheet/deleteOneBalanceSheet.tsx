@@ -20,7 +20,6 @@ export function DeleteOneBalanceSheet(props: {
             routeDefinition: deleteOneBalanceSheetRouteDefinition,
             body: {
                 idBalanceSheet: props.balanceSheet.id,
-                idOrganization: props.balanceSheet.idOrganization,
                 idYear: props.balanceSheet.idYear,
             },
         })
@@ -33,7 +32,6 @@ export function DeleteOneBalanceSheet(props: {
         await invalidateData({
             routeDefinition: readAllBalanceSheetsRouteDefinition,
             body: {
-                idOrganization: props.balanceSheet.idOrganization,
                 idYear: props.balanceSheet.idYear,
             },
         })

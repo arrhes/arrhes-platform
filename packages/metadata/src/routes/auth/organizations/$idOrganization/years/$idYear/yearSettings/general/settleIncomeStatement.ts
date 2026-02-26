@@ -11,7 +11,6 @@ export const settleIncomeStatementRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idYear: yearSchema.entries.id,
-            idOrganization: yearSchema.entries.idOrganization,
             idJournalClosing: v.nonNullable(journalSchema.entries.id, "Le journal doit être renseigné"),
             idAccountProfit: v.nonNullable(accountSchema.entries.id, "Le compte doit être renseigné"),
             idAccountLoss: v.nonNullable(accountSchema.entries.id, "Le compte doit être renseigné"),

@@ -69,7 +69,7 @@ function generateAccounts(parameters: {
 }
 
 export const generateAccountsRoute = apiFactory.createApp().post(generateAccountsRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: generateAccountsRouteDefinition.schemas.body,
@@ -87,7 +87,7 @@ export const generateAccountsRoute = apiFactory.createApp().post(generateAccount
             const _deletedAccounts = await deleteMany({
                 database: tx,
                 table: models.account,
-                where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.idYear, body.idYear)),
+                where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear)),
             })
         } catch (_error: unknown) {
             throw new Exception({
@@ -99,7 +99,7 @@ export const generateAccountsRoute = apiFactory.createApp().post(generateAccount
         const organization = await selectOne({
             database: tx,
             table: models.organization,
-            where: (table) => eq(table.id, body.idOrganization),
+            where: (table) => eq(table.id, idOrganization),
         })
         const defaultAccounts = (
             organization.scope === "association" ? defaultAssociationAccounts : defaultCompanyAccounts
@@ -111,7 +111,7 @@ export const generateAccountsRoute = apiFactory.createApp().post(generateAccount
         })
 
         const newAccounts = generateAccounts({
-            idOrganization: body.idOrganization,
+            idOrganization: idOrganization,
             idYear: body.idYear,
             accounts: defaultAccounts,
             idAccountParent: null,

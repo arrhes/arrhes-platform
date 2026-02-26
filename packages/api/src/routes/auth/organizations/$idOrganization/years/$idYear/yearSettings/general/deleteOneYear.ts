@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { deleteOne } from "../../../../../../../../utilities/sql/deleteOne.js"
 
 export const deleteOneYearRoute = apiFactory.createApp().post(deleteOneYearRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: deleteOneYearRouteDefinition.schemas.body,
@@ -16,7 +16,7 @@ export const deleteOneYearRoute = apiFactory.createApp().post(deleteOneYearRoute
     const deleteOneYear = await deleteOne({
         database: c.var.clients.sql,
         table: models.year,
-        where: (table) => and(eq(table.idOrganization, body.idOrganization), eq(table.id, body.idYear)),
+        where: (table) => and(eq(table.idOrganization, idOrganization), eq(table.id, body.idYear)),
     })
 
     return response({

@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../../utilities/sql/selectOne.js"
 
 export const readOneAccountRoute = apiFactory.createApp().post(readOneAccountRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readOneAccountRouteDefinition.schemas.body,
@@ -17,11 +17,7 @@ export const readOneAccountRoute = apiFactory.createApp().post(readOneAccountRou
         database: c.var.clients.sql,
         table: models.account,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idAccount),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idAccount)),
     })
 
     return response({

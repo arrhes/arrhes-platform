@@ -55,9 +55,7 @@ export function UpdateOneOrganizationUser(props: {
                         onSuccess={async () => {
                             await invalidateData({
                                 routeDefinition: readAllOrganizationUsersRouteDefinition,
-                                body: {
-                                    idOrganization: props.organizationUser.idOrganization,
-                                },
+                                body: {},
                             })
 
                             setOpen(false)

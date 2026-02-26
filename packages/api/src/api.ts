@@ -40,6 +40,7 @@ export async function api(parameters: {
                         "Set-Cookie",
                         "Credentials",
                         "X-Forwaded-For",
+                        "X-Organization-Id",
                         "Cache-Control",
                     ],
                     allowMethods: ["POST"],

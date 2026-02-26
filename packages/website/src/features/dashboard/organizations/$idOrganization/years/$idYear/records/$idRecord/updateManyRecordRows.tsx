@@ -36,7 +36,6 @@ export function UpdateManyRecordRows(props: {
                     <FormRoot
                         schema={updateManyRecordRowsRouteDefinition.schemas.body}
                         defaultValues={{
-                            idOrganization: props.record.idOrganization,
                             idYear: props.record.idYear,
                             idRecord: props.record.id,
                         }}
@@ -63,7 +62,6 @@ export function UpdateManyRecordRows(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                         idRecord: props.record.id,
                                     },
@@ -71,7 +69,6 @@ export function UpdateManyRecordRows(props: {
                                 invalidateData({
                                     routeDefinition: readAllRecordRowsRouteDefinition,
                                     body: {
-                                        idOrganization: props.record.idOrganization,
                                         idYear: props.record.idYear,
                                     },
                                 }),

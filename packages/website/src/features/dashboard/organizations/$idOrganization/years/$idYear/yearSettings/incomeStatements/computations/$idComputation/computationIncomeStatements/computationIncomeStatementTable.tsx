@@ -22,7 +22,6 @@ export function ComputationIncomeStatementsTable(props: {
             body={{
                 idComputation: props.computation.id,
                 idYear: props.computation.idYear,
-                idOrganization: props.computation.idOrganization,
             }}
         >
             {(computationIncomeStatements) => {
@@ -57,7 +56,6 @@ export function ComputationIncomeStatementsTable(props: {
                                     <DataWrapper
                                         routeDefinition={readOneIncomeStatementRouteDefinition}
                                         body={{
-                                            idOrganization: row.original.idOrganization,
                                             idYear: row.original.idYear,
                                             idIncomeStatement: row.original.idIncomeStatement,
                                         }}

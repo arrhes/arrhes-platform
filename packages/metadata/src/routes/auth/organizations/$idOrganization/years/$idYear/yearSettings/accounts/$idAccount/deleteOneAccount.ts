@@ -9,7 +9,6 @@ export const deleteOneAccountRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idAccount: accountSchema.entries.id,
-            idOrganization: accountSchema.entries.idOrganization,
             idYear: accountSchema.entries.idYear,
         }),
         return: v.object({}),

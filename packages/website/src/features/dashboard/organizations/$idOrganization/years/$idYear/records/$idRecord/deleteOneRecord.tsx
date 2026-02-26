@@ -17,7 +17,6 @@ export function DeleteOneRecord(props: {
             routeDefinition: deleteOneRecordRouteDefinition,
             body: {
                 idRecord: props.record.id,
-                idOrganization: props.record.idOrganization,
                 idYear: props.record.idYear,
             },
         })
@@ -30,7 +29,6 @@ export function DeleteOneRecord(props: {
         await invalidateData({
             routeDefinition: readAllRecordsRouteDefinition,
             body: {
-                idOrganization: props.record.idOrganization,
                 idYear: props.record.idYear,
             },
         })

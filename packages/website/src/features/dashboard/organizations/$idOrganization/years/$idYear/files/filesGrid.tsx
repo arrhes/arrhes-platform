@@ -115,7 +115,6 @@ export function FilesGrid(props: {
             routeDefinition: updateOneFileRouteDefinition,
             body: {
                 idFile: fileId,
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
                 idFolder: folderId,
             },
@@ -129,7 +128,6 @@ export function FilesGrid(props: {
         await invalidateData({
             routeDefinition: readAllFilesRouteDefinition,
             body: {
-                idOrganization: props.idOrganization,
                 idYear: props.idYear,
             },
         })

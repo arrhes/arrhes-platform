@@ -9,7 +9,6 @@ export const updateOneYearRouteDefinition = routeDefinition({
     schemas: {
         body: v.object({
             idYear: yearSchema.entries.id,
-            idOrganization: yearSchema.entries.idOrganization,
             idYearPrevious: v.optional(yearSchema.entries.idYearPrevious),
             label: v.optional(yearSchema.entries.label),
             startingAt: v.optional(yearSchema.entries.startingAt),

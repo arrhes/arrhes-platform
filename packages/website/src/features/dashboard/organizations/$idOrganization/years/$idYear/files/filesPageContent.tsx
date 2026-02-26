@@ -207,7 +207,6 @@ export function FilesPageContent(props: {
                 <DataWrapper
                     routeDefinition={readAllFilesRouteDefinition}
                     body={{
-                        idOrganization: params.idOrganization,
                         idYear: params.idYear,
                     }}
                 >

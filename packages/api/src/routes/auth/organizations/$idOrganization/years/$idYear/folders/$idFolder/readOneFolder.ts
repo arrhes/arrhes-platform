@@ -7,7 +7,7 @@ import { response } from "../../../../../../../../utilities/response.js"
 import { selectOne } from "../../../../../../../../utilities/sql/selectOne.js"
 
 export const readOneFolderRoute = apiFactory.createApp().post(readOneFolderRouteDefinition.path, async (c) => {
-    await checkUserSessionMiddleware({ context: c })
+    const { idOrganization } = await checkUserSessionMiddleware({ context: c })
     const body = await validateBodyMiddleware({
         context: c,
         schema: readOneFolderRouteDefinition.schemas.body,
@@ -17,11 +17,7 @@ export const readOneFolderRoute = apiFactory.createApp().post(readOneFolderRoute
         database: c.var.clients.sql,
         table: models.folder,
         where: (table) =>
-            and(
-                eq(table.idOrganization, body.idOrganization),
-                eq(table.idYear, body.idYear),
-                eq(table.id, body.idFolder),
-            ),
+            and(eq(table.idOrganization, idOrganization), eq(table.idYear, body.idYear), eq(table.id, body.idFolder)),
     })
 
     return response({
