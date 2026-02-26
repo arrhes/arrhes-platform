@@ -66,6 +66,7 @@ export const createFirstPaymentRoute = apiFactory
             throw new Exception({
                 statusCode: 401,
                 internalMessage: "User is not admin of the organization",
+                externalMessage: "Vous n'êtes pas administrateur de l'organisation",
             })
         }
 
@@ -84,6 +85,7 @@ export const createFirstPaymentRoute = apiFactory
                 throw new Exception({
                     statusCode: 400,
                     internalMessage: "Missing organization information",
+                    externalMessage: "Informations de l'organisation manquantes",
                 })
             }
             const customer = await c.var.clients.mollie.customers.create({

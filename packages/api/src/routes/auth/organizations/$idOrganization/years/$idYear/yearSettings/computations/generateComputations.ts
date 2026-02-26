@@ -33,7 +33,7 @@ export const generateComputationsRoute = apiFactory
             } catch (_error: unknown) {
                 throw new Exception({
                     internalMessage: "Failed to delete computations",
-                    externalMessage: "Échec de la suppression des journaux",
+                    externalMessage: "Échec de la suppression des calculs",
                 })
             }
 

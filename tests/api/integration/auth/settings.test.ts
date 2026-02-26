@@ -76,12 +76,7 @@ describe("POST /auth/update-user", () => {
 })
 
 describe("POST /auth/update-user-password", () => {
-    /**
-     * NOTE: This route has a known bug — the comparison uses `===` instead of `!==`
-     * which means it throws when passwords DO match (opposite of intended behavior).
-     * The tests document this behavior as-is.
-     */
-    it("rejects request when new passwords match (known bug: === instead of !==)", async () => {
+    it("succeeds when new passwords match and current password is correct", async () => {
         const response = await authenticatedRequest({
             session,
             path: "/auth/update-user-password",
@@ -91,8 +86,19 @@ describe("POST /auth/update-user-password", () => {
                 newPasswordCheck: "NewPassword123!",
             },
         })
-        // Bug: should succeed but fails because of === instead of !==
-        expect(response.status).toBe(400)
+        expect(response.status).toBe(200)
+
+        // Restore original password so other tests are not affected
+        const restoreResponse = await authenticatedRequest({
+            session,
+            path: "/auth/update-user-password",
+            body: {
+                currentPassword: "NewPassword123!",
+                newPassword: "demo",
+                newPasswordCheck: "demo",
+            },
+        })
+        expect(restoreResponse.status).toBe(200)
     })
 
     it("rejects request with wrong current password and mismatched new passwords", async () => {
@@ -105,8 +111,7 @@ describe("POST /auth/update-user-password", () => {
                 newPasswordCheck: "DifferentPassword456!",
             },
         })
-        // Passwords don't match, so the bug makes this pass the first check,
-        // but then it should fail on current password verification
+        // Passwords don't match so it fails on password mismatch check
         expect(response.status).toBe(400)
     })
 

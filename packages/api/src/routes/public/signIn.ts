@@ -29,6 +29,7 @@ export const signInRoute = apiFactory.createApp().post(signInRouteDefinition.pat
         throw new Exception({
             statusCode: 400,
             internalMessage: "Error signing in",
+            externalMessage: "Identifiants incorrects",
             cause: "Password does not match the database one",
         })
     }

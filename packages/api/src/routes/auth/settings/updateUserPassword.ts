@@ -17,7 +17,7 @@ export const updateUserPasswordRoute = apiFactory
             schema: updateUserPasswordRouteDefinition.schemas.body,
         })
 
-        if (body.newPassword === body.newPasswordCheck) {
+        if (body.newPassword !== body.newPasswordCheck) {
             throw new Exception({
                 statusCode: 400,
                 internalMessage: "Wrong new password check",

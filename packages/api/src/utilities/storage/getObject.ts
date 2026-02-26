@@ -25,7 +25,7 @@ export async function getObject(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Object not deleted from storage",
+            internalMessage: "Object not retrieved from storage",
             rawError: error,
         })
     }

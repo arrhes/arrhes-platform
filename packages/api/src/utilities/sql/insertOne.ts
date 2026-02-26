@@ -16,7 +16,7 @@ export async function insertOne<T extends PgTable<TableConfig>>(parameters: {
             throw new Exception({
                 statusCode: 400,
                 internalMessage: "Object not inserted",
-                cause: "Object not found",
+                cause: "Insert returned no rows",
             })
         }
 

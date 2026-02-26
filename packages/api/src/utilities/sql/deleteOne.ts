@@ -27,7 +27,7 @@ export async function deleteOne<T extends PgTable<TableConfig>>(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Not available",
+            internalMessage: "Object not deleted",
             rawError: error,
         })
     }

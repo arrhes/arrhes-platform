@@ -21,7 +21,7 @@ export const generateFilePutSignedUrlRoute = apiFactory
         if (body.size > 10_000_000) {
             throw new Exception({
                 internalMessage: "File size is too big",
-                statusCode: 500,
+                statusCode: 400,
                 externalMessage: "Fichier trop volumineux",
             })
         }

@@ -21,7 +21,7 @@ export async function updateOne<T extends PgTable<TableConfig>>(parameters: {
             throw new Exception({
                 statusCode: 400,
                 internalMessage: "Object not updated",
-                cause: "Oject not found",
+                cause: "Object not found",
             })
         }
 
@@ -29,7 +29,7 @@ export async function updateOne<T extends PgTable<TableConfig>>(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Oject not updated",
+            internalMessage: "Object not updated",
             rawError: error,
         })
     }

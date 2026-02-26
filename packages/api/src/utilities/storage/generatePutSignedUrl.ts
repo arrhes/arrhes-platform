@@ -35,7 +35,7 @@ export async function generatePutSignedUrl(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Signed URL not generated",
+            internalMessage: "PUT signed URL not generated",
             rawError: error,
         })
     }

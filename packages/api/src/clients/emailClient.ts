@@ -23,7 +23,7 @@ export function emailClient(env: ReturnType<typeof getEnv>) {
     } catch (error) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "SQL client not available",
+            internalMessage: "Email client not available",
             rawError: error,
         })
     }

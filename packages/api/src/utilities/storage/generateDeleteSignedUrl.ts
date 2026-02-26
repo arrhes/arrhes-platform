@@ -27,7 +27,7 @@ export async function generateDeleteSignedUrl(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Signed URL not generated",
+            internalMessage: "DELETE signed URL not generated",
             rawError: error,
         })
     }

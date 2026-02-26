@@ -31,7 +31,7 @@ export async function generateGetSignedUrl(parameters: {
     } catch (error: unknown) {
         throw new Exception({
             statusCode: 500,
-            internalMessage: "Signed URL not generated",
+            internalMessage: "GET signed URL not generated",
             rawError: error,
         })
     }

@@ -78,7 +78,7 @@ export async function api(parameters: {
                             message: v.string(),
                         }),
                         data: {
-                            message: error.message,
+                            message: error.externalMessage ?? "Internal error",
                         },
                     })
                 }
