@@ -1,10 +1,12 @@
 import { readOneOrganizationRouteDefinition } from "@arrhes/application-metadata/routes"
+import { LinkContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
-import { Link, useParams } from "@tanstack/react-router"
+import { useParams } from "@tanstack/react-router"
 import { Banner } from "../../../../../components/layouts/banner.tsx"
 import { DataWrapper } from "../../../../../components/layouts/dataWrapper.tsx"
 import { Page } from "../../../../../components/layouts/page/page.tsx"
 import { SettingsSection } from "../../../../../components/layouts/settingsSection/settingsSection.tsx"
+import { LinkButton } from "../../../../../components/linkButton.tsx"
 import { organizationStorageRoute } from "../../../../../routes/root/dashboard/organizations/$idOrganization/organizationSettings/organizationStorageRoute.tsx"
 
 function formatBytes(bytes: number): string {
@@ -105,16 +107,18 @@ export function OrganizationStoragePage() {
 
                                 <Banner variant="information">
                                     Pour augmenter votre limite de stockage, souscrivez à un{" "}
-                                    <Link
+                                    <LinkButton
                                         to="/dashboard/organisations/$idOrganization/abonnement"
                                         params={{ idOrganization: params.idOrganization }}
-                                        className={css({
-                                            textDecoration: "underline",
-                                            fontWeight: "600",
-                                        })}
                                     >
-                                        abonnement
-                                    </Link>
+                                        <LinkContent
+                                            className={css({
+                                                color: "information",
+                                            })}
+                                        >
+                                            abonnement
+                                        </LinkContent>
+                                    </LinkButton>
                                     .
                                 </Banner>
                             </>

@@ -1,4 +1,6 @@
+import { CircularLoader } from "@arrhes/ui"
 import { createRoute } from "@tanstack/react-router"
+import { Page } from "../../../../../../../components/layouts/page/page.js"
 import { YearLayout } from "../../../../../../../features/dashboard/organizations/$idOrganization/years/$idYear/yearLayout.js"
 import { prefetchYearData } from "../../../../../../../utilities/prefetchYearData.js"
 import { yearPathRoute } from "./yearPathRoute.js"
@@ -6,6 +8,13 @@ import { yearPathRoute } from "./yearPathRoute.js"
 export const yearLayoutRoute = createRoute({
     getParentRoute: () => yearPathRoute,
     id: "yearLayout",
+    pendingComponent: () => (
+        <Page.Root>
+            <Page.Content>
+                <CircularLoader text="Récupération des données de l'exercice..." />
+            </Page.Content>
+        </Page.Root>
+    ),
     beforeLoad: ({ params }) => {
         prefetchYearData({
             idYear: params.idYear,

@@ -7,6 +7,7 @@ import type {
     readAllRecordsRouteDefinition,
 } from "@arrhes/application-metadata/routes"
 import type { returnedSchemas } from "@arrhes/application-metadata/schemas"
+import { LinkContent } from "@arrhes/ui"
 import { css } from "@arrhes/ui/utilities/cn.js"
 import { useMemo } from "react"
 import type * as v from "valibot"
@@ -95,7 +96,9 @@ export function RecordsTable(props: {
                                 idRecord: row.original.id,
                             }}
                         >
-                            <FormatText>{row.original.label}</FormatText>
+                            <LinkContent>
+                                {row.original.label}
+                            </LinkContent>
                         </LinkButton>
                     ),
                     filterFn: "includesString",
@@ -234,7 +237,7 @@ export function RecordsTable(props: {
                                                         display: "flex",
                                                         justifyContent: "flex-start",
                                                         alignItems: "center",
-                                                        gap: "2",
+                                                        gap: "0.5rem",
                                                     })}
                                                 >
                                                     <FormatText

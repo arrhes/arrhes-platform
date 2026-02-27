@@ -14,7 +14,7 @@ const bannerRecipe = sva({
             justifyContent: "start",
             alignItems: "start",
             gap: "0.5rem",
-            borderRadius: "md",
+            borderRadius: "lg",
             border: "1px solid",
         },
         header: {
@@ -124,15 +124,11 @@ export function Banner(props: {
         <div className={cx(classes.container, props.className)}>
             {(Icon || title) && (
                 <div className={classes.header}>
-                    {Icon && (
-                        <span className={classes.icon}>
-                            <Icon size={16} />
-                        </span>
-                    )}
+                    {Icon && <Icon className={classes.icon} size={16} />}
                     {title && <span className={classes.title}>{title}</span>}
                 </div>
             )}
-            <p className={classes.text}>{props.children}</p>
+            <span className={classes.text}>{props.children}</span>
         </div>
     )
 }

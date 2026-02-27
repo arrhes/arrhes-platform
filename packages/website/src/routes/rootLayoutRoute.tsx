@@ -10,7 +10,7 @@ export const rootLayoutRoute = createRootRouteWithContext<{
     isAuthenticated: boolean | undefined
     userSession: Promise<v.InferOutput<typeof readUserSessionRouteDefinition.schemas.return> | undefined> | undefined
 }>()({
-    pendingComponent: () => <CircularLoader text="Application loading..." />,
+    pendingComponent: () => <CircularLoader text="Chargement de l'application..." />,
     beforeLoad: (_ctx) => {},
     component: () => {
         const matches = useRouterState({ select: (s) => s.matches })

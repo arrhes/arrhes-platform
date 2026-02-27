@@ -12,7 +12,7 @@ export function LinkContent(props: LinkContentProps) {
             aria-disabled={props.disabled}
             className={cx(
                 css({
-                    color: "neutral",
+                    color: "primary",
                     textDecoration: "underline",
                     cursor: "pointer",
                     _hover: { textDecoration: "none" },

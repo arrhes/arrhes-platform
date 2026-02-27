@@ -23,7 +23,7 @@ export function DeleteOneOrganizationUser(props: {
         })
 
         if (deleteResponse.ok === false) {
-            toast({ title: "Erreur lors de la suppression de l'utilisateur", variant: "error" })
+            toast({ title: "Erreur lors de la révocation de l'utilisateur", variant: "error" })
             return
         }
 
@@ -31,14 +31,14 @@ export function DeleteOneOrganizationUser(props: {
             routeDefinition: readOneOrganizationRouteDefinition,
             body: {},
         })
-        toast({ title: "Utilisateur supprimé de l'organisation", variant: "success" })
+        toast({ title: "Utilisateur révoqué de l'organisation", variant: "success" })
     }
 
     return (
         <DeleteConfirmation
-            title="Voulez-vous supprimer l'utilisateur de cette organisation ?"
+            title="Voulez-vous révoquer l'utilisateur de cette organisation ?"
             description="Cette action est irréversible."
-            submitText="Supprimer l'utilisateur"
+            submitText="Révoquer l'utilisateur"
             onSubmit={onSubmit}
         >
             {props.children}

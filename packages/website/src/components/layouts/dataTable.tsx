@@ -80,7 +80,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignItems: "stretch",
-                gap: "1rem",
+                gap: "0.5rem",
             })}
         >
             {!props.hideSearchBar && (
@@ -276,13 +276,13 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                                             !props.onRowClick
                                                 ? undefined
                                                 : css({
-                                                      cursor: "pointer",
-                                                      _hover: { backgroundColor: "neutral/5" },
-                                                  }),
+                                                    cursor: "pointer",
+                                                    _hover: { backgroundColor: "neutral/5" },
+                                                }),
                                             row.getIsExpanded()
                                                 ? css({
-                                                      borderBottomColor: "neutral/10",
-                                                  })
+                                                    borderBottomColor: "neutral/10",
+                                                })
                                                 : undefined,
                                         )}
                                     >
@@ -388,7 +388,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             display: "flex",
                             justifyContent: "flex-end",
                             alignItems: "center",
-                            gap: "2",
+                            gap: "0.5rem",
                         })}
                     >
                         <Button onClick={() => table.previousPage()} isDisabled={!table.getCanPreviousPage()}>
@@ -410,7 +410,7 @@ export function DataTable<TData extends Record<keyof TData, unknown>>(props: {
                             <ButtonOutlineContent
                                 leftIcon={<IconChevronRight size={16} />}
                                 text={undefined}
-                                isDisabled={!table.getCanPreviousPage()}
+                                isDisabled={!table.getCanNextPage()}
                             />
                         </Button>
                     </div>
